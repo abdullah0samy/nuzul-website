@@ -16,6 +16,8 @@ import {
   ExternalLink,
   Cpu,
   Layers,
+  ChevronDown,
+  ChevronUp,
 } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
 import { NUZUL_CASE_STUDIES, NUZUL_CONTACT } from '../../data/nuzulData';
@@ -28,6 +30,7 @@ export const ProjectsSection: React.FC = () => {
 
   const [activeFilter, setActiveFilter] = useState<'all' | 'healthcare' | 'mail' | 'infrastructure'>('all');
   const [selectedCaseStudy, setSelectedCaseStudy] = useState<CaseStudy | null>(null);
+  const [showAllProjects, setShowAllProjects] = useState(false);
 
   const iconMap: Record<string, React.ElementType> = {
     Shield,
@@ -36,6 +39,10 @@ export const ProjectsSection: React.FC = () => {
     Mail,
     Truck,
     Lock,
+    CheckCircle2,
+    Sparkles,
+    Layers,
+    Cpu,
   };
 
   const filteredProjects = NUZUL_CASE_STUDIES.filter((p) => {
@@ -43,7 +50,10 @@ export const ProjectsSection: React.FC = () => {
     if (activeFilter === 'healthcare')
       return (
         p.category_en.toLowerCase().includes('health') ||
-        p.category_en.toLowerCase().includes('hospital')
+        p.category_en.toLowerCase().includes('hospital') ||
+        p.category_en.toLowerCase().includes('clinic') ||
+        p.category_en.toLowerCase().includes('emr') ||
+        p.category_en.toLowerCase().includes('medical')
       );
     if (activeFilter === 'mail')
       return (
@@ -60,10 +70,19 @@ export const ProjectsSection: React.FC = () => {
         p.category_en.toLowerCase().includes('finance') ||
         p.category_en.toLowerCase().includes('tax') ||
         p.category_en.toLowerCase().includes('logistics') ||
-        p.category_en.toLowerCase().includes('turnkey')
+        p.category_en.toLowerCase().includes('turnkey') ||
+        p.category_en.toLowerCase().includes('crm') ||
+        p.category_en.toLowerCase().includes('qa') ||
+        p.category_en.toLowerCase().includes('software')
       );
     return true;
   });
+
+  const INITIAL_PROJECTS_COUNT = 6;
+  const displayedProjects =
+    activeFilter === 'all' && !showAllProjects
+      ? filteredProjects.slice(0, INITIAL_PROJECTS_COUNT)
+      : filteredProjects;
 
   return (
     <section
@@ -77,12 +96,12 @@ export const ProjectsSection: React.FC = () => {
         <div className="mx-auto max-w-3xl text-center">
           <div className="eyebrow-mono justify-center text-emerald-600 dark:text-emerald-400">
             <Shield className="h-4 w-4" />
-            <span>{isAr ? 'تجارب واقعية ونتائج حقيقية' : 'PROVEN CASE STUDIES & FEASIBILITY'}</span>
+            <span>{isAr ? 'قصص نجاح عملائنا ودراسات الحالة التقنية' : 'CLIENT SUCCESS STORIES & TECHNICAL CASE STUDIES'}</span>
           </div>
 
           <h2 className="mt-4 text-3xl font-black leading-tight sm:text-4xl">
             {isAr
-              ? 'قصص نجاح ودراسات جدوى حقيقية لمؤسسات ومستشفيات مصرية'
+              ? 'قصص نجاح عملائنا ودراسات الحالة التقنية لمؤسسات ومستشفيات مصرية'
               : 'Grounded Case Studies & Real Outcomes Across Egypt'}
           </h2>
 
@@ -92,17 +111,17 @@ export const ProjectsSection: React.FC = () => {
             }`}
           >
             {isAr
-              ? 'دراسات حالة هندسية موثقة: ماذا كانت المشكلة، وكيف تدخل فريق نُزول تِك بالحل البرمجي والسحابي، وما هو الأثر المالي والتشغيلي المباشر على أعمال كل عميل.'
+              ? 'دراسات حالة تقنية موثقة: تشخيص التحديات الهندسية، وبناء السحابة والأنظمة السيادية، والأثر التشغيلي والمالي المباشر على أعمال كل عميل.'
               : 'Documented architectural interventions: diagnosing the root bottleneck, engineering sovereign cloud & local systems, and delivering quantifiable ROI for Egyptian enterprises.'}
           </p>
 
           {/* Filter Tabs */}
           <div className="mt-8 flex flex-wrap items-center justify-center gap-2">
             {[
-              { id: 'all', labelAr: `جميع دراسات الحالة (${NUZUL_CASE_STUDIES.length})`, labelEn: `All Case Studies (${NUZUL_CASE_STUDIES.length})` },
-              { id: 'healthcare', labelAr: 'المستشفيات والأنظمة الصحية', labelEn: 'Hospitals & Healthcare' },
-              { id: 'mail', labelAr: 'هجرة البريد وحوكمة الأرشيف', labelEn: 'Email & Archiving Governance' },
-              { id: 'infrastructure', labelAr: 'الشبكات والأمن والسيرفرات والمالية', labelEn: 'Networks, Security, Servers & Finance' },
+              { id: 'all', labelAr: `جميع دراسات الحالة التقنية (${NUZUL_CASE_STUDIES.length})`, labelEn: `All Technical Case Studies (${NUZUL_CASE_STUDIES.length})` },
+              { id: 'healthcare', labelAr: 'المستشفيات والأنظمة الصحية والعيادات', labelEn: 'Hospitals & Healthcare' },
+              { id: 'mail', labelAr: 'هجرة البريد وحوكمة الأرشيف والـ DNS', labelEn: 'Email & Archiving Governance' },
+              { id: 'infrastructure', labelAr: 'البنية التحتية والشبكات والأمن السيبراني', labelEn: 'Infrastructure, Security & Networks' },
             ].map((tab) => (
               <button
                 key={tab.id}
@@ -124,7 +143,7 @@ export const ProjectsSection: React.FC = () => {
 
         {/* Clean, Tidy Outer Project Cards Grid */}
         <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {filteredProjects.map((project: CaseStudy) => {
+          {displayedProjects.map((project: CaseStudy) => {
             const title = isAr ? project.title_ar : project.title_en;
             const category = isAr ? project.category_ar : project.category_en;
             const client = isAr ? project.client_ar : project.client_en;
@@ -218,13 +237,45 @@ export const ProjectsSection: React.FC = () => {
                     className="flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white py-2.5 text-xs font-bold transition-all cursor-pointer shadow-sm hover:shadow"
                   >
                     <FileText className="h-3.5 w-3.5" />
-                    <span>{isAr ? 'عرض دراسة الجدوى والحل الكامل' : 'View Feasibility & Case Study'}</span>
+                    <span>{isAr ? 'عرض تفاصيل دراسة الحالة والحل الهندسي' : 'View Full Case Study & Architecture'}</span>
                   </button>
                 </div>
               </article>
             );
           })}
         </div>
+
+        {/* Show More / Show Less Toggle Button for Projects */}
+        {activeFilter === 'all' && filteredProjects.length > INITIAL_PROJECTS_COUNT && (
+          <div className="mt-12 flex flex-col items-center justify-center gap-3">
+            <button
+              type="button"
+              onClick={() => setShowAllProjects(!showAllProjects)}
+              className="inline-flex items-center gap-2.5 rounded-full bg-emerald-600 hover:bg-emerald-500 px-8 py-3.5 text-sm font-bold text-white shadow-lg shadow-emerald-600/25 transition-all duration-300 hover:scale-105 cursor-pointer ring-2 ring-emerald-400/40"
+            >
+              {showAllProjects ? (
+                <>
+                  <span>{isAr ? 'عرض دراسات أقل' : 'Show Fewer Case Studies'}</span>
+                  <ChevronUp className="h-4 w-4" />
+                </>
+              ) : (
+                <>
+                  <span>
+                    {isAr
+                      ? `عرض باقي قصص نجاح عملائنا ودراسات الحالة (${filteredProjects.length - INITIAL_PROJECTS_COUNT} مشاريع إضافية)`
+                      : `View All ${filteredProjects.length} Case Studies`}
+                  </span>
+                  <ChevronDown className="h-4 w-4" />
+                </>
+              )}
+            </button>
+            <span className="text-xs font-mono text-slate-400">
+              {isAr
+                ? `يتم عرض ${displayedProjects.length} من أصل ${filteredProjects.length} دراسة حالة تقنية موثقة`
+                : `Showing ${displayedProjects.length} of ${filteredProjects.length} documented case studies`}
+            </span>
+          </div>
+        )}
       </div>
 
       {/* Strategic Case Study Deep-Dive Modal */}
@@ -275,7 +326,7 @@ export const ProjectsSection: React.FC = () => {
               >
                 <div className="flex items-center gap-2 text-xs font-mono font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider mb-2">
                   <Sparkles className="h-4 w-4" />
-                  <span>{isAr ? 'الملخص التنفيذي ودراسة الجدوى' : 'EXECUTIVE SUMMARY & FEASIBILITY'}</span>
+                  <span>{isAr ? 'الملخص التنفيذي ونطاق العمل' : 'EXECUTIVE SUMMARY & SCOPE'}</span>
                 </div>
                 <p className="text-xs leading-relaxed">
                   {isAr ? selectedCaseStudy.executiveSummary_ar : selectedCaseStudy.executiveSummary_en}
@@ -398,7 +449,7 @@ export const ProjectsSection: React.FC = () => {
                 rel="noopener noreferrer"
                 className="btn btn-primary flex-1 py-3 text-xs font-bold inline-flex items-center justify-center gap-2 cursor-pointer shadow-md"
               >
-                <span>{isAr ? 'طلب استشارة ودراسة جدوى مماثلة لمؤسستك' : 'Request Similar Feasibility Study'}</span>
+                <span>{isAr ? 'طلب استشارة هندسية وحل مماثل لمؤسستك' : 'Request Architecture & Implementation'}</span>
               </a>
 
               <button

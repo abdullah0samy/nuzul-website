@@ -9,16 +9,17 @@ export const TechStackSection: React.FC = () => {
   const technologies = [
     { name: 'Cisco', category: 'Enterprise Routing & Switching' },
     { name: 'Fortinet', category: 'Next-Gen Hardware Firewalls' },
-    { name: 'VMware', category: 'Cloud Virtualization' },
-    { name: 'Proxmox', category: 'High Availability Clusters' },
+    { name: 'VMware ESXi', category: 'Enterprise Virtualization' },
+    { name: 'Proxmox VE', category: 'High Availability Hypervisors' },
+    { name: 'Docker', category: 'Containerized Microservices' },
+    { name: 'Kubernetes', category: 'Container Orchestration' },
+    { name: 'Prometheus & Grafana', category: 'Real-Time Observability & Telemetry' },
     { name: 'Sophos', category: 'Perimeter Cybersecurity' },
-    { name: 'Docker', category: 'Containerized Services' },
-    { name: 'Kubernetes', category: 'Orchestration & DevOps' },
     { name: 'PostgreSQL', category: 'Enterprise Relational DB' },
-    { name: 'React', category: 'Executive Dashboards' },
-    { name: 'Node.js', category: 'High-Throughput APIs' },
+    { name: 'React 19 & Vite', category: 'Executive Dashboards' },
+    { name: 'Node.js', category: 'High-Throughput Core APIs' },
     { name: 'Linux KVM', category: 'Hardened Operating Systems' },
-    { name: 'Windows Server', category: 'Licensed Remote Desktop RDP' },
+    { name: 'TrueNAS & ZFS', category: 'Immutable Hybrid Storage' },
   ];
 
   return (

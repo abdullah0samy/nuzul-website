@@ -2,6 +2,16 @@ export type Locale = 'ar' | 'en';
 
 export type Currency = 'EGP' | 'USD' | 'SAR' | 'AED' | 'EUR';
 
+export type ServiceCategoryKey =
+  | 'all'
+  | 'infra_cloud'
+  | 'security_obs'
+  | 'software'
+  | 'servers'
+  | 'private_cloud'
+  | 'observability'
+  | 'infrastructure';
+
 export interface ServiceItem {
   id: number;
   title_en: string;
@@ -9,7 +19,7 @@ export interface ServiceItem {
   description_en: string;
   description_ar: string;
   icon: string;
-  category_key: 'software' | 'servers' | 'infrastructure';
+  category_key: ServiceCategoryKey;
   category_en: string;
   category_ar: string;
   useCaseStory_ar: string;

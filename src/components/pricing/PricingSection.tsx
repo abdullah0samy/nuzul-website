@@ -25,7 +25,7 @@ export const PricingSection: React.FC = () => {
           </div>
 
           <h2 className="mt-4 text-3xl font-black leading-tight sm:text-4xl">
-            {isAr ? 'خوادم سحابية فائقة السرعة وسيرفرات ويندوز RDP' : 'High-Performance Cloud VPS & Windows RDP'}
+            {isAr ? 'خوادم سحابية عالية الأداء وبيئات تشغيل متطورة' : 'High-Performance Cloud VPS & Server Environments'}
           </h2>
 
           <p
@@ -34,8 +34,8 @@ export const PricingSection: React.FC = () => {
             }`}
           >
             {isAr
-              ? 'سيرفرات ويندوز Remote Desktop تبدأ من 1000 ج.م/شهرياً لتشغيل برامج المحاسبة والضرائب، واستضافة مشتركة وسيرفرات VPS بأقراص NVMe مع الدفع الفوري عبر إنستاباي وفودافون كاش.'
-              : 'Licensed Windows VPS (RDP) starting at 1,000 EGP/mo ($20/mo) for remote accounting ERPs, NVMe KVM cloud servers, and instant checkout via InstaPay & Vodafone Cash.'}
+              ? 'خوادم KVM سحابية، استضافة مواقع، وخوادم سطح المكتب السحابي بأقراص NVMe فائقة السرعة، مع تسليم فوري ودعم فني متخصص على مدار الساعة.'
+              : 'Enterprise KVM cloud VPS, web hosting, and Cloud Desktop servers with ultra-fast NVMe storage, instant provisioning, and 24/7 support.'}
           </p>
         </div>
 

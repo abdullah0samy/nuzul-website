@@ -53,13 +53,13 @@ const MainLayout: React.FC = () => {
         {/* 4. Live System Demos: HIS Hospital Information System & ClinicCore SaaS/On-Premises */}
         <LiveDemosSection />
 
-        {/* 5. Cloud VPS, Windows RDP (1000 EGP/mo) & Managed Web Hosting */}
+        {/* 5. Cloud VPS, Dedicated Hosted Workspaces & Managed Web Hosting */}
         <PricingSection />
 
         {/* 6. Interactive Real-Time Domain Search API with .eg & .com.eg */}
         <DomainSearchWidget />
 
-        {/* 7. Strategic Case Studies & Feasibility (Cairo Cure, ABCH, Lebanon Hospital, amer-acc, etc.) */}
+        {/* 7. Strategic Case Studies & Success Stories (Cairo Cure, ABCH, Dr. Khaled Farouk Obeido, Lebanon Hospital, amer-acc, etc.) */}
         <ProjectsSection />
 
         {/* 8. Enterprise Technology Stack Powering Our Deployments */}

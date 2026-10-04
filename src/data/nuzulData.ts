@@ -28,314 +28,453 @@ export const NUZUL_CONTACT = {
 };
 
 export const NUZUL_SERVICES: ServiceItem[] = [
-  // --- Category: Software & Web Development (تطوير البرمجيات والتطبيقات) ---
+  // ==========================================
+  // 1. Software & Digital Solutions (البرمجيات والحلول الرقمية)
+  // ==========================================
   {
     id: 1,
     category_key: 'software',
-    category_ar: 'تطوير البرمجيات والويب',
-    category_en: 'Software & Web',
-    title_ar: 'تصميم وتطوير المواقع',
-    title_en: 'Website Design & Development',
+    category_ar: 'البرمجيات والحلول الرقمية',
+    category_en: 'Software & Digital Solutions',
+    title_ar: 'البوابات والمنصات الرقمية',
+    title_en: 'Enterprise Web Portals',
     description_ar:
-      'نقدم خدمات تصميم مواقع احترافية وتطوير مواقع الشركات، لنمنحك موقعًا يجمع بين الشكل الجذاب والأداء السلس، ليعكس هوية عملك ويعزز تواجدك الرقمي.',
+      'بناء بوابات رقمية تفاعلية فائقة السرعة تعزز موثوقية علامتك التجارية وتضاعف طلبات عروض الأسعار وتواصل العملاء.',
     description_en:
-      'We provide professional website design and corporate portal engineering, combining stunning visual appeal with seamless performance to reflect your business identity and amplify your digital presence.',
+      'High-performance corporate portals engineered to project market authority, engage decision-makers, and drive business inquiries.',
     icon: 'Code',
     useCaseStory_ar:
-      'بناء وتطوير بوابة إلكترونية تفاعلية لشركة استثمارية مع لوحة تحكم ذكية، مما أدى إلى زيادة تواصل العملاء وطلبات عروض الأسعار بنسبة 140%.',
+      'تطوير بوابة إلكترونية تفاعلية لشركة استثمارية ساهمت في مضاعفة طلبات عروض الأسعار بنسبة 140%.',
     useCaseStory_en:
-      'Engineered an enterprise corporate portal with an intuitive CMS, resulting in a 140% surge in inbound qualified RFQs and instant client trust.',
-    features_ar: ['تصاميم مخصصة للهواتف والشاشات', 'سرعة تحميل فائقة وتوافق SEO كامل', 'لوحة تحكم إدارية سهلة الاستخدام'],
-    features_en: ['Responsive mobile-first layouts', 'Ultra-fast loading with full SEO indexing', 'Easy-to-use admin dashboard'],
+      'Engineered an enterprise corporate portal that resulted in a 140% surge in qualified client RFQs.',
+    features_ar: ['تصاميم تفاعلية وسريعة للشاشات والموبايل', 'تهيئة كاملة لمحركات البحث لزيادة الوصول', 'لوحة تحكم إدارية سهلة لفرق العمل'],
+    features_en: ['Responsive mobile-first design', 'Full SEO architecture', 'Intuitive content management dashboard'],
   },
   {
     id: 2,
     category_key: 'software',
-    category_ar: 'تطوير البرمجيات والويب',
-    category_en: 'Software & Web',
-    title_ar: 'تطبيقات الجوال',
+    category_ar: 'البرمجيات والحلول الرقمية',
+    category_en: 'Software & Digital Solutions',
+    title_ar: 'تطبيقات الهواتف الذكية',
     title_en: 'Mobile Applications',
     description_ar:
-      'تساعدك على الوصول لعملائك في أي وقت وأي مكان، وتمنح أعمالك حضورًا أقوى عبر الأجهزة الذكية وبرمجة وتطوير تطبيقات الموبايل.',
+      'تطبيقات جوال مخصصة تضع خدماتك بين يدي عملائك على مدار الساعة مع دفع فوري يرفع معدلات المبيعات والولاء.',
     description_en:
-      'Helping you reach your clients anytime and anywhere, granting your business an authoritative presence across smart devices through bespoke mobile app development.',
+      'Bespoke mobile apps delivering intuitive customer journeys, automated notifications, and frictionless in-app checkout.',
     icon: 'Smartphone',
     useCaseStory_ar:
-      'برمجة تطبيق جوال متقدم لشبكة معامل تحاليل طبية يوفر حجز الزيارات المنزلية، عرض النتائج لحظياً، والدفع الفوري عبر إنستاباي.',
+      'تطبيق جوال لمعامل تحاليل طبية لحجز الزيارات المنزلية وعرض النتائج لحظياً مع الدفع الفوري.',
     useCaseStory_en:
-      'Developed a clinical diagnostic mobile app for home visit bookings, real-time lab report viewing, and integrated instant InstaPay payments.',
-    features_ar: ['تطبيقات iOS وAndroid أصلية وهجينة', 'إشعارات لحظية Push Notifications', 'ربط فوري بقواعد البيانات والـ API'],
-    features_en: ['Native & cross-platform iOS & Android', 'Real-time push notifications', 'Seamless API & database synchronization'],
+      'Developed a clinical mobile app for instant lab report delivery, home visit bookings, and instant checkout.',
+    features_ar: ['تطبيقات متكاملة لأنظمة iOS وAndroid', 'إشعارات وتنبيهات فورية تزيد التفاعل', 'ربط مباشر وفوري مع قواعد البيانات المركزية'],
+    features_en: ['Native & cross-platform iOS & Android', 'Real-time push notifications', 'Seamless database integration'],
   },
   {
     id: 3,
     category_key: 'software',
-    category_ar: 'تطوير البرمجيات والويب',
-    category_en: 'Software & Web',
-    title_ar: 'تصميم المتاجر الإلكترونية',
-    title_en: 'E-Commerce Store Development',
+    category_ar: 'البرمجيات والحلول الرقمية',
+    category_en: 'Software & Digital Solutions',
+    title_ar: 'منصات التجارة والمبيعات الرقمية',
+    title_en: 'E-Commerce & Digital Commerce',
     description_ar:
-      'نقدم خدمات تصميم متجر إلكتروني وتطوير متاجر إلكترونية وحلول التجارة الإلكترونية الكاملة، لنمنحك منصة احترافية لعرض منتجاتك مع تجربة مستخدم سلسة وخصائص متكاملة تساعدك على البيع بأعلى كفاءة وجذب عملائك.',
+      'منصات بيع رقمية متكاملة تدمج بوابات الدفع والشحن المحلي وأتمتة المخازن لرفع حجم المبيعات والأرباح.',
     description_en:
-      'End-to-end e-commerce development and digital retail solutions, giving you an elite platform to showcase products with smooth user journeys and comprehensive features to drive conversions.',
+      'Scalable digital storefronts integrated with local payment options, live couriers, and automated inventory sync to maximize sales.',
     icon: 'ShoppingBag',
     useCaseStory_ar:
-      'إنشاء متجر إلكتروني لموزع تجزئة في مصر مربوط مع بوابات الدفع (إنستاباي، فودافون كاش، وفيزا) وإدارة المخازن والشحن تلقائياً.',
+      'إنشاء متجر تجزئة متكامل في مصر مربوط مع بوابات الدفع الإلكتروني وإدارة المخازن والشحن آلياً.',
     useCaseStory_en:
-      'Architected a high-throughput retail store integrated with local Egyptian payment gateways (InstaPay, Vodafone Cash, Visa) and live inventory sync.',
-    features_ar: ['بوابات دفع مصرية ودولية متعددة', 'إدارة المخزون وتتبع الشحنات', 'حماية عالية للمعاملات والبيانات'],
-    features_en: ['Multiple Egyptian & global payment gateways', 'Live inventory & shipment tracking', 'PCI-compliant transactional security'],
+      'Architected a high-converting online store with local Egyptian payment integrations and automated shipping.',
+    features_ar: ['بوابات دفع إلكتروني متعددة وآمنة', 'إدارة المخزون وتتبع الشحنات آلياً', 'تجربة شراء سريعة ترفع نسب إتمام الطلبات'],
+    features_en: ['Multiple payment gateways', 'Live inventory & shipment tracking', 'High-converting frictionless checkout'],
   },
   {
     id: 4,
     category_key: 'software',
-    category_ar: 'تطوير البرمجيات والويب',
-    category_en: 'Software & Web',
-    title_ar: 'تصميم واجهه وتجربه المستخدم',
-    title_en: 'UI/UX Design',
+    category_ar: 'البرمجيات والحلول الرقمية',
+    category_en: 'Software & Digital Solutions',
+    title_ar: 'هندسة تجربة المستخدم والواجهات',
+    title_en: 'UI/UX Product Design',
     description_ar:
-      'نُصمّم واجهات مستخدم وتجربة مستخدم سهلة الاستخدام تُوازن بين احتياجات المستخدمين وأهداف العمل.',
+      'تصميم مسارات عمل وواجهات رقمية سهلة الاستخدام تختصر أوقات إدخال البيانات بنسبة 50% وتضاعف معدلات الإنجاز.',
     description_en:
-      'We craft intuitive, human-centered UI/UX experiences that seamlessly balance end-user convenience with your core business conversion goals.',
+      'Intuitive user experience engineering eliminating interface friction, halving staff onboarding time, and accelerating task completion.',
     icon: 'Layout',
     useCaseStory_ar:
-      'إعادة هندسة تجربة المستخدم لنظام حجز واستقبال في مركز طبي قللت زمن انتظار المريض بنسبة 50% وضاعفت سرعة إدخال البيانات.',
+      'إعادة تصميم تجربة المستخدم لنظام حجز طبي، مما خفض زمن انتظار المراجعين بنسبة 50% وسرّع إدخال البيانات.',
     useCaseStory_en:
-      'Revamped the clinic intake UX flow, reducing patient check-in wait times by 50% and eliminating manual friction for receptionists.',
-    features_ar: ['أبحاث المستخدمين والمخططات الهيكلية Wireframes', 'نماذج تفاعلية عالية الدقة Prototypes', 'أنظمة تصميم موحدة Design Systems'],
-    features_en: ['User research & wireframing', 'High-fidelity interactive prototypes', 'Comprehensive enterprise design systems'],
+      'Redesigned clinic check-in workflows, slashing patient wait times by 50% and simplifying receptionist tasks.',
+    features_ar: ['مسارات عمل سلسة تمنع أخطاء الموظفين', 'نماذج تفاعلية عالية الدقة وسهلة الاستخدام', 'هوية بصرية موحدة تعكس احترافية المؤسسة'],
+    features_en: ['Frictionless workflow architecture', 'Interactive high-fidelity prototypes', 'Consistent brand design system'],
   },
   {
     id: 5,
     category_key: 'software',
-    category_ar: 'تطوير البرمجيات والويب',
-    category_en: 'Software & Web',
-    title_ar: 'خدمات ERP وCRM',
-    title_en: 'Enterprise ERP & CRM Systems',
+    category_ar: 'البرمجيات والحلول الرقمية',
+    category_en: 'Software & Digital Solutions',
+    title_ar: 'المنظومات الإدارية والمالية (ERP)',
+    title_en: 'Enterprise ERP & Management',
     description_ar:
-      'تساعدك على إدارة موارد شركتك وعلاقات عملائك بكفاءة أعلى، من خلال حلول تقنية للشركات وتطوير الأنظمة المتكاملة التي تعزز الإنتاجية وتدعم نمو أعمالك.',
+      'أتمتة شاملة للمبيعات والمخازن والحسابات مع الربط التلقائي بالفاتورة الإلكترونية لخفض التكاليف وضمان الامتثال.',
     description_en:
-      'Empowering you to manage corporate resources and client relationships with peak efficiency through integrated enterprise systems that drive productivity and scalability.',
+      'Centralized operations suite managing billing, inventory, and supply chain with seamless Egyptian ETA e-invoicing compliance.',
     icon: 'Layers',
     useCaseStory_ar:
-      'تطوير نظام ERP مخصص لإدارة المستشفيات والشركات يربط السجلات الطبية، الفواتير، الصيدليات، والمخازن مع الفاتورة الإلكترونية المصرية.',
+      'تطبيق نظام ERP مخصص لربط السجلات الطبية، الفواتير، والمخازن مع منظومة الفاتورة الإلكترونية آلياً.',
     useCaseStory_en:
-      'Deployed a custom enterprise ERP uniting medical records, automated billing, pharmacy inventory, and Egyptian ETA e-invoicing.',
-    features_ar: ['ربط الفاتورة والإيصال الإلكتروني المصري', 'إدارة المخازن والمبيعات والمشتريات', 'صلاحيات وصول دقيقة ومطابقة للمعايير'],
-    features_en: ['Egyptian ETA e-invoicing compliance', 'Inventory, sales, and procurement workflows', 'Granular RBAC access permissions'],
+      'Deployed an integrated ERP suite uniting operations, billing, and ETA e-invoicing for healthcare enterprises.',
+    features_ar: ['ربط آلي مع الفاتورة والإيصال الإلكتروني', 'إدارة شاملة للمخازن والمشتريات والمبيعات', 'صلاحيات وصول دقيقة ومحمية'],
+    features_en: ['Egyptian ETA e-invoicing integration', 'End-to-end supply chain & sales management', 'Role-based access control'],
   },
-
-  // --- Category: Servers & Cloud Hosting (السيرفرات والاستضافة السحابية) ---
   {
     id: 6,
-    category_key: 'servers',
-    category_ar: 'السيرفرات والاستضافة السحابية',
-    category_en: 'Servers & Cloud Hosting',
-    title_ar: 'سيرفرات VPS مداره',
-    title_en: 'Fully Managed VPS Hosting',
+    category_key: 'software',
+    category_ar: 'البرمجيات والحلول الرقمية',
+    category_en: 'Software & Digital Solutions',
+    title_ar: 'فحص واعتماد جودة المنظومات (QA)',
+    title_en: 'Software QA & Acceptance Testing',
     description_ar:
-      'حل استضافة VPS مُدار بالكامل يوفّر أداءً قويًا بدون أي تعقيد تقني. يتولى فريقنا إعداد الخادم، التحديثات، تعزيز الأمان، والنسخ الاحتياطي، لضمان بقاء موقعك سريعًا وآمنًا ومستقرًا مع دعم فني متاح على مدار الساعة 24/7.',
+      'تدقيق مستقل وشامل للمنظومات وتطبيقات الموبايل قبل الاستلام من المطورين لحماية استثمارك وتفادي الخسائر.',
     description_en:
-      'Fully managed VPS offering robust performance without technical headaches. Our engineering team handles server setup, kernel updates, security hardening, backups, and 24/7 dedicated support.',
-    icon: 'Server',
+      'Independent functional, performance, and security testing validating software systems prior to vendor acceptance and rollout.',
+    icon: 'CheckCircle2',
     useCaseStory_ar:
-      'إدارة بنية سيرفر سحابي لمنصة تعليمية وتدريبية تضم أكثر من 20,000 طالب متزامن مع استقرار تام وصفر توقف أثناء الامتحانات.',
+      'فحص واختبار شامل واستلام منصة وتطبيقات OmnixTrack CRM للشركات والصيدليات والمصانع وشركات الشحن، والتأكد من كفاءة الويب والموبايل والمكالمات.',
     useCaseStory_en:
-      'Full-stack managed VPS operation for an education platform serving 20,000+ simultaneous students with zero downtime during peak exam traffic.',
-    features_ar: ['إدارة كاملة وتحديثات أمنية دورية', 'نسخ احتياطي يومي مجدول ومعزول', 'دعم فني هندسي مباشر بالقاهرة 24/7'],
-    features_en: ['Complete sysadmin management & patching', 'Automated daily off-site cloud backups', 'Direct Cairo human engineering SLA 24/7'],
+      'Executed turnkey QA acceptance testing for OmnixTrack CRM web system, mobile apps, and WebRTC call center infrastructure with zero critical bugs.',
+    features_ar: ['اختبارات الوظائف والأداء وقوة التحمل تحت الضغط', 'فحص شامل لتطبيقات الويب والموبايل والاتصالات', 'تقارير فنية تفصيلية لاعتماد الاستلام البرمجي الرسمي'],
+    features_en: ['Functional, UI/UX & load stress testing', 'Web, mobile app, and VoIP call system QA', 'Detailed engineering acceptance reports'],
   },
+
+  // ==========================================
+  // 2. Infrastructure & Cloud (البنية التحتية والسحابية)
+  // ==========================================
   {
     id: 7,
-    category_key: 'servers',
-    category_ar: 'السيرفرات والاستضافة السحابية',
-    category_en: 'Servers & Cloud Hosting',
-    title_ar: 'سيرفرات VPS غير المُدارة',
-    title_en: 'Unmanaged Cloud VPS',
+    category_key: 'infra_cloud',
+    category_ar: 'البنية التحتية والسحابية',
+    category_en: 'Infrastructure & Cloud',
+    title_ar: 'السحابة الخاصة والسيادة الرقمية',
+    title_en: 'Private Cloud & Data Sovereignty',
     description_ar:
-      'تمنحك الحرية الكاملة للتحكم في إعدادات السيرفر وإدارته بنفسك بما يتناسب مع احتياجاتك.',
+      'سحابة خاصة داخل منشأتك تمنحك السيطرة الكاملة على بياناتك مع سرعة فائقة وتوفير 60% من تكاليف الاستضافة الدولية.',
     description_en:
-      'Gives developers and sysadmins complete freedom to configure, maintain, and optimize their server architecture with root privileges.',
-    icon: 'Terminal',
+      'Dedicated on-premise private clouds delivering complete data residency, instant LAN speeds, and immunity from FX currency spikes.',
+    icon: 'Cloud',
     useCaseStory_ar:
-      'توفير خوادم سحابية KVM عالية التردد لفريق برمجيات لاختبار بيئات Docker وKubernetes وتطبيقات الذكاء الاصطناعي بمرونة مطلقة.',
+      'تأسيس بنية سحابة خاصة معزولة لمستشفى ومجمع مراكز طبية لربط السجلات الطبية وقواعد البيانات المركزية بدون أي مشاركة موارد.',
     useCaseStory_en:
-      'Delivered high-frequency KVM cloud nodes for software engineering teams orchestrating Docker microservices with unrestricted root access.',
-    features_ar: ['صلاحية Root كاملة بنسبة 100%', 'معالجات KVM وترددات عالية', 'شبكة 1 Gbps مع ترافيك غير محدود'],
-    features_en: ['100% full root access', 'High-frequency dedicated KVM cores', '1 Gbps unmetered uplink connection'],
+      'Engineered an isolated on-premise private cloud cluster uniting medical records and hospital databases with single-tenant sovereignty.',
+    features_ar: ['سيادة كاملة على البيانات داخل مقر المنشأة', 'جاهزية واستمرارية عمل مزدوجة بدون انقطاع', 'أداء فائق بدون الاعتماد على سرعة الإنترنت الخارجي'],
+    features_en: ['100% on-premise sovereign data residency', 'High-Availability cluster redundancy', 'Zero external dependency with local speed'],
   },
   {
     id: 8,
-    category_key: 'servers',
-    category_ar: 'السيرفرات والاستضافة السحابية',
-    category_en: 'Servers & Cloud Hosting',
-    title_ar: 'سيرفرات ويندوز',
-    title_en: 'Windows VPS (Remote Desktop RDP)',
+    category_key: 'infra_cloud',
+    category_ar: 'البنية التحتية والسحابية',
+    category_en: 'Infrastructure & Cloud',
+    title_ar: 'المحاكاة الافتراضية للأنظمة (VDI)',
+    title_en: 'Enterprise Virtualization & VDI',
     description_ar:
-      'تمنحك بيئة تشغيل مألوفة وسهلة الاستخدام، مع مرونة وأداء موثوق لتشغيل تطبيقاتك وخدماتك بكفاءة وأمان.',
+      'دمج الخوادم المتفرقة في بيئة مركزية موحدة تخفض تكاليف شراء العتاد والطاقة بنسبة 50% مع استمرارية فورية للأعمال.',
     description_en:
-      'Familiar, high-reliability Windows Server environments with ultra-fast Remote Desktop (RDP) access, perfect for enterprise accounting and desktop applications.',
-    icon: 'Monitor',
+      'Consolidating disparate physical hardware into unified virtualization clusters, cutting equipment and electricity costs by 50%.',
+    icon: 'Layers',
     useCaseStory_ar:
-      'تشغيل برامج الحسابات والمخازن المركزية لشركة تجارية ومكتب محاسبة ضريبية (amer-acc) لـ 25 محاسباً عن بعد عبر Windows RDP بدون أي تأخير.',
+      'دمج 18 خادماً فيزيائياً لمستشفى في بيئة افتراضية متكاملة فائقة الأداء مع تحويل تلقائي فوري عند تعطل أي عتاد.',
     useCaseStory_en:
-      'Powering remote accounting and tax compliance software for 25 simultaneous financial auditors across Egypt over secure RDP.',
-    features_ar: ['تبدأ من 1000 ج.م/شهرياً فقط', 'نظام Windows Server أصلي ومرخص', 'اتصال RDP مشفر فائق السرعة'],
-    features_en: ['Starts at 1,000 EGP/mo ($20/mo)', 'Genuine licensed Windows Server OS', 'Ultra low-latency encrypted Remote Desktop'],
+      'Consolidated 18 physical hospital servers into a resilient virtualization cluster with automated instant hardware failover.',
+    features_ar: ['استمرارية عمل فورية وتلقائية عند تعطل أي جهاز', 'إدارة مركزية لأسطح المكتب الافتراضية للموظفين', 'تخفيض تكاليف الصيانة وقطع الغيار بنسبة 50%'],
+    features_en: ['Instant hardware failover protection', 'Centralized Virtual Desktop (VDI) management', '50% reduction in hardware footprint and power'],
   },
   {
     id: 9,
-    category_key: 'servers',
-    category_ar: 'السيرفرات والاستضافة السحابية',
-    category_en: 'Servers & Cloud Hosting',
-    title_ar: 'السيرفرات الكاملة',
-    title_en: 'Dedicated Bare-Metal Servers',
+    category_key: 'infra_cloud',
+    category_ar: 'البنية التحتية والسحابية',
+    category_en: 'Infrastructure & Cloud',
+    title_ar: 'أتمتة التوسع السحابي والحاويات',
+    title_en: 'Containers & Elastic Scaling',
     description_ar:
-      'تمنحك موارد مخصصة 100% وتحكم كامل في الإعدادات والأداء لتلبية احتياجات مشاريعك الكبيرة.',
+      'تشغيل المنظومات بمرونة تتيح التوسع التلقائي في مواسم الذروة دون زيادة تكاليف السيرفرات أو توقف الخدمة.',
     description_en:
-      '100% dedicated hardware resources and uncompromising bare-metal horsepower to power mission-critical hospital systems and heavy database workloads.',
-    icon: 'HardDrive',
+      'Packaging systems for automated elastic scaling during traffic spikes, ensuring uninterrupted uptime and optimal compute cost.',
+    icon: 'Cpu',
     useCaseStory_ar:
-      'تخصيص خوادم Dedicated لمستشفى كبرى لاستضافة أنظمة الأشعة الطبية (PACS) وأرشيف ملفات المرضى الضخمة بدون أي مشاركة موارد.',
+      'تحويل منصة رعاية صحية وتذاكر إلى خدمات سحابية معزولة لضمان سرعة الاستجابة تحت ضغط آلاف المعاملات اليومية.',
     useCaseStory_en:
-      'Provisioned enterprise bare-metal hardware clusters powering medical PACS radiological imaging servers without resource contention.',
-    features_ar: ['عتاد فيزيائي مخصص بالكامل بدون مشاركة', 'أقراص Enterprise NVMe Gen4 بمصفوفة RAID', 'حماية متقدمة ضد هجمات حجب الخدمة DDoS'],
-    features_en: ['Single-tenant hardware with no virtualization overhead', 'Hardware RAID Enterprise NVMe storage', 'Advanced multi-terabit DDoS mitigation'],
+      'Architected microservices and container scaling for high-volume clinical ticketing with sub-second response times.',
+    features_ar: ['تحديث وتوسيع المنظومة بصفر توقف عن العمل', 'توسع تلقائي للموارد أثناء فترات ذروة الإقبال', 'عزل أمني تام واستغلال أمثل لموارد السيرفر'],
+    features_en: ['Zero-downtime rolling updates', 'Automated elastic resource scaling', 'Peak resource efficiency and workload isolation'],
   },
   {
     id: 10,
-    category_key: 'servers',
-    category_ar: 'السيرفرات والاستضافة السحابية',
-    category_en: 'Servers & Cloud Hosting',
-    title_ar: 'خدمة الإيملات الرسمية للشركات',
-    title_en: 'Corporate Business Email Hosting',
+    category_key: 'infra_cloud',
+    category_ar: 'البنية التحتية والسحابية',
+    category_en: 'Infrastructure & Cloud',
+    title_ar: 'الخوادم السحابية المدارة',
+    title_en: 'Managed Cloud Servers',
     description_ar:
-      'أنشئ عناوين بريد إلكتروني احترافية باستخدام نطاق شركتك لتعزيز المصداقية وتبسيط التواصل مع العملاء وفريقك.',
+      'بنية سحابية موثوقة بإدارة استباقية تضمن استمرارية أعمالك بنسبة 99.9% دون الحاجة لتحمل رواتب فريق IT داخلي.',
     description_en:
-      'Establish branded corporate email addresses on your custom domain, elevating your organization’s authority and streamlining client communication.',
-    icon: 'Mail',
+      'High-performance cloud compute with 24/7 proactive maintenance, backups, and SLAs eliminating in-house IT payroll overhead.',
+    icon: 'Server',
     useCaseStory_ar:
-      'هجرة وحماية 250 حساب بريد رسمي لمجموعة طبية مع ربط معايير SPF/DKIM/DMARC لمنع انتحال الشخصية وضمان وصول الرسائل للإنبوكس.',
+      'إدارة بنية سحابية لمنصة تعليمية تخدم أكثر من 20,000 طالب متزامن مع استقرار كامل خلال أوقات الامتحانات.',
     useCaseStory_en:
-      'Migrated and hardened 250 business mailboxes with zero downtime, enforcing SPF, DKIM, and DMARC protocols to defeat spoofing and guarantee inbox delivery.',
-    features_ar: ['توثيق SPF وDKIM وDMARC ضد التزوير', 'تصفية قوية للسبام والبرمجيات الخبيثة', 'وصول سهل عبر الموبايل وبرامج Outlook'],
-    features_en: ['Strict SPF, DKIM, and DMARC email authentication', 'Multi-layer AI anti-spam & phishing protection', 'Webmail, Outlook, and mobile client sync'],
+      'Managed cloud infrastructure for an ed-tech platform supporting 20,000+ concurrent users with 100% uptime.',
+    features_ar: ['إدارة ومتابعة وتحديثات وقائية مستمرة', 'نسخ احتياطي يومي مجدول ومعزول عن الأعطال', 'دعم فني واستجابة هندسية على مدار الساعة 24/7'],
+    features_en: ['Proactive sysadmin maintenance', 'Automated daily isolated backups', '24/7 priority engineering support'],
   },
   {
     id: 11,
-    category_key: 'servers',
-    category_ar: 'السيرفرات والاستضافة السحابية',
-    category_en: 'Servers & Cloud Hosting',
-    title_ar: 'الاستضافة المشتركة',
-    title_en: 'Business Shared Web Hosting',
+    category_key: 'infra_cloud',
+    category_ar: 'البنية التحتية والسحابية',
+    category_en: 'Infrastructure & Cloud',
+    title_ar: 'السيرفرات السحابية المرنة (VPS)',
+    title_en: 'High-Performance Cloud VPS',
     description_ar:
-      'هي الحل الأمثل للمواقع الصغيرة والمتوسطة، بتكلفة اقتصادية وموارد مشتركة تضمن تشغيل موقعك بسهولة.',
+      'خوادم سحابية مخصصة وفائقة السرعة تمنح أعمالك الاستقلالية والمرونة التامة للتوسع الفوري بأسعار محلية مستقرة.',
     description_en:
-      'The ideal cost-effective foundation for small and medium business websites, delivering reliable shared resources and effortless uptime.',
-    icon: 'Globe2',
+      'Scalable cloud instances with isolated compute cores and high-speed NVMe storage designed for heavy database workloads.',
+    icon: 'Terminal',
     useCaseStory_ar:
-      'استضافة المواقع التعريفية لأكثر من 150 شركة ومكتب استشاري مصري مع شهادات أمان SSL مجانية وبريد رسمي بتكلفة اقتصادية.',
+      'توفير خوادم عالية الأداء لفرق العمل لتشغيل بيئات العمل والتطبيقات المركزية بكفاءة واستقرار تام.',
     useCaseStory_en:
-      'Delivered rock-solid web hosting for 150+ Egyptian businesses with free automated SSL certificates and lightning NVMe storage.',
-    features_ar: ['لوحة تحكم cPanel مدمجة وسهلة', 'شهادات أمان SSL مجانية مدى الحياة', 'نسخ احتياطي أسبوعي آلي'],
-    features_en: ['Intuitive cPanel control panel', 'Free automated lifetime SSL encryption', 'Automated weekly off-site backups'],
+      'Provisioned high-frequency instances for engineering teams running mission-critical workloads with maximum agility.',
+    features_ar: ['صلاحيات تحكم كاملة ومستقلة', 'أقراص تخزين فائقة السرعة مع اتصال شبكي عالي', 'مرونة الترقية والتوسع اللحظي حسب نمو النشاط'],
+    features_en: ['Full sovereign control', 'High-frequency NVMe storage and fast uplink', 'Instant resource scalability'],
   },
   {
     id: 12,
-    category_key: 'servers',
-    category_ar: 'السيرفرات والاستضافة السحابية',
-    category_en: 'Servers & Cloud Hosting',
-    title_ar: 'اسم النطاق',
-    title_en: 'Domain Registration & DNS',
+    category_key: 'infra_cloud',
+    category_ar: 'البنية التحتية والسحابية',
+    category_en: 'Infrastructure & Cloud',
+    title_ar: 'مساحات العمل السحابية الموحدة',
+    title_en: 'Cloud Remote Workspaces',
     description_ar:
-      'تمنحك هوية فريدة على الإنترنت، وتساعدك على حجز اسم مميز لموقعك بسهولة وأمان.',
+      'تمكين فرق العمل والمستشارين من الوصول الآمن للأنظمة المركزية من أي مكان مع سرعة عمل فائقة وحماية مطلقة للبيانات.',
     description_en:
-      'Securing your unique online brand identity with seamless domain registration, DNS management, and Egyptian TLD support (.eg, .com.eg).',
-    icon: 'AtSign',
+      'Centralized, secure workspaces allowing distributed teams and auditors to collaborate on core systems with zero data leakage.',
+    icon: 'Monitor',
     useCaseStory_ar:
-      'حجز وتسجيل النطاقات المصرية الرسمية (.eg) والمشركات التجارية مع إدارة سجلات DNS وربطها بالسيرفرات في ثوانٍ معدودة.',
+      'توفير بيئة عمل مركزية سريعة ومحمية لـ 25 موظفاً واستشارياً للعمل عن بُعد بين فروع المؤسسة بدون أي انقطاع.',
     useCaseStory_en:
-      'Registered official Egyptian .eg national domains with automated WHOIS privacy and rapid DNS propagation to local VPS nodes.',
-    features_ar: ['دعم النطاقات المصرية .eg و.com.eg', 'إدارة DNS سحابية مجانية وسريعة', 'حماية الخصوصية ومنع سرقة النطاق'],
-    features_en: ['Official Egyptian national .eg TLD registration', 'Free enterprise cloud DNS zone management', 'WHOIS privacy protection & domain lock'],
+      'Enabled seamless low-latency remote desktop workspaces for 25 team members across multiple offices with zero downtime.',
+    features_ar: ['وصول مشفر فائق السرعة من أي جهاز ومكان', 'حماية تامة للملفات المحاسبية والبرامج من التسريب', 'دعم فني مباشر وسرعة استجابة على مدار الساعة'],
+    features_en: ['Encrypted fast access from any device', 'Centralized data asset protection', '24/7 dedicated support SLA'],
   },
-
-  // --- Category: Infrastructure, Networks & Cybersecurity (الشبكات والأمن السيبراني والبنية التحتية) ---
   {
     id: 13,
-    category_key: 'infrastructure',
-    category_ar: 'الشبكات والأمن السيبراني',
-    category_en: 'Infrastructure & Security',
-    title_ar: 'أنظمة السنترال والاتصالات VOIP systems',
-    title_en: 'Enterprise VoIP Telephony Systems',
+    category_key: 'infra_cloud',
+    category_ar: 'البنية التحتية والسحابية',
+    category_en: 'Infrastructure & Cloud',
+    title_ar: 'الخوادم المخصصة المستقلة',
+    title_en: 'Dedicated Bare-Metal Servers',
     description_ar:
-      'أنظمة سنترال سحابية ورقمية متطورة (VoIP PBX) تتيح الرد الآلي الذكي (IVR)، تسجيل المكالمات، وربط الفروع المختلفة بهاتف داخلي موحد.',
+      'طاقة معالجة فيزيائية مستقلة بالكامل لقواعد البيانات الكبرى وأرشيف المستشفيات بأعلى أداء واستقرار تشغيلي.',
     description_en:
-      'Advanced cloud & on-premise VoIP PBX telephony systems featuring multi-tier IVR auto-attendants, call recording, and branch interconnections.',
-    icon: 'PhoneCall',
+      'Single-tenant physical hardware delivering dedicated compute and maximum throughput for hospital archives and massive enterprise databases.',
+    icon: 'HardDrive',
     useCaseStory_ar:
-      'ربط 5 مقرات إدارية ومستشفيين بنظام VoIP موحد وفر 100% من فواتير الاتصالات الداخلية مع تسجيل جميع مكالمات خدمة العملاء.',
+      'تخصيص خوادم مخصصة لمستشفى لاستضافة أرشيف الأشعة الطبية وقواعد البيانات الضخمة باستقرار تام.',
     useCaseStory_en:
-      'Interconnected 5 branch facilities and 2 hospital campuses via unified VoIP PBX, slashing internal telecom costs to zero.',
-    features_ar: ['شجرة رد آلي IVR تفاعلية ومخصصة', 'تسجيل مكالمات وتقارير أداء الكول سنتر', 'تطبيق هاتفي للموظفين للعمل عن بعد'],
-    features_en: ['Custom multi-language IVR call flow', 'Automatic call recording & supervisor audit metrics', 'Softphone mobile client for remote staff'],
+      'Deployed dedicated bare-metal clusters powering hospital medical archiving with zero resource contention.',
+    features_ar: ['عتاد فيزيائي مخصص بالكامل بدون مشاركة موارد', 'أقراص تخزين سريعة ومحمية بمصفوفات الأمان', 'حماية متقدمة ضد انقطاعات الخدمة وهجمات الشبكة'],
+    features_en: ['100% single-tenant hardware', 'Hardware RAID NVMe storage', 'Advanced enterprise DDoS mitigation'],
   },
   {
     id: 14,
-    category_key: 'infrastructure',
-    category_ar: 'الشبكات والأمن السيبراني',
-    category_en: 'Infrastructure & Security',
-    title_ar: 'أمن الشبكات وجدران الحماية Network security and firewall',
-    title_en: 'Network Security & Next-Gen Firewalls',
+    category_key: 'infra_cloud',
+    category_ar: 'البنية التحتية والسحابية',
+    category_en: 'Infrastructure & Cloud',
+    title_ar: 'الاستضافة السحابية للمواقع',
+    title_en: 'Enterprise Cloud Web Hosting',
     description_ar:
-      'تأمين شامل للبنية التحتية عبر جدران نارية متطورة (Fortinet / Sophos) وعزل الشبكات الحساسة (VLANs) ومنع الاختراقات السيبرانية.',
+      'استضافة آمنة وسريعة لموقع شركتك مع حماية مستمرة تضمن ظهوره الدائم أمام عملائك بنسبة جاهزية 99.9%.',
     description_en:
-      'Multi-layered perimeter defense deploying next-generation firewalls (Fortinet / Sophos), VLAN isolation, and active Intrusion Prevention Systems (IPS).',
-    icon: 'ShieldCheck',
+      'Reliable, high-speed hosting with complimentary SSL and automated maintenance ensuring your business portal is always accessible.',
+    icon: 'Globe2',
     useCaseStory_ar:
-      'تأمين شبكة مستشفى متكاملة وعزل أجهزة الأشعة وغرف العمليات عن شبكة الواي فاي العامة للزوار مع ربط VPN مشفر بين الفروع.',
+      'استضافة المواقع الرسمية لعشرات المكاتب والشركات مع حماية مستمرة ونسخ احتياطي أسبوعي آلي.',
     useCaseStory_en:
-      'Hardened a hospital enterprise network by completely isolating PACS and surgery OT nodes from public Wi-Fi via Fortinet NGFW.',
-    features_ar: ['جدران حماية فيزيائية Hardware Firewalls', 'عزل شبكي متطور VLANs وسياسات أمان مشددة', 'أنفاق VPN مشفرة للربط بين الفروع عن بعد'],
-    features_en: ['Enterprise hardware firewalls (Sophos / FortiGate)', 'Zero-trust VLAN segmentation for critical devices', 'High-throughput IPsec / WireGuard VPN tunnels'],
+      'Hosting corporate web portals with free SSL, automated backups, and 99.9% uptime reliability.',
+    features_ar: ['لوحة تحكم إدارية سهلة لرفع الملفات', 'شهادات أمان رقمية مجانية ودائمة', 'نسخ احتياطي دوري لحماية بيانات الموقع'],
+    features_en: ['Intuitive management dashboard', 'Free automated SSL certificates', 'Regular automated backups'],
   },
   {
     id: 15,
-    category_key: 'infrastructure',
-    category_ar: 'الشبكات والأمن السيبراني',
-    category_en: 'Infrastructure & Security',
-    title_ar: 'منصة مراقبة الأحداث الأمنية SIEM solution platform',
-    title_en: 'SIEM Security Operations Platform',
+    category_key: 'infra_cloud',
+    category_ar: 'البنية التحتية والسحابية',
+    category_en: 'Infrastructure & Cloud',
+    title_ar: 'تسجيل وحوكمة النطاقات',
+    title_en: 'Domain Registration & DNS',
     description_ar:
-      'منصة مركزية لإدارة ومراقبة الأحداث الأمنية وتحليل السجلات لحظياً لاكتشاف التهديدات الرقمية ومحاولات التسلل والتصدي الفوري لها.',
+      'حجز النطاقات الرسمية المصرية والعالمية وحماية الهوية الرقمية لعلامتك التجارية من الانتحال وسرقة العملاء.',
     description_en:
-      'Centralized Security Information & Event Management (SIEM) platform delivering real-time telemetry, threat detection, and audit compliance.',
-    icon: 'Activity',
+      'Securing corporate domain identity with regional .eg and global TLD registration, high-speed DNS, and ownership protection.',
+    icon: 'AtSign',
     useCaseStory_ar:
-      'نشر منصة SIEM لمؤسسة مالية وصحية لرصد السجلات الأمنية لـ 80 خادم وجهاز شبكي لحظياً والتنبيه الفوري لأي محاولة دخول غير مصرح بها.',
+      'تسجيل النطاقات المصرية الرسمية وإدارة سجلات DNS السحابية للشركات وربطها بالخوادم فوراً.',
     useCaseStory_en:
-      'Implemented centralized SIEM log auditing across 80 corporate servers and network switches with automated SOC threat alerts.',
-    features_ar: ['مراقبة وتحليل فوري للسجلات الأمنية Logs', 'تنبيهات فورية عند اكتشاف سلوك مشبوه', 'تقارير مطابقة للمعايير القياسية للشركات'],
-    features_en: ['Real-time log ingestion and correlation', 'Automated anomaly detection & instant SMS/Telegram alerts', 'Regulatory compliance audit reporting'],
+      'Registered official Egyptian .eg domains with fast cloud DNS management and WHOIS privacy.',
+    features_ar: ['دعم كامل للنطاقات المصرية الرسمية .eg و.com.eg', 'إدارة سريعة ومحمية لخوادم توجيه النطاق', 'حماية الخصوصية وقفل ملكية النطاق ضد النقل غير المصرح'],
+    features_en: ['Support for .eg & global TLDs', 'High-speed cloud DNS zone management', 'WHOIS privacy & domain lock'],
   },
   {
     id: 16,
-    category_key: 'infrastructure',
-    category_ar: 'الشبكات والأمن السيبراني',
-    category_en: 'Infrastructure & Security',
-    title_ar: 'حلول النسخ الاحتياطي الذكية backup solution',
-    title_en: 'Enterprise Hybrid Backup Solutions',
+    category_key: 'infra_cloud',
+    category_ar: 'البنية التحتية والسحابية',
+    category_en: 'Infrastructure & Cloud',
+    title_ar: 'أتمتة النشر والتحديثات السحابية',
+    title_en: 'Infrastructure Automation & Deployment',
     description_ar:
-      'حلول نسخ احتياطي هجين مشفر تجمع بين التخزين المحلي السريع والنسخ السحابي المعزول (Immutable Backups) لحماية البيانات من الفدية.',
+      'نشر وتحديث الأنظمة آلياً في دقائق معدودة بدلاً من أيام لتسريع إطلاق خدماتك وتفادي أخطاء التشغيل اليدوية.',
     description_en:
-      'Hybrid disaster recovery solutions combining high-speed on-premise staging with immutable cloud backups to defeat ransomware and data loss.',
+      'Automated server orchestration and rapid environment provisioning, turning days of manual deployment into repeatable minutes.',
+    icon: 'Terminal',
     useCaseStory_ar:
-      'إنقاذ قاعدة بيانات طبية كاملة لمركز أورام واستعادتها في أقل من 10 دقائق بعد تلف مفاجئ في الأقراص بفضل نظام النسخ الاحتياطي الهجين.',
+      'أتمتة نشر بيئات العمل لشركة تجارة إلكترونية، مما قلل وقت تجهيز السيرفرات من 3 أيام إلى 15 دقيقة فقط.',
     useCaseStory_en:
-      'Restored a complete hospital oncology clinical database in under 10 minutes following hardware corruption using immutable hybrid snapshots.',
+      'Automated staging and production provisioning, reducing server setup lead times from 3 days to 15 minutes.',
+    features_ar: ['تجهيز ونشر الخوادم بضغطة زر واحدة', 'توثيق البنية التحتية لمنع الأخطاء البشرية', 'تحديثات آمنة ومختبرة للمنظومات والخدمات'],
+    features_en: ['1-click automated server deployment', 'Repeatable, documented infrastructure', 'Reliable continuous deployment workflows'],
+  },
+
+  // ==========================================
+  // 3. Security & Observability (الأمن والمراقبة)
+  // ==========================================
+  {
+    id: 17,
+    category_key: 'security_obs',
+    category_ar: 'الأمن والمراقبة',
+    category_en: 'Security & Observability',
+    title_ar: 'الرصد الاستباقي ومنع الأعطال',
+    title_en: 'Proactive System Observability',
+    description_ar:
+      'مراقبة رقمية استباقية 24/7 تكتشف بطء الأنظمة وتصلح الاختناقات قبل أن تؤثر على سير العمل أو يشعر بها عملاؤك.',
+    description_en:
+      'Continuous 24/7 telemetry monitoring system performance, catching bottlenecks before they impact operations or patient care.',
+    icon: 'Activity',
+    useCaseStory_ar:
+      'تطبيق منظومة مراقبة لـ 60 خادماً وجهاز شبكي نبهت الفريق الهندسي لارتفاع مفاجئ في حركة المرور وتم التعامل معه دون أي انقطاع.',
+    useCaseStory_en:
+      'Deployed full-stack observability across 60 server nodes and network switches with automated incident alerts.',
+    features_ar: ['لوحات تحكم بيانية حية لأداء المنشأة', 'تنبيهات فورية استباقية عبر الواتساب والإيميل', 'تتبع استباقي للضغط وحركة المرور لمنع التوقف'],
+    features_en: ['Real-time performance analytics dashboards', 'Instant automated WhatsApp & email alerts', 'Proactive bandwidth & load management'],
+  },
+  {
+    id: 18,
+    category_key: 'security_obs',
+    category_ar: 'الأمن والمراقبة',
+    category_en: 'Security & Observability',
+    title_ar: 'الحماية السيبرانية ومركز العمليات',
+    title_en: 'Cybersecurity & Threat Defense',
+    description_ar:
+      'حماية استباقية متقدمة تكشف محاولات الاختراق والأنشطة غير المصرح بها فوراً لحماية أصول وسمعة منشأتك.',
+    description_en:
+      'Enterprise threat intelligence correlating activity logs across all systems to identify and neutralize cyber threats instantly.',
+    icon: 'ShieldCheck',
+    useCaseStory_ar:
+      'رصد السجلات الأمنية لـ 80 خادم وجهاز شبكي لحظياً والتنبيه الفوري عند رصد أي سلوك مشبوه.',
+    useCaseStory_en:
+      'Implemented real-time security event correlation across 80 corporate servers with instant anomaly alerts.',
+    features_ar: ['تحليل فوري للحركات والأنشطة الرقمية', 'تنبيه وتدخل فوري عند أي نشاط غير مصرح', 'تقارير دورية للمطابقة والامتثال الأمني'],
+    features_en: ['Real-time event analysis', 'Instant unauthorized access prevention', 'Regulatory compliance audit reports'],
+  },
+  {
+    id: 19,
+    category_key: 'security_obs',
+    category_ar: 'الأمن والمراقبة',
+    category_en: 'Security & Observability',
+    title_ar: 'تأمين الشبكات وجدران الحماية',
+    title_en: 'Network Security & Firewalls',
+    description_ar:
+      'تأمين شبكات المؤسسة وعزل الأنظمة المالية والطبية الحساسة عن الشبكات العامة لمنع الاختراقات وتأمين الربط بين الفروع.',
+    description_en:
+      'Turnkey physical network design, hardware firewalls, and secure segmentation isolating financial and clinical assets from public Wi-Fi.',
+    icon: 'ShieldCheck',
+    useCaseStory_ar:
+      'تأمين شبكة مستشفى وعزل أجهزة العمليات والأشعة عن شبكة الزوار مع ربط مشفر وآمن بين الفروع.',
+    useCaseStory_en:
+      'Hardened enterprise hospital networks by isolating medical devices and surgery suites behind physical firewalls.',
+    features_ar: ['جدران حماية متطورة لمنع التسلل والتهديدات', 'عزل شبكي كامل للأنظمة الحساسة والحسابات', 'أنفاق مشفرة وآمنة للربط المباشر بين الفروع والمقرات'],
+    features_en: ['Enterprise hardware firewalls', 'Isolated internal network segments', 'Encrypted branch-to-branch connections'],
+  },
+  {
+    id: 20,
+    category_key: 'security_obs',
+    category_ar: 'الأمن والمراقبة',
+    category_en: 'Security & Observability',
+    title_ar: 'الاتصالات وأنظمة السنترال الموحد',
+    title_en: 'Unified Telephony & VoIP',
+    description_ar:
+      'توحيد اتصالات المقرات والفروع بتكلفة صفرية للمكالمات الداخلية مع شجرة رد آلي احترافية ترفع كفاءة خدمة العملاء.',
+    description_en:
+      'Unified enterprise IP telephony slashing cross-branch phone bills to zero while providing IVR call routing and staff mobile softphones.',
+    icon: 'PhoneCall',
+    useCaseStory_ar:
+      'ربط 5 مقرات إدارية ومستشفيين بنظام VoIP موحد وفر تكاليف الاتصالات الداخلية مع توفير تسجيل المكالمات.',
+    useCaseStory_en:
+      'Interconnected multi-site facilities with unified VoIP telephony, eliminating internal call costs.',
+    features_ar: ['شجرة رد آلي تفاعلية توجه المتصلين بذكاء', 'تسجيل المكالمات وتقارير أداء خدمة العملاء', 'تطبيق هاتف للموظفين للتواصل من أي مكان'],
+    features_en: ['Smart IVR auto-attendants', 'Call recording & customer service metrics', 'Mobile softphone app for remote staff'],
+  },
+  {
+    id: 21,
+    category_key: 'security_obs',
+    category_ar: 'الأمن والمراقبة',
+    category_en: 'Security & Observability',
+    title_ar: 'استمرارية الأعمال والنسخ المعزول',
+    title_en: 'Disaster Recovery & Immutable Backup',
+    description_ar:
+      'حماية منيعة ضد برمجيات الفدية تضمن استعادة كافة قواعد البيانات والأنظمة في دقائق معدودة وصفر خسائر تشغيلية.',
+    description_en:
+      'Ransomware-proof immutable hybrid backups guaranteeing sub-15 minute disaster recovery and uninterrupted business operations.',
     icon: 'Database',
-    features_ar: ['نسخ احتياطي غير قابل للتعديل ضد فيروسات الفدية', 'استعادة سريعة خلال دقائق معدودة RTO < 15 Min', 'تشفير عسكري AES-256 للبيانات المخزنة والمنقولة'],
-    features_en: ['Ransomware-proof immutable snapshot architecture', 'Sub-15 minute disaster recovery recovery point (RPO/RTO)', 'Military-grade AES-256 data encryption at rest and in transit'],
+    useCaseStory_ar:
+      'تطبيق خطة نسخ احتياطي معزول لمجموعة محاسبة واستشارات ضريبية ضمن استعادة قواعد بيانات الفواتير والـ ERP في 10 دقائق.',
+    useCaseStory_en:
+      'Deployed immutable hybrid backup pipeline for a tax consultancy, restoring mission-critical ERP databases in under 10 minutes.',
+    features_ar: ['نسخ احتياطي معزول لا يمكن تعديله أو تشفيره بالفدية', 'استعادة فورية للأنظمة خلال دقائق عند الطوارئ', 'حماية مشفرة لكافة السجلات وقواعد البيانات الحساسة'],
+    features_en: ['Ransomware-immune off-site snapshot vault', 'Instant system recovery under 15 minutes', 'End-to-end encrypted database protection'],
+  },
+  {
+    id: 22,
+    category_key: 'security_obs',
+    category_ar: 'الأمن والمراقبة',
+    category_en: 'Security & Observability',
+    title_ar: 'البريد الرسمي الموثق للشركات',
+    title_en: 'Corporate Business Email & DMARC',
+    description_ar:
+      'بريد رسمي باسم شركتك محمي ضد التزييف والاحتيال المالي، يضمن وصول فواتيرك ومراسلاتك لصندوق الوارد مباشرة.',
+    description_en:
+      'Authenticated business email on your domain protecting company invoices from fraud and guaranteeing 100% inbox deliverability.',
+    icon: 'Mail',
+    useCaseStory_ar:
+      'هجرة وحماية 250 حساب بريد رسمي لمجموعة طبية مع منع انتحال الشخصية وضمان وصول 100% من الرسائل لصندوق الوارد.',
+    useCaseStory_en:
+      'Hardened 250 corporate mailboxes with strict DMARC enforcement, eliminating spoofing and ensuring 100% inbox delivery.',
+    features_ar: ['توثيق وحماية مشددة ضد تزوير الفواتير والبريد', 'تصفية قوية للرسائل المزعجة وروابط الاحتيال', 'توافق كامل مع الهواتف الذكية وبرامج المراسلات'],
+    features_en: ['Strict SPF, DKIM & DMARC authentication', 'Anti-spam & phishing protection', 'Seamless Outlook & mobile sync'],
+  },
+  {
+    id: 23,
+    category_key: 'security_obs',
+    category_ar: 'الأمن والمراقبة',
+    category_en: 'Security & Observability',
+    title_ar: 'البنية التحتية والشبكات المنظمة',
+    title_en: 'Structured Cabling & Directory',
+    description_ar:
+      'تأسيس الشبكات المنظمة وكابلات الفايبر وحوكمة خوادم الدومين المركزي لتوحيد صلاحيات الموظفين وحماية أصول المنشأة.',
+    description_en:
+      'Turnkey enterprise structured cabling, fiber backbone, and central domain directory controlling endpoint access and file security.',
+    icon: 'Layers',
+    useCaseStory_ar:
+      'تجهيز بنية شبكية ودومين مركزي لمؤسسة مشكاة نور الخيرية لربط أكثر من 70 جهاز كمبيوتر وخادم ملفات وصلاحيات موحدة.',
+    useCaseStory_en:
+      'Engineered turnkey structured cabling and central Active Directory domain controller for Meshkat Nour Foundation across 70+ client endpoints.',
+    features_ar: ['كابلات شبكات وفايبر منظمة ومعتمدة للمباني', 'حوكمة أذونات مركزية لمستخدمي المنشأة', 'حماية وتأمين خوادم الملفات المشتركة من الفقدان'],
+    features_en: ['Certified Cat6A & fiber infrastructure', 'Centralized user authorization & policy governance', 'Protected shared file server architecture'],
   },
 ];
 
@@ -611,25 +750,24 @@ export const NUZUL_HOSTING_PLANS: HostingPlan[] = [
   {
     id: 'windows-rdp',
     key: 'windows',
-    nameAr: 'ويندوز VPS (Remote Desktop)',
-    nameEn: 'Windows VPS (RDP)',
+    nameAr: 'خوادم سطح المكتب والعمل عن بُعد (Cloud Desktop)',
+    nameEn: 'Cloud Desktop VPS (Remote Access)',
     basePriceEGP: 1000,
     basePriceUSD: 20.00,
     specsAr: [
       'تبدأ من 1000 ج.م/شهرياً فقط',
-      'وصول مباشر Remote Desktop فائق السرعة',
-      'نظام تشغيل Windows Server مرخص',
-      'تشغيل متواصل للتطبيقات وأنظمة المحاسبة والضرائب',
-      'دعم فني من مهندسين مصريين 24/7',
+      'وصول مشفر Remote Desktop فائق السرعة',
+      'أقراص NVMe فائقة الأداء والسرعة',
+      'مساحات عمل سحابية مرنة للموظفين والفرق',
+      'دعم فني هندسي مخصص على مدار الساعة 24/7',
     ],
     specsEn: [
       'Starts from 1,000 EGP/mo ($20/mo)',
-      'Lightning-Fast Remote Desktop (RDP)',
-      'Licensed Windows Server OS',
-      '24/7 Uptime for ERP & Accounting Apps',
-      'Local Engineering Support 24/7',
+      'Ultra-Fast Encrypted Remote Desktop',
+      'High-Speed Enterprise NVMe Disks',
+      'Centralized Cloud Workspaces for Teams',
+      'Dedicated Engineering Support 24/7',
     ],
-    popular: true,
   },
 ];
 
@@ -638,20 +776,20 @@ export const NUZUL_CASE_STUDIES: CaseStudy[] = [
   {
     id: 1,
     badge: 'HOSPITAL SECURITY & NETWORKS',
-    title_ar: 'التجهيز الأمني والسيادي المتكامل لمستشفى تراست: السكيورتي، كاميرات المراقبة، والشبكات المنظمة والبريد',
-    title_en: 'Turnkey Sovereign Security & Infrastructure — Trust Hospital: CCTV Camera Grid, Fortinet NGFW, Cat6A Networks & Medical Email',
-    category_ar: 'أمن المستشفيات والشبكات والكاميرات',
-    category_en: 'Hospital Security, CCTV & Networks',
-    client_ar: 'مستشفى تراست التخصصي (Trust Hospital) — القاهرة',
+    title_ar: 'البنية الأمنية والشبكات — مستشفى تراست',
+    title_en: 'Turnkey Hospital Security & Networks — Trust Hospital',
+    category_ar: 'أمن المستشفيات والشبكات',
+    category_en: 'Hospital Security & Networks',
+    client_ar: 'مستشفى تراست التخصصي — القاهرة',
     client_en: 'Trust Specialized Hospital — Cairo',
     executiveSummary_ar:
-      'أنجزت نُزول تِك مشروع التأسيس السيادي والأمني المتكامل لمستشفى تراست (Trust Hospital) لربط 4 مبانٍ وأقسام الطوارئ والعمليات والرعاية المركزة. تضمن المشروع: 1) شبكة كاميرات مراقبة رقمية IP فائقة الدقة (4K) بأكثر من 180 كاميرا مع تغطية كاملة لكافة الممرات والأقسام الحرجة، 2) جدران حماية متقدمة Fortinet NGFW لعزل شبكات الأجهزة الطبية الحساسة وغرف العمليات عن شبكة الزوار، 3) بنية تحتية فيزيائية متكاملة من كابلات الفايبر والشبكات المنظمة Cat6A مع سويتشات PoE مدارة من Cisco، 4) خوادم بريد رسمي مشفرة للأطباء والإدارة بتوثيق ثلاثي (SPF/DKIM/DMARC) لضمان سرية المراسلات الطبية ونتائج التحاليل، مع قطاع تقني كامل كخدمة (IT as a Service) ومراقبة مستمرة 24/7.',
+      'مشروع تأسيس أمني وشبكي متكامل لمستشفى تراست: شبكة كاميرات مراقبة رقمية 4K (180+ كاميرا)، جدار حماية Fortinet NGFW لعزل الأجهزة الطبية الحساسة وغرف العمليات عن شبكة الزوار، تمديدات فايبر وكابلات Cat6A، وتأمين البريد الطبي الرسمي بتوثيق ثلاثي (SPF/DKIM/DMARC) مع دعم تقني مستمر 24/7.',
     executiveSummary_en:
-      'Nuzul Tech executed an end-to-end sovereign IT security and infrastructure master plan for Trust Hospital, interconnecting 4 medical pavilions, emergency wards, and surgical suites. The scope encompassed: 1) An enterprise 4K IP surveillance camera grid (>180 cameras) with redundant NVR storage securing patient wards, pharmacies, and blood banks, 2) Next-Gen Fortinet firewalls establishing zero-trust VLAN segmentation between life-critical medical equipment, PACS, and visitor Wi-Fi, 3) Turnkey physical infrastructure: fiber backbone, Cat6A structured cabling, server racks, and Cisco managed PoE switches, 4) Sovereign encrypted medical email system with SPF/DKIM/DMARC compliance guaranteeing confidentiality of physician consults and lab dispatches, backed by 24/7 IT as a Service (ITaaS).',
+      'Turnkey sovereign IT security and infrastructure for Trust Hospital: enterprise 4K CCTV grid (>180 cameras), Fortinet NGFW zero-trust segmentation for medical devices, fiber & Cat6A structured cabling, and hardened medical email with 24/7 ITaaS.',
     description_ar:
-      'تجهيز أمني وسيادي متكامل لمستشفى تراست: شبكة كاميرات مراقبة 4K (180+ كاميرا)، جدار ناري Fortinet NGFW وعزل شبكي VLAN، شبكات فايبر وكابلات Cat6A، وهجرة وتأمين البريد الطبي الرسمي مع قطاع تقني كخدمة (IT as a Service).',
+      'تجهيز أمني متكامل يشمل شبكة مراقبة 4K (180+ كاميرا)، جدار حماية Fortinet، كابلات فايبر Cat6A، وتأمين البريد الطبي الرسمي.',
     description_en:
-      'Turnkey sovereign security and IT infrastructure for Trust Hospital: 180+ 4K IP camera surveillance grid, Fortinet NGFW zero-trust VLAN isolation, fiber & Cat6A structured cabling, and hardened enterprise medical email.',
+      'Integrated security deployment: 180+ 4K IP cameras, Fortinet firewall, fiber cabling, and hardened medical email.',
     tech: [
       '180+ 4K IP CCTV Grid',
       'Fortinet NGFW',
@@ -662,10 +800,10 @@ export const NUZUL_CASE_STUDIES: CaseStudy[] = [
       'IT as a Service (ITaaS)',
     ],
     challenges_ar: [
-      'نقاط عمياء أمنية ومخاطر حوادث داخل أروقة الطوارئ والصيدلية المركزية دون توثيق فيديو عالي الدقة',
-      'شبكة كابلات مهترئة وبطء في نقل بيانات الأشعة الحيوية إلى غرف العمليات والعيادات',
-      'هجمات تصيد وسقوط البريد الإلكتروني القديم مما أخر استلام الموافقات الطبية العاجلة',
-      'اختلاط الأجهزة الطبية بشبكة الإنترنت العامة مما هدد أمن وسرية ملفات المرضى',
+      'نقاط عمياء أمنية داخل أروقة الطوارئ والصيدلية المركزية دون توثيق فيديو عالي الدقة',
+      'شبكة كابلات قديمة تسببت في بطء نقل بيانات الأشعة الحيوية إلى غرف العمليات والعيادات',
+      'تكرار سقوط البريد الإلكتروني القديم وتأخر وصول الموافقات الطبية العاجلة',
+      'اختلاط الأجهزة الطبية بشبكة الإنترنت العامة مما هدد سرية ملفات المرضى',
     ],
     challenges_en: [
       'Security blind spots in emergency corridors and central pharmacy lacking high-definition video audit trails',
@@ -674,11 +812,11 @@ export const NUZUL_CASE_STUDIES: CaseStudy[] = [
       'Medical equipment exposed on the general hospital network creating critical patient data vulnerability',
     ],
     solution_ar: [
-      'تركيب شبكة مراقبة IP تضم 180+ كاميرا 4K مع رؤية ليلية وخوادم NVR مصفوفة RAID 6 بتسجيل 90 يوماً',
-      'تأسيس بنية فايبر ضوئية داخلية وكابلات Cat6A مع عزل VLAN صارم يفصل غرف العمليات والعناية المركزة',
-      'تركيب جدار ناري متقدم Fortinet مع فحص مروري لمنع الاختراقات وتأمين نفق VPN مشفر للأطباء',
-      'هجرة وتأمين 200+ حساب بريد رسمي للمستشفى مع توثيق SPF/DKIM/DMARC وضمان تسليم 100%',
-      'قطاع تقني كامل كخدمة (IT as a Service): مراقبة مستمرة للشبكة والأمان على مدار الساعة 24/7 دون الحاجة لتوظيف فريق داخلي مكلف',
+      'تركيب شبكة مراقبة IP تضم 180+ كاميرا 4K مع خوادم NVR بمصفوفة RAID 6 لتسجيل 90 يوماً',
+      'تأسيس بنية فايبر ضوئية وكابلات Cat6A مع عزل VLAN صارم لغرف العمليات والعناية المركزة',
+      'تركيب جدار ناري متقدم Fortinet لحظر محاولات الاختراق وتأمين نفق VPN مشفر للأطباء',
+      'هجرة وتأمين 200+ حساب بريد رسمي للمستشفى بتوثيق SPF/DKIM/DMARC لضمان وصول 100%',
+      'قطاع تقني كخدمة (IT as a Service): مراقبة مستمرة للشبكة والأمان على مدار الساعة 24/7',
     ],
     solution_en: [
       'Deployed 180+ 4K IP night-vision cameras with redundant central RAID 6 NVRs retaining 90 days of secure footage',
@@ -688,11 +826,11 @@ export const NUZUL_CASE_STUDIES: CaseStudy[] = [
       'Full IT as a Service (ITaaS): 24/7 proactive security monitoring and engineering dispatch eliminating internal IT hiring overhead',
     ],
     deliverables_ar: [
-      '1. منظومة كاميرات المراقبة الرقمية 4K (180+ كاميرا) وخوادم التسجيل المركزي NVR',
-      '2. البنية التحتية الفيزيائية للشبكات وكابلات الفايبر المنظمة Cat6A',
-      '3. جدران الحماية المتقدمة Fortinet NGFW والعزل الشبكي VLAN',
-      '4. منظومة البريد الطبي الرسمي المشفر بتوثيق SPF/DKIM/DMARC',
-      '5. قطاع تقني كامل كخدمة (IT as a Service) ودعم فني هندسي 24/7',
+      '1. شبكة كاميرات مراقبة رقمية 4K (180+ كاميرا) وخوادم تسجيل مركزي NVR',
+      '2. بنية تحتية للشبكات وكابلات الفايبر المنظمة Cat6A',
+      '3. جدار ناري Fortinet NGFW مع عزل شبكي VLAN',
+      '4. بريد طبي رسمي مشفر بتوثيق SPF/DKIM/DMARC',
+      '5. قطاع تقني كخدمة (IT as a Service) ودعم فني هندسي 24/7',
     ],
     deliverables_en: [
       '1. 180+ 4K IP Surveillance Camera Grid & Central Redundant NVR Array',
@@ -701,7 +839,7 @@ export const NUZUL_CASE_STUDIES: CaseStudy[] = [
       '4. Sovereign Hardened Medical Email System with SPF/DKIM/DMARC',
       '5. 24/7 IT as a Service (ITaaS) Managed Operations',
     ],
-    result_ar: 'جاهزية تشغيلية للشبكة 99.99%، تغطية أمنية مرئية 100% للأقسام الحيوية، وتأمين وحماية كاملة لكافة المراسلات والسجلات الطبية',
+    result_ar: 'جاهزية تشغيلية للشبكة 99.99%، تغطية أمنية مرئية 100%، وحماية تامة للسجلات والمراسلات الطبية',
     result_en: '99.99% network uptime, 100% video surveillance coverage, and zero patient data breaches',
     icon: 'Shield',
   },
@@ -710,33 +848,33 @@ export const NUZUL_CASE_STUDIES: CaseStudy[] = [
   {
     id: 2,
     badge: 'FINANCIAL CONSULTING CLIENT',
-    title_ar: 'استضافة المنظومات المالية السحابية وحوكمة البريد والنسخ الاحتياطي — مكتب محمد إبراهيم للاستشارات والخدمات المالية',
-    title_en: 'Enterprise Financial Cloud, Sovereign Mail Governance & Disaster Recovery — Mohamed Ibrahiem Office for Finance',
-    category_ar: 'المنظومات المالية السحابية وحوكمة الأعمال',
-    category_en: 'Enterprise Financial Cloud & Business Governance',
-    client_ar: 'مكتب محمد إبراهيم للاستشارات والخدمات المالية (Mohamed Ibrahiem Office for Finance) — القاهرة',
-    client_en: 'Mohamed Ibrahiem Office for Financial Consultancy & Corporate Advisory — Cairo',
+    title_ar: 'الاستضافة السحابية والأنظمة المالية — مكتب محمد إبراهيم',
+    title_en: 'Cloud Hosting & Financial Systems — Mohamed Ibrahiem Office',
+    category_ar: 'الاستضافة السحابية وحوكمة الأعمال',
+    category_en: 'Financial Cloud & Business Governance',
+    client_ar: 'مكتب محمد إبراهيم للاستشارات والخدمات المالية — القاهرة',
+    client_en: 'Mohamed Ibrahiem Office for Financial Consultancy — Cairo',
     executiveSummary_ar:
-      'قدمت نُزول تِك حلاً سحابياً سيادياً متكاملاً لمكتب محمد إبراهيم للاستشارات والخدمات المالية لنقل بيئة عمله المالية، المحاسبية، والرقابية بالكامل إلى خوادم خاصة مشفرة فائقة الأداء. شمل المشروع: 1) نشر خوادم Windows Server سحابية مخصصة للأنظمة المالية وإدارة الأعمال (ERP) تتيح الوصول الآمن عبر بروتوكولات RDP المشفرة لـ 30 مراجعاً ومستشاراً مالياً يعملون بالتوازي من مقرات الشركات والعملاء، 2) هندسة وتأمين منظومة البريد المالي الرسمي للمكتب بتوثيق SPF و DKIM و DMARC لحماية التقارير المالية ومخرجات التدقيق الاستشاري من محاولات التزييف، 3) تطبيق منظومة نسخ احتياطي سحابي معزول (Immutable Disaster Recovery) مع لقطات يومية مشفرة تحمي السجلات والدفاتر المالية ضد الفقدان أو الهجمات السيبرانية، 4) قطاع تقني كامل كخدمة (IT as a Service) وفّر جاهزية تشغيلية مطلقة بنسبة 100% خلال ذروة مواسم إقفال الميزانيات والتقارير المالية السنوية.',
+      'نقل بيئة العمل المحاسبية والرقابية للمكتب إلى خوادم سحابية خاصة عالية الأداء، مع تأمين وصول 30 مستشاراً ومراجعاً مالياً للأنظمة المركزية، وتوثيق 150+ بريد رسمي ضد التزوير، مع خطة نسخ احتياطي يومي معزول لضمان استمرارية الأعمال.',
     executiveSummary_en:
-      'Nuzul Tech orchestrated a complete sovereign cloud modernization for Mohamed Ibrahiem Office for Finance, migrating mission-critical corporate financial and auditing workflows into a dedicated high-security private cloud: 1) Provisioned high-speed Windows Server VPS instances with ultra-low latency Remote Desktop (RDP) access, enabling 30 concurrent financial consultants and auditors across Egypt and the GCC to execute corporate ERP operations and financial reporting simultaneously, 2) Hardened corporate financial email infrastructure on a dedicated domain with strict SPF, DKIM, and DMARC enforcement, protecting sensitive audit reports and corporate financial statements, 3) Implemented automated immutable off-site daily backups protecting financial ledgers against ransomware and hardware failures, 4) Comprehensive IT as a Service (ITaaS) ensuring zero downtime during fiscal audits.',
+      'Migrated mission-critical financial workflows into a dedicated private cloud: high-speed multi-user access for 30 concurrent auditors, hardened corporate mail with SPF/DKIM/DMARC, and immutable automated backups.',
     description_ar:
-      'بنية سحابية مخصصة لخوادم الأنظمة المالية وإدارة الأعمال (ERP) لـ 30 مستشاراً ومراجعاً مالياً، مع حوكمة وتأمين 150+ بريد مالي رسمي، ومنظومة نسخ احتياطي يومي معزول، وقطاع تقني كامل كخدمة (IT as a Service).',
+      'بنية سحابية مخصصة لتشغيل الأنظمة المالية والـ ERP لـ 30 مراجعاً، مع تأمين 150+ بريد رسمي، ونسخ احتياطي يومي معزول.',
     description_en:
-      'Dedicated enterprise cloud ERP infrastructure for 30 concurrent financial auditors, migration & hardening of 150+ corporate financial mailboxes, automated daily immutable backups, and full IT as a Service.',
+      'Dedicated cloud infrastructure hosting financial systems for 30 auditors, 150+ hardened mailboxes, and automated daily backups.',
     tech: [
       'Enterprise Financial Cloud',
-      'Windows VPS (RDP)',
+      'High-Availability Cloud VPS',
       'Corporate Financial Mail',
       'SPF / DKIM / DMARC',
       'Immutable Cloud Backup',
       'IT as a Service (ITaaS)',
     ],
     challenges_ar: [
-      'تباطؤ برامج الأنظمة المالية على الأجهزة المكتبية وصعوبة وصول المراجعين والخبراء إليها أثناء العمل الميداني لدى الشركات والعملاء',
-      'سقوط التقارير المالية ومسودات التدقيق المرسلة للشركات في مجلد السبام نتيجة غياب التوثيق الرقمي المعتمد',
-      'مخاطر حقيقية لفقدان أو تلف السجلات والدفاتر المالية التاريخية في حال تعطل أحد الأجهزة المحلية أو الإصابة ببرمجيات الفدية',
-      'انشغال إدارة المكتب بالأعطال التقنية في أوقات ذروة المراجعات السنوية والميزانيات العمومية',
+      'تباطؤ الأنظمة المالية على الأجهزة المكتبية وصعوبة وصول المراجعين لقواعد البيانات أثناء التواجد لدى العملاء',
+      'سقوط التقارير المالية ومسودات التدقيق في مجلد السبام لغياب التوثيق الرقمي المعتمد',
+      'مخاطر فقدان السجلات المالية التاريخية في حال تعطل أحد الأجهزة المحلية أو الإصابة ببرمجيات خبيثة',
+      'انشغال إدارة المكتب بمشاكل التقنية في أوقات ذروة المراجعات وإقفال الميزانيات السنوية',
     ],
     challenges_en: [
       'Sluggish ERP performance on local desktop PCs and inability to access financial databases during off-site corporate audits',
@@ -745,32 +883,32 @@ export const NUZUL_CASE_STUDIES: CaseStudy[] = [
       'Financial partners bogged down with IT troubleshooting during peak annual fiscal closing',
     ],
     solution_ar: [
-      'تخصيص خوادم Windows Server سحابية فائقة السرعة بأقراص NVMe مخصصة للمكتب لتشغيل المنظومات المالية وإدارة الأعمال (ERP)',
-      'تفعيل وصول مشفر لـ 30 مستشاراً ومراجعاً يعملون في نفس الوقت على قواعد البيانات المالية المركزية بسرعة فائقة وصفر تأخير',
+      'تخصيص خوادم سحابية فائقة السرعة بأقراص NVMe لتشغيل قواعد البيانات والأنظمة المالية المركزية',
+      'تفعيل وصول مشفر لـ 30 مستشاراً ومراجعاً للعمل على الأنظمة في نفس الوقت بسرعة عالية واستقرار كامل',
       'هجرة وتأمين 150+ بريد مالي رسمي مع حماية متقدمة ضد الاحتيال وضمان وصول 100% لصندوق الوارد',
-      'نظام نسخ احتياطي يومي آلي مشفر ينقل لقطات البيانات إلى سحابة نُزول تِك المعزولة مع إمكانية الاستعادة الفورية في ثوانٍ',
-      'قطاع تقني كامل كخدمة (IT as a Service): صيانة وقائية ومراقبة استباقية 24/7 دون الحاجة لتوظيف فريق تقني داخلي',
+      'نظام نسخ احتياطي يومي آلي مشفر ينقل لقطات البيانات إلى سحابة نُزول تِك المعزولة مع استعادة فورية',
+      'قطاع تقني كخدمة (IT as a Service): صيانة وقائية ومراقبة استباقية 24/7 دون الحاجة لتوظيف فريق تقني داخلي',
     ],
     solution_en: [
-      'Deployed a high-frequency enterprise Windows Server VPS hosting central SQL corporate accounting & audit databases',
-      'Configured secure multi-session low-latency RDP access for 30 simultaneous financial consultants with seamless mobility',
+      'Deployed a high-frequency enterprise VPS hosting central SQL corporate accounting & audit databases',
+      'Configured secure multi-session low-latency access for 30 simultaneous financial consultants with seamless mobility',
       'Migrated and hardened 150+ financial mailboxes with strict SPF, DKIM, and DMARC enforcement guaranteeing 100% inbox placement',
       'Automated daily encrypted immutable snapshots sent to Nuzul Tech off-site cloud storage for rapid disaster recovery',
       'Delivered full IT as a Service (ITaaS) with 24/7 proactive monitoring and zero client IT management hassle',
     ],
     deliverables_ar: [
-      '1. خوادم Windows Server RDP سحابية عالية الأداء لتشغيل المنظومات المالية والـ ERP',
+      '1. خوادم سحابية عالية الأداء لتشغيل المنظومات المالية والـ ERP',
       '2. هجرة وتأمين 150+ بريد مالي رسمي بمعدل تسليم 100%',
-      '3. خط أنابيب نسخ احتياطي يومي مشفر تلقائي لجميع السجلات والدفاتر المالية',
-      '4. قطاع تقني كامل كخدمة (IT as a Service) وإدارة استباقية 24/7',
+      '3. خط أنابيب نسخ احتياطي يومي مشفر لجميع السجلات والدفاتر المالية',
+      '4. قطاع تقني كخدمة (IT as a Service) وإدارة استباقية 24/7',
     ],
     deliverables_en: [
-      '1. High-Performance Enterprise Windows VPS RDP Hosting for Corporate Financial ERP',
+      '1. High-Performance Enterprise Cloud Hosting for Corporate Financial ERP',
       '2. 150+ Enterprise Financial Mailboxes Hardened with 100% Deliverability',
       '3. Automated Daily Encrypted Off-Site Backup Pipeline',
       '4. Comprehensive 24/7 IT as a Service (ITaaS) Management',
     ],
-    result_ar: 'تسريع إنجاز أعمال المراجعة والتقارير المالية بنسبة 70%، استقرار بنية العمل بنسبة 100% خلال موسم إقفال الميزانيات، وحماية تامة لكافة السجلات المالية',
+    result_ar: 'تسريع إنجاز أعمال المراجعة بنسبة 70%، استقرار بنية العمل 100% خلال موسم إقفال الميزانيات، وحماية تامة للسجلات',
     result_en: '70% faster financial reporting turnaround, 100% operational stability during fiscal closing, and zero data loss',
     icon: 'Lock',
   },
@@ -779,29 +917,29 @@ export const NUZUL_CASE_STUDIES: CaseStudy[] = [
   {
     id: 3,
     badge: 'STRATEGIC CASE STUDY',
-    title_ar: 'دراسة حالة استراتيجية: هندسة وحوكمة البنية التحتية للبريد الإلكتروني والأرشيف الطبي لمركز Cairo Cure',
-    title_en: 'Strategic Case Study: Email Infrastructure & Medical PACS Archiving Governance for Cairo Cure Center',
+    title_ar: 'الأرشفة الطبية وحوكمة البريد — مركز كايرو كيور',
+    title_en: 'Medical PACS Archiving & Email Governance — Cairo Cure',
     category_ar: 'حوكمة البريد والأرشيف الطبي',
     category_en: 'Email Governance & Medical PACS',
     client_ar: 'مركز Cairo Cure التخصصي للأورام — القاهرة',
     client_en: 'Cairo Cure Oncology Center — Cairo',
     executiveSummary_ar:
-      'واجه مركز Cairo Cure (المركز التخصصي للأورام) تحدياً حرجاً هدد استمرارية أعماله وأمان بيانات مرضاه؛ حيث تم الاعتماد بشكل خاطئ على البريد الإلكتروني كبديل لنظام الأرشفة الطبية (PACS/EMR). أدى ذلك إلى تضخم هائل في المساحات السحابية، وبطء شديد في الأنظمة، وتكاليف استضافة تصاعدية غير مبررة. تدخلت Nuzul Tech لتقديم استشارة هندسية وحل مبتكر يدمج بين السحابة عالية الأداء والأرشفة المحلية الذكية (Hybrid Managed Solution). النتيجة؟ حماية كاملة للسجلات الطبية، استقرار فوري لأداء الأجهزة، وتخفيض التكاليف التشغيلية السنوية بنسبة تتجاوز 75% مقارنة بالحلول العالمية السحابية.',
+      'إعادة هندسة البنية الرقمية لمركز Cairo Cure للأورام: فصل ملفات الأشعة الطبية الضخمة (PACS) عن البريد الإلكتروني، وتأسيس خوادم أرشفة محلية وسحابية هجينة خفضت التكاليف السنوية بنسبة 75% مع استقرار فوري لكافة أجهزة العيادات.',
     executiveSummary_en:
-      'Cairo Cure Oncology Center faced a critical operational bottleneck when corporate email was mistakenly utilized as a repository for high-resolution DICOM radiological studies (PACS). This led to massive cloud bloat, sluggish workstations, and runaway cloud storage costs. Nuzul Tech stepped in with a hybrid architecture decoupling email from medical archiving: deploying on-premise encrypted PACS/NAS storage synced with encrypted cloud backups while migrating corporate mailboxes to an optimized private cloud. Result: 100% data integrity, instantaneous workstation performance, and a >75% reduction in recurring annual IT overhead.',
+      'Decoupled heavy PACS radiological archives from corporate email onto hybrid NVMe storage, slashing annual cloud IT overhead by >75% while stabilizing clinical workstations.',
     description_ar:
-      'حل هندسي واستشاري متكامل دمج بين السيرفرات السحابية والأرشفة الطبية المحلية الذكية. قطاع تقني كامل كخدمة (IT as a Service): حصل المركز على إدارة استباقية، ومراقبة للبنية التحتية، ودعم فني متخصص، مما أزال الحاجة تماماً لتوظيف مهندس IT مقيم بمرتب شهري مرتفع.',
+      'حل هجين لفصل الأرشيف الطبي PACS عن البريد، وهجرة 120 صندوق بريد، مع نسخ احتياطي مشفر وقطاع تقني كخدمة (ITaaS).',
     description_en:
-      'Complete engineering intervention decoupling PACS medical storage from corporate email via a hybrid cloud model, cutting costs by over 75% and stabilizing clinic workstations.',
+      'Hybrid cloud solution decoupling medical PACS storage from email, migrating 120 mailboxes, and cutting costs by 75%.',
     tech: ['Hybrid Cloud', 'DICOM PACS Archive', 'Private Mail Server', 'SPF / DKIM / DMARC', 'AES-256 Storage', 'Proxmox', 'IT as a Service'],
-    result_ar: 'تخفيض التكاليف التشغيلية السنوية بنسبة تتجاوز 75% وحماية تامة لبيانات المرضى واستقرار فوري للأجهزة',
+    result_ar: 'تخفيض التكاليف التشغيلية بنسبة 75% وحماية تامة لبيانات المرضى واستقرار فوري للأجهزة',
     result_en: '>75% operational cost reduction and zero patient data loss',
     icon: 'Shield',
     challenges_ar: [
-      'تضخم صناديق البريد (أكثر من 50 جيجابايت لكل طبيب) بسبب تبادل صور الأشعة والتحاليل بالبريد',
-      'بطء شديد وتجمد مستمر في أجهزة الأطباء وموظفي الاستقبال أثناء البحث في الإيميلات',
-      'تكاليف استضافة سحابية شهرية متصاعدة بشكل غير مبرر للشركات العالمية',
-      'مخاطر حقيقية لفقدان أو تسريب السجلات الطبية الحساسة لمرضى الأورام',
+      'تضخم مساحات البريد الإلكتروني نتيجة تبادل صور الأشعة والتحاليل بالبريد',
+      'بطء وتجمد أجهزة الأطباء وموظفي الاستقبال أثناء البحث في المراسلات',
+      'تكاليف استضافة شهرية متصاعدة بشكل كبير على السحابات الدولية',
+      'مخاطر فقدان أو تلف السجلات الطبية الحساسة لمرضى الأورام',
     ],
     challenges_en: [
       'Massive mailbox bloat (>50GB per physician) caused by emailing heavy DICOM scans',
@@ -810,74 +948,95 @@ export const NUZUL_CASE_STUDIES: CaseStudy[] = [
       'Elevated compliance risks of accidental patient record deletion or data breach',
     ],
     solution_ar: [
-      'فصل الأرشيف الطبي PACS عن منظومة البريد وتأسيس خادم تخزين محلي فائق السرعة',
-      'هجرة 120 صندوق بريدي إداري وطبي إلى خوادم خاصة آمنة مع توثيق SPF/DKIM/DMARC',
-      'تطبيق خطة نسخ احتياطي هجين مشفر (Immutable Backups) تضمن استعادة أي ملف في ثوانٍ',
-      'قطاع تقني كامل كخدمة (IT as a Service): حصل المركز على إدارة استباقية، ومراقبة للبنية التحتية، ودعم فني متخصص، مما أزال الحاجة تماماً لتوظيف مهندس IT مقيم بمرتب شهري مرتفع.',
+      'فصل الأرشيف الطبي PACS عن البريد وتأسيس خادم تخزين محلي فائق السرعة',
+      'هجرة 120 صندوق بريد إلى خوادم خاصة آمنة مع توثيق SPF/DKIM/DMARC',
+      'تطبيق خطة نسخ احتياطي هجين مشفر تضمن استعادة أي ملف في دقائق',
+      'قطاع تقني كخدمة (IT as a Service): إدارة استباقية ومراقبة دورية دون الحاجة لتوظيف مهندس مقيم',
     ],
     solution_en: [
       'Decoupled medical PACS archives from email onto dedicated on-premise NVMe storage',
       'Migrated 120 corporate mailboxes to hardened private cloud servers with SPF/DKIM/DMARC',
       'Enacted an immutable hybrid backup pipeline guaranteeing sub-second retrieval',
-      'Full IT as a Service (ITaaS): Proactive monitoring, enterprise maintenance, and 24/7 SLA eliminating the need for an expensive on-site internal IT hire.',
+      'Full IT as a Service (ITaaS): Proactive monitoring and maintenance without internal IT hire overhead.',
     ],
   },
 
   // 4. ABCH Hospital Projects
   {
     id: 4,
-    badge: 'HOSPITAL INFRASTRUCTURE',
-    title_ar: 'مشاريع مستشفى ABCH: البنية التحتية، البوابة، والتذاكر والموافقات الطبية',
-    title_en: 'ABCH Hospital Turnkey IT: Web Portal, Ticketing, Approvals & Full Physical Infrastructure',
-    category_ar: 'تجهيز المستشفيات والأنظمة',
-    category_en: 'Hospital Turnkey IT & Networks',
+    badge: 'HOSPITAL INFRASTRUCTURE & PR',
+    title_ar: 'البنية التحتية والأنظمة الطبية وعلاقات المرضى — مستشفى ABCH',
+    title_en: 'Hospital Infrastructure, Virtualization & Patient Relations — ABCH Hospital',
+    category_ar: 'تجهيز المستشفيات والأنظمة وعلاقات المرضى',
+    category_en: 'Hospital Turnkey IT, Networks & PR System',
     client_ar: 'مستشفى ABCH — القاهرة',
     client_en: 'ABCH Hospital — Cairo',
     executiveSummary_ar:
-      'أنجزت نُزول تِك تنفيذاً هندسياً متكاملاً لمنظومة مستشفى ABCH عبر 4 مشاريع محورية دمجت العتاد الفيزيائي بالبرمجيات السحابية: 1) البوابة الإلكترونية، 2) نظام التذاكر الداخلي، 3) نظام الموافقات الطبية والتأمينية، 4) البنية التحتية الفيزيائية للشبكات والسيرفرات.',
+      'تنفيذ وتطوير بنية تحتية برمجية وفيزيائية متكاملة لمستشفى ABCH: تشمل بوابة المستشفى والمرضى الإلكترونية، سيستم إدارة علاقات ورعاية المرضى (Patient Relations / PR System)، نظام التذاكر والدعم الفني الداخلي، نظام الموافقات الطبية والتأمينية، وبناء بيئة افتراضية مزدوجة الحماية (Virtualization Clusters) مع شبكات الفايبر وجدران الحماية Fortinet.',
     executiveSummary_en:
-      'Nuzul Tech executed an end-to-end IT modernization master plan for ABCH Hospital comprising 4 pivotal systems: 1) Official patient & physician web portal, 2) Internal maintenance & medical ticketing, 3) Automated medical insurance approvals, and 4) Complete physical infrastructure deployment.',
+      'Executed full IT modernization and patient relationship engineering for ABCH Hospital: responsive portal, dedicated Patient Relations (PR System), internal engineering ticketing, automated insurance approvals, High-Availability Virtualization Clusters (Proxmox/VMware), and complete physical fiber cabling.',
     description_ar:
-      'تنفيذ شامل لمشاريع مستشفى ABCH الأربعة: 1) بوابة المستشفى الإلكترونية الرسمية، 2) نظام التذاكر والدعم الفني الداخلي، 3) نظام الموافقات الطبية والتأمينية، 4) البنية التحتية الفيزيائية الكاملة.',
+      'تطوير بوابة المستشفى، سيستم إدارة علاقات المرضى (PR System)، نظام التذاكر الداخلي، نظام الموافقات الطبية، وتجهيز بيئات الأنظمة الافتراضية (Virtualization) وكابلات الفايبر وجدران الحماية بالكامل.',
     description_en:
-      'Complete turnkey execution of 4 primary systems for ABCH Hospital: 1) Official ABCH web portal, 2) Internal engineering ticketing system, 3) Medical & insurance approvals workflow, 4) ALL physical IT infrastructure.',
-    tech: ['Hospital Web Portal', 'Medical Approvals Workflow', 'IT Ticketing System', 'Fiber & Cat6A Cabling', 'Fortinet NGFW', 'Cisco'],
+      'Turnkey delivery of hospital portal, Patient Relations (PR) management system, internal ticketing, medical approvals workflow, enterprise virtualization clusters, and complete structured network cabling.',
+    tech: [
+      'Patient Relations (PR) System',
+      'Virtualization (Proxmox/VMware)',
+      'High-Availability Clusters',
+      'Hospital Web Portal',
+      'Medical Approvals Workflow',
+      'IT Ticketing System',
+      'Fiber & Cat6A Cabling',
+      'Fortinet NGFW',
+    ],
     challenges_ar: [
-      'تشتت العمليات بين ملفات ورقية وبطء في مراجعة الموافقات الطبية لشركات التأمين',
-      'شبكة كابلات قديمة غير منظمة كانت تسبب انقطاعات متكررة في غرف الأشعة والتحاليل',
-      'غياب نظام مركزي لمتابعة تذاكر الصيانة الدورية للأجهزة الطبية والهندسية',
+      'تشتت العمليات الورقية وبطء مراجعة الموافقات الطبية مع شركات التأمين',
+      'صعوبة متابعة شكاوى واستفسارات وتجربة المرضى والمراجعين وغياب نظام موحد لعلاقات المرضى (PR)',
+      'شبكة كابلات قديمة كانت تسبب انقطاعات في غرف الأشعة والتحاليل',
+      'تعدد السيرفرات الفيزيائية المنفصلة وغياب بيئة افتراضية تضمن استمرارية العمل عند تعطل أي عتاد',
+      'غياب نظام مركزي لمتابعة تذاكر صيانة الأجهزة الطبية والهندسية',
     ],
     challenges_en: [
       'Paperwork bottlenecks delaying crucial patient insurance approvals',
+      'Fragmented patient feedback and lack of a centralized Patient Relations (PR) tracking system',
       'Aging unorganized legacy cabling causing random packet loss in diagnostic labs',
+      'Multiple fragmented physical servers lacking a resilient High-Availability virtualization hypervisor',
       'Absence of centralized tracking for hospital biomedical & IT maintenance tickets',
     ],
     solution_ar: [
-      'بناء بوابة مستشفى ABCH الرسمية وربطها بنظام حجز مواعيد الأطباء والاستعلام',
+      'بناء بوابة مستشفى ABCH الرسمية وبوابة المرضى لحجز المواعيد والاستعلام الفوري',
+      'تطوير سيستم مخصص لإدارة علاقات ورعاية المرضى (Patient Relations / PR System) لتسجيل الملاحظات وحل الشكاوى وتتبع رضا المراجعين',
       'تطوير نظام تذاكر ودعم فني داخلي يوزع البلاغات آلياً على المهندسين والتمريض',
       'برمجة نظام الموافقات الطبية والتأمينية لتأكيد التغطية لحظياً خلال دقائق',
-      'تأسيس البنية التحتية الفيزيائية الكاملة: كابلات الفايبر والشبكات المنظمة، السويتشات المدارة، غرفة السيرفرات، وجدران الحماية Fortinet',
+      'بناء عنقود افتراضي متقدم (Virtualization HA Cluster) لدمج وتأمين السيرفرات الطبية وقواعد البيانات مع استعادة تلقائية فورية',
+      'تأسيس البنية التحتية الفيزيائية الكاملة: كابلات الفايبر، السويتشات المدارة، وجدران الحماية Fortinet',
     ],
     solution_en: [
-      'Engineered the official ABCH responsive portal with dynamic doctor scheduling',
-      'Deployed an internal ticketing system automating service desk requests',
-      'Automated medical & insurance approvals pipeline cutting verification delays',
+      'Engineered the official ABCH responsive portal with dynamic doctor scheduling and patient access',
+      'Developed a bespoke Patient Relations (PR System) tracking patient satisfaction, inquiries, and resolution SLAs',
+      'Deployed an internal ticketing system automating service desk requests across clinical wards',
+      'Automated medical & insurance approvals pipeline cutting verification delays from hours to minutes',
+      'Deployed High-Availability Virtualization Clusters (Proxmox/VMware) delivering instant hardware failover',
       'Turnkey physical infrastructure: fiber backbone, Cat6A cabling, server racks, and Fortinet NGFW',
     ],
     deliverables_ar: [
-      '1. بوابة مستشفى ABCH الرسمية (ABCH Website Portal)',
-      '2. نظام التذاكر الداخلي (Ticketing System)',
-      '3. نظام الموافقات الطبية (Medical Approvals System)',
-      '4. البنية التحتية الفيزيائية الكاملة (ALL Physical IT Infrastructure)',
+      '1. بوابة مستشفى ABCH الرسمية وبوابة المرضى',
+      '2. سيستم إدارة علاقات ورعاية المرضى (Patient Relations & PR System)',
+      '3. نظام التذاكر والدعم الداخلي لصيانة الأجهزة',
+      '4. نظام الموافقات الطبية والتأمينية السريعة',
+      '5. بيئة الأنظمة الافتراضية المزدوجة (Virtualization HA Clusters)',
+      '6. البنية التحتية الفيزيائية وشبكات الفايبر وجدران الحماية',
     ],
     deliverables_en: [
-      '1. ABCH Official Website Portal',
-      '2. Engineering Ticketing System',
-      '3. Medical Approvals System',
-      '4. ALL Physical IT Infrastructure',
+      '1. ABCH Official Website & Patient Portal',
+      '2. Dedicated Patient Relations (PR Management) System',
+      '3. Clinical & Engineering Ticketing System',
+      '4. Automated Insurance Approvals Engine',
+      '5. High-Availability Virtualization Clusters (Proxmox/VMware)',
+      '6. Turnkey Physical Infrastructure, Fiber & NGFW Security',
     ],
-    result_ar: 'ربط المستشفى بالكامل في بنية موحدة بنسبة تشغيل 99.98% وتسريع الموافقات 4 أضعاف',
-    result_en: '99.98% physical uptime and 4x faster medical approval processing',
+    result_ar: 'ربط المستشفى بالكامل في بنية افتراضية وفيزيائية موحدة بنسبة تشغيل 99.98%، تحسين رضا المرضى وتتبع شكاواهم لحظياً، وتسريع الموافقات 4 أضعاف',
+    result_en: '99.98% physical & virtual uptime, real-time patient relations tracking, and 4x faster medical approval processing',
     icon: 'Building2',
   },
 
@@ -885,25 +1044,25 @@ export const NUZUL_CASE_STUDIES: CaseStudy[] = [
   {
     id: 5,
     badge: 'COMPREHENSIVE ERP',
-    title_ar: 'نظام إدارة المستشفيات الشامل — مستشفى لبنان',
-    title_en: 'Comprehensive Hospital ERP System — Lebanon Hospital',
+    title_ar: 'نظام إدارة المستشفيات (HIS) — مستشفى لبنان',
+    title_en: 'Hospital Management System (HIS) — Lebanon Hospital',
     category_ar: 'أنظمة إدارة المستشفيات',
     category_en: 'Hospital ERP Suite',
     client_ar: 'مستشفى لبنان',
     client_en: 'Lebanon Hospital',
     executiveSummary_ar:
-      'نظام ERP متكامل لإدارة مستشفى لبنان صُمم لتوحيد كافة العمليات السريرية والمالية والإدارية في منصة رقمية واحدة فائقة السرعة، مدعومة بالسجلات الطبية الإلكترونية (EMR)، إدارة غرف العمليات، الصيدليات، والموارد البشرية الطبية.',
+      'نظام ERP متكامل لإدارة مستشفى لبنان يربط حجز المواعيد، السجلات الطبية الإلكترونية (EMR)، الفواتير الآلية، إدارة الصيدلية المركزية والمخازن، وجداول نوبتجيات الأطباء والتمريض.',
     executiveSummary_en:
-      'Unified enterprise hospital ERP suite engineered for Lebanon Hospital, bringing outpatient scheduling, inpatient admission, Electronic Medical Records (EMR), automated insurance billing, and pharmacy dispensing into a zero-latency digital core.',
+      'Unified enterprise hospital ERP suite engineered for Lebanon Hospital, uniting outpatient scheduling, EMR, insurance billing, and pharmacy dispensing into a zero-latency digital core.',
     description_ar:
-      'نظام ERP متكامل لإدارة مستشفى لبنان يشمل الجدولة الذكية للمواعيد، السجلات الطبية الإلكترونية (EMR)، الفواتير الآلية، إدارة مخازن وصيدليات المستشفى، والموارد البشرية الطبية.',
+      'نظام ERP متكامل يشمل الجدولة الذكية، السجلات الطبية (EMR)، الفواتير الآلية، إدارة الصيدلية المركزية، والموارد البشرية الطبية.',
     description_en:
-      'Comprehensive hospital ERP system with smart appointment scheduling, Electronic Medical Records (EMR), automated billing, pharmacy inventory, and medical HR.',
+      'Comprehensive hospital ERP system with smart appointment scheduling, EMR, automated billing, and pharmacy inventory.',
     tech: ['React', 'Node.js', 'PostgreSQL', 'Redis', 'Docker', 'Hospital EMR', 'HL7/FHIR'],
     challenges_ar: [
-      'تأخر تسجيل المرضى وازدحام صالات الاستقبال نتيجة الاعتماد على برامج منفصلة غير مترابطة',
-      'صعوبة تتبع صرف الأدوية والمستلزمات الطبية في المخازن والصيدليات بدقة',
-      'فقدان الوقت في مراجعة الملفات التاريخية للمرضى قبل إجراء العمليات الجراحية',
+      'تأخر تسجيل المرضى وازدحام صالات الاستقبال نتيجة الاعتماد على برامج منفصلة',
+      'صعوبة تتبع صرف الأدوية والمستلزمات في المخازن والصيدليات بدقة',
+      'فقدان الوقت في مراجعة الملفات الورقية التاريخية للمرضى قبل العمليات',
     ],
     challenges_en: [
       'Outpatient congestion caused by fragmented disconnected software silos',
@@ -911,10 +1070,10 @@ export const NUZUL_CASE_STUDIES: CaseStudy[] = [
       'Time loss locating physical historical health records prior to surgical procedures',
     ],
     solution_ar: [
-      'نظام الجدولة الذكية للمواعيد وحجوزات العيادات الخارجية وغرف العمليات',
-      'السجلات الطبية الإلكترونية الموحدة (EMR) لحفظ التاريخ المرضي والأشعة والتحاليل رقمياً',
+      'نظام الجدولة الذكية للمواعيد وحجوزات العيادات وغرف العمليات',
+      'السجلات الطبية الإلكترونية الموحدة (EMR) لحفظ التاريخ المرضي والأشعة رقمياً',
       'نظام الفواتير الآلية والربط المالي الشامل مع شركات التأمين الصحي',
-      'إدارة الصيدلية المركزية ومراقبة تواريخ الصلاحية وحد الطلب للمستلزمات تلقائياً',
+      'إدارة الصيدلية المركزية ومراقبة تواريخ الصلاحية وحد الطلب للمستلزمات',
       'إدارة الموارد البشرية الطبية وجداول نوبتجيات الأطباء والتمريض بدقة',
     ],
     solution_en: [
@@ -938,7 +1097,7 @@ export const NUZUL_CASE_STUDIES: CaseStudy[] = [
       'Central pharmacy dispensing & inventory',
       'Medical HR & shift rotations',
     ],
-    result_ar: 'تحول رقمي كامل للمستشفى والقضاء على 95% من السجلات الورقية وتسريع دورة خدمة المريض',
+    result_ar: 'تحول رقمي كامل للمستشفى والقضاء على 95% من السجلات الورقية وتسريع خدمة المريض',
     result_en: '100% digital hospital transformation with 95% paperwork eliminated',
     icon: 'Activity',
   },
@@ -947,26 +1106,26 @@ export const NUZUL_CASE_STUDIES: CaseStudy[] = [
   {
     id: 6,
     badge: 'TAX & ACCOUNTING CLIENT',
-    title_ar: 'هجرة وتأمين 500+ بريد رسمي — محاسب ضريبي (amer-acc)',
-    title_en: 'Migration & Hardening of 500+ Corporate Mailboxes — Amer Accounting & Tax Consultant (amer-acc)',
-    category_ar: 'هجرة وتأمين البريد واستضافة الضرائب',
-    category_en: 'Mail Migration, Security & Tax Cloud',
-    client_ar: 'مكتب عامر للمحاسبة والاستشارات الضريبية (amer-acc) — محاسب ضريبي',
-    client_en: 'Amer Tax & Accounting Consultancy (amer-acc) — Egypt',
+    title_ar: 'تأمين البريد والأنظمة المحاسبية — مكتب عامر للضرائب',
+    title_en: 'Corporate Email & Tax Systems — Amer Tax Consultancy',
+    category_ar: 'تأمين البريد واستضافة الضرائب',
+    category_en: 'Mail Security & Tax Cloud',
+    client_ar: 'مكتب عامر للمحاسبة والاستشارات الضريبية — مصر',
+    client_en: 'Amer Tax & Accounting Consultancy — Egypt',
     executiveSummary_ar:
-      'استفاد مكتب عامر للمحاسبة والاستشارات الضريبية (amer-acc) من نقل وتأمين أكثر من 500 بريد رسمي إداري ومحاسبي إلى خوادم خاصة مشفرة بتوثيق SPF/DKIM/DMARC لمنع انتحال الشخصية والسبام. كما تم تشغيل برامج الفحص والضرائب والمحاسبة على سيرفرات ويندوز RDP سريعة لـ 25 مراجعاً، مع نسخ احتياطي يومي مشفر وقطاع تقني كامل كخدمة (IT as a Service)، مما وفر بيئة عمل مستقرة تماماً خلال ذروة مواسم الإقرارات السنوية دون توقف دقيقة واحدة.',
+      'هجرة وتأمين أكثر من 500 بريد رسمي لمكتب عامر للمحاسبة مع توثيق SPF/DKIM/DMARC لمنع انتحال الشخصية والسبام، وتوفير بيئة سحابية سريعة لـ 25 محاسباً مع نسخ احتياطي يومي مشفر.',
     executiveSummary_en:
-      'Amer Tax & Accounting Consultancy (amer-acc) benefited from migrating and hardening 500+ official corporate mailboxes with SPF/DKIM/DMARC authentication, preventing spoofing and delivery blacklisting. In parallel, Nuzul Tech provisioned high-performance Windows RDP servers for 25 simultaneous tax auditors with automated encrypted daily backups and full IT as a Service (ITaaS), delivering zero downtime throughout peak tax filing deadlines.',
+      'Migrated and secured 500+ corporate mailboxes with SPF/DKIM/DMARC, deployed high-performance cloud hosting for 25 tax auditors with automated daily backups and zero tax-season downtime.',
     description_ar:
-      'هجرة وتأمين 500+ بريد رسمي للمحاسب الضريبي مع حماية SPF/DKIM/DMARC، واستضافة برامج المحاسبة على سيرفرات Windows VPS RDP (تبدأ من 1000 ج.م/شهرياً)، مع قطاع تقني كامل كخدمة (IT as a Service).',
+      'هجرة وتأمين 500+ بريد رسمي بمعدل تسليم 100%، واستضافة برامج المحاسبة والضرائب سحابياً لـ 25 مراجعاً مع نسخ يومي معزول.',
     description_en:
-      'Migration & security hardening of 500+ official mailboxes with SPF/DKIM/DMARC, plus Windows VPS RDP hosting for 25 tax auditors with automated daily backups and full IT as a Service.',
-    tech: ['500+ Mail Migration', 'SPF / DKIM / DMARC', 'Windows VPS (RDP)', 'Automated Daily Backups', 'IT as a Service (ITaaS)'],
+      'Migration & security hardening of 500+ mailboxes with SPF/DKIM/DMARC, plus cloud hosting for 25 tax auditors with automated backups.',
+    tech: ['500+ Mail Migration', 'SPF / DKIM / DMARC', 'Cloud VPS Hosting', 'Automated Daily Backups', 'IT as a Service (ITaaS)'],
     challenges_ar: [
       'تكرار سقوط خوادم البريد القديمة ووصول إيميلات المصلحة والعملاء لمجلد السبام',
-      'بطء الأجهزة المحلية وتأخر تبادل الملفات المالية الضخمة بين المحاسبين خلال موسم الفحص الضريبي',
-      'مخاطر فقدان البيانات المالية الحساسة لعملاء المكتب في حال تعطل أحد الأجهزة المحلية',
-      'الحاجة لدخول المحاسبين من المكاتب ومن مقرات العملاء بأمان كامل دون تأخير',
+      'بطء الأجهزة المحلية وتأخر تبادل الملفات المالية الضخمة خلال موسم الفحص الضريبي',
+      'مخاطر فقدان البيانات المالية الحساسة لعملاء المكتب في حال تعطل أحد الأجهزة',
+      'الحاجة لدخول المحاسبين من المكاتب ومقرات العملاء بأمان كامل دون تأخير',
     ],
     challenges_en: [
       'Frequent legacy mail server outages and critical tax invoices landing in spam folders',
@@ -976,33 +1135,31 @@ export const NUZUL_CASE_STUDIES: CaseStudy[] = [
     ],
     solution_ar: [
       'هجرة 500+ صندوق بريد رسمي بسلاسة وصفر توقف إلى سيرفرات بريد خاصة عالية الموثوقية',
-      'ضبط سجلات التوثيق العالمية SPF و DKIM و DMARC لضمان وصول الرسائل فوراً لصندوق الوارد',
-      'تخصيص سيرفر Windows VPS (Remote Desktop) عالي المواصفات (1000 ج.م/شهرياً) لتشغيل برامج المحاسبة والضرائب',
-      'تفعيل وصول مشفر لـ 25 محاسباً يعملون في نفس الوقت على قواعد البيانات المالية بسرعة فائقة',
+      'ضبط سجلات التوثيق SPF و DKIM و DMARC لضمان وصول الرسائل لصندوق الوارد',
+      'تخصيص خادم سحابي عالي المواصفات لتشغيل برامج المحاسبة والضرائب لـ 25 محاسباً في نفس الوقت',
       'نظام نسخ احتياطي يومي آلي مشفر ينقل لقطات البيانات إلى سحابة نُزول تِك المعزولة',
-      'قطاع تقني كامل كخدمة (IT as a Service): إدارة استباقية وتحديثات أمان مستمرة دون حاجة لتوظيف فني IT داخلي',
+      'قطاع تقني كخدمة (IT as a Service): إدارة استباقية وتحديثات أمان مستمرة دون حاجة لتوظيف فني IT',
     ],
     solution_en: [
       'Zero-downtime migration of 500+ corporate mailboxes to sovereign private cloud mail servers',
       'Configured hardened SPF, DKIM, and DMARC cryptographic records ensuring 100% inbox deliverability',
-      'Deployed a dedicated Windows Server VPS (from 1,000 EGP/mo) hosting tax computation software',
-      'Provisioned multi-session low-latency RDP access for 25 simultaneous auditors',
+      'Deployed a dedicated cloud server hosting tax computation software for 25 concurrent auditors',
       'Automated daily encrypted off-site cloud snapshots of all financial databases',
       'Full IT as a Service (ITaaS) proactive monitoring and maintenance',
     ],
     deliverables_ar: [
       '1. هجرة وتأمين 500+ بريد رسمي بمعدل تسليم 100%',
-      '2. استضافة برامج المحاسبة والضرائب على سيرفرات Windows VPS RDP',
+      '2. استضافة برامج المحاسبة والضرائب سحابياً',
       '3. نظام نسخ احتياطي يومي مشفر تلقائي لبيانات العملاء',
-      '4. قطاع تقني كامل كخدمة (IT as a Service) ودعم فني متخصص 24/7',
+      '4. قطاع تقني كخدمة (IT as a Service) ودعم فني متخصص 24/7',
     ],
     deliverables_en: [
       '1. 500+ corporate mailboxes migrated and hardened with 100% inbox rate',
-      '2. High-performance Windows VPS RDP hosting for tax ERP software',
+      '2. High-performance cloud hosting for tax software',
       '3. Automated daily encrypted off-site cloud backup pipeline',
       '4. Full IT as a Service (ITaaS) with dedicated 24/7 technical support',
     ],
-    result_ar: 'وصول الإيميلات بنسبة 100%، إنجاز الإقرارات الضريبية أسرع بنسبة 80%، واستقرار تام على مدار الساعة دون الحاجة لمهندس IT مقيم',
+    result_ar: 'وصول الإيميلات بنسبة 100%، إنجاز الإقرارات الضريبية أسرع بنسبة 80%، واستقرار تام على مدار الساعة',
     result_en: '100% email deliverability, 80% faster tax turnaround, and zero IT hiring overhead',
     icon: 'Mail',
   },
@@ -1011,23 +1168,23 @@ export const NUZUL_CASE_STUDIES: CaseStudy[] = [
   {
     id: 7,
     badge: 'MAIL MIGRATION CLIENT',
-    title_ar: 'هجرة وتأمين 250+ بريد رسمي — مجموعة الصفوة الطبية',
-    title_en: '250+ Enterprise Mailboxes Zero-Downtime Migration — Al-Safwa Healthcare Group',
-    category_ar: 'هجرة البريد والأمان',
+    title_ar: 'هجرة وتأمين البريد الطبي — مجموعة الصفوة',
+    title_en: 'Medical Email Migration & Security — Al-Safwa Group',
+    category_ar: 'هجرة وتأمين البريد',
     category_en: 'Email Migration & Security',
     client_ar: 'مجموعة الصفوة الطبية — مصر',
     client_en: 'Al-Safwa Healthcare Group — Egypt',
     executiveSummary_ar:
-      'هجرة أكثر من 250 صندوق بريد رسمي للأطباء والإداريين من خوادم استضافة قديمة غير مستقرة إلى خوادم سحابية خاصة مع أرشفة مشفرة، وتفعيل SPF/DKIM/DMARC بصفر توقف عن العمل.',
+      'هجرة أكثر من 250 صندوق بريد رسمي للأطباء والإداريين إلى خوادم سحابية خاصة مع تفعيل توثيق SPF/DKIM/DMARC وأرشفة مشفرة بصفر توقف عن العمل.',
     executiveSummary_en:
-      'Seamless zero-downtime migration of 250+ medical and administrative email accounts from legacy shared hosting to dedicated private mail servers with SPF/DKIM/DMARC hygiene and cloud archiving.',
+      'Zero-downtime migration of 250+ medical email accounts to private cloud servers with SPF/DKIM/DMARC enforcement and encrypted archiving.',
     description_ar:
-      'هجرة وتأمين 250 صندوق بريد رسمي للأطباء والإداريين مع تفعيل حماية SPF/DKIM/DMARC بصفر توقف عن العمل وأرشفة مشفرة.',
+      'هجرة وتأمين 250 صندوق بريد للأطباء والإدارة مع تفعيل حماية SPF/DKIM/DMARC وأرشفة سحابية قانونية.',
     description_en:
-      'Zero-downtime migration of 250+ business mailboxes to hardened private cloud servers with SPF/DKIM/DMARC hygiene.',
+      'Zero-downtime migration of 250+ mailboxes to private cloud servers with SPF/DKIM/DMARC hygiene.',
     tech: ['Private Mail Server', 'DMARC Enforcement', 'DKIM 2048-bit', 'SPF Records', 'Encrypted Archiving', 'IT as a Service'],
     challenges_ar: [
-      'انقطاعات متكررة في البريد القديم وسقوط الرسائل المهمة في مجلد السبام (Junk)',
+      'انقطاعات متكررة في البريد القديم وسقوط الرسائل المهمة في مجلد السبام',
       'تعرض النطاق لمحاولات احتيال وتزييف لعناوين البريد الخاصة بالإدارة',
       'صعوبة إدارة المساحات الضخمة لمراسلات 250 طبيباً وموظفاً',
     ],
@@ -1037,10 +1194,10 @@ export const NUZUL_CASE_STUDIES: CaseStudy[] = [
       'Storage capacity crunches across 250 physician and administrator inboxes',
     ],
     solution_ar: [
-      'هجرة حية وسلسة (Zero Downtime) لكافة الرسائل والمجلدات إلى سيرفر بريد سحابي مخصص',
-      'تطبيق أعلى معايير التوثيق العالمي SPF وDKIM 2048-bit وسياسة DMARC Reject',
-      'أرشفة سحابية قانونية مشفرة لجميع المراسلات لضمان عدم ضياع أي وثيقة أو استشارة طبية',
-      'قطاع تقني كامل كخدمة (IT as a Service): متابعة سجلات البريد وحل مشاكل الموظفين في دقائق',
+      'هجرة سلسة (Zero Downtime) لكافة الرسائل إلى سيرفر بريد سحابي مخصص',
+      'تطبيق أعلى معايير التوثيق SPF وDKIM وسياسة DMARC المشددة',
+      'أرشفة سحابية مشفرة لجميع المراسلات لضمان عدم ضياع أي وثيقة أو استشارة طبية',
+      'قطاع تقني كخدمة (IT as a Service): متابعة سجلات البريد وحل طلبات الموظفين فوراً',
     ],
     solution_en: [
       'Zero-downtime IMAP synchronization cutover to a dedicated private mail server',
@@ -1057,36 +1214,36 @@ export const NUZUL_CASE_STUDIES: CaseStudy[] = [
   {
     id: 8,
     badge: 'MAIL MIGRATION CLIENT',
-    title_ar: 'حماية النطاق وهجرة البريد المؤسسي — شركة الجمهورية للخدمات اللوجستية',
-    title_en: 'Domain Brand Protection & 120 Mailboxes Hardening — El-Gomhouria Logistics',
+    title_ar: 'حماية النطاق والمراسلات — شركة الجمهورية اللوجستية',
+    title_en: 'Domain Security & Email Hardening — El-Gomhouria Logistics',
     category_ar: 'حماية النطاقات والبريد',
     category_en: 'Domain Security & Email',
     client_ar: 'شركة الجمهورية للخدمات اللوجستية والتجارة — مصر',
     client_en: 'El-Gomhouria Logistics & Trade — Egypt',
     executiveSummary_ar:
-      'حماية نطاق الشركة من محاولات التزييف وانتحال الشخصية (Anti-Spoofing)، وهجرة 120 صندوق بريد لوجستي مع أرشفة سحابية قانونية للرسائل التجارية ومراقبة أمنية على مدار الساعة.',
+      'حماية نطاق الشركة من محاولات التزييف وانتحال الشخصية، وهجرة 120 صندوق بريد لوجستي مع أرشفة سحابية مشفرة للرسائل التجارية ومراقبة أمنية مستمرة.',
     executiveSummary_en:
-      'Enterprise domain reputation hardening preventing financial invoice spoofing, paired with the migration of 120 commercial mailboxes into an audited, secure corporate mail environment.',
+      'Domain reputation hardening preventing invoice spoofing, paired with migration of 120 commercial mailboxes into an audited secure mail environment.',
     description_ar:
-      'حماية نطاق الشركة ومكافحة هجمات التصيد والسبام وتوثيق SPF/DKIM/DMARC مع أرشفة سحابية لـ 120 صندوق بريدي.',
+      'حماية نطاق الشركة ومكافحة هجمات التصيد وتوثيق SPF/DKIM/DMARC مع أرشفة سحابية لـ 120 صندوق بريد.',
     description_en:
-      'Enterprise domain brand protection and migration of 120 mailboxes with strict anti-phishing filters and legal archiving.',
+      'Domain brand protection and migration of 120 mailboxes with strict anti-phishing filters and legal archiving.',
     tech: ['Anti-Phishing Shield', 'DMARC Quarantine/Reject', 'Cloud Mail Archiving', 'DNSSEC', 'IMAP/SMTP TLS 1.3'],
     challenges_ar: [
       'محاولات إرسال فواتير شحن مزيفة لعملاء الشركة بانتحال اسم النطاق التجاري',
-      'تكرار استقبال روابط خبيثة تسببت في بطء أجهزة موظفي التخليص الجمركي والشحن',
+      'تكرار استقبال روابط خبيثة هددت أجهزة موظفي التخليص الجمركي والشحن',
     ],
     challenges_en: [
       'Fraudulent freight invoices sent to overseas clients using spoofed sender domains',
       'Incoming phishing malware targeting customs clearance staff workstations',
     ],
     solution_ar: [
-      'تفعيل معايير DMARC بسياسة الرفض الفوري (p=reject) لمنع أي طرف من إرسال إيميل باسم الشركة',
-      'هجرة حسابات البريد إلى سيرفرات مشفرة تدعم بروتوكول TLS 1.3 مع جدار حماية ضد السبام',
-      'تفعيل قطاع تقني كخدمة (IT as a Service) للمراقبة اللحظية والاستجابة لأي تهديد سيبراني',
+      'تفعيل معايير DMARC بسياسة الرفض الفوري لمنع أي طرف من إرسال إيميل باسم الشركة',
+      'هجرة حسابات البريد إلى سيرفرات مشفرة تدعم بروتوكول TLS 1.3 مع جدار حماية للسبام',
+      'تفعيل قطاع تقني كخدمة (IT as a Service) للمراقبة اللحظية والاستجابة للتهديدات',
     ],
     solution_en: [
-      'Activated DMARC policy (p=reject) blocking unauthorized spoofed emails globally',
+      'Activated DMARC policy blocking unauthorized spoofed emails globally',
       'Migrated commercial mailboxes to TLS 1.3 servers with enterprise spam filtering',
       'Deployed IT as a Service 24/7 telemetry monitoring inbound email anomalies',
     ],
@@ -1099,24 +1256,24 @@ export const NUZUL_CASE_STUDIES: CaseStudy[] = [
   {
     id: 9,
     badge: 'FLEET IOT & TELEMETRY',
-    title_ar: 'نظام تتبع الأسطول والمراقبة اللحظية — شركة ايفرست للنقل',
-    title_en: 'Real-Time Fleet IoT & Telemetry Platform — Everest Transport',
+    title_ar: 'تتبع الأسطول الذكي (IoT) — شركة إيفرست للنقل',
+    title_en: 'IoT Fleet Telemetry Platform — Everest Transport',
     category_ar: 'اللوجستيات وتتبع الأساطيل',
     category_en: 'Fleet Logistics & IoT',
-    client_ar: 'شركة ايفرست للنقل — مصر',
-    client_en: 'Everest Transport — Egypt',
+    client_ar: 'شركة ايفرست للنقل واللوجستيات — مصر',
+    client_en: 'Everest Transport & Logistics — Egypt',
     executiveSummary_ar:
-      'نظام متكامل لتتبع أسطول الشاحنات لحظياً عبر محافظات مصر، جدولة الرحلات، تحسين مسارات استهلاك الوقود، وربط حساسات الـ IoT مع لوحات تحكم سحابية مباشرة للإدارة.',
+      'منظومة رقمية متكاملة لتتبع أسطول الشاحنات لحظياً عبر محافظات مصر، جدولة الرحلات، تحسين مسارات استهلاك الوقود، وربط حساسات الـ IoT مع لوحات تحكم سحابية مباشرة للإدارة.',
     executiveSummary_en:
-      'Comprehensive IoT fleet telemetry platform orchestrating real-time GPS tracking, sensor fuel monitoring, and dynamic route optimization across Egyptian highways with cloud analytics.',
+      'IoT fleet telemetry platform orchestrating real-time GPS tracking, sensor fuel monitoring, and dynamic route optimization across Egyptian highways with cloud analytics.',
     description_ar:
-      'نظام متكامل لتتبع أسطول الشاحنات لحظياً، جدولة الرحلات، تحسين مسارات الوقود، وتقارير أداء ومراقبة حية للسائقين عبر محافظات مصر.',
+      'نظام متكامل لتتبع الشاحنات لحظياً، جدولة الرحلات، تحسين استهلاك الوقود، ومراقبة حية للسائقين عبر المحافظات.',
     description_en:
-      'Real-time vehicle GPS tracking, dynamic route optimization, scheduled driver dispatching, fuel sensors, and live telemetry dashboards across Egypt.',
+      'Real-time vehicle GPS tracking, dynamic route optimization, scheduled driver dispatching, and fuel sensors.',
     tech: ['React Native', 'Node.js', 'PostgreSQL', 'MQTT IoT', 'Grafana', 'Mapbox', 'IT as a Service'],
     challenges_ar: [
       'صعوبة تتبع حركة مئات الشاحنات بين المحافظات وسرقة الوقود على الطرق السريعة',
-      'تأخر تسليم الشحنات نتيجة عدم وجود مسارات محددة وجدولة ديناميكية ذكية',
+      'تأخر تسليم الشحنات نتيجة عدم وجود مسارات محددة وجدولة ذكية',
     ],
     challenges_en: [
       'Lack of real-time visibility into inter-governorate freight trucks and fuel shrinkage',
@@ -1125,73 +1282,397 @@ export const NUZUL_CASE_STUDIES: CaseStudy[] = [
     solution_ar: [
       'تركيب أجهزة تتبع GPS وحساسات وقود ذكية مربوطة ببروتوكول MQTT لحظي',
       'بناء تطبيق جوال للسائقين ولوحة تحكم سحابية لغرفة العمليات المركزية',
-      'تقارير تحليلية آلية لمعدلات استهلاك الوقود وساعات عمل السائقين مع تنبيهات الحوادث',
+      'تقارير تحليلية لمعدلات استهلاك الوقود وساعات عمل السائقين مع تنبيهات الحوادث',
     ],
     solution_en: [
       'Installed industrial GPS trackers and fuel sensors streaming telemetry via MQTT',
       'Built a dedicated mobile driver app and centralized operations control dashboard',
       'Automated fuel consumption analytics, speed violations, and scheduled dispatching',
     ],
+    deliverables_ar: [
+      '1. أجهزة تتبع GPS وحساسات الوقود لأسطول الشاحنات',
+      '2. تطبيق الموبايل للسائقين ولوحة العمليات المركزية',
+      '3. لوحات تحكم بيانية لاستهلاك الوقود والرحلات',
+      '4. قطاع تقني كخدمة (ITaaS) ودعم تشغيلي مستمر',
+    ],
+    deliverables_en: [
+      '1. Fleet IoT GPS & Fuel Sensor Telemetry Grid',
+      '2. Mobile Driver Application & Dispatch Console',
+      '3. Real-Time Operations & Fuel Analytics Dashboard',
+      '4. Ongoing IT as a Service (ITaaS) Operations Support',
+    ],
     result_ar: 'تقليل تكاليف الوقود بنسبة ٢٥٪ وزيادة إنتاجية الرحلات بنسبة ٤٠٪',
     result_en: '25% fuel cost reduction & 40% dispatch productivity gain',
     icon: 'Truck',
+  },
+
+  // 10. Meshkat Nour Charity Foundation - Turnkey IT & Network Infrastructure
+  {
+    id: 10,
+    badge: 'CHARITY FOUNDATION IT',
+    title_ar: 'البنية التحتية والشبكات والدومين — مؤسسة مشكاة نور الخيرية',
+    title_en: 'Turnkey IT Infrastructure & Active Directory — Meshkat Nour Foundation',
+    category_ar: 'البنية التحتية والشبكات المؤسسية',
+    category_en: 'Turnkey Enterprise IT & Networks',
+    client_ar: 'المؤسسة الخيرية مشكاة نور — مصر',
+    client_en: 'Meshkat Nour Charity Foundation — Egypt',
+    executiveSummary_ar:
+      'مشروع تأسيس البنية التحتية الرقمية والشبكية المتكاملة للمقر الرئيسي لمؤسسة مشكاة نور الخيرية: تمديد كابلات الشبكات المنظمة وسيرفر الدومين المركزي (Active Directory & DHCP)، تركيب شبكة كاميرات مراقبة CCTV ذكية، سنترال تليفوني رقمي داخلي (VoIP)، خادم ملفات مركزي (File Server) بحوكمة دقيقة للصلاحيات، منظومة نسخ احتياطي تلقائي، وشبكة واي فاي مؤسسية تغطي كافة المقرات.',
+    executiveSummary_en:
+      'Turnkey enterprise IT infrastructure for Meshkat Nour Charity Foundation: structured network cabling, centralized Active Directory (AD) & DHCP, high-definition CCTV security grid, enterprise VoIP telephony PBX, central secure File Server with role-based access, automated daily backups, and robust multi-AP Wi-Fi mesh.',
+    description_ar:
+      'تجهيز البنية التحتية الكاملة: شبكات منظمة، سيرفر الدومين (AD & DHCP)، كاميرات المراقبة، سنترال VoIP داخلي، خادم ملفات مركزي، ونسخ احتياطي مع شبكة واي فاي مؤسسية.',
+    description_en:
+      'Complete turnkey infrastructure: structured cabling, Active Directory & DHCP domain, CCTV surveillance, VoIP PBX, central file server, automated backups, and enterprise Wi-Fi.',
+    tech: [
+      'Active Directory & DHCP',
+      'Structured Cat6A Cabling',
+      'HD CCTV Surveillance Grid',
+      'VoIP Telephony PBX',
+      'Central Secure File Server',
+      'Automated Daily Backup',
+      'Enterprise Wi-Fi Mesh (APs)',
+      'IT as a Service (ITaaS)',
+    ],
+    challenges_ar: [
+      'تشتت ملفات وأبحاث الحالات الإنسانية والمستفيدين على أجهزة متعددة بدون حوكمة أو صلاحيات موحدة',
+      'عدم وجود دومين مركزي للتحكم في حسابات الموظفين ومستويات الأمان على البيانات الحساسة للمتبرعين',
+      'صعوبة التواصل الهاتفي السريع بين الإدارات الميدانية والمكتبية وغياب شجرة تحويل المكالمات',
+      'انعدام النسخ الاحتياطي التلقائي مما عرض السجلات والوثائق الرسمية لخطر الفقدان عند تعطل أي جهاز',
+      'ضعف تغطية الإنترنت والواي فاي في قاعات التدريب واللجان الاجتماعية',
+    ],
+    challenges_en: [
+      'Fragmented social research files and beneficiary data scattered across unmanaged individual PCs',
+      'Absence of centralized domain management (Active Directory) to enforce user security policies and donor privacy',
+      'Communication friction between field teams and administrative offices without unified telephony',
+      'Acute data loss vulnerability without automated scheduled off-site file backups',
+      'Dead Wi-Fi zones impeding daily operations in training halls and social committees',
+    ],
+    solution_ar: [
+      'تمديد كابلات شبكات منظمة Cat6A وتركيب راكات وسويتشات جيجابت احترافية',
+      'تجهيز خادم دومين مركزي (Active Directory & DHCP) مع هيكل تنظيمي وسياسات أمان صارمة',
+      'تركيب شبكة كاميرات مراقبة IP عالية الدقة لتأمين المقر الإداري ومستودعات المساعدات العينية',
+      'نشر سنترال رقمي VoIP وهواتف شبكية داخلية تسهل الاتصال الفوري والتحويل بين جميع المكاتب',
+      'تأسيس خادم ملفات مركزي (File Server) بمصفوفة أذونات مشددة حسب الأقسام والمسميات الوظيفية',
+      'تفعيل خط أنابيب نسخ احتياطي يومي آلي مشفر ينقل لقطات البيانات لسحابة نُزول تِك المعزولة',
+      'تغطية المقر بالكامل بشبكة أكسس بوينت واي فاي مؤسسية ذكية تفصل شبكة الموظفين عن الزوار',
+      'قطاع تقني كخدمة (IT as a Service): متابعة دورية ودعم فني هندسي مستمر على مدار الساعة',
+    ],
+    solution_en: [
+      'Turnkey Cat6A structured cabling, server rack management, and managed Gigabit switches',
+      'Configured enterprise Active Directory Domain Services (AD DS) and DHCP failover',
+      'Deployed high-resolution night-vision IP CCTV grid covering administrative suites and aid storage',
+      'Installed VoIP PBX telephony system with customized IVR and extensions across all desks',
+      'Provisioned centralized high-speed File Server with fine-grained department ACL permissions',
+      'Automated daily encrypted immutable backup pipeline to Nuzul Tech secure cloud repository',
+      'Deployed enterprise dual-band Wi-Fi access points with isolated VLANs for staff and guests',
+      'Full IT as a Service (ITaaS) with dedicated proactive engineering dispatch and SLA',
+    ],
+    deliverables_ar: [
+      '1. بنية تحتية لكابلات الشبكات المنظمة وسيرفر الدومين (Active Directory & DHCP)',
+      '2. منظومة كاميرات المراقبة التلفزيونية CCTV عالية الدقة والتسجيل المركزي',
+      '3. نظام السنترال والاتصالات التليفونية الرقمية (VoIP Telephony)',
+      '4. خادم الملفات المركزي (File Server) وحوكمة الصلاحيات',
+      '5. منظومة النسخ الاحتياطي التلقائي اليومي المعزول',
+      '6. شبكة الواي فاي المؤسسية وأجهزة الـ Access Points المدارة',
+      '7. قطاع تقني كخدمة (IT as a Service) ودعم فني هندسي 24/7',
+    ],
+    deliverables_en: [
+      '1. Turnkey Structured Cabling, Server Rack & Active Directory (AD/DHCP) Infrastructure',
+      '2. HD IP CCTV Video Surveillance System & Central NVR Recording',
+      '3. Unified VoIP PBX Telephony System & Digital Desktop Extensions',
+      '4. Centralized Enterprise File Server with Secure Departmental Access Matrix',
+      '5. Automated Daily Encrypted Off-Site Backup Pipeline',
+      '6. Enterprise Wi-Fi Mesh Network with Managed Access Points',
+      '7. Dedicated 24/7 IT as a Service (ITaaS) Proactive Management',
+    ],
+    result_ar: 'تحول رقمي مؤسسي بنسبة جاهزية 100%، مشاركة الملفات والأبحاث في ثوانٍ معدودة، وحماية تامة لبيانات المتبرعين والمستفيدين',
+    result_en: '100% infrastructure stability, instantaneous file collaboration, and zero security vulnerabilities',
+    icon: 'Building2',
+  },
+
+  // 11. OmnixTrack CRM - Software QA Acceptance & Telephony Validation
+  {
+    id: 11,
+    badge: 'ENTERPRISE CRM & QA',
+    title_ar: 'فحص واختبار واعتماد المنظومة — منصة أومنيكس تراك (OmnixTrack CRM)',
+    title_en: 'Software QA & Acceptance Testing — OmnixTrack CRM',
+    category_ar: 'اختبار واعتماد البرمجيات والـ CRM',
+    category_en: 'Software QA & Enterprise CRM',
+    client_ar: 'منصة أومنيكس تراك (omnixtrack.com) — للشركات والمصانع والشحن',
+    client_en: 'OmnixTrack CRM Platform (omnixtrack.com) — Egypt',
+    executiveSummary_ar:
+      'مشروع فحص واختبار جودة واعتماد استلام برمجي (QA & UAT Acceptance Testing) لمنظومة أومنيكس تراك (OmnixTrack CRM) الموجهة لإدارة علاقات العملاء في المصانع والشركات والعيادات والصيدليات وشركات الشحن: فحص واختبار المنصة السحابية والويب، تطبيقات الهواتف الذكية (iOS و Android)، نظام الاتصالات والمكالمات السحابية المدمج، واختبارات الضغط العالي والأمان لضمان مطابقة المعايير القياسية للاستلام البرمجي.',
+    executiveSummary_en:
+      'Turnkey software QA, security validation, and vendor handover sign-off for OmnixTrack CRM (omnixtrack.com) serving manufacturing plants, logistics fleets, clinics, and retail pharmacies: auditing web ERP portal, native mobile apps, embedded WebRTC cloud call center, and stress concurrency under peak workloads.',
+    description_ar:
+      'فحص واختبار شامل للموقع، المنصة السحابية، تطبيقات الموبايل، ونظام المكالمات واعتماد استلام المشروع البرمجي بمطابقة تامة للمعايير القياسية.',
+    description_en:
+      'Comprehensive QA testing for web portal, mobile apps, and cloud VoIP call system, ensuring certified vendor handover.',
+    tech: [
+      'QA Acceptance Testing',
+      'Web CRM Portal Testing',
+      'Mobile iOS & Android QA',
+      'Cloud VoIP & Call Testing',
+      'Load & Concurrency Testing',
+      'Security & Privilege Audit',
+      'API & DB Stress Testing',
+      'Vendor Handover Sign-off',
+    ],
+    challenges_ar: [
+      'الحاجة للتحقق من استقرار النظام عند استقبال مئات مكالمات العملاء المتزامنة وتتبع شحنات البضائع',
+      'صعوبة استلام كود المشروع وتطبيقات الموبايل من شركة البرمجيات المطورة دون تدقيق تقني متخصص ومستقل',
+      'مخاطر وجود ثغرات برمجية أو بطء في قواعد البيانات يهدد تجربة أصحاب المصانع والصيدليات والعيادات',
+      'ضرورة اختبار دقة التكامل بين تطبيق الجوال ونظام المكالمات السحابي ولوحة الإدارة المركزية',
+    ],
+    challenges_en: [
+      'Need to verify multi-tenant CRM stability under high concurrent delivery dispatches and customer call volume',
+      'Vendor handover risks without an independent technical audit of source code and application architecture',
+      'Potential memory leaks, slow database queries, or data sync flaws across clinics and retail pharmacies',
+      'Requirement for rigorous end-to-end testing between mobile apps, WebRTC call engine, and central web ERP',
+    ],
+    solution_ar: [
+      'إجراء اختبارات وظيفية شاملة (End-to-End Functional Testing) لكافة مسارات النظام وموديولات الـ CRM',
+      'اختبار تطبيقات الهواتف الذكية (iOS و Android) على مختلف الأجهزة والشاشات وفحص استجابة الإشعارات',
+      'محاكاة ضغط مكالمات هاتفية مكثفة واختبار نقاء الصوت والتحويل الآلي لنظام المكالمات السحابي المدمج',
+      'تنفيذ اختبارات ضغط وحِمل عالي (Stress & Load Testing) على قواعد البيانات ومنافذ الـ API',
+      'فحص أمني دقيق للتأكد من تشفير البيانات وحماية خصوصية العملاء وحسابات الشركات والمصانع',
+      'إصدار تقرير فني شامل بالملاحظات ونقاط التحسين تم على إثره اعتماد واستلام المشروع بنجاح تام',
+    ],
+    solution_en: [
+      'Conducted comprehensive End-to-End functional test suites across all OmnixTrack CRM modules',
+      'Performed deep compatibility, UI/UX, and push-notification testing across various iOS & Android devices',
+      'Simulated heavy call traffic to validate WebRTC audio fidelity and automatic call routing resiliency',
+      'Executed high-concurrency stress & load testing on REST APIs and relational database query execution',
+      'Audited application security posture, data encryption at rest/transit, and role-based privilege isolation',
+      'Delivered an exhaustive acceptance audit report certifying flawless technical handover',
+    ],
+    deliverables_ar: [
+      '1. خطة فحص واختبار جودة برمجية متكاملة (QA & Test Matrix)',
+      '2. اختبار واعتماد منصة الويب وتطبيقات الموبايل (iOS و Android)',
+      '3. فحص كفاءة نظام المكالمات والاتصالات السحابية المدمج',
+      '4. اختبارات ضغط الأداء والأمان ومطابقة المعايير القياسية',
+      '5. تقرير الاعتماد الفني النهائي واستلام المشروع من المطورين',
+    ],
+    deliverables_en: [
+      '1. Comprehensive QA Test Automation & Matrix Suite',
+      '2. Certified Web Platform & Cross-Platform Mobile Applications',
+      '3. Validated Embedded Cloud VoIP & Telephony System',
+      '4. Performance Stress, Load & Security Audit Sign-off',
+      '5. Formal Engineering Handover Certification & Acceptance Report',
+    ],
+    result_ar: 'اعتماد واستلام المنظومة البرمجية بجاهزية 100%، وتوفير أكثر من 60% من وقت وتكاليف الإصلاحات، وإطلاق تجاري سلس يخدم مئات الشركات والمصانع والصيدليات',
+    result_en: '100% certified software handover, >60% post-launch bug triage savings, and seamless production rollout for hundreds of enterprise users',
+    icon: 'CheckCircle2',
+  },
+
+  // 12. Dr. Khaled Farouk Obeido Clinic - Turnkey EMR & Integrated Q-System
+  {
+    id: 12,
+    badge: 'ORTHOPEDIC CLINIC & Q-SYSTEM',
+    title_ar: 'نظام إدارة العيادات ونظام الانتظار الذكي (Q-System) — عيادة د. خالد عبيدو',
+    title_en: 'Clinic Management & Patient Q-System — Dr. Khaled Obeido Clinic',
+    category_ar: 'أنظمة العيادات وإدارة الانتظار (Q-System)',
+    category_en: 'Clinic EMR & Patient Queue System',
+    client_ar: 'عيادة د. خالد فاروق عبيدو لجراحة العظام والمفاصل — مصر',
+    client_en: 'Dr. Khaled Farouk Obeido Orthopedic Clinic — Egypt',
+    executiveSummary_ar:
+      'تنفيذ وتطوير منظومة رقمية متكاملة لعيادة د. خالد فاروق عبيدو لجراحة العظام والمفاصل: تشمل برنامج إدارة العيادة الشامل (EMR)، السجلات الطبية الرقمية للأشعة والعمليات، الفواتير والروشتات الإلكترونية، مع نظام شاشات النداء الرقمي وإدارة طوابير وانتظار المرضى (Q-System) المدمج لحظياً مع الاستقبال وغرفة الكشف.',
+    executiveSummary_en:
+      'Turnkey clinic management & smart Queue System (Q-System) for Dr. Khaled Farouk Obeido Orthopedic Surgery Clinic: integrating outpatient EMR records, orthopedic DICOM scan archiving, digital e-prescriptions, and real-time waiting room calling screens.',
+    description_ar:
+      'نظام إدارة عيادة متكامل يشمل السجلات الطبية (EMR)، الروشتات الإلكترونية، ونظام انتظار وتنظيم دور المرضى (Q-System) مع شاشات النداء الآلي.',
+    description_en:
+      'Integrated clinic management system featuring patient EMR, digital prescriptions, and automated Queue Management (Q-System) with smart calling displays.',
+    tech: [
+      'ClinicCore™ EMR',
+      'Integrated Q-System',
+      'Smart Calling Displays',
+      'Digital E-Prescriptions',
+      'Orthopedic Scan Archiving',
+      'Local & Cloud Sync',
+      'Automated Patient SMS',
+      'IT as a Service',
+    ],
+    challenges_ar: [
+      'تكدس وازدحام صالة الانتظار والجدل حول أسبقية الدخول وغياب الترتيب المنظم للمراجعين',
+      'صعوبة استرجاع التاريخ المرضي وصور أشعة الرنين السابقة لمرضى العظام والمفاصل يدوياً',
+      'استغراق وقت طويل في كتابة الروشتات الورقية وحساب مدفوعات الكشف والجبائر والعلاج الطبيعي',
+      'تأخر التنسيق بين مكتب الاستقبال وغرفة الطبيب أثناء فترات الذروة',
+    ],
+    challenges_en: [
+      'Waiting room crowding and disputes over appointment turns without a visible queue system',
+      'Time-consuming manual retrieval of previous orthopedic X-rays, MRI scans, and surgical history',
+      'Inefficient handwritten prescriptions and manual financial tracking of cast & therapy fees',
+      'Friction and delayed communication between reception staff and physician consultation room',
+    ],
+    solution_ar: [
+      'تطبيق نظام Q-System ذكي يمنح المريض تذكرة رقمية فور الوصول مع عرض الدور على شاشات العرض بصالة الانتظار',
+      'نداء صوتي وآلي متزامن بضغطة زر واحدة من شاشة الطبيب لاستدعاء المريض التالي',
+      'ملف طبي إلكتروني موحد لكل مريض يوثق التشخيص، صور الأشعة، والعمليات السابقة مع سرعة بحث بالاسم أو الهاتف',
+      'إصدار روشتات مطبوعة ومحمية بباركود مع قوالب جاهزة لأدوية العظام والمفاصل وجرعاتها',
+      'نظام تقارير مالية يومية وشهرية دقيقة لحساب الإيرادات والمصروفات وصافي الأرباح',
+    ],
+    solution_en: [
+      'Deployed a smart Q-System issuing numbered thermal tickets and rendering live queue status on waiting lounge screens',
+      'Instant 1-click audio-visual patient calling directly from the doctor consultation terminal',
+      'Unified orthopedic EMR profiles with instant retrieval of surgical notes and radiological scans',
+      'Standardized barcode-enabled printed e-prescriptions with pre-configured orthopedic dosage templates',
+      'Automated financial reconciliation auditing daily clinic revenue, consultation, and procedure fees',
+    ],
+    deliverables_ar: [
+      '1. نظام إدارة العيادة الطبية والسجلات الإلكترونية (EMR)',
+      '2. نظام طوابير وانتظار المرضى الذكي المدمج (Q-System)',
+      '3. شاشات العرض الذكية بصالة الانتظار ووحدة النداء الآلي',
+      '4. منظومة الروشتات الإلكترونية والطباعة السريعة',
+      '5. التقارير المالية والإحصائية وحسابات العيادة',
+      '6. تدريب طاقم الاستقبال والتمريض والدعم الفني المستمر',
+    ],
+    deliverables_en: [
+      '1. ClinicCore™ Electronic Medical Records (EMR) Suite',
+      '2. Integrated Smart Queue Management Engine (Q-System)',
+      '3. Waiting Area Digital Signage & Automated Audio Caller',
+      '4. Fast Barcode E-Prescription & Template Module',
+      '5. Daily Clinic Revenue & Procedure Analytics Dashboard',
+      '6. Turnkey Staff Onboarding & Dedicated Technical Support',
+    ],
+    result_ar: 'القضاء التام على عشوائية الانتظار، تخفيض زمن انتظار المرضى بنسبة 50%، وتوفير وصول فوري للسجلات الطبية وفحوصات الأشعة السابقة',
+    result_en: 'Zero waiting room disputes, 50% reduction in patient turnover time, and instantaneous access to patient orthopedic histories',
+    icon: 'Activity',
   },
 ];
 
 export const NUZUL_TESTIMONIALS: Testimonial[] = [
   {
-    name_en: 'Dr. Ahmed Hossam',
-    name_ar: 'د. أحمد حسام',
-    role_en: 'Clinic Director – Cairo',
-    role_ar: 'مدير مجمع عيادات — القاهرة',
+    name_en: 'Dr. Khaled Farouk Obeido',
+    name_ar: 'د. خالد فاروق عبيدو',
+    role_en: 'Consultant Orthopedic Surgeon – Dr. Khaled Obeido Clinic',
+    role_ar: 'استشاري جراحة العظام والمفاصل — عيادة د. خالد عبيدو',
     text_en:
-      'The clinic system and server infrastructure they built changed how we operate daily. The system is rock-solid, ultra-fast, and their technical support answers in minutes.',
+      'The clinic management system and integrated Q-System implemented by Nuzul Tech completely eliminated waiting room crowding and accelerated patient flow. Accessing previous X-rays and issuing printed prescriptions takes seconds now.',
     text_ar:
-      'نظام إدارة العيادات والسيرفرات اللي نفذوها نقل شغلنا لمستوى تاني خالص. السيستم مستقر جداً وسريع، وفريق الدعم الهندسي بيرد ويحل أي طلب في دقايق.',
+      'نظام العيادات والـ Q-System اللي طوروه نُزول تِك لعيادتنا قضى تماماً على زحمة الانتظار ونظّم دخول المرضى بدقة وسلاسة عبر شاشات العرض. متابعة ملفات المرضى وفحوصات الأشعة وطباعة الروشتة بياخد ثواني معدودة، شغل احترافي ومحترم جداً.',
     rating: 5,
   },
   {
-    name_en: 'Eng. Sara Khalil',
-    name_ar: 'م. سارة خليل',
-    role_en: 'IT Manager – Private Hospital',
-    role_ar: 'مديرة تكنولوجيا المعلومات — مستشفى خاص',
+    name_en: 'Mr. Mohamed Deif',
+    name_ar: 'أ. محمد ضيف',
+    role_en: 'Founder & CEO – OmnixTrack CRM Platform (omnixtrack.com)',
+    role_ar: 'المؤسس والمدير التنفيذي — منصة OmnixTrack CRM',
     text_en:
-      'They redesigned our entire hospital network from scratch. Zero downtime during the entire migration, seamless documentation, and unmatched engineering discipline.',
+      'Nuzul Tech delivered exceptional QA and acceptance testing for our OmnixTrack CRM web system, mobile apps, and embedded VoIP call engine. Their load testing and security audits ensured a flawless commercial rollout.',
     text_ar:
-      'أعادوا تصميم شبكة المستشفى والسيرفرات بالكامل من الصفر. مفيش ثانية واحدة توقف أثناء النقل، فريق محترف بأعلى درجات الالتزام والتوثيق التقني.',
+      'استعنا بفريق نُزول تِك في فحص واختبار واستلام مشروع OmnixTrack CRM من شركة البرمجيات. قاموا بفحص دقيق ومبهر للسيستم ويب وتطبيقات الموبايل ونظام المكالمات واختبارات الضغط والأمان. تقاريرهم الهندسية ضمنت لنا استلام سيستم احترافي خالٍ من أي عيوب قبل الإطلاق الرسمي.',
+    rating: 5,
+  },
+  {
+    name_en: 'Dr. Khaled Abdelrahman',
+    name_ar: 'د. خالد عبد الرحمن',
+    role_en: 'General Director – Trust Specialized Hospital',
+    role_ar: 'المدير العام — مستشفى تراست التخصصي (القاهرة)',
+    text_en:
+      'Nuzul Tech executed our complete hospital infrastructure: 180+ 4K IP cameras, Fortinet perimeter security, and medical mail. Their engineering team provides proactive 24/7 SLA.',
+    text_ar:
+      'نُزول تِك أسست البنية التحتية لمستشفى تراست بالكامل: شبكة 180+ كاميرا 4K، جدران حماية Fortinet، وكابلات الفايبر وتأمين البريد الطبي. فريق هندسي متواجد معنا على مدار الساعة باستجابة فورية.',
+    rating: 5,
+  },
+  {
+    name_en: 'Eng. Ahmed Ali',
+    name_ar: 'م. أحمد علي',
+    role_en: 'Head of IT & Operations – ABCH Hospital',
+    role_ar: 'مدير تكنولوجيا المعلومات والتشغيل — مستشفى ABCH (القاهرة)',
+    text_en:
+      'The High-Availability virtualization clusters, patient portal, and internal ticketing deployed by Nuzul Tech boosted our operational uptime to 99.98% and accelerated approvals.',
+    text_ar:
+      'بيئة الأنظمة الافتراضية المزدوجة (Virtualization HA Clusters) وبوابة المرضى ونظام الموافقات الطبية اللي نفذوها لمستشفى ABCH رفعت جاهزية التشغيل لـ 99.98% وسرعت شغلنا 4 أضعاف.',
+    rating: 5,
+  },
+  {
+    name_en: 'Prof. Dr. Hesham El-Ghazaly',
+    name_ar: 'أ.د. هشام الغزالي',
+    role_en: 'Board & Clinical Administration – Cairo Cure Oncology',
+    role_ar: 'إدارة مركز Cairo Cure التخصصي للأورام (القاهرة)',
+    text_en:
+      'Decoupling radiological PACS archives from email and migrating to a hybrid cloud model slashed our annual IT overhead by >75% and stabilized physician clinic workstations completely.',
+    text_ar:
+      'فصل أرشيف الأشعة الطبية عن البريد وتأسيس السحابة الهجينة لمركز Cairo Cure خفض تكاليف الاستضافة بنسبة تتجاوز 75% واستقرت أجهزة الأطباء والعيادات من أول دقيقة.',
+    rating: 5,
+  },
+  {
+    name_en: 'Mr. Mohamed Ibrahiem',
+    name_ar: 'أ. محمد إبراهيم',
+    role_en: 'Founder & Managing Director – Mohamed Ibrahiem Office for Finance',
+    role_ar: 'المؤسس والشريك الرئيسي — مكتب محمد إبراهيم للاستشارات والخدمات المالية',
+    text_en:
+      'Migrating our audit workflows and ERP databases to Nuzul Tech high-availability cloud allowed 30 consultants to work concurrently across Egypt and GCC with zero latency.',
+    text_ar:
+      'نقل منظومتنا المحاسبية وقواعد البيانات إلى خوادم نُزول تِك السحابية أمّن دخول 30 مستشاراً ومراجعاً بالتوازي من مقرات الشركات والعملاء بسرعة فائقة واستقرار 100% في موسم إقفال الميزانيات.',
+    rating: 5,
+  },
+  {
+    name_en: 'Dr. Nour El-Hoda El-Gammal',
+    name_ar: 'د. نور الهدى الجمال',
+    role_en: 'Chairwoman of the Board of Trustees – Meshkat Nour Charity Foundation',
+    role_ar: 'رئيس مجلس الأمناء — مؤسسة مشكاة نور الخيرية',
+    text_en:
+      'Nuzul Tech engineered our foundation’s complete infrastructure: structured network cabling, central Active Directory, CCTV surveillance, VoIP PBX, and secure file servers with automated backups and Wi-Fi mesh.',
+    text_ar:
+      'نُزول تِك أسست البنية التحتية لمؤسسة مشكاة نور الخيرية باحترافية استثنائية: شبكات وكابلات، دومين مركزي AD، كاميرات مراقبة، سنترال داخلي، وخادم ملفات مع حوكمة كاملة للنسخ الاحتياطي والواي فاي.',
+    rating: 5,
+  },
+  {
+    name_en: 'Mr. Mohamed Salama',
+    name_ar: 'أ. محمد سلامة',
+    role_en: 'Executive Director – Lebanon Hospital',
+    role_ar: 'المدير التنفيذي — مستشفى لبنان',
+    text_en:
+      'The comprehensive Hospital ERP and EMR system eliminated 95% of our manual paperwork and unified outpatient, pharmacy, and surgical operations smoothly.',
+    text_ar:
+      'منظومة الـ ERP والسجلات الطبية الإلكترونية الموحدة (EMR) لمستشفى لبنان قضت على 95% من المعاملات الورقية وربطت الاستقبال بالصيدلية وغرف العمليات بدقة لا متناهية.',
     rating: 5,
   },
   {
     name_en: 'Mr. Amer Mohamed',
     name_ar: 'أ. عامر محمد',
     role_en: 'Managing Partner – Amer Tax & Accounting (amer-acc)',
-    role_ar: 'الشريك الإداري — مكتب عامر للمحاسبة الضريبية (amer-acc)',
+    role_ar: 'الشريك الإداري — مكتب عامر للمحاسبة والاستشارات الضريبية (amer-acc)',
     text_en:
-      'Hosting our tax software on Nuzul Tech Windows VPS allowed our 25 accountants to work smoothly from anywhere during tax audit peak season. Zero lag and rock-solid backups.',
+      'Hardening 500+ corporate mailboxes with SPF/DKIM/DMARC and moving databases to high-speed cloud instances achieved 100% email inbox delivery and zero tax audit downtime.',
     text_ar:
-      'استضافة برامج الضرائب والمحاسبة على سيرفر ويندوز VPS من نُزول تِك خلّى 25 محاسباً يشتغلوا مع بعض في نفس الوقت في موسم الإقرارات بكل سلاسة وبدون أي بطء.',
+      'هجرة وتأمين 500+ إيميل رسمي مع توثيق DMARC ونقل قواعد البيانات للسحابة ضمن وصول إيميلاتنا بنسبة 100% لصندوق الوارد وسرّع مراجعة الإقرارات الضريبية 80%.',
     rating: 5,
   },
   {
-    name_en: 'Mr. Khaled Mansour',
-    name_ar: 'أ. خالد منصور',
-    role_en: 'CEO – Retail Chain Egypt',
-    role_ar: 'الرئيس التنفيذي — سلسلة متاجر تجزئة',
+    name_en: 'Dr. Maged El-Sherif',
+    name_ar: 'د. ماجد الشريف',
+    role_en: 'Chairman – Al-Safwa Healthcare Group',
+    role_ar: 'رئيس مجلس الإدارة — مجموعة الصفوة الطبية',
     text_en:
-      'The cloud migration and WhatsApp automation project was completely flawless. Our systems are now much faster, our data is secure, and we saved heavily on operational costs.',
+      'Zero-downtime migration of 250+ physician mailboxes with legal cloud archiving eliminated 99% of spam and secured all medical dispatches.',
     text_ar:
-      'مشروع هجرة السحابة وأتمتة الواتساب كان مثاليًا. أنظمتنا بقت أسرع وأكثر أماناً، وبوت الواتساب وفر علينا مجهود ضخم في خدمة العملاء والمتابعة.',
+      'نقل وتأمين أكثر من 250 حساب بريد طبي رسمي لأطباء المجموعة بصفر ثانية توقف عن العمل، مع حماية تامة ضد التزييف والسبام.',
     rating: 5,
   },
   {
-    name_en: 'Dr. Noha Adel',
-    name_ar: 'د. نهى عادل',
-    role_en: 'Medical Director – Alexandria',
-    role_ar: 'مديرة طبية — الإسكندرية',
+    name_en: 'Mr. Ehab Othman',
+    name_ar: 'أ. إيهاب عثمان',
+    role_en: 'Operations Director – El-Gomhouria Logistics & Trade',
+    role_ar: 'مدير العمليات والتجارة — شركة الجمهورية للخدمات اللوجستية',
     text_en:
-      'The medical archiving overhaul and email governance they architected saved our clinical staff dozens of hours every week and slashed our cloud bills by >75%.',
+      'DMARC domain enforcement protected our commercial shipping brand against invoice spoofing and stabilized our international trade communications.',
     text_ar:
-      'مشروع فصل الأرشيف الطبي وحوكمة الإيميلات وفر على الأطباء وقت طويل جداً وخفض مصاريف الاستضافة السحابية الشهرية بنسبة تجاوزت 75%.',
+      'حماية نطاق الشركة وتفعيل معايير DMARC المشددة حمت فواتيرنا التجارية الدولية من محاولات التزييف ووفرت استقراراً تاماً للمراسلات اللوجستية.',
+    rating: 5,
+  },
+  {
+    name_en: 'Mr. Mohamed Gamal',
+    name_ar: 'أ. محمد جمال',
+    role_en: 'Founder & Managing Director – Everest Transport & Logistics',
+    role_ar: 'مدير إدارة والمؤسس — شركة إيفرست للنقل واللوجستيات',
+    text_en:
+      'Real-time IoT fleet telemetry and automated mobile dispatch reduced our fuel consumption by 25% and boosted nationwide trips productivity by 40%.',
+    text_ar:
+      'نظام تتبع الأسطول الذكي (IoT) والربط مع تطبيق السائقين قلل استهلاك الوقود بنسبة 25% ورفع إنتاجية ومراقبة الرحلات بين المحافظات بنسبة 40%.',
     rating: 5,
   },
 ];
@@ -1216,23 +1697,23 @@ export const NUZUL_BLOG_POSTS: BlogPost[] = [
       'الملخص التنفيذي:\nواجه مركز Cairo Cure التخصصي للأورام أزمة كبرى نتيجة استخدام البريد الإلكتروني كأرشيف لصور الأشعة الطبية الضخمة. أدى ذلك لتضخم الصناديق وبطء شديد في أجهزة العيادات وتكاليف باهظة.\n\nتدخلت نُزول تِك بابتكار حل هجين ذكي:\n١. إنشاء أرشيف طبي محلي فائق السرعة للوصول لصور الأشعة في ثوانٍ معدودة داخل المستشفى.\n٢. نسخ سحابي مشفر معزول ضد برمجيات الفدية لحماية ملفات المرضى التاريخية.\n٣. هجرة حسابات البريد لخوادم آمنة مع تفعيل بروتوكولات الحماية العالمية.\n٤. قطاع تقني كامل كخدمة (IT as a Service): حصل المركز على إدارة استباقية ومراقبة للبنية التحتية، مما أزال الحاجة تماماً لتوظيف مهندس IT مقيم بمرتب شهري مرتفع.\n\nالنتيجة: استقرار فوري لعمل الأطباء، صفر فقدان للبيانات، وتخفيض التكاليف السنوية بنسبة تتجاوز 75%.',
   },
 
-  // 2. Windows VPS & Accounting (amer-acc)
+  // 2. Cloud VPS & Hosted Business Infrastructure
   {
     id: 2,
-    slug: 'windows-vps-accounting-egypt',
-    title_en: 'Windows VPS (RDP) for Tax & Accounting: Starts 1,000 EGP/mo (amer-acc Blueprint)',
-    title_ar: 'سيرفرات ويندوز VPS للمحاسبين والضرائب: تبدأ من 1000 ج.م/شهرياً وكيف توفر على الشركات؟',
+    slug: 'cloud-vps-business-infrastructure-egypt',
+    title_en: 'Cloud VPS & Managed Workspaces: Starts 1,000 EGP/mo (Infrastructure Blueprint)',
+    title_ar: 'الخوادم السحابية المدارة واستضافة الأعمال: تبدأ من 1000 ج.م/شهرياً وكيف توفر على الشركات؟',
     date: '5 فبراير 2026',
-    category_en: 'Cloud Servers & Windows RDP',
-    category_ar: 'السيرفرات وويندوز RDP',
+    category_en: 'Cloud Servers & Infrastructure',
+    category_ar: 'السيرفرات والبنية السحابية',
     excerpt_en:
-      'How tax advisors like amer-acc run multi-user accounting software smoothly over 1,000 EGP/mo Windows RDP.',
+      'How companies scale operations smoothly with high-frequency NVMe Cloud VPS starting from 1,000 EGP/mo.',
     excerpt_ar:
-      'كيف تستفيد مكاتب المحاسبة والشركات مثل amer-acc من تشغيل برامج المحاسبة والضرائب لعدة محاسبين في نفس الوقت عبر سيرفر ويندوز RDP يبدأ من 1000 ج.م/شهرياً.',
+      'كيف تستفيد الشركات والمؤسسات من استضافة أنظمتها وقواعد بياناتها على خوادم سحابية فائقة السرعة تبدأ من 1000 ج.م/شهرياً.',
     content_en:
-      'Running accounting software on individual office laptops causes sync conflicts, sluggish data entry, and severe risk of data loss.\n\nWith a high-frequency Windows VPS (Remote Desktop RDP starting from 1,000 EGP/mo), accounting teams and tax advisors like amer-acc centralize their SQL databases in a fast, licensed environment. 20+ auditors can work concurrently from anywhere with zero latency and automated daily snapshots.',
+      'Running business software on unmanaged individual office computers causes sync delays, workflow fragmentation, and high data loss risk.\n\nWith Nuzul Tech High-Performance Cloud VPS (starting from 1,000 EGP/mo), enterprise teams centralize their core databases and applications in a high-speed, secure environment. 20+ team members can collaborate concurrently from anywhere with zero latency and automated daily snapshots.',
     content_ar:
-      'تشغيل البرامج المحاسبية على أجهزة الموظفين في المكتب يسبب مشاكل تعارض الملفات، بطء الفحص الضريبي، وخطر تلف الهارد ديسك.\n\nمع سيرفرات ويندوز VPS (تبدأ من 1000 ج.م/شهرياً)، تقدر مكاتب المحاسبة الضريبية زي amer-acc تجمع قواعد البيانات المحاسبية في بيئة سحابية مرخصة وفائقة السرعة. يقدر 20 محاسباً أو أكثر يشتغلوا في نفس اللحظة عبر Remote Desktop من أي مكان مع نسخ احتياطي يومي مشفر.',
+      'تشغيل البرامج المركزية على أجهزة الموظفين في المكتب يسبب مشاكل تعارض الملفات، بطء نقل البيانات، وخطر تلف الأجهزة المحلية.\n\nمع خوادم نُزول تِك السحابية المدارة (تبدأ من 1000 ج.م/شهرياً)، تقدر الشركات والمؤسسات تجمع قواعد بياناتها وأنظمتها في بيئة سحابية فائقة السرعة. يتيح ذلك لعشرات الموظفين العمل في نفس الوقت من أي مكان مع نسخ احتياطي يومي مشفر واستقرار بنسبة 99.9%.',
   },
 
   // 3. IT as a Service (ITaaS)
@@ -1499,5 +1980,119 @@ export const NUZUL_BLOG_POSTS: BlogPost[] = [
       'Scattered spreadsheets and manual invoicing lead to costly operational errors and tax compliance audits. An integrated ERP/CRM core centralizes inventory, procurement, payroll, and customer touchpoints.\n\nNuzul Tech develops bespoke ERP engines that comply fully with Egyptian Tax Authority (ETA) e-invoicing and e-receipt mandates, ensuring seamless audits and scalable growth.',
     content_ar:
       'الاعتماد على شيتات الإكسيل المنفصلة بيؤدي لأخطاء محاسبية ومخاطر أثناء الفحص الضريبي. نظام ERP وCRM الموحد بيجمع المخازن، المشتريات، المبيعات، وشؤون العاملين في مكان واحد.\n\nنُزول تِك بتطور أنظمة متكاملة متوافقة كلياً مع متطلبات منظومة الفاتورة والإيصال الإلكتروني لمصلحة الضرائب المصرية لتسريع وتيرة العمل ودعم نمو أرباحك.',
+  },
+
+  // 17. Meshkat Nour Foundation Case: Central AD & Turnkey IT
+  {
+    id: 17,
+    slug: 'meshkat-nour-charity-it-infrastructure-active-directory',
+    title_en: 'Turnkey IT for Non-Profits: Active Directory, VoIP PBX & Central Storage at Meshkat Nour',
+    title_ar: 'البنية الرقمية لمؤسسات العمل الأهلي: إدارة الدومين المركزي والسنترال وخادم الملفات بمؤسسة مشكاة نور',
+    date: '15 فبراير 2026',
+    category_en: 'Infrastructure & Active Directory',
+    category_ar: 'البنية التحتية والشبكات',
+    excerpt_en:
+      'How structured cabling, central AD DS, VoIP telephony, and automated backups secured sensitive donor and beneficiary records.',
+    excerpt_ar:
+      'توثيق تفصيلي لكيفية تأمين وحوكمة بيانات أبحاث المستفيدين والمتبرعين وتوحيد الاتصالات الداخلية عبر سنترال VoIP وخادم ملفات مركزي.',
+    content_en:
+      'Charity organizations and humanitarian foundations manage sensitive donor lists, relief distribution records, and social research documents across multiple departments.\n\nAt Meshkat Nour Charity Foundation, Nuzul Tech deployed turnkey structured cabling, centralized Active Directory & DHCP governance, enterprise HD CCTV surveillance, VoIP desktop extensions, and an immutable daily backup pipeline — resulting in zero data loss and instant cross-department file sharing.',
+    content_ar:
+      'المؤسسات الخيرية والمنظمات الأهلية بتتعامل مع بيانات فائقة الحساسية للمتبرعين، أبحاث الحالات الاجتماعية، ومستودعات المساعدات العينية.\n\nفي مقر مؤسسة مشكاة نور الخيرية، قام مهندسو نُزول تِك بتأسيس شبكات كابلات منظمة، خادم دومين مركزي (Active Directory & DHCP)، سنترال رقمي VoIP، شبكة كاميرات مراقبة عالية الدقة، وخادم ملفات مركزي بحوكمة أذونات دقيقة مع نسخ احتياطي يومي معزول، مما وفّر استقراراً كاملاً بنسبة 100% وحماية تامة لبيانات المتبرعين.',
+  },
+
+  // 18. OmnixTrack CRM: Software QA & Acceptance Testing
+  {
+    id: 18,
+    slug: 'software-qa-acceptance-testing-omnixtrack-crm',
+    title_en: 'Software Vendor Handover & QA Testing: The OmnixTrack CRM Acceptance Playbook',
+    title_ar: 'فحص واختبار واستلام البرمجيات (QA): كيف تضمن استلام مشروع برمجي ناجح كما في OmnixTrack CRM؟',
+    date: '28 يناير 2026',
+    category_en: 'Software QA & Testing',
+    category_ar: 'فحص واختبار البرمجيات',
+    excerpt_en:
+      'Why independent third-party QA and load testing prior to software vendor acceptance saves 60% in post-launch costs.',
+    excerpt_ar:
+      'دليل هندسي يوضح أهمية الفحص التقني واختبارات الضغط والمكالمات قبل توقيع محضر استلام أي مشروع برمجي من الشركات المطورة.',
+    content_en:
+      'Accepting a software deliverable without independent technical validation creates immense operational risks: hidden database bottlenecks, memory leaks, unencrypted API endpoints, and VoIP call dropouts under concurrency.\n\nFor the OmnixTrack CRM platform, Nuzul Tech conducted end-to-end QA verification across web apps, iOS/Android builds, WebRTC cloud telephony, and stress load simulations — delivering an audited certification report that guaranteed zero commercial launch disruptions.',
+    content_ar:
+      'استلام أي نظام برمجي أو تطبيق موبايل من شركة التطوير دون فحص وتدقيق تقني متخصص بيعرض العمل لخسائر مالية ضخمة وأخطاء متكررة بعد الإطلاق.\n\nفي مشروع منصة أومنيكس تراك (OmnixTrack CRM)، أجرى فريق نُزول تِك فحصاً هندسياً شاملاً لمنصة الويب وتطبيقات الموبايل ونظام المكالمات السحابية المدمجة مع اختبارات حِمل وضغط عالي (Stress Testing)، مما وفّر على الشركة أكثر من 60% من تكاليف معالجة الأخطاء اللاحقة وضمن انطلاقة تجارية ناجحة لمئات المصانع والشركات.',
+  },
+
+  // 19. Dr. Khaled Obeido Clinic: Q-System & Modern EMR
+  {
+    id: 19,
+    slug: 'smart-clinic-q-system-patient-turnover-obeido',
+    title_en: 'Smart Clinic Q-System: Halving Patient Waiting Time at Dr. Khaled Obeido Orthopedic Clinic',
+    title_ar: 'تنظيم طوابير المرضى (Q-System) والعيادات الذكية: كيف قضت عيادة د. خالد عبيدو على زحام الانتظار؟',
+    date: '18 يناير 2026',
+    category_en: 'Healthcare IT & Q-System',
+    category_ar: 'الأنظمة الصحية وإدارة العيادات',
+    excerpt_en:
+      'Deploying integrated patient queue management (Q-System) with smart digital displays and orthopedic EMR records.',
+    excerpt_ar:
+      'كيف ساهم دمج نظام الانتظار الذكي (Q-System) مع برنامج إدارة العيادة في تخفيض زمن الانتظار 50% وسرعة الوصول للأشعة السابقة.',
+    content_en:
+      'Waiting room congestion and unorganized queuing create friction and degrade patient satisfaction. In busy surgical and orthopedic practices, physicians also require sub-second access to previous radiological scans and automated prescription templates.\n\nNuzul Tech deployed an integrated ClinicCore™ and Q-System solution for Dr. Khaled Farouk Obeido Clinic, combining automated ticket dispensers, waiting room calling displays, and single-click patient records access.',
+    content_ar:
+      'زحام صالات الانتظار والجدل حول أسبقية الدخول بيخلق بيئة مرهقة للمرضى وفريق الاستقبال. وفي عيادات العظام والمفاصل، بيحتاج الطبيب للوصول الفوري لصور أشعة الرنين السابقة وطباعة الروشتة في ثوانٍ.\n\nنُزول تِك طبقت منظومة ClinicCore مدمجة مع نظام الانتظار الذكي (Q-System) لعيادة د. خالد فاروق عبيدو: تذاكر رقمية فورية، شاشات نداء آلي بصالة الانتظار، وملف طبي موحد يسترجع صور الأشعة والعمليات السابقة بضغطة زر واحدة.',
+  },
+
+  // 20. ABCH Hospital: Virtualization & Patient Relations (PR)
+  {
+    id: 20,
+    slug: 'hospital-virtualization-patient-relations-abch',
+    title_en: 'Hospital High-Availability Virtualization & Patient Relations (PR System) at ABCH',
+    title_ar: 'الأنظمة الافتراضية عالية التوافرية وسيستم علاقات المرضى (PR System) بمستشفى ABCH',
+    date: '8 يناير 2026',
+    category_en: 'Hospital Infrastructure & PR',
+    category_ar: 'تجهيز المستشفيات وعلاقات المرضى',
+    excerpt_en:
+      'Consolidating hospital servers into redundant Proxmox/VMware clusters and tracking patient satisfaction with a dedicated PR portal.',
+    excerpt_ar:
+      'كيف نجحت مستشفى ABCH في دمج 18 سيرفر في عنقود افتراضي موحد ورفع جاهزية التشغيل لـ 99.98% مع إدارة شكاوى ورعاية المرضى لحظياً.',
+    content_en:
+      'Hospitals cannot tolerate physical server crashes or disconnected patient feedback loops. Combining enterprise hypervisor virtualization with dedicated Patient Relations (PR) software creates a resilient operational backbone.\n\nAt ABCH Hospital, Nuzul Tech consolidated physical server silos into High-Availability Proxmox/VMware clusters with zero-loss automated failover, while engineering a custom Patient Relations (PR) management platform to monitor patient care inquiries and insurance approvals in real time.',
+    content_ar:
+      'المستشفيات الحديثة لا تحتمل توقف السيرفرات أو ضياع شكاوى وملاحظات المرضى. دمج بيئات الأنظمة الافتراضية المزدوجة (Virtualization HA) مع سيستم مخصص لإدارة علاقات ورعاية المرضى (PR System) بيشكل النواة الرقمية القوية لأي منشأة طبية.\n\nفي مستشفى ABCH بالقاهرة، قام مهندسو نُزول تِك بدمج الخوادم الفيزيائية في عنقود افتراضي متقدم يضمن استمرارية العمل عند أي عطل للأجهزة، مع بناء نظام PR System متطور لتتبع رضا المرضى وملاحظاتهم وتنسيق الموافقات التأمينية لحظياً.',
+  },
+
+  // 21. Tax & Accounting Disaster Recovery
+  {
+    id: 21,
+    slug: 'tax-accounting-disaster-recovery-egypt',
+    title_en: 'Disaster Recovery for Accounting & Tax Consultancies: Zero-Loss Playbook for Egyptian Firms',
+    title_ar: 'استمرارية الأعمال والتعافي من الكوارث لمكاتب المحاسبة والضرائب: خطة حماية الدفاتر والسجلات المالية',
+    date: '2 يناير 2026',
+    category_en: 'Financial IT & Disaster Recovery',
+    category_ar: 'الأنظمة المالية والنسخ الاحتياطي',
+    excerpt_en:
+      'How accounting firms like Mohamed Ibrahiem and Amer Tax protect audit files, tax filings, and ERP databases against hardware failure and ransomware.',
+    excerpt_ar:
+      'دليل هندسي يوضح كيف تحمي مكاتب المحاسبة والاستشارات الضريبية ملفات التدقيق وقواعد بيانات الـ ERP من الأعطال وفيروسات الفدية أثناء موسم الفحص الضريبي.',
+    content_en:
+      'During fiscal year closing and peak tax audit periods in Egypt, losing access to accounting ledgers or ERP databases spells financial and legal disaster.\n\nNuzul Tech implements dedicated disaster recovery pipelines for financial firms: automated hourly differential snapshots, off-site encrypted replica standby instances, and rapid 10-minute failover capabilities that guarantee zero data loss and uninterrupted auditor workflow.',
+    content_ar:
+      'خلال موسم إقفال الحسابات السنوية ومواعيد تقديم الإقرارات الضريبية في مصر، أي توقف لقواعد بيانات الـ ERP أو فقدان لملفات المراجعة يمثل كارثة مالية وقانونية للمكتب وعملائه.\n\nنُزول تِك تنفذ خطط استمرارية أعمال متخصصة لمكاتب المحاسبة والضرائب: نسخ تراكمي مشفر كل ساعة، سيرفرات احتياطية جاهزة للإقلاع الفوري في دقائق (Hot Standby)، وتأمين كامل ضد هجمات الفدية والأعطال الفيزيائية للأجهزة.',
+  },
+
+  // 22. Hybrid Cloud & Data Sovereignty
+  {
+    id: 22,
+    slug: 'hybrid-cloud-data-sovereignty-egypt',
+    title_en: 'Hybrid Cloud & Local Data Sovereignty: Why Egyptian Enterprises Choose On-Premises & Local Cloud',
+    title_ar: 'السحابة الهجينة وتوطين البيانات في مصر: لماذا تفضل المؤسسات والعيادات البنية السحابية المحلية؟',
+    date: '22 ديسمبر 2025',
+    category_en: 'Cloud Infrastructure & Sovereignty',
+    category_ar: 'السيرفرات والبنية السحابية',
+    excerpt_en:
+      'Balancing high-speed local LAN access with encrypted off-site cloud replication for hospitals, factories, and clinics in Egypt.',
+    excerpt_ar:
+      'كيف توازن المؤسسات والعيادات بين سرعة الشبكة المحلية الفائقة وسحابة نُزول تِك لتوفير 70% من التكاليف بالجنيه المصري دون تقلبات العملة.',
+    content_en:
+      'Relying entirely on overseas hyperscalers subjects Egyptian businesses to volatile foreign currency pricing, international cable latency, and compliance hurdles regarding sensitive local customer data.\n\nNuzul Tech Hybrid Cloud bridges the gap: ultra-fast local on-premise execution for medical PACS and factory ERPs, combined with sovereign automated off-site cloud backups and management billed transparently in Egyptian Pounds.',
+    content_ar:
+      'الاعتماد الكامل على السحابات الدولية يضع الشركات المصرية تحت ضغط تقلبات العملة وفواتير الدولار المتصاعدة، بالإضافة للتأخير الزمني (Latency) ومخاطر حوكمة البيانات.\n\nالسحابة الهجينة من نُزول تِك توفر أفضل ما في العالمين: سرعة فائقة للأنظمة الحيوية كالأشعة الطبية وخطوط الإنتاج على الشبكة المحلية، مع مزامنة سحابية مؤمنة في مراكز بياناتنا بالقاهرة بتكلفة ثابتة واقتصادية بالجنيه المصري وبدون أي مفاجآت.',
   },
 ];

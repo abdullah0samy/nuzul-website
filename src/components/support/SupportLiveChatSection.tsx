@@ -11,7 +11,7 @@ export const SupportLiveChatSection: React.FC = () => {
   const [fullName, setFullName] = useState('');
   const [orgName, setOrgName] = useState('');
   const [phone, setPhone] = useState('');
-  const [service, setService] = useState('سيرفرات ويندوز VPS (RDP)');
+  const [service, setService] = useState('الخوادم السحابية واستضافة الأعمال');
   const [deploymentType, setDeploymentType] = useState('سحابي Cloud VPS');
   const [details, setDetails] = useState('');
   const [submitted, setSubmitted] = useState(false);
@@ -202,7 +202,7 @@ export const SupportLiveChatSection: React.FC = () => {
                       onChange={(e) => setService(e.target.value)}
                       className="w-full rounded-xl border border-white/10 bg-[#070c14] py-2.5 px-3 text-xs text-emerald-300 focus:border-emerald-400 focus:outline-none font-semibold"
                     >
-                      <option value="سيرفرات ويندوز VPS (RDP)">سيرفرات ويندوز VPS (RDP) - تبدأ من 1000 ج.م</option>
+                      <option value="الخوادم السحابية وخوادم العمل عن بُعد">الخوادم السحابية وخوادم العمل عن بُعد (تبدأ من 1000 ج.م)</option>
                       <option value="سيرفرات سحابية Cloud VPS مُدارة">سيرفرات سحابية Cloud VPS مُدارة</option>
                       <option value="أنظمة إدارة المستشفيات والعيادات HIS/EMR">أنظمة إدارة المستشفيات والعيادات HIS/EMR</option>
                       <option value="تجهيز البنية التحتية والشبكات والسنترال">تجهيز البنية التحتية والشبكات والسنترال VOIP</option>

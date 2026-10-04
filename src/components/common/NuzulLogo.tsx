@@ -62,7 +62,7 @@ export const NuzulLogo: React.FC<NuzulLogoProps> = ({
 
         {showSubtitle && (
           <span
-            className={`text-[10px] font-medium tracking-wide mt-0.5 leading-none ${
+            className={`hidden sm:block text-[10px] font-medium tracking-wide mt-0.5 leading-none ${
               isDark ? 'text-slate-400' : 'text-slate-500'
             }`}
           >

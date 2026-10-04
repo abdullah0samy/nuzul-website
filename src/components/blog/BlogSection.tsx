@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Newspaper, ArrowRight, ArrowLeft, Calendar, Tag, BookOpen, Search, ShieldCheck } from 'lucide-react';
+import { Newspaper, ArrowRight, ArrowLeft, Calendar, Tag, BookOpen, Search, ShieldCheck, ChevronDown, ChevronUp } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
 import { NUZUL_BLOG_POSTS } from '../../data/nuzulData';
 import { BlogPost } from '../../types';
@@ -11,13 +11,55 @@ export const BlogSection: React.FC = () => {
 
   const [activeCategory, setActiveCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
+  const [showAllPosts, setShowAllPosts] = useState(false);
+
+  const cloudCount = NUZUL_BLOG_POSTS.filter(
+    (p) =>
+      p.category_en.toLowerCase().includes('server') ||
+      p.category_en.toLowerCase().includes('vps') ||
+      p.category_en.toLowerCase().includes('domain') ||
+      p.category_en.toLowerCase().includes('cloud') ||
+      p.category_en.toLowerCase().includes('bare-metal')
+  ).length;
+
+  const healthCount = NUZUL_BLOG_POSTS.filter(
+    (p) =>
+      p.category_en.toLowerCase().includes('health') ||
+      p.category_en.toLowerCase().includes('hospital') ||
+      p.category_en.toLowerCase().includes('clinic') ||
+      p.category_en.toLowerCase().includes('pacs') ||
+      p.category_en.toLowerCase().includes('q-system')
+  ).length;
+
+  const securityCount = NUZUL_BLOG_POSTS.filter(
+    (p) =>
+      p.category_en.toLowerCase().includes('security') ||
+      p.category_en.toLowerCase().includes('firewall') ||
+      p.category_en.toLowerCase().includes('backup') ||
+      p.category_en.toLowerCase().includes('voip') ||
+      p.category_en.toLowerCase().includes('email') ||
+      p.category_en.toLowerCase().includes('siem') ||
+      p.category_en.toLowerCase().includes('disaster') ||
+      p.category_en.toLowerCase().includes('active directory')
+  ).length;
+
+  const softwareCount = NUZUL_BLOG_POSTS.filter(
+    (p) =>
+      p.category_en.toLowerCase().includes('software') ||
+      p.category_en.toLowerCase().includes('mobile') ||
+      p.category_en.toLowerCase().includes('web') ||
+      p.category_en.toLowerCase().includes('ui/ux') ||
+      p.category_en.toLowerCase().includes('erp') ||
+      p.category_en.toLowerCase().includes('qa') ||
+      p.category_en.toLowerCase().includes('testing')
+  ).length;
 
   const categories = [
-    { id: 'all', labelAr: 'جميع المقالات والأدلة (١٦)', labelEn: 'All Guides (16)' },
-    { id: 'cloud', labelAr: 'السيرفرات والـ VPS', labelEn: 'Cloud & Servers' },
-    { id: 'health', labelAr: 'الأنظمة الصحية والمستشفيات', labelEn: 'Healthcare & PACS' },
-    { id: 'security', labelAr: 'الأمن السيبراني والشبكات', labelEn: 'Security & Firewalls' },
-    { id: 'software', labelAr: 'البرمجيات وتطبيقات الموبايل', labelEn: 'Software & Mobile' },
+    { id: 'all', labelAr: `جميع المقالات والأدلة (${NUZUL_BLOG_POSTS.length})`, labelEn: `All Guides (${NUZUL_BLOG_POSTS.length})` },
+    { id: 'cloud', labelAr: `السيرفرات والـ VPS (${cloudCount})`, labelEn: `Cloud & Servers (${cloudCount})` },
+    { id: 'health', labelAr: `الأنظمة الصحية والمستشفيات (${healthCount})`, labelEn: `Healthcare & PACS (${healthCount})` },
+    { id: 'security', labelAr: `الأمن والشبكات والطوارئ (${securityCount})`, labelEn: `Security & DR (${securityCount})` },
+    { id: 'software', labelAr: `البرمجيات وتطبيقات الموبايل (${softwareCount})`, labelEn: `Software & Mobile (${softwareCount})` },
   ];
 
   const filteredPosts = NUZUL_BLOG_POSTS.filter((post) => {
@@ -27,12 +69,16 @@ export const BlogSection: React.FC = () => {
       matchCat =
         post.category_en.toLowerCase().includes('server') ||
         post.category_en.toLowerCase().includes('vps') ||
-        post.category_en.toLowerCase().includes('domain');
+        post.category_en.toLowerCase().includes('domain') ||
+        post.category_en.toLowerCase().includes('cloud') ||
+        post.category_en.toLowerCase().includes('bare-metal');
     } else if (activeCategory === 'health') {
       matchCat =
         post.category_en.toLowerCase().includes('health') ||
         post.category_en.toLowerCase().includes('hospital') ||
-        post.category_en.toLowerCase().includes('clinic');
+        post.category_en.toLowerCase().includes('clinic') ||
+        post.category_en.toLowerCase().includes('pacs') ||
+        post.category_en.toLowerCase().includes('q-system');
     } else if (activeCategory === 'security') {
       matchCat =
         post.category_en.toLowerCase().includes('security') ||
@@ -40,14 +86,18 @@ export const BlogSection: React.FC = () => {
         post.category_en.toLowerCase().includes('backup') ||
         post.category_en.toLowerCase().includes('voip') ||
         post.category_en.toLowerCase().includes('email') ||
-        post.category_en.toLowerCase().includes('siem');
+        post.category_en.toLowerCase().includes('siem') ||
+        post.category_en.toLowerCase().includes('disaster') ||
+        post.category_en.toLowerCase().includes('active directory');
     } else if (activeCategory === 'software') {
       matchCat =
         post.category_en.toLowerCase().includes('software') ||
         post.category_en.toLowerCase().includes('mobile') ||
         post.category_en.toLowerCase().includes('web') ||
         post.category_en.toLowerCase().includes('ui/ux') ||
-        post.category_en.toLowerCase().includes('erp');
+        post.category_en.toLowerCase().includes('erp') ||
+        post.category_en.toLowerCase().includes('qa') ||
+        post.category_en.toLowerCase().includes('testing');
     }
 
     // Search query match
@@ -59,6 +109,13 @@ export const BlogSection: React.FC = () => {
     const excerpt = (isAr ? post.excerpt_ar : post.excerpt_en).toLowerCase();
     return title.includes(q) || excerpt.includes(q);
   });
+
+  const INITIAL_POSTS_COUNT = 8;
+  const isSearchActive = searchQuery.trim().length > 0;
+  const displayedPosts =
+    activeCategory === 'all' && !isSearchActive && !showAllPosts
+      ? filteredPosts.slice(0, INITIAL_POSTS_COUNT)
+      : filteredPosts;
 
   return (
     <section
@@ -89,8 +146,8 @@ export const BlogSection: React.FC = () => {
             }`}
           >
             {isAr
-              ? 'أدلة هندسية متخصصة ومحدثة لكل خدمة من خدماتنا: من سيرفرات ويندوز VPS بـ 1000 ج.م، وفصل أرشيف المستشفيات عن البريد، إلى جدران الحماية وسنترال VoIP والنسخ المعزول ضد الفدية.'
-              : 'Field-tested architectural playbooks across all 16 enterprise domains: Windows VPS clusters, DICOM PACS medical decoupling, DMARC phishing immunity, and 3-2-1 hybrid cloud recovery.'}
+              ? 'أدلة هندسية متخصصة ومحدثة لكل خدمة من خدماتنا: من الخوادم السحابية المخصصة، وفصل أرشيف المستشفيات عن البريد، إلى جدران الحماية وسنترال VoIP والنسخ المعزول ضد الفدية.'
+              : 'Field-tested architectural playbooks across all 22 enterprise domains: High-performance cloud VPS, DICOM PACS medical decoupling, DMARC phishing immunity, and 3-2-1 hybrid cloud recovery.'}
           </p>
 
           {/* Search Bar & Category Filter */}
@@ -117,10 +174,13 @@ export const BlogSection: React.FC = () => {
               <button
                 key={cat.id}
                 type="button"
-                onClick={() => setActiveCategory(cat.id)}
+                onClick={() => {
+                  setActiveCategory(cat.id);
+                  setShowAllPosts(false);
+                }}
                 className={`rounded-full px-4 py-2 text-xs font-bold transition-all cursor-pointer ${
                   activeCategory === cat.id
-                    ? 'bg-emerald-500 text-white shadow-md shadow-emerald-500/20'
+                    ? 'bg-emerald-500 text-white shadow-md shadow-emerald-500/20 ring-2 ring-emerald-400/40'
                     : isDark
                     ? 'bg-[#0d1524] text-slate-300 hover:bg-white/10 hover:text-white border border-white/10'
                     : 'bg-white text-slate-600 hover:bg-slate-100 hover:text-slate-900 border border-slate-200 shadow-sm'
@@ -134,7 +194,7 @@ export const BlogSection: React.FC = () => {
 
         {/* Guides Grid */}
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {filteredPosts.map((post: BlogPost) => {
+          {displayedPosts.map((post: BlogPost) => {
             const title = isAr ? post.title_ar : post.title_en;
             const category = isAr ? post.category_ar : post.category_en;
             const excerpt = isAr ? post.excerpt_ar : post.excerpt_en;
@@ -183,6 +243,38 @@ export const BlogSection: React.FC = () => {
             );
           })}
         </div>
+
+        {/* Show More / Show Less Toggle Button for Blog Posts */}
+        {activeCategory === 'all' && !isSearchActive && filteredPosts.length > INITIAL_POSTS_COUNT && (
+          <div className="mt-12 flex flex-col items-center justify-center gap-3">
+            <button
+              type="button"
+              onClick={() => setShowAllPosts(!showAllPosts)}
+              className="inline-flex items-center gap-2.5 rounded-full bg-emerald-600 hover:bg-emerald-500 px-8 py-3.5 text-sm font-bold text-white shadow-lg shadow-emerald-600/25 transition-all duration-300 hover:scale-105 cursor-pointer ring-2 ring-emerald-400/40"
+            >
+              {showAllPosts ? (
+                <>
+                  <span>{isAr ? 'عرض مقالات أقل' : 'Show Fewer Guides'}</span>
+                  <ChevronUp className="h-4 w-4" />
+                </>
+              ) : (
+                <>
+                  <span>
+                    {isAr
+                      ? `عرض باقي المقالات والأدلة (${filteredPosts.length - INITIAL_POSTS_COUNT} مقالاً إضافياً)`
+                      : `View All ${filteredPosts.length} Guides`}
+                  </span>
+                  <ChevronDown className="h-4 w-4" />
+                </>
+              )}
+            </button>
+            <span className="text-xs font-mono text-slate-400">
+              {isAr
+                ? `يتم عرض ${displayedPosts.length} من أصل ${filteredPosts.length} مقالاً ودليلاً هندسياً`
+                : `Showing ${displayedPosts.length} of ${filteredPosts.length} engineering guides`}
+            </span>
+          </div>
+        )}
 
         {filteredPosts.length === 0 && (
           <div className="mt-12 rounded-3xl border border-dashed border-slate-300 dark:border-white/10 p-12 text-center">

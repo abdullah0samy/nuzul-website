@@ -10,6 +10,7 @@ import {
   Sun,
   Moon,
   ShieldCheck,
+  Shield,
   Server,
   Activity,
   Layers,
@@ -19,6 +20,7 @@ import {
   Code2,
   Lock,
   Headphones,
+  BookOpen,
 } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
 import { NuzulLogo } from '../common/NuzulLogo';
@@ -89,10 +91,10 @@ export const Navbar: React.FC = () => {
     },
   ];
 
-  // Group services into 3 concise columns
+  // Group services into 3 concise high-impact enterprise columns
   const softwareServices = NUZUL_SERVICES.filter((s) => s.category_key === 'software');
-  const serverServices = NUZUL_SERVICES.filter((s) => s.category_key === 'servers');
-  const infraServices = NUZUL_SERVICES.filter((s) => s.category_key === 'infrastructure');
+  const infraCloudServices = NUZUL_SERVICES.filter((s) => s.category_key === 'infra_cloud');
+  const securityObsServices = NUZUL_SERVICES.filter((s) => s.category_key === 'security_obs');
 
   return (
     <header
@@ -117,7 +119,7 @@ export const Navbar: React.FC = () => {
 
             {/* Desktop Navigation Links with Clean, Concise Mega Dropdowns */}
             <div className="hidden lg:flex lg:items-center lg:gap-0.5 xl:gap-1">
-              {/* 1. All Services (16) */}
+              {/* 1. All Services */}
               <div className="relative">
                 <button
                   type="button"
@@ -141,13 +143,13 @@ export const Navbar: React.FC = () => {
                 {activeDropdown === 'services' && (
                   <div
                     onMouseLeave={() => setActiveDropdown(null)}
-                    className={`absolute top-full mt-2 w-[760px] overflow-hidden rounded-2xl border p-4 shadow-2xl backdrop-blur-xl z-50 transition-all ${
+                    className={`absolute top-full mt-2 w-[880px] overflow-hidden rounded-2xl border p-4 shadow-2xl backdrop-blur-xl z-50 transition-all ${
                       isDark ? 'border-white/10 bg-[#0d1524]' : 'border-slate-200 bg-white'
                     } ${isAr ? 'right-0' : 'left-0'}`}
                   >
                     <div className="flex items-center justify-between border-b border-current/10 pb-2 mb-3">
                       <span className="text-xs font-mono font-bold uppercase text-emerald-600 dark:text-emerald-400">
-                        {isAr ? `دليل الخدمات (${NUZUL_SERVICES.length})` : `Services (${NUZUL_SERVICES.length})`}
+                        {isAr ? `دليل الخدمات المتكاملة (${NUZUL_SERVICES.length})` : `All Services (${NUZUL_SERVICES.length})`}
                       </span>
                       <a
                         href="#services"
@@ -159,12 +161,12 @@ export const Navbar: React.FC = () => {
                       </a>
                     </div>
 
-                    <div className="grid grid-cols-3 gap-3">
-                      {/* Col 1: Software & ERP */}
+                    <div className="grid grid-cols-3 gap-4">
+                      {/* Col 1: Software & Digital */}
                       <div className="space-y-1">
                         <div className="flex items-center gap-1 text-[11px] font-bold text-slate-900 dark:text-white border-b border-current/10 pb-1 mb-1.5">
-                          <Code2 className="h-3 w-3 text-emerald-500" />
-                          <span>{isAr ? 'البرمجيات والـ ERP' : 'Software & ERP'}</span>
+                          <Code2 className="h-3.5 w-3.5 text-emerald-500" />
+                          <span>{isAr ? 'البرمجيات والحلول الرقمية' : 'Software & Digital'}</span>
                         </div>
                         {softwareServices.map((svc) => (
                           <a
@@ -178,16 +180,16 @@ export const Navbar: React.FC = () => {
                         ))}
                       </div>
 
-                      {/* Col 2: Cloud Servers */}
+                      {/* Col 2: Infrastructure & Cloud */}
                       <div className="space-y-1">
                         <div className="flex items-center gap-1 text-[11px] font-bold text-slate-900 dark:text-white border-b border-current/10 pb-1 mb-1.5">
-                          <Server className="h-3 w-3 text-emerald-500" />
-                          <span>{isAr ? 'السيرفرات السحابية' : 'Cloud Servers'}</span>
+                          <Server className="h-3.5 w-3.5 text-emerald-500" />
+                          <span>{isAr ? 'البنية التحتية والسحابية' : 'Infrastructure & Cloud'}</span>
                         </div>
-                        {serverServices.map((svc) => (
+                        {infraCloudServices.map((svc) => (
                           <a
                             key={svc.id}
-                            href="#pricing"
+                            href="#services"
                             onClick={() => setActiveDropdown(null)}
                             className="block rounded-lg px-2 py-1 text-xs text-slate-600 dark:text-slate-300 hover:bg-emerald-500/10 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
                           >
@@ -196,13 +198,13 @@ export const Navbar: React.FC = () => {
                         ))}
                       </div>
 
-                      {/* Col 3: Infrastructure & Security */}
+                      {/* Col 3: Security & Observability */}
                       <div className="space-y-1">
                         <div className="flex items-center gap-1 text-[11px] font-bold text-slate-900 dark:text-white border-b border-current/10 pb-1 mb-1.5">
-                          <ShieldCheck className="h-3 w-3 text-emerald-500" />
-                          <span>{isAr ? 'الشبكات والأمن' : 'Networks & Security'}</span>
+                          <Lock className="h-3.5 w-3.5 text-emerald-500" />
+                          <span>{isAr ? 'الأمن والمراقبة' : 'Security & Observability'}</span>
                         </div>
-                        {infraServices.map((svc) => (
+                        {securityObsServices.map((svc) => (
                           <a
                             key={svc.id}
                             href="#services"
@@ -266,7 +268,7 @@ export const Navbar: React.FC = () => {
                 )}
               </div>
 
-              {/* 3. Case Studies (9) */}
+              {/* 3. Case Studies */}
               <div className="relative">
                 <button
                   type="button"
@@ -278,7 +280,7 @@ export const Navbar: React.FC = () => {
                       : 'text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-slate-500/5'
                   }`}
                 >
-                  <span>{isAr ? `دراسات الجدوى (${NUZUL_CASE_STUDIES.length})` : `Case Studies (${NUZUL_CASE_STUDIES.length})`}</span>
+                  <span>{isAr ? `قصص النجاح والحالة (${NUZUL_CASE_STUDIES.length})` : `Case Studies (${NUZUL_CASE_STUDIES.length})`}</span>
                   <ChevronDown
                     className={`h-3.5 w-3.5 transition-transform duration-200 ${
                       activeDropdown === 'cases' ? 'rotate-180 text-emerald-500' : 'text-slate-400'
@@ -296,7 +298,7 @@ export const Navbar: React.FC = () => {
                   >
                     <div className="flex items-center justify-between border-b border-current/10 pb-2 mb-2.5">
                       <span className="text-xs font-mono font-bold uppercase text-emerald-600 dark:text-emerald-400">
-                        {isAr ? `دراسات الجدوى الموثقة (${NUZUL_CASE_STUDIES.length} مشاريع)` : `Case Studies (${NUZUL_CASE_STUDIES.length} Projects)`}
+                        {isAr ? `قصص نجاح عملائنا ودراسات الحالة التقنية (${NUZUL_CASE_STUDIES.length} مشاريع)` : `Client Success Stories & Case Studies (${NUZUL_CASE_STUDIES.length})`}
                       </span>
                       <a
                         href="#projects"
@@ -362,8 +364,8 @@ export const Navbar: React.FC = () => {
                         onClick={() => setActiveDropdown(null)}
                         className="group flex items-center justify-between rounded-lg px-2.5 py-1.5 text-xs hover:bg-emerald-500/10 transition-colors"
                       >
-                        <span className="font-bold text-purple-400">
-                          {isAr ? 'خوادم ويندوز RDP للمنظومات المالية' : 'Windows RDP for Financial ERP'}
+                        <span className="font-bold text-emerald-500">
+                          {isAr ? 'خوادم سطح المكتب السحابي (Remote Desktop)' : 'Cloud Desktop VPS (Remote Access)'}
                         </span>
                         <span className="text-[10px] font-mono text-emerald-400 font-bold">1,000 ج.م</span>
                       </a>
@@ -520,7 +522,7 @@ export const Navbar: React.FC = () => {
           </div>
 
           {/* Right Action Zone */}
-          <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
+          <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
             {/* 1. Official LinkedIn Button */}
             <a
               href={NUZUL_CONTACT.linkedin}
@@ -565,217 +567,292 @@ export const Navbar: React.FC = () => {
               )}
             </button>
 
-            {/* 4. Primary CTA: Portal */}
+            {/* 4. Primary CTA: Portal (Compact on small phones, full text on sm+) */}
             <button
               type="button"
               onClick={() => setIsClientAreaOpen(true)}
-              className="btn btn-primary inline-flex h-9 items-center gap-1.5 px-3 sm:px-4 text-xs font-bold uppercase tracking-wider cursor-pointer shadow-sm"
+              className="btn btn-primary inline-flex h-9 items-center gap-1.5 px-2.5 sm:px-4 text-xs font-bold uppercase tracking-wider cursor-pointer shadow-sm"
+              title={isAr ? 'بوابة العميل' : 'Portal'}
             >
               <User className="h-3.5 w-3.5" />
-              <span>{isAr ? 'بوابة العميل' : 'Portal'}</span>
+              <span className="hidden sm:inline">{isAr ? 'بوابة العميل' : 'Portal'}</span>
             </button>
 
-            {/* 5. Mobile Hamburger Button */}
+            {/* 5. Mobile & Tablet 3-Stripes / Hamburger Menu (Prominent, High-Contrast & Always Visible on Mobile) */}
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className={`inline-flex h-9 w-9 items-center justify-center rounded-xl border transition-colors lg:hidden cursor-pointer ${
-                isDark
-                  ? 'border-white/10 bg-white/[0.03] text-white hover:border-white/30'
-                  : 'border-slate-200 bg-slate-100 text-slate-800 hover:bg-slate-200'
+              className={`inline-flex h-9 w-9 items-center justify-center rounded-xl border transition-all lg:hidden cursor-pointer shadow-sm ${
+                mobileMenuOpen
+                  ? 'border-emerald-500/60 bg-emerald-500/20 text-emerald-400 ring-2 ring-emerald-500/30'
+                  : isDark
+                  ? 'border-emerald-500/40 bg-emerald-500/10 text-white hover:border-emerald-500 hover:bg-emerald-500/20'
+                  : 'border-emerald-600/30 bg-emerald-50 text-slate-900 hover:bg-emerald-100'
               }`}
-              aria-label="Toggle navigation menu"
+              aria-label={isAr ? 'قائمة خريطة الموقع والروابط' : 'Toggle navigation menu'}
+              title={isAr ? 'روابط وخريطة الموقع' : 'Navigation Menu'}
             >
-              {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              {mobileMenuOpen ? (
+                <X className="h-5 w-5 stroke-[2.5]" />
+              ) : (
+                <Menu className="h-5 w-5 stroke-[2.5] text-emerald-500 dark:text-emerald-400" />
+              )}
             </button>
           </div>
         </nav>
       </div>
 
-      {/* Responsive Mobile Drawer with Concise Connected Accordions */}
+      {/* Responsive Mobile Drawer with Backdrop Overlay & Organized Hierarchical Accordions */}
       {mobileMenuOpen && (
-        <div
-          className={`border-t px-5 py-5 lg:hidden max-h-[85vh] overflow-y-auto ${
-            isDark ? 'bg-[#0a111c] border-white/10 text-white' : 'bg-white border-slate-200 text-slate-900'
-          }`}
-        >
-          <div className="space-y-3">
-            {/* Quick Utility Row */}
-            <div
-              className={`flex items-center justify-between rounded-2xl border p-2 text-xs ${
-                isDark ? 'bg-[#0d1524] border-white/10' : 'bg-slate-100 border-slate-200'
-              }`}
-            >
-              {/* Language Switch */}
-              <div className="flex items-center gap-1">
-                <button
-                  type="button"
-                  onClick={() => setLocale('ar')}
-                  className={`rounded-lg px-2.5 py-1 font-bold text-xs cursor-pointer ${
-                    isAr ? 'bg-emerald-500 text-white' : 'text-slate-400'
-                  }`}
-                >
-                  العربية
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setLocale('en')}
-                  className={`rounded-lg px-2.5 py-1 font-bold text-xs cursor-pointer ${
-                    !isAr ? 'bg-emerald-500 text-white' : 'text-slate-400'
-                  }`}
-                >
-                  EN
-                </button>
-              </div>
+        <>
+          {/* Backdrop Overlay */}
+          <div
+            className="fixed inset-0 top-17 z-40 bg-black/60 backdrop-blur-sm lg:hidden transition-opacity"
+            onClick={() => setMobileMenuOpen(false)}
+            aria-hidden="true"
+          />
 
-              {/* Theme Switcher */}
-              <button
-                type="button"
-                onClick={toggleTheme}
-                className={`flex items-center gap-1.5 rounded-lg border px-2.5 py-1 text-xs font-bold cursor-pointer ${
-                  isDark ? 'border-white/10 bg-white/5 text-amber-300' : 'border-slate-300 bg-white text-indigo-600'
+          {/* Drawer Container */}
+          <div
+            className={`fixed inset-x-0 top-17 z-50 max-h-[calc(100vh-4.25rem)] overflow-y-auto border-b px-4 sm:px-6 py-5 shadow-2xl lg:hidden transition-all duration-300 ${
+              isDark ? 'bg-[#0a111c]/98 border-white/10 text-white' : 'bg-white/98 border-slate-200 text-slate-900'
+            }`}
+          >
+            <div className="space-y-3">
+              {/* Quick Utility Row */}
+              <div
+                className={`flex items-center justify-between rounded-2xl border p-2 text-xs ${
+                  isDark ? 'bg-[#0d1524] border-white/10' : 'bg-slate-100 border-slate-200'
                 }`}
-                aria-label="Toggle Theme"
               >
-                {isDark ? <Sun className="h-3.5 w-3.5 text-amber-400" /> : <Moon className="h-3.5 w-3.5 text-indigo-600" />}
-                <span>{isDark ? 'النهار' : 'الليل'}</span>
-              </button>
-
-              {/* Currency */}
-              <div className="flex items-center gap-1 font-mono text-xs">
-                {(['EGP', 'USD', 'SAR'] as const).map((curr) => (
+                {/* Language Switch */}
+                <div className="flex items-center gap-1">
                   <button
-                    key={curr}
                     type="button"
-                    onClick={() => setCurrency(curr)}
-                    className={`rounded px-1.5 py-0.5 cursor-pointer ${
-                      currency === curr ? 'bg-emerald-500 text-white font-bold' : 'text-slate-400'
+                    onClick={() => setLocale('ar')}
+                    className={`rounded-lg px-2.5 py-1 font-bold text-xs cursor-pointer ${
+                      isAr ? 'bg-emerald-500 text-white' : 'text-slate-400'
                     }`}
                   >
-                    {curr}
+                    العربية
                   </button>
-                ))}
-              </div>
-            </div>
+                  <button
+                    type="button"
+                    onClick={() => setLocale('en')}
+                    className={`rounded-lg px-2.5 py-1 font-bold text-xs cursor-pointer ${
+                      !isAr ? 'bg-emerald-500 text-white' : 'text-slate-400'
+                    }`}
+                  >
+                    EN
+                  </button>
+                </div>
 
-            {/* Mobile Nav Accordions with Concise Lists */}
-            <div className="space-y-1.5">
-              {/* 1. All Services (16) */}
-              <div
-                className={`rounded-xl border overflow-hidden ${
-                  isDark ? 'bg-[#0d1524] border-white/5' : 'bg-slate-50 border-slate-200'
-                }`}
-              >
+                {/* Theme Switcher */}
                 <button
                   type="button"
-                  onClick={() => handleMobileSectionToggle('m-services')}
-                  className="w-full flex items-center justify-between p-3 text-start font-bold text-xs cursor-pointer"
+                  onClick={toggleTheme}
+                  className={`flex items-center gap-1.5 rounded-lg border px-2.5 py-1 text-xs font-bold cursor-pointer ${
+                    isDark ? 'border-white/10 bg-white/5 text-amber-300' : 'border-slate-300 bg-white text-indigo-600'
+                  }`}
+                  aria-label="Toggle Theme"
                 >
-                  <span>{isAr ? `كافة الخدمات (${NUZUL_SERVICES.length})` : `All Services (${NUZUL_SERVICES.length})`}</span>
-                  <ChevronDown
-                    className={`h-3.5 w-3.5 transition-transform duration-200 ${
-                      mobileExpandedSection === 'm-services' ? 'rotate-180 text-emerald-500' : 'text-slate-400'
-                    }`}
-                  />
+                  {isDark ? <Sun className="h-3.5 w-3.5 text-amber-400" /> : <Moon className="h-3.5 w-3.5 text-indigo-600" />}
+                  <span>{isDark ? 'النهار' : 'الليل'}</span>
                 </button>
-                {mobileExpandedSection === 'm-services' && (
-                  <div className="px-3 pb-3 pt-1 space-y-1 border-t border-current/10 max-h-52 overflow-y-auto">
-                    {NUZUL_SERVICES.map((s) => (
-                      <a
-                        key={s.id}
-                        href="#services"
-                        onClick={() => setMobileMenuOpen(false)}
-                        className="block py-0.5 text-xs text-slate-400 hover:text-emerald-500"
-                      >
-                        • {isAr ? s.title_ar : s.title_en}
-                      </a>
-                    ))}
-                  </div>
-                )}
+
+                {/* Currency */}
+                <div className="flex items-center gap-1 font-mono text-xs">
+                  {(['EGP', 'USD', 'SAR'] as const).map((curr) => (
+                    <button
+                      key={curr}
+                      type="button"
+                      onClick={() => setCurrency(curr)}
+                      className={`rounded px-1.5 py-0.5 cursor-pointer ${
+                        currency === curr ? 'bg-emerald-500 text-white font-bold' : 'text-slate-400'
+                      }`}
+                    >
+                      {curr}
+                    </button>
+                  ))}
+                </div>
               </div>
 
-              {/* 2. Live System Demos */}
-              <div
-                className={`rounded-xl border overflow-hidden ${
-                  isDark ? 'bg-[#0d1524] border-white/5' : 'bg-slate-50 border-slate-200'
-                }`}
-              >
-                <button
-                  type="button"
-                  onClick={() => handleMobileSectionToggle('m-demos')}
-                  className="w-full flex items-center justify-between p-3 text-start font-bold text-xs cursor-pointer"
-                >
-                  <span>{isAr ? 'الأنظمة الطبية الحية' : 'Live System Demos'}</span>
-                  <ChevronDown
-                    className={`h-3.5 w-3.5 transition-transform duration-200 ${
-                      mobileExpandedSection === 'm-demos' ? 'rotate-180 text-emerald-500' : 'text-slate-400'
-                    }`}
-                  />
-                </button>
-                {mobileExpandedSection === 'm-demos' && (
-                  <div className="px-3 pb-3 pt-1 space-y-1 border-t border-current/10">
-                    {liveDemosList.map((d) => (
-                      <a
-                        key={d.id}
-                        href="#live-demos"
-                        onClick={() => setMobileMenuOpen(false)}
-                        className="block py-0.5 text-xs text-slate-400 hover:text-emerald-500"
-                      >
-                        • {isAr ? d.titleAr : d.titleEn}
-                      </a>
-                    ))}
-                  </div>
-                )}
-              </div>
+              {/* Mobile Nav Accordions with Concise Lists */}
+              <div className="space-y-2">
+                {/* Header Label: Full Site Navigation */}
+                <div className="flex items-center justify-between px-1 text-[11px] font-mono font-bold text-slate-400 uppercase tracking-wider">
+                  <span>{isAr ? 'خريطة أقسام وخدمات الموقع' : 'Full Site Map & Navigation'}</span>
+                  <span className="text-emerald-500 font-bold">{NUZUL_SERVICES.length + NUZUL_CASE_STUDIES.length + NUZUL_BLOG_POSTS.length} {isAr ? 'رابط' : 'Links'}</span>
+                </div>
 
-              {/* 3. Case Studies (9) */}
-              <div
-                className={`rounded-xl border overflow-hidden ${
-                  isDark ? 'bg-[#0d1524] border-white/5' : 'bg-slate-50 border-slate-200'
-                }`}
-              >
-                <button
-                  type="button"
-                  onClick={() => handleMobileSectionToggle('m-cases')}
-                  className="w-full flex items-center justify-between p-3 text-start font-bold text-xs cursor-pointer"
+                {/* 1. Services by Category Pillar (Software, Cloud, Security) */}
+                <div
+                  className={`rounded-2xl border overflow-hidden transition-colors ${
+                    isDark ? 'bg-[#0d1524] border-white/10' : 'bg-slate-50 border-slate-200'
+                  }`}
                 >
-                  <span>{isAr ? `دراسات الجدوى (${NUZUL_CASE_STUDIES.length})` : `Case Studies (${NUZUL_CASE_STUDIES.length})`}</span>
-                  <ChevronDown
-                    className={`h-3.5 w-3.5 transition-transform duration-200 ${
-                      mobileExpandedSection === 'm-cases' ? 'rotate-180 text-emerald-500' : 'text-slate-400'
-                    }`}
-                  />
-                </button>
-                {mobileExpandedSection === 'm-cases' && (
-                  <div className="px-3 pb-3 pt-1 space-y-1 border-t border-current/10 max-h-52 overflow-y-auto">
-                    {NUZUL_CASE_STUDIES.map((c) => (
-                      <a
-                        key={c.id}
-                        href="#projects"
-                        onClick={() => setMobileMenuOpen(false)}
-                        className="block py-0.5 text-xs text-slate-400 hover:text-emerald-500"
-                      >
-                        • {c.id}. {isAr ? c.client_ar.split('—')[0] : c.client_en.split('—')[0]}
-                      </a>
-                    ))}
-                  </div>
-                )}
-              </div>
+                  <button
+                    type="button"
+                    onClick={() => handleMobileSectionToggle('m-services')}
+                    className="w-full flex items-center justify-between p-3.5 text-start font-bold text-xs cursor-pointer"
+                  >
+                    <div className="flex items-center gap-2">
+                      <Layers className="h-4 w-4 text-emerald-500" />
+                      <span>{isAr ? `دليل كافة الخدمات التقنية (${NUZUL_SERVICES.length})` : `All Technical Services (${NUZUL_SERVICES.length})`}</span>
+                    </div>
+                    <ChevronDown
+                      className={`h-4 w-4 transition-transform duration-200 ${
+                        mobileExpandedSection === 'm-services' ? 'rotate-180 text-emerald-500' : 'text-slate-400'
+                      }`}
+                    />
+                  </button>
+                  {mobileExpandedSection === 'm-services' && (
+                    <div className="px-3 pb-3 pt-1 space-y-3 border-t border-current/10 max-h-72 overflow-y-auto">
+                      {/* Software Pillar */}
+                      <div className="space-y-1">
+                        <div className="text-[10px] font-bold font-mono text-emerald-600 dark:text-emerald-400 uppercase">
+                          {isAr ? '1. البرمجيات والحلول الرقمية' : '1. Software & Digital Solutions'}
+                        </div>
+                        {softwareServices.map((s) => (
+                          <a
+                            key={s.id}
+                            href="#services"
+                            onClick={() => setMobileMenuOpen(false)}
+                            className="block py-1 px-2 rounded-lg text-xs text-slate-300 dark:text-slate-300 hover:bg-emerald-500/10 hover:text-emerald-500 transition-colors"
+                          >
+                            • {isAr ? s.title_ar : s.title_en}
+                          </a>
+                        ))}
+                      </div>
+
+                      {/* Infrastructure & Cloud Pillar */}
+                      <div className="space-y-1 border-t border-white/5 pt-2">
+                        <div className="text-[10px] font-bold font-mono text-emerald-600 dark:text-emerald-400 uppercase">
+                          {isAr ? '2. البنية التحتية والسحابية' : '2. Infrastructure & Cloud'}
+                        </div>
+                        {infraCloudServices.map((s) => (
+                          <a
+                            key={s.id}
+                            href="#services"
+                            onClick={() => setMobileMenuOpen(false)}
+                            className="block py-1 px-2 rounded-lg text-xs text-slate-300 dark:text-slate-300 hover:bg-emerald-500/10 hover:text-emerald-500 transition-colors"
+                          >
+                            • {isAr ? s.title_ar : s.title_en}
+                          </a>
+                        ))}
+                      </div>
+
+                      {/* Security & Observability Pillar */}
+                      <div className="space-y-1 border-t border-white/5 pt-2">
+                        <div className="text-[10px] font-bold font-mono text-emerald-600 dark:text-emerald-400 uppercase">
+                          {isAr ? '3. الأمن والمراقبة' : '3. Security & Observability'}
+                        </div>
+                        {securityObsServices.map((s) => (
+                          <a
+                            key={s.id}
+                            href="#services"
+                            onClick={() => setMobileMenuOpen(false)}
+                            className="block py-1 px-2 rounded-lg text-xs text-slate-300 dark:text-slate-300 hover:bg-emerald-500/10 hover:text-emerald-500 transition-colors"
+                          >
+                            • {isAr ? s.title_ar : s.title_en}
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* 2. Live System Demos */}
+                <div
+                  className={`rounded-2xl border overflow-hidden transition-colors ${
+                    isDark ? 'bg-[#0d1524] border-white/10' : 'bg-slate-50 border-slate-200'
+                  }`}
+                >
+                  <button
+                    type="button"
+                    onClick={() => handleMobileSectionToggle('m-demos')}
+                    className="w-full flex items-center justify-between p-3.5 text-start font-bold text-xs cursor-pointer"
+                  >
+                    <div className="flex items-center gap-2">
+                      <Activity className="h-4 w-4 text-emerald-500" />
+                      <span>{isAr ? 'المعاينة الحية للأنظمة الطبية والعيادات' : 'Live Clinical & Hospital Demos'}</span>
+                    </div>
+                    <ChevronDown
+                      className={`h-4 w-4 transition-transform duration-200 ${
+                        mobileExpandedSection === 'm-demos' ? 'rotate-180 text-emerald-500' : 'text-slate-400'
+                      }`}
+                    />
+                  </button>
+                  {mobileExpandedSection === 'm-demos' && (
+                    <div className="px-3 pb-3 pt-1 space-y-1 border-t border-current/10">
+                      {liveDemosList.map((d) => (
+                        <a
+                          key={d.id}
+                          href="#live-demos"
+                          onClick={() => setMobileMenuOpen(false)}
+                          className="block py-1 px-2 rounded-lg text-xs text-slate-300 hover:bg-emerald-500/10 hover:text-emerald-500 transition-colors"
+                        >
+                          • {isAr ? d.titleAr : d.titleEn}
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* 3. Case Studies (12) */}
+                <div
+                  className={`rounded-2xl border overflow-hidden transition-colors ${
+                    isDark ? 'bg-[#0d1524] border-white/10' : 'bg-slate-50 border-slate-200'
+                  }`}
+                >
+                  <button
+                    type="button"
+                    onClick={() => handleMobileSectionToggle('m-cases')}
+                    className="w-full flex items-center justify-between p-3.5 text-start font-bold text-xs cursor-pointer"
+                  >
+                    <div className="flex items-center gap-2">
+                      <Shield className="h-4 w-4 text-emerald-500" />
+                      <span>{isAr ? `قصص نجاح عملائنا ودراسات الحالة التقنية (${NUZUL_CASE_STUDIES.length})` : `Client Success Stories & Case Studies (${NUZUL_CASE_STUDIES.length})`}</span>
+                    </div>
+                    <ChevronDown
+                      className={`h-4 w-4 transition-transform duration-200 ${
+                        mobileExpandedSection === 'm-cases' ? 'rotate-180 text-emerald-500' : 'text-slate-400'
+                      }`}
+                    />
+                  </button>
+                  {mobileExpandedSection === 'm-cases' && (
+                    <div className="px-3 pb-3 pt-1 space-y-1 border-t border-current/10 max-h-60 overflow-y-auto">
+                      {NUZUL_CASE_STUDIES.map((c) => (
+                        <a
+                          key={c.id}
+                          href="#projects"
+                          onClick={() => setMobileMenuOpen(false)}
+                          className="block py-1 px-2 rounded-lg text-xs text-slate-300 hover:bg-emerald-500/10 hover:text-emerald-500 transition-colors"
+                        >
+                          • {c.id}. {isAr ? c.title_ar.split('—')[0] : c.title_en.split('—')[0]}
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                </div>
 
               {/* 4. Servers & Pricing */}
               <div
-                className={`rounded-xl border overflow-hidden ${
-                  isDark ? 'bg-[#0d1524] border-white/5' : 'bg-slate-50 border-slate-200'
+                className={`rounded-2xl border overflow-hidden transition-colors ${
+                  isDark ? 'bg-[#0d1524] border-white/10' : 'bg-slate-50 border-slate-200'
                 }`}
               >
                 <button
                   type="button"
                   onClick={() => handleMobileSectionToggle('m-pricing')}
-                  className="w-full flex items-center justify-between p-3 text-start font-bold text-xs cursor-pointer"
+                  className="w-full flex items-center justify-between p-3.5 text-start font-bold text-xs cursor-pointer"
                 >
-                  <span>{isAr ? 'السيرفرات والأسعار' : 'Servers & Pricing'}</span>
+                  <div className="flex items-center gap-2">
+                    <Server className="h-4 w-4 text-emerald-500" />
+                    <span>{isAr ? 'السيرفرات والأسعار وباقات ITaaS' : 'Servers & ITaaS Pricing'}</span>
+                  </div>
                   <ChevronDown
-                    className={`h-3.5 w-3.5 transition-transform duration-200 ${
+                    className={`h-4 w-4 transition-transform duration-200 ${
                       mobileExpandedSection === 'm-pricing' ? 'rotate-180 text-emerald-500' : 'text-slate-400'
                     }`}
                   />
@@ -785,21 +862,21 @@ export const Navbar: React.FC = () => {
                     <a
                       href="#pricing"
                       onClick={() => setMobileMenuOpen(false)}
-                      className="block py-0.5 text-xs text-slate-400 hover:text-emerald-500"
+                      className="block py-1 px-2 rounded-lg text-xs text-slate-300 hover:bg-emerald-500/10 hover:text-emerald-500 transition-colors"
                     >
-                      • {isAr ? 'خوادم ويندوز RDP للمنظومات المالية (1000 ج.م)' : 'Windows RDP for Financial ERP (1,000 EGP)'}
+                      • {isAr ? 'خوادم سطح المكتب السحابي (1000 ج.م)' : 'Cloud Desktop VPS (1,000 EGP)'}
                     </a>
                     <a
                       href="#pricing"
                       onClick={() => setMobileMenuOpen(false)}
-                      className="block py-0.5 text-xs text-slate-400 hover:text-emerald-500"
+                      className="block py-1 px-2 rounded-lg text-xs text-slate-300 hover:bg-emerald-500/10 hover:text-emerald-500 transition-colors"
                     >
                       • {isAr ? 'السيرفرات السحابية المدارة (Managed VPS)' : 'Managed Cloud VPS'}
                     </a>
                     <a
                       href="#packages"
                       onClick={() => setMobileMenuOpen(false)}
-                      className="block py-0.5 text-xs text-slate-400 hover:text-emerald-500"
+                      className="block py-1 px-2 rounded-lg text-xs text-slate-300 hover:bg-emerald-500/10 hover:text-emerald-500 transition-colors"
                     >
                       • {isAr ? 'باقات قطاع تقني كامل كخدمة (ITaaS)' : 'IT as a Service (ITaaS)'}
                     </a>
@@ -807,26 +884,29 @@ export const Navbar: React.FC = () => {
                 )}
               </div>
 
-              {/* 5. Guides (16) */}
+              {/* 5. Guides (22) */}
               <div
-                className={`rounded-xl border overflow-hidden ${
-                  isDark ? 'bg-[#0d1524] border-white/5' : 'bg-slate-50 border-slate-200'
+                className={`rounded-2xl border overflow-hidden transition-colors ${
+                  isDark ? 'bg-[#0d1524] border-white/10' : 'bg-slate-50 border-slate-200'
                 }`}
               >
                 <button
                   type="button"
                   onClick={() => handleMobileSectionToggle('m-guides')}
-                  className="w-full flex items-center justify-between p-3 text-start font-bold text-xs cursor-pointer"
+                  className="w-full flex items-center justify-between p-3.5 text-start font-bold text-xs cursor-pointer"
                 >
-                  <span>{isAr ? `الأدلة الهندسية (${NUZUL_BLOG_POSTS.length})` : `Guides (${NUZUL_BLOG_POSTS.length})`}</span>
+                  <div className="flex items-center gap-2">
+                    <BookOpen className="h-4 w-4 text-emerald-500" />
+                    <span>{isAr ? `الأدلة الهندسية والمدونة (${NUZUL_BLOG_POSTS.length})` : `Guides & Articles (${NUZUL_BLOG_POSTS.length})`}</span>
+                  </div>
                   <ChevronDown
-                    className={`h-3.5 w-3.5 transition-transform duration-200 ${
+                    className={`h-4 w-4 transition-transform duration-200 ${
                       mobileExpandedSection === 'm-guides' ? 'rotate-180 text-emerald-500' : 'text-slate-400'
                     }`}
                   />
                 </button>
                 {mobileExpandedSection === 'm-guides' && (
-                  <div className="px-3 pb-3 pt-1 space-y-1 border-t border-current/10 max-h-52 overflow-y-auto">
+                  <div className="px-3 pb-3 pt-1 space-y-1 border-t border-current/10 max-h-60 overflow-y-auto">
                     {NUZUL_BLOG_POSTS.map((a) => (
                       <button
                         key={a.id}
@@ -835,7 +915,7 @@ export const Navbar: React.FC = () => {
                           setMobileMenuOpen(false);
                           setActiveArticle(a);
                         }}
-                        className="block w-full text-start py-0.5 text-xs text-slate-400 hover:text-emerald-500 cursor-pointer"
+                        className="block w-full text-start py-1 px-2 rounded-lg text-xs text-slate-300 hover:bg-emerald-500/10 hover:text-emerald-500 transition-colors cursor-pointer"
                       >
                         • {a.id}. {isAr ? a.title_ar.split(':')[0] : a.title_en.split(':')[0]}
                       </button>
@@ -844,40 +924,50 @@ export const Navbar: React.FC = () => {
                 )}
               </div>
 
-              {/* 6. Consultation */}
+              {/* 6. Consultation & WhatsApp */}
               <div
-                className={`rounded-xl border overflow-hidden ${
-                  isDark ? 'bg-[#0d1524] border-white/5' : 'bg-slate-50 border-slate-200'
+                className={`rounded-2xl border overflow-hidden transition-colors ${
+                  isDark ? 'bg-[#0d1524] border-white/10' : 'bg-slate-50 border-slate-200'
                 }`}
               >
                 <button
                   type="button"
                   onClick={() => handleMobileSectionToggle('m-consult')}
-                  className="w-full flex items-center justify-between p-3 text-start font-bold text-xs cursor-pointer"
+                  className="w-full flex items-center justify-between p-3.5 text-start font-bold text-xs cursor-pointer"
                 >
-                  <span>{isAr ? 'طلب استشارة' : 'Consultation'}</span>
+                  <div className="flex items-center gap-2">
+                    <PhoneCall className="h-4 w-4 text-emerald-500" />
+                    <span>{isAr ? 'طلب استشارة والتواصل المباشر' : 'Consultation & Direct Contact'}</span>
+                  </div>
                   <ChevronDown
-                    className={`h-3.5 w-3.5 transition-transform duration-200 ${
+                    className={`h-4 w-4 transition-transform duration-200 ${
                       mobileExpandedSection === 'm-consult' ? 'rotate-180 text-emerald-500' : 'text-slate-400'
                     }`}
                   />
                 </button>
                 {mobileExpandedSection === 'm-consult' && (
-                  <div className="px-3 pb-3 pt-1 space-y-1 border-t border-current/10">
+                  <div className="px-3 pb-3 pt-1 space-y-1.5 border-t border-current/10">
                     <a
                       href="#contact"
                       onClick={() => setMobileMenuOpen(false)}
-                      className="block py-0.5 text-xs text-slate-400 hover:text-emerald-500"
+                      className="block py-1 px-2 rounded-lg text-xs text-slate-300 hover:bg-emerald-500/10 hover:text-emerald-500 transition-colors"
                     >
-                      • {isAr ? 'معاينة هندسية فيزيائية للمقر' : 'On-Site Inspection'}
+                      • {isAr ? 'معاينة هندسية فيزيائية لمقر المنشأة' : 'On-Site Physical Inspection'}
                     </a>
                     <a
                       href={NUZUL_CONTACT.whatsappUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="block py-0.5 text-xs text-emerald-500 font-bold"
+                      className="flex items-center justify-between py-1 px-2 rounded-lg text-xs text-emerald-400 font-bold bg-emerald-500/10"
                     >
-                      • {isAr ? 'محادثة فورية (واتساب 24/7)' : 'WhatsApp Engineering Desk'}
+                      <span>• {isAr ? 'محادثة فورية (واتساب 24/7): 01140565057' : 'WhatsApp 24/7: +201140565057'}</span>
+                      <PhoneCall className="h-3 w-3" />
+                    </a>
+                    <a
+                      href={`tel:${NUZUL_CONTACT.rawPhone2}`}
+                      className="block py-1 px-2 rounded-lg text-xs text-slate-300 hover:text-emerald-400"
+                    >
+                      • {isAr ? 'هاتف الطوارئ الهندسي: 01011678830' : 'Direct Line: +201011678830'}
                     </a>
                   </div>
                 )}
@@ -920,7 +1010,8 @@ export const Navbar: React.FC = () => {
             </div>
           </div>
         </div>
-      )}
-    </header>
+      </>
+    )}
+  </header>
   );
 };

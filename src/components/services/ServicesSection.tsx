@@ -16,21 +16,28 @@ import {
   ShieldCheck,
   Activity,
   Database,
+  Cloud,
+  Cpu,
+  Eye,
   CheckCircle2,
   ArrowRight,
   ArrowLeft,
   Sparkles,
   BookOpen,
+  ChevronDown,
+  ChevronUp,
 } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
 import { NUZUL_SERVICES, NUZUL_CONTACT } from '../../data/nuzulData';
+import { ServiceCategoryKey } from '../../types';
 
 export const ServicesSection: React.FC = () => {
   const { locale, theme } = useApp();
   const isAr = locale === 'ar';
   const isDark = theme === 'dark';
 
-  const [activeCategory, setActiveCategory] = useState<'all' | 'software' | 'servers' | 'infrastructure'>('all');
+  const [activeCategory, setActiveCategory] = useState<ServiceCategoryKey>('all');
+  const [showAll, setShowAll] = useState(false);
 
   const iconMap: Record<string, React.ElementType> = {
     Code,
@@ -49,6 +56,10 @@ export const ServicesSection: React.FC = () => {
     ShieldCheck,
     Activity,
     Database,
+    Cloud,
+    Cpu,
+    Eye,
+    CheckCircle2,
   };
 
   const filteredServices = NUZUL_SERVICES.filter((s) => {
@@ -56,11 +67,21 @@ export const ServicesSection: React.FC = () => {
     return s.category_key === activeCategory;
   });
 
-  const categories = [
-    { id: 'all', labelAr: 'جميع الخدمات (١٦)', labelEn: 'All Services (16)' },
-    { id: 'software', labelAr: 'تطوير البرمجيات والويب (٥)', labelEn: 'Software & Web (5)' },
-    { id: 'servers', labelAr: 'السيرفرات والاستضافة السحابية (٧)', labelEn: 'Servers & Cloud Hosting (7)' },
-    { id: 'infrastructure', labelAr: 'الشبكات والأمن السيبراني (٤)', labelEn: 'Infrastructure & Security (4)' },
+  const INITIAL_COUNT = 8;
+  const displayedServices =
+    activeCategory === 'all' && !showAll
+      ? filteredServices.slice(0, INITIAL_COUNT)
+      : filteredServices;
+
+  const softwareCount = NUZUL_SERVICES.filter((s) => s.category_key === 'software').length;
+  const infraCloudCount = NUZUL_SERVICES.filter((s) => s.category_key === 'infra_cloud').length;
+  const securityObsCount = NUZUL_SERVICES.filter((s) => s.category_key === 'security_obs').length;
+
+  const categories: { id: ServiceCategoryKey; labelAr: string; labelEn: string }[] = [
+    { id: 'all', labelAr: `جميع الخدمات (${NUZUL_SERVICES.length})`, labelEn: `All Services (${NUZUL_SERVICES.length})` },
+    { id: 'infra_cloud', labelAr: `البنية التحتية والسحابية (${infraCloudCount})`, labelEn: `Infrastructure & Cloud (${infraCloudCount})` },
+    { id: 'security_obs', labelAr: `الأمن والمراقبة (${securityObsCount})`, labelEn: `Security & Observability (${securityObsCount})` },
+    { id: 'software', labelAr: `البرمجيات والحلول الرقمية (${softwareCount})`, labelEn: `Software & Digital Solutions (${softwareCount})` },
   ];
 
   return (
@@ -95,11 +116,12 @@ export const ServicesSection: React.FC = () => {
           {/* Under One Roof Core Badges */}
           <div className="mt-6 flex flex-wrap items-center justify-center gap-2 text-xs font-mono">
             {[
-              { ar: 'أنظمة السنترال VOIP', en: 'Enterprise VoIP PBX' },
-              { ar: 'أمن الشبكات والجدار الناري Firewall', en: 'Next-Gen Perimeter Firewalls' },
-              { ar: 'تطبيقات الويب والموبايل', en: 'Bespoke Web & Mobile Apps' },
-              { ar: 'منصة مراقبة الأحداث الأمنية SIEM', en: '24/7 SIEM Security Operations' },
-              { ar: 'حلول النسخ الاحتياطي الذكية', en: 'Immutable Automated Backups' },
+              { ar: 'حلول الأمن والشبكات', en: 'Enterprise Security & Networks' },
+              { ar: 'أنظمة السنترال والاتصالات', en: 'Unified Telephony & VoIP' },
+              { ar: 'الأنظمة السحابية والـ ERP', en: 'Enterprise Cloud & ERP Systems' },
+              { ar: 'تطبيقات الويب والموبايل', en: 'Web & Mobile Applications' },
+              { ar: 'النسخ الاحتياطي واستعادة البيانات', en: 'Disaster Recovery & Backup' },
+              { ar: 'المراقبة السيبرانية المستمرة', en: '24/7 Threat Monitoring' },
             ].map((item, idx) => (
               <span
                 key={idx}
@@ -138,7 +160,7 @@ export const ServicesSection: React.FC = () => {
 
         {/* Services Grid with High-Contrast Enhanced Borders & Glow */}
         <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {filteredServices.map((service) => {
+          {displayedServices.map((service) => {
             const Icon = iconMap[service.icon] || Server;
             const title = isAr ? service.title_ar : service.title_en;
             const desc = isAr ? service.description_ar : service.description_en;
@@ -228,6 +250,38 @@ export const ServicesSection: React.FC = () => {
             );
           })}
         </div>
+
+        {/* Show More / Show Less Toggle Button for Services */}
+        {activeCategory === 'all' && filteredServices.length > INITIAL_COUNT && (
+          <div className="mt-12 flex flex-col items-center justify-center gap-3">
+            <button
+              type="button"
+              onClick={() => setShowAll(!showAll)}
+              className="inline-flex items-center gap-2.5 rounded-full bg-emerald-600 hover:bg-emerald-500 px-8 py-3.5 text-sm font-bold text-white shadow-lg shadow-emerald-600/25 transition-all duration-300 hover:scale-105 cursor-pointer ring-2 ring-emerald-400/40"
+            >
+              {showAll ? (
+                <>
+                  <span>{isAr ? 'عرض خدمات أقل' : 'Show Fewer Services'}</span>
+                  <ChevronUp className="h-4 w-4" />
+                </>
+              ) : (
+                <>
+                  <span>
+                    {isAr
+                      ? `عرض باقي الخدمات (${filteredServices.length - INITIAL_COUNT} خدمة إضافية)`
+                      : `View All ${filteredServices.length} Services`}
+                  </span>
+                  <ChevronDown className="h-4 w-4" />
+                </>
+              )}
+            </button>
+            <span className="text-xs font-mono text-slate-400">
+              {isAr
+                ? `يتم عرض ${displayedServices.length} من أصل ${filteredServices.length} خدمة متكاملة`
+                : `Showing ${displayedServices.length} of ${filteredServices.length} total services`}
+            </span>
+          </div>
+        )}
       </div>
     </section>
   );

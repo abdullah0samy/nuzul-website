@@ -80,8 +80,8 @@ export const ContactConsultationSection: React.FC = () => {
             }`}
           >
             {isAr
-              ? 'سواء كنت بحاجة إلى استضافة سيرفرات Windows RDP، تجهيز شبكات وسنترال للمستشفيات، منصة عيادات سحابية، أو حماية بريد شركتك — نتحمل المسؤولية كاملة من التخطيط حتى التسليم والتأمين.'
-              : 'Whether you require Windows RDP VPS clusters, hospital IT & structured cabling, Clinic SaaS deployment, or corporate mail security — we provide end-to-end engineering sovereignty.'}
+              ? 'سواء كنت بحاجة إلى خوادم سحابية مخصصة، تجهيز شبكات وسنترال للمستشفيات، منصة عيادات سحابية، أو حماية بريد شركتك — نتحمل المسؤولية كاملة من التخطيط حتى التسليم والتأمين.'
+              : 'Whether you require dedicated cloud VPS clusters, hospital IT & structured cabling, Clinic SaaS deployment, or corporate mail security — we provide end-to-end engineering sovereignty.'}
           </p>
         </div>
 
@@ -211,8 +211,8 @@ export const ContactConsultationSection: React.FC = () => {
                       <option value="enterprise-turnkey">
                         {isAr ? 'تجهيز IT متكامل تحت سقف واحد (Turnkey IT)' : 'Turnkey IT Infrastructure'}
                       </option>
-                      <option value="windows-rdp">
-                        {isAr ? 'سيرفرات ويندوز VPS (تبدأ من 1000 ج.م)' : 'Windows VPS RDP (from 1,000 EGP/mo)'}
+                      <option value="cloud-vps">
+                        {isAr ? 'الخوادم السحابية المدارة واستضافة الأعمال (تبدأ من 1000 ج.م)' : 'Managed Cloud VPS & Hosting (from 1,000 EGP/mo)'}
                       </option>
                       <option value="hospital-his">
                         {isAr ? 'نظام المستشفيات الشامل (HIS Platform)' : 'Hospital Information System (HIS)'}

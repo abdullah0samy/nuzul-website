@@ -8,17 +8,15 @@ services:
       - "80"
     environment:
       - NODE_ENV=production
+    networks:
+      - coolify
     healthcheck:
       test: ["CMD-SHELL", "wget -q --spider http://127.0.0.1:80/ || exit 1"]
-      interval: 15s
+      interval: 10s
       timeout: 5s
       retries: 3
       start_period: 5s
-    networks:
-      - coolify
-      - default
 
 networks:
   coolify:
     external: true
-  default:

@@ -28,7 +28,7 @@ export const Footer: React.FC = () => {
       titleAr: 'السيرفرات والاستضافة السحابية',
       titleEn: 'Servers & Cloud Hosting',
       links: [
-        { labelAr: 'سيرفرات Windows RDP (تبدأ 1000 ج.م)', labelEn: 'Windows VPS (from 1,000 EGP)', href: '#pricing' },
+        { labelAr: 'خوادم سطح المكتب السحابي (تبدأ 1000 ج.م)', labelEn: 'Cloud Desktop VPS (from 1,000 EGP)', href: '#pricing' },
         { labelAr: 'سيرفرات VPS مُدارة بالكامل', labelEn: 'Fully Managed VPS', href: '#pricing' },
         { labelAr: 'سيرفرات VPS غير مُدارة (Root)', labelEn: 'Unmanaged Cloud VPS', href: '#pricing' },
         { labelAr: 'السيرفرات الكاملة (Bare-Metal)', labelEn: 'Dedicated Bare-Metal Servers', href: '#pricing' },
@@ -50,8 +50,8 @@ export const Footer: React.FC = () => {
       ],
     },
     {
-      titleAr: 'دراسات الجدوى والحالة',
-      titleEn: 'Strategic Case Studies',
+      titleAr: 'قصص نجاح عملائنا ودراسات الحالة التقنية',
+      titleEn: 'Client Success Stories & Case Studies',
       links: [
         { labelAr: 'دراسة حالة مركز Cairo Cure للأورام', labelEn: 'Cairo Cure Oncology Case Study', href: '#projects' },
         { labelAr: 'مشاريع مستشفى ABCH الأربعة', labelEn: 'ABCH Hospital Turnkey IT', href: '#projects' },
