@@ -1,39 +1,41 @@
-# Multi-stage build for Nuzul Tech Production Web App
-# Stage 1: Build Vite Production Assets
+# Multi-stage build optimized for Production & Coolify Deployment
+# Stage 1: Build Frontend Assets
 FROM node:20-alpine AS builder
 
 WORKDIR /app
 
-# Copy package descriptors
+# Copy dependency manifests
 COPY package*.json ./
 
-# Install dependencies
-RUN npm ci
+# Install exact dependencies
+RUN npm ci || npm install --legacy-peer-deps
 
-# Copy source files
+# Copy source code
 COPY . .
 
-# Build production bundle
+# Build production bundle with Vite
 RUN npm run build
 
-# Stage 2: Serve with Nginx Alpine
+# Stage 2: Production Nginx Server
 FROM nginx:alpine
 
-# Remove default nginx static assets
-RUN rm -rf /usr/share/nginx/html/*
+WORKDIR /usr/share/nginx/html
 
-# Copy built assets from builder stage
-COPY --from=builder /app/dist /usr/share/nginx/html
+# Clean default assets
+RUN rm -rf ./*
 
-# Copy custom Nginx configuration
+# Copy built static files from builder
+COPY --from=builder /app/dist ./
+
+# Copy optimized Nginx configuration
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Expose HTTP port
 EXPOSE 80
 
 # Health check
-HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
-  CMD wget --no-verbose --tries=1 --spider http://localhost/ || exit 1
+HEALTHCHECK --interval=15s --timeout=5s --start-period=5s --retries=3 \
+  CMD wget --no-verbose --tries=1 --spider http://127.0.0.1:80/ || exit 1
 
 # Start Nginx
 CMD ["nginx", "-g", "daemon off;"]
