@@ -3,12 +3,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: nuzultech-web
     restart: unless-stopped
     expose:
       - "80"
-    ports:
-      - "${PORT:-8080}:80"
     environment:
       - NODE_ENV=production
     healthcheck:
