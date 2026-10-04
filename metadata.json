@@ -1,0 +1,7 @@
+{
+  "name": "IM Host — Cloud VPS & Dedicated Hosting",
+  "description": "Cloud VPS, Windows RDP and dedicated servers in the United States and Europe, with full root access, clear monthly pricing and 24/7 guru support.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
