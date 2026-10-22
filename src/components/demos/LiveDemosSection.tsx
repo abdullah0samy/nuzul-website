@@ -19,6 +19,7 @@ import {
   Building2,
 } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
+import { RevealOnScroll, StaggerContainer, StaggerItem } from '../common/RevealOnScroll';
 
 export const LiveDemosSection: React.FC = () => {
   const { locale, theme } = useApp();
@@ -40,81 +41,84 @@ export const LiveDemosSection: React.FC = () => {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-emerald-500/10 rounded-full blur-[140px] pointer-events-none" />
 
       <div className="relative mx-auto max-w-7xl">
-        {/* Section Header */}
-        <div className="mx-auto max-w-3xl text-center mb-14">
-          <div className="eyebrow-mono justify-center text-emerald-600 dark:text-emerald-400">
-            <Activity className="h-4 w-4" />
-            <span>{isAr ? 'معاينة الأنظمة الصحية الحية' : 'ENTERPRISE HEALTHCARE PLATFORMS'}</span>
+        {/* Section Header with Reveal on Scroll */}
+        <RevealOnScroll direction="up" threshold={0.2}>
+          <div className="mx-auto max-w-3xl text-center mb-14">
+            <div className="eyebrow-mono justify-center text-emerald-600 dark:text-emerald-400">
+              <Activity className="h-4 w-4" />
+              <span>{isAr ? 'معاينة الأنظمة الصحية الحية' : 'ENTERPRISE HEALTHCARE PLATFORMS'}</span>
+            </div>
+
+            <h2 className="mt-4 text-3xl font-black leading-tight sm:text-4xl">
+              {isAr
+                ? 'جرّب أنظمتنا الطبية المتكاملة مباشرة على بيئات عمل حقيقية'
+                : 'Experience Our Enterprise Healthcare Platforms Live in Action'}
+            </h2>
+
+            <p
+              className={`mt-4 text-base leading-relaxed ${
+                isDark ? 'text-slate-300' : 'text-slate-600'
+              }`}
+            >
+              {isAr
+                ? 'صممت نُزول تِك برمجيات رعاية صحية سيادية للمستشفيات والعيادات التخصصية في مصر والعالم العربي. اختبر الأنظمة بنفسك مع واجهات سلسة، سجلات EMR، وربط مالي وتأميني كامل.'
+                : 'Engineered for sovereign medical operations. Test-drive our fully featured Hospital Information System (HIS) and modular ClinicCore™ SaaS / On-Premises platforms in real time.'}
+            </p>
+
+            {/* Segmented Filter Control */}
+            <div className="mt-8 inline-flex items-center gap-1 rounded-2xl border p-1 text-xs font-bold backdrop-blur-md border-emerald-500/30 bg-emerald-500/5">
+              <button
+                type="button"
+                onClick={() => setActiveTab('all')}
+                className={`rounded-xl px-4 py-2 transition-all cursor-pointer ${
+                  activeTab === 'all'
+                    ? 'bg-emerald-500 text-white shadow-md'
+                    : isDark
+                    ? 'text-slate-400 hover:text-white'
+                    : 'text-slate-600 hover:text-slate-900'
+                }`}
+              >
+                {isAr ? 'كافة الأنظمة التجريبية (٢)' : 'All Demos (2)'}
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveTab('hospital')}
+                className={`rounded-xl px-4 py-2 transition-all cursor-pointer ${
+                  activeTab === 'hospital'
+                    ? 'bg-emerald-500 text-white shadow-md'
+                    : isDark
+                    ? 'text-slate-400 hover:text-white'
+                    : 'text-slate-600 hover:text-slate-900'
+                }`}
+              >
+                {isAr ? 'نظام المستشفيات (HIS)' : 'Hospital HIS Demo'}
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveTab('clinics')}
+                className={`rounded-xl px-4 py-2 transition-all cursor-pointer ${
+                  activeTab === 'clinics'
+                    ? 'bg-emerald-500 text-white shadow-md'
+                    : isDark
+                    ? 'text-slate-400 hover:text-white'
+                    : 'text-slate-600 hover:text-slate-900'
+                }`}
+              >
+                {isAr ? 'منصة العيادات (ClinicCore™)' : 'Clinics SaaS Platform'}
+              </button>
+            </div>
           </div>
+        </RevealOnScroll>
 
-          <h2 className="mt-4 text-3xl font-black leading-tight sm:text-4xl">
-            {isAr
-              ? 'جرّب أنظمتنا الطبية المتكاملة مباشرة على بيئات عمل حقيقية'
-              : 'Experience Our Enterprise Healthcare Platforms Live in Action'}
-          </h2>
-
-          <p
-            className={`mt-4 text-base leading-relaxed ${
-              isDark ? 'text-slate-300' : 'text-slate-600'
-            }`}
-          >
-            {isAr
-              ? 'صممت نُزول تِك برمجيات رعاية صحية سيادية للمستشفيات والعيادات التخصصية في مصر والعالم العربي. اختبر الأنظمة بنفسك مع واجهات سلسة، سجلات EMR، وربط مالي وتأميني كامل.'
-              : 'Engineered for sovereign medical operations. Test-drive our fully featured Hospital Information System (HIS) and modular ClinicCore™ SaaS / On-Premises platforms in real time.'}
-          </p>
-
-          {/* Segmented Filter Control */}
-          <div className="mt-8 inline-flex items-center gap-1 rounded-2xl border p-1 text-xs font-bold backdrop-blur-md border-emerald-500/30 bg-emerald-500/5">
-            <button
-              type="button"
-              onClick={() => setActiveTab('all')}
-              className={`rounded-xl px-4 py-2 transition-all cursor-pointer ${
-                activeTab === 'all'
-                  ? 'bg-emerald-500 text-white shadow-md'
-                  : isDark
-                  ? 'text-slate-400 hover:text-white'
-                  : 'text-slate-600 hover:text-slate-900'
-              }`}
-            >
-              {isAr ? 'كافة الأنظمة التجريبية (٢)' : 'All Demos (2)'}
-            </button>
-            <button
-              type="button"
-              onClick={() => setActiveTab('hospital')}
-              className={`rounded-xl px-4 py-2 transition-all cursor-pointer ${
-                activeTab === 'hospital'
-                  ? 'bg-emerald-500 text-white shadow-md'
-                  : isDark
-                  ? 'text-slate-400 hover:text-white'
-                  : 'text-slate-600 hover:text-slate-900'
-              }`}
-            >
-              {isAr ? 'نظام المستشفيات (HIS)' : 'Hospital HIS Demo'}
-            </button>
-            <button
-              type="button"
-              onClick={() => setActiveTab('clinics')}
-              className={`rounded-xl px-4 py-2 transition-all cursor-pointer ${
-                activeTab === 'clinics'
-                  ? 'bg-emerald-500 text-white shadow-md'
-                  : isDark
-                  ? 'text-slate-400 hover:text-white'
-                  : 'text-slate-600 hover:text-slate-900'
-              }`}
-            >
-              {isAr ? 'منصة العيادات (ClinicCore™)' : 'Clinics SaaS Platform'}
-            </button>
-          </div>
-        </div>
-
-        {/* 2 Premier Demo Cards Grid */}
-        <div className="grid gap-8 lg:grid-cols-2">
+        {/* 2 Premier Demo Cards Grid with Staggered Scroll Reveal */}
+        <StaggerContainer staggerDelay={0.12} className="grid gap-8 lg:grid-cols-2">
           {/* ==============================================================
               CARD 1: HIS SYSTEM DEMO (HOSPITAL INFORMATION SYSTEM)
               ============================================================== */}
           {(activeTab === 'all' || activeTab === 'hospital') && (
-            <article
-              className={`relative flex flex-col justify-between overflow-hidden rounded-3xl border transition-all duration-300 hover:-translate-y-1.5 ${
+            <StaggerItem className="h-full">
+              <article
+                className={`relative flex flex-col justify-between h-full overflow-hidden rounded-3xl border transition-all duration-300 hover:-translate-y-1.5 ${
                 isDark
                   ? 'border-emerald-500/40 bg-gradient-to-b from-[#0d1524] to-[#070c14] shadow-[0_20px_50px_-15px_rgba(0,0,0,0.8)] hover:border-emerald-400'
                   : 'border-emerald-500/30 bg-white shadow-xl hover:shadow-2xl hover:border-emerald-500'
@@ -249,14 +253,16 @@ export const LiveDemosSection: React.FC = () => {
                 </div>
               </div>
             </article>
-          )}
+          </StaggerItem>
+        )}
 
-          {/* ==============================================================
-              CARD 2: CLINIC SYSTEM SAAS & ON-PREMISES (CLINICCORE PRO)
-              ============================================================== */}
-          {(activeTab === 'all' || activeTab === 'clinics') && (
+        {/* ==============================================================
+            CARD 2: CLINIC SYSTEM SAAS & ON-PREMISES (CLINICCORE PRO)
+            ============================================================== */}
+        {(activeTab === 'all' || activeTab === 'clinics') && (
+          <StaggerItem className="h-full">
             <article
-              className={`relative flex flex-col justify-between overflow-hidden rounded-3xl border transition-all duration-300 hover:-translate-y-1.5 ${
+              className={`relative flex flex-col justify-between h-full overflow-hidden rounded-3xl border transition-all duration-300 hover:-translate-y-1.5 ${
                 isDark
                   ? 'border-cyan-500/40 bg-gradient-to-b from-[#0d1524] to-[#070c14] shadow-[0_20px_50px_-15px_rgba(0,0,0,0.8)] hover:border-cyan-400'
                   : 'border-cyan-500/30 bg-white shadow-xl hover:shadow-2xl hover:border-cyan-500'
@@ -426,9 +432,10 @@ export const LiveDemosSection: React.FC = () => {
                 </div>
               </div>
             </article>
-          )}
-        </div>
-      </div>
-    </section>
+          </StaggerItem>
+        )}
+      </StaggerContainer>
+    </div>
+  </section>
   );
 };

@@ -16,60 +16,38 @@ export const NuzulLogo: React.FC<NuzulLogoProps> = ({
   const isAr = locale === 'ar';
   const isDark = theme === 'dark';
 
-  // Dimension settings
-  const imgSizes = {
-    sm: 'h-8 w-8',
-    md: 'h-10 w-10',
-    lg: 'h-12 w-12',
+  // Sizing definitions matching the 230x48 aspect ratio
+  const logoHeights = {
+    sm: 'h-7 sm:h-8',
+    md: 'h-8 sm:h-9 md:h-10',
+    lg: 'h-10 sm:h-11 md:h-12',
   };
 
-  const titleSizes = {
-    sm: 'text-sm',
-    md: 'text-base sm:text-lg',
-    lg: 'text-xl',
-  };
-
-  const logoSrc = isDark ? '/brand/nuzul-logo-dark.png' : '/brand/nuzul-logo-light.png';
+  const logoSrc = isDark
+    ? '/assets/aistudio/nuzul-clean-dark_0fce6014.svg'
+    : '/assets/aistudio/nuzul-clean-light_cf8663fc.svg';
 
   return (
-    <div className={`flex items-center gap-2.5 sm:gap-3 select-none ${className}`}>
-      {/* Official Original Brand Logo Image */}
-      <div className={`relative shrink-0 flex items-center justify-center ${imgSizes[size]}`}>
+    <div className={`flex flex-col select-none ${className}`}>
+      <div className="flex items-center gap-2">
         <img
           src={logoSrc}
           alt="Nuzul Tech | نُزول تِك"
-          className="h-full w-full object-contain filter drop-shadow-[0_2px_8px_rgba(16,185,129,0.25)] transition-transform duration-200 group-hover:scale-105"
-          onError={(e) => {
-            const target = e.currentTarget;
-            if (target.src.indexOf('dark') !== -1) {
-              target.src = '/brand/nuzul-logo-light.png';
-            }
-          }}
+          className={`${logoHeights[size]} w-auto object-contain transition-transform duration-200 group-hover:scale-[1.02] filter drop-shadow-[0_1px_4px_rgba(16,185,129,0.15)]`}
+          loading="eager"
         />
       </div>
 
-      {/* Brand Name & Typography */}
-      <div className="flex flex-col">
-        <div className="flex items-center gap-1.5 leading-none">
-          <span
-            className={`font-black tracking-tight transition-colors ${titleSizes[size]} ${
-              isDark ? 'text-white' : 'text-slate-900'
-            }`}
-          >
-            {isAr ? 'نُزول تِك' : 'Nuzul Tech'}
-          </span>
-        </div>
-
-        {showSubtitle && (
-          <span
-            className={`hidden sm:block text-[10px] font-medium tracking-wide mt-0.5 leading-none ${
-              isDark ? 'text-slate-400' : 'text-slate-500'
-            }`}
-          >
-            {isAr ? 'حلول واستشارات تقنية المعلومات' : 'IT Solutions & Consulting'}
-          </span>
-        )}
-      </div>
+      {showSubtitle && (
+        <span
+          className={`hidden lg:block text-[9px] font-medium tracking-wider uppercase mt-1 leading-none ${
+            isDark ? 'text-slate-400' : 'text-slate-500'
+          }`}
+        >
+          {isAr ? 'حلول واستشارات تقنية المعلومات' : 'IT Solutions & Consulting'}
+        </span>
+      )}
     </div>
   );
 };
+

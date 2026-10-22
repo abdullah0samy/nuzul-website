@@ -359,8 +359,8 @@ export const NUZUL_SERVICES: ServiceItem[] = [
       'تطبيق منظومة مراقبة لـ 60 خادماً وجهاز شبكي نبهت الفريق الهندسي لارتفاع مفاجئ في حركة المرور وتم التعامل معه دون أي انقطاع.',
     useCaseStory_en:
       'Deployed full-stack observability across 60 server nodes and network switches with automated incident alerts.',
-    features_ar: ['لوحات تحكم بيانية حية لأداء المنشأة', 'تنبيهات فورية استباقية عبر الواتساب والإيميل', 'تتبع استباقي للضغط وحركة المرور لمنع التوقف'],
-    features_en: ['Real-time performance analytics dashboards', 'Instant automated WhatsApp & email alerts', 'Proactive bandwidth & load management'],
+    features_ar: ['لوحات تحكم بيانية حية لأداء المنشأة', 'تنبيهات فورية استباقية عبر الواتساب والإيميل', 'تتبع استباقي للضغط وحركة المرور لمنع التوقف', 'مراقبة حية مستمرة للسيرفرات وشبكات المراقبة والكاميرات'],
+    features_en: ['Real-time performance analytics dashboards', 'Instant automated WhatsApp & email alerts', 'Proactive bandwidth & load management', 'Continuous live monitoring for servers, networks & CCTV infrastructure'],
   },
   {
     id: 18,
@@ -397,8 +397,8 @@ export const NUZUL_SERVICES: ServiceItem[] = [
       'تأمين شبكة مستشفى وعزل أجهزة العمليات والأشعة عن شبكة الزوار مع ربط مشفر وآمن بين الفروع.',
     useCaseStory_en:
       'Hardened enterprise hospital networks by isolating medical devices and surgery suites behind physical firewalls.',
-    features_ar: ['جدران حماية متطورة لمنع التسلل والتهديدات', 'عزل شبكي كامل للأنظمة الحساسة والحسابات', 'أنفاق مشفرة وآمنة للربط المباشر بين الفروع والمقرات'],
-    features_en: ['Enterprise hardware firewalls', 'Isolated internal network segments', 'Encrypted branch-to-branch connections'],
+    features_ar: ['جدران حماية متطورة لمنع التسلل والتهديدات', 'عزل شبكي كامل للأنظمة الحساسة والحسابات', 'أنفاق مشفرة وآمنة للربط المباشر بين الفروع والمقرات', 'تأمين شبكات كاميرات المراقبة IP وعزل مسجلات NVR'],
+    features_en: ['Enterprise hardware firewalls', 'Isolated internal network segments', 'Encrypted branch-to-branch connections', 'IP CCTV surveillance networking & NVR security'],
   },
   {
     id: 20,
@@ -416,7 +416,7 @@ export const NUZUL_SERVICES: ServiceItem[] = [
       'ربط 5 مقرات إدارية ومستشفيين بنظام VoIP موحد وفر تكاليف الاتصالات الداخلية مع توفير تسجيل المكالمات.',
     useCaseStory_en:
       'Interconnected multi-site facilities with unified VoIP telephony, eliminating internal call costs.',
-    features_ar: ['شجرة رد آلي تفاعلية توجه المتصلين بذكاء', 'تسجيل المكالمات وتقارير أداء خدمة العملاء', 'تطبيق هاتف للموظفين للتواصل من أي مكان'],
+    features_ar: ['شجرة رد آلي تفاعلية (IVR) لتوجيه المتصلين باحترافية', 'تسجيل المكالمات وتقارير أداء خدمة العملاء', 'تطبيق هاتف للموظفين للتواصل من أي مكان'],
     features_en: ['Smart IVR auto-attendants', 'Call recording & customer service metrics', 'Mobile softphone app for remote staff'],
   },
   {
@@ -554,7 +554,7 @@ export const NUZUL_PACKAGES: EnterprisePackage[] = [
     summary_ar: [
       'كل مميزات باقة البداية',
       'موقع ديناميكي أو منصة مخصصة',
-      'أتمتة واتساب للأعمال وروبوت ذكي',
+      'أتمتة رسائل واتساب للأعمال والردود الفورية',
       'شبكة وكاميرات مراقبة متطورة',
       'زيارات صيانة شهرية للمقر',
     ],
@@ -630,7 +630,7 @@ export const NUZUL_PACKAGES: EnterprisePackage[] = [
       'ربط آمن لجميع الفروع بشبكة VPN موحدة',
       '١٦+ كاميرا مراقبة وأنظمة بصمة ذكية',
       'كول سنتر رقمي مع تسجيل المكالمات',
-      'روبوت تفاعلي معتمد عبر WhatsApp API',
+      'نظام ردود تفاعلية معتمد عبر WhatsApp API',
       'أنظمة ERP وإدارة مخازن وفواتير مخصصة',
       'مهندس دعم مخصص مع اتفاقية مستوى خدمة SLA',
     ],
@@ -667,7 +667,7 @@ export const NUZUL_PACKAGES: EnterprisePackage[] = [
       'High-throughput Fiber & Redundant Internet Failover',
       'Hospital/Industrial Grade ERP Software Suite',
       'Dedicated Server Farm with Proxmox / VMware Clusters',
-      'AI-Powered Predictive System Telemetry',
+      'Automated Proactive System Monitoring & Alerts',
       'Full Security Operations Center (SOC) Hardening',
       'Direct WhatsApp and Dedicated Hotline Channel',
       'Custom Feature Engineering on Demand',

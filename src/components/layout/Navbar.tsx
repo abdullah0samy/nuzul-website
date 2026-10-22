@@ -117,21 +117,21 @@ export const Navbar: React.FC = () => {
               <NuzulLogo size="md" />
             </a>
 
-            {/* Desktop Navigation Links with Clean, Concise Mega Dropdowns */}
-            <div className="hidden lg:flex lg:items-center lg:gap-0.5 xl:gap-1">
-              {/* 1. All Services */}
+            {/* Desktop Navigation Links: 4 Consolidated Executive Pillars */}
+            <div className="hidden lg:flex lg:items-center lg:gap-1 xl:gap-2">
+              {/* 1. Services & Solutions Mega Dropdown */}
               <div className="relative">
                 <button
                   type="button"
                   onClick={() => handleDropdownToggle('services')}
                   onMouseEnter={() => setActiveDropdown('services')}
-                  className={`inline-flex items-center gap-1 rounded-xl px-2.5 xl:px-3 py-1.5 text-xs font-bold transition-all cursor-pointer ${
+                  className={`inline-flex items-center gap-1.5 rounded-xl px-3 py-1.5 text-xs font-bold transition-all cursor-pointer ${
                     activeDropdown === 'services'
                       ? 'bg-emerald-500/15 text-emerald-600 dark:text-emerald-400'
                       : 'text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-slate-500/5'
                   }`}
                 >
-                  <span>{isAr ? `كافة الخدمات (${NUZUL_SERVICES.length})` : `All Services (${NUZUL_SERVICES.length})`}</span>
+                  <span>{isAr ? 'الخدمات والحلول (23)' : 'Services & Solutions (23)'}</span>
                   <ChevronDown
                     className={`h-3.5 w-3.5 transition-transform duration-200 ${
                       activeDropdown === 'services' ? 'rotate-180 text-emerald-500' : 'text-slate-400'
@@ -139,24 +139,23 @@ export const Navbar: React.FC = () => {
                   />
                 </button>
 
-                {/* Services Dropdown (Concise 3-column list) */}
                 {activeDropdown === 'services' && (
                   <div
                     onMouseLeave={() => setActiveDropdown(null)}
-                    className={`absolute top-full mt-2 w-[880px] overflow-hidden rounded-2xl border p-4 shadow-2xl backdrop-blur-xl z-50 transition-all ${
+                    className={`absolute top-full mt-2 w-[840px] overflow-hidden rounded-2xl border p-4 shadow-2xl backdrop-blur-xl z-50 transition-all ${
                       isDark ? 'border-white/10 bg-[#0d1524]' : 'border-slate-200 bg-white'
                     } ${isAr ? 'right-0' : 'left-0'}`}
                   >
                     <div className="flex items-center justify-between border-b border-current/10 pb-2 mb-3">
                       <span className="text-xs font-mono font-bold uppercase text-emerald-600 dark:text-emerald-400">
-                        {isAr ? `دليل الخدمات المتكاملة (${NUZUL_SERVICES.length})` : `All Services (${NUZUL_SERVICES.length})`}
+                        {isAr ? 'كافة الخدمات والحلول التقنية المتكاملة' : 'Integrated Enterprise IT Solutions'}
                       </span>
                       <a
                         href="#services"
                         onClick={() => setActiveDropdown(null)}
                         className="text-[11px] font-bold text-emerald-600 dark:text-emerald-400 hover:underline inline-flex items-center gap-1"
                       >
-                        <span>{isAr ? 'عرض الكل بالصفحة' : 'View All'}</span>
+                        <span>{isAr ? 'استعراض الكل في الصفحة' : 'Browse All'}</span>
                         {isAr ? <ArrowLeft className="h-3 w-3" /> : <ArrowRight className="h-3 w-3" />}
                       </a>
                     </div>
@@ -166,7 +165,7 @@ export const Navbar: React.FC = () => {
                       <div className="space-y-1">
                         <div className="flex items-center gap-1 text-[11px] font-bold text-slate-900 dark:text-white border-b border-current/10 pb-1 mb-1.5">
                           <Code2 className="h-3.5 w-3.5 text-emerald-500" />
-                          <span>{isAr ? 'البرمجيات والحلول الرقمية' : 'Software & Digital'}</span>
+                          <span>{isAr ? 'البرمجيات والحلول الرقمية' : 'Software & Digital (6)'}</span>
                         </div>
                         {softwareServices.map((svc) => (
                           <a
@@ -184,7 +183,7 @@ export const Navbar: React.FC = () => {
                       <div className="space-y-1">
                         <div className="flex items-center gap-1 text-[11px] font-bold text-slate-900 dark:text-white border-b border-current/10 pb-1 mb-1.5">
                           <Server className="h-3.5 w-3.5 text-emerald-500" />
-                          <span>{isAr ? 'البنية التحتية والسحابية' : 'Infrastructure & Cloud'}</span>
+                          <span>{isAr ? 'البنية التحتية والسحابية' : 'Infrastructure & Cloud (10)'}</span>
                         </div>
                         {infraCloudServices.map((svc) => (
                           <a
@@ -202,7 +201,7 @@ export const Navbar: React.FC = () => {
                       <div className="space-y-1">
                         <div className="flex items-center gap-1 text-[11px] font-bold text-slate-900 dark:text-white border-b border-current/10 pb-1 mb-1.5">
                           <Lock className="h-3.5 w-3.5 text-emerald-500" />
-                          <span>{isAr ? 'الأمن والمراقبة' : 'Security & Observability'}</span>
+                          <span>{isAr ? 'الأمن والمراقبة والسنترال' : 'Security & Telephony (7)'}</span>
                         </div>
                         {securityObsServices.map((svc) => (
                           <a
@@ -220,130 +219,19 @@ export const Navbar: React.FC = () => {
                 )}
               </div>
 
-              {/* 2. Live System Demos */}
-              <div className="relative">
-                <button
-                  type="button"
-                  onClick={() => handleDropdownToggle('demos')}
-                  onMouseEnter={() => setActiveDropdown('demos')}
-                  className={`inline-flex items-center gap-1 rounded-xl px-2.5 xl:px-3 py-1.5 text-xs font-bold transition-all cursor-pointer ${
-                    activeDropdown === 'demos'
-                      ? 'bg-emerald-500/15 text-emerald-600 dark:text-emerald-400'
-                      : 'text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-slate-500/5'
-                  }`}
-                >
-                  <span>{isAr ? 'الأنظمة الطبية الحية' : 'Live System Demos'}</span>
-                  <ChevronDown
-                    className={`h-3.5 w-3.5 transition-transform duration-200 ${
-                      activeDropdown === 'demos' ? 'rotate-180 text-emerald-500' : 'text-slate-400'
-                    }`}
-                  />
-                </button>
-
-                {activeDropdown === 'demos' && (
-                  <div
-                    onMouseLeave={() => setActiveDropdown(null)}
-                    className={`absolute top-full mt-2 w-80 overflow-hidden rounded-2xl border p-3.5 shadow-2xl backdrop-blur-xl z-50 ${
-                      isDark ? 'border-white/10 bg-[#0d1524]' : 'border-slate-200 bg-white'
-                    } ${isAr ? 'right-0' : 'left-0'}`}
-                  >
-                    <div className="space-y-1.5">
-                      {liveDemosList.map((demo) => (
-                        <a
-                          key={demo.id}
-                          href="#live-demos"
-                          onClick={() => setActiveDropdown(null)}
-                          className="group flex items-center justify-between rounded-xl p-2 transition-colors hover:bg-emerald-500/10"
-                        >
-                          <span className="text-xs font-bold text-slate-800 dark:text-slate-200 group-hover:text-emerald-600 dark:group-hover:text-emerald-400">
-                            {isAr ? demo.titleAr : demo.titleEn}
-                          </span>
-                          <span className="text-[10px] font-mono text-emerald-500 bg-emerald-500/10 px-1.5 py-0.5 rounded">
-                            {isAr ? demo.tagAr : demo.tagEn}
-                          </span>
-                        </a>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              {/* 3. Case Studies */}
-              <div className="relative">
-                <button
-                  type="button"
-                  onClick={() => handleDropdownToggle('cases')}
-                  onMouseEnter={() => setActiveDropdown('cases')}
-                  className={`inline-flex items-center gap-1 rounded-xl px-2.5 xl:px-3 py-1.5 text-xs font-bold transition-all cursor-pointer ${
-                    activeDropdown === 'cases'
-                      ? 'bg-emerald-500/15 text-emerald-600 dark:text-emerald-400'
-                      : 'text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-slate-500/5'
-                  }`}
-                >
-                  <span>{isAr ? `قصص النجاح والحالة (${NUZUL_CASE_STUDIES.length})` : `Case Studies (${NUZUL_CASE_STUDIES.length})`}</span>
-                  <ChevronDown
-                    className={`h-3.5 w-3.5 transition-transform duration-200 ${
-                      activeDropdown === 'cases' ? 'rotate-180 text-emerald-500' : 'text-slate-400'
-                    }`}
-                  />
-                </button>
-
-                {/* Case Studies Dropdown (Concise 2-column list of all 9 projects) */}
-                {activeDropdown === 'cases' && (
-                  <div
-                    onMouseLeave={() => setActiveDropdown(null)}
-                    className={`absolute top-full mt-2 w-[620px] overflow-hidden rounded-2xl border p-4 shadow-2xl backdrop-blur-xl z-50 ${
-                      isDark ? 'border-white/10 bg-[#0d1524]' : 'border-slate-200 bg-white'
-                    } ${isAr ? 'right-0' : 'left-0'}`}
-                  >
-                    <div className="flex items-center justify-between border-b border-current/10 pb-2 mb-2.5">
-                      <span className="text-xs font-mono font-bold uppercase text-emerald-600 dark:text-emerald-400">
-                        {isAr ? `قصص نجاح عملائنا ودراسات الحالة التقنية (${NUZUL_CASE_STUDIES.length} مشاريع)` : `Client Success Stories & Case Studies (${NUZUL_CASE_STUDIES.length})`}
-                      </span>
-                      <a
-                        href="#projects"
-                        onClick={() => setActiveDropdown(null)}
-                        className="text-[11px] font-bold text-emerald-600 dark:text-emerald-400 hover:underline inline-flex items-center gap-1"
-                      >
-                        <span>{isAr ? 'عرض الكل' : 'View All'}</span>
-                        {isAr ? <ArrowLeft className="h-3 w-3" /> : <ArrowRight className="h-3 w-3" />}
-                      </a>
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-x-3 gap-y-1">
-                      {NUZUL_CASE_STUDIES.map((c) => (
-                        <a
-                          key={c.id}
-                          href="#projects"
-                          onClick={() => setActiveDropdown(null)}
-                          className="group flex items-center justify-between rounded-lg px-2 py-1.5 text-xs text-slate-700 dark:text-slate-300 hover:bg-emerald-500/10 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
-                        >
-                          <span className="truncate font-medium">
-                            {c.id}. {isAr ? c.client_ar.split('—')[0] : c.client_en.split('—')[0]}
-                          </span>
-                          <span className="text-[10px] font-mono text-emerald-500/80 shrink-0 ml-1">
-                            {c.badge ? c.badge.split(' ')[0] : ''}
-                          </span>
-                        </a>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              {/* 4. Servers & Pricing */}
+              {/* 2. Packages & Cloud Pricing */}
               <div className="relative">
                 <button
                   type="button"
                   onClick={() => handleDropdownToggle('pricing')}
                   onMouseEnter={() => setActiveDropdown('pricing')}
-                  className={`inline-flex items-center gap-1 rounded-xl px-2.5 xl:px-3 py-1.5 text-xs font-bold transition-all cursor-pointer ${
+                  className={`inline-flex items-center gap-1.5 rounded-xl px-3 py-1.5 text-xs font-bold transition-all cursor-pointer ${
                     activeDropdown === 'pricing'
                       ? 'bg-emerald-500/15 text-emerald-600 dark:text-emerald-400'
                       : 'text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-slate-500/5'
                   }`}
                 >
-                  <span>{isAr ? 'السيرفرات والأسعار' : 'Servers & Pricing'}</span>
+                  <span>{isAr ? 'الباقات والسيرفرات' : 'Packages & Servers'}</span>
                   <ChevronDown
                     className={`h-3.5 w-3.5 transition-transform duration-200 ${
                       activeDropdown === 'pricing' ? 'rotate-180 text-emerald-500' : 'text-slate-400'
@@ -354,189 +242,177 @@ export const Navbar: React.FC = () => {
                 {activeDropdown === 'pricing' && (
                   <div
                     onMouseLeave={() => setActiveDropdown(null)}
-                    className={`absolute top-full mt-2 w-80 overflow-hidden rounded-2xl border p-3 shadow-2xl backdrop-blur-xl z-50 ${
+                    className={`absolute top-full mt-2 w-84 overflow-hidden rounded-2xl border p-3.5 shadow-2xl backdrop-blur-xl z-50 ${
                       isDark ? 'border-white/10 bg-[#0d1524]' : 'border-slate-200 bg-white'
                     } ${isAr ? 'right-0' : 'left-0'}`}
                   >
-                    <div className="space-y-1">
-                      <a
-                        href="#pricing"
-                        onClick={() => setActiveDropdown(null)}
-                        className="group flex items-center justify-between rounded-lg px-2.5 py-1.5 text-xs hover:bg-emerald-500/10 transition-colors"
-                      >
-                        <span className="font-bold text-emerald-500">
-                          {isAr ? 'خوادم سطح المكتب السحابي (Remote Desktop)' : 'Cloud Desktop VPS (Remote Access)'}
-                        </span>
-                        <span className="text-[10px] font-mono text-emerald-400 font-bold">1,000 ج.م</span>
-                      </a>
-
-                      <a
-                        href="#pricing"
-                        onClick={() => setActiveDropdown(null)}
-                        className="group flex items-center justify-between rounded-lg px-2.5 py-1.5 text-xs text-slate-700 dark:text-slate-300 hover:bg-emerald-500/10 hover:text-emerald-500 transition-colors"
-                      >
-                        <span>{isAr ? 'سيرفرات سحابية مدارة (Managed VPS)' : 'Managed Cloud VPS'}</span>
-                        <span className="text-[10px] font-mono text-slate-400">NVMe</span>
-                      </a>
-
-                      <a
-                        href="#pricing"
-                        onClick={() => setActiveDropdown(null)}
-                        className="group flex items-center justify-between rounded-lg px-2.5 py-1.5 text-xs text-slate-700 dark:text-slate-300 hover:bg-emerald-500/10 hover:text-emerald-500 transition-colors"
-                      >
-                        <span>{isAr ? 'سيرفرات KVM غير مدارة (Root)' : 'Unmanaged KVM VPS'}</span>
-                        <span className="text-[10px] font-mono text-slate-400">1 Gbps</span>
-                      </a>
-
+                    <div className="space-y-1.5">
                       <a
                         href="#packages"
                         onClick={() => setActiveDropdown(null)}
-                        className="group flex items-center justify-between rounded-lg px-2.5 py-1.5 text-xs text-slate-700 dark:text-slate-300 hover:bg-emerald-500/10 hover:text-emerald-500 transition-colors"
+                        className="group flex items-center justify-between rounded-xl px-3 py-2 text-xs hover:bg-emerald-500/10 transition-colors"
                       >
-                        <span className="font-bold text-emerald-600 dark:text-emerald-400">
-                          {isAr ? 'باقات قطاع تقني كامل (ITaaS)' : 'IT as a Service (ITaaS)'}
-                        </span>
-                        <span className="text-[10px] font-mono text-cyan-400">Turnkey</span>
+                        <div>
+                          <div className="font-bold text-slate-900 dark:text-white group-hover:text-emerald-500">
+                            {isAr ? 'باقات قطاع تقني كامل (ITaaS)' : 'IT as a Service Packages'}
+                          </div>
+                          <div className="text-[10px] text-slate-400">
+                            {isAr ? 'Starter, Business, Pro, Enterprise' : '4 Turnkey Enterprise Tiers'}
+                          </div>
+                        </div>
+                        <span className="text-[10px] font-mono font-bold text-emerald-400">SLA 24/7</span>
+                      </a>
+
+                      <a
+                        href="#pricing"
+                        onClick={() => setActiveDropdown(null)}
+                        className="group flex items-center justify-between rounded-xl px-3 py-2 text-xs hover:bg-emerald-500/10 transition-colors"
+                      >
+                        <div>
+                          <div className="font-bold text-slate-900 dark:text-white group-hover:text-emerald-500">
+                            {isAr ? 'خوادم سطح المكتب السحابي VPS' : 'Cloud Desktop VPS'}
+                          </div>
+                          <div className="text-[10px] text-slate-400">
+                            {isAr ? 'وصول آمن وسريع للموظفين والمحاسبين' : 'Remote Access for Distributed Teams'}
+                          </div>
+                        </div>
+                        <span className="text-[10px] font-mono font-bold text-emerald-500">1,000 ج.م</span>
+                      </a>
+
+                      <a
+                        href="#pricing"
+                        onClick={() => setActiveDropdown(null)}
+                        className="group flex items-center justify-between rounded-xl px-3 py-2 text-xs hover:bg-emerald-500/10 transition-colors"
+                      >
+                        <div>
+                          <div className="font-bold text-slate-900 dark:text-white group-hover:text-emerald-500">
+                            {isAr ? 'سيرفرات KVM NVMe المدارة' : 'Managed KVM NVMe VPS'}
+                          </div>
+                          <div className="text-[10px] text-slate-400">
+                            {isAr ? 'تحكم كامل مع صيانة ونسخ احتياطي' : 'Root Access with Managed Backup'}
+                          </div>
+                        </div>
+                        <span className="text-[10px] font-mono text-cyan-400">1 Gbps</span>
+                      </a>
+
+                      <a
+                        href="#compare-plans"
+                        onClick={() => setActiveDropdown(null)}
+                        className="group flex items-center justify-between rounded-xl px-3 py-2 text-xs bg-emerald-500/5 hover:bg-emerald-500/10 transition-colors border border-emerald-500/20"
+                      >
+                        <div>
+                          <div className="font-bold text-emerald-600 dark:text-emerald-400">
+                            {isAr ? 'مقارنة مواصفات السيرفرات' : 'Compare VPS Specs'}
+                          </div>
+                          <div className="text-[10px] text-slate-400">
+                            {isAr ? 'جدول مقارنة المواصفات التقنية جنباً إلى جنب' : 'Side-by-side technical specs table'}
+                          </div>
+                        </div>
+                        <span className="text-[10px] font-mono font-bold text-emerald-500">{isAr ? 'جديد' : 'New'}</span>
                       </a>
                     </div>
                   </div>
                 )}
               </div>
 
-              {/* 5. Guides (16) */}
+              {/* 3. Live Demos & Case Studies */}
               <div className="relative">
                 <button
                   type="button"
-                  onClick={() => handleDropdownToggle('guides')}
-                  onMouseEnter={() => setActiveDropdown('guides')}
-                  className={`inline-flex items-center gap-1 rounded-xl px-2.5 xl:px-3 py-1.5 text-xs font-bold transition-all cursor-pointer ${
-                    activeDropdown === 'guides'
+                  onClick={() => handleDropdownToggle('demos')}
+                  onMouseEnter={() => setActiveDropdown('demos')}
+                  className={`inline-flex items-center gap-1.5 rounded-xl px-3 py-1.5 text-xs font-bold transition-all cursor-pointer ${
+                    activeDropdown === 'demos'
                       ? 'bg-emerald-500/15 text-emerald-600 dark:text-emerald-400'
                       : 'text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-slate-500/5'
                   }`}
                 >
-                  <span>{isAr ? `الأدلة الهندسية (${NUZUL_BLOG_POSTS.length})` : `Guides (${NUZUL_BLOG_POSTS.length})`}</span>
+                  <span>{isAr ? 'الأنظمة وسابقة الأعمال' : 'Systems & Portfolio'}</span>
                   <ChevronDown
                     className={`h-3.5 w-3.5 transition-transform duration-200 ${
-                      activeDropdown === 'guides' ? 'rotate-180 text-emerald-500' : 'text-slate-400'
+                      activeDropdown === 'demos' ? 'rotate-180 text-emerald-500' : 'text-slate-400'
                     }`}
                   />
                 </button>
 
-                {/* Guides Dropdown (Concise 2-column list of all 16 titles) */}
-                {activeDropdown === 'guides' && (
+                {activeDropdown === 'demos' && (
                   <div
                     onMouseLeave={() => setActiveDropdown(null)}
-                    className={`absolute top-full mt-2 w-[680px] overflow-hidden rounded-2xl border p-4 shadow-2xl backdrop-blur-xl z-50 ${
+                    className={`absolute top-full mt-2 w-[480px] overflow-hidden rounded-2xl border p-4 shadow-2xl backdrop-blur-xl z-50 ${
                       isDark ? 'border-white/10 bg-[#0d1524]' : 'border-slate-200 bg-white'
                     } ${isAr ? 'right-0' : 'left-0'}`}
                   >
-                    <div className="flex items-center justify-between border-b border-current/10 pb-2 mb-2.5">
-                      <span className="text-xs font-mono font-bold uppercase text-emerald-600 dark:text-emerald-400">
-                        {isAr ? `المكتبة الهندسية (${NUZUL_BLOG_POSTS.length} دليل)` : `Guides (${NUZUL_BLOG_POSTS.length} Blueprints)`}
-                      </span>
-                      <a
-                        href="#blog"
-                        onClick={() => setActiveDropdown(null)}
-                        className="text-[11px] font-bold text-emerald-600 dark:text-emerald-400 hover:underline inline-flex items-center gap-1"
-                      >
-                        <span>{isAr ? 'عرض الكل' : 'Browse All'}</span>
-                        {isAr ? <ArrowLeft className="h-3 w-3" /> : <ArrowRight className="h-3 w-3" />}
-                      </a>
-                    </div>
+                    <div className="space-y-3">
+                      <div>
+                        <div className="text-[11px] font-mono font-bold text-emerald-600 dark:text-emerald-400 uppercase mb-1.5">
+                          {isAr ? 'الأنظمة الطبية الحية' : 'Live Healthcare Demos'}
+                        </div>
+                        <div className="grid grid-cols-2 gap-2">
+                          {liveDemosList.map((demo) => (
+                            <a
+                              key={demo.id}
+                              href="#live-demos"
+                              onClick={() => setActiveDropdown(null)}
+                              className="rounded-xl border border-current/10 p-2.5 transition-all hover:border-emerald-500/40 hover:bg-emerald-500/10"
+                            >
+                              <div className="text-xs font-bold text-slate-800 dark:text-slate-200">
+                                {isAr ? demo.titleAr : demo.titleEn}
+                              </div>
+                              <div className="text-[10px] text-emerald-500 font-mono mt-0.5">
+                                {isAr ? demo.tagAr : demo.tagEn}
+                              </div>
+                            </a>
+                          ))}
+                        </div>
+                      </div>
 
-                    <div className="grid grid-cols-2 gap-x-3 gap-y-1">
-                      {NUZUL_BLOG_POSTS.map((art) => (
-                        <button
-                          key={art.id}
-                          type="button"
-                          onClick={() => {
-                            setActiveDropdown(null);
-                            setActiveArticle(art);
-                          }}
-                          className="group flex items-center justify-between rounded-lg px-2 py-1 text-start text-xs text-slate-700 dark:text-slate-300 hover:bg-emerald-500/10 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors cursor-pointer w-full"
-                        >
-                          <span className="truncate font-medium">
-                            {art.id}. {isAr ? art.title_ar.split(':')[0] : art.title_en.split(':')[0]}
+                      <div className="border-t border-current/10 pt-2.5">
+                        <div className="flex items-center justify-between mb-1.5">
+                          <span className="text-[11px] font-mono font-bold text-slate-400 uppercase">
+                            {isAr ? `سابقة أعمال المستشفيات والشركات (${NUZUL_CASE_STUDIES.length})` : `Enterprise Case Studies (${NUZUL_CASE_STUDIES.length})`}
                           </span>
-                          <span className="text-[10px] font-mono text-slate-400 ml-1 shrink-0">
-                            #{art.id}
-                          </span>
-                        </button>
-                      ))}
+                          <a
+                            href="#projects"
+                            onClick={() => setActiveDropdown(null)}
+                            className="text-[11px] font-bold text-emerald-500 hover:underline"
+                          >
+                            {isAr ? 'عرض الكل' : 'View All'}
+                          </a>
+                        </div>
+                        <div className="grid grid-cols-2 gap-1 text-xs">
+                          {NUZUL_CASE_STUDIES.slice(0, 4).map((c) => (
+                            <a
+                              key={c.id}
+                              href="#projects"
+                              onClick={() => setActiveDropdown(null)}
+                              className="truncate rounded-lg px-2 py-1 text-slate-600 dark:text-slate-300 hover:bg-emerald-500/10 hover:text-emerald-500 transition-colors"
+                            >
+                              • {isAr ? c.client_ar.split('—')[0] : c.client_en.split('—')[0]}
+                            </a>
+                          ))}
+                        </div>
+                      </div>
                     </div>
                   </div>
                 )}
               </div>
 
-              {/* 6. Consultation */}
+              {/* 4. Engineering Knowledge Base */}
               <div className="relative">
-                <button
-                  type="button"
-                  onClick={() => handleDropdownToggle('contact')}
-                  onMouseEnter={() => setActiveDropdown('contact')}
-                  className={`inline-flex items-center gap-1 rounded-xl px-2.5 xl:px-3 py-1.5 text-xs font-bold transition-all cursor-pointer ${
-                    activeDropdown === 'contact'
-                      ? 'bg-emerald-500/15 text-emerald-600 dark:text-emerald-400'
-                      : 'text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-slate-500/5'
-                  }`}
+                <a
+                  href="#blog"
+                  className="inline-flex items-center gap-1.5 rounded-xl px-3 py-1.5 text-xs font-bold text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-slate-500/5 transition-all cursor-pointer"
                 >
-                  <span>{isAr ? 'طلب استشارة' : 'Consultation'}</span>
-                  <ChevronDown
-                    className={`h-3.5 w-3.5 transition-transform duration-200 ${
-                      activeDropdown === 'contact' ? 'rotate-180 text-emerald-500' : 'text-slate-400'
-                    }`}
-                  />
-                </button>
-
-                {activeDropdown === 'contact' && (
-                  <div
-                    onMouseLeave={() => setActiveDropdown(null)}
-                    className={`absolute top-full mt-2 w-72 overflow-hidden rounded-2xl border p-3 shadow-2xl backdrop-blur-xl z-50 ${
-                      isDark ? 'border-white/10 bg-[#0d1524]' : 'border-slate-200 bg-white'
-                    } ${isAr ? 'right-0' : 'left-0'}`}
-                  >
-                    <div className="space-y-1">
-                      <a
-                        href="#contact"
-                        onClick={() => setActiveDropdown(null)}
-                        className="block rounded-lg px-2.5 py-1.5 text-xs font-medium text-slate-700 dark:text-slate-300 hover:bg-emerald-500/10 hover:text-emerald-500 transition-colors"
-                      >
-                        {isAr ? 'معاينة هندسية فيزيائية للمقر' : 'On-Site Enterprise Inspection'}
-                      </a>
-
-                      <a
-                        href={NUZUL_CONTACT.whatsappUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center justify-between rounded-lg px-2.5 py-1.5 text-xs font-bold text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500/10 transition-colors"
-                      >
-                        <span>{isAr ? 'محادثة فورية (واتساب 24/7)' : 'WhatsApp Engineering 24/7'}</span>
-                        <PhoneCall className="h-3 w-3" />
-                      </a>
-                    </div>
-                  </div>
-                )}
+                  <BookOpen className="h-3.5 w-3.5 text-emerald-500" />
+                  <span>{isAr ? `المكتبة الهندسية (${NUZUL_BLOG_POSTS.length})` : `Guides (${NUZUL_BLOG_POSTS.length})`}</span>
+                </a>
               </div>
             </div>
           </div>
 
           {/* Right Action Zone */}
           <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
-            {/* 1. Official LinkedIn Button */}
-            <a
-              href={NUZUL_CONTACT.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden md:inline-flex items-center gap-1.5 rounded-xl bg-[#0a66c2] hover:bg-[#004182] text-white px-3 py-1.5 text-xs font-bold transition-all shadow-sm cursor-pointer"
-              title="Nuzul Tech Official LinkedIn"
-              aria-label="LinkedIn Profile"
-            >
-              <Linkedin className="h-3.5 w-3.5 fill-current" />
-              <span>LinkedIn</span>
-            </a>
-
-            {/* 2. Direct WhatsApp Action */}
+            {/* 1. Direct WhatsApp Action */}
             <a
               href={NUZUL_CONTACT.whatsappUrl}
               target="_blank"

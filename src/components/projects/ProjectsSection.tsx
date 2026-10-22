@@ -22,6 +22,7 @@ import {
 import { useApp } from '../../context/AppContext';
 import { NUZUL_CASE_STUDIES, NUZUL_CONTACT } from '../../data/nuzulData';
 import { CaseStudy } from '../../types';
+import { RevealOnScroll, StaggerContainer, StaggerItem } from '../common/RevealOnScroll';
 
 export const ProjectsSection: React.FC = () => {
   const { locale, theme } = useApp();
@@ -92,57 +93,59 @@ export const ProjectsSection: React.FC = () => {
       }`}
     >
       <div className="mx-auto max-w-7xl">
-        {/* Section Header */}
-        <div className="mx-auto max-w-3xl text-center">
-          <div className="eyebrow-mono justify-center text-emerald-600 dark:text-emerald-400">
-            <Shield className="h-4 w-4" />
-            <span>{isAr ? 'قصص نجاح عملائنا ودراسات الحالة التقنية' : 'CLIENT SUCCESS STORIES & TECHNICAL CASE STUDIES'}</span>
+        {/* Section Header with Reveal on Scroll */}
+        <RevealOnScroll direction="up" threshold={0.2}>
+          <div className="mx-auto max-w-3xl text-center">
+            <div className="eyebrow-mono justify-center text-emerald-600 dark:text-emerald-400">
+              <Shield className="h-4 w-4" />
+              <span>{isAr ? 'قصص نجاح عملائنا ودراسات الحالة التقنية' : 'CLIENT SUCCESS STORIES & TECHNICAL CASE STUDIES'}</span>
+            </div>
+
+            <h2 className="mt-4 text-3xl font-black leading-tight sm:text-4xl">
+              {isAr
+                ? 'قصص نجاح عملائنا ودراسات الحالة التقنية لمؤسسات ومستشفيات مصرية'
+                : 'Grounded Case Studies & Real Outcomes Across Egypt'}
+            </h2>
+
+            <p
+              className={`mt-3 text-base leading-relaxed ${
+                isDark ? 'text-slate-300' : 'text-slate-600'
+              }`}
+            >
+              {isAr
+                ? 'دراسات حالة تقنية موثقة: تشخيص التحديات الهندسية، وبناء السحابة والأنظمة السيادية، والأثر التشغيلي والمالي المباشر على أعمال كل عميل.'
+                : 'Documented architectural interventions: diagnosing the root bottleneck, engineering sovereign cloud & local systems, and delivering quantifiable ROI for Egyptian enterprises.'}
+            </p>
+
+            {/* Filter Tabs */}
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-2">
+              {[
+                { id: 'all', labelAr: `جميع دراسات الحالة التقنية (${NUZUL_CASE_STUDIES.length})`, labelEn: `All Technical Case Studies (${NUZUL_CASE_STUDIES.length})` },
+                { id: 'healthcare', labelAr: 'المستشفيات والأنظمة الصحية والعيادات', labelEn: 'Hospitals & Healthcare' },
+                { id: 'mail', labelAr: 'هجرة البريد وحوكمة الأرشيف والـ DNS', labelEn: 'Email & Archiving Governance' },
+                { id: 'infrastructure', labelAr: 'البنية التحتية والشبكات والأمن السيبراني', labelEn: 'Infrastructure, Security & Networks' },
+              ].map((tab) => (
+                <button
+                  key={tab.id}
+                  type="button"
+                  onClick={() => setActiveFilter(tab.id as any)}
+                  className={`rounded-full px-5 py-2 text-xs font-bold transition-all cursor-pointer ${
+                    activeFilter === tab.id
+                      ? 'bg-emerald-500 text-white shadow-md ring-2 ring-emerald-400/40'
+                      : isDark
+                      ? 'bg-[#0d1524] text-slate-300 hover:bg-white/10 hover:text-white border border-white/10'
+                      : 'bg-white text-slate-600 hover:bg-slate-100 hover:text-slate-900 border border-slate-200 shadow-sm'
+                  }`}
+                >
+                  {isAr ? tab.labelAr : tab.labelEn}
+                </button>
+              ))}
+            </div>
           </div>
+        </RevealOnScroll>
 
-          <h2 className="mt-4 text-3xl font-black leading-tight sm:text-4xl">
-            {isAr
-              ? 'قصص نجاح عملائنا ودراسات الحالة التقنية لمؤسسات ومستشفيات مصرية'
-              : 'Grounded Case Studies & Real Outcomes Across Egypt'}
-          </h2>
-
-          <p
-            className={`mt-3 text-base leading-relaxed ${
-              isDark ? 'text-slate-300' : 'text-slate-600'
-            }`}
-          >
-            {isAr
-              ? 'دراسات حالة تقنية موثقة: تشخيص التحديات الهندسية، وبناء السحابة والأنظمة السيادية، والأثر التشغيلي والمالي المباشر على أعمال كل عميل.'
-              : 'Documented architectural interventions: diagnosing the root bottleneck, engineering sovereign cloud & local systems, and delivering quantifiable ROI for Egyptian enterprises.'}
-          </p>
-
-          {/* Filter Tabs */}
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-2">
-            {[
-              { id: 'all', labelAr: `جميع دراسات الحالة التقنية (${NUZUL_CASE_STUDIES.length})`, labelEn: `All Technical Case Studies (${NUZUL_CASE_STUDIES.length})` },
-              { id: 'healthcare', labelAr: 'المستشفيات والأنظمة الصحية والعيادات', labelEn: 'Hospitals & Healthcare' },
-              { id: 'mail', labelAr: 'هجرة البريد وحوكمة الأرشيف والـ DNS', labelEn: 'Email & Archiving Governance' },
-              { id: 'infrastructure', labelAr: 'البنية التحتية والشبكات والأمن السيبراني', labelEn: 'Infrastructure, Security & Networks' },
-            ].map((tab) => (
-              <button
-                key={tab.id}
-                type="button"
-                onClick={() => setActiveFilter(tab.id as any)}
-                className={`rounded-full px-5 py-2 text-xs font-bold transition-all cursor-pointer ${
-                  activeFilter === tab.id
-                    ? 'bg-emerald-500 text-white shadow-md ring-2 ring-emerald-400/40'
-                    : isDark
-                    ? 'bg-[#0d1524] text-slate-300 hover:bg-white/10 hover:text-white border border-white/10'
-                    : 'bg-white text-slate-600 hover:bg-slate-100 hover:text-slate-900 border border-slate-200 shadow-sm'
-                }`}
-              >
-                {isAr ? tab.labelAr : tab.labelEn}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Clean, Tidy Outer Project Cards Grid */}
-        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {/* Clean, Tidy Outer Project Cards Grid with Staggered Scroll Reveal */}
+        <StaggerContainer staggerDelay={0.08} className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {displayedProjects.map((project: CaseStudy) => {
             const title = isAr ? project.title_ar : project.title_en;
             const category = isAr ? project.category_ar : project.category_en;
@@ -151,13 +154,13 @@ export const ProjectsSection: React.FC = () => {
             const result = isAr ? project.result_ar : project.result_en;
 
             return (
-              <article
-                key={project.id}
-                className={`group relative flex flex-col justify-between rounded-3xl border p-6 sm:p-7 transition-all duration-300 hover:-translate-y-1 ${
-                  isDark
-                    ? 'border-slate-800 bg-[#0d1524] hover:border-emerald-500/50 shadow-lg'
-                    : 'border-slate-200 bg-white hover:border-emerald-500/60 shadow-sm hover:shadow-md'
-                }`}
+              <StaggerItem key={project.id} className="h-full">
+                <article
+                  className={`group relative flex flex-col justify-between h-full rounded-3xl border p-6 sm:p-7 transition-all duration-300 hover:-translate-y-1 ${
+                    isDark
+                      ? 'border-slate-800 bg-[#0d1524] hover:border-emerald-500/50 shadow-lg'
+                      : 'border-slate-200 bg-white hover:border-emerald-500/60 shadow-sm hover:shadow-md'
+                  }`}
               >
                 <div>
                   {/* Category & Client Header */}
@@ -241,9 +244,10 @@ export const ProjectsSection: React.FC = () => {
                   </button>
                 </div>
               </article>
-            );
-          })}
-        </div>
+            </StaggerItem>
+          );
+        })}
+      </StaggerContainer>
 
         {/* Show More / Show Less Toggle Button for Projects */}
         {activeFilter === 'all' && filteredProjects.length > INITIAL_PROJECTS_COUNT && (

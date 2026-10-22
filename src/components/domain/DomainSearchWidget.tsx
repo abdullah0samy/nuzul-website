@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Search, Globe, CheckCircle2, XCircle, ShoppingCart, ArrowRight, ArrowLeft, ExternalLink, ShieldCheck, Server } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
 import { NUZUL_CONTACT } from '../../data/nuzulData';
+import { RevealOnScroll } from '../common/RevealOnScroll';
 
 export const DomainSearchWidget: React.FC = () => {
   const { locale, formatPrice, addToCart, setActivePaymentModal, theme } = useApp();
@@ -176,7 +177,8 @@ export const DomainSearchWidget: React.FC = () => {
         isDark ? 'bg-[#0a111c] border-white/10 text-white' : 'bg-slate-50 border-slate-200 text-slate-900'
       }`}
     >
-      <div className="mx-auto max-w-5xl">
+      <RevealOnScroll direction="up" threshold={0.15}>
+        <div className="mx-auto max-w-5xl">
         <div className="text-center">
           <div className="eyebrow-mono justify-center text-emerald-600 dark:text-emerald-400">
             <Globe className="h-4 w-4" />
@@ -377,7 +379,8 @@ export const DomainSearchWidget: React.FC = () => {
             {searchError}
           </div>
         )}
-      </div>
+        </div>
+      </RevealOnScroll>
     </section>
   );
 };

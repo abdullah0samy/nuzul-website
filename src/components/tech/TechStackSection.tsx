@@ -1,5 +1,6 @@
 import React from 'react';
 import { useApp } from '../../context/AppContext';
+import { RevealOnScroll, StaggerContainer, StaggerItem } from '../common/RevealOnScroll';
 
 export const TechStackSection: React.FC = () => {
   const { locale, theme } = useApp();
@@ -29,30 +30,33 @@ export const TechStackSection: React.FC = () => {
       }`}
     >
       <div className="mx-auto max-w-7xl">
-        <p className="mb-8 text-center font-mono text-[11px] font-bold uppercase tracking-[0.16em] text-emerald-600 dark:text-emerald-400">
-          {isAr
-            ? 'التقنيات العالمية المعتمدة في بنيتنا التحتية وأنظمتنا'
-            : 'Enterprise Technology Stack Powering Our Deployments'}
-        </p>
+        <RevealOnScroll direction="up" threshold={0.3}>
+          <p className="mb-8 text-center font-mono text-[11px] font-bold uppercase tracking-[0.16em] text-emerald-600 dark:text-emerald-400">
+            {isAr
+              ? 'التقنيات العالمية المعتمدة في بنيتنا التحتية وأنظمتنا'
+              : 'Enterprise Technology Stack Powering Our Deployments'}
+          </p>
+        </RevealOnScroll>
 
-        <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 md:gap-x-8">
+        <StaggerContainer staggerDelay={0.05} className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 md:gap-x-8">
           {technologies.map((tech) => (
-            <div
-              key={tech.name}
-              title={tech.category}
-              className={`group flex items-center gap-2 rounded-xl border px-3.5 py-2 transition-all duration-200 hover:-translate-y-0.5 ${
-                isDark
-                  ? 'border-white/10 bg-[#0d1524] hover:border-emerald-500/40 text-slate-200'
-                  : 'border-slate-200 bg-slate-50 hover:border-emerald-500 text-slate-800 shadow-sm'
-              }`}
-            >
-              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 group-hover:scale-125 transition-transform" />
-              <span className="font-mono text-xs font-bold group-hover:text-emerald-500 transition-colors">
-                {tech.name}
-              </span>
-            </div>
+            <StaggerItem key={tech.name} distance={16} scale={0.94}>
+              <div
+                title={tech.category}
+                className={`group flex items-center gap-2 rounded-xl border px-3.5 py-2 transition-all duration-200 hover:-translate-y-0.5 ${
+                  isDark
+                    ? 'border-white/10 bg-[#0d1524] hover:border-emerald-500/40 text-slate-200'
+                    : 'border-slate-200 bg-slate-50 hover:border-emerald-500 text-slate-800 shadow-sm'
+                }`}
+              >
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 group-hover:scale-125 transition-transform" />
+                <span className="font-mono text-xs font-bold group-hover:text-emerald-500 transition-colors">
+                  {tech.name}
+                </span>
+              </div>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
       </div>
     </section>
   );

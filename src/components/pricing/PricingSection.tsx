@@ -3,6 +3,7 @@ import { Check, Sparkles, ArrowRight, ArrowLeft, Server, ShieldCheck } from 'luc
 import { useApp } from '../../context/AppContext';
 import { NUZUL_HOSTING_PLANS } from '../../data/nuzulData';
 import { HostingPlan } from '../../types';
+import { RevealOnScroll, StaggerContainer, StaggerItem } from '../common/RevealOnScroll';
 
 export const PricingSection: React.FC = () => {
   const { locale, formatPrice, addToCart, setActivePaymentModal, theme } = useApp();
@@ -17,38 +18,40 @@ export const PricingSection: React.FC = () => {
       }`}
     >
       <div className="mx-auto max-w-7xl">
-        {/* Header */}
-        <div className="mx-auto max-w-3xl text-center mb-14">
-          <div className="eyebrow-mono justify-center text-emerald-600 dark:text-emerald-400">
-            <Server className="h-4 w-4" />
-            <span>{isAr ? 'السيرفرات السحابية والاستضافة' : 'CLOUD VPS & HOSTING'}</span>
+        {/* Header with Reveal on Scroll */}
+        <RevealOnScroll direction="up" threshold={0.2}>
+          <div className="mx-auto max-w-3xl text-center mb-14">
+            <div className="eyebrow-mono justify-center text-emerald-600 dark:text-emerald-400">
+              <Server className="h-4 w-4" />
+              <span>{isAr ? 'السيرفرات السحابية والاستضافة' : 'CLOUD VPS & HOSTING'}</span>
+            </div>
+
+            <h2 className="mt-4 text-3xl font-black leading-tight sm:text-4xl">
+              {isAr ? 'خوادم سحابية عالية الأداء وبيئات تشغيل متطورة' : 'High-Performance Cloud VPS & Server Environments'}
+            </h2>
+
+            <p
+              className={`mt-3 text-base leading-relaxed ${
+                isDark ? 'text-slate-300' : 'text-slate-600'
+              }`}
+            >
+              {isAr
+                ? 'خوادم KVM سحابية، استضافة مواقع، وخوادم سطح المكتب السحابي بأقراص NVMe فائقة السرعة، مع تسليم فوري ودعم فني متخصص على مدار الساعة.'
+                : 'Enterprise KVM cloud VPS, web hosting, and Cloud Desktop servers with ultra-fast NVMe storage, instant provisioning, and 24/7 support.'}
+            </p>
           </div>
+        </RevealOnScroll>
 
-          <h2 className="mt-4 text-3xl font-black leading-tight sm:text-4xl">
-            {isAr ? 'خوادم سحابية عالية الأداء وبيئات تشغيل متطورة' : 'High-Performance Cloud VPS & Server Environments'}
-          </h2>
-
-          <p
-            className={`mt-3 text-base leading-relaxed ${
-              isDark ? 'text-slate-300' : 'text-slate-600'
-            }`}
-          >
-            {isAr
-              ? 'خوادم KVM سحابية، استضافة مواقع، وخوادم سطح المكتب السحابي بأقراص NVMe فائقة السرعة، مع تسليم فوري ودعم فني متخصص على مدار الساعة.'
-              : 'Enterprise KVM cloud VPS, web hosting, and Cloud Desktop servers with ultra-fast NVMe storage, instant provisioning, and 24/7 support.'}
-          </p>
-        </div>
-
-        {/* 4 Cards Grid */}
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {/* 4 Cards Grid with Staggered Scroll Reveal */}
+        <StaggerContainer staggerDelay={0.1} className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {NUZUL_HOSTING_PLANS.map((plan: HostingPlan) => {
             const planName = isAr ? plan.nameAr : plan.nameEn;
             const specs = isAr ? plan.specsAr : plan.specsEn;
 
             return (
-              <article
-                key={plan.id}
-                className={`relative flex flex-col justify-between rounded-3xl border-2 p-7 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1.5 ${
+              <StaggerItem key={plan.id} className="h-full">
+                <article
+                  className={`relative flex flex-col justify-between h-full rounded-2xl border p-7 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1.5 ${
                   plan.popular
                     ? isDark
                       ? 'border-emerald-400/60 bg-gradient-to-b from-emerald-950/25 to-[#0d1524] shadow-[0_15px_40px_-10px_rgba(16,185,129,0.25)] ring-1 ring-emerald-400/40'
@@ -125,10 +128,11 @@ export const PricingSection: React.FC = () => {
                   </div>
                 </div>
               </article>
-            );
-          })}
-        </div>
-      </div>
-    </section>
-  );
+            </StaggerItem>
+          );
+        })}
+      </StaggerContainer>
+    </div>
+  </section>
+);
 };

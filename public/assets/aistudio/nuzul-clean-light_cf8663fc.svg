@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 230 48" width="230" height="48">
+  <!-- Minimalist Flat Cloud & Arrow Icon -->
+  <g transform="translate(4, 3) scale(0.68)">
+    <path d="M 36 54 L 24 54 C 13 54 5 46 5 35 C 5 26 12 18 22 17 C 25 8 35 2 47 2 C 59 2 69 10 72 20 C 80 21 86 28 86 36 C 86 46 78 54 68 54 L 52 54" fill="none" stroke="#0b4f6c" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M 28 54 L 44 26 C 45.5 23 48.5 23 49.5 26 L 55 42 C 56 45 58.5 45 60 42 L 68 23" fill="none" stroke="#14919b" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round" />
+    <polygon points="71,14 60,22 73,27" fill="#14919b" />
+  </g>
+  <!-- Balanced English & Arabic Brand Name -->
+  <text x="72" y="25" font-family="&#39;Poppins&#39;, -apple-system, &#39;Segoe UI&#39;, sans-serif" font-size="20" font-weight="700" fill="#0f172a">Nuzul <tspan font-weight="500" fill="#14919b">Tech</tspan></text>
+  <text x="73" y="42" font-family="Tahoma, &#39;Segoe UI&#39;, Arial, sans-serif" font-size="13" font-weight="700" fill="#475569">نُزول تك</text>
+</svg>

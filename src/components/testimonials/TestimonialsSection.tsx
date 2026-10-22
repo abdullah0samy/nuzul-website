@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Sparkles, Quote, Star, ChevronDown, ChevronUp } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
 import { NUZUL_TESTIMONIALS } from '../../data/nuzulData';
+import { RevealOnScroll, StaggerContainer, StaggerItem } from '../common/RevealOnScroll';
 
 export const TestimonialsSection: React.FC = () => {
   const { locale, theme } = useApp();
@@ -23,56 +24,58 @@ export const TestimonialsSection: React.FC = () => {
       }`}
     >
       <div className="mx-auto max-w-7xl">
-        {/* Header */}
-        <div className="mx-auto max-w-3xl text-center">
-          <div className="eyebrow-mono justify-center text-emerald-600 dark:text-emerald-400">
-            <Sparkles className="h-4 w-4" />
-            <span>{isAr ? 'قصص نجاح عملائنا وتجاربهم الموثقة' : 'CLIENT SUCCESS STORIES & REVIEWS'}</span>
+        {/* Header with Reveal on Scroll */}
+        <RevealOnScroll direction="up" threshold={0.2}>
+          <div className="mx-auto max-w-3xl text-center">
+            <div className="eyebrow-mono justify-center text-emerald-600 dark:text-emerald-400">
+              <Sparkles className="h-4 w-4" />
+              <span>{isAr ? 'قصص نجاح عملائنا وتجاربهم الموثقة' : 'CLIENT SUCCESS STORIES & REVIEWS'}</span>
+            </div>
+
+            <h2 className="mt-4 text-3xl font-black leading-tight sm:text-4xl">
+              {isAr ? 'ماذا يقول عملاؤنا وقادة المؤسسات في مصر؟' : 'What Enterprise Leaders Say About Nuzul Tech'}
+            </h2>
+
+            <p
+              className={`mt-3 text-base leading-relaxed ${
+                isDark ? 'text-slate-300' : 'text-slate-600'
+              }`}
+            >
+              {isAr
+                ? 'تجارب وقصص نجاح حقيقية من قيادات مستشفيات تراست وABCH وكايرو كيور، وعيادة د. خالد عبيدو، ومؤسسة مشكاة نور الخيرية، ومنصة OmnixTrack CRM، والشركات التي اعتمدت على البنية التحتية والأنظمة الافتراضية والحوسبة السحابية لنُزول تِك.'
+                : 'Direct outcomes from executive leaders at Trust Hospital, ABCH, Cairo Cure, Dr. Khaled Obeido Clinic, Meshkat Nour Foundation, OmnixTrack CRM, and enterprise partners across Egypt.'}
+            </p>
           </div>
+        </RevealOnScroll>
 
-          <h2 className="mt-4 text-3xl font-black leading-tight sm:text-4xl">
-            {isAr ? 'ماذا يقول عملاؤنا وقادة المؤسسات في مصر؟' : 'What Enterprise Leaders Say About Nuzul Tech'}
-          </h2>
-
-          <p
-            className={`mt-3 text-base leading-relaxed ${
-              isDark ? 'text-slate-300' : 'text-slate-600'
-            }`}
-          >
-            {isAr
-              ? 'تجارب وقصص نجاح حقيقية من قيادات مستشفيات تراست وABCH وكايرو كيور، وعيادة د. خالد عبيدو، ومؤسسة مشكاة نور الخيرية، ومنصة OmnixTrack CRM، والشركات التي اعتمدت على البنية التحتية والأنظمة الافتراضية والحوسبة السحابية لنُزول تِك.'
-              : 'Direct outcomes from executive leaders at Trust Hospital, ABCH, Cairo Cure, Dr. Khaled Obeido Clinic, Meshkat Nour Foundation, OmnixTrack CRM, and enterprise partners across Egypt.'}
-          </p>
-        </div>
-
-        {/* Testimonials Grid (3 Columns for 12 clients) */}
-        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {/* Testimonials Grid (3 Columns for 12 clients) with Staggered Reveal */}
+        <StaggerContainer staggerDelay={0.08} className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {displayedTestimonials.map((t, idx) => {
             const name = isAr ? t.name_ar : t.name_en;
             const role = isAr ? t.role_ar : t.role_en;
             const text = isAr ? t.text_ar : t.text_en;
 
             return (
-              <article
-                key={idx}
-                className={`relative flex flex-col justify-between rounded-3xl border-2 p-6 transition-all duration-300 hover:-translate-y-1 ${
-                  isDark
-                    ? 'border-white/10 bg-[#0d1524] hover:border-emerald-500/40 shadow-xl'
-                    : 'border-slate-200 bg-white hover:border-emerald-500 shadow-md'
-                }`}
-              >
-                <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center text-amber-500 text-xs gap-0.5">
-                      {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="h-3.5 w-3.5 fill-amber-500" />
-                      ))}
+              <StaggerItem key={idx} className="h-full">
+                <article
+                  className={`relative flex flex-col justify-between h-full rounded-3xl border-2 p-6 transition-all duration-300 hover:-translate-y-1 ${
+                    isDark
+                      ? 'border-white/10 bg-[#0d1524] hover:border-emerald-500/40 shadow-xl'
+                      : 'border-slate-200 bg-white hover:border-emerald-500 shadow-md'
+                  }`}
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center text-amber-500 text-xs gap-0.5">
+                        {[...Array(5)].map((_, i) => (
+                          <Star key={i} className="h-3.5 w-3.5 fill-amber-500" />
+                        ))}
+                      </div>
+                      <Quote className="h-5 w-5 text-emerald-500/40" />
                     </div>
-                    <Quote className="h-5 w-5 text-emerald-500/40" />
-                  </div>
 
-                  <p
-                    className={`text-xs leading-relaxed italic mb-6 ${
+                    <p
+                      className={`text-xs leading-relaxed italic mb-6 ${
                       isDark ? 'text-slate-200' : 'text-slate-700'
                     }`}
                   >
@@ -85,9 +88,10 @@ export const TestimonialsSection: React.FC = () => {
                   <div className="text-[11px] text-emerald-600 dark:text-emerald-400 mt-0.5 font-medium">{role}</div>
                 </div>
               </article>
-            );
-          })}
-        </div>
+            </StaggerItem>
+          );
+        })}
+      </StaggerContainer>
 
         {/* Show More / Show Less Toggle Button */}
         {NUZUL_TESTIMONIALS.length > INITIAL_TESTIMONIALS_COUNT && (

@@ -3,6 +3,7 @@ import { Newspaper, ArrowRight, ArrowLeft, Calendar, Tag, BookOpen, Search, Shie
 import { useApp } from '../../context/AppContext';
 import { NUZUL_BLOG_POSTS } from '../../data/nuzulData';
 import { BlogPost } from '../../types';
+import { RevealOnScroll, StaggerContainer, StaggerItem } from '../common/RevealOnScroll';
 
 export const BlogSection: React.FC = () => {
   const { locale, setActiveArticle, theme } = useApp();
@@ -127,88 +128,90 @@ export const BlogSection: React.FC = () => {
       }`}
     >
       <div className="mx-auto max-w-7xl">
-        {/* Header */}
-        <div className="mx-auto max-w-3xl text-center mb-12">
-          <div className="eyebrow-mono justify-center text-emerald-600 dark:text-emerald-400">
-            <Newspaper className="h-4 w-4" />
-            <span>{isAr ? 'المدونة والهندسة التقنية' : 'ENTERPRISE IT & CLOUD KNOWLEDGE BASE'}</span>
-          </div>
+        {/* Header with Reveal on Scroll */}
+        <RevealOnScroll direction="up" threshold={0.2}>
+          <div className="mx-auto max-w-3xl text-center mb-12">
+            <div className="eyebrow-mono justify-center text-emerald-600 dark:text-emerald-400">
+              <Newspaper className="h-4 w-4" />
+              <span>{isAr ? 'المدونة والهندسة التقنية' : 'ENTERPRISE IT & CLOUD KNOWLEDGE BASE'}</span>
+            </div>
 
-          <h2 className="mt-4 text-3xl font-black leading-tight sm:text-4xl">
-            {isAr
-              ? 'أحدث مقالات وتجارب البنية التحتية والسيرفرات في مصر'
-              : 'Recent Enterprise IT & Cloud Engineering Guides'}
-          </h2>
+            <h2 className="mt-4 text-3xl font-black leading-tight sm:text-4xl">
+              {isAr
+                ? 'أحدث مقالات وتجارب البنية التحتية والسيرفرات في مصر'
+                : 'Recent Enterprise IT & Cloud Engineering Guides'}
+            </h2>
 
-          <p
-            className={`mt-4 text-base leading-relaxed ${
-              isDark ? 'text-slate-300' : 'text-slate-600'
-            }`}
-          >
-            {isAr
-              ? 'أدلة هندسية متخصصة ومحدثة لكل خدمة من خدماتنا: من الخوادم السحابية المخصصة، وفصل أرشيف المستشفيات عن البريد، إلى جدران الحماية وسنترال VoIP والنسخ المعزول ضد الفدية.'
-              : 'Field-tested architectural playbooks across all 22 enterprise domains: High-performance cloud VPS, DICOM PACS medical decoupling, DMARC phishing immunity, and 3-2-1 hybrid cloud recovery.'}
-          </p>
+            <p
+              className={`mt-4 text-base leading-relaxed ${
+                isDark ? 'text-slate-300' : 'text-slate-600'
+              }`}
+            >
+              {isAr
+                ? 'أدلة هندسية متخصصة ومحدثة لكل خدمة من خدماتنا: من الخوادم السحابية المخصصة، وفصل أرشيف المستشفيات عن البريد، إلى جدران الحماية وسنترال VoIP والنسخ المعزول ضد الفدية.'
+                : 'Field-tested architectural playbooks across all 22 enterprise domains: High-performance cloud VPS, DICOM PACS medical decoupling, DMARC phishing immunity, and 3-2-1 hybrid cloud recovery.'}
+            </p>
 
-          {/* Search Bar & Category Filter */}
-          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
-            <div className="relative w-full max-w-md">
-              <Search className="absolute left-3.5 rtl:left-auto rtl:right-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder={isAr ? 'ابحث في مقالات وأدلة الخدمات...' : 'Search IT & cloud guides...'}
-                className={`w-full rounded-2xl border py-2.5 px-10 text-xs focus:border-emerald-500 focus:outline-none transition-colors ${
-                  isDark
-                    ? 'bg-[#0d1524] border-white/10 text-white placeholder-slate-500'
-                    : 'bg-white border-slate-200 text-slate-900 placeholder-slate-400 shadow-sm'
-                }`}
-              />
+            {/* Search Bar & Category Filter */}
+            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+              <div className="relative w-full max-w-md">
+                <Search className="absolute left-3.5 rtl:left-auto rtl:right-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder={isAr ? 'ابحث في مقالات وأدلة الخدمات...' : 'Search IT & cloud guides...'}
+                  className={`w-full rounded-2xl border py-2.5 px-10 text-xs focus:border-emerald-500 focus:outline-none transition-colors ${
+                    isDark
+                      ? 'bg-[#0d1524] border-white/10 text-white placeholder-slate-500'
+                      : 'bg-white border-slate-200 text-slate-900 placeholder-slate-400 shadow-sm'
+                  }`}
+                />
+              </div>
+            </div>
+
+            {/* Category Tabs */}
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
+              {categories.map((cat) => (
+                <button
+                  key={cat.id}
+                  type="button"
+                  onClick={() => {
+                    setActiveCategory(cat.id);
+                    setShowAllPosts(false);
+                  }}
+                  className={`rounded-full px-4 py-2 text-xs font-bold transition-all cursor-pointer ${
+                    activeCategory === cat.id
+                      ? 'bg-emerald-500 text-white shadow-md shadow-emerald-500/20 ring-2 ring-emerald-400/40'
+                      : isDark
+                      ? 'bg-[#0d1524] text-slate-300 hover:bg-white/10 hover:text-white border border-white/10'
+                      : 'bg-white text-slate-600 hover:bg-slate-100 hover:text-slate-900 border border-slate-200 shadow-sm'
+                  }`}
+                >
+                  {isAr ? cat.labelAr : cat.labelEn}
+                </button>
+              ))}
             </div>
           </div>
+        </RevealOnScroll>
 
-          {/* Category Tabs */}
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
-            {categories.map((cat) => (
-              <button
-                key={cat.id}
-                type="button"
-                onClick={() => {
-                  setActiveCategory(cat.id);
-                  setShowAllPosts(false);
-                }}
-                className={`rounded-full px-4 py-2 text-xs font-bold transition-all cursor-pointer ${
-                  activeCategory === cat.id
-                    ? 'bg-emerald-500 text-white shadow-md shadow-emerald-500/20 ring-2 ring-emerald-400/40'
-                    : isDark
-                    ? 'bg-[#0d1524] text-slate-300 hover:bg-white/10 hover:text-white border border-white/10'
-                    : 'bg-white text-slate-600 hover:bg-slate-100 hover:text-slate-900 border border-slate-200 shadow-sm'
-                }`}
-              >
-                {isAr ? cat.labelAr : cat.labelEn}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Guides Grid */}
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        {/* Guides Grid with Staggered Scroll Reveal */}
+        <StaggerContainer staggerDelay={0.06} className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {displayedPosts.map((post: BlogPost) => {
             const title = isAr ? post.title_ar : post.title_en;
             const category = isAr ? post.category_ar : post.category_en;
             const excerpt = isAr ? post.excerpt_ar : post.excerpt_en;
 
             return (
-              <article
-                key={post.id}
-                onClick={() => setActiveArticle(post)}
-                className={`group cursor-pointer overflow-hidden rounded-3xl border-2 p-6 transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between ${
-                  isDark
-                    ? 'border-white/10 bg-[#0d1524] hover:border-emerald-500/60 hover:shadow-2xl hover:shadow-emerald-500/10'
-                    : 'border-slate-200 bg-white hover:border-emerald-500 hover:shadow-xl'
-                }`}
-              >
+              <StaggerItem key={post.id} className="h-full">
+                <article
+                  onClick={() => setActiveArticle(post)}
+                  className={`group cursor-pointer overflow-hidden rounded-3xl border-2 p-6 transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between h-full ${
+                    isDark
+                      ? 'border-white/10 bg-[#0d1524] hover:border-emerald-500/60 hover:shadow-2xl hover:shadow-emerald-500/10'
+                      : 'border-slate-200 bg-white hover:border-emerald-500 hover:shadow-xl'
+                  }`}
+                >
                 <div>
                   <div className="flex items-center justify-between gap-2 mb-4">
                     <span className="inline-flex rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 px-2.5 py-1 font-mono text-[10px] font-bold">
@@ -240,9 +243,10 @@ export const BlogSection: React.FC = () => {
                   <BookOpen className="h-4 w-4 text-slate-400 group-hover:text-emerald-500 transition-colors" />
                 </div>
               </article>
-            );
-          })}
-        </div>
+            </StaggerItem>
+          );
+        })}
+      </StaggerContainer>
 
         {/* Show More / Show Less Toggle Button for Blog Posts */}
         {activeCategory === 'all' && !isSearchActive && filteredPosts.length > INITIAL_POSTS_COUNT && (

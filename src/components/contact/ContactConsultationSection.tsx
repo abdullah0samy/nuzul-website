@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
 import { NUZUL_CONTACT, NUZUL_SERVICES } from '../../data/nuzulData';
+import { RevealOnScroll } from '../common/RevealOnScroll';
 
 export const ContactConsultationSection: React.FC = () => {
   const { locale, theme } = useApp();
@@ -61,42 +62,45 @@ export const ContactConsultationSection: React.FC = () => {
       }`}
     >
       <div className="mx-auto max-w-7xl">
-        {/* Section Header */}
-        <div className="mx-auto max-w-3xl text-center mb-16">
-          <div className="eyebrow-mono justify-center text-emerald-600 dark:text-emerald-400">
-            <Mail className="h-4 w-4" />
-            <span>{isAr ? 'طلب استشارة وتواصل هندسي' : 'ENTERPRISE CONSULTATION & INQUIRY'}</span>
+        {/* Section Header with Reveal on Scroll */}
+        <RevealOnScroll direction="up" threshold={0.2}>
+          <div className="mx-auto max-w-3xl text-center mb-16">
+            <div className="eyebrow-mono justify-center text-emerald-600 dark:text-emerald-400">
+              <Mail className="h-4 w-4" />
+              <span>{isAr ? 'طلب استشارة وتواصل هندسي' : 'ENTERPRISE CONSULTATION & INQUIRY'}</span>
+            </div>
+
+            <h2 className="mt-4 text-3xl font-black leading-tight sm:text-4xl">
+              {isAr
+                ? 'تواصل مع فريقنا الهندسي لتشخيص وتطوير بنيتك التحتية'
+                : 'Consult Our Senior Infrastructure & Software Engineers'}
+            </h2>
+
+            <p
+              className={`mt-4 text-base leading-relaxed ${
+                isDark ? 'text-slate-300' : 'text-slate-600'
+              }`}
+            >
+              {isAr
+                ? 'سواء كنت بحاجة إلى خوادم سحابية مخصصة، تجهيز شبكات وسنترال للمستشفيات، منصة عيادات سحابية، أو حماية بريد شركتك — نتحمل المسؤولية كاملة من التخطيط حتى التسليم والتأمين.'
+                : 'Whether you require dedicated cloud VPS clusters, hospital IT & structured cabling, Clinic SaaS deployment, or corporate mail security — we provide end-to-end engineering sovereignty.'}
+            </p>
           </div>
-
-          <h2 className="mt-4 text-3xl font-black leading-tight sm:text-4xl">
-            {isAr
-              ? 'تواصل مع فريقنا الهندسي لتشخيص وتطوير بنيتك التحتية'
-              : 'Consult Our Senior Infrastructure & Software Engineers'}
-          </h2>
-
-          <p
-            className={`mt-4 text-base leading-relaxed ${
-              isDark ? 'text-slate-300' : 'text-slate-600'
-            }`}
-          >
-            {isAr
-              ? 'سواء كنت بحاجة إلى خوادم سحابية مخصصة، تجهيز شبكات وسنترال للمستشفيات، منصة عيادات سحابية، أو حماية بريد شركتك — نتحمل المسؤولية كاملة من التخطيط حتى التسليم والتأمين.'
-              : 'Whether you require dedicated cloud VPS clusters, hospital IT & structured cabling, Clinic SaaS deployment, or corporate mail security — we provide end-to-end engineering sovereignty.'}
-          </p>
-        </div>
+        </RevealOnScroll>
 
         {/* 2 Columns: Left = Interactive Consultation Form, Right = HQ & Data Center Operations */}
         <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
           {/* ==============================================================
               LEFT COLUMN: ENTERPRISE CONSULTATION FORM
               ============================================================== */}
-          <div
-            className={`rounded-3xl border p-7 sm:p-9 transition-colors shadow-2xl ${
-              isDark
-                ? 'border-emerald-500/30 bg-gradient-to-b from-[#0d1524] to-[#0a111c]'
-                : 'border-slate-200 bg-slate-50'
-            }`}
-          >
+          <RevealOnScroll direction={isAr ? 'right' : 'left'} threshold={0.15}>
+            <div
+              className={`rounded-3xl border p-7 sm:p-9 transition-colors shadow-2xl ${
+                isDark
+                  ? 'border-emerald-500/30 bg-gradient-to-b from-[#0d1524] to-[#0a111c]'
+                  : 'border-slate-200 bg-slate-50'
+              }`}
+            >
             <div className="flex items-center justify-between border-b pb-4 mb-6 border-current/10">
               <div>
                 <h3 className="text-xl font-bold">
@@ -329,12 +333,14 @@ export const ContactConsultationSection: React.FC = () => {
                 </div>
               </form>
             )}
-          </div>
+            </div>
+          </RevealOnScroll>
 
           {/* ==============================================================
               RIGHT COLUMN: DATA CENTER OPERATIONS & CAIRO HQ VISUAL
               ============================================================== */}
-          <div className="space-y-6">
+          <RevealOnScroll direction={isAr ? 'left' : 'right'} threshold={0.15}>
+            <div className="space-y-6">
             {/* Primary Visual Showcase Card */}
             <div
               className={`relative overflow-hidden rounded-3xl border transition-all ${
@@ -461,8 +467,9 @@ export const ContactConsultationSection: React.FC = () => {
               </div>
             </div>
           </div>
-        </div>
+        </RevealOnScroll>
       </div>
-    </section>
+    </div>
+  </section>
   );
 };

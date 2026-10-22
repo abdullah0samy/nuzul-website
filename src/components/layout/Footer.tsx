@@ -45,6 +45,7 @@ export const Footer: React.FC = () => {
         { labelAr: 'أمن الشبكات وجدران الحماية Firewall', labelEn: 'Network Security & Firewalls', href: '#services' },
         { labelAr: 'منصة مراقبة الأحداث الأمنية SIEM', labelEn: 'SIEM Solution Platform', href: '#services' },
         { labelAr: 'حلول النسخ الاحتياطي الذكية Backup', labelEn: 'Enterprise Backup Solutions', href: '#services' },
+        { labelAr: 'خريطة طريق التنفيذ (٣ مراحل)', labelEn: 'Implementation Roadmap (3 Steps)', href: '#deployment-roadmap' },
         { labelAr: 'باقات تأسيس المؤسسات', labelEn: 'Turnkey Enterprise Packages', href: '#packages' },
         { labelAr: 'طلب استشارة هندسية وعرض سعر', labelEn: 'Request Consultation', href: '#contact' },
       ],
@@ -94,8 +95,8 @@ export const Footer: React.FC = () => {
               }`}
             >
               {isAr
-                ? 'نُزول تِك (Nuzul Tech) هي الشريك التقني المتكامل للمؤسسات والمستشفيات والشركات في مصر. نقدم حلولاً معتمدة من الكابلات المنظمة وتجهيز المقرات وحتى السيرفرات السحابية والأنظمة البرمجية المتطورة.'
-                : 'Nuzul Tech is your full-stack enterprise technology partner in Egypt. From turnkey structured networking and firewalls to cloud VPS hosting and hospital ERP systems.'}
+                ? 'نُزول تِك (Nuzul Tech) هي الشريك التقني المتكامل للمؤسسات والشركات في مصر. نقدم حلولاً معتمدة من الكابلات المنظمة وتجهيز المقرات وحتى السيرفرات السحابية والأنظمة البرمجية المتطورة.'
+                : 'Nuzul Tech is your full-stack enterprise technology partner in Egypt. From turnkey structured networking and firewalls to cloud VPS hosting and custom ERP systems.'}
             </p>
 
             {/* Direct Contact info */}

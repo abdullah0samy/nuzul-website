@@ -57,7 +57,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   // Read theme from localStorage or default to 'dark'
   const [theme, setThemeState] = useState<Theme>(() => {
     if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('nuzul_theme');
+      const saved = localStorage.getItem('nuzul_theme') || localStorage.getItem('theme');
       if (saved === 'light' || saved === 'dark') return saved;
     }
     return 'dark';
@@ -87,6 +87,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     root.setAttribute('data-theme', theme);
     try {
       localStorage.setItem('nuzul_theme', theme);
+      localStorage.setItem('theme', theme);
     } catch (e) {
       // ignore
     }
