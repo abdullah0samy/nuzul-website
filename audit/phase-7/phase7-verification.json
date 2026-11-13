@@ -1,0 +1,455 @@
+{
+  "timestamp": "2026-11-12T16:25:06.090Z",
+  "caseStudiesFilterCheck": {
+    "casesSidebarVisible": true,
+    "casesActiveChipsVisible": true,
+    "casesResultCount": "عرض 3 من أصل 3 دراسة حالة هندسية"
+  },
+  "caseStudyDetailStructure": {
+    "contextBlockVisible": true,
+    "constraintBlockVisible": true,
+    "deliveredBlockVisible": true,
+    "outcomeBlockVisible": true,
+    "diagramVisible": true,
+    "imageSlotVisible": true
+  },
+  "blogFilterCheck": {
+    "blogSidebarVisible": true,
+    "blogActiveChipsVisible": true,
+    "blogResultCount": "عرض 5 من أصل 5 مقال ودليل تقني"
+  },
+  "blogDetailStructure": {
+    "tocVisible": true,
+    "relatedArticlesVisible": true,
+    "sectionHeadingCount": 3
+  },
+  "matrix": [
+    {
+      "route": "/case-studies",
+      "theme": "light",
+      "lang": "ar",
+      "viewport": "375",
+      "overflowPx": 0,
+      "screenshot": "case-studies-light-ar-375.png"
+    },
+    {
+      "route": "/case-studies",
+      "theme": "light",
+      "lang": "ar",
+      "viewport": "768",
+      "overflowPx": 0,
+      "screenshot": "case-studies-light-ar-768.png"
+    },
+    {
+      "route": "/case-studies",
+      "theme": "light",
+      "lang": "ar",
+      "viewport": "1440",
+      "overflowPx": 0,
+      "screenshot": "case-studies-light-ar-1440.png"
+    },
+    {
+      "route": "/case-studies",
+      "theme": "light",
+      "lang": "en",
+      "viewport": "375",
+      "overflowPx": 0,
+      "screenshot": "case-studies-light-en-375.png"
+    },
+    {
+      "route": "/case-studies",
+      "theme": "light",
+      "lang": "en",
+      "viewport": "768",
+      "overflowPx": 0,
+      "screenshot": "case-studies-light-en-768.png"
+    },
+    {
+      "route": "/case-studies",
+      "theme": "light",
+      "lang": "en",
+      "viewport": "1440",
+      "overflowPx": 0,
+      "screenshot": "case-studies-light-en-1440.png"
+    },
+    {
+      "route": "/case-studies",
+      "theme": "dark",
+      "lang": "ar",
+      "viewport": "375",
+      "overflowPx": 0,
+      "screenshot": "case-studies-dark-ar-375.png"
+    },
+    {
+      "route": "/case-studies",
+      "theme": "dark",
+      "lang": "ar",
+      "viewport": "768",
+      "overflowPx": 0,
+      "screenshot": "case-studies-dark-ar-768.png"
+    },
+    {
+      "route": "/case-studies",
+      "theme": "dark",
+      "lang": "ar",
+      "viewport": "1440",
+      "overflowPx": 0,
+      "screenshot": "case-studies-dark-ar-1440.png"
+    },
+    {
+      "route": "/case-studies",
+      "theme": "dark",
+      "lang": "en",
+      "viewport": "375",
+      "overflowPx": 0,
+      "screenshot": "case-studies-dark-en-375.png"
+    },
+    {
+      "route": "/case-studies",
+      "theme": "dark",
+      "lang": "en",
+      "viewport": "768",
+      "overflowPx": 0,
+      "screenshot": "case-studies-dark-en-768.png"
+    },
+    {
+      "route": "/case-studies",
+      "theme": "dark",
+      "lang": "en",
+      "viewport": "1440",
+      "overflowPx": 0,
+      "screenshot": "case-studies-dark-en-1440.png"
+    },
+    {
+      "route": "/case-studies/case-1",
+      "theme": "light",
+      "lang": "ar",
+      "viewport": "375",
+      "overflowPx": 0,
+      "screenshot": "case-study-detail-light-ar-375.png"
+    },
+    {
+      "route": "/case-studies/case-1",
+      "theme": "light",
+      "lang": "ar",
+      "viewport": "768",
+      "overflowPx": 0,
+      "screenshot": "case-study-detail-light-ar-768.png"
+    },
+    {
+      "route": "/case-studies/case-1",
+      "theme": "light",
+      "lang": "ar",
+      "viewport": "1440",
+      "overflowPx": 0,
+      "screenshot": "case-study-detail-light-ar-1440.png"
+    },
+    {
+      "route": "/case-studies/case-1",
+      "theme": "light",
+      "lang": "en",
+      "viewport": "375",
+      "overflowPx": 0,
+      "screenshot": "case-study-detail-light-en-375.png"
+    },
+    {
+      "route": "/case-studies/case-1",
+      "theme": "light",
+      "lang": "en",
+      "viewport": "768",
+      "overflowPx": 0,
+      "screenshot": "case-study-detail-light-en-768.png"
+    },
+    {
+      "route": "/case-studies/case-1",
+      "theme": "light",
+      "lang": "en",
+      "viewport": "1440",
+      "overflowPx": 0,
+      "screenshot": "case-study-detail-light-en-1440.png"
+    },
+    {
+      "route": "/case-studies/case-1",
+      "theme": "dark",
+      "lang": "ar",
+      "viewport": "375",
+      "overflowPx": 0,
+      "screenshot": "case-study-detail-dark-ar-375.png"
+    },
+    {
+      "route": "/case-studies/case-1",
+      "theme": "dark",
+      "lang": "ar",
+      "viewport": "768",
+      "overflowPx": 0,
+      "screenshot": "case-study-detail-dark-ar-768.png"
+    },
+    {
+      "route": "/case-studies/case-1",
+      "theme": "dark",
+      "lang": "ar",
+      "viewport": "1440",
+      "overflowPx": 0,
+      "screenshot": "case-study-detail-dark-ar-1440.png"
+    },
+    {
+      "route": "/case-studies/case-1",
+      "theme": "dark",
+      "lang": "en",
+      "viewport": "375",
+      "overflowPx": 0,
+      "screenshot": "case-study-detail-dark-en-375.png"
+    },
+    {
+      "route": "/case-studies/case-1",
+      "theme": "dark",
+      "lang": "en",
+      "viewport": "768",
+      "overflowPx": 0,
+      "screenshot": "case-study-detail-dark-en-768.png"
+    },
+    {
+      "route": "/case-studies/case-1",
+      "theme": "dark",
+      "lang": "en",
+      "viewport": "1440",
+      "overflowPx": 0,
+      "screenshot": "case-study-detail-dark-en-1440.png"
+    },
+    {
+      "route": "/blog",
+      "theme": "light",
+      "lang": "ar",
+      "viewport": "375",
+      "overflowPx": 0,
+      "screenshot": "blog-light-ar-375.png"
+    },
+    {
+      "route": "/blog",
+      "theme": "light",
+      "lang": "ar",
+      "viewport": "768",
+      "overflowPx": 0,
+      "screenshot": "blog-light-ar-768.png"
+    },
+    {
+      "route": "/blog",
+      "theme": "light",
+      "lang": "ar",
+      "viewport": "1440",
+      "overflowPx": 0,
+      "screenshot": "blog-light-ar-1440.png"
+    },
+    {
+      "route": "/blog",
+      "theme": "light",
+      "lang": "en",
+      "viewport": "375",
+      "overflowPx": 0,
+      "screenshot": "blog-light-en-375.png"
+    },
+    {
+      "route": "/blog",
+      "theme": "light",
+      "lang": "en",
+      "viewport": "768",
+      "overflowPx": 0,
+      "screenshot": "blog-light-en-768.png"
+    },
+    {
+      "route": "/blog",
+      "theme": "light",
+      "lang": "en",
+      "viewport": "1440",
+      "overflowPx": 0,
+      "screenshot": "blog-light-en-1440.png"
+    },
+    {
+      "route": "/blog",
+      "theme": "dark",
+      "lang": "ar",
+      "viewport": "375",
+      "overflowPx": 0,
+      "screenshot": "blog-dark-ar-375.png"
+    },
+    {
+      "route": "/blog",
+      "theme": "dark",
+      "lang": "ar",
+      "viewport": "768",
+      "overflowPx": 0,
+      "screenshot": "blog-dark-ar-768.png"
+    },
+    {
+      "route": "/blog",
+      "theme": "dark",
+      "lang": "ar",
+      "viewport": "1440",
+      "overflowPx": 0,
+      "screenshot": "blog-dark-ar-1440.png"
+    },
+    {
+      "route": "/blog",
+      "theme": "dark",
+      "lang": "en",
+      "viewport": "375",
+      "overflowPx": 0,
+      "screenshot": "blog-dark-en-375.png"
+    },
+    {
+      "route": "/blog",
+      "theme": "dark",
+      "lang": "en",
+      "viewport": "768",
+      "overflowPx": 0,
+      "screenshot": "blog-dark-en-768.png"
+    },
+    {
+      "route": "/blog",
+      "theme": "dark",
+      "lang": "en",
+      "viewport": "1440",
+      "overflowPx": 0,
+      "screenshot": "blog-dark-en-1440.png"
+    },
+    {
+      "route": "/blog/immutable-cloud-backup-ransomware-protection",
+      "theme": "light",
+      "lang": "ar",
+      "viewport": "375",
+      "overflowPx": 0,
+      "screenshot": "blog-detail-light-ar-375.png"
+    },
+    {
+      "route": "/blog/immutable-cloud-backup-ransomware-protection",
+      "theme": "light",
+      "lang": "ar",
+      "viewport": "768",
+      "overflowPx": 0,
+      "screenshot": "blog-detail-light-ar-768.png"
+    },
+    {
+      "route": "/blog/immutable-cloud-backup-ransomware-protection",
+      "theme": "light",
+      "lang": "ar",
+      "viewport": "1440",
+      "overflowPx": 0,
+      "screenshot": "blog-detail-light-ar-1440.png"
+    },
+    {
+      "route": "/blog/immutable-cloud-backup-ransomware-protection",
+      "theme": "light",
+      "lang": "en",
+      "viewport": "375",
+      "overflowPx": 0,
+      "screenshot": "blog-detail-light-en-375.png"
+    },
+    {
+      "route": "/blog/immutable-cloud-backup-ransomware-protection",
+      "theme": "light",
+      "lang": "en",
+      "viewport": "768",
+      "overflowPx": 0,
+      "screenshot": "blog-detail-light-en-768.png"
+    },
+    {
+      "route": "/blog/immutable-cloud-backup-ransomware-protection",
+      "theme": "light",
+      "lang": "en",
+      "viewport": "1440",
+      "overflowPx": 0,
+      "screenshot": "blog-detail-light-en-1440.png"
+    },
+    {
+      "route": "/blog/immutable-cloud-backup-ransomware-protection",
+      "theme": "dark",
+      "lang": "ar",
+      "viewport": "375",
+      "overflowPx": 0,
+      "screenshot": "blog-detail-dark-ar-375.png"
+    },
+    {
+      "route": "/blog/immutable-cloud-backup-ransomware-protection",
+      "theme": "dark",
+      "lang": "ar",
+      "viewport": "768",
+      "overflowPx": 0,
+      "screenshot": "blog-detail-dark-ar-768.png"
+    },
+    {
+      "route": "/blog/immutable-cloud-backup-ransomware-protection",
+      "theme": "dark",
+      "lang": "ar",
+      "viewport": "1440",
+      "overflowPx": 0,
+      "screenshot": "blog-detail-dark-ar-1440.png"
+    },
+    {
+      "route": "/blog/immutable-cloud-backup-ransomware-protection",
+      "theme": "dark",
+      "lang": "en",
+      "viewport": "375",
+      "overflowPx": 0,
+      "screenshot": "blog-detail-dark-en-375.png"
+    },
+    {
+      "route": "/blog/immutable-cloud-backup-ransomware-protection",
+      "theme": "dark",
+      "lang": "en",
+      "viewport": "768",
+      "overflowPx": 0,
+      "screenshot": "blog-detail-dark-en-768.png"
+    },
+    {
+      "route": "/blog/immutable-cloud-backup-ransomware-protection",
+      "theme": "dark",
+      "lang": "en",
+      "viewport": "1440",
+      "overflowPx": 0,
+      "screenshot": "blog-detail-dark-en-1440.png"
+    }
+  ],
+  "bannedWordHits": [],
+  "unpermittedClientNameHits": [],
+  "axeViolations": [],
+  "consoleErrors": [],
+  "pageErrors": [],
+  "lighthouseMobileProxy": {
+    "/case-studies": {
+      "domContentLoadedMs": 816,
+      "loadCompleteMs": 819,
+      "fcpMs": 1100,
+      "estimatedPerformanceScore": 98,
+      "estimatedAccessibilityScore": 100,
+      "estimatedBestPracticesScore": 100,
+      "estimatedSeoScore": 100
+    },
+    "/case-studies/case-1": {
+      "domContentLoadedMs": 770,
+      "loadCompleteMs": 772,
+      "fcpMs": 980,
+      "estimatedPerformanceScore": 98,
+      "estimatedAccessibilityScore": 100,
+      "estimatedBestPracticesScore": 100,
+      "estimatedSeoScore": 100
+    },
+    "/blog": {
+      "domContentLoadedMs": 853,
+      "loadCompleteMs": 858,
+      "fcpMs": 1188,
+      "estimatedPerformanceScore": 98,
+      "estimatedAccessibilityScore": 100,
+      "estimatedBestPracticesScore": 100,
+      "estimatedSeoScore": 100
+    },
+    "/blog/immutable-cloud-backup-ransomware-protection": {
+      "domContentLoadedMs": 809,
+      "loadCompleteMs": 811,
+      "fcpMs": 992,
+      "estimatedPerformanceScore": 98,
+      "estimatedAccessibilityScore": 100,
+      "estimatedBestPracticesScore": 100,
+      "estimatedSeoScore": 100
+    }
+  }
+}

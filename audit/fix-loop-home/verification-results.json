@@ -1,0 +1,91 @@
+{
+  "timestamp": "2026-11-13T09:26:16.349Z",
+  "viewports": {
+    "375px": {
+      "lightScreenshot": "/app/applet/audit/fix-loop-home/screenshots/home-375px-light.png",
+      "darkScreenshot": "/app/applet/audit/fix-loop-home/screenshots/home-375px-dark.png"
+    },
+    "768px": {
+      "lightScreenshot": "/app/applet/audit/fix-loop-home/screenshots/home-768px-light.png",
+      "darkScreenshot": "/app/applet/audit/fix-loop-home/screenshots/home-768px-dark.png"
+    },
+    "1440px": {
+      "lightScreenshot": "/app/applet/audit/fix-loop-home/screenshots/home-1440px-light.png",
+      "darkScreenshot": "/app/applet/audit/fix-loop-home/screenshots/home-1440px-dark.png"
+    }
+  },
+  "measurements": {
+    "screenHeight": 667,
+    "distanceToSectionPx": 618,
+    "distanceToFirstCardPx": 928,
+    "screensToSection": 0.93,
+    "screensToFirstCard": 1.39,
+    "passesUnder1_5Screens": true
+  },
+  "bannedWordsMatches": [
+    "نُزول"
+  ],
+  "consoleErrors": [],
+  "pageErrors": [],
+  "checks": {
+    "heroButtonWidths": {
+      "primaryWidth": 327,
+      "secondaryWidth": 327,
+      "primaryHeight": 48,
+      "secondaryHeight": 48,
+      "equalWidth": true,
+      "equalHeight": true
+    },
+    "networkCanvasMobile": {
+      "heroCanvasCount": 1,
+      "globalCanvasCount": 0,
+      "mobileNodeCount": 28
+    },
+    "mobileHeaderControlCount": 2,
+    "mobileDrawer": {
+      "drawerVisible": true,
+      "drawerLangBtnVisible": true,
+      "drawerThemeBtnsCount": 3
+    },
+    "whatsapp": {
+      "hasPulseDot": false,
+      "status": "away",
+      "soundMuted": true,
+      "boundingBox": {
+        "x": 16,
+        "y": 607,
+        "w": 48,
+        "h": 44
+      }
+    },
+    "services": {
+      "heading": "الخدمات",
+      "cardsCount": 4,
+      "hasShowMoreButtons": false,
+      "serviceCardsAreLinksCount": 4,
+      "firstCardHasNumbering": false
+    },
+    "architectureDiagram": {
+      "sectionExists": true,
+      "mobileSvgVisibleAt375": true,
+      "desktopSvgHiddenAt375": true,
+      "archMobileNodesCount": 5,
+      "archDesktopNodesCount": 5,
+      "mobileHorizontalOverflow": false
+    },
+    "desktop1440": {
+      "archSvgDesktopVisibleAt1440": true,
+      "archSvgMobileHiddenAt1440": true,
+      "desktopNodeCount": 95,
+      "desktopHorizontalOverflow": false
+    }
+  },
+  "performance": {
+    "domContentLoadedMs": 993,
+    "loadCompleteMs": 1025,
+    "fcpMs": 1424,
+    "lcpMs": 1424,
+    "cls": 0.0049,
+    "transferSizeKb": 0
+  }
+}

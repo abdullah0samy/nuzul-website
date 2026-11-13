@@ -1,0 +1,152 @@
+{
+  "timestamp": "2026-11-12T16:20:11.193Z",
+  "validationAudit": {
+    "errorNameVisible": true,
+    "errorCompanyVisible": true,
+    "errorPhoneVisible": true,
+    "errorEmailVisible": true,
+    "errorDetailsVisible": true,
+    "errorTurnstileVisible": true,
+    "validationScreenshot": "/app/applet/audit/phase-8/screenshots/phase8-contact-validation-errors.png"
+  },
+  "spamProtectionAudit": {
+    "honeypotStatus": 400,
+    "honeypotError": "SPAM_DETECTED"
+  },
+  "realSubmissionAudit": {
+    "successVisible": true,
+    "referenceId": "NZL-REQ-414205",
+    "storedCount": 1,
+    "latestSubmission": {
+      "referenceId": "NZL-REQ-414205",
+      "receivedAt": "2026-11-12T16:20:14.205Z",
+      "recipientInbox": "info@nuzultech.com",
+      "payload": {
+        "name": "م. طارق المنشاوي",
+        "company": "المجموعة الهندسية للتصنيع والتوريد",
+        "phone": "+20 101 234 5678",
+        "email": "t.elmenshawy@industrial-eg.com",
+        "serviceType": "cloud",
+        "details": "نرغب في عرض سعر لخادم سحابي معزول KVM VPS لتشغيل قاعدة بيانات ERP لعدد 35 مستخدماً مع نسخ احتياطي يومي.",
+        "lang": "ar"
+      }
+    },
+    "successScreenshot": "/app/applet/audit/phase-8/screenshots/phase8-contact-submission-success.png"
+  },
+  "keyboardOnlyAudit": {
+    "allInputsHaveLabels": true,
+    "focusOrderVerified": true
+  },
+  "matrix": [
+    {
+      "route": "/contact",
+      "theme": "light",
+      "lang": "ar",
+      "viewport": "375",
+      "overflowPx": 0,
+      "screenshot": "contact-light-ar-375.png"
+    },
+    {
+      "route": "/contact",
+      "theme": "light",
+      "lang": "ar",
+      "viewport": "768",
+      "overflowPx": 0,
+      "screenshot": "contact-light-ar-768.png"
+    },
+    {
+      "route": "/contact",
+      "theme": "light",
+      "lang": "ar",
+      "viewport": "1440",
+      "overflowPx": 0,
+      "screenshot": "contact-light-ar-1440.png"
+    },
+    {
+      "route": "/contact",
+      "theme": "light",
+      "lang": "en",
+      "viewport": "375",
+      "overflowPx": 0,
+      "screenshot": "contact-light-en-375.png"
+    },
+    {
+      "route": "/contact",
+      "theme": "light",
+      "lang": "en",
+      "viewport": "768",
+      "overflowPx": 0,
+      "screenshot": "contact-light-en-768.png"
+    },
+    {
+      "route": "/contact",
+      "theme": "light",
+      "lang": "en",
+      "viewport": "1440",
+      "overflowPx": 0,
+      "screenshot": "contact-light-en-1440.png"
+    },
+    {
+      "route": "/contact",
+      "theme": "dark",
+      "lang": "ar",
+      "viewport": "375",
+      "overflowPx": 0,
+      "screenshot": "contact-dark-ar-375.png"
+    },
+    {
+      "route": "/contact",
+      "theme": "dark",
+      "lang": "ar",
+      "viewport": "768",
+      "overflowPx": 0,
+      "screenshot": "contact-dark-ar-768.png"
+    },
+    {
+      "route": "/contact",
+      "theme": "dark",
+      "lang": "ar",
+      "viewport": "1440",
+      "overflowPx": 0,
+      "screenshot": "contact-dark-ar-1440.png"
+    },
+    {
+      "route": "/contact",
+      "theme": "dark",
+      "lang": "en",
+      "viewport": "375",
+      "overflowPx": 0,
+      "screenshot": "contact-dark-en-375.png"
+    },
+    {
+      "route": "/contact",
+      "theme": "dark",
+      "lang": "en",
+      "viewport": "768",
+      "overflowPx": 0,
+      "screenshot": "contact-dark-en-768.png"
+    },
+    {
+      "route": "/contact",
+      "theme": "dark",
+      "lang": "en",
+      "viewport": "1440",
+      "overflowPx": 0,
+      "screenshot": "contact-dark-en-1440.png"
+    }
+  ],
+  "axeViolations": [],
+  "consoleErrors": [],
+  "pageErrors": [],
+  "lighthouseMobileProxy": {
+    "/contact": {
+      "domContentLoadedMs": 849,
+      "loadCompleteMs": 851,
+      "fcpMs": 1036,
+      "estimatedPerformanceScore": 99,
+      "estimatedAccessibilityScore": 100,
+      "estimatedBestPracticesScore": 100,
+      "estimatedSeoScore": 100
+    }
+  }
+}

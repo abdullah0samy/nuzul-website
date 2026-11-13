@@ -1,991 +1,755 @@
-import React, { useState, useRef, useEffect } from 'react';
-import {
-  Code,
-  Smartphone,
-  ShoppingBag,
-  Layout,
-  Layers,
-  Server,
-  Terminal,
-  Monitor,
-  HardDrive,
-  Mail,
-  Globe2,
-  AtSign,
-  PhoneCall,
-  ShieldCheck,
-  Activity,
-  Database,
-  Cloud,
-  Cpu,
-  Eye,
-  CheckCircle2,
-  ArrowRight,
-  ArrowLeft,
-  Sparkles,
-  BookOpen,
-  ChevronDown,
-  ChevronUp,
-  Search,
-  X,
-  RotateCcw,
-  Clock,
-  History,
-  Trash2,
-  FilterX,
-} from 'lucide-react';
+import React, { useState, useEffect, useMemo } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
+import { SERVICES, ServiceItem } from '../../data/nuzulData';
 import { useApp } from '../../context/AppContext';
-import { NUZUL_SERVICES, NUZUL_CONTACT } from '../../data/nuzulData';
-import { ServiceCategoryKey, ServiceItem } from '../../types';
-import { RevealOnScroll, StaggerContainer, StaggerItem } from '../common/RevealOnScroll';
+import {
+  Check,
+  ArrowLeft,
+  ArrowRight,
+  RotateCcw,
+  SlidersHorizontal,
+  X,
+  Search,
+  ArrowUpDown,
+  ChevronDown,
+} from 'lucide-react';
+import { scoreArabicMatch } from '../../utils/arabicSearch';
+import { openGlobalSearch } from '../search/GlobalSearchCommandPalette';
 
-interface QuickTag {
-  id: string;
-  labelAr: string;
-  labelEn: string;
-  query: string;
-  synonyms: string[];
-}
-
-// 6 Core Quick Search Tags mapped directly to Nuzul Tech service portfolio
-const quickTags: QuickTag[] = [
+const CATEGORY_DEFS = [
   {
-    id: 'voip',
-    labelAr: 'سنترال وVoIP',
-    labelEn: 'VoIP & PBX',
-    query: 'سنترال وVoIP',
-    synonyms: ['سنترال', 'voip', 'اتصالات', 'telephony', 'مكالمات', 'هاتف', 'ip telephony', 'كول سنتر', 'رد الي', 'ivr', 'بدالة'],
+    slug: 'all',
+    internalAr: 'all',
+    nameAr: 'جميع الخدمات',
+    nameEn: 'All Services',
   },
   {
-    id: 'cloud',
-    labelAr: 'خوادم سحابية',
-    labelEn: 'Cloud Servers',
-    query: 'خوادم سحابية',
-    synonyms: ['خوادم', 'سيرفرات', 'سحابية', 'سحابة', 'سيرفر', 'خادم', 'vps', 'cloud', 'bare-metal', 'استضافة', 'حاويات', 'افتراضية', 'vdi'],
+    slug: 'infrastructure',
+    internalAr: 'الشبكات والبنية التحتية',
+    nameAr: 'الشبكات والبنية التحتية',
+    nameEn: 'Infrastructure & Networks',
   },
   {
-    id: 'firewalls',
-    labelAr: 'جدران حماية وشبكات',
-    labelEn: 'Firewalls & Networks',
-    query: 'جدران حماية وشبكات',
-    synonyms: ['حماية', 'جدران', 'جدار', 'firewall', 'firewalls', 'شبكات', 'شبكة', 'سيبرانية', 'تأمين', 'vpn', 'كابلات', 'فايبر', 'cybersecurity'],
+    slug: 'cloud',
+    internalAr: 'السحابة والاستضافة',
+    nameAr: 'السحابة والاستضافة',
+    nameEn: 'Cloud & Servers',
   },
   {
-    id: 'erp',
-    labelAr: 'أنظمة ERP ومستشفيات',
-    labelEn: 'ERP & Hospital Systems',
-    query: 'أنظمة ERP ومستشفيات',
-    synonyms: ['erp', 'مستشفيات', 'مستشفى', 'عيادات', 'طبية', 'ادارية', 'مالية', 'فواتير', 'منظومات', 'سجلات', 'clinic', 'hospital', 'his', 'مرضى'],
+    slug: 'security',
+    internalAr: 'الأمن السيبراني',
+    nameAr: 'الأمن السيبراني',
+    nameEn: 'Cybersecurity',
   },
   {
-    id: 'apps',
-    labelAr: 'تطبيقات ويب وموبايل',
-    labelEn: 'Web & Mobile Apps',
-    query: 'تطبيقات ويب وموبايل',
-    synonyms: ['تطبيقات', 'تطبيق', 'ويب', 'موبايل', 'جوال', 'بوابات', 'مواقع', 'متاجر', 'متجر', 'تجارة', 'واجهات', 'web', 'app', 'mobile', 'ios', 'android', 'برمجيات'],
-  },
-  {
-    id: 'surveillance',
-    labelAr: 'كاميرات ومراقبة',
-    labelEn: 'CCTV & Monitoring',
-    query: 'كاميرات ومراقبة',
-    synonyms: ['مراقبة', 'كاميرات', 'كاميرا', 'cctv', 'رصد', 'تتبع', 'nvr', 'observability', 'استباقي', 'تنبيهات'],
+    slug: 'software',
+    internalAr: 'البرمجيات وأنظمة الإدارة',
+    nameAr: 'البرمجيات وأنظمة الإدارة',
+    nameEn: 'Software & ERP',
   },
 ];
 
-// Arabic text normalizer (handles alef forms, teh marbuta, yaa, and tashkeel)
-const normalizeArabic = (text: string): string => {
-  if (!text) return '';
-  return text
-    .toLowerCase()
-    .trim()
-    .replace(/[أإآ]/g, 'ا')
-    .replace(/[ة]/g, 'ه')
-    .replace(/[ى]/g, 'ي')
-    .replace(/[ؤ]/g, 'و')
-    .replace(/[ئ]/g, 'ي')
-    .replace(/[\u064B-\u065F]/g, '');
-};
+const SORT_OPTIONS = [
+  { id: 'default', labelAr: 'الترتيب الافتراضي', labelEn: 'Default Order' },
+  { id: 'title', labelAr: 'الترتيب الأبجدي', labelEn: 'Alphabetical' },
+  { id: 'category', labelAr: 'حسب القطاع الهندسي', labelEn: 'By Engineering Pillar' },
+];
 
-// Strips common prefixes like conjunction 'و' and definite article 'ال'
-const cleanWord = (word: string): string => {
-  let cleaned = normalizeArabic(word).replace(/[.,/#!$%^&*;:{}=\-_`~()]/g, '');
-  if (cleaned.startsWith('و') && cleaned.length > 2) {
-    cleaned = cleaned.slice(1);
-  }
-  if (cleaned.startsWith('ال') && cleaned.length > 3) {
-    cleaned = cleaned.slice(2);
-  }
-  if (cleaned.startsWith('ب') && cleaned.length > 3) {
-    cleaned = cleaned.slice(1);
-  }
-  if (cleaned.startsWith('ل') && cleaned.length > 3) {
-    cleaned = cleaned.slice(1);
-  }
-  return cleaned;
-};
-
-// Levenshtein distance for fuzzy typo tolerance
-const levenshteinDistance = (a: string, b: string): number => {
-  if (a.length === 0) return b.length;
-  if (b.length === 0) return a.length;
-  const matrix: number[][] = [];
-  for (let i = 0; i <= b.length; i++) matrix[i] = [i];
-  for (let j = 0; j <= a.length; j++) matrix[0][j] = j;
-
-  for (let i = 1; i <= b.length; i++) {
-    for (let j = 1; j <= a.length; j++) {
-      if (b.charAt(i - 1) === a.charAt(j - 1)) {
-        matrix[i][j] = matrix[i - 1][j - 1];
-      } else {
-        matrix[i][j] = Math.min(
-          matrix[i - 1][j - 1] + 1, // substitution
-          matrix[i][j - 1] + 1,     // insertion
-          matrix[i - 1][j] + 1      // deletion
-        );
-      }
-    }
-  }
-  return matrix[b.length][a.length];
-};
-
-// Fuzzy word matcher (exact, substring, or edit-distance tolerance)
-const isWordFuzzyMatch = (queryWord: string, targetWord: string): boolean => {
-  if (!queryWord || !targetWord) return false;
-  if (queryWord === targetWord) return true;
-  if (targetWord.includes(queryWord) || queryWord.includes(targetWord)) return true;
-
-  // For words with length >= 3, allow 1 typo; for >= 7, allow 2 typos
-  const qLen = queryWord.length;
-  const tLen = targetWord.length;
-  if (qLen >= 3 && tLen >= 3) {
-    const maxDiff = qLen >= 7 ? 2 : 1;
-    if (Math.abs(qLen - tLen) <= maxDiff) {
-      if (levenshteinDistance(queryWord, targetWord) <= maxDiff) {
-        return true;
-      }
-    }
-  }
-  return false;
-};
-
-const getServiceHaystack = (service: ServiceItem): string => {
-  return [
-    service.title_ar,
-    service.title_en,
-    service.description_ar,
-    service.description_en,
-    service.category_ar,
-    service.category_en,
-    service.useCaseStory_ar,
-    service.useCaseStory_en,
-    ...(service.features_ar || []),
-    ...(service.features_en || []),
-  ]
-    .filter(Boolean)
-    .join(' ');
-};
-
-// Robust fuzzy search with weighted relevance scoring
-interface MatchResult {
-  matches: boolean;
-  score: number;
-}
-
-const evaluateFuzzyMatch = (
-  service: ServiceItem,
-  query: string,
-  selectedTagId: string | null
-): MatchResult => {
-  const trimmed = query.trim();
-  // If search is completely empty and no quick tag selected, match everything
-  if (!trimmed && !selectedTagId) {
-    return { matches: true, score: 1 };
-  }
-
-  const haystack = getServiceHaystack(service);
-  const normalizedHaystack = normalizeArabic(haystack);
-  const rawHaystack = haystack.toLowerCase();
-  const haystackWords = normalizedHaystack.split(/\s+/).map(cleanWord).filter((w) => w.length > 1);
-
-  let score = 0;
-
-  // 1. If a quick tag is selected, match against its synonym list
-  if (selectedTagId) {
-    const activeTag = quickTags.find((t) => t.id === selectedTagId);
-    if (activeTag) {
-      const tagMatch = activeTag.synonyms.some((syn) => {
-        const normSyn = normalizeArabic(syn);
-        return normalizedHaystack.includes(normSyn) || rawHaystack.includes(syn.toLowerCase());
-      });
-      if (tagMatch) {
-        return { matches: true, score: 100 };
-      }
-    }
-  }
-
-  // 2. Check if query matches any registered quick tag directly
-  const matchedQuickTag = quickTags.find(
-    (t) =>
-      normalizeArabic(t.labelAr) === normalizeArabic(trimmed) ||
-      normalizeArabic(t.query) === normalizeArabic(trimmed) ||
-      t.id.toLowerCase() === trimmed.toLowerCase()
-  );
-
-  if (matchedQuickTag) {
-    const tagSynMatch = matchedQuickTag.synonyms.some((syn) => {
-      const normSyn = normalizeArabic(syn);
-      return normalizedHaystack.includes(normSyn) || rawHaystack.includes(syn.toLowerCase());
-    });
-    if (tagSynMatch) {
-      return { matches: true, score: 90 };
-    }
-  }
-
-  // 3. Exact full phrase match (highest natural score)
-  const normQuery = normalizeArabic(trimmed);
-  const rawQuery = trimmed.toLowerCase();
-  if (normalizedHaystack.includes(normQuery) || rawHaystack.includes(rawQuery)) {
-    score += 50;
-    // Extra boost if match is in the title
-    const normTitleAr = normalizeArabic(service.title_ar);
-    const normTitleEn = service.title_en.toLowerCase();
-    if (normTitleAr.includes(normQuery) || normTitleEn.includes(rawQuery)) {
-      score += 40;
-    }
-    return { matches: true, score };
-  }
-
-  // 4. Token-based fuzzy matching
-  const rawTokens = trimmed.split(/\s+/).filter(Boolean);
-  const cleanedTokens = rawTokens.map(cleanWord).filter((t) => t.length > 1);
-  if (cleanedTokens.length === 0) {
-    return { matches: true, score: 1 };
-  }
-
-  let matchedTokenCount = 0;
-  for (const token of cleanedTokens) {
-    // Check if token matches directly or fuzzily with any word in the service haystack
-    const directHit = normalizedHaystack.includes(token) || rawHaystack.includes(token);
-    if (directHit) {
-      matchedTokenCount++;
-      score += 20;
-      continue;
-    }
-
-    // Fuzzy check against haystack words
-    const fuzzyHit = haystackWords.some((hWord) => isWordFuzzyMatch(token, hWord));
-    if (fuzzyHit) {
-      matchedTokenCount++;
-      score += 15;
-    }
-  }
-
-  // If at least one significant token matched fuzzily or directly
-  if (matchedTokenCount > 0) {
-    return { matches: true, score };
-  }
-
-  return { matches: false, score: 0 };
-};
-
-const RECENT_SEARCHES_STORAGE_KEY = 'nuzul_recent_searches_v2';
-const MAX_RECENT_SEARCHES = 6;
+const PAGE_SIZE = 9;
 
 export const ServicesSection: React.FC = () => {
-  const { locale, theme } = useApp();
-  const isAr = locale === 'ar';
-  const isDark = theme === 'dark';
+  const { lang, addToCart } = useApp();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [mobileSheetOpen, setMobileSheetOpen] = useState(false);
+  const [isSkeletonLoading, setIsSkeletonLoading] = useState(false);
+  const [expandedServiceIds, setExpandedServiceIds] = useState<Record<string, boolean>>({});
 
-  const [activeCategory, setActiveCategory] = useState<ServiceCategoryKey>('all');
-  const [showAll, setShowAll] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedTagId, setSelectedTagId] = useState<string | null>(null);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [recentSearches, setRecentSearches] = useState<string[]>([]);
+  const toggleServiceExpand = (id: string) => {
+    setExpandedServiceIds((prev) => ({ ...prev, [id]: !prev[id] }));
+  };
 
-  const searchContainerRef = useRef<HTMLDivElement>(null);
-  const searchInputRef = useRef<HTMLInputElement>(null);
+  const ArrowIcon = lang === 'ar' ? ArrowLeft : ArrowRight;
 
-  // Load recent searches from localStorage
-  useEffect(() => {
-    try {
-      const stored = localStorage.getItem(RECENT_SEARCHES_STORAGE_KEY);
-      if (stored) {
-        const parsed = JSON.parse(stored);
-        if (Array.isArray(parsed)) {
-          setRecentSearches(parsed.slice(0, MAX_RECENT_SEARCHES));
+  // Read filters from URL query params (?cat= or ?category=, ?q=, ?sort=, ?page=, ?skeleton=)
+  const rawCatParam = searchParams.get('cat') || searchParams.get('category') || 'all';
+  const activeCatDef =
+    CATEGORY_DEFS.find(
+      (c) => c.slug === rawCatParam || c.internalAr === rawCatParam
+    ) || CATEGORY_DEFS[0];
+  const activeCatSlug = activeCatDef.slug;
+
+  const queryParam = (searchParams.get('q') || '').trim();
+  const sortParam = searchParams.get('sort') || 'default';
+  const pageParam = Math.max(1, parseInt(searchParams.get('page') || '1', 10) || 1);
+  const forceSkeleton = searchParams.get('skeleton') === '1';
+
+  // Category counts (computed against queryParam if present so counts stay accurate)
+  const categoryCounts = useMemo(() => {
+    const counts: Record<string, number> = { all: 0 };
+    for (const c of CATEGORY_DEFS) {
+      if (c.slug !== 'all') counts[c.slug] = 0;
+    }
+
+    for (const s of SERVICES) {
+      if (queryParam) {
+        const matchScore = scoreArabicMatch(queryParam, {
+          title: `${s.title} ${s.titleEn}`,
+          subtitle: `${s.category} ${s.shortDesc} ${s.shortDescEn}`,
+          tags: [...s.features, ...s.featuresEn],
+        });
+        if (matchScore <= 0) continue;
+      }
+      counts.all += 1;
+      const catObj = CATEGORY_DEFS.find((c) => c.internalAr === s.category);
+      if (catObj) {
+        counts[catObj.slug] = (counts[catObj.slug] || 0) + 1;
+      }
+    }
+    return counts;
+  }, [queryParam]);
+
+  // Filter & sort services
+  const filteredServices = useMemo(() => {
+    const result: { service: ServiceItem; score: number }[] = [];
+
+    for (const service of SERVICES) {
+      const matchesCat =
+        activeCatSlug === 'all' || service.category === activeCatDef.internalAr;
+      if (!matchesCat) continue;
+
+      if (!queryParam) {
+        result.push({ service, score: 1 });
+      } else {
+        const score = scoreArabicMatch(queryParam, {
+          title: `${service.title} ${service.titleEn}`,
+          subtitle: `${service.category} ${service.shortDesc} ${service.shortDescEn}`,
+          tags: [...service.features, ...service.featuresEn],
+        });
+        if (score > 0) {
+          result.push({ service, score });
         }
       }
-    } catch {
-      // Graceful fallback
     }
-  }, []);
 
-  // Close recent searches dropdown on click outside
+    if (sortParam === 'title') {
+      result.sort((a, b) => {
+        const tA = lang === 'ar' ? a.service.title : a.service.titleEn;
+        const tB = lang === 'ar' ? b.service.title : b.service.titleEn;
+        return tA.localeCompare(tB, lang === 'ar' ? 'ar' : 'en');
+      });
+    } else if (sortParam === 'category') {
+      result.sort((a, b) =>
+        a.service.category.localeCompare(b.service.category, 'ar')
+      );
+    } else if (queryParam) {
+      result.sort((a, b) => b.score - a.score);
+    }
+
+    return result.map((r) => r.service);
+  }, [activeCatSlug, activeCatDef.internalAr, queryParam, sortParam, lang]);
+
+  const visibleCount = pageParam * PAGE_SIZE;
+  const visibleServices = filteredServices.slice(0, visibleCount);
+  const hasMore = visibleServices.length < filteredServices.length;
+
+  const updateUrlParams = (updates: {
+    cat?: string | null;
+    q?: string | null;
+    sort?: string | null;
+    page?: number | null;
+  }) => {
+    setIsSkeletonLoading(true);
+    const next = new URLSearchParams(searchParams);
+    // Normalize legacy 'category' param to 'cat'
+    next.delete('category');
+
+    if (updates.cat !== undefined) {
+      if (!updates.cat || updates.cat === 'all') {
+        next.delete('cat');
+      } else {
+        next.set('cat', updates.cat);
+      }
+      if (updates.page === undefined) next.delete('page');
+    }
+
+    if (updates.q !== undefined) {
+      if (!updates.q || !updates.q.trim()) {
+        next.delete('q');
+      } else {
+        next.set('q', updates.q.trim());
+      }
+      if (updates.page === undefined) next.delete('page');
+    }
+
+    if (updates.sort !== undefined) {
+      if (!updates.sort || updates.sort === 'default') {
+        next.delete('sort');
+      } else {
+        next.set('sort', updates.sort);
+      }
+    }
+
+    if (updates.page !== undefined) {
+      if (!updates.page || updates.page <= 1) {
+        next.delete('page');
+      } else {
+        next.set('page', String(updates.page));
+      }
+    }
+
+    setSearchParams(next);
+  };
+
   useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (
-        searchContainerRef.current &&
-        !searchContainerRef.current.contains(e.target as Node)
-      ) {
-        setIsDropdownOpen(false);
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+    if (!isSkeletonLoading) return;
+    const t = setTimeout(() => setIsSkeletonLoading(false), 90);
+    return () => clearTimeout(t);
+  }, [isSkeletonLoading, searchParams]);
 
-  // Save query to recent searches
-  const saveRecentSearch = (query: string) => {
-    const trimmed = query.trim();
-    if (!trimmed || trimmed.length < 2) return;
+  const handleClearAllFilters = () => {
+    setSearchParams({});
+    setMobileSheetOpen(false);
+  };
 
-    setRecentSearches((prev) => {
-      const filtered = prev.filter((item) => item.toLowerCase() !== trimmed.toLowerCase());
-      const updated = [trimmed, ...filtered].slice(0, MAX_RECENT_SEARCHES);
-      try {
-        localStorage.setItem(RECENT_SEARCHES_STORAGE_KEY, JSON.stringify(updated));
-      } catch {
-        // Safe fallback
-      }
-      return updated;
+  const hasActiveFilters =
+    activeCatSlug !== 'all' || Boolean(queryParam) || sortParam !== 'default';
+
+  const activeSortObj =
+    SORT_OPTIONS.find((s) => s.id === sortParam) || SORT_OPTIONS[0];
+
+  const handleRequestService = (service: ServiceItem) => {
+    addToCart({
+      id: service.id,
+      name: lang === 'ar' ? service.title : service.titleEn,
+      type: 'service',
+      price: 0,
+      billingCycle: 'one-time',
+      details: lang === 'ar' ? service.shortDesc : service.shortDescEn,
     });
-  };
-
-  const removeRecentSearch = (queryToRemove: string, e: React.MouseEvent) => {
-    e.stopPropagation();
-    setRecentSearches((prev) => {
-      const updated = prev.filter((item) => item !== queryToRemove);
-      try {
-        localStorage.setItem(RECENT_SEARCHES_STORAGE_KEY, JSON.stringify(updated));
-      } catch {
-        // Safe fallback
-      }
-      return updated;
-    });
-  };
-
-  const clearAllRecentSearches = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setRecentSearches([]);
-    try {
-      localStorage.removeItem(RECENT_SEARCHES_STORAGE_KEY);
-    } catch {
-      // Safe fallback
-    }
-  };
-
-  const handleSelectRecentSearch = (query: string) => {
-    setSearchQuery(query);
-    setSelectedTagId(null);
-    setActiveCategory('all');
-    setShowAll(true);
-    setIsDropdownOpen(false);
-    saveRecentSearch(query);
-  };
-
-  const iconMap: Record<string, React.ElementType> = {
-    Code,
-    Smartphone,
-    ShoppingBag,
-    Layout,
-    Layers,
-    Server,
-    Terminal,
-    Monitor,
-    HardDrive,
-    Mail,
-    Globe2,
-    AtSign,
-    PhoneCall,
-    ShieldCheck,
-    Activity,
-    Database,
-    Cloud,
-    Cpu,
-    Eye,
-    CheckCircle2,
-  };
-
-  const isSearching = searchQuery.trim().length > 0 || selectedTagId !== null;
-
-  // 1. Evaluate fuzzy matches across all 23 services and rank by score
-  const scoredMatches = NUZUL_SERVICES.map((s) => {
-    const evalResult = evaluateFuzzyMatch(s, searchQuery, selectedTagId);
-    return { service: s, ...evalResult };
-  })
-    .filter((res) => res.matches)
-    .sort((a, b) => b.score - a.score);
-
-  const allCategoryMatches = scoredMatches.map((m) => m.service);
-
-  // 2. Filter by active category
-  const filteredServices = allCategoryMatches.filter((s) => {
-    if (activeCategory === 'all') return true;
-    return s.category_key === activeCategory;
-  });
-
-  const INITIAL_COUNT = 8;
-  const displayedServices =
-    !isSearching && activeCategory === 'all' && !showAll
-      ? filteredServices.slice(0, INITIAL_COUNT)
-      : filteredServices;
-
-  const softwareCount = NUZUL_SERVICES.filter((s) => s.category_key === 'software').length;
-  const infraCloudCount = NUZUL_SERVICES.filter((s) => s.category_key === 'infra_cloud').length;
-  const securityObsCount = NUZUL_SERVICES.filter((s) => s.category_key === 'security_obs').length;
-
-  const categories: { id: ServiceCategoryKey; labelAr: string; labelEn: string; count: number }[] = [
-    {
-      id: 'all',
-      labelAr: `جميع الخدمات (${NUZUL_SERVICES.length})`,
-      labelEn: `All Services (${NUZUL_SERVICES.length})`,
-      count: NUZUL_SERVICES.length,
-    },
-    {
-      id: 'infra_cloud',
-      labelAr: `البنية التحتية والسحابية (${infraCloudCount})`,
-      labelEn: `Infrastructure & Cloud (${infraCloudCount})`,
-      count: infraCloudCount,
-    },
-    {
-      id: 'security_obs',
-      labelAr: `الأمن والمراقبة (${securityObsCount})`,
-      labelEn: `Security & Observability (${securityObsCount})`,
-      count: securityObsCount,
-    },
-    {
-      id: 'software',
-      labelAr: `البرمجيات والحلول الرقمية (${softwareCount})`,
-      labelEn: `Software & Digital Solutions (${softwareCount})`,
-      count: softwareCount,
-    },
-  ];
-
-  // Completely resets search, quick tag, and category back to all services
-  const handleClearFilters = () => {
-    setSearchQuery('');
-    setSelectedTagId(null);
-    setActiveCategory('all');
-    setShowAll(true);
-    setIsDropdownOpen(false);
-    if (searchInputRef.current) {
-      searchInputRef.current.value = '';
-      searchInputRef.current.focus();
-    }
-  };
-
-  const handleTagClick = (tag: QuickTag) => {
-    if (selectedTagId === tag.id) {
-      // Deselect: restore full catalog
-      setSelectedTagId(null);
-      setSearchQuery('');
-      setActiveCategory('all');
-      setShowAll(true);
-    } else {
-      // Select
-      setSelectedTagId(tag.id);
-      setSearchQuery(tag.labelAr);
-      setActiveCategory('all');
-      setShowAll(true);
-      saveRecentSearch(tag.labelAr);
-    }
-    setIsDropdownOpen(false);
-  };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const val = e.target.value;
-    setSearchQuery(val);
-    setSelectedTagId(null);
-
-    if (!val.trim()) {
-      setActiveCategory('all');
-      setShowAll(true);
-    }
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      if (searchQuery.trim()) {
-        saveRecentSearch(searchQuery);
-        setIsDropdownOpen(false);
-      }
-    } else if (e.key === 'Escape') {
-      setIsDropdownOpen(false);
-      handleClearFilters();
-    }
   };
 
   return (
-    <section
-      id="services"
-      className={`relative overflow-hidden scroll-mt-24 px-5 py-20 sm:py-24 sm:px-6 lg:px-8 border-t transition-colors ${
-        isDark ? 'bg-[#070c14] border-white/10 text-white' : 'bg-slate-50 border-slate-200 text-slate-900'
-      }`}
-    >
-      <div className="mx-auto max-w-7xl">
-        {/* Header with Reveal on Scroll */}
-        <RevealOnScroll direction="up" threshold={0.15}>
-          <div className="mx-auto max-w-3xl text-center">
-            <div className="eyebrow-mono justify-center text-emerald-600 dark:text-emerald-400">
-              <ShieldCheck className="h-4 w-4" />
-              <span>{isAr ? 'خدمات نُزول تِك المتكاملة' : 'NUZUL TECH SERVICES'}</span>
-            </div>
-
-            <h2 className="mt-4 text-3xl font-black leading-tight sm:text-4xl">
-              {isAr ? 'كل ما يحتاجه عملك تحت سقف واحد' : 'Everything Your Business Needs Under One Roof'}
-            </h2>
-
-            <p
-              className={`mt-4 text-base leading-relaxed ${
-                isDark ? 'text-slate-300' : 'text-slate-600'
-              }`}
-            >
-              {isAr
-                ? 'حلول تقنية متكاملة ومترابطة للمؤسسات والشركات: من تجهيز الشبكات الفيزيائية والسنترال وجدران الحماية، إلى الخوادم السحابية والبرمجيات المخصصة مع دعم هندسي مصري متواصل.'
-                : 'Integrated enterprise IT solutions: physical cabling, VoIP telephony, firewalls, high-compute cloud VPS, and bespoke software with direct engineering support.'}
-            </p>
-
-            {/* Core Capability Pills */}
-            <div className="mt-6 flex flex-wrap items-center justify-center gap-2 text-xs font-mono">
-              {[
-                { ar: 'حلول الأمن والشبكات', en: 'Enterprise Security & Networks' },
-                { ar: 'أنظمة السنترال والاتصالات', en: 'Unified Telephony & VoIP' },
-                { ar: 'الأنظمة السحابية والـ ERP', en: 'Enterprise Cloud & ERP Systems' },
-                { ar: 'تطبيقات الويب والموبايل', en: 'Web & Mobile Applications' },
-                { ar: 'النسخ الاحتياطي واستعادة البيانات', en: 'Disaster Recovery & Backup' },
-                { ar: 'المراقبة المستمرة للأجهزة', en: '24/7 System Monitoring' },
-              ].map((item, idx) => (
-                <span
-                  key={idx}
-                  className={`inline-flex items-center gap-1.5 rounded-xl border px-3 py-1.5 font-bold transition-colors ${
-                    isDark
-                      ? 'border-emerald-500/40 bg-emerald-500/10 text-emerald-300'
-                      : 'border-emerald-300 bg-emerald-50 text-emerald-900 shadow-sm'
-                  }`}
-                >
-                  <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" />
-                  <span>{isAr ? item.ar : item.en}</span>
-                </span>
-              ))}
-            </div>
-
-            {/* Search Bar Feature with Recent Searches Dropdown & Fuzzy Matching */}
-            <div className="relative mx-auto mt-8 max-w-2xl" ref={searchContainerRef}>
-              <div
-                className={`relative flex items-center rounded-2xl border transition-all duration-300 backdrop-blur-md ${
-                  isDark
-                    ? 'bg-[#0d1524]/90 border-white/10 shadow-[0_10px_30px_rgba(0,0,0,0.4)] focus-within:border-emerald-500 focus-within:ring-2 focus-within:ring-emerald-500/25'
-                    : 'bg-white/95 border-slate-200 shadow-md focus-within:border-emerald-500 focus-within:ring-2 focus-within:ring-emerald-500/20'
-                }`}
+    <section id="services" className="section-spacing bg-page-band">
+      <div className="container-nuzul">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          {/* STICKY FILTER SIDEBAR (Right in RTL / Left in LTR on Desktop >= 1024px) */}
+          <aside
+            aria-label={lang === 'ar' ? 'تصفية وترتيب الخدمات' : 'Filter and sort services'}
+            data-testid="services-filter-sidebar"
+            className="hidden lg:block lg:col-span-3 sticky top-24 clean-card p-5 space-y-6"
+          >
+            {/* Global Search Trigger Button (No per-section text box per Section 3.7) */}
+            <div>
+              <button
+                type="button"
+                onClick={() => openGlobalSearch(queryParam)}
+                data-testid="sidebar-global-search-trigger"
+                className="w-full min-h-[44px] px-3.5 py-2.5 rounded-xl bg-page border border-token text-xs font-semibold text-muted hover-text-main flex items-center justify-between gap-2 transition-colors"
               >
-                <div className={`pointer-events-none flex items-center ${isAr ? 'pr-4 pl-2' : 'pl-4 pr-2'}`}>
-                  <Search className="h-5 w-5 text-emerald-500 transition-colors" />
-                </div>
-
-                <input
-                  ref={searchInputRef}
-                  type="text"
-                  value={searchQuery}
-                  onChange={handleInputChange}
-                  onFocus={() => setIsDropdownOpen(true)}
-                  onKeyDown={handleKeyDown}
-                  placeholder={
-                    isAr
-                      ? 'ابحث فوراً: سنترال VoIP، سيرفرات سحابية، ERP، جدران حماية، تطبيقات، مراقبة...'
-                      : 'Instant Search: VoIP PBX, Cloud VPS, ERP, Firewalls, Web Apps, Monitoring...'
-                  }
-                  className={`w-full bg-transparent py-3.5 text-sm outline-none transition-colors ${
-                    isDark ? 'text-white placeholder:text-slate-500' : 'text-slate-900 placeholder:text-slate-400'
-                  } ${isAr ? 'text-right' : 'text-left'}`}
-                  dir={isAr ? 'rtl' : 'ltr'}
-                />
-
-                {/* Clear Button & Results Count Badge */}
-                <div className={`flex items-center gap-2 ${isAr ? 'pl-3 pr-2' : 'pr-3 pl-2'}`}>
-                  {isSearching && (
-                    <>
-                      <span className="hidden sm:inline-flex items-center rounded-full bg-emerald-500/10 px-2.5 py-0.5 text-xs font-mono font-bold text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
-                        {filteredServices.length} {isAr ? 'نتيجة' : 'results'}
-                      </span>
-                      <button
-                        type="button"
-                        onClick={handleClearFilters}
-                        className={`rounded-full p-1.5 transition-colors cursor-pointer ${
-                          isDark
-                            ? 'hover:bg-white/10 text-slate-400 hover:text-white'
-                            : 'hover:bg-slate-100 text-slate-400 hover:text-slate-700'
-                        }`}
-                        title={isAr ? 'مسح البحث (Esc)' : 'Clear search (Esc)'}
-                        aria-label={isAr ? 'مسح البحث' : 'Clear search'}
-                      >
-                        <X className="h-4 w-4" />
-                      </button>
-                    </>
-                  )}
-                </div>
-              </div>
-
-              {/* Recent Searches Dropdown Menu */}
-              {isDropdownOpen && recentSearches.length > 0 && (
-                <div
-                  className={`absolute top-full mt-2 w-full overflow-hidden rounded-2xl border p-2.5 shadow-2xl backdrop-blur-xl z-50 text-start transition-all ${
-                    isDark
-                      ? 'bg-[#0d1524]/95 border-white/10 text-white shadow-[0_15px_40px_rgba(0,0,0,0.6)]'
-                      : 'bg-white/95 border-slate-200 text-slate-900 shadow-xl'
-                  }`}
-                  dir={isAr ? 'rtl' : 'ltr'}
-                >
-                  <div className="flex items-center justify-between px-3 py-1.5 border-b border-current/10 mb-1.5">
-                    <div className="flex items-center gap-1.5 text-xs font-bold text-slate-400 font-mono">
-                      <History className="h-3.5 w-3.5 text-emerald-500" />
-                      <span>{isAr ? 'عمليات البحث الأخيرة' : 'Recent Searches'}</span>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={clearAllRecentSearches}
-                      className="text-[11px] font-medium text-slate-400 hover:text-red-500 transition-colors cursor-pointer flex items-center gap-1"
-                    >
-                      <Trash2 className="h-3 w-3" />
-                      <span>{isAr ? 'مسح السجل' : 'Clear all'}</span>
-                    </button>
-                  </div>
-
-                  <div className="space-y-1">
-                    {recentSearches.map((item, idx) => (
-                      <div
-                        key={idx}
-                        onClick={() => handleSelectRecentSearch(item)}
-                        className={`group flex items-center justify-between rounded-xl px-3 py-2 text-xs transition-colors cursor-pointer ${
-                          isDark
-                            ? 'hover:bg-emerald-500/10 text-slate-200 hover:text-emerald-400'
-                            : 'hover:bg-emerald-50 text-slate-700 hover:text-emerald-800'
-                        }`}
-                      >
-                        <div className="flex items-center gap-2.5">
-                          <Clock className="h-3.5 w-3.5 text-slate-400 group-hover:text-emerald-500 transition-colors" />
-                          <span className="font-medium">{item}</span>
-                        </div>
-                        <button
-                          type="button"
-                          onClick={(e) => removeRecentSearch(item, e)}
-                          className="text-slate-400 hover:text-red-400 p-1 rounded-md hover:bg-slate-500/10 transition-colors cursor-pointer"
-                          title={isAr ? 'حذف من السجل' : 'Remove from recent'}
-                        >
-                          <X className="h-3.5 w-3.5" />
-                        </button>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Quick Search Suggestion Tags */}
-              <div className="mt-3 flex flex-wrap items-center justify-center gap-1.5 text-xs">
-                <span
-                  className={`inline-flex items-center gap-1 text-[11px] font-mono ${
-                    isDark ? 'text-slate-400' : 'text-slate-500'
-                  }`}
-                >
-                  <Sparkles className="h-3 w-3 text-emerald-500" />
-                  <span>{isAr ? 'بحث سريع:' : 'Quick tags:'}</span>
+                <span className="inline-flex items-center gap-2 truncate">
+                  <Search className="w-4 h-4 text-accent shrink-0" />
+                  <span className="truncate">
+                    {queryParam
+                      ? queryParam
+                      : lang === 'ar'
+                      ? 'بحث (Ctrl+K)'
+                      : 'Search (Ctrl+K)'}
+                  </span>
                 </span>
-                {quickTags.map((tag) => {
-                  const isSelected =
-                    selectedTagId === tag.id ||
-                    searchQuery.trim().toLowerCase() === tag.labelAr.toLowerCase();
+                <kbd className="px-1.5 py-0.5 rounded bg-surface border border-token text-[10px] ltr-num shrink-0">
+                  ⌘K
+                </kbd>
+              </button>
+            </div>
 
+            {/* Category Filters with Counts */}
+            <div>
+              <h2 className="text-xs font-bold text-accent mb-3">
+                {lang === 'ar' ? 'القطاعات الهندسية' : 'Engineering Pillars'}
+              </h2>
+              <div className="space-y-1.5" role="group" aria-label={lang === 'ar' ? 'تصنيفات الخدمات' : 'Service categories'}>
+                {CATEGORY_DEFS.map((cat) => {
+                  const isActive = activeCatSlug === cat.slug;
+                  const count = categoryCounts[cat.slug] ?? 0;
                   return (
                     <button
-                      key={tag.id}
+                      key={cat.slug}
                       type="button"
-                      onClick={() => handleTagClick(tag)}
-                      className={`rounded-lg px-2.5 py-1 text-[11px] font-medium transition-all cursor-pointer ${
-                        isSelected
-                          ? 'bg-emerald-500 text-white font-bold shadow-sm shadow-emerald-500/25 ring-1 ring-emerald-400'
-                          : isDark
-                          ? 'bg-white/5 text-slate-300 hover:bg-emerald-500/10 hover:text-emerald-400 border border-white/5'
-                          : 'bg-slate-100 text-slate-600 hover:bg-emerald-50 hover:text-emerald-700 border border-slate-200/60'
+                      onClick={() => updateUrlParams({ cat: cat.slug })}
+                      data-testid={`filter-cat-${cat.slug}`}
+                      aria-pressed={isActive}
+                      className={`w-full min-h-[44px] px-3.5 py-2.5 rounded-xl text-xs font-semibold flex items-center justify-between gap-2 transition-colors border ${
+                        isActive
+                          ? 'bg-accent text-accent-contrast border-accent'
+                          : 'bg-page text-main border-token hover-surface-2'
                       }`}
                     >
-                      {isAr ? tag.labelAr : tag.labelEn}
+                      <span className="text-start truncate">
+                        {lang === 'ar' ? cat.nameAr : cat.nameEn}
+                      </span>
+                      <span
+                        data-testid={`filter-cat-count-${cat.slug}`}
+                        className={`px-2 py-0.5 rounded text-[11px] font-bold ltr-num shrink-0 ${
+                          isActive
+                            ? 'bg-surface text-accent'
+                            : 'bg-surface-2 text-muted'
+                        }`}
+                      >
+                        {count}
+                      </span>
                     </button>
                   );
                 })}
               </div>
             </div>
 
-            {/* Category Filter Tabs */}
-            <div className="mt-7 flex flex-wrap items-center justify-center gap-2">
-              {categories.map((cat) => (
-                <button
-                  key={cat.id}
-                  type="button"
-                  onClick={() => {
-                    setActiveCategory(cat.id as any);
-                    setShowAll(true);
-                  }}
-                  className={`rounded-full px-5 py-2.5 text-xs font-bold transition-all cursor-pointer ${
-                    activeCategory === cat.id
-                      ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/25 ring-2 ring-emerald-400/40'
-                      : isDark
-                      ? 'bg-[#0d1524] text-slate-300 hover:bg-white/10 hover:text-white border border-white/10'
-                      : 'bg-white text-slate-600 hover:bg-slate-100 hover:text-slate-900 border border-slate-200 shadow-sm'
-                  }`}
+            {/* Sort Selector */}
+            <div className="pt-4 border-t border-token">
+              <label
+                htmlFor="services-sort-select"
+                className="block text-xs font-bold text-accent mb-2"
+              >
+                {lang === 'ar' ? 'ترتيب النتائج' : 'Sort Results'}
+              </label>
+              <div className="relative">
+                <select
+                  id="services-sort-select"
+                  data-testid="services-sort-select"
+                  value={sortParam}
+                  onChange={(e) => updateUrlParams({ sort: e.target.value })}
+                  className="w-full min-h-[44px] px-3.5 py-2.5 rounded-xl bg-page border border-token text-xs font-semibold text-main focus:outline-none focus:border-accent cursor-pointer"
                 >
-                  {isAr ? cat.labelAr : cat.labelEn}
-                </button>
-              ))}
-            </div>
-          </div>
-        </RevealOnScroll>
-
-        {/* Active Search Banner Indicator */}
-        {isSearching && filteredServices.length > 0 && (
-          <div className="mt-8 flex flex-wrap items-center justify-between gap-3 rounded-2xl border px-5 py-3 text-xs border-emerald-500/30 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 backdrop-blur-md">
-            <div className="flex items-center gap-2 font-medium">
-              <Search className="h-4 w-4 shrink-0 text-emerald-500" />
-              <span>
-                {isAr
-                  ? `نتائج البحث عن "${searchQuery}": تم العثور على ${filteredServices.length} خدمة متخصصة`
-                  : `Search results for "${searchQuery}": ${filteredServices.length} matching services found`}
-              </span>
-            </div>
-            <button
-              type="button"
-              onClick={handleClearFilters}
-              className="inline-flex items-center gap-1 font-bold text-xs underline cursor-pointer hover:opacity-80"
-            >
-              <X className="h-3.5 w-3.5" />
-              <span>{isAr ? 'مسح الفلاتر وعرض الكل' : 'Clear filters & show all'}</span>
-            </button>
-          </div>
-        )}
-
-        {/* Empty State when 0 services match (Exact Helpful Guidance requested) */}
-        {filteredServices.length === 0 && (
-          <div
-            className={`mt-12 mx-auto max-w-xl text-center rounded-2xl border p-8 sm:p-10 transition-all ${
-              isDark
-                ? 'bg-[#0d1524] border-white/10 shadow-[0_10px_35px_rgba(0,0,0,0.5)]'
-                : 'bg-white border-slate-200 shadow-xl'
-            }`}
-          >
-            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-500 mb-4 shadow-sm">
-              <FilterX className="h-8 w-8 stroke-[1.5]" />
-            </div>
-
-            <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
-              {isAr ? 'لم يتم العثور على خدمات مطابقة' : 'No services found'}
-            </h3>
-
-            <p
-              className={`mt-2 text-sm leading-relaxed ${
-                isDark ? 'text-slate-300' : 'text-slate-600'
-              }`}
-            >
-              {isAr
-                ? 'لم يتم العثور على أي خدمات مطابقة لبحثك، يرجى مسح الفلاتر وإعادة المحاولة لعرض كافة حلول نُزول تِك.'
-                : 'No services found, please clear your filters and try again.'}
-            </p>
-
-            {/* Clear Filters CTA */}
-            <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
-              <button
-                type="button"
-                onClick={handleClearFilters}
-                className="inline-flex items-center gap-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 px-5 py-2.5 text-xs font-bold text-white shadow-md shadow-emerald-600/25 transition-all cursor-pointer"
-              >
-                <RotateCcw className="h-4 w-4" />
-                <span>
-                  {isAr ? `مسح الفلاتر وعرض كافة الخدمات (${NUZUL_SERVICES.length})` : `Clear filters & show all ${NUZUL_SERVICES.length} services`}
-                </span>
-              </button>
-
-              <a
-                href={NUZUL_CONTACT.whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`inline-flex items-center gap-2 rounded-xl border px-4 py-2.5 text-xs font-bold transition-all cursor-pointer ${
-                  isDark
-                    ? 'border-white/10 bg-white/5 text-slate-300 hover:bg-white/10'
-                    : 'border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100'
-                }`}
-              >
-                <span>{isAr ? 'استفسار عبر واتساب' : 'Ask via WhatsApp'}</span>
-              </a>
-            </div>
-
-            {/* Suggested quick tags to immediately jump back */}
-            <div className="mt-6 pt-5 border-t border-current/10">
-              <span className="text-xs text-slate-400 block mb-2">
-                {isAr ? 'أو اختر أحد المواضيع الأكثر طلباً:' : 'Or explore popular topics:'}
-              </span>
-              <div className="flex flex-wrap items-center justify-center gap-1.5">
-                {quickTags.slice(0, 4).map((tag) => (
-                  <button
-                    key={tag.id}
-                    type="button"
-                    onClick={() => handleTagClick(tag)}
-                    className="rounded-lg px-2 py-1 text-[11px] font-medium bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500/20 transition-colors cursor-pointer"
-                  >
-                    {isAr ? tag.labelAr : tag.labelEn}
-                  </button>
-                ))}
+                  {SORT_OPTIONS.map((opt) => (
+                    <option key={opt.id} value={opt.id}>
+                      {lang === 'ar' ? opt.labelAr : opt.labelEn}
+                    </option>
+                  ))}
+                </select>
               </div>
             </div>
+
+            {hasActiveFilters && (
+              <div className="pt-4 border-t border-token">
+                <button
+                  type="button"
+                  onClick={handleClearAllFilters}
+                  data-testid="sidebar-clear-all-btn"
+                  className="w-full min-h-[44px] py-2.5 px-3 rounded-xl text-xs font-semibold text-muted hover-text-main border border-token bg-page inline-flex items-center justify-center gap-2"
+                >
+                  <RotateCcw className="w-3.5 h-3.5" />
+                  <span>{lang === 'ar' ? 'مسح جميع الفلاتر' : 'Clear all filters'}</span>
+                </button>
+              </div>
+            )}
+          </aside>
+
+          {/* MAIN SERVICES LISTING COLUMN (lg:col-span-9) */}
+          <div className="lg:col-span-9 space-y-6">
+            {/* Top Status Bar: Result Count + Mobile Filter Trigger + Active Filter Chips */}
+            <div className="clean-card p-4 sm:p-5 space-y-3">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <div
+                  data-testid="services-result-count"
+                  className="text-sm font-bold text-main"
+                >
+                  {lang === 'ar' ? (
+                    <span>
+                      <bdi dir="ltr" className="ltr-num text-accent">{visibleServices.length}</bdi> من{' '}
+                      <bdi dir="ltr" className="ltr-num">{filteredServices.length}</bdi> خدمة
+                    </span>
+                  ) : (
+                    <span>
+                      <bdi dir="ltr" className="ltr-num text-accent">{visibleServices.length}</bdi> of{' '}
+                      <bdi dir="ltr" className="ltr-num">{filteredServices.length}</bdi> services
+                    </span>
+                  )}
+                </div>
+
+                {/* Mobile Bottom Sheet Trigger (< 1024px) */}
+                <div className="flex lg:hidden items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setMobileSheetOpen(true)}
+                    data-testid="mobile-filter-sheet-trigger"
+                    className="min-h-[44px] px-4 py-2 rounded-xl bg-page border border-token text-xs font-bold text-main inline-flex items-center gap-2 whitespace-nowrap"
+                  >
+                    <SlidersHorizontal className="w-4 h-4 text-accent" />
+                    <span>{lang === 'ar' ? 'تصفية وترتيب' : 'Filter & Sort'}</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Active Filter Chips Row */}
+              {hasActiveFilters && (
+                <div
+                  data-testid="active-filter-chips-bar"
+                  className="pt-3 border-t border-token flex flex-wrap items-center gap-2"
+                >
+                  <span className="text-xs text-muted font-semibold">
+                    {lang === 'ar' ? 'الفلاتر النشطة:' : 'Active filters:'}
+                  </span>
+
+                  {activeCatSlug !== 'all' && (
+                    <span
+                      data-testid="active-filter-chip-cat"
+                      className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-accent-soft border border-accent text-xs font-semibold text-accent"
+                    >
+                      <span>
+                        {lang === 'ar' ? activeCatDef.nameAr : activeCatDef.nameEn}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => updateUrlParams({ cat: 'all' })}
+                        aria-label={lang === 'ar' ? 'إزالة فلتر القطاع' : 'Remove category filter'}
+                        className="p-0.5 hover:opacity-80"
+                      >
+                        <X className="w-3.5 h-3.5" />
+                      </button>
+                    </span>
+                  )}
+
+                  {queryParam && (
+                    <span
+                      data-testid="active-filter-chip-q"
+                      className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-accent-soft border border-accent text-xs font-semibold text-accent"
+                    >
+                      <span>
+                        {lang === 'ar' ? `البحث: ${queryParam}` : `Query: ${queryParam}`}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => updateUrlParams({ q: null })}
+                        aria-label={lang === 'ar' ? 'إزالة كلمة البحث' : 'Remove search query'}
+                        className="p-0.5 hover:opacity-80"
+                      >
+                        <X className="w-3.5 h-3.5" />
+                      </button>
+                    </span>
+                  )}
+
+                  {sortParam !== 'default' && (
+                    <span
+                      data-testid="active-filter-chip-sort"
+                      className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-surface-2 border border-token text-xs font-semibold text-main"
+                    >
+                      <ArrowUpDown className="w-3 h-3 text-accent" />
+                      <span>
+                        {lang === 'ar' ? activeSortObj.labelAr : activeSortObj.labelEn}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => updateUrlParams({ sort: 'default' })}
+                        aria-label={lang === 'ar' ? 'إعادة الترتيب الافتراضي' : 'Reset sort'}
+                        className="p-0.5 hover:opacity-80"
+                      >
+                        <X className="w-3.5 h-3.5" />
+                      </button>
+                    </span>
+                  )}
+
+                  <button
+                    type="button"
+                    onClick={handleClearAllFilters}
+                    data-testid="clear-all-filters-btn"
+                    className="text-xs font-bold text-accent hover:underline ms-auto"
+                  >
+                    {lang === 'ar' ? 'مسح الكل' : 'Clear all'}
+                  </button>
+                </div>
+              )}
+            </div>
+
+            {/* Skeleton Loading State */}
+            {isSkeletonLoading || forceSkeleton ? (
+              <div
+                data-testid="services-skeleton-grid"
+                className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"
+                aria-busy="true"
+                aria-label={lang === 'ar' ? 'جاري تحميل الخدمات' : 'Loading services'}
+              >
+                {Array.from({ length: 6 }).map((_, idx) => (
+                  <div
+                    key={idx}
+                    className="clean-card p-7 bg-surface space-y-4 animate-pulse"
+                  >
+                    <div className="h-5 w-32 rounded bg-surface-2" />
+                    <div className="h-6 w-3/4 rounded bg-surface-2" />
+                    <div className="h-14 w-full rounded bg-surface-2" />
+                    <div className="space-y-2 pt-3 border-t border-token">
+                      <div className="h-4 w-5/6 rounded bg-surface-2" />
+                      <div className="h-4 w-2/3 rounded bg-surface-2" />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : filteredServices.length === 0 ? (
+              /* Empty State with Suggestions + Contact CTA */
+              <div
+                data-testid="services-empty-state"
+                className="clean-card p-10 sm:p-12 text-center space-y-4"
+              >
+                <p className="text-lg font-bold text-main">
+                  {lang === 'ar'
+                    ? 'لم يتم العثور على خدمات مطابقة للفلاتر المحددة'
+                    : 'No engineering services match the selected filters'}
+                </p>
+                <p className="text-sm text-muted max-w-md mx-auto leading-relaxed">
+                  {lang === 'ar'
+                    ? 'يمكنك مسح الفلاتر لعرض جميع الخدمات الهندسية (23 خدمة) أو التواصل مباشرة مع مهندسينا لطلب مشروع مخصص.'
+                    : 'Clear active filters to browse all 23 engineering services, or contact our team for a custom architectural requirement.'}
+                </p>
+                <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
+                  <button
+                    type="button"
+                    onClick={handleClearAllFilters}
+                    data-testid="empty-state-reset-btn"
+                    className="btn-secondary min-h-[44px] px-5 py-2.5 text-xs font-bold whitespace-nowrap inline-flex items-center gap-2"
+                  >
+                    <RotateCcw className="w-4 h-4" />
+                    <span>{lang === 'ar' ? 'مسح جميع الفلاتر' : 'Clear All Filters'}</span>
+                  </button>
+                  <Link
+                    to="/contact"
+                    data-testid="empty-state-contact-cta"
+                    className="btn-primary min-h-[44px] px-5 py-2.5 text-xs font-bold whitespace-nowrap inline-flex items-center gap-2"
+                  >
+                    <span>
+                      {lang === 'ar' ? 'تواصل مع مهندس مختص' : 'Contact an Engineer'}
+                    </span>
+                    <ArrowIcon className="w-4 h-4" />
+                  </Link>
+                </div>
+              </div>
+            ) : (
+              /* Services Cards Grid + Load More Pagination */
+              <>
+                <div
+                  data-testid="services-cards-grid"
+                  className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 items-stretch"
+                >
+                  {visibleServices.map((service) => {
+                    const features =
+                      lang === 'ar' ? service.features : service.featuresEn;
+                    const isExpanded = Boolean(expandedServiceIds[service.id]);
+                    return (
+                      <div
+                        key={service.id}
+                        data-testid={`service-card-${service.id}`}
+                        className="clean-card clean-card-hover p-6 flex flex-col justify-between"
+                      >
+                        <div>
+                          <div className="mb-3">
+                            <span className="inline-block text-xs font-semibold text-accent px-2.5 py-1 rounded bg-surface-2 border border-token">
+                              {service.category}
+                            </span>
+                          </div>
+
+                          <h3 className="text-lg font-bold text-main mb-2">
+                            <Link
+                              to={`/services/${service.id}`}
+                              className="hover-text-accent transition-colors"
+                            >
+                              {lang === 'ar' ? service.title : service.titleEn}
+                            </Link>
+                          </h3>
+
+                          <p
+                            className={`text-muted text-sm leading-relaxed mb-4 ${
+                              isExpanded ? '' : 'line-clamp-2'
+                            }`}
+                          >
+                            {lang === 'ar' ? service.shortDesc : service.shortDescEn}
+                          </p>
+
+                          {isExpanded && (
+                            <ul className="space-y-2 border-t border-token pt-3 mb-4">
+                              {features.map((feat, idx) => (
+                                <li
+                                  key={idx}
+                                  className="flex items-start gap-2 text-xs text-main"
+                                >
+                                  <Check className="w-3.5 h-3.5 text-accent shrink-0 mt-0.5" />
+                                  <span>{feat}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          )}
+                        </div>
+
+                        <div className="pt-3 border-t border-token flex items-center justify-between gap-2">
+                          <button
+                            type="button"
+                            onClick={() => toggleServiceExpand(service.id)}
+                            data-testid={`service-expand-${service.id}`}
+                            aria-expanded={isExpanded}
+                            className="inline-flex items-center gap-1 min-h-[44px] text-xs font-semibold text-muted hover-text-main transition-colors whitespace-nowrap"
+                          >
+                            <span>
+                              {isExpanded
+                                ? lang === 'ar'
+                                  ? 'إخفاء التفاصيل'
+                                  : 'Show less'
+                                : lang === 'ar'
+                                ? 'إظهار المزيد'
+                                : 'Show more'}
+                            </span>
+                            <ChevronDown
+                              className={`w-3.5 h-3.5 transition-transform ${
+                                isExpanded ? 'rotate-180 text-accent' : ''
+                              }`}
+                            />
+                          </button>
+
+                          <div className="flex items-center gap-2">
+                            <Link
+                              to={`/services/${service.id}`}
+                              className="btn-secondary min-h-[44px] px-3 py-2 text-xs whitespace-nowrap"
+                            >
+                              {lang === 'ar' ? 'التفاصيل' : 'Details'}
+                            </Link>
+                            <button
+                              type="button"
+                              onClick={() => handleRequestService(service)}
+                              className="btn-primary min-h-[44px] px-3.5 py-2 text-xs whitespace-nowrap"
+                            >
+                              <span>{lang === 'ar' ? 'اطلب' : 'Request'}</span>
+                              <ArrowIcon className="w-3.5 h-3.5" />
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {/* Pagination / Load More */}
+                {hasMore && (
+                  <div className="pt-6 text-center">
+                    <button
+                      type="button"
+                      onClick={() => updateUrlParams({ page: pageParam + 1 })}
+                      data-testid="load-more-services-btn"
+                      className="btn-secondary min-h-[44px] px-6 py-3 text-sm font-bold whitespace-nowrap"
+                    >
+                      {lang === 'ar'
+                        ? `عرض باقي الخدمات (${filteredServices.length - visibleServices.length})`
+                        : `Show remaining services (${filteredServices.length - visibleServices.length})`}
+                    </button>
+                  </div>
+                )}
+              </>
+            )}
           </div>
-        )}
+        </div>
+      </div>
 
-        {/* Services Grid with Staggered Reveal */}
-        {filteredServices.length > 0 && (
-          <StaggerContainer
-            staggerDelay={0.06}
-            className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+      {/* MOBILE BOTTOM SHEET FILTER DIALOG (< 1024px) */}
+      {mobileSheetOpen && (
+        <div
+          className="fixed inset-0 z-[80] lg:hidden flex flex-col justify-end"
+          data-testid="mobile-filter-sheet-backdrop"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setMobileSheetOpen(false);
+          }}
+        >
+          <div
+            className="fixed inset-0 bg-overlay pointer-events-none"
+            aria-hidden="true"
+          />
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-label={lang === 'ar' ? 'تصفية وترتيب الخدمات' : 'Filter and sort services'}
+            data-testid="mobile-filter-bottom-sheet"
+            className="relative z-10 w-full rounded-t-2xl bg-surface border-t-2 border-token p-5 max-h-[82vh] overflow-y-auto space-y-5"
           >
-            {displayedServices.map((service) => {
-              const Icon = iconMap[service.icon] || Server;
-              const title = isAr ? service.title_ar : service.title_en;
-              const desc = isAr ? service.description_ar : service.description_en;
-              const categoryLabel = isAr ? service.category_ar : service.category_en;
-              const story = isAr ? service.useCaseStory_ar : service.useCaseStory_en;
-              const features = isAr ? service.features_ar : service.features_en;
+            <div className="flex items-center justify-between pb-3 border-b border-token">
+              <span className="text-base font-bold text-main">
+                {lang === 'ar' ? 'تصفية وترتيب الخدمات' : 'Filter & Sort Services'}
+              </span>
+              <button
+                type="button"
+                onClick={() => setMobileSheetOpen(false)}
+                data-testid="mobile-filter-sheet-close"
+                aria-label={lang === 'ar' ? 'إغلاق' : 'Close'}
+                className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center rounded-lg text-muted hover-text-main"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
 
-              return (
-                <StaggerItem key={service.id} className="h-full">
-                  <article
-                    className={`group relative flex flex-col justify-between h-full rounded-2xl border-2 p-6 transition-all duration-300 hover:-translate-y-1.5 ${
-                      isDark
-                        ? 'border-emerald-500/25 bg-[#0d1524] hover:border-emerald-400 shadow-[0_10px_30px_rgba(0,0,0,0.5)] hover:shadow-[0_15px_35px_rgba(16,185,129,0.18)]'
-                        : 'border-slate-200 bg-white hover:border-emerald-500 shadow-md hover:shadow-xl'
+            <div className="space-y-2">
+              <div className="text-xs font-bold text-accent">
+                {lang === 'ar' ? 'القطاعات الهندسية' : 'Engineering Pillars'}
+              </div>
+              {CATEGORY_DEFS.map((cat) => {
+                const isActive = activeCatSlug === cat.slug;
+                const count = categoryCounts[cat.slug] ?? 0;
+                return (
+                  <button
+                    key={cat.slug}
+                    type="button"
+                    onClick={() => {
+                      updateUrlParams({ cat: cat.slug });
+                      setMobileSheetOpen(false);
+                    }}
+                    data-testid={`mobile-filter-cat-${cat.slug}`}
+                    className={`w-full min-h-[44px] px-3.5 py-2.5 rounded-xl text-xs font-semibold flex items-center justify-between border ${
+                      isActive
+                        ? 'bg-accent text-accent-contrast border-accent'
+                        : 'bg-page text-main border-token'
                     }`}
                   >
-                    <div>
-                      {/* Top Header: Icon + Category Badge */}
-                      <div className="flex items-start justify-between gap-3">
-                        <div
-                          className={`flex h-12 w-12 items-center justify-center rounded-xl border transition-all duration-300 group-hover:scale-110 ${
-                            isDark
-                              ? 'bg-emerald-500/15 border-emerald-500/30 text-emerald-400 group-hover:bg-emerald-500 group-hover:text-black group-hover:shadow-[0_0_20px_rgba(16,185,129,0.4)]'
-                              : 'bg-emerald-50 border-emerald-200 text-emerald-700 group-hover:bg-emerald-600 group-hover:text-white shadow-sm'
-                          }`}
-                        >
-                          <Icon className="h-6 w-6 stroke-[1.8]" />
-                        </div>
+                    <span>{lang === 'ar' ? cat.nameAr : cat.nameEn}</span>
+                    <span className="ltr-num font-bold">{count}</span>
+                  </button>
+                );
+              })}
+            </div>
 
-                        <span
-                          className={`rounded-full px-2.5 py-1 text-[11px] font-semibold border ${
-                            isDark
-                              ? 'bg-white/5 border-white/10 text-slate-300'
-                              : 'bg-slate-100 border-slate-200 text-slate-600'
-                          }`}
-                        >
-                          {categoryLabel}
-                        </span>
-                      </div>
+            <div className="space-y-2 pt-3 border-t border-token">
+              <label
+                htmlFor="mobile-services-sort"
+                className="block text-xs font-bold text-accent"
+              >
+                {lang === 'ar' ? 'ترتيب النتائج' : 'Sort Results'}
+              </label>
+              <select
+                id="mobile-services-sort"
+                value={sortParam}
+                onChange={(e) => {
+                  updateUrlParams({ sort: e.target.value });
+                  setMobileSheetOpen(false);
+                }}
+                className="w-full min-h-[44px] px-3.5 py-2.5 rounded-xl bg-page border border-token text-xs font-semibold text-main"
+              >
+                {SORT_OPTIONS.map((opt) => (
+                  <option key={opt.id} value={opt.id}>
+                    {lang === 'ar' ? opt.labelAr : opt.labelEn}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-                      {/* Service Title */}
-                      <h3 className="mt-5 text-lg font-bold leading-snug group-hover:text-emerald-500 transition-colors">
-                        {title}
-                      </h3>
-
-                      {/* Service Description */}
-                      <p
-                        className={`mt-2.5 text-xs leading-relaxed ${
-                          isDark ? 'text-slate-300' : 'text-slate-600'
-                        }`}
-                      >
-                        {desc}
-                      </p>
-
-                      {/* Real Customer Case Story */}
-                      {story && (
-                        <div
-                          className={`mt-4 rounded-xl border p-3 text-xs leading-relaxed transition-colors ${
-                            isDark
-                              ? 'border-emerald-500/20 bg-emerald-950/20 text-emerald-200/90'
-                              : 'border-emerald-200/80 bg-emerald-50/60 text-emerald-900'
-                          }`}
-                        >
-                          <div className="flex items-center gap-1.5 font-bold text-[11px] mb-1 font-mono uppercase text-emerald-600 dark:text-emerald-400">
-                            <BookOpen className="h-3 w-3" />
-                            <span>{isAr ? 'قصة تنفيذ حقيقية' : 'Production Case Story'}</span>
-                          </div>
-                          <p>{story}</p>
-                        </div>
-                      )}
-
-                      {/* Key Features Bullet List */}
-                      {features && features.length > 0 && (
-                        <ul className="mt-4 space-y-2 text-xs">
-                          {features.map((feature, fIdx) => (
-                            <li
-                              key={fIdx}
-                              className={`flex items-start gap-2 ${
-                                isDark ? 'text-slate-300' : 'text-slate-700'
-                              }`}
-                            >
-                              <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-emerald-500 mt-0.5" />
-                              <span className="leading-tight">{feature}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      )}
-                    </div>
-
-                    {/* Footer Action: Consultation / Direct Contact */}
-                    <div className="mt-6 pt-4 border-t border-current/10 flex items-center justify-between">
-                      <a
-                        href="#contact"
-                        className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-600 dark:text-emerald-400 group-hover:underline cursor-pointer"
-                      >
-                        <span>{isAr ? 'طلب الخدمة' : 'Request Service'}</span>
-                        {isAr ? (
-                          <ArrowLeft className="h-3.5 w-3.5 transition-transform group-hover:-translate-x-1" />
-                        ) : (
-                          <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
-                        )}
-                      </a>
-
-                      <a
-                        href={NUZUL_CONTACT.whatsappUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-[11px] font-mono text-slate-400 hover:text-emerald-500 transition-colors"
-                      >
-                        {isAr ? 'استفسار سريع' : 'Quick Chat'}
-                      </a>
-                    </div>
-                  </article>
-                </StaggerItem>
-              );
-            })}
-          </StaggerContainer>
-        )}
-
-        {/* Show More / Show Less Toggle Button */}
-        {!isSearching && activeCategory === 'all' && NUZUL_SERVICES.length > INITIAL_COUNT && (
-          <div className="mt-12 text-center">
-            <button
-              type="button"
-              onClick={() => setShowAll(!showAll)}
-              className="inline-flex items-center gap-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 px-6 py-3 text-xs font-bold uppercase tracking-wider text-white shadow-lg shadow-emerald-600/25 transition-all cursor-pointer"
-            >
-              <span>
-                {showAll
-                  ? isAr
-                    ? 'عرض خدمات أقل'
-                    : 'Show Less Services'
-                  : isAr
-                  ? `عرض كافة الخدمات المتبقية (${NUZUL_SERVICES.length - INITIAL_COUNT})`
-                  : `Show All Remaining (${NUZUL_SERVICES.length - INITIAL_COUNT}) Services`}
-              </span>
-              {showAll ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
-            </button>
+            <div className="pt-3 border-t border-token flex items-center gap-3">
+              <button
+                type="button"
+                onClick={handleClearAllFilters}
+                className="btn-secondary flex-1 min-h-[44px] py-2.5 text-xs font-bold whitespace-nowrap"
+              >
+                {lang === 'ar' ? 'مسح الكل' : 'Clear All'}
+              </button>
+              <button
+                type="button"
+                onClick={() => setMobileSheetOpen(false)}
+                className="btn-primary flex-1 min-h-[44px] py-2.5 text-xs font-bold whitespace-nowrap"
+              >
+                {lang === 'ar' ? 'عرض النتائج' : 'Show Results'}
+              </button>
+            </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </section>
   );
 };

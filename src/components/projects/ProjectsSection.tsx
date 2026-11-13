@@ -1,472 +1,579 @@
-import React, { useState } from 'react';
-import {
-  Shield,
-  Building2,
-  Activity,
-  Mail,
-  Truck,
-  Lock,
-  CheckCircle2,
-  AlertTriangle,
-  ArrowRight,
-  ArrowLeft,
-  X,
-  FileText,
-  Sparkles,
-  ExternalLink,
-  Cpu,
-  Layers,
-  ChevronDown,
-  ChevronUp,
-} from 'lucide-react';
+import React, { useMemo, useState } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
+import { PROJECTS, NormalizedProject } from '../../data/nuzulData';
 import { useApp } from '../../context/AppContext';
-import { NUZUL_CASE_STUDIES, NUZUL_CONTACT } from '../../data/nuzulData';
-import { CaseStudy } from '../../types';
-import { RevealOnScroll, StaggerContainer, StaggerItem } from '../common/RevealOnScroll';
+import { matchesArabicQuery, scoreArabicMatch } from '../../utils/arabicSearch';
+import { openGlobalSearch } from '../search/GlobalSearchCommandPalette';
+import { ArchitectureDiagram } from '../common/ArchitectureDiagram';
+import {
+  ArrowLeft,
+  ArrowRight,
+  SlidersHorizontal,
+  Search,
+  X,
+  RotateCcw,
+  Clock,
+  ChevronDown,
+} from 'lucide-react';
+
+interface CaseCategoryDef {
+  slug: 'all' | 'infrastructure' | 'cloud' | 'security' | 'software';
+  nameAr: string;
+  nameEn: string;
+}
+
+const CASE_CATEGORIES: CaseCategoryDef[] = [
+  { slug: 'all', nameAr: 'جميع المشاريع', nameEn: 'All Case Studies' },
+  { slug: 'infrastructure', nameAr: 'الشبكات والبنية التحتية', nameEn: 'Infrastructure & Networks' },
+  { slug: 'cloud', nameAr: 'السحابة والاستضافة', nameEn: 'Cloud & Servers' },
+  { slug: 'security', nameAr: 'الأمن السيبراني', nameEn: 'Cybersecurity' },
+  { slug: 'software', nameAr: 'البرمجيات وأنظمة الإدارة', nameEn: 'Software & ERP' },
+];
+
+const SORT_OPTIONS = [
+  { id: 'default', labelAr: 'الترتيب القياسي', labelEn: 'Featured Order' },
+  { id: 'title', labelAr: 'أبجدياً (أ - ي)', labelEn: 'Alphabetical (A - Z)' },
+];
+
+const ITEMS_PER_PAGE = 6;
 
 export const ProjectsSection: React.FC = () => {
-  const { locale, theme } = useApp();
-  const isAr = locale === 'ar';
-  const isDark = theme === 'dark';
+  const { lang } = useApp();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [mobileSheetOpen, setMobileSheetOpen] = useState(false);
+  const [expandedCaseIds, setExpandedCaseIds] = useState<Record<string, boolean>>({});
+  const ArrowIcon = lang === 'ar' ? ArrowLeft : ArrowRight;
 
-  const [activeFilter, setActiveFilter] = useState<'all' | 'healthcare' | 'mail' | 'infrastructure'>('all');
-  const [selectedCaseStudy, setSelectedCaseStudy] = useState<CaseStudy | null>(null);
-  const [showAllProjects, setShowAllProjects] = useState(false);
-
-  const iconMap: Record<string, React.ElementType> = {
-    Shield,
-    Building2,
-    Activity,
-    Mail,
-    Truck,
-    Lock,
-    CheckCircle2,
-    Sparkles,
-    Layers,
-    Cpu,
+  const toggleCaseExpand = (id: string) => {
+    setExpandedCaseIds((prev) => ({ ...prev, [id]: !prev[id] }));
   };
 
-  const filteredProjects = NUZUL_CASE_STUDIES.filter((p) => {
-    if (activeFilter === 'all') return true;
-    if (activeFilter === 'healthcare')
-      return (
-        p.category_en.toLowerCase().includes('health') ||
-        p.category_en.toLowerCase().includes('hospital') ||
-        p.category_en.toLowerCase().includes('clinic') ||
-        p.category_en.toLowerCase().includes('emr') ||
-        p.category_en.toLowerCase().includes('medical')
-      );
-    if (activeFilter === 'mail')
-      return (
-        p.category_en.toLowerCase().includes('mail') ||
-        p.category_en.toLowerCase().includes('email')
-      );
-    if (activeFilter === 'infrastructure')
-      return (
-        p.category_en.toLowerCase().includes('infrastructure') ||
-        p.category_en.toLowerCase().includes('network') ||
-        p.category_en.toLowerCase().includes('security') ||
-        p.category_en.toLowerCase().includes('cctv') ||
-        p.category_en.toLowerCase().includes('accounting') ||
-        p.category_en.toLowerCase().includes('finance') ||
-        p.category_en.toLowerCase().includes('tax') ||
-        p.category_en.toLowerCase().includes('logistics') ||
-        p.category_en.toLowerCase().includes('turnkey') ||
-        p.category_en.toLowerCase().includes('crm') ||
-        p.category_en.toLowerCase().includes('qa') ||
-        p.category_en.toLowerCase().includes('software')
-      );
-    return true;
-  });
+  const catParam = (searchParams.get('cat') || 'all') as CaseCategoryDef['slug'];
+  const queryParam = (searchParams.get('q') || '').trim();
+  const sortParam = searchParams.get('sort') || 'default';
+  const pageParam = Math.max(1, parseInt(searchParams.get('page') || '1', 10) || 1);
 
-  const INITIAL_PROJECTS_COUNT = 6;
-  const displayedProjects =
-    activeFilter === 'all' && !showAllProjects
-      ? filteredProjects.slice(0, INITIAL_PROJECTS_COUNT)
-      : filteredProjects;
+  const activeCatDef =
+    CASE_CATEGORIES.find((c) => c.slug === catParam) || CASE_CATEGORIES[0];
+  const activeCatSlug = activeCatDef.slug;
+
+  const queryMatchedProjects = useMemo(() => {
+    if (!queryParam) return PROJECTS;
+    return PROJECTS.filter((p) => {
+      const haystacks = [
+        p.title,
+        p.titleEn,
+        p.client,
+        p.clientEn,
+        p.contextAr,
+        p.contextEn,
+        p.challenge,
+        p.challengeEn,
+        p.solution,
+        p.solutionEn,
+        p.qualitativeOutcomeAr,
+        p.qualitativeOutcomeEn,
+        ...p.technologies,
+      ];
+      return matchesArabicQuery(queryParam, haystacks);
+    });
+  }, [queryParam]);
+
+  const categoryCounts = useMemo(() => {
+    const counts: Record<string, number> = {
+      all: queryMatchedProjects.length,
+    };
+    for (const c of CASE_CATEGORIES) {
+      if (c.slug !== 'all') {
+        counts[c.slug] = queryMatchedProjects.filter(
+          (p) => p.categorySlug === c.slug
+        ).length;
+      }
+    }
+    return counts;
+  }, [queryMatchedProjects]);
+
+  const filteredProjects = useMemo(() => {
+    let list: NormalizedProject[] =
+      activeCatSlug === 'all'
+        ? [...queryMatchedProjects]
+        : queryMatchedProjects.filter((p) => p.categorySlug === activeCatSlug);
+
+    if (queryParam && sortParam === 'default') {
+      list.sort(
+        (a, b) =>
+          scoreArabicMatch(queryParam, [b.title, b.titleEn, ...b.technologies]) -
+          scoreArabicMatch(queryParam, [a.title, a.titleEn, ...a.technologies])
+      );
+    } else if (sortParam === 'title') {
+      list.sort((a, b) => {
+        const tA = lang === 'ar' ? a.title : a.titleEn;
+        const tB = lang === 'ar' ? b.title : b.titleEn;
+        return tA.localeCompare(tB, lang === 'ar' ? 'ar' : 'en');
+      });
+    }
+
+    return list;
+  }, [queryMatchedProjects, activeCatSlug, queryParam, sortParam, lang]);
+
+  const visibleCount = pageParam * ITEMS_PER_PAGE;
+  const visibleProjects = filteredProjects.slice(0, visibleCount);
+  const hasMore = visibleCount < filteredProjects.length;
+
+  const updateUrlParams = (updates: {
+    cat?: string | null;
+    q?: string | null;
+    sort?: string | null;
+    page?: number | null;
+  }) => {
+    const next = new URLSearchParams(searchParams);
+
+    if (updates.cat !== undefined) {
+      if (!updates.cat || updates.cat === 'all') next.delete('cat');
+      else next.set('cat', updates.cat);
+      if (updates.page === undefined) next.delete('page');
+    }
+    if (updates.q !== undefined) {
+      if (!updates.q || !updates.q.trim()) next.delete('q');
+      else next.set('q', updates.q.trim());
+      if (updates.page === undefined) next.delete('page');
+    }
+    if (updates.sort !== undefined) {
+      if (!updates.sort || updates.sort === 'default') next.delete('sort');
+      else next.set('sort', updates.sort);
+    }
+    if (updates.page !== undefined) {
+      if (!updates.page || updates.page <= 1) next.delete('page');
+      else next.set('page', String(updates.page));
+    }
+
+    setSearchParams(next);
+  };
+
+  const handleClearAllFilters = () => {
+    setSearchParams({});
+    setMobileSheetOpen(false);
+  };
+
+  const hasActiveFilters =
+    activeCatSlug !== 'all' || Boolean(queryParam) || sortParam !== 'default';
 
   return (
-    <section
-      id="projects"
-      className={`relative overflow-hidden scroll-mt-24 px-5 py-20 sm:py-24 sm:px-6 lg:px-8 border-t transition-colors ${
-        isDark ? 'bg-[#090e17] border-white/10 text-white' : 'bg-slate-50 border-slate-200 text-slate-900'
-      }`}
-    >
-      <div className="mx-auto max-w-7xl">
-        {/* Section Header with Reveal on Scroll */}
-        <RevealOnScroll direction="up" threshold={0.2}>
-          <div className="mx-auto max-w-3xl text-center">
-            <div className="eyebrow-mono justify-center text-emerald-600 dark:text-emerald-400">
-              <Shield className="h-4 w-4" />
-              <span>{isAr ? 'قصص نجاح عملائنا ودراسات الحالة التقنية' : 'CLIENT SUCCESS STORIES & TECHNICAL CASE STUDIES'}</span>
-            </div>
-
-            <h2 className="mt-4 text-3xl font-black leading-tight sm:text-4xl">
-              {isAr
-                ? 'قصص نجاح عملائنا ودراسات الحالة التقنية لمؤسسات ومستشفيات مصرية'
-                : 'Grounded Case Studies & Real Outcomes Across Egypt'}
-            </h2>
-
-            <p
-              className={`mt-3 text-base leading-relaxed ${
-                isDark ? 'text-slate-300' : 'text-slate-600'
-              }`}
-            >
-              {isAr
-                ? 'دراسات حالة تقنية موثقة: تشخيص التحديات الهندسية، وبناء السحابة والأنظمة السيادية، والأثر التشغيلي والمالي المباشر على أعمال كل عميل.'
-                : 'Documented architectural interventions: diagnosing the root bottleneck, engineering sovereign cloud & local systems, and delivering quantifiable ROI for Egyptian enterprises.'}
-            </p>
-
-            {/* Filter Tabs */}
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-2">
-              {[
-                { id: 'all', labelAr: `جميع دراسات الحالة التقنية (${NUZUL_CASE_STUDIES.length})`, labelEn: `All Technical Case Studies (${NUZUL_CASE_STUDIES.length})` },
-                { id: 'healthcare', labelAr: 'المستشفيات والأنظمة الصحية والعيادات', labelEn: 'Hospitals & Healthcare' },
-                { id: 'mail', labelAr: 'هجرة البريد وحوكمة الأرشيف والـ DNS', labelEn: 'Email & Archiving Governance' },
-                { id: 'infrastructure', labelAr: 'البنية التحتية والشبكات والأمن السيبراني', labelEn: 'Infrastructure, Security & Networks' },
-              ].map((tab) => (
-                <button
-                  key={tab.id}
-                  type="button"
-                  onClick={() => setActiveFilter(tab.id as any)}
-                  className={`rounded-full px-5 py-2 text-xs font-bold transition-all cursor-pointer ${
-                    activeFilter === tab.id
-                      ? 'bg-emerald-500 text-white shadow-md ring-2 ring-emerald-400/40'
-                      : isDark
-                      ? 'bg-[#0d1524] text-slate-300 hover:bg-white/10 hover:text-white border border-white/10'
-                      : 'bg-white text-slate-600 hover:bg-slate-100 hover:text-slate-900 border border-slate-200 shadow-sm'
-                  }`}
-                >
-                  {isAr ? tab.labelAr : tab.labelEn}
-                </button>
-              ))}
-            </div>
-          </div>
-        </RevealOnScroll>
-
-        {/* Clean, Tidy Outer Project Cards Grid with Staggered Scroll Reveal */}
-        <StaggerContainer staggerDelay={0.08} className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {displayedProjects.map((project: CaseStudy) => {
-            const title = isAr ? project.title_ar : project.title_en;
-            const category = isAr ? project.category_ar : project.category_en;
-            const client = isAr ? project.client_ar : project.client_en;
-            const description = isAr ? project.description_ar : project.description_en;
-            const result = isAr ? project.result_ar : project.result_en;
-
-            return (
-              <StaggerItem key={project.id} className="h-full">
-                <article
-                  className={`group relative flex flex-col justify-between h-full rounded-3xl border p-6 sm:p-7 transition-all duration-300 hover:-translate-y-1 ${
-                    isDark
-                      ? 'border-slate-800 bg-[#0d1524] hover:border-emerald-500/50 shadow-lg'
-                      : 'border-slate-200 bg-white hover:border-emerald-500/60 shadow-sm hover:shadow-md'
-                  }`}
+    <section id="projects" className="section-spacing bg-page-band">
+      <div className="container-nuzul">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          {/* STICKY FILTER SIDEBAR (Desktop >= 1024px) */}
+          <aside
+            aria-label={lang === 'ar' ? 'تصفية دراسات الحالة' : 'Filter case studies'}
+            data-testid="cases-filter-sidebar"
+            className="hidden lg:block lg:col-span-3 sticky top-24 clean-card p-5 space-y-6"
+          >
+            <div>
+              <button
+                type="button"
+                onClick={() => openGlobalSearch(queryParam)}
+                data-testid="cases-global-search-trigger"
+                className="w-full min-h-[44px] px-3.5 py-2.5 rounded-xl bg-page border border-token text-xs font-semibold text-muted hover-text-main flex items-center justify-between gap-2 transition-colors"
               >
-                <div>
-                  {/* Category & Client Header */}
-                  <div className="flex items-center justify-between gap-2 mb-3">
-                    <span className="inline-flex rounded-lg bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-1 font-mono text-[10px] font-bold text-emerald-600 dark:text-emerald-400">
-                      {category}
-                    </span>
-                    <span className="text-[11px] font-medium text-slate-400 truncate max-w-[60%] text-end">
-                      {client}
-                    </span>
-                  </div>
+                <span className="inline-flex items-center gap-2 truncate">
+                  <Search className="w-4 h-4 text-accent shrink-0" />
+                  <span className="truncate">
+                    {queryParam
+                      ? queryParam
+                      : lang === 'ar'
+                      ? 'بحث شامل (Ctrl+K)'
+                      : 'Global Search (Ctrl+K)'}
+                  </span>
+                </span>
+                <kbd className="px-1.5 py-0.5 rounded bg-surface border border-token text-[10px] ltr-num shrink-0">
+                  ⌘K
+                </kbd>
+              </button>
+            </div>
 
-                  {/* Clean Title */}
-                  <h3 className="text-base sm:text-lg font-bold leading-snug group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
-                    {title}
-                  </h3>
-
-                  {/* Concise Description: What Service Was Delivered */}
-                  <div className="mt-3.5 space-y-2">
-                    <div className="text-[11px] font-bold text-emerald-600 dark:text-emerald-400 flex items-center gap-1.5">
-                      <Layers className="h-3 w-3" />
-                      <span>{isAr ? 'الخدمة المنفذة:' : 'Delivered Scope:'}</span>
-                    </div>
-                    <p
-                      className={`text-xs leading-relaxed line-clamp-3 ${
-                        isDark ? 'text-slate-300' : 'text-slate-600'
+            <div>
+              <h2 className="text-xs font-bold text-accent mb-3">
+                {lang === 'ar' ? 'تصفية حسب القطاع التقني' : 'Filter by Engineering Pillar'}
+              </h2>
+              <div className="space-y-1.5" role="group" aria-label={lang === 'ar' ? 'تصنيفات المشاريع' : 'Case study categories'}>
+                {CASE_CATEGORIES.map((cat) => {
+                  const isActive = activeCatSlug === cat.slug;
+                  const count = categoryCounts[cat.slug] ?? 0;
+                  return (
+                    <button
+                      key={cat.slug}
+                      type="button"
+                      onClick={() => updateUrlParams({ cat: cat.slug })}
+                      data-testid={`cases-filter-cat-${cat.slug}`}
+                      aria-pressed={isActive}
+                      className={`w-full min-h-[44px] px-3.5 py-2.5 rounded-xl text-xs font-semibold flex items-center justify-between gap-2 transition-colors border ${
+                        isActive
+                          ? 'bg-accent text-accent-contrast border-accent'
+                          : 'bg-page text-main border-token hover-surface-2'
                       }`}
                     >
-                      {description}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="mt-6 pt-5 border-t border-slate-200 dark:border-white/10 space-y-3.5">
-                  {/* How Client Benefited (Outcome Banner) */}
-                  <div
-                    className={`rounded-2xl p-3 text-xs border ${
-                      isDark
-                        ? 'bg-emerald-950/20 border-emerald-500/20 text-emerald-300'
-                        : 'bg-emerald-50/80 border-emerald-200 text-emerald-950'
-                    }`}
-                  >
-                    <div className="text-[10px] font-mono font-bold text-emerald-600 dark:text-emerald-400 mb-1 flex items-center gap-1">
-                      <CheckCircle2 className="h-3.5 w-3.5" />
-                      <span>{isAr ? 'كيف استفاد العميل من نُزول تِك:' : 'Client Value & Direct ROI:'}</span>
-                    </div>
-                    <p className="text-xs font-medium leading-relaxed">
-                      {result}
-                    </p>
-                  </div>
-
-                  {/* Tech stack tags */}
-                  <div className="flex flex-wrap gap-1.5">
-                    {project.tech.slice(0, 3).map((t, i) => (
+                      <span className="text-start truncate">
+                        {lang === 'ar' ? cat.nameAr : cat.nameEn}
+                      </span>
                       <span
-                        key={i}
-                        className={`rounded-md border px-2 py-0.5 font-mono text-[10px] ${
-                          isDark
-                            ? 'bg-white/5 border-white/5 text-slate-400'
-                            : 'bg-slate-100 border-slate-200 text-slate-600'
+                        className={`px-2 py-0.5 rounded text-[11px] font-bold ltr-num shrink-0 ${
+                          isActive ? 'bg-surface text-accent' : 'bg-surface-2 text-muted'
                         }`}
                       >
-                        {t}
+                        {count}
                       </span>
-                    ))}
-                    {project.tech.length > 3 && (
-                      <span className="rounded-md border border-slate-200 dark:border-white/10 px-1.5 py-0.5 font-mono text-[10px] text-slate-400">
-                        +{project.tech.length - 3}
-                      </span>
-                    )}
-                  </div>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
 
-                  {/* View Details Button (Opens rich modal) */}
+            <div className="pt-4 border-t border-token">
+              <label
+                htmlFor="cases-sort-select"
+                className="block text-xs font-bold text-accent mb-2"
+              >
+                {lang === 'ar' ? 'ترتيب النتائج' : 'Sort Results'}
+              </label>
+              <select
+                id="cases-sort-select"
+                data-testid="cases-sort-select"
+                value={sortParam}
+                onChange={(e) => updateUrlParams({ sort: e.target.value })}
+                className="w-full min-h-[44px] px-3.5 py-2.5 rounded-xl bg-page border border-token text-xs font-semibold text-main focus:outline-none focus:border-accent cursor-pointer"
+              >
+                {SORT_OPTIONS.map((opt) => (
+                  <option key={opt.id} value={opt.id}>
+                    {lang === 'ar' ? opt.labelAr : opt.labelEn}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {hasActiveFilters && (
+              <div className="pt-4 border-t border-token">
+                <button
+                  type="button"
+                  onClick={handleClearAllFilters}
+                  data-testid="cases-sidebar-clear-btn"
+                  className="w-full min-h-[44px] py-2.5 px-3 rounded-xl text-xs font-semibold text-muted hover-text-main border border-token bg-page inline-flex items-center justify-center gap-2"
+                >
+                  <RotateCcw className="w-3.5 h-3.5" />
+                  <span>{lang === 'ar' ? 'مسح جميع الفلاتر' : 'Clear all filters'}</span>
+                </button>
+              </div>
+            )}
+          </aside>
+
+          {/* MAIN CASE STUDIES LISTING COLUMN (lg:col-span-9) */}
+          <div className="lg:col-span-9 space-y-6">
+            {/* Status Bar: Result Count + Mobile Filter Sheet Trigger + Active Chips */}
+            <div className="clean-card p-4 sm:p-5 space-y-3">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <div
+                  data-testid="cases-result-count"
+                  className="text-sm font-bold text-main"
+                >
+                  {lang === 'ar' ? (
+                    <span>
+                      عرض <bdi dir="ltr" className="ltr-num text-accent">{visibleProjects.length}</bdi> من أصل{' '}
+                      <bdi dir="ltr" className="ltr-num">{filteredProjects.length}</bdi> دراسة حالة هندسية
+                    </span>
+                  ) : (
+                    <span>
+                      Showing <bdi dir="ltr" className="ltr-num text-accent">{visibleProjects.length}</bdi> of{' '}
+                      <bdi dir="ltr" className="ltr-num">{filteredProjects.length}</bdi> engineering case studies
+                    </span>
+                  )}
+                </div>
+
+                <div className="flex lg:hidden items-center gap-2">
                   <button
                     type="button"
-                    onClick={() => setSelectedCaseStudy(project)}
-                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white py-2.5 text-xs font-bold transition-all cursor-pointer shadow-sm hover:shadow"
+                    onClick={() => setMobileSheetOpen(true)}
+                    data-testid="cases-mobile-filter-trigger"
+                    className="min-h-[44px] px-4 py-2 rounded-xl bg-page border border-token text-xs font-bold text-main inline-flex items-center gap-2 whitespace-nowrap"
                   >
-                    <FileText className="h-3.5 w-3.5" />
-                    <span>{isAr ? 'عرض تفاصيل دراسة الحالة والحل الهندسي' : 'View Full Case Study & Architecture'}</span>
+                    <SlidersHorizontal className="w-4 h-4 text-accent" />
+                    <span>{lang === 'ar' ? 'تصفية وترتيب' : 'Filter & Sort'}</span>
                   </button>
                 </div>
-              </article>
-            </StaggerItem>
-          );
-        })}
-      </StaggerContainer>
+              </div>
 
-        {/* Show More / Show Less Toggle Button for Projects */}
-        {activeFilter === 'all' && filteredProjects.length > INITIAL_PROJECTS_COUNT && (
-          <div className="mt-12 flex flex-col items-center justify-center gap-3">
-            <button
-              type="button"
-              onClick={() => setShowAllProjects(!showAllProjects)}
-              className="inline-flex items-center gap-2.5 rounded-full bg-emerald-600 hover:bg-emerald-500 px-8 py-3.5 text-sm font-bold text-white shadow-lg shadow-emerald-600/25 transition-all duration-300 hover:scale-105 cursor-pointer ring-2 ring-emerald-400/40"
-            >
-              {showAllProjects ? (
-                <>
-                  <span>{isAr ? 'عرض دراسات أقل' : 'Show Fewer Case Studies'}</span>
-                  <ChevronUp className="h-4 w-4" />
-                </>
-              ) : (
-                <>
-                  <span>
-                    {isAr
-                      ? `عرض باقي قصص نجاح عملائنا ودراسات الحالة (${filteredProjects.length - INITIAL_PROJECTS_COUNT} مشاريع إضافية)`
-                      : `View All ${filteredProjects.length} Case Studies`}
+              {hasActiveFilters && (
+                <div
+                  data-testid="cases-active-filter-chips"
+                  className="pt-3 border-t border-token flex flex-wrap items-center gap-2"
+                >
+                  <span className="text-xs text-muted font-semibold">
+                    {lang === 'ar' ? 'الفلاتر النشطة:' : 'Active filters:'}
                   </span>
-                  <ChevronDown className="h-4 w-4" />
-                </>
+
+                  {activeCatSlug !== 'all' && (
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-accent-soft border border-accent text-xs font-semibold text-accent">
+                      <span>{lang === 'ar' ? activeCatDef.nameAr : activeCatDef.nameEn}</span>
+                      <button
+                        type="button"
+                        onClick={() => updateUrlParams({ cat: 'all' })}
+                        aria-label={lang === 'ar' ? 'إزالة فلتر القطاع' : 'Remove category filter'}
+                        className="p-0.5 hover:opacity-80"
+                      >
+                        <X className="w-3.5 h-3.5" />
+                      </button>
+                    </span>
+                  )}
+
+                  {queryParam && (
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-accent-soft border border-accent text-xs font-semibold text-accent">
+                      <span>
+                        {lang === 'ar' ? `البحث: ${queryParam}` : `Query: ${queryParam}`}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => updateUrlParams({ q: null })}
+                        aria-label={lang === 'ar' ? 'إزالة كلمة البحث' : 'Remove query filter'}
+                        className="p-0.5 hover:opacity-80"
+                      >
+                        <X className="w-3.5 h-3.5" />
+                      </button>
+                    </span>
+                  )}
+
+                  <button
+                    type="button"
+                    onClick={handleClearAllFilters}
+                    data-testid="cases-clear-all-btn"
+                    className="ms-auto text-xs font-bold text-accent hover:underline whitespace-nowrap"
+                  >
+                    {lang === 'ar' ? 'مسح الكل' : 'Clear all'}
+                  </button>
+                </div>
               )}
-            </button>
-            <span className="text-xs font-mono text-slate-400">
-              {isAr
-                ? `يتم عرض ${displayedProjects.length} من أصل ${filteredProjects.length} دراسة حالة تقنية موثقة`
-                : `Showing ${displayedProjects.length} of ${filteredProjects.length} documented case studies`}
-            </span>
+            </div>
+
+            {/* Empty State */}
+            {filteredProjects.length === 0 ? (
+              <div
+                data-testid="cases-empty-state"
+                className="clean-card p-10 text-center space-y-4"
+              >
+                <h3 className="text-xl font-bold text-main">
+                  {lang === 'ar'
+                    ? 'لا توجد دراسات حالة مطابقة للفلاتر المحددة'
+                    : 'No case studies match your selected filters'}
+                </h3>
+                <p className="text-sm text-muted max-w-md mx-auto">
+                  {lang === 'ar'
+                    ? 'يمكنك مسح الفلاتر لاستعراض كافة المشاريع المنفذة أو التواصل مع فريقنا الهندسي لمناقشة مشروع مماثل.'
+                    : 'Clear the active filters to view all documented deployments or contact our engineering team directly.'}
+                </p>
+                <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
+                  <button
+                    type="button"
+                    onClick={handleClearAllFilters}
+                    className="btn-secondary px-5 py-2.5 text-xs font-bold"
+                  >
+                    {lang === 'ar' ? 'عرض جميع المشاريع' : 'Show All Case Studies'}
+                  </button>
+                  <Link to="/contact" className="btn-primary px-5 py-2.5 text-xs font-bold">
+                    {lang === 'ar' ? 'احجز استشارة هندسية' : 'Book Engineering Consultation'}
+                  </Link>
+                </div>
+              </div>
+            ) : (
+              <>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {visibleProjects.map((project) => {
+                    const isExpanded = Boolean(expandedCaseIds[project.id]);
+                    return (
+                      <article
+                        key={project.id}
+                        data-testid={`case-study-card-${project.id}`}
+                        className="clean-card clean-card-hover overflow-hidden flex flex-col justify-between"
+                      >
+                        <div>
+                          <div className="bg-surface-2 overflow-hidden border-b border-token">
+                            <ArchitectureDiagram caseId={project.id} variant="card" />
+                          </div>
+
+                          <div className="p-6 space-y-3">
+                            <div className="flex flex-wrap items-center justify-between gap-2">
+                              <span className="text-xs font-semibold text-accent px-2.5 py-1 rounded bg-surface-2 border border-token whitespace-nowrap">
+                                {lang === 'ar' ? project.category : project.categoryEn}
+                              </span>
+                              <span className="text-xs text-muted inline-flex items-center gap-1">
+                                <Clock className="w-3.5 h-3.5 text-accent" />
+                                <span>{lang === 'ar' ? project.timelineAr : project.timelineEn}</span>
+                              </span>
+                            </div>
+
+                            <div className="text-xs font-semibold text-muted">
+                              {lang === 'ar' ? project.client : project.clientEn}
+                            </div>
+
+                            <h3 className="text-lg font-bold text-main leading-snug">
+                              <Link
+                                to={`/case-studies/${project.id}`}
+                                className="hover-text-accent transition-colors"
+                              >
+                                {lang === 'ar' ? project.title : project.titleEn}
+                              </Link>
+                            </h3>
+
+                            <p
+                              className={`text-sm text-muted leading-relaxed ${
+                                isExpanded ? '' : 'line-clamp-2'
+                              }`}
+                            >
+                              {lang === 'ar'
+                                ? project.qualitativeOutcomeAr
+                                : project.qualitativeOutcomeEn}
+                            </p>
+
+                            {isExpanded && (
+                              <div className="space-y-2.5 pt-3 border-t border-token text-xs text-muted leading-relaxed">
+                                <p>
+                                  <strong className="text-main font-semibold">
+                                    {lang === 'ar' ? 'السياق: ' : 'Context: '}
+                                  </strong>
+                                  {lang === 'ar' ? project.contextAr : project.contextEn}
+                                </p>
+                                <p>
+                                  <strong className="text-main font-semibold">
+                                    {lang === 'ar' ? 'التحدي: ' : 'Challenge: '}
+                                  </strong>
+                                  {lang === 'ar' ? project.challenge : project.challengeEn}
+                                </p>
+                                <p>
+                                  <strong className="text-main font-semibold">
+                                    {lang === 'ar' ? 'التنفيذ: ' : 'Delivered: '}
+                                  </strong>
+                                  {lang === 'ar' ? project.solution : project.solutionEn}
+                                </p>
+                                <div className="flex flex-wrap gap-1.5 pt-1">
+                                  {project.technologies.map((tech, i) => (
+                                    <span
+                                      key={i}
+                                      dir="ltr"
+                                      className="ltr-num text-[11px] px-2 py-0.5 rounded bg-surface-2 text-muted border border-token whitespace-nowrap"
+                                    >
+                                      {tech}
+                                    </span>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+
+                        <div className="px-6 pb-4 pt-3 border-t border-token flex items-center justify-between gap-3">
+                          <button
+                            type="button"
+                            onClick={() => toggleCaseExpand(project.id)}
+                            data-testid={`case-expand-${project.id}`}
+                            aria-expanded={isExpanded}
+                            className="inline-flex items-center gap-1 min-h-[44px] text-xs font-semibold text-muted hover-text-main transition-colors whitespace-nowrap"
+                          >
+                            <span>
+                              {isExpanded
+                                ? lang === 'ar'
+                                  ? 'إخفاء التفاصيل'
+                                  : 'Show less'
+                                : lang === 'ar'
+                                ? 'إظهار المزيد'
+                                : 'Show more'}
+                            </span>
+                            <ChevronDown
+                              className={`w-3.5 h-3.5 transition-transform ${
+                                isExpanded ? 'rotate-180 text-accent' : ''
+                              }`}
+                            />
+                          </button>
+
+                          <Link
+                            to={`/case-studies/${project.id}`}
+                            className="inline-flex items-center gap-1.5 min-h-[44px] px-2 text-xs font-bold text-accent hover:underline shrink-0 whitespace-nowrap"
+                          >
+                            <span>{lang === 'ar' ? 'تفاصيل المشروع' : 'Read Case Study'}</span>
+                            <ArrowIcon className="w-3.5 h-3.5 shrink-0" />
+                          </Link>
+                        </div>
+                      </article>
+                    );
+                  })}
+                </div>
+
+                {hasMore && (
+                  <div className="pt-4 text-center">
+                    <button
+                      type="button"
+                      onClick={() => updateUrlParams({ page: pageParam + 1 })}
+                      data-testid="load-more-cases-btn"
+                      className="btn-secondary px-8 py-3.5 text-sm font-bold whitespace-nowrap"
+                    >
+                      {lang === 'ar'
+                        ? `عرض المزيد من المشاريع (${filteredProjects.length - visibleProjects.length} متبقية)`
+                        : `Load More Case Studies (${filteredProjects.length - visibleProjects.length} remaining)`}
+                    </button>
+                  </div>
+                )}
+              </>
+            )}
+          </div>
+        </div>
+
+        {/* MOBILE FILTER BOTTOM SHEET (< 1024px) */}
+        {mobileSheetOpen && (
+          <div
+            className="fixed inset-0 z-50 lg:hidden flex flex-col justify-end"
+            data-testid="cases-mobile-filter-sheet"
+          >
+            <div
+              className="fixed inset-0 bg-overlay"
+              onClick={() => setMobileSheetOpen(false)}
+            />
+            <div className="relative z-10 bg-surface border-t-2 border-token rounded-t-2xl p-6 max-h-[80vh] overflow-y-auto space-y-5">
+              <div className="flex items-center justify-between pb-3 border-b border-token">
+                <h3 className="text-base font-bold text-main">
+                  {lang === 'ar' ? 'تصفية وترتيب المشاريع' : 'Filter & Sort Case Studies'}
+                </h3>
+                <button
+                  type="button"
+                  onClick={() => setMobileSheetOpen(false)}
+                  className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center rounded-lg bg-page border border-token text-muted"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+
+              <div className="space-y-2">
+                {CASE_CATEGORIES.map((cat) => {
+                  const isActive = activeCatSlug === cat.slug;
+                  const count = categoryCounts[cat.slug] ?? 0;
+                  return (
+                    <button
+                      key={cat.slug}
+                      type="button"
+                      onClick={() => {
+                        updateUrlParams({ cat: cat.slug });
+                        setMobileSheetOpen(false);
+                      }}
+                      className={`w-full min-h-[44px] px-4 py-2.5 rounded-xl text-xs font-bold flex items-center justify-between border ${
+                        isActive
+                          ? 'bg-accent text-accent-contrast border-accent'
+                          : 'bg-page text-main border-token'
+                      }`}
+                    >
+                      <span>{lang === 'ar' ? cat.nameAr : cat.nameEn}</span>
+                      <span className="ltr-num">{count}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
           </div>
         )}
       </div>
-
-      {/* Strategic Case Study Deep-Dive Modal */}
-      {selectedCaseStudy && (
-        <div className="fixed inset-0 z-[130] flex items-center justify-center bg-black/80 p-4 backdrop-blur-md">
-          <div
-            className={`relative max-h-[92vh] w-full max-w-2xl overflow-y-auto rounded-3xl border p-6 sm:p-8 shadow-2xl transition-colors ${
-              isDark
-                ? 'border-emerald-500/40 bg-[#0a111c] text-white'
-                : 'border-slate-200 bg-white text-slate-900'
-            }`}
-          >
-            {/* Close Button */}
-            <button
-              onClick={() => setSelectedCaseStudy(null)}
-              className={`absolute top-5 right-5 rtl:right-auto rtl:left-5 p-2 rounded-full transition-colors cursor-pointer ${
-                isDark
-                  ? 'bg-white/10 text-slate-300 hover:bg-white/20 hover:text-white'
-                  : 'bg-slate-100 text-slate-600 hover:bg-slate-200 hover:text-slate-900'
-              }`}
-              aria-label="Close"
-            >
-              <X className="h-5 w-5" />
-            </button>
-
-            {/* Header info */}
-            <div className="flex items-center gap-2 flex-wrap mb-2">
-              <span className="rounded-lg bg-emerald-500/15 border border-emerald-500/40 px-2.5 py-1 font-mono text-[10px] font-bold text-emerald-600 dark:text-emerald-400">
-                {isAr ? selectedCaseStudy.category_ar : selectedCaseStudy.category_en}
-              </span>
-              <span className="font-mono text-xs text-slate-400">
-                {isAr ? selectedCaseStudy.client_ar : selectedCaseStudy.client_en}
-              </span>
-            </div>
-
-            <h3 className="text-xl font-bold leading-snug sm:text-2xl">
-              {isAr ? selectedCaseStudy.title_ar : selectedCaseStudy.title_en}
-            </h3>
-
-            {/* 1. Executive Summary in Emerald container */}
-            {selectedCaseStudy.executiveSummary_ar && (
-              <div
-                className={`mt-6 rounded-2xl border p-5 ${
-                  isDark
-                    ? 'border-emerald-500/30 bg-emerald-950/20 text-slate-200'
-                    : 'border-emerald-200 bg-emerald-50/70 text-slate-800'
-                }`}
-              >
-                <div className="flex items-center gap-2 text-xs font-mono font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider mb-2">
-                  <Sparkles className="h-4 w-4" />
-                  <span>{isAr ? 'الملخص التنفيذي ونطاق العمل' : 'EXECUTIVE SUMMARY & SCOPE'}</span>
-                </div>
-                <p className="text-xs leading-relaxed">
-                  {isAr ? selectedCaseStudy.executiveSummary_ar : selectedCaseStudy.executiveSummary_en}
-                </p>
-              </div>
-            )}
-
-            {/* 2. Key Challenges & Risks in Amber container */}
-            {selectedCaseStudy.challenges_ar && (
-              <div className="mt-6">
-                <h4 className="flex items-center gap-2 text-xs font-mono font-bold text-amber-500 uppercase tracking-wider mb-3">
-                  <AlertTriangle className="h-4 w-4 text-amber-500" />
-                  <span>{isAr ? 'تشخيص الوضع الراهن والتحديات' : 'THE CHALLENGES & RISKS'}</span>
-                </h4>
-                <div className="space-y-2">
-                  {(isAr ? selectedCaseStudy.challenges_ar : selectedCaseStudy.challenges_en || []).map((c, i) => (
-                    <div
-                      key={i}
-                      className={`flex items-start gap-2 rounded-xl border p-3 text-xs ${
-                        isDark
-                          ? 'bg-amber-950/20 border-amber-500/20 text-slate-200'
-                          : 'bg-amber-50/80 border-amber-200 text-slate-800'
-                      }`}
-                    >
-                      <span className="font-mono text-amber-500 font-bold">•</span>
-                      <span>{c}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* 3. Engineered Solution with Checkmarks */}
-            {selectedCaseStudy.solution_ar && (
-              <div className="mt-6">
-                <h4 className="flex items-center gap-2 text-xs font-mono font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider mb-3">
-                  <CheckCircle2 className="h-4 w-4 text-emerald-500" />
-                  <span>{isAr ? 'الحل الهندسي والتدخل التقني المنفذ' : 'THE ENGINEERING SOLUTION'}</span>
-                </h4>
-                <div className="space-y-2">
-                  {(isAr ? selectedCaseStudy.solution_ar : selectedCaseStudy.solution_en || []).map((s, i) => (
-                    <div
-                      key={i}
-                      className={`flex items-start gap-2 rounded-xl border p-3 text-xs ${
-                        isDark
-                          ? 'bg-[#0d1524] border-white/10 text-slate-200'
-                          : 'bg-slate-50 border-slate-200 text-slate-800'
-                      }`}
-                    >
-                      <span className="font-mono text-emerald-500 font-bold">✓</span>
-                      <span>{s}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* 4. IT as a Service Callout (Strictly Highlighted) */}
-            <div
-              className={`mt-6 rounded-2xl border p-4 ${
-                isDark
-                  ? 'bg-gradient-to-r from-emerald-950/30 to-cyan-950/30 border-emerald-500/30 text-slate-200'
-                  : 'bg-emerald-50 border-emerald-300 text-slate-900 shadow-sm'
-              }`}
-            >
-              <div className="flex items-center gap-2 text-xs font-mono text-emerald-600 dark:text-emerald-400 font-bold mb-1.5">
-                <Cpu className="h-4 w-4" />
-                <span>{isAr ? 'قطاع تقني كامل كخدمة (IT as a Service):' : 'Full IT as a Service (ITaaS):'}</span>
-              </div>
-              <p className="text-xs leading-relaxed font-medium">
-                {isAr
-                  ? 'حصل المركز على إدارة استباقية، ومراقبة للبنية التحتية، ودعم فني متخصص، مما أزال الحاجة تماماً لتوظيف مهندس IT مقيم بمرتب شهري مرتفع.'
-                  : 'Proactive infrastructure monitoring, enterprise patch management, and dedicated SLA response, completely eliminating the recurring payroll and overhead of an on-site IT engineer.'}
-              </p>
-            </div>
-
-            {/* 5. Deliverables if available */}
-            {selectedCaseStudy.deliverables_ar && (
-              <div className="mt-6">
-                <h4 className="text-xs font-mono font-bold uppercase tracking-wider mb-3">
-                  {isAr ? 'مخرجات ومنظومة المشروع الأساسية' : 'Executed System Deliverables'}
-                </h4>
-                <div className="space-y-2">
-                  {(isAr ? selectedCaseStudy.deliverables_ar : selectedCaseStudy.deliverables_en || []).map((d, i) => (
-                    <div
-                      key={i}
-                      className={`flex items-start gap-2 rounded-xl border p-3 text-xs ${
-                        isDark
-                          ? 'bg-white/5 border-white/5 text-slate-300'
-                          : 'bg-slate-50 border-slate-200 text-slate-700'
-                      }`}
-                    >
-                      <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0 mt-0.5" />
-                      <span>{d}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* 6. Measurable Direct Result */}
-            <div
-              className={`mt-6 rounded-2xl border p-4 ${
-                isDark ? 'bg-black/40 border-emerald-500/30' : 'bg-slate-100 border-slate-300'
-              }`}
-            >
-              <div className="text-[11px] font-mono text-emerald-600 dark:text-emerald-400 font-bold mb-1">
-                {isAr ? 'الأثر والنتيجة المباشرة (ROI):' : 'Direct Operational Impact (ROI):'}
-              </div>
-              <div className="text-sm font-bold">
-                {isAr ? selectedCaseStudy.result_ar : selectedCaseStudy.result_en}
-              </div>
-            </div>
-
-            {/* Modal Actions */}
-            <div className="mt-8 flex flex-col sm:flex-row gap-3 border-t border-slate-200 dark:border-white/10 pt-5">
-              <a
-                href={NUZUL_CONTACT.whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-primary flex-1 py-3 text-xs font-bold inline-flex items-center justify-center gap-2 cursor-pointer shadow-md"
-              >
-                <span>{isAr ? 'طلب استشارة هندسية وحل مماثل لمؤسستك' : 'Request Architecture & Implementation'}</span>
-              </a>
-
-              <button
-                type="button"
-                onClick={() => setSelectedCaseStudy(null)}
-                className="btn btn-secondary py-3 px-6 text-xs font-bold cursor-pointer"
-              >
-                <span>{isAr ? 'إغلاق' : 'Close'}</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </section>
   );
 };

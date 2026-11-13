@@ -1,323 +1,461 @@
 import React, { useState } from 'react';
-import { X, Copy, Check, ExternalLink, ShieldCheck, ArrowRight, ArrowLeft, Phone, CreditCard, MessageCircle } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
-import { NUZUL_CONTACT } from '../../data/nuzulData';
+import {
+  X,
+  CreditCard,
+  Smartphone,
+  Landmark,
+  CheckCircle2,
+  Copy,
+  Check,
+  ShieldCheck,
+  Lock,
+  Receipt
+} from 'lucide-react';
 import { InstaPayLogo } from '../common/InstaPayLogo';
 
+type PaymentMethod = 'instapay' | 'vodafone' | 'fawry' | 'card' | 'bank';
+
 export const PaymentModal: React.FC = () => {
-  const { activePaymentModal, setActivePaymentModal, locale, theme } = useApp();
-  const isAr = locale === 'ar';
-  const isDark = theme === 'dark';
+  const {
+    lang,
+    cart,
+    clearCart,
+    formatPrice,
+    isPaymentModalOpen,
+    setIsPaymentModalOpen,
+  } = useApp();
 
-  const [copiedType, setCopiedType] = useState<string | null>(null);
+  const [selectedMethod, setSelectedMethod] = useState<PaymentMethod>('instapay');
+  const [referenceNumber, setReferenceNumber] = useState('');
+  const [clientName, setClientName] = useState('');
+  const [clientPhone, setClientPhone] = useState('');
+  const [copiedText, setCopiedText] = useState<string | null>(null);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
-  if (!activePaymentModal) return null;
+  if (!isPaymentModalOpen) return null;
 
-  const copyToClipboard = (text: string, type: string) => {
+  const totalEGP = cart.reduce((sum, item) => sum + item.price, 0);
+
+  const handleCopy = (text: string, label: string) => {
     navigator.clipboard.writeText(text);
-    setCopiedType(type);
-    setTimeout(() => setCopiedType(null), 2000);
+    setCopiedText(label);
+    setTimeout(() => setCopiedText(null), 2000);
+  };
+
+  const handleConfirmPayment = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitted(true);
+    setTimeout(() => {
+      clearCart();
+    }, 600);
+  };
+
+  const handleClose = () => {
+    setIsPaymentModalOpen(false);
+    setIsSubmitted(false);
+    setReferenceNumber('');
   };
 
   return (
-    <div className="fixed inset-0 z-[120] flex items-center justify-center bg-black/85 p-4 backdrop-blur-md">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto">
       <div
-        className={`relative w-full max-w-lg overflow-hidden rounded-3xl border p-6 sm:p-8 shadow-2xl transition-colors ${
-          isDark
-            ? 'border-emerald-500/30 bg-[#0a111c] text-white'
-            : 'border-slate-200 bg-white text-slate-900'
-        }`}
-      >
-        {/* Close Button */}
-        <button
-          onClick={() => setActivePaymentModal(null)}
-          className={`absolute top-5 right-5 rtl:right-auto rtl:left-5 p-1.5 rounded-full transition-colors cursor-pointer ${
-            isDark ? 'text-slate-400 hover:text-white hover:bg-white/10' : 'text-slate-500 hover:text-slate-900 hover:bg-slate-100'
-          }`}
-          aria-label="Close"
-        >
-          <X className="h-5 w-5" />
-        </button>
+        onClick={handleClose}
+        className="fixed inset-0 bg-overlay backdrop-blur-xs"
+      />
 
-        {/* Modal Type: InstaPay */}
-        {activePaymentModal === 'instapay' && (
-          <div>
-            <div className="flex items-center gap-3">
-              <div className="flex h-12 items-center justify-center rounded-2xl bg-gradient-to-r from-[#4A154B] to-[#200524] px-3.5 py-2 shadow-lg border border-purple-500/30">
-                <InstaPayLogo size="md" variant="wordmark" />
-              </div>
+      <div className="relative w-full max-w-3xl rounded-2xl bg-surface border border-token shadow-xl overflow-hidden z-10 my-8">
+        {/* Header */}
+        <div className="p-6 border-b border-token flex items-center justify-between bg-surface-2">
+          <div className="flex items-center gap-3">
+            <div className="w-11 h-11 rounded-xl bg-accent-soft border border-accent-soft flex items-center justify-center text-accent">
+              <Receipt className="w-5 h-5" />
+            </div>
+            <div>
+              <h3 className="text-lg font-bold text-main">
+                {lang === 'ar'
+                  ? 'بوابة الدفع وإتمام التعاقد المؤسسي'
+                  : 'Enterprise Checkout & Payment Gateway'}
+              </h3>
+              <p className="text-xs text-muted">
+                {lang === 'ar'
+                  ? 'اختر وسيلة الدفع المناسبة لك في مصر أو الشرق الأوسط لتفعيل خدماتك فوراً'
+                  : 'Select your preferred payment method in Egypt or MENA for instant activation'}
+              </p>
+            </div>
+          </div>
+          <button
+            type="button"
+            onClick={handleClose}
+            aria-label={lang === 'ar' ? 'إغلاق' : 'Close'}
+            className="p-2 rounded-lg bg-surface text-muted hover-text-main transition-colors"
+          >
+            <X className="w-5 h-5" />
+          </button>
+        </div>
+
+        {isSubmitted ? (
+          <div className="p-8 md:p-12 text-center space-y-5">
+            <div className="w-20 h-20 rounded-full bg-success-soft border border-success flex items-center justify-center text-success mx-auto">
+              <CheckCircle2 className="w-10 h-10" />
+            </div>
+            <h4 className="text-2xl font-bold text-main">
+              {lang === 'ar'
+                ? 'تم استلام طلب التفعيل وإشعار الدفع بنجاح!'
+                : 'Payment Notification & Order Received!'}
+            </h4>
+            <p className="text-sm text-muted max-w-lg mx-auto leading-relaxed">
+              {lang === 'ar'
+                ? 'يقوم قسم الحسابات والتشغيل السحابي بمراجعة المعاملة الآن. ستصلك بيانات الخادم والفاتورة الضريبية الرسمية خلال أقل من 15 دقيقة عبر البريد الإلكتروني والواتساب.'
+                : 'Our billing and cloud provisioning team is verifying your transaction. Server credentials and official tax invoice will be sent within 15 minutes.'}
+            </p>
+            <div className="p-4 rounded-xl bg-page border border-token max-w-md mx-auto text-xs text-muted space-y-1">
               <div>
-                <h3 className="text-lg font-black text-white flex items-center gap-1.5">
-                  <span>{isAr ? 'الدفع المباشر عبر' : 'Direct Payment via'}</span>
-                  <InstaPayLogo size="md" variant="wordmark" />
-                </h3>
-                <p className="text-xs text-emerald-400 font-medium">
-                  {isAr ? 'التحويل اللحظي المعتمد من البنك المركزي المصري' : 'Instant Transfer Powered by InstaPay Egypt'}
-                </p>
+                {lang === 'ar' ? 'رقم الطلب المرجعي:' : 'Order Reference:'}{' '}
+                <span className="text-accent font-bold ltr-num">#NZL-{Math.floor(100000 + Math.random() * 900000)}</span>
               </div>
+              {referenceNumber && (
+                <div>
+                  {lang === 'ar' ? 'مرجع التحويل:' : 'Transfer Ref:'}{' '}
+                  <span className="text-main ltr-num">{referenceNumber}</span>
+                </div>
+              )}
             </div>
-
-            {/* Main Interactive Callout */}
-            <div
-              className={`mt-6 rounded-2xl border p-5 ${
-                isDark ? 'border-purple-500/30 bg-purple-950/20 text-white' : 'border-purple-200 bg-purple-50 text-slate-900'
-              }`}
+            <button
+              type="button"
+              onClick={handleClose}
+              className="px-8 py-3.5 rounded-xl btn-primary font-bold text-sm"
             >
-              <div className="text-[11px] font-mono uppercase text-purple-600 dark:text-purple-300 font-bold">
-                {isAr ? 'بيانات التحويل عبر إنستاباي (InstaPay):' : 'InstaPay Payment Details:'}
+              {lang === 'ar' ? 'العودة إلى الموقع' : 'Return to Website'}
+            </button>
+          </div>
+        ) : (
+          <div className="p-6 md:p-8 grid grid-cols-1 lg:grid-cols-12 gap-6">
+            {/* Payment Methods Column */}
+            <div className="lg:col-span-5 space-y-3">
+              <div className="text-xs font-bold text-muted mb-2">
+                {lang === 'ar' ? '1. اختر وسيلة الدفع:' : '1. Select Payment Method:'}
               </div>
-
-              {/* IPA Address */}
-              <div className="mt-3">
-                <div className="text-[11px] font-medium text-slate-400 mb-1">
-                  {isAr ? 'عنوان الدفع اللحظي (IPA):' : 'Payment Address (IPA):'}
-                </div>
-                <div
-                  className={`flex items-center justify-between gap-2 rounded-xl border p-3 ${
-                    isDark ? 'border-purple-400/30 bg-black/40' : 'border-purple-200 bg-white'
-                  }`}
-                >
-                  <span className="font-mono text-base font-bold text-purple-600 dark:text-purple-300" dir="ltr">
-                    {NUZUL_CONTACT.instapayAddress}
-                  </span>
-
-                  <button
-                    type="button"
-                    onClick={() => copyToClipboard(NUZUL_CONTACT.instapayAddress, 'ipa')}
-                    className="btn btn-secondary inline-flex h-8 items-center gap-1 px-3 text-[11px] font-bold cursor-pointer"
-                  >
-                    {copiedType === 'ipa' ? (
-                      <>
-                        <Check className="h-3.5 w-3.5 text-emerald-500" />
-                        <span>{isAr ? 'تم النسخ' : 'Copied'}</span>
-                      </>
-                    ) : (
-                      <>
-                        <Copy className="h-3.5 w-3.5" />
-                        <span>{isAr ? 'نسخ العنوان' : 'Copy IPA'}</span>
-                      </>
-                    )}
-                  </button>
-                </div>
-              </div>
-
-              {/* Mobile Number for InstaPay */}
-              <div className="mt-3">
-                <div className="text-[11px] font-medium text-slate-400 mb-1">
-                  {isAr ? 'أو التحويل برقم الموبايل المسجل بإنستاباي:' : 'Or via Registered InstaPay Mobile Number:'}
-                </div>
-                <div
-                  className={`flex items-center justify-between gap-2 rounded-xl border p-3 ${
-                    isDark ? 'border-purple-400/30 bg-black/40' : 'border-purple-200 bg-white'
-                  }`}
-                >
-                  <span className="font-mono text-base font-bold text-purple-600 dark:text-purple-300" dir="ltr">
-                    {NUZUL_CONTACT.instapayPhone}
-                  </span>
-
-                  <button
-                    type="button"
-                    onClick={() => copyToClipboard(NUZUL_CONTACT.instapayPhone, 'instapayPhone')}
-                    className="btn btn-secondary inline-flex h-8 items-center gap-1 px-3 text-[11px] font-bold cursor-pointer"
-                  >
-                    {copiedType === 'instapayPhone' ? (
-                      <>
-                        <Check className="h-3.5 w-3.5 text-emerald-500" />
-                        <span>{isAr ? 'تم النسخ' : 'Copied'}</span>
-                      </>
-                    ) : (
-                      <>
-                        <Copy className="h-3.5 w-3.5" />
-                        <span>{isAr ? 'نسخ الرقم' : 'Copy Number'}</span>
-                      </>
-                    )}
-                  </button>
-                </div>
-              </div>
-
-              {/* Instructions */}
-              <div className="mt-4 space-y-1.5 text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-                <div className="font-bold text-slate-800 dark:text-slate-200">{isAr ? 'خطوات التحويل السريع:' : 'Quick Steps:'}</div>
-                <div>1. {isAr ? 'افتح تطبيق إنستاباي على هاتفك' : 'Open the InstaPay app on your phone'}</div>
-                <div>2. {isAr ? `اختر "إرسال نقود" برقم الهاتف (${NUZUL_CONTACT.instapayPhone}) أو عنوان الـ IPA` : `Select Send Money using Phone (${NUZUL_CONTACT.instapayPhone}) or IPA`}</div>
-                <div>3. {isAr ? 'اكتب المبلغ واضغط تأكيد' : 'Enter plan amount and confirm'}</div>
-                <div>4. {isAr ? 'أرسل لنا صورة الإيصال عبر واتساب لتفعيل الخدمة فوراً' : 'Share screenshot on WhatsApp for instant provisioning'}</div>
-              </div>
-            </div>
-
-            {/* Actions */}
-            <div className="mt-6 flex flex-col sm:flex-row items-center gap-3">
-              <a
-                href={`${NUZUL_CONTACT.whatsappUrl}&text=${encodeURIComponent(
-                  isAr
-                    ? `مرحباً نُزول تِك، قمت بالتحويل عبر إنستاباي إلى (${NUZUL_CONTACT.instapayAddress} / ${NUZUL_CONTACT.instapayPhone}) وأود تأكيد تفعيل الخدمة.`
-                    : `Hello Nuzul Tech, I sent a payment via InstaPay to (${NUZUL_CONTACT.instapayAddress} / ${NUZUL_CONTACT.instapayPhone}) and would like to confirm activation.`
-                )}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-primary flex-1 w-full py-3 text-xs font-bold gap-2 cursor-pointer shadow-lg"
-              >
-                <MessageCircle className="h-4 w-4" />
-                <span>{isAr ? 'إرسال إيصال التحويل عبر واتساب' : 'Send Receipt via WhatsApp'}</span>
-              </a>
 
               <button
                 type="button"
-                onClick={() => setActivePaymentModal(null)}
-                className="btn btn-secondary w-full sm:w-auto py-3 px-5 text-xs font-bold cursor-pointer"
-              >
-                {isAr ? 'إغلاق' : 'Close'}
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* Modal Type: Vodafone Cash */}
-        {activePaymentModal === 'vodafone' && (
-          <div>
-            <div className="flex items-center gap-3">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-red-600 font-bold text-white shadow-lg">
-                <Phone className="h-6 w-6" />
-              </div>
-              <div>
-                <h3 className="text-xl font-bold">
-                  {isAr ? 'الدفع عبر فودافون كاش (Vodafone Cash)' : 'Vodafone Cash Direct Wallet'}
-                </h3>
-                <p className="text-xs text-red-600 dark:text-red-400 font-medium">
-                  {isAr ? 'تحويل لحظي مباشر لمحفظة الشركة' : 'Instant mobile wallet payment'}
-                </p>
-              </div>
-            </div>
-
-            <div
-              className={`mt-6 rounded-2xl border p-5 ${
-                isDark ? 'border-red-500/30 bg-red-950/20 text-white' : 'border-red-200 bg-red-50 text-slate-900'
-              }`}
-            >
-              <div className="text-[11px] font-mono uppercase text-red-600 dark:text-red-300 font-bold">
-                {isAr ? 'رقم محفظة فودافون كاش المعتمد:' : 'Official Vodafone Cash Wallet Number:'}
-              </div>
-
-              <div
-                className={`mt-2 flex items-center justify-between gap-2 rounded-xl border p-3 ${
-                  isDark ? 'border-red-400/30 bg-black/40' : 'border-red-200 bg-white'
+                onClick={() => setSelectedMethod('instapay')}
+                className={`w-full p-3.5 rounded-xl border text-start transition-all flex items-center justify-between ${
+                  selectedMethod === 'instapay'
+                    ? 'bg-accent-soft border-accent text-main'
+                    : 'bg-surface border-token text-muted hover-surface-2'
                 }`}
               >
-                <a
-                  href={`tel:*9*7*${NUZUL_CONTACT.vodafoneCash}*0#`}
-                  className="font-mono text-lg font-bold text-red-600 dark:text-red-400 hover:underline"
-                  dir="ltr"
-                >
-                  {NUZUL_CONTACT.vodafoneCash}
-                </a>
+                <div className="flex items-center gap-3">
+                  <InstaPayLogo size={28} />
+                  <div>
+                    <div className="text-sm font-bold text-main">InstaPay Egypt</div>
+                    <div className="text-[11px] text-muted">
+                      {lang === 'ar' ? 'تحويل لحظي عبر تطبيق إنستا باي' : 'Instant IPN Bank Transfer'}
+                    </div>
+                  </div>
+                </div>
+                <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-accent-soft text-accent">
+                  {lang === 'ar' ? 'الأسرع' : 'Fastest'}
+                </span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setSelectedMethod('vodafone')}
+                className={`w-full p-3.5 rounded-xl border text-start transition-all flex items-center justify-between ${
+                  selectedMethod === 'vodafone'
+                    ? 'bg-accent-soft border-accent text-main'
+                    : 'bg-surface border-token text-muted hover-surface-2'
+                }`}
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-7 h-7 rounded-lg bg-danger-soft text-danger flex items-center justify-center font-bold text-xs">
+                    <Smartphone className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <div className="text-sm font-bold text-main">Vodafone Cash</div>
+                    <div className="text-[11px] text-muted">
+                      {lang === 'ar' ? 'فودافون كاش وكافة المحافظ الذكية' : 'Vodafone Cash & Mobile Wallets'}
+                    </div>
+                  </div>
+                </div>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setSelectedMethod('fawry')}
+                className={`w-full p-3.5 rounded-xl border text-start transition-all flex items-center justify-between ${
+                  selectedMethod === 'fawry'
+                    ? 'bg-accent-soft border-accent text-main'
+                    : 'bg-surface border-token text-muted hover-surface-2'
+                }`}
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-7 h-7 rounded-lg bg-warning-soft text-warning flex items-center justify-center font-bold text-xs">
+                    Fawry
+                  </div>
+                  <div>
+                    <div className="text-sm font-bold text-main">Fawry Pay</div>
+                    <div className="text-[11px] text-muted">
+                      {lang === 'ar' ? 'كود دفع فوري من أي منفذ أو تطبيق' : 'Fawry Reference Code'}
+                    </div>
+                  </div>
+                </div>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setSelectedMethod('card')}
+                className={`w-full p-3.5 rounded-xl border text-start transition-all flex items-center justify-between ${
+                  selectedMethod === 'card'
+                    ? 'bg-accent-soft border-accent text-main'
+                    : 'bg-surface border-token text-muted hover-surface-2'
+                }`}
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-7 h-7 rounded-lg bg-accent-soft text-accent flex items-center justify-center">
+                    <CreditCard className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <div className="text-sm font-bold text-main">Visa / Mastercard</div>
+                    <div className="text-[11px] text-muted">
+                      {lang === 'ar' ? 'بطاقات ائتمانية أو خصم مباشر' : 'Credit or Debit Card (3D Secure)'}
+                    </div>
+                  </div>
+                </div>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setSelectedMethod('bank')}
+                className={`w-full p-3.5 rounded-xl border text-start transition-all flex items-center justify-between ${
+                  selectedMethod === 'bank'
+                    ? 'bg-accent-soft border-accent text-main'
+                    : 'bg-surface border-token text-muted hover-surface-2'
+                }`}
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-7 h-7 rounded-lg bg-surface-2 text-accent flex items-center justify-center">
+                    <Landmark className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <div className="text-sm font-bold text-main">
+                      {lang === 'ar' ? 'تحويل بنكي رسمي للشركات' : 'Corporate Bank Wire'}
+                    </div>
+                    <div className="text-[11px] text-muted">CIB / QNB / NBE</div>
+                  </div>
+                </div>
+              </button>
+            </div>
+
+            {/* Payment Details & Confirmation Form */}
+            <div className="lg:col-span-7 bg-page rounded-2xl p-5 sm:p-6 border border-token flex flex-col justify-between">
+              <form onSubmit={handleConfirmPayment} className="space-y-5">
+                {/* Summary Banner */}
+                <div className="flex items-center justify-between pb-4 border-b border-token">
+                  <div>
+                    <div className="text-xs text-muted">
+                      {lang === 'ar' ? 'إجمالي المبلغ المطلوب سداده:' : 'Total Amount Due:'}
+                    </div>
+                    <div className="text-2xl font-bold text-accent ltr-num">
+                      {formatPrice(totalEGP > 0 ? totalEGP : 550)}
+                    </div>
+                  </div>
+                  <div className="text-end">
+                    <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-accent-soft text-accent text-[11px] font-semibold">
+                      <Lock className="w-3 h-3" /> 256-Bit SSL
+                    </span>
+                  </div>
+                </div>
+
+                {/* Dynamic Instructions per Method */}
+                {selectedMethod === 'instapay' && (
+                  <div className="p-4 rounded-xl bg-surface border border-token space-y-3">
+                    <div className="text-xs font-bold text-accent">
+                      {lang === 'ar'
+                        ? 'بيانات التحويل الفوري عبر تطبيق InstaPay:'
+                        : 'InstaPay Instant Transfer Details:'}
+                    </div>
+                    <div className="flex items-center justify-between p-3 rounded-lg bg-surface-2 border border-token">
+                      <div>
+                        <div className="text-[10px] text-muted">InstaPay Address (IPA)</div>
+                        <div className="text-sm font-bold text-main ltr-num">nuzultech@instapay</div>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => handleCopy('nuzultech@instapay', 'ipa')}
+                        className="px-3 py-1.5 rounded-lg bg-surface text-xs text-main hover-surface-2 border border-token flex items-center gap-1.5"
+                      >
+                        {copiedText === 'ipa' ? <Check className="w-3.5 h-3.5 text-success" /> : <Copy className="w-3.5 h-3.5" />}
+                        <span>{copiedText === 'ipa' ? (lang === 'ar' ? 'تم النسخ' : 'Copied') : (lang === 'ar' ? 'نسخ العنوان' : 'Copy IPA')}</span>
+                      </button>
+                    </div>
+                  </div>
+                )}
+
+                {selectedMethod === 'vodafone' && (
+                  <div className="p-4 rounded-xl bg-surface border border-token space-y-3">
+                    <div className="text-xs font-bold text-danger">
+                      {lang === 'ar'
+                        ? 'بيانات التحويل عبر محفظة فودافون كاش (Vodafone Cash):'
+                        : 'Vodafone Cash Wallet Transfer Details:'}
+                    </div>
+                    <div className="flex items-center justify-between p-3 rounded-lg bg-surface-2 border border-token">
+                      <div>
+                        <div className="text-[10px] text-muted">Wallet Number</div>
+                        <div className="text-sm font-bold text-main ltr-num">0100 000 0000</div>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => handleCopy('01000000000', 'vf')}
+                        className="px-3 py-1.5 rounded-lg bg-surface text-xs text-main hover-surface-2 border border-token flex items-center gap-1.5"
+                      >
+                        {copiedText === 'vf' ? <Check className="w-3.5 h-3.5 text-success" /> : <Copy className="w-3.5 h-3.5" />}
+                        <span>{copiedText === 'vf' ? (lang === 'ar' ? 'تم النسخ' : 'Copied') : (lang === 'ar' ? 'نسخ الرقم' : 'Copy')}</span>
+                      </button>
+                    </div>
+                  </div>
+                )}
+
+                {selectedMethod === 'fawry' && (
+                  <div className="p-4 rounded-xl bg-surface border border-token space-y-2">
+                    <div className="text-xs font-bold text-warning">
+                      {lang === 'ar' ? 'كود الدفع المرجعي عبر فوري (Fawry Pay):' : 'Fawry Pay Reference Code:'}
+                    </div>
+                    <div className="flex items-center justify-between p-3 rounded-lg bg-surface-2 border border-token">
+                      <div>
+                        <div className="text-[10px] text-muted">Service Code: 78890</div>
+                        <div className="text-base font-bold text-warning ltr-num">9482 1104 8832</div>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => handleCopy('948211048832', 'fawry')}
+                        className="px-3 py-1.5 rounded-lg bg-surface text-xs text-main border border-token flex items-center gap-1.5"
+                      >
+                        {copiedText === 'fawry' ? <Check className="w-3.5 h-3.5 text-success" /> : <Copy className="w-3.5 h-3.5" />}
+                        <span>{lang === 'ar' ? 'نسخ الكود' : 'Copy Code'}</span>
+                      </button>
+                    </div>
+                  </div>
+                )}
+
+                {selectedMethod === 'card' && (
+                  <div className="space-y-3">
+                    <div>
+                      <label className="block text-[11px] text-muted mb-1">
+                        {lang === 'ar' ? 'رقم البطاقة البنكية (16 رقم)' : 'Card Number'}
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        dir="ltr"
+                        placeholder="4532 •••• •••• ••••"
+                        className="w-full px-3.5 py-2.5 text-sm input-token ltr-num"
+                      />
+                    </div>
+                    <div className="grid grid-cols-2 gap-3">
+                      <div>
+                        <label className="block text-[11px] text-muted mb-1">
+                          {lang === 'ar' ? 'تاريخ الانتهاء' : 'Expiry Date'}
+                        </label>
+                        <input
+                          type="text"
+                          required
+                          dir="ltr"
+                          placeholder="MM / YY"
+                          className="w-full px-3.5 py-2.5 text-sm input-token ltr-num"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-[11px] text-muted mb-1">CVV / CVC</label>
+                        <input
+                          type="password"
+                          required
+                          dir="ltr"
+                          maxLength={4}
+                          placeholder="•••"
+                          className="w-full px-3.5 py-2.5 text-sm input-token ltr-num"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {selectedMethod === 'bank' && (
+                  <div className="p-4 rounded-xl bg-surface border border-token space-y-2 text-xs">
+                    <div className="font-bold text-accent">
+                      {lang === 'ar' ? 'الحساب البنكي الرسمي للشركات (CIB Egypt):' : 'Official Corporate Bank Account (CIB Egypt):'}
+                    </div>
+                    <div className="text-main">
+                      {lang === 'ar' ? 'اسم المستفيد: شركة نُزول تِك لتقنية المعلومات' : 'Beneficiary: Nuzul Tech IT Solutions LLC'}
+                    </div>
+                    <div className="text-muted ltr-num">IBAN: EG890010012900000100048291824</div>
+                    <div className="text-muted ltr-num">SWIFT: CIBEEGCX</div>
+                  </div>
+                )}
+
+                {/* Client Confirmation Fields */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                  <div>
+                    <label className="block text-[11px] text-muted mb-1">
+                      {lang === 'ar' ? 'اسم العميل / الشركة *' : 'Client / Company Name *'}
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={clientName}
+                      onChange={(e) => setClientName(e.target.value)}
+                      placeholder={lang === 'ar' ? 'الاسم بالكامل' : 'Full Name'}
+                      className="w-full px-3.5 py-2.5 text-xs input-token"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[11px] text-muted mb-1">
+                      {lang === 'ar' ? 'رقم الواتساب لاستلام البيانات *' : 'WhatsApp Number *'}
+                    </label>
+                    <input
+                      type="tel"
+                      required
+                      dir="ltr"
+                      value={clientPhone}
+                      onChange={(e) => setClientPhone(e.target.value)}
+                      placeholder="+20 10..."
+                      className="w-full px-3.5 py-2.5 text-xs input-token ltr-num"
+                    />
+                  </div>
+                </div>
+
+                {selectedMethod !== 'card' && (
+                  <div>
+                    <label className="block text-[11px] text-muted mb-1">
+                      {lang === 'ar'
+                        ? 'رقم العملية المرجعي أو آخر 4 أرقام من المحول منه (اختياري)'
+                        : 'Transaction Reference / Last 4 Digits (Optional)'}
+                    </label>
+                    <input
+                      type="text"
+                      dir="ltr"
+                      value={referenceNumber}
+                      onChange={(e) => setReferenceNumber(e.target.value)}
+                      placeholder="e.g. IPN-84920194"
+                      className="w-full px-3.5 py-2.5 text-xs input-token ltr-num"
+                    />
+                  </div>
+                )}
 
                 <button
-                  type="button"
-                  onClick={() => copyToClipboard(NUZUL_CONTACT.vodafoneCash, 'vodafone')}
-                  className="btn btn-secondary inline-flex h-8 items-center gap-1 px-3 text-[11px] font-bold cursor-pointer"
+                  type="submit"
+                  className="w-full py-3.5 rounded-xl btn-primary font-bold text-sm"
                 >
-                  {copiedType === 'vodafone' ? (
-                    <>
-                      <Check className="h-3.5 w-3.5 text-emerald-500" />
-                      <span>{isAr ? 'تم النسخ' : 'Copied'}</span>
-                    </>
-                  ) : (
-                    <>
-                      <Copy className="h-3.5 w-3.5" />
-                      <span>{isAr ? 'نسخ الرقم' : 'Copy Number'}</span>
-                    </>
-                  )}
+                  <ShieldCheck className="w-5 h-5" />
+                  <span>
+                    {lang === 'ar'
+                      ? 'تأكيد السداد والبدء الفوري في التفعيل'
+                      : 'Confirm Payment & Start Instant Activation'}
+                  </span>
                 </button>
-              </div>
-
-              {/* Instructions */}
-              <div className="mt-4 space-y-1.5 text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-                <div className="font-bold text-slate-800 dark:text-slate-200">{isAr ? 'طريقة التحويل من خط فودافون:' : 'How to send money:'}</div>
-                <div>1. {isAr ? `اطلب كود التحويل السريع: *9*7*${NUZUL_CONTACT.vodafoneCash}*المبلغ#` : `Dial: *9*7*${NUZUL_CONTACT.vodafoneCash}*Amount#`}</div>
-                <div>2. {isAr ? 'أدخل الرقم السري لمحفظتك لتأكيد التحويل' : 'Enter your Vodafone Cash wallet PIN to confirm'}</div>
-                <div>3. {isAr ? 'احفظ رسالة التأكيد وأرسلها عبر واتساب لتفعيل سيرفرك أو خدمتك' : 'Share the confirmation SMS on WhatsApp for instant deployment'}</div>
-              </div>
-            </div>
-
-            {/* Actions */}
-            <div className="mt-6 flex flex-col sm:flex-row items-center gap-3">
-              <a
-                href={`${NUZUL_CONTACT.whatsappUrl2}&text=${encodeURIComponent(
-                  isAr
-                    ? `مرحباً نُزول تِك، قمت بالتحويل عبر فودافون كاش إلى ${NUZUL_CONTACT.vodafoneCash} لتفعيل الخدمة.`
-                    : `Hello Nuzul Tech, I transferred via Vodafone Cash to ${NUZUL_CONTACT.vodafoneCash} to activate my service.`
-                )}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-primary flex-1 w-full py-3 text-xs font-bold gap-2 cursor-pointer shadow-lg"
-              >
-                <MessageCircle className="h-4 w-4" />
-                <span>{isAr ? 'تأكيد التحويل عبر واتساب' : 'Confirm via WhatsApp'}</span>
-              </a>
-
-              <button
-                type="button"
-                onClick={() => setActivePaymentModal(null)}
-                className="btn btn-secondary w-full sm:w-auto py-3 px-5 text-xs font-bold cursor-pointer"
-              >
-                {isAr ? 'إغلاق' : 'Close'}
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* Modal Type: Credit/Debit Cards */}
-        {activePaymentModal === 'card' && (
-          <div>
-            <div className="flex items-center gap-3">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-600 font-bold text-white shadow-lg">
-                <CreditCard className="h-6 w-6" />
-              </div>
-              <div>
-                <h3 className="text-xl font-bold">
-                  {isAr ? 'الدفع بالبطاقات البنكية (Visa & Mastercard)' : 'Debit & Credit Cards Checkout'}
-                </h3>
-                <p className="text-xs text-blue-600 dark:text-blue-400 font-medium">
-                  {isAr ? 'بوابة دفع آمنة ومشفرة 3D Secure' : '3D Secure Encrypted Checkout'}
-                </p>
-              </div>
-            </div>
-
-            <div
-              className={`mt-6 rounded-2xl border p-5 ${
-                isDark ? 'border-blue-500/30 bg-blue-950/20 text-white' : 'border-blue-200 bg-blue-50 text-slate-900'
-              }`}
-            >
-              <div className="space-y-2 text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-                <p>
-                  {isAr
-                    ? 'نقبل جميع بطاقات فيزا وماستركارد الصادرة من البنوك المصرية والدولية مع خصم مباشر بالجنيه المصري (EGP) أو الدولار.'
-                    : 'We accept all Visa & Mastercard debit/credit cards issued by Egyptian and international banks with zero conversion fee.'}
-                </p>
-                <p className="font-semibold text-slate-800 dark:text-slate-200">
-                  {isAr
-                    ? 'يمكنك إضافة باقتك أو سيرفرك إلى السلة والمتابعة إلى الدفع الآمن مباشرة.'
-                    : 'Add your chosen plan to your cart and proceed directly to secure checkout.'}
-                </p>
-              </div>
-            </div>
-
-            <div className="mt-6 flex flex-col sm:flex-row items-center gap-3">
-              <a
-                href="#pricing"
-                onClick={() => setActivePaymentModal(null)}
-                className="btn btn-primary flex-1 w-full py-3 text-xs font-bold gap-2 cursor-pointer shadow-lg"
-              >
-                <span>{isAr ? 'استعراض الخطط واختيار السيرفر' : 'Browse Plans & Deploy'}</span>
-              </a>
-
-              <button
-                type="button"
-                onClick={() => setActivePaymentModal(null)}
-                className="btn btn-secondary w-full sm:w-auto py-3 px-5 text-xs font-bold cursor-pointer"
-              >
-                {isAr ? 'إغلاق' : 'Close'}
-              </button>
+              </form>
             </div>
           </div>
         )}

@@ -1,138 +1,494 @@
-import React from 'react';
-import { Check, Sparkles, ArrowRight, ArrowLeft, Server, ShieldCheck } from 'lucide-react';
-import { useApp } from '../../context/AppContext';
-import { NUZUL_HOSTING_PLANS } from '../../data/nuzulData';
-import { HostingPlan } from '../../types';
-import { RevealOnScroll, StaggerContainer, StaggerItem } from '../common/RevealOnScroll';
+import React, { useState, useRef } from 'react';
+import {
+  HOSTING_PLANS,
+  WEB_HOSTING_PLANS,
+  WINDOWS_HOSTING_PLANS,
+  HostingCategory,
+  HostingPlan,
+} from '../../data/nuzulData';
+import { useApp, Currency } from '../../context/AppContext';
+import { Check, ChevronDown, GitCompare, MapPin } from 'lucide-react';
+import {
+  useComparePlansStore,
+  toggleComparePlan,
+} from './comparePlansStore';
+
+const CATEGORY_TABS: {
+  id: HostingCategory;
+  labelAr: string;
+  labelEn: string;
+  descAr: string;
+  descEn: string;
+}[] = [
+  {
+    id: 'vps',
+    labelAr: 'خوادم Cloud VPS (KVM)',
+    labelEn: 'Cloud VPS (KVM)',
+    descAr: 'عزل KVM مخصص، معالجات AMD EPYC/Xeon، تخزين NVMe، و32 TB نقل بيانات شهرياً.',
+    descEn: 'Dedicated KVM isolation, AMD EPYC/Xeon vCPU, NVMe storage arrays, and 32 TB outbound traffic.',
+  },
+  {
+    id: 'web',
+    labelAr: 'استضافة المواقع وووردبريس',
+    labelEn: 'Managed Web & WP',
+    descAr: 'خوادم LiteSpeed مع ذاكرة LSCache، لوحة cPanel، شهادات SSL مجانية، ونسخ احتياطي يومي.',
+    descEn: 'LiteSpeed Enterprise with LSCache, cPanel/WHM, automated AutoSSL, and daily backups.',
+  },
+  {
+    id: 'windows',
+    labelAr: 'خوادم Windows & RDP',
+    labelEn: 'Windows Cloud & RDP',
+    descAr: 'مرخصة رسمياً بـ Windows Server 2022 لتشغيل قواعد بيانات SQL وأنظمة ERP المحاسبية عن بُعد.',
+    descEn: 'Licensed Windows Server 2022 instances tuned for MS SQL Server, accounting suites & RDP.',
+  },
+];
+
+const REGIONS = [
+  { id: 'cai', code: 'EG-CAI', ar: 'القاهرة', en: 'Cairo' },
+  { id: 'fra', code: 'EU-FRA', ar: 'فرانكفورت', en: 'Frankfurt' },
+  { id: 'ruh', code: 'SA-RUH', ar: 'الرياض', en: 'Riyadh' },
+];
 
 export const PricingSection: React.FC = () => {
-  const { locale, formatPrice, addToCart, setActivePaymentModal, theme } = useApp();
-  const isAr = locale === 'ar';
-  const isDark = theme === 'dark';
+  const { lang, currency, setCurrency, formatPrice, addToCart } = useApp();
+  const [activeCategory, setActiveCategory] = useState<HostingCategory>('vps');
+  const [billingCycle, setBillingCycle] = useState<'monthly' | 'yearly'>('yearly');
+  const [region, setRegion] = useState<string>('cai');
+  const [expandedPlanId, setExpandedPlanId] = useState<string | null>(null);
+  const [activeMobileIndex, setActiveMobileIndex] = useState<number>(0);
+  const trackRef = useRef<HTMLDivElement | null>(null);
+  const { selectedPlanIds } = useComparePlansStore();
+
+  const plans: HostingPlan[] =
+    activeCategory === 'vps'
+      ? HOSTING_PLANS
+      : activeCategory === 'web'
+      ? WEB_HOSTING_PLANS
+      : WINDOWS_HOSTING_PLANS;
+
+  const activeCategoryMeta =
+    CATEGORY_TABS.find((t) => t.id === activeCategory) || CATEGORY_TABS[0];
+  const activeRegion = REGIONS.find((r) => r.id === region) || REGIONS[0];
+
+  const handleOrderPlan = (plan: HostingPlan) => {
+    const price = billingCycle === 'yearly' ? plan.yearlyPriceEGP : plan.monthlyPriceEGP;
+    addToCart({
+      id: `${plan.id}-${billingCycle}-${region}`,
+      name: `${lang === 'ar' ? plan.name : plan.nameEn} (${
+        billingCycle === 'yearly'
+          ? lang === 'ar'
+            ? 'سنوي'
+            : 'Annual'
+          : lang === 'ar'
+          ? 'شهري'
+          : 'Monthly'
+      })`,
+      type: 'hosting',
+      price,
+      billingCycle,
+      details: `${plan.cpu} · ${plan.ram} · ${plan.storage} · ${
+        lang === 'ar' ? activeRegion.ar : activeRegion.en
+      } (${activeRegion.code})`,
+    });
+  };
+
+  const scrollToMobileCard = (index: number) => {
+    setActiveMobileIndex(index);
+    if (!trackRef.current) return;
+    const cards = trackRef.current.querySelectorAll('[data-plan-card]');
+    const card = cards[index] as HTMLElement | undefined;
+    if (card) {
+      card.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    }
+  };
 
   return (
-    <section
-      id="pricing"
-      className={`relative overflow-hidden scroll-mt-24 px-4 py-20 sm:py-24 sm:px-6 lg:px-8 border-t transition-colors ${
-        isDark ? 'bg-[#070c14] border-white/10 text-white' : 'bg-slate-50 border-slate-200 text-slate-900'
-      }`}
-    >
-      <div className="mx-auto max-w-7xl">
-        {/* Header with Reveal on Scroll */}
-        <RevealOnScroll direction="up" threshold={0.2}>
-          <div className="mx-auto max-w-3xl text-center mb-14">
-            <div className="eyebrow-mono justify-center text-emerald-600 dark:text-emerald-400">
-              <Server className="h-4 w-4" />
-              <span>{isAr ? 'السيرفرات السحابية والاستضافة' : 'CLOUD VPS & HOSTING'}</span>
-            </div>
-
-            <h2 className="mt-4 text-3xl font-black leading-tight sm:text-4xl">
-              {isAr ? 'خوادم سحابية عالية الأداء وبيئات تشغيل متطورة' : 'High-Performance Cloud VPS & Server Environments'}
+    <section id="hosting" className="section-spacing bg-page-band">
+      <div className="container-nuzul">
+        {/* Section Heading */}
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-8 gap-6">
+          <div className="max-w-2xl">
+            <p className="text-sm font-semibold text-accent mb-2">
+              {lang === 'ar' ? 'تسعير عالمي بمواصفات قياسية' : 'Predictable Cloud Infrastructure Pricing'}
+            </p>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-main mb-3">
+              {lang === 'ar'
+                ? 'خطط الخوادم السحابية والاستضافة المدارة'
+                : 'Cloud VPS, Managed Web & Windows RDP Plans'}
             </h2>
-
-            <p
-              className={`mt-3 text-base leading-relaxed ${
-                isDark ? 'text-slate-300' : 'text-slate-600'
-              }`}
-            >
-              {isAr
-                ? 'خوادم KVM سحابية، استضافة مواقع، وخوادم سطح المكتب السحابي بأقراص NVMe فائقة السرعة، مع تسليم فوري ودعم فني متخصص على مدار الساعة.'
-                : 'Enterprise KVM cloud VPS, web hosting, and Cloud Desktop servers with ultra-fast NVMe storage, instant provisioning, and 24/7 support.'}
+            <p className="text-sm sm:text-base text-muted leading-relaxed">
+              {lang === 'ar' ? activeCategoryMeta.descAr : activeCategoryMeta.descEn}
             </p>
           </div>
-        </RevealOnScroll>
 
-        {/* 4 Cards Grid with Staggered Scroll Reveal */}
-        <StaggerContainer staggerDelay={0.1} className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {NUZUL_HOSTING_PLANS.map((plan: HostingPlan) => {
-            const planName = isAr ? plan.nameAr : plan.nameEn;
-            const specs = isAr ? plan.specsAr : plan.specsEn;
+          {/* Right Controls: Currency + Billing Cycle */}
+          <div className="flex flex-wrap items-center gap-3 self-start lg:self-end">
+            {/* Currency Switcher */}
+            <div
+              className="inline-flex items-center bg-surface p-1 rounded-xl border border-token"
+              role="group"
+              aria-label={lang === 'ar' ? 'عملة العرض' : 'Display currency'}
+            >
+              {(['EGP', 'USD', 'SAR'] as Currency[]).map((curr) => (
+                <button
+                  key={curr}
+                  type="button"
+                  onClick={() => setCurrency(curr)}
+                  data-testid={`currency-btn-${curr}`}
+                  className={`min-h-[40px] px-3 py-1.5 rounded-lg text-xs font-bold ltr-num transition-colors whitespace-nowrap ${
+                    currency === curr
+                      ? 'bg-surface-2 text-accent border border-token'
+                      : 'text-muted hover-text-main'
+                  }`}
+                >
+                  {curr}
+                </button>
+              ))}
+            </div>
+
+            {/* Billing Switcher */}
+            <div
+              className="inline-flex items-center bg-surface p-1 rounded-xl border border-token"
+              role="group"
+              aria-label={lang === 'ar' ? 'دورة الفوترة' : 'Billing cycle'}
+            >
+              <button
+                type="button"
+                onClick={() => setBillingCycle('monthly')}
+                data-testid="billing-toggle-monthly"
+                className={`min-h-[40px] px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-semibold whitespace-nowrap transition-colors ${
+                  billingCycle === 'monthly'
+                    ? 'bg-accent text-accent-contrast'
+                    : 'text-muted hover-text-main'
+                }`}
+              >
+                {lang === 'ar' ? 'شهري' : 'Monthly'}
+              </button>
+              <button
+                type="button"
+                onClick={() => setBillingCycle('yearly')}
+                data-testid="billing-toggle-yearly"
+                className={`min-h-[40px] px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 ${
+                  billingCycle === 'yearly'
+                    ? 'bg-accent text-accent-contrast'
+                    : 'text-muted hover-text-main'
+                }`}
+              >
+                <span>{lang === 'ar' ? 'سنوي' : 'Annual'}</span>
+                <span
+                  className={`text-[11px] px-1.5 py-0.5 rounded font-bold ltr-num whitespace-nowrap ${
+                    billingCycle === 'yearly'
+                      ? 'bg-surface text-accent'
+                      : 'bg-surface-2 text-accent'
+                  }`}
+                >
+                  -17%
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Contabo-Style Category Tabs + Datacenter Region Selector */}
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 pb-5 border-b border-token">
+          <div
+            className="flex flex-wrap items-center gap-2"
+            role="tablist"
+            aria-label={lang === 'ar' ? 'فئات الخوادم والاستضافة' : 'Server categories'}
+          >
+            {CATEGORY_TABS.map((tab) => {
+              const active = activeCategory === tab.id;
+              return (
+                <button
+                  key={tab.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={active}
+                  onClick={() => {
+                    setActiveCategory(tab.id);
+                    setActiveMobileIndex(0);
+                    setExpandedPlanId(null);
+                  }}
+                  data-testid={`pricing-tab-${tab.id}`}
+                  className={`min-h-[44px] px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold border transition-colors whitespace-nowrap ${
+                    active
+                      ? 'bg-accent text-accent-contrast border-accent'
+                      : 'bg-surface text-main border-token hover-surface-2'
+                  }`}
+                >
+                  {lang === 'ar' ? tab.labelAr : tab.labelEn}
+                </button>
+              );
+            })}
+          </div>
+
+          <div className="flex items-center gap-2 self-start md:self-auto">
+            <MapPin className="w-4 h-4 text-accent shrink-0" aria-hidden="true" />
+            <label htmlFor="region-select" className="text-xs font-medium text-muted whitespace-nowrap">
+              {lang === 'ar' ? 'موقع النشر:' : 'Region:'}
+            </label>
+            <select
+              id="region-select"
+              value={region}
+              onChange={(e) => setRegion(e.target.value)}
+              data-testid="pricing-region-select"
+              className="min-h-[40px] px-3 py-1.5 rounded-lg bg-surface border border-token text-xs font-semibold text-main focus:outline-none cursor-pointer"
+            >
+              {REGIONS.map((r) => (
+                <option key={r.id} value={r.id}>
+                  {lang === 'ar' ? `${r.ar} (${r.code})` : `${r.en} (${r.code})`}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+
+        {/* Mobile Quick Plan Switcher (<768px) */}
+        <div className="md:hidden mb-4" data-testid="mobile-pricing-swipe-nav">
+          <div className="flex items-center gap-2 overflow-x-auto pb-1">
+            {plans.map((plan, idx) => {
+              const isActive = activeMobileIndex === idx;
+              return (
+                <button
+                  key={plan.id}
+                  type="button"
+                  onClick={() => scrollToMobileCard(idx)}
+                  data-testid={`mobile-plan-pill-${plan.id}`}
+                  className={`min-h-[44px] px-3.5 py-2 rounded-lg text-xs font-semibold whitespace-nowrap border transition-colors ${
+                    isActive
+                      ? 'bg-accent text-accent-contrast border-accent'
+                      : 'bg-surface text-main border-token'
+                  }`}
+                >
+                  {lang === 'ar' ? plan.name : plan.nameEn}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Pricing Tier Grid (4 Balanced Columns Desktop / Swipe Mobile) */}
+        <div
+          ref={trackRef}
+          data-testid="pricing-cards-track"
+          className="flex md:grid md:grid-cols-2 lg:grid-cols-4 gap-5 items-stretch overflow-x-auto md:overflow-visible snap-x snap-mandatory pb-4 md:pb-0"
+        >
+          {plans.map((plan, idx) => {
+            const displayMonthlyEGP =
+              billingCycle === 'yearly'
+                ? Math.round(plan.yearlyPriceEGP / 12)
+                : plan.monthlyPriceEGP;
+            const features = lang === 'ar' ? plan.features : plan.featuresEn;
+            const isExpanded = expandedPlanId === plan.id;
+            const isSelectedForCompare = selectedPlanIds.includes(plan.id);
 
             return (
-              <StaggerItem key={plan.id} className="h-full">
-                <article
-                  className={`relative flex flex-col justify-between h-full rounded-2xl border p-7 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1.5 ${
-                  plan.popular
-                    ? isDark
-                      ? 'border-emerald-400/60 bg-gradient-to-b from-emerald-950/25 to-[#0d1524] shadow-[0_15px_40px_-10px_rgba(16,185,129,0.25)] ring-1 ring-emerald-400/40'
-                      : 'border-emerald-500 bg-white shadow-xl ring-2 ring-emerald-400/30'
-                    : isDark
-                    ? 'border-white/10 bg-[#0d1524] hover:border-emerald-500/40 shadow-xl'
-                    : 'border-slate-200 bg-white hover:border-emerald-500 shadow-md'
+              <div
+                key={plan.id}
+                data-plan-card={plan.id}
+                onFocus={() => setActiveMobileIndex(idx)}
+                className={`clean-card clean-card-hover p-6 flex flex-col justify-between relative w-[86vw] max-w-[330px] shrink-0 snap-center md:w-auto md:max-w-none md:shrink ${
+                  plan.popular ? 'border-accent ring-1 ring-[var(--accent)]' : ''
                 }`}
               >
                 <div>
-                  {/* Popularity badge */}
-                  {plan.popular && (
-                    <div className="mb-4">
-                      <span className="inline-flex items-center gap-1 rounded-full border border-emerald-400/40 bg-emerald-400/10 px-2.5 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-300">
-                        <Sparkles className="h-3 w-3" />
-                        {isAr ? 'الأكثر طلباً' : 'Most Popular'}
+                  {/* Optional Recommended Label */}
+                  <div className="min-h-[26px] mb-2.5 flex items-center justify-between gap-2">
+                    {plan.popular ? (
+                      <span className="inline-block px-2.5 py-0.5 rounded bg-accent text-accent-contrast text-[11px] font-bold whitespace-nowrap">
+                        {lang === 'ar' ? 'الأكثر طلباً' : 'Most Popular'}
+                      </span>
+                    ) : (
+                      <span className="text-[11px] font-medium text-muted">
+                        <bdi dir="ltr" className="ltr-num">{activeRegion.code}</bdi>
+                      </span>
+                    )}
+                    {isSelectedForCompare && (
+                      <span className="text-[11px] font-bold text-accent whitespace-nowrap">
+                        {lang === 'ar' ? 'بالمقارنة' : 'In Compare'}
+                      </span>
+                    )}
+                  </div>
+
+                  <h3 className="text-lg font-bold text-main">
+                    <bdi dir="ltr" className="ltr-num">
+                      {lang === 'ar' ? plan.name : plan.nameEn}
+                    </bdi>
+                  </h3>
+                  <p
+                    className={`text-muted text-xs mt-1 leading-relaxed ${
+                      isExpanded ? '' : 'line-clamp-2'
+                    }`}
+                  >
+                    {lang === 'ar' ? plan.targetAudience : plan.targetAudienceEn}
+                  </p>
+
+                  {/* Contabo-Style Price Block */}
+                  <div className="my-4 pb-4 border-b border-token">
+                    <div className="flex items-baseline gap-1.5">
+                      <span className="text-3xl font-bold text-main">
+                        <bdi dir="ltr" className="ltr-num">
+                          {formatPrice(displayMonthlyEGP)}
+                        </bdi>
+                      </span>
+                      <span className="text-xs text-muted">
+                        / {lang === 'ar' ? 'شهرياً' : 'mo'}
                       </span>
                     </div>
+                    <div className="text-[11px] text-muted mt-1">
+                      {billingCycle === 'yearly' ? (
+                        <span>
+                          {lang === 'ar' ? 'دفعة سنوية: ' : 'Billed annually: '}
+                          <bdi dir="ltr" className="ltr-num font-semibold text-main">
+                            {formatPrice(plan.yearlyPriceEGP)}
+                          </bdi>
+                          {' · '}
+                          {lang === 'ar' ? 'إعداد مجاني' : '$0 setup'}
+                        </span>
+                      ) : (
+                        <span>
+                          {lang === 'ar'
+                            ? 'دفع شهري بدون عقد · إعداد 0 ج.م'
+                            : 'Month-to-month · $0 setup fee'}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Contabo-Style Core Hardware Specs Table */}
+                  <dl className="space-y-2.5 text-xs mb-3 pb-3 border-b border-token">
+                    <div className="flex items-center justify-between gap-2">
+                      <dt className="text-muted">CPU</dt>
+                      <dd className="font-semibold text-main">
+                        <bdi dir="ltr" className="ltr-num">{plan.cpu}</bdi>
+                      </dd>
+                    </div>
+                    <div className="flex items-center justify-between gap-2">
+                      <dt className="text-muted">RAM</dt>
+                      <dd className="font-semibold text-main">
+                        <bdi dir="ltr" className="ltr-num">{plan.ram}</bdi>
+                      </dd>
+                    </div>
+                    <div className="flex items-center justify-between gap-2">
+                      <dt className="text-muted">{lang === 'ar' ? 'التخزين' : 'Storage'}</dt>
+                      <dd className="font-semibold text-main">
+                        <bdi dir="ltr" className="ltr-num">{plan.storage}</bdi>
+                      </dd>
+                    </div>
+                    <div className="flex items-center justify-between gap-2">
+                      <dt className="text-muted">{lang === 'ar' ? 'نقل البيانات' : 'Traffic'}</dt>
+                      <dd className="font-semibold text-main">
+                        <bdi dir="ltr" className="ltr-num">{plan.bandwidth}</bdi>
+                      </dd>
+                    </div>
+
+                    {isExpanded && (
+                      <>
+                        <div className="flex items-center justify-between gap-2 pt-2 border-t border-token">
+                          <dt className="text-muted">{lang === 'ar' ? 'اللقطات' : 'Snapshots'}</dt>
+                          <dd className="font-semibold text-main">
+                            <bdi dir="ltr" className="ltr-num">{plan.snapshots}</bdi>
+                          </dd>
+                        </div>
+                        <div className="flex items-center justify-between gap-2">
+                          <dt className="text-muted">{lang === 'ar' ? 'منفذ الشبكة' : 'Port Speed'}</dt>
+                          <dd className="font-semibold text-main">
+                            <bdi dir="ltr" className="ltr-num">{plan.portSpeed}</bdi>
+                          </dd>
+                        </div>
+                        <div className="flex items-center justify-between gap-2">
+                          <dt className="text-muted">{lang === 'ar' ? 'لوحة الإدارة' : 'Access'}</dt>
+                          <dd className="font-semibold text-main">
+                            <bdi dir="ltr" className="ltr-num">{plan.panel}</bdi>
+                          </dd>
+                        </div>
+                        <div className="flex items-center justify-between gap-2">
+                          <dt className="text-muted">{lang === 'ar' ? 'اتفاقية SLA' : 'Uptime SLA'}</dt>
+                          <dd className="font-semibold text-accent">
+                            <bdi dir="ltr" className="ltr-num">{plan.uptime}</bdi>
+                          </dd>
+                        </div>
+                      </>
+                    )}
+                  </dl>
+
+                  {isExpanded && (
+                    <ul className="space-y-2 mb-3">
+                      {features.map((feat, i) => (
+                        <li key={i} className="flex items-start gap-2 text-xs text-main">
+                          <Check className="w-3.5 h-3.5 text-accent shrink-0 mt-0.5" />
+                          <span>{feat}</span>
+                        </li>
+                      ))}
+                    </ul>
                   )}
 
-                  <h3 className="text-lg font-bold">{planName}</h3>
-                  <div className="mt-2 text-xs text-slate-400">{isAr ? 'تبدأ من' : 'Starting at'}</div>
-
-                  {/* Formatted dynamic price */}
-                  <div className="figures mt-1 text-3xl font-black text-emerald-600 dark:text-emerald-400">
-                    {formatPrice(plan.basePriceEGP)}
-                    <span className="text-xs font-normal text-slate-400">/{isAr ? 'شهرياً' : 'mo'}</span>
-                  </div>
-
-                  {/* Specs list */}
-                  <ul
-                    className={`mt-6 space-y-2.5 text-xs ${
-                      isDark ? 'text-slate-300' : 'text-slate-700'
-                    }`}
-                  >
-                    {specs.map((spec, i) => (
-                      <li key={i} className="flex items-center gap-2">
-                        <Check className="h-3.5 w-3.5 shrink-0 text-emerald-500" />
-                        <span>{spec}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Actions */}
-                <div className="mt-8 pt-4 border-t border-current/10 space-y-2">
                   <button
                     type="button"
-                    onClick={() => addToCart(plan, 12, 'cairo')}
-                    className={`btn w-full py-2.5 text-xs font-bold uppercase tracking-wider cursor-pointer ${
-                      plan.popular ? 'btn-primary shadow-lg shadow-emerald-500/20' : 'btn-secondary'
+                    onClick={() => setExpandedPlanId(isExpanded ? null : plan.id)}
+                    data-testid={`plan-expand-${plan.id}`}
+                    aria-expanded={isExpanded}
+                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-accent hover:underline mb-2 min-h-[44px]"
+                  >
+                    <span>
+                      {isExpanded
+                        ? lang === 'ar'
+                          ? 'إخفاء المواصفات'
+                          : 'Show less'
+                        : lang === 'ar'
+                        ? 'عرض باقي المواصفات'
+                        : 'Show full specs'}
+                    </span>
+                    <ChevronDown
+                      className={`w-3.5 h-3.5 transition-transform ${
+                        isExpanded ? 'rotate-180' : ''
+                      }`}
+                    />
+                  </button>
+                </div>
+
+                {/* Action Buttons */}
+                <div className="space-y-2 pt-2">
+                  <button
+                    type="button"
+                    onClick={() => handleOrderPlan(plan)}
+                    className={`w-full min-h-[44px] py-2.5 rounded-lg text-sm font-semibold whitespace-nowrap transition-colors ${
+                      plan.popular ? 'btn-primary' : 'btn-secondary'
                     }`}
                   >
-                    <span>{isAr ? 'حجز وتفعيل الخادم' : 'Deploy Server'}</span>
+                    {lang === 'ar' ? 'إعداد وطلب الخادم' : 'Configure & Order'}
                   </button>
 
-                  <div className="flex items-center justify-between text-[11px] text-slate-400 pt-1">
-                    <span>{isAr ? 'الدفع متاح عبر:' : 'Instant Pay:'}</span>
+                  {activeCategory === 'vps' && (
                     <button
                       type="button"
-                      onClick={() => setActivePaymentModal('instapay')}
-                      className="text-purple-600 dark:text-purple-400 font-mono hover:underline cursor-pointer font-semibold"
+                      onClick={() => toggleComparePlan(plan.id)}
+                      data-testid={`card-compare-btn-${plan.id}`}
+                      aria-pressed={isSelectedForCompare}
+                      className={`w-full min-h-[40px] py-2 px-3 rounded-lg text-xs font-semibold whitespace-nowrap border transition-colors inline-flex items-center justify-center gap-1.5 ${
+                        isSelectedForCompare
+                          ? 'bg-accent-soft border-accent text-accent'
+                          : 'bg-surface border-token text-muted hover-text-main'
+                      }`}
                     >
-                      InstaPay
+                      <GitCompare className="w-3.5 h-3.5 shrink-0" />
+                      <span>
+                        {isSelectedForCompare
+                          ? lang === 'ar'
+                            ? 'في جدول المقارنة'
+                            : 'Selected to Compare'
+                          : lang === 'ar'
+                          ? 'أضف للمقارنة'
+                          : 'Add to Compare'}
+                      </span>
                     </button>
-                    <span>·</span>
-                    <button
-                      type="button"
-                      onClick={() => setActivePaymentModal('vodafone')}
-                      className="text-red-600 dark:text-red-400 font-mono hover:underline cursor-pointer font-semibold"
-                    >
-                      Vodafone
-                    </button>
-                  </div>
+                  )}
                 </div>
-              </article>
-            </StaggerItem>
-          );
-        })}
-      </StaggerContainer>
-    </div>
-  </section>
-);
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
 };

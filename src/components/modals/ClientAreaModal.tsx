@@ -1,201 +1,192 @@
 import React, { useState } from 'react';
-import { X, Lock, Mail, User, ShieldCheck, ArrowRight, ArrowLeft } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
-import { NuzulLogo } from '../common/NuzulLogo';
+import { X, Lock, Mail, KeyRound, Server, ShieldCheck, CheckCircle2, Activity, HardDrive, Cpu } from 'lucide-react';
 
 export const ClientAreaModal: React.FC = () => {
-  const { isClientAreaOpen, setIsClientAreaOpen, clientAreaTab, setClientAreaTab, locale, theme } = useApp();
-  const isAr = locale === 'ar';
-  const isDark = theme === 'dark';
-
+  const { lang, isClientAreaOpen, setIsClientAreaOpen } = useApp();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [name, setName] = useState('');
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   if (!isClientAreaOpen) return null;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitted(true);
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setIsClientAreaOpen(false);
-    }, 1500);
+    if (!email) return;
+    setIsLoggedIn(true);
+  };
+
+  const handleDemoAccess = () => {
+    setEmail('enterprise@client-company.eg');
+    setIsLoggedIn(true);
   };
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 p-4 backdrop-blur-md">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <div
-        className={`relative w-full max-w-md overflow-hidden rounded-3xl border p-7 shadow-2xl transition-colors ${
-          isDark
-            ? 'border-emerald-500/40 bg-[#0a111c] text-white'
-            : 'border-slate-200 bg-white text-slate-900'
-        }`}
-      >
-        {/* Close Button */}
-        <button
-          onClick={() => setIsClientAreaOpen(false)}
-          className={`absolute top-5 right-5 rtl:right-auto rtl:left-5 p-1.5 rounded-full transition-colors cursor-pointer ${
-            isDark ? 'text-slate-400 hover:text-white hover:bg-white/10' : 'text-slate-500 hover:text-slate-900 hover:bg-slate-100'
-          }`}
-          aria-label="Close"
-        >
-          <X className="h-5 w-5" />
-        </button>
+        onClick={() => setIsClientAreaOpen(false)}
+        className="fixed inset-0 bg-overlay backdrop-blur-xs"
+      />
 
-        {/* Brand header */}
-        <div className="flex items-center gap-3">
-          <NuzulLogo size="sm" showSubtitle={false} />
-          <div>
-            <span className="font-mono text-sm font-bold tracking-wider block">
-              {isAr ? 'بوابة عملاء نُزول' : 'Nuzul Client Portal'}
-            </span>
-            <span className="text-[10px] text-emerald-600 dark:text-emerald-400 font-mono">
-              {isAr ? 'حلول واستشارات تقنية المعلومات' : 'IT Solutions & Consulting'}
-            </span>
-          </div>
-        </div>
-
-        {/* Tab switcher */}
-        <div
-          className={`mt-6 flex rounded-xl border p-1 text-xs ${
-            isDark ? 'border-white/10 bg-[#0d1524]' : 'border-slate-200 bg-slate-100'
-          }`}
-        >
-          <button
-            type="button"
-            onClick={() => setClientAreaTab('login')}
-            className={`flex-1 rounded-lg py-2 font-bold transition-colors cursor-pointer ${
-              clientAreaTab === 'login'
-                ? 'bg-emerald-500 text-white shadow-sm'
-                : 'text-slate-400 hover:text-current'
-            }`}
-          >
-            {isAr ? 'تسجيل الدخول' : 'Sign In'}
-          </button>
-          <button
-            type="button"
-            onClick={() => setClientAreaTab('register')}
-            className={`flex-1 rounded-lg py-2 font-bold transition-colors cursor-pointer ${
-              clientAreaTab === 'register'
-                ? 'bg-emerald-500 text-white shadow-sm'
-                : 'text-slate-400 hover:text-current'
-            }`}
-          >
-            {isAr ? 'إنشاء حساب جديد' : 'Register'}
-          </button>
-        </div>
-
-        {/* Form Body */}
-        <form onSubmit={handleSubmit} className="mt-6 space-y-4">
-          {clientAreaTab === 'register' && (
+      <div className="relative w-full max-w-2xl rounded-2xl bg-surface border border-token shadow-xl overflow-hidden z-10">
+        {/* Header */}
+        <div className="p-6 border-b border-token flex items-center justify-between bg-surface-2">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-accent-soft border border-accent-soft flex items-center justify-center text-accent">
+              <Lock className="w-5 h-5" />
+            </div>
             <div>
-              <label className="block text-xs font-semibold mb-1.5">
-                {isAr ? 'الاسم الكامل' : 'Full Name'}
-              </label>
-              <div className="relative flex items-center">
-                <User className="absolute left-3.5 rtl:left-auto rtl:right-3.5 h-4 w-4 text-slate-400" />
-                <input
-                  type="text"
-                  required
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  placeholder={isAr ? 'أحمد محمد' : 'Ahmed Mohamed'}
-                  className={`w-full rounded-xl border py-2.5 px-10 text-xs focus:border-emerald-500 focus:outline-none transition-colors ${
-                    isDark ? 'bg-white/5 border-white/10 text-white placeholder-slate-500' : 'bg-slate-50 border-slate-200 text-slate-900 placeholder-slate-400'
-                  }`}
-                />
+              <h3 className="text-lg font-bold text-main">
+                {lang === 'ar' ? 'بوابة عملاء نُزول تِك السحابية' : 'Nuzul Tech Cloud Client Portal'}
+              </h3>
+              <p className="text-xs text-muted">
+                {lang === 'ar' ? 'إدارة الخوادم، الفواتير، وتذاكر الدعم الفني الموحدة' : 'Manage servers, invoices, and support tickets'}
+              </p>
+            </div>
+          </div>
+          <button
+            type="button"
+            onClick={() => setIsClientAreaOpen(false)}
+            aria-label={lang === 'ar' ? 'إغلاق' : 'Close'}
+            className="p-2 rounded-lg bg-surface text-muted hover-text-main transition-colors"
+          >
+            <X className="w-5 h-5" />
+          </button>
+        </div>
+
+        {/* Body */}
+        <div className="p-6 md:p-8">
+          {!isLoggedIn ? (
+            <form onSubmit={handleLogin} className="space-y-5 max-w-md mx-auto">
+              <div>
+                <label className="block text-xs font-semibold text-main mb-2">
+                  {lang === 'ar' ? 'البريد الإلكتروني المؤسسي' : 'Corporate Email'}
+                </label>
+                <div className="relative">
+                  <Mail className="w-4 h-4 text-muted absolute top-1/2 -translate-y-1/2 start-3.5" />
+                  <input
+                    type="email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="admin@yourcompany.com"
+                    dir="ltr"
+                    className="w-full ps-10 pe-4 py-3 text-sm input-token ltr-num"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-main mb-2">
+                  {lang === 'ar' ? 'كلمة المرور' : 'Password'}
+                </label>
+                <div className="relative">
+                  <KeyRound className="w-4 h-4 text-muted absolute top-1/2 -translate-y-1/2 start-3.5" />
+                  <input
+                    type="password"
+                    required
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="••••••••••••"
+                    dir="ltr"
+                    className="w-full ps-10 pe-4 py-3 text-sm input-token ltr-num"
+                  />
+                </div>
+              </div>
+
+              <button
+                type="submit"
+                className="w-full py-3.5 rounded-xl btn-primary font-bold text-sm"
+              >
+                {lang === 'ar' ? 'تسجيل الدخول إلى لوحة التحكم' : 'Sign In to Control Panel'}
+              </button>
+
+              <div className="relative py-2 flex items-center justify-center">
+                <div className="border-t border-token w-full" />
+                <span className="bg-surface px-3 text-xs text-muted">
+                  {lang === 'ar' ? 'أو' : 'OR'}
+                </span>
+                <div className="border-t border-token w-full" />
+              </div>
+
+              <button
+                type="button"
+                onClick={handleDemoAccess}
+                className="w-full py-3 rounded-xl btn-secondary text-xs font-bold"
+              >
+                {lang === 'ar' ? 'معاينة لوحة تحكم عميل تجريبية (Live Demo)' : 'Preview Live Demo Client Dashboard'}
+              </button>
+            </form>
+          ) : (
+            <div className="space-y-6">
+              <div className="flex flex-wrap items-center justify-between gap-4 p-4 rounded-xl bg-accent-soft border border-accent-soft">
+                <div className="flex items-center gap-3">
+                  <CheckCircle2 className="w-6 h-6 text-accent" />
+                  <div>
+                    <div className="text-sm font-bold text-main">
+                      {lang === 'ar' ? 'مرحباً بك في لوحة التحكم السحابية' : 'Welcome to Cloud Control Panel'}
+                    </div>
+                    <div className="text-xs text-muted ltr-num">{email}</div>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setIsLoggedIn(false)}
+                  className="px-3 py-1.5 rounded-lg bg-surface text-xs text-muted hover-text-main border border-token"
+                >
+                  {lang === 'ar' ? 'تسجيل الخروج' : 'Sign Out'}
+                </button>
+              </div>
+
+              {/* Active Instances */}
+              <div>
+                <h4 className="text-xs font-bold text-muted uppercase mb-3">
+                  {lang === 'ar' ? 'الخوادم السحابية النشطة (Active Cloud Instances)' : 'Active Cloud Instances'}
+                </h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="p-4 rounded-xl bg-page border border-token space-y-3">
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm font-bold text-main flex items-center gap-2">
+                        <Server className="w-4 h-4 text-accent" />
+                        prd-erp-cairo-01
+                      </span>
+                      <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-success-soft text-success">
+                        ONLINE
+                      </span>
+                    </div>
+                    <div className="text-xs text-muted ltr-num">IP: 197.45.118.24 • Cairo EG-CAI</div>
+                    <div className="grid grid-cols-3 gap-2 pt-2 border-t border-token text-[11px]">
+                      <div className="text-muted flex items-center gap-1">
+                        <Cpu className="w-3 h-3 text-accent" /> <span className="ltr-num">24%</span>
+                      </div>
+                      <div className="text-muted flex items-center gap-1">
+                        <Activity className="w-3 h-3 text-accent" /> <span className="ltr-num">6.2/16GB</span>
+                      </div>
+                      <div className="text-muted flex items-center gap-1">
+                        <HardDrive className="w-3 h-3 text-accent" /> <span className="ltr-num">48% NVMe</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="p-4 rounded-xl bg-page border border-token space-y-3">
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm font-bold text-main flex items-center gap-2">
+                        <ShieldCheck className="w-4 h-4 text-accent" />
+                        dr-backup-riyadh-02
+                      </span>
+                      <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-success-soft text-success">
+                        SYNCED
+                      </span>
+                    </div>
+                    <div className="text-xs text-muted ltr-num">IP: 95.177.204.88 • Riyadh DR Node</div>
+                    <div className="text-[11px] text-accent pt-2 border-t border-token">
+                      {lang === 'ar' ? 'آخر نسخ احتياطي ناجح: منذ 14 دقيقة' : 'Last snapshot: 14 mins ago'}
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           )}
-
-          <div>
-            <label className="block text-xs font-semibold mb-1.5">
-              {isAr ? 'البريد الإلكتروني' : 'Email Address'}
-            </label>
-            <div className="relative flex items-center">
-              <Mail className="absolute left-3.5 rtl:left-auto rtl:right-3.5 h-4 w-4 text-slate-400" />
-              <input
-                type="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="name@company.com"
-                className={`w-full rounded-xl border py-2.5 px-10 text-xs focus:border-emerald-500 focus:outline-none font-mono transition-colors ${
-                  isDark ? 'bg-white/5 border-white/10 text-white placeholder-slate-500' : 'bg-slate-50 border-slate-200 text-slate-900 placeholder-slate-400'
-                }`}
-              />
-            </div>
-          </div>
-
-          <div>
-            <div className="flex items-center justify-between mb-1.5">
-              <label className="text-xs font-semibold">
-                {isAr ? 'كلمة المرور' : 'Password'}
-              </label>
-              {clientAreaTab === 'login' && (
-                <button
-                  type="button"
-                  onClick={() => setClientAreaTab('forgot')}
-                  className="text-[11px] text-emerald-600 dark:text-emerald-400 hover:underline cursor-pointer"
-                >
-                  {isAr ? 'نسيت كلمة المرور؟' : 'Forgot password?'}
-                </button>
-              )}
-            </div>
-            <div className="relative flex items-center">
-              <Lock className="absolute left-3.5 rtl:left-auto rtl:right-3.5 h-4 w-4 text-slate-400" />
-              <input
-                type="password"
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="••••••••••••"
-                className={`w-full rounded-xl border py-2.5 px-10 text-xs focus:border-emerald-500 focus:outline-none font-mono transition-colors ${
-                  isDark ? 'bg-white/5 border-white/10 text-white placeholder-slate-500' : 'bg-slate-50 border-slate-200 text-slate-900 placeholder-slate-400'
-                }`}
-              />
-            </div>
-          </div>
-
-          {clientAreaTab === 'forgot' && (
-            <div
-              className={`rounded-xl border p-3 text-xs ${
-                isDark ? 'border-emerald-400/20 bg-emerald-950/20 text-slate-300' : 'border-emerald-200 bg-emerald-50 text-slate-700'
-              }`}
-            >
-              {isAr
-                ? 'سنرسل لك رابط إعادة تعيين كلمة المرور إلى بريدك الإلكتروني المسجل.'
-                : "We'll send a secure password reset link to your registered corporate email."}
-            </div>
-          )}
-
-          {isSubmitted ? (
-            <div className="flex items-center justify-center gap-2 rounded-xl bg-emerald-500/20 border border-emerald-500/40 p-3 text-xs font-bold text-emerald-600 dark:text-emerald-300">
-              <ShieldCheck className="h-4 w-4" />
-              <span>
-                {isAr ? 'تم التحقق بنجاح! جاري تحويلك لبوابة نُزول تِك...' : 'Authenticated successfully! Redirecting to portal...'}
-              </span>
-            </div>
-          ) : (
-            <button
-              type="submit"
-              className="btn btn-primary w-full py-3 text-xs font-bold uppercase tracking-wider cursor-pointer"
-            >
-              <span>
-                {clientAreaTab === 'login'
-                  ? isAr ? 'تسجيل الدخول لبوابة العميل' : 'Sign In to Client Portal'
-                  : clientAreaTab === 'register'
-                  ? isAr ? 'إنشاء الحساب والمتابعة' : 'Create Account & Continue'
-                  : isAr ? 'إرسال رابط الاستعادة' : 'Send Reset Link'}
-              </span>
-            </button>
-          )}
-        </form>
-
-        <div className="mt-6 text-center text-[11px] text-slate-400">
-          <span>{isAr ? 'اتصال محمي ومشفر عبر SSL 256-bit — نُزول تِك' : '256-bit Encrypted SSL Connection — Nuzul Tech'}</span>
         </div>
       </div>
     </div>

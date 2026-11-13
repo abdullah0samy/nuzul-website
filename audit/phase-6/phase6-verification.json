@@ -1,0 +1,267 @@
+{
+  "timestamp": "2026-11-12T16:01:49.272Z",
+  "phase6A_CommandPalette": {
+    "openedViaCtrlK": true,
+    "serviceGroupVisible": true,
+    "planGroupVisible": true,
+    "emptyStateVisible": true,
+    "emptyContactCtaVisible": true,
+    "closedViaEsc": true,
+    "openedViaHeaderIcon": true,
+    "recentSearchesSaved": true,
+    "recentSearches": [
+      "كاميرات"
+    ],
+    "paletteScreenshot": "/app/applet/audit/phase-6/screenshots/phase6A-command-palette-results.png"
+  },
+  "phase6B_ArabicUnitTests": {
+    "passed": 20,
+    "failed": 0,
+    "total": 20,
+    "output": "=== RUNNING PHASE 6B ARABIC SEARCH UNIT TESTS (20 CASES) ===\n[PASS] Case #01 | Query: \"أمن سيبراني\" -> Alef with hamza above vs bare alef (أمن سيبراني -> امن سيبراني)\n[PASS] Case #02 | Query: \"إستضافة سحابية\" -> Alef with hamza below vs bare alef (إستضافة -> استضافة)\n[PASS] Case #03 | Query: \"آمان الشبكات\" -> Alef madda normalization (آمان الشبكات -> امان الشبكات)\n[PASS] Case #04 | Query: \"شبكه داخليه\" -> Ta marbuta vs Ha equivalence (شبكه داخليه -> شبكة داخلية)\n[PASS] Case #05 | Query: \"أمن سيبرانى\" -> Alef maqsura vs Ya equivalence (أمن سيبرانى -> أمن سيبراني)\n[PASS] Case #06 | Query: \"شَبَكَاتٌ وَخَوَادِمُ\" -> Tashkeel (diacritics) stripping (شَبَكَاتٌ وَخَوَادِمُ)\n[PASS] Case #07 | Query: \"ســـيـــرفـــر ســـحـــابـــي\" -> Tatweel (kashida) stripping (ســـيـــرفـــر ســـحـــابـــي)\n[PASS] Case #08 | Query: \"١٩٩\" -> Arabic-Indic numerals converted to Western digits (١٩٩ -> 199 EGP plan)\n[PASS] Case #09 | Query: \"دعم فني ٢٤/٧\" -> Arabic-Indic 24/7 support query (دعم فني ٢٤/٧)\n[PASS] Case #10 | Query: \"سيرفر\" -> Synonym matching: سيرفر matches خادم / Cloud VPS plans & services\n[PASS] Case #11 | Query: \"خادم\" -> Synonym matching: خادم matches سيرفر / VPS plans\n[PASS] Case #12 | Query: \"كاميرات\" -> Synonym matching: كاميرات matches مراقبة / CCTV services & case studies\n[PASS] Case #13 | Query: \"مراقبه\" -> Synonym matching: مراقبه (with Ha) matches CCTV surveillance\n[PASS] Case #14 | Query: \"سنترال\" -> Synonym matching: سنترال matches VoIP / PBX telephony services\n[PASS] Case #15 | Query: \"تليفون شبكي\" -> Synonym matching: تليفون شبكي matches VoIP services\n[PASS] Case #16 | Query: \"فايروول\" -> Synonym matching: فايروول matches جدار ناري / Fortinet NGFW\n[PASS] Case #17 | Query: \"باك اب\" -> Synonym matching: باك اب matches نسخ احتياطي / Backup articles & services\n[PASS] Case #18 | Query: \"ايميل شركات\" -> Synonym matching: ايميل شركات matches بريد إلكتروني رسمي\n[PASS] Case #19 | Query: \"بصمه حضور\" -> Synonym matching: بصمه حضور matches Biometric Attendance & Access Control\n[PASS] Case #20 | Query: \"برنامج محاسبه ومخازن\" -> Synonym matching: برنامج محاسبه ومخازن matches ERP software services\n\nALL 20/20 ARABIC SEARCH UNIT TEST CASES PASSED!"
+  },
+  "phase6C_ListingFilters": {
+    "directUrlLoaded": "http://localhost:3000/services?cat=cloud&q=%D8%B3%D9%8A%D8%B1%D9%81%D8%B1",
+    "activeChipsVisible": true,
+    "resultCountText1": "عرض 6 من أصل 6 خدمة هندسية",
+    "hasSecurityCatParam": true,
+    "backRestoredCloud": true,
+    "urlAfterClear": "http://localhost:3000/services",
+    "mobileTriggerVisible": true,
+    "mobileSheetVisible": true,
+    "filteredScreenshot": "/app/applet/audit/phase-6/screenshots/phase6C-services-filtered-url.png",
+    "mobileSheetScreenshot": "/app/applet/audit/phase-6/screenshots/phase6C-mobile-filter-sheet.png"
+  },
+  "phase6D_ServiceDetailBlocks": {
+    "service-detail-view": true,
+    "service-what-it-is": true,
+    "service-who-it-is-for": true,
+    "service-scope-matrix": true,
+    "service-how-delivery-works": true,
+    "service-deliverables": true,
+    "service-sla-terms": true,
+    "service-tech-specs": true,
+    "service-price-drivers": true,
+    "service-related-case-study": true,
+    "service-faq": true,
+    "service-bottom-cta": true
+  },
+  "matrix": [
+    {
+      "route": "/services",
+      "theme": "light",
+      "lang": "ar",
+      "viewport": "375",
+      "overflowPx": 0,
+      "screenshot": "services-light-ar-375.png"
+    },
+    {
+      "route": "/services",
+      "theme": "light",
+      "lang": "ar",
+      "viewport": "768",
+      "overflowPx": 0,
+      "screenshot": "services-light-ar-768.png"
+    },
+    {
+      "route": "/services",
+      "theme": "light",
+      "lang": "ar",
+      "viewport": "1440",
+      "overflowPx": 0,
+      "screenshot": "services-light-ar-1440.png"
+    },
+    {
+      "route": "/services",
+      "theme": "light",
+      "lang": "en",
+      "viewport": "375",
+      "overflowPx": 0,
+      "screenshot": "services-light-en-375.png"
+    },
+    {
+      "route": "/services",
+      "theme": "light",
+      "lang": "en",
+      "viewport": "768",
+      "overflowPx": 0,
+      "screenshot": "services-light-en-768.png"
+    },
+    {
+      "route": "/services",
+      "theme": "light",
+      "lang": "en",
+      "viewport": "1440",
+      "overflowPx": 0,
+      "screenshot": "services-light-en-1440.png"
+    },
+    {
+      "route": "/services",
+      "theme": "dark",
+      "lang": "ar",
+      "viewport": "375",
+      "overflowPx": 0,
+      "screenshot": "services-dark-ar-375.png"
+    },
+    {
+      "route": "/services",
+      "theme": "dark",
+      "lang": "ar",
+      "viewport": "768",
+      "overflowPx": 0,
+      "screenshot": "services-dark-ar-768.png"
+    },
+    {
+      "route": "/services",
+      "theme": "dark",
+      "lang": "ar",
+      "viewport": "1440",
+      "overflowPx": 0,
+      "screenshot": "services-dark-ar-1440.png"
+    },
+    {
+      "route": "/services",
+      "theme": "dark",
+      "lang": "en",
+      "viewport": "375",
+      "overflowPx": 0,
+      "screenshot": "services-dark-en-375.png"
+    },
+    {
+      "route": "/services",
+      "theme": "dark",
+      "lang": "en",
+      "viewport": "768",
+      "overflowPx": 0,
+      "screenshot": "services-dark-en-768.png"
+    },
+    {
+      "route": "/services",
+      "theme": "dark",
+      "lang": "en",
+      "viewport": "1440",
+      "overflowPx": 0,
+      "screenshot": "services-dark-en-1440.png"
+    },
+    {
+      "route": "/services/service-1",
+      "theme": "light",
+      "lang": "ar",
+      "viewport": "375",
+      "overflowPx": 0,
+      "screenshot": "service-detail-light-ar-375.png"
+    },
+    {
+      "route": "/services/service-1",
+      "theme": "light",
+      "lang": "ar",
+      "viewport": "768",
+      "overflowPx": 0,
+      "screenshot": "service-detail-light-ar-768.png"
+    },
+    {
+      "route": "/services/service-1",
+      "theme": "light",
+      "lang": "ar",
+      "viewport": "1440",
+      "overflowPx": 0,
+      "screenshot": "service-detail-light-ar-1440.png"
+    },
+    {
+      "route": "/services/service-1",
+      "theme": "light",
+      "lang": "en",
+      "viewport": "375",
+      "overflowPx": 0,
+      "screenshot": "service-detail-light-en-375.png"
+    },
+    {
+      "route": "/services/service-1",
+      "theme": "light",
+      "lang": "en",
+      "viewport": "768",
+      "overflowPx": 0,
+      "screenshot": "service-detail-light-en-768.png"
+    },
+    {
+      "route": "/services/service-1",
+      "theme": "light",
+      "lang": "en",
+      "viewport": "1440",
+      "overflowPx": 0,
+      "screenshot": "service-detail-light-en-1440.png"
+    },
+    {
+      "route": "/services/service-1",
+      "theme": "dark",
+      "lang": "ar",
+      "viewport": "375",
+      "overflowPx": 0,
+      "screenshot": "service-detail-dark-ar-375.png"
+    },
+    {
+      "route": "/services/service-1",
+      "theme": "dark",
+      "lang": "ar",
+      "viewport": "768",
+      "overflowPx": 0,
+      "screenshot": "service-detail-dark-ar-768.png"
+    },
+    {
+      "route": "/services/service-1",
+      "theme": "dark",
+      "lang": "ar",
+      "viewport": "1440",
+      "overflowPx": 0,
+      "screenshot": "service-detail-dark-ar-1440.png"
+    },
+    {
+      "route": "/services/service-1",
+      "theme": "dark",
+      "lang": "en",
+      "viewport": "375",
+      "overflowPx": 0,
+      "screenshot": "service-detail-dark-en-375.png"
+    },
+    {
+      "route": "/services/service-1",
+      "theme": "dark",
+      "lang": "en",
+      "viewport": "768",
+      "overflowPx": 0,
+      "screenshot": "service-detail-dark-en-768.png"
+    },
+    {
+      "route": "/services/service-1",
+      "theme": "dark",
+      "lang": "en",
+      "viewport": "1440",
+      "overflowPx": 0,
+      "screenshot": "service-detail-dark-en-1440.png"
+    }
+  ],
+  "bannedWordHits": [],
+  "axeViolations": [],
+  "consoleErrors": [],
+  "pageErrors": [],
+  "lighthouseMobileProxy": {
+    "/services": {
+      "domContentLoadedMs": 835,
+      "loadCompleteMs": 838,
+      "fcpMs": 1192,
+      "estimatedPerformanceScore": 98,
+      "estimatedAccessibilityScore": 100,
+      "estimatedBestPracticesScore": 100,
+      "estimatedSeoScore": 100
+    },
+    "/services/service-1": {
+      "domContentLoadedMs": 782,
+      "loadCompleteMs": 784,
+      "fcpMs": 1052,
+      "estimatedPerformanceScore": 98,
+      "estimatedAccessibilityScore": 100,
+      "estimatedBestPracticesScore": 100,
+      "estimatedSeoScore": 100
+    }
+  }
+}

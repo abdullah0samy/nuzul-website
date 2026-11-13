@@ -1,63 +1,116 @@
 import React from 'react';
 import { useApp } from '../../context/AppContext';
-import { NUZUL_CONTACT } from '../../data/nuzulData';
 import { InstaPayLogo } from './InstaPayLogo';
+import { ShieldCheck, Lock, CreditCard, Landmark, Smartphone } from 'lucide-react';
 
-export const PaymentBadges: React.FC<{ compact?: boolean }> = ({ compact = false }) => {
-  const { setActivePaymentModal, locale } = useApp();
-  const isAr = locale === 'ar';
+interface PaymentBadgesProps {
+  variant?: 'default' | 'compact' | 'footer';
+  className?: string;
+}
+
+export const PaymentBadges: React.FC<PaymentBadgesProps> = ({ variant = 'default', className = '' }) => {
+  const { lang } = useApp();
+
+  if (variant === 'footer') {
+    return (
+      <div className={`flex flex-wrap items-center gap-2.5 ${className}`}>
+        {/* InstaPay */}
+        <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-navy-surface border border-navy transition-colors" title="InstaPay Egypt">
+          <InstaPayLogo size={18} />
+          <span className="text-xs font-bold text-on-navy tracking-wide">InstaPay</span>
+        </div>
+
+        {/* Vodafone Cash */}
+        <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-navy-surface border border-navy transition-colors" title="Vodafone Cash">
+          <span className="w-2 h-2 rounded-full bg-danger" />
+          <span className="text-xs font-bold text-on-navy">Vodafone Cash</span>
+        </div>
+
+        {/* Fawry */}
+        <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-navy-surface border border-navy transition-colors" title="Fawry Pay">
+          <span className="w-2 h-2 rounded-full bg-warning" />
+          <span className="text-xs font-bold text-on-navy">Fawry</span>
+        </div>
+
+        {/* Visa & Mastercard */}
+        <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-navy-surface border border-navy transition-colors" title="Visa & Mastercard">
+          <CreditCard className="w-3.5 h-3.5 text-navy-accent" />
+          <span className="text-xs font-bold text-on-navy">Visa / Mastercard</span>
+        </div>
+
+        {/* Bank Transfer */}
+        <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-navy-surface border border-navy transition-colors" title="CIB / QNB / NBE Corporate Bank Transfer">
+          <Landmark className="w-3.5 h-3.5 text-navy-accent" />
+          <span className="text-xs font-semibold text-on-navy-muted">
+            {lang === 'ar' ? 'تحويل بنكي (CIB / QNB / الأهلي)' : 'Bank Transfer (CIB / QNB / NBE)'}
+          </span>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="flex flex-wrap items-center gap-2">
-      {/* InstaPay Official Clickable Badge */}
-      <button
-        type="button"
-        onClick={() => setActivePaymentModal('instapay')}
-        className="group flex items-center gap-2 rounded-xl border border-purple-500/40 bg-gradient-to-r from-[#2e0933] to-[#17041a] px-3 py-1.5 text-xs font-bold text-white transition-all hover:scale-105 hover:border-purple-400 shadow-sm cursor-pointer"
-        title={isAr ? 'اضغط للدفع الفوري عبر إنستاباي' : 'Click to pay instantly via InstaPay'}
-      >
-        <InstaPayLogo size="md" variant="wordmark" />
-        <span className="rounded bg-emerald-500/20 border border-emerald-500/40 px-1.5 py-0.2 text-[9px] text-emerald-400 font-sans font-medium">
-          {isAr ? 'لحظي' : 'Instant'}
-        </span>
-      </button>
+    <div className={`rounded-2xl bg-surface border border-token p-4 sm:p-5 ${className}`}>
+      <div className="flex flex-col lg:flex-row items-center justify-between gap-4">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-xl bg-accent-soft border border-accent-soft flex items-center justify-center text-accent shrink-0">
+            <ShieldCheck className="w-5 h-5" />
+          </div>
+          <div>
+            <div className="text-xs sm:text-sm font-bold text-main flex items-center gap-2">
+              <span>{lang === 'ar' ? 'بوابات دفع محلية ودولية مؤمنة بالكامل' : '100% Secured Local & International Payment Gateways'}</span>
+              <span className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-accent-soft text-accent text-[10px] font-semibold">
+                <Lock className="w-2.5 h-2.5" /> 256-Bit SSL
+              </span>
+            </div>
+            <p className="text-[11px] text-muted mt-0.5">
+              {lang === 'ar'
+                ? 'تفعيل فوري للخدمات مع إصدار فاتورة ضريبية رسمية معتمدة للشركات والمؤسسات.'
+                : 'Instant service activation with official tax invoices for enterprises.'}
+            </p>
+          </div>
+        </div>
 
-      {/* Vodafone Cash Clickable Badge */}
-      <button
-        type="button"
-        onClick={() => setActivePaymentModal('vodafone')}
-        className="group flex items-center gap-1.5 rounded-xl border border-red-500/40 bg-red-950/30 px-3 py-1.5 font-mono text-xs font-bold text-red-200 transition-all hover:scale-105 hover:border-red-400 hover:bg-red-900/40 shadow-sm cursor-pointer"
-        title={isAr ? 'اضغط للدفع عبر فودافون كاش' : 'Click to pay via Vodafone Cash'}
-      >
-        <span className="flex h-5 w-5 items-center justify-center rounded-md bg-red-600 text-[10px] font-black text-white">
-          VF
-        </span>
-        <span>Vodafone Cash</span>
-      </button>
+        <div className="flex flex-wrap items-center justify-center gap-2">
+          <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-surface-2 border border-token">
+            <InstaPayLogo size={20} />
+            <div className="text-start">
+              <div className="text-xs font-bold text-main leading-none">InstaPay</div>
+              <div className="text-[9px] text-accent font-semibold mt-0.5">{lang === 'ar' ? 'تحويل لحظي' : 'Instant'}</div>
+            </div>
+          </div>
 
-      {/* Visa Clickable Badge */}
-      <button
-        type="button"
-        onClick={() => setActivePaymentModal('card')}
-        className="group flex items-center gap-1.5 rounded-xl border border-blue-500/30 bg-blue-950/20 px-3 py-1.5 font-mono text-xs font-bold text-blue-200 transition-all hover:scale-105 hover:border-blue-400 hover:bg-blue-900/40 shadow-sm cursor-pointer"
-        title={isAr ? 'الدفع ببطاقات فيزا' : 'Pay via Visa'}
-      >
-        <span className="font-black italic tracking-wider text-blue-400">VISA</span>
-      </button>
+          <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-surface-2 border border-token">
+            <div className="w-6 h-6 rounded-lg bg-danger-soft border border-danger flex items-center justify-center text-danger shrink-0">
+              <Smartphone className="w-3.5 h-3.5" />
+            </div>
+            <div className="text-start">
+              <div className="text-xs font-bold text-main leading-none">Vodafone Cash</div>
+              <div className="text-[9px] text-muted mt-0.5">{lang === 'ar' ? 'محافظ إلكترونية' : 'Mobile Wallet'}</div>
+            </div>
+          </div>
 
-      {/* Mastercard Clickable Badge */}
-      <button
-        type="button"
-        onClick={() => setActivePaymentModal('card')}
-        className="group flex items-center gap-1.5 rounded-xl border border-orange-500/30 bg-orange-950/20 px-3 py-1.5 font-mono text-xs font-bold text-orange-200 transition-all hover:scale-105 hover:border-orange-400 hover:bg-orange-900/40 shadow-sm cursor-pointer"
-        title={isAr ? 'الدفع ببطاقات ماستركارد' : 'Pay via Mastercard'}
-      >
-        <span className="flex items-center -space-x-1">
-          <span className="h-3.5 w-3.5 rounded-full bg-red-500 opacity-90" />
-          <span className="h-3.5 w-3.5 rounded-full bg-amber-500 opacity-90" />
-        </span>
-        <span className="text-[11px] font-semibold text-slate-200">Mastercard</span>
-      </button>
+          <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-surface-2 border border-token">
+            <div className="w-6 h-6 rounded-lg bg-warning-soft border border-warning flex items-center justify-center text-warning font-bold text-[10px] shrink-0">
+              F
+            </div>
+            <div className="text-start">
+              <div className="text-xs font-bold text-main leading-none">Fawry Pay</div>
+              <div className="text-[9px] text-muted mt-0.5">{lang === 'ar' ? 'فوري بلس' : 'Fawry Plus'}</div>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-surface-2 border border-token">
+            <div className="w-6 h-6 rounded-lg bg-accent-soft border border-accent-soft flex items-center justify-center text-accent shrink-0">
+              <CreditCard className="w-3.5 h-3.5" />
+            </div>
+            <div className="text-start">
+              <div className="text-xs font-bold text-main leading-none">Visa / Master</div>
+              <div className="text-[9px] text-muted mt-0.5">3D Secure</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

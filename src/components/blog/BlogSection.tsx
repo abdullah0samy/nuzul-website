@@ -1,294 +1,545 @@
-import React, { useState } from 'react';
-import { Newspaper, ArrowRight, ArrowLeft, Calendar, Tag, BookOpen, Search, ShieldCheck, ChevronDown, ChevronUp } from 'lucide-react';
+import React, { useMemo, useState } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
+import { ARTICLES, Article } from '../../data/nuzulData';
 import { useApp } from '../../context/AppContext';
-import { NUZUL_BLOG_POSTS } from '../../data/nuzulData';
-import { BlogPost } from '../../types';
-import { RevealOnScroll, StaggerContainer, StaggerItem } from '../common/RevealOnScroll';
+import { matchesArabicQuery, scoreArabicMatch } from '../../utils/arabicSearch';
+import { openGlobalSearch } from '../search/GlobalSearchCommandPalette';
+import {
+  Calendar,
+  Clock,
+  ArrowLeft,
+  ArrowRight,
+  FileText,
+  SlidersHorizontal,
+  Search,
+  X,
+  RotateCcw,
+  ChevronDown,
+  Check,
+} from 'lucide-react';
+
+interface BlogCategoryDef {
+  slug: 'all' | 'infrastructure' | 'cloud' | 'security' | 'software';
+  nameAr: string;
+  nameEn: string;
+}
+
+const BLOG_CATEGORIES: BlogCategoryDef[] = [
+  { slug: 'all', nameAr: 'جميع المقالات والأدلة', nameEn: 'All Technical Guides' },
+  { slug: 'infrastructure', nameAr: 'الشبكات والبنية التحتية', nameEn: 'Infrastructure & Networks' },
+  { slug: 'cloud', nameAr: 'السحابة والاستضافة', nameEn: 'Cloud & Servers' },
+  { slug: 'security', nameAr: 'الأمن السيبراني والنسخ الاحتياطي', nameEn: 'Cybersecurity & Backups' },
+  { slug: 'software', nameAr: 'البرمجيات وأنظمة الإدارة', nameEn: 'Software & ERP' },
+];
+
+const SORT_OPTIONS = [
+  { id: 'default', labelAr: 'الأحدث نشراً', labelEn: 'Most Recent' },
+  { id: 'title', labelAr: 'أبجدياً (أ - ي)', labelEn: 'Alphabetical (A - Z)' },
+];
+
+const ITEMS_PER_PAGE = 9;
 
 export const BlogSection: React.FC = () => {
-  const { locale, setActiveArticle, theme } = useApp();
-  const isAr = locale === 'ar';
-  const isDark = theme === 'dark';
+  const { lang } = useApp();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [mobileSheetOpen, setMobileSheetOpen] = useState(false);
+  const [expandedBlogIds, setExpandedBlogIds] = useState<Record<string, boolean>>({});
+  const ArrowIcon = lang === 'ar' ? ArrowLeft : ArrowRight;
 
-  const [activeCategory, setActiveCategory] = useState<string>('all');
-  const [searchQuery, setSearchQuery] = useState('');
-  const [showAllPosts, setShowAllPosts] = useState(false);
+  const toggleBlogExpand = (id: string) => {
+    setExpandedBlogIds((prev) => ({ ...prev, [id]: !prev[id] }));
+  };
 
-  const cloudCount = NUZUL_BLOG_POSTS.filter(
-    (p) =>
-      p.category_en.toLowerCase().includes('server') ||
-      p.category_en.toLowerCase().includes('vps') ||
-      p.category_en.toLowerCase().includes('domain') ||
-      p.category_en.toLowerCase().includes('cloud') ||
-      p.category_en.toLowerCase().includes('bare-metal')
-  ).length;
+  const catParam = (searchParams.get('cat') || 'all') as BlogCategoryDef['slug'];
+  const queryParam = (searchParams.get('q') || '').trim();
+  const sortParam = searchParams.get('sort') || 'default';
+  const pageParam = Math.max(1, parseInt(searchParams.get('page') || '1', 10) || 1);
 
-  const healthCount = NUZUL_BLOG_POSTS.filter(
-    (p) =>
-      p.category_en.toLowerCase().includes('health') ||
-      p.category_en.toLowerCase().includes('hospital') ||
-      p.category_en.toLowerCase().includes('clinic') ||
-      p.category_en.toLowerCase().includes('pacs') ||
-      p.category_en.toLowerCase().includes('q-system')
-  ).length;
+  const activeCatDef =
+    BLOG_CATEGORIES.find((c) => c.slug === catParam) || BLOG_CATEGORIES[0];
+  const activeCatSlug = activeCatDef.slug;
 
-  const securityCount = NUZUL_BLOG_POSTS.filter(
-    (p) =>
-      p.category_en.toLowerCase().includes('security') ||
-      p.category_en.toLowerCase().includes('firewall') ||
-      p.category_en.toLowerCase().includes('backup') ||
-      p.category_en.toLowerCase().includes('voip') ||
-      p.category_en.toLowerCase().includes('email') ||
-      p.category_en.toLowerCase().includes('siem') ||
-      p.category_en.toLowerCase().includes('disaster') ||
-      p.category_en.toLowerCase().includes('active directory')
-  ).length;
+  const queryMatchedArticles = useMemo(() => {
+    if (!queryParam) return ARTICLES;
+    return ARTICLES.filter((a) => {
+      const haystacks = [
+        a.title,
+        a.titleEn,
+        a.category,
+        a.categoryEn,
+        a.excerpt,
+        a.excerptEn,
+        ...a.content,
+        ...a.contentEn,
+      ];
+      return matchesArabicQuery(queryParam, haystacks);
+    });
+  }, [queryParam]);
 
-  const softwareCount = NUZUL_BLOG_POSTS.filter(
-    (p) =>
-      p.category_en.toLowerCase().includes('software') ||
-      p.category_en.toLowerCase().includes('mobile') ||
-      p.category_en.toLowerCase().includes('web') ||
-      p.category_en.toLowerCase().includes('ui/ux') ||
-      p.category_en.toLowerCase().includes('erp') ||
-      p.category_en.toLowerCase().includes('qa') ||
-      p.category_en.toLowerCase().includes('testing')
-  ).length;
+  const categoryCounts = useMemo(() => {
+    const counts: Record<string, number> = {
+      all: queryMatchedArticles.length,
+    };
+    for (const c of BLOG_CATEGORIES) {
+      if (c.slug !== 'all') {
+        counts[c.slug] = queryMatchedArticles.filter(
+          (a) => a.categorySlug === c.slug
+        ).length;
+      }
+    }
+    return counts;
+  }, [queryMatchedArticles]);
 
-  const categories = [
-    { id: 'all', labelAr: `جميع المقالات والأدلة (${NUZUL_BLOG_POSTS.length})`, labelEn: `All Guides (${NUZUL_BLOG_POSTS.length})` },
-    { id: 'cloud', labelAr: `السيرفرات والـ VPS (${cloudCount})`, labelEn: `Cloud & Servers (${cloudCount})` },
-    { id: 'health', labelAr: `الأنظمة الصحية والمستشفيات (${healthCount})`, labelEn: `Healthcare & PACS (${healthCount})` },
-    { id: 'security', labelAr: `الأمن والشبكات والطوارئ (${securityCount})`, labelEn: `Security & DR (${securityCount})` },
-    { id: 'software', labelAr: `البرمجيات وتطبيقات الموبايل (${softwareCount})`, labelEn: `Software & Mobile (${softwareCount})` },
-  ];
+  const filteredArticles = useMemo(() => {
+    let list: Article[] =
+      activeCatSlug === 'all'
+        ? [...queryMatchedArticles]
+        : queryMatchedArticles.filter((a) => a.categorySlug === activeCatSlug);
 
-  const filteredPosts = NUZUL_BLOG_POSTS.filter((post) => {
-    // Category match
-    let matchCat = true;
-    if (activeCategory === 'cloud') {
-      matchCat =
-        post.category_en.toLowerCase().includes('server') ||
-        post.category_en.toLowerCase().includes('vps') ||
-        post.category_en.toLowerCase().includes('domain') ||
-        post.category_en.toLowerCase().includes('cloud') ||
-        post.category_en.toLowerCase().includes('bare-metal');
-    } else if (activeCategory === 'health') {
-      matchCat =
-        post.category_en.toLowerCase().includes('health') ||
-        post.category_en.toLowerCase().includes('hospital') ||
-        post.category_en.toLowerCase().includes('clinic') ||
-        post.category_en.toLowerCase().includes('pacs') ||
-        post.category_en.toLowerCase().includes('q-system');
-    } else if (activeCategory === 'security') {
-      matchCat =
-        post.category_en.toLowerCase().includes('security') ||
-        post.category_en.toLowerCase().includes('firewall') ||
-        post.category_en.toLowerCase().includes('backup') ||
-        post.category_en.toLowerCase().includes('voip') ||
-        post.category_en.toLowerCase().includes('email') ||
-        post.category_en.toLowerCase().includes('siem') ||
-        post.category_en.toLowerCase().includes('disaster') ||
-        post.category_en.toLowerCase().includes('active directory');
-    } else if (activeCategory === 'software') {
-      matchCat =
-        post.category_en.toLowerCase().includes('software') ||
-        post.category_en.toLowerCase().includes('mobile') ||
-        post.category_en.toLowerCase().includes('web') ||
-        post.category_en.toLowerCase().includes('ui/ux') ||
-        post.category_en.toLowerCase().includes('erp') ||
-        post.category_en.toLowerCase().includes('qa') ||
-        post.category_en.toLowerCase().includes('testing');
+    if (queryParam && sortParam === 'default') {
+      list.sort(
+        (a, b) =>
+          scoreArabicMatch(queryParam, [b.title, b.titleEn, b.excerpt, b.excerptEn]) -
+          scoreArabicMatch(queryParam, [a.title, a.titleEn, a.excerpt, a.excerptEn])
+      );
+    } else if (sortParam === 'title') {
+      list.sort((a, b) => {
+        const tA = lang === 'ar' ? a.title : a.titleEn;
+        const tB = lang === 'ar' ? b.title : b.titleEn;
+        return tA.localeCompare(tB, lang === 'ar' ? 'ar' : 'en');
+      });
     }
 
-    // Search query match
-    if (!matchCat) return false;
-    if (!searchQuery.trim()) return true;
+    return list;
+  }, [queryMatchedArticles, activeCatSlug, queryParam, sortParam, lang]);
 
-    const q = searchQuery.toLowerCase();
-    const title = (isAr ? post.title_ar : post.title_en).toLowerCase();
-    const excerpt = (isAr ? post.excerpt_ar : post.excerpt_en).toLowerCase();
-    return title.includes(q) || excerpt.includes(q);
-  });
+  const visibleCount = pageParam * ITEMS_PER_PAGE;
+  const visibleArticles = filteredArticles.slice(0, visibleCount);
+  const hasMore = visibleCount < filteredArticles.length;
 
-  const INITIAL_POSTS_COUNT = 8;
-  const isSearchActive = searchQuery.trim().length > 0;
-  const displayedPosts =
-    activeCategory === 'all' && !isSearchActive && !showAllPosts
-      ? filteredPosts.slice(0, INITIAL_POSTS_COUNT)
-      : filteredPosts;
+  const updateUrlParams = (updates: {
+    cat?: string | null;
+    q?: string | null;
+    sort?: string | null;
+    page?: number | null;
+  }) => {
+    const next = new URLSearchParams(searchParams);
+
+    if (updates.cat !== undefined) {
+      if (!updates.cat || updates.cat === 'all') next.delete('cat');
+      else next.set('cat', updates.cat);
+      if (updates.page === undefined) next.delete('page');
+    }
+    if (updates.q !== undefined) {
+      if (!updates.q || !updates.q.trim()) next.delete('q');
+      else next.set('q', updates.q.trim());
+      if (updates.page === undefined) next.delete('page');
+    }
+    if (updates.sort !== undefined) {
+      if (!updates.sort || updates.sort === 'default') next.delete('sort');
+      else next.set('sort', updates.sort);
+    }
+    if (updates.page !== undefined) {
+      if (!updates.page || updates.page <= 1) next.delete('page');
+      else next.set('page', String(updates.page));
+    }
+
+    setSearchParams(next);
+  };
+
+  const handleClearAllFilters = () => {
+    setSearchParams({});
+    setMobileSheetOpen(false);
+  };
+
+  const hasActiveFilters =
+    activeCatSlug !== 'all' || Boolean(queryParam) || sortParam !== 'default';
 
   return (
-    <section
-      id="blog"
-      className={`relative overflow-hidden scroll-mt-24 px-5 py-20 sm:py-24 sm:px-6 lg:px-8 border-t transition-colors ${
-        isDark
-          ? 'bg-[#070c14] border-white/10 text-white'
-          : 'bg-slate-50 border-slate-200 text-slate-900'
-      }`}
-    >
-      <div className="mx-auto max-w-7xl">
-        {/* Header with Reveal on Scroll */}
-        <RevealOnScroll direction="up" threshold={0.2}>
-          <div className="mx-auto max-w-3xl text-center mb-12">
-            <div className="eyebrow-mono justify-center text-emerald-600 dark:text-emerald-400">
-              <Newspaper className="h-4 w-4" />
-              <span>{isAr ? 'المدونة والهندسة التقنية' : 'ENTERPRISE IT & CLOUD KNOWLEDGE BASE'}</span>
+    <section id="blog" className="section-spacing bg-page-band">
+      <div className="container-nuzul">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          {/* STICKY FILTER SIDEBAR (Desktop >= 1024px) */}
+          <aside
+            aria-label={lang === 'ar' ? 'تصفية المقالات التقنية' : 'Filter technical articles'}
+            data-testid="blog-filter-sidebar"
+            className="hidden lg:block lg:col-span-3 sticky top-24 clean-card p-5 space-y-6"
+          >
+            <div>
+              <button
+                type="button"
+                onClick={() => openGlobalSearch(queryParam)}
+                data-testid="blog-global-search-trigger"
+                className="w-full min-h-[44px] px-3.5 py-2.5 rounded-xl bg-page border border-token text-xs font-semibold text-muted hover-text-main flex items-center justify-between gap-2 transition-colors"
+              >
+                <span className="inline-flex items-center gap-2 truncate">
+                  <Search className="w-4 h-4 text-accent shrink-0" />
+                  <span className="truncate">
+                    {queryParam
+                      ? queryParam
+                      : lang === 'ar'
+                      ? 'بحث شامل (Ctrl+K)'
+                      : 'Global Search (Ctrl+K)'}
+                  </span>
+                </span>
+                <kbd className="px-1.5 py-0.5 rounded bg-surface border border-token text-[10px] ltr-num shrink-0">
+                  ⌘K
+                </kbd>
+              </button>
             </div>
 
-            <h2 className="mt-4 text-3xl font-black leading-tight sm:text-4xl">
-              {isAr
-                ? 'أحدث مقالات وتجارب البنية التحتية والسيرفرات في مصر'
-                : 'Recent Enterprise IT & Cloud Engineering Guides'}
-            </h2>
-
-            <p
-              className={`mt-4 text-base leading-relaxed ${
-                isDark ? 'text-slate-300' : 'text-slate-600'
-              }`}
-            >
-              {isAr
-                ? 'أدلة هندسية متخصصة ومحدثة لكل خدمة من خدماتنا: من الخوادم السحابية المخصصة، وفصل أرشيف المستشفيات عن البريد، إلى جدران الحماية وسنترال VoIP والنسخ المعزول ضد الفدية.'
-                : 'Field-tested architectural playbooks across all 22 enterprise domains: High-performance cloud VPS, DICOM PACS medical decoupling, DMARC phishing immunity, and 3-2-1 hybrid cloud recovery.'}
-            </p>
-
-            {/* Search Bar & Category Filter */}
-            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
-              <div className="relative w-full max-w-md">
-                <Search className="absolute left-3.5 rtl:left-auto rtl:right-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
-                <input
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder={isAr ? 'ابحث في مقالات وأدلة الخدمات...' : 'Search IT & cloud guides...'}
-                  className={`w-full rounded-2xl border py-2.5 px-10 text-xs focus:border-emerald-500 focus:outline-none transition-colors ${
-                    isDark
-                      ? 'bg-[#0d1524] border-white/10 text-white placeholder-slate-500'
-                      : 'bg-white border-slate-200 text-slate-900 placeholder-slate-400 shadow-sm'
-                  }`}
-                />
+            <div>
+              <h2 className="text-xs font-bold text-accent mb-3">
+                {lang === 'ar' ? 'تصنيفات الأدلة الهندسية' : 'Knowledge Pillars'}
+              </h2>
+              <div className="space-y-1.5" role="group" aria-label={lang === 'ar' ? 'تصنيفات المدونة' : 'Blog categories'}>
+                {BLOG_CATEGORIES.map((cat) => {
+                  const isActive = activeCatSlug === cat.slug;
+                  const count = categoryCounts[cat.slug] ?? 0;
+                  return (
+                    <button
+                      key={cat.slug}
+                      type="button"
+                      onClick={() => updateUrlParams({ cat: cat.slug })}
+                      data-testid={`blog-filter-cat-${cat.slug}`}
+                      aria-pressed={isActive}
+                      className={`w-full min-h-[44px] px-3.5 py-2.5 rounded-xl text-xs font-semibold flex items-center justify-between gap-2 transition-colors border ${
+                        isActive
+                          ? 'bg-accent text-accent-contrast border-accent'
+                          : 'bg-page text-main border-token hover-surface-2'
+                      }`}
+                    >
+                      <span className="text-start truncate">
+                        {lang === 'ar' ? cat.nameAr : cat.nameEn}
+                      </span>
+                      <span
+                        className={`px-2 py-0.5 rounded text-[11px] font-bold ltr-num shrink-0 ${
+                          isActive ? 'bg-surface text-accent' : 'bg-surface-2 text-muted'
+                        }`}
+                      >
+                        {count}
+                      </span>
+                    </button>
+                  );
+                })}
               </div>
             </div>
 
-            {/* Category Tabs */}
-            <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
-              {categories.map((cat) => (
-                <button
-                  key={cat.id}
-                  type="button"
-                  onClick={() => {
-                    setActiveCategory(cat.id);
-                    setShowAllPosts(false);
-                  }}
-                  className={`rounded-full px-4 py-2 text-xs font-bold transition-all cursor-pointer ${
-                    activeCategory === cat.id
-                      ? 'bg-emerald-500 text-white shadow-md shadow-emerald-500/20 ring-2 ring-emerald-400/40'
-                      : isDark
-                      ? 'bg-[#0d1524] text-slate-300 hover:bg-white/10 hover:text-white border border-white/10'
-                      : 'bg-white text-slate-600 hover:bg-slate-100 hover:text-slate-900 border border-slate-200 shadow-sm'
-                  }`}
-                >
-                  {isAr ? cat.labelAr : cat.labelEn}
-                </button>
-              ))}
+            <div className="pt-4 border-t border-token">
+              <label
+                htmlFor="blog-sort-select"
+                className="block text-xs font-bold text-accent mb-2"
+              >
+                {lang === 'ar' ? 'ترتيب المقالات' : 'Sort Articles'}
+              </label>
+              <select
+                id="blog-sort-select"
+                data-testid="blog-sort-select"
+                value={sortParam}
+                onChange={(e) => updateUrlParams({ sort: e.target.value })}
+                className="w-full min-h-[44px] px-3.5 py-2.5 rounded-xl bg-page border border-token text-xs font-semibold text-main focus:outline-none focus:border-accent cursor-pointer"
+              >
+                {SORT_OPTIONS.map((opt) => (
+                  <option key={opt.id} value={opt.id}>
+                    {lang === 'ar' ? opt.labelAr : opt.labelEn}
+                  </option>
+                ))}
+              </select>
             </div>
-          </div>
-        </RevealOnScroll>
 
-        {/* Guides Grid with Staggered Scroll Reveal */}
-        <StaggerContainer staggerDelay={0.06} className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {displayedPosts.map((post: BlogPost) => {
-            const title = isAr ? post.title_ar : post.title_en;
-            const category = isAr ? post.category_ar : post.category_en;
-            const excerpt = isAr ? post.excerpt_ar : post.excerpt_en;
-
-            return (
-              <StaggerItem key={post.id} className="h-full">
-                <article
-                  onClick={() => setActiveArticle(post)}
-                  className={`group cursor-pointer overflow-hidden rounded-3xl border-2 p-6 transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between h-full ${
-                    isDark
-                      ? 'border-white/10 bg-[#0d1524] hover:border-emerald-500/60 hover:shadow-2xl hover:shadow-emerald-500/10'
-                      : 'border-slate-200 bg-white hover:border-emerald-500 hover:shadow-xl'
-                  }`}
+            {hasActiveFilters && (
+              <div className="pt-4 border-t border-token">
+                <button
+                  type="button"
+                  onClick={handleClearAllFilters}
+                  data-testid="blog-sidebar-clear-btn"
+                  className="w-full min-h-[44px] py-2.5 px-3 rounded-xl text-xs font-semibold text-muted hover-text-main border border-token bg-page inline-flex items-center justify-center gap-2"
                 >
-                <div>
-                  <div className="flex items-center justify-between gap-2 mb-4">
-                    <span className="inline-flex rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 px-2.5 py-1 font-mono text-[10px] font-bold">
-                      {category}
-                    </span>
-                    <span className="text-[11px] font-mono text-slate-400">
-                      {post.date}
-                    </span>
-                  </div>
+                  <RotateCcw className="w-3.5 h-3.5" />
+                  <span>{lang === 'ar' ? 'مسح جميع الفلاتر' : 'Clear all filters'}</span>
+                </button>
+              </div>
+            )}
+          </aside>
 
-                  <h3 className="text-base font-bold leading-snug group-hover:text-emerald-500 transition-colors min-h-[3.25rem]">
-                    {title}
-                  </h3>
+          {/* MAIN BLOG LISTING COLUMN (lg:col-span-9) */}
+          <div className="lg:col-span-9 space-y-6">
+            <div className="clean-card p-4 sm:p-5 space-y-3">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <div
+                  data-testid="blog-result-count"
+                  className="text-sm font-bold text-main"
+                >
+                  {lang === 'ar' ? (
+                    <span>
+                      عرض <bdi dir="ltr" className="ltr-num text-accent">{visibleArticles.length}</bdi> من أصل{' '}
+                      <bdi dir="ltr" className="ltr-num">{filteredArticles.length}</bdi> مقال ودليل تقني
+                    </span>
+                  ) : (
+                    <span>
+                      Showing <bdi dir="ltr" className="ltr-num text-accent">{visibleArticles.length}</bdi> of{' '}
+                      <bdi dir="ltr" className="ltr-num">{filteredArticles.length}</bdi> technical guides
+                    </span>
+                  )}
+                </div>
 
-                  <p
-                    className={`mt-3 text-xs leading-relaxed line-clamp-3 ${
-                      isDark ? 'text-slate-400' : 'text-slate-600'
-                    }`}
+                <div className="flex lg:hidden items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setMobileSheetOpen(true)}
+                    data-testid="blog-mobile-filter-trigger"
+                    className="min-h-[44px] px-4 py-2 rounded-xl bg-page border border-token text-xs font-bold text-main inline-flex items-center gap-2 whitespace-nowrap"
                   >
-                    {excerpt}
-                  </p>
+                    <SlidersHorizontal className="w-4 h-4 text-accent" />
+                    <span>{lang === 'ar' ? 'تصفية وترتيب' : 'Filter & Sort'}</span>
+                  </button>
                 </div>
+              </div>
 
-                <div className="pt-6 mt-4 border-t border-current/10 flex items-center justify-between">
-                  <span className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-600 dark:text-emerald-400 group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-transform">
-                    <span>{isAr ? 'اقرأ الدليل بالكامل' : 'Read Full Guide'}</span>
-                    {isAr ? <ArrowLeft className="h-3.5 w-3.5" /> : <ArrowRight className="h-3.5 w-3.5" />}
+              {hasActiveFilters && (
+                <div
+                  data-testid="blog-active-filter-chips"
+                  className="pt-3 border-t border-token flex flex-wrap items-center gap-2"
+                >
+                  <span className="text-xs text-muted font-semibold">
+                    {lang === 'ar' ? 'الفلاتر النشطة:' : 'Active filters:'}
                   </span>
-                  <BookOpen className="h-4 w-4 text-slate-400 group-hover:text-emerald-500 transition-colors" />
+
+                  {activeCatSlug !== 'all' && (
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-accent-soft border border-accent text-xs font-semibold text-accent">
+                      <span>{lang === 'ar' ? activeCatDef.nameAr : activeCatDef.nameEn}</span>
+                      <button
+                        type="button"
+                        onClick={() => updateUrlParams({ cat: 'all' })}
+                        aria-label={lang === 'ar' ? 'إزالة فلتر التصنيف' : 'Remove category filter'}
+                        className="p-0.5 hover:opacity-80"
+                      >
+                        <X className="w-3.5 h-3.5" />
+                      </button>
+                    </span>
+                  )}
+
+                  {queryParam && (
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-accent-soft border border-accent text-xs font-semibold text-accent">
+                      <span>
+                        {lang === 'ar' ? `البحث: ${queryParam}` : `Query: ${queryParam}`}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => updateUrlParams({ q: null })}
+                        aria-label={lang === 'ar' ? 'إزالة كلمة البحث' : 'Remove query filter'}
+                        className="p-0.5 hover:opacity-80"
+                      >
+                        <X className="w-3.5 h-3.5" />
+                      </button>
+                    </span>
+                  )}
+
+                  <button
+                    type="button"
+                    onClick={handleClearAllFilters}
+                    data-testid="blog-clear-filters-btn"
+                    className="ms-auto text-xs font-bold text-accent hover:underline whitespace-nowrap"
+                  >
+                    {lang === 'ar' ? 'مسح الكل' : 'Clear all'}
+                  </button>
                 </div>
-              </article>
-            </StaggerItem>
-          );
-        })}
-      </StaggerContainer>
-
-        {/* Show More / Show Less Toggle Button for Blog Posts */}
-        {activeCategory === 'all' && !isSearchActive && filteredPosts.length > INITIAL_POSTS_COUNT && (
-          <div className="mt-12 flex flex-col items-center justify-center gap-3">
-            <button
-              type="button"
-              onClick={() => setShowAllPosts(!showAllPosts)}
-              className="inline-flex items-center gap-2.5 rounded-full bg-emerald-600 hover:bg-emerald-500 px-8 py-3.5 text-sm font-bold text-white shadow-lg shadow-emerald-600/25 transition-all duration-300 hover:scale-105 cursor-pointer ring-2 ring-emerald-400/40"
-            >
-              {showAllPosts ? (
-                <>
-                  <span>{isAr ? 'عرض مقالات أقل' : 'Show Fewer Guides'}</span>
-                  <ChevronUp className="h-4 w-4" />
-                </>
-              ) : (
-                <>
-                  <span>
-                    {isAr
-                      ? `عرض باقي المقالات والأدلة (${filteredPosts.length - INITIAL_POSTS_COUNT} مقالاً إضافياً)`
-                      : `View All ${filteredPosts.length} Guides`}
-                  </span>
-                  <ChevronDown className="h-4 w-4" />
-                </>
               )}
-            </button>
-            <span className="text-xs font-mono text-slate-400">
-              {isAr
-                ? `يتم عرض ${displayedPosts.length} من أصل ${filteredPosts.length} مقالاً ودليلاً هندسياً`
-                : `Showing ${displayedPosts.length} of ${filteredPosts.length} engineering guides`}
-            </span>
-          </div>
-        )}
+            </div>
 
-        {filteredPosts.length === 0 && (
-          <div className="mt-12 rounded-3xl border border-dashed border-slate-300 dark:border-white/10 p-12 text-center">
-            <Newspaper className="h-8 w-8 mx-auto text-slate-400 mb-3" />
-            <h4 className="text-base font-bold">
-              {isAr ? 'لم يتم العثور على مقالات مطابقة' : 'No Guides Found'}
-            </h4>
-            <p className="text-xs text-slate-400 mt-1">
-              {isAr ? 'جرب البحث بكلمات أخرى أو اختر فئة مختلفة' : 'Try searching with different terms'}
-            </p>
+            {filteredArticles.length === 0 ? (
+              <div
+                data-testid="blog-empty-state"
+                className="clean-card p-10 text-center space-y-4"
+              >
+                <h3 className="text-xl font-bold text-main">
+                  {lang === 'ar'
+                    ? 'لا توجد مقالات مطابقة للفلاتر المحددة'
+                    : 'No articles match your selected filters'}
+                </h3>
+                <button
+                  type="button"
+                  onClick={handleClearAllFilters}
+                  className="btn-secondary px-5 py-2.5 text-xs font-bold"
+                >
+                  {lang === 'ar' ? 'عرض جميع المقالات' : 'Show All Articles'}
+                </button>
+              </div>
+            ) : (
+              <>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {visibleArticles.map((article, idx) => {
+                    const isExpanded = Boolean(expandedBlogIds[article.id]);
+                    return (
+                      <article
+                        key={article.id}
+                        data-testid={`blog-card-${article.id}`}
+                        className="clean-card clean-card-hover overflow-hidden flex flex-col justify-between"
+                      >
+                        <div>
+                          <div className="px-6 py-4 bg-surface-2 border-b border-token flex items-center justify-between gap-3">
+                            <span className="px-2.5 py-1 rounded bg-surface text-accent text-xs font-semibold border border-token whitespace-nowrap">
+                              {lang === 'ar' ? article.category : article.categoryEn}
+                            </span>
+                            <span className="inline-flex items-center gap-1.5 text-xs text-muted font-semibold whitespace-nowrap">
+                              <FileText className="w-3.5 h-3.5 text-accent shrink-0" />
+                              <span>
+                                {lang === 'ar' ? 'دليل' : 'Guide'}{' '}
+                                <bdi dir="ltr" className="ltr-num">
+                                  {String(idx + 1).padStart(2, '0')}
+                                </bdi>
+                              </span>
+                            </span>
+                          </div>
+
+                          <div className="p-6">
+                            <div className="flex items-center gap-3 text-xs text-muted mb-2.5">
+                              <span className="inline-flex items-center gap-1.5">
+                                <Calendar className="w-3.5 h-3.5 shrink-0" />
+                                <bdi dir="ltr" className="ltr-num">{article.date}</bdi>
+                              </span>
+                              <span aria-hidden="true">·</span>
+                              <span className="inline-flex items-center gap-1">
+                                <Clock className="w-3.5 h-3.5 shrink-0" />
+                                <span>{lang === 'ar' ? article.readTime : article.readTimeEn}</span>
+                              </span>
+                            </div>
+
+                            <h3 className="text-lg font-bold text-main mb-2.5 leading-snug">
+                              <Link
+                                to={`/blog/${article.id}`}
+                                className="hover-text-accent transition-colors"
+                              >
+                                {lang === 'ar' ? article.title : article.titleEn}
+                              </Link>
+                            </h3>
+
+                            <p
+                              className={`text-muted text-sm leading-relaxed ${
+                                isExpanded ? '' : 'line-clamp-2'
+                              }`}
+                            >
+                              {lang === 'ar' ? article.excerpt : article.excerptEn}
+                            </p>
+
+                            {isExpanded && article.sections && article.sections.length > 0 && (
+                              <ul className="space-y-1.5 pt-3 mt-3 border-t border-token">
+                                {article.sections.map((sec) => (
+                                  <li key={sec.id} className="flex items-start gap-2 text-xs text-main">
+                                    <Check className="w-3.5 h-3.5 text-accent shrink-0 mt-0.5" />
+                                    <span>{lang === 'ar' ? sec.headingAr : sec.headingEn}</span>
+                                  </li>
+                                ))}
+                              </ul>
+                            )}
+                          </div>
+                        </div>
+
+                        <div className="px-6 pb-4 pt-3 border-t border-token flex items-center justify-between gap-2 text-xs">
+                          <button
+                            type="button"
+                            onClick={() => toggleBlogExpand(article.id)}
+                            data-testid={`blog-expand-${article.id}`}
+                            aria-expanded={isExpanded}
+                            className="inline-flex items-center gap-1 min-h-[44px] font-semibold text-muted hover-text-main transition-colors whitespace-nowrap"
+                          >
+                            <span>
+                              {isExpanded
+                                ? lang === 'ar'
+                                  ? 'إخفاء التفاصيل'
+                                  : 'Show less'
+                                : lang === 'ar'
+                                ? 'إظهار المزيد'
+                                : 'Show more'}
+                            </span>
+                            <ChevronDown
+                              className={`w-3.5 h-3.5 transition-transform ${
+                                isExpanded ? 'rotate-180 text-accent' : ''
+                              }`}
+                            />
+                          </button>
+
+                          <Link
+                            to={`/blog/${article.id}`}
+                            className="inline-flex items-center gap-1.5 min-h-[44px] px-2 font-semibold text-accent hover:underline whitespace-nowrap"
+                          >
+                            <span>{lang === 'ar' ? 'اقرأ المقال' : 'Read Article'}</span>
+                            <ArrowIcon className="w-3.5 h-3.5 shrink-0" />
+                          </Link>
+                        </div>
+                      </article>
+                    );
+                  })}
+                </div>
+
+                {hasMore && (
+                  <div className="pt-4 text-center">
+                    <button
+                      type="button"
+                      onClick={() => updateUrlParams({ page: pageParam + 1 })}
+                      data-testid="load-more-blog-btn"
+                      className="btn-secondary px-8 py-3.5 text-sm font-bold whitespace-nowrap"
+                    >
+                      {lang === 'ar'
+                        ? `عرض المزيد من المقالات (${filteredArticles.length - visibleArticles.length} متبقية)`
+                        : `Load More Articles (${filteredArticles.length - visibleArticles.length} remaining)`}
+                    </button>
+                  </div>
+                )}
+              </>
+            )}
+          </div>
+        </div>
+
+        {/* MOBILE FILTER BOTTOM SHEET (< 1024px) */}
+        {mobileSheetOpen && (
+          <div
+            className="fixed inset-0 z-50 lg:hidden flex flex-col justify-end"
+            data-testid="blog-mobile-filter-sheet"
+          >
+            <div
+              className="fixed inset-0 bg-overlay"
+              onClick={() => setMobileSheetOpen(false)}
+            />
+            <div className="relative z-10 bg-surface border-t-2 border-token rounded-t-2xl p-6 max-h-[80vh] overflow-y-auto space-y-5">
+              <div className="flex items-center justify-between pb-3 border-b border-token">
+                <h3 className="text-base font-bold text-main">
+                  {lang === 'ar' ? 'تصفية وترتيب المقالات' : 'Filter & Sort Articles'}
+                </h3>
+                <button
+                  type="button"
+                  onClick={() => setMobileSheetOpen(false)}
+                  className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center rounded-lg bg-page border border-token text-muted"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+
+              <div className="space-y-2">
+                {BLOG_CATEGORIES.map((cat) => {
+                  const isActive = activeCatSlug === cat.slug;
+                  const count = categoryCounts[cat.slug] ?? 0;
+                  return (
+                    <button
+                      key={cat.slug}
+                      type="button"
+                      onClick={() => {
+                        updateUrlParams({ cat: cat.slug });
+                        setMobileSheetOpen(false);
+                      }}
+                      className={`w-full min-h-[44px] px-4 py-2.5 rounded-xl text-xs font-bold flex items-center justify-between border ${
+                        isActive
+                          ? 'bg-accent text-accent-contrast border-accent'
+                          : 'bg-page text-main border-token'
+                      }`}
+                    >
+                      <span>{lang === 'ar' ? cat.nameAr : cat.nameEn}</span>
+                      <span className="ltr-num">{count}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
           </div>
         )}
       </div>

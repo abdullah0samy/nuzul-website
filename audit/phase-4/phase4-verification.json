@@ -1,0 +1,204 @@
+{
+  "timestamp": "2026-11-04T13:14:59.865Z",
+  "scrollHeightMetrics": {
+    "ar": {
+      "viewportHeightPx": 900,
+      "mainContentHeightPx": 4942,
+      "mainContentScreensVh": 5.49,
+      "totalDocumentHeightPx": 5518,
+      "totalDocumentScreensVh": 6.13
+    },
+    "en": {
+      "viewportHeightPx": 900,
+      "mainContentHeightPx": 5287,
+      "mainContentScreensVh": 5.87,
+      "totalDocumentHeightPx": 5866,
+      "totalDocumentScreensVh": 6.52
+    }
+  },
+  "sectionAnatomyAudit": [
+    {
+      "order": 1,
+      "id": "home-hero-section",
+      "present": true,
+      "heightPx": 764,
+      "heightVh": 0.85,
+      "backgroundColor": "rgb(11, 18, 32)",
+      "headingTag": "h1",
+      "headingText": "نبني ونؤمّن البنية التحتية السحابية والشبكية التي تعتمد عليها أعمالك يومياً",
+      "hasRhetoricalQuestionInHeading": false,
+      "subtitleLines": 2
+    },
+    {
+      "order": 2,
+      "id": "home-pillars-section",
+      "present": true,
+      "heightPx": 1049,
+      "heightVh": 1.17,
+      "backgroundColor": "rgb(248, 250, 252)",
+      "headingTag": "h2",
+      "headingText": "أربعة قطاعات هندسية تغطي دورة حياة التقنية في شركتك",
+      "hasRhetoricalQuestionInHeading": false,
+      "subtitleLines": 2
+    },
+    {
+      "order": 3,
+      "id": "home-featured-case-study",
+      "present": true,
+      "heightPx": 603,
+      "heightVh": 0.67,
+      "backgroundColor": "rgb(255, 255, 255)",
+      "headingTag": "h2",
+      "headingText": "إعادة هيكلة الشبكة وتأمين السجلات الطبية ومنظومة المراقبة البصرية",
+      "hasRhetoricalQuestionInHeading": false,
+      "subtitleLines": 2
+    },
+    {
+      "order": 4,
+      "id": "home-how-we-work",
+      "present": true,
+      "heightPx": 447,
+      "heightVh": 0.5,
+      "backgroundColor": "rgb(248, 250, 252)",
+      "headingTag": "h2",
+      "headingText": "منهجية عمل واضحة في 3 خطوات",
+      "hasRhetoricalQuestionInHeading": false,
+      "subtitleLines": 1
+    },
+    {
+      "order": 5,
+      "id": "home-hosting-teaser",
+      "present": true,
+      "heightPx": 484,
+      "heightVh": 0.54,
+      "backgroundColor": "rgb(11, 18, 32)",
+      "headingTag": "h2",
+      "headingText": "استضافة سحابية وخوادم مخصصة للأعمال",
+      "hasRhetoricalQuestionInHeading": false,
+      "subtitleLines": 2
+    },
+    {
+      "order": 6,
+      "id": "home-testimonials",
+      "present": true,
+      "heightPx": 509,
+      "heightVh": 0.57,
+      "backgroundColor": "rgb(248, 250, 252)",
+      "headingTag": "h2",
+      "headingText": "شهادات قادة التقنية ومديري العمليات",
+      "hasRhetoricalQuestionInHeading": false,
+      "subtitleLines": 1
+    },
+    {
+      "order": 7,
+      "id": "home-faq",
+      "present": true,
+      "heightPx": 564,
+      "heightVh": 0.63,
+      "backgroundColor": "rgb(255, 255, 255)",
+      "headingTag": "h2",
+      "headingText": "الأسئلة الشائعة حول التعاقد والتشغيل",
+      "hasRhetoricalQuestionInHeading": false,
+      "subtitleLines": 2
+    },
+    {
+      "order": 8,
+      "id": "home-final-cta",
+      "present": true,
+      "heightPx": 523,
+      "heightVh": 0.58,
+      "backgroundColor": "rgb(11, 18, 32)",
+      "headingTag": "h2",
+      "headingText": "تحدث مع مهندس بنية تحتية لتقييم شبكتك أو تخطيط نقل خوادمك",
+      "hasRhetoricalQuestionInHeading": false,
+      "subtitleLines": 2
+    }
+  ],
+  "canvasLifecycleAudit": {
+    "initialDesktop": {
+      "running": "true",
+      "pauseReason": "none",
+      "motionState": "running",
+      "nodeCount": 120,
+      "dpr": 1
+    },
+    "afterScrollOffscreen": {
+      "running": "false",
+      "pauseReason": "offscreen",
+      "motionState": "paused"
+    },
+    "afterScrollBackToTop": {
+      "running": "true",
+      "pauseReason": "none"
+    },
+    "afterTabHidden": {
+      "running": "false",
+      "pauseReason": "hidden",
+      "motionState": "paused"
+    },
+    "mobileCanvasState": {
+      "running": "true",
+      "nodeCount": 48,
+      "dpr": 1
+    }
+  },
+  "reducedMotionAudit": {
+    "light": {
+      "canvasRunning": "false",
+      "canvasPauseReason": "reduced-motion",
+      "canvasMotionState": "reduced-static",
+      "staticRevealElementsCount": 15,
+      "animatedRevealElementsCount": 0,
+      "screenshot": "audit/phase-4/screenshots/home-reduced-motion-light-1440px-rtl.png"
+    },
+    "dark": {
+      "canvasRunning": "false",
+      "canvasPauseReason": "reduced-motion",
+      "canvasMotionState": "reduced-static",
+      "staticRevealElementsCount": 15,
+      "animatedRevealElementsCount": 0,
+      "screenshot": "audit/phase-4/screenshots/home-reduced-motion-dark-1440px-rtl.png"
+    }
+  },
+  "mobilePerformanceAndVitals": {
+    "viewport": "375x812 (Mobile)",
+    "fcpMs": 936,
+    "lcpMs": 936,
+    "cls": 0,
+    "clsShiftsCount": 0,
+    "domCompleteMs": 717,
+    "domNodesCount": 609,
+    "performanceScoreEquivalent": 98,
+    "accessibilityScoreEquivalent": 100,
+    "seoScoreEquivalent": 100
+  },
+  "bannedWordsAudit": {
+    "ar": {
+      "checkedPhrasesCount": 24,
+      "matchesFound": []
+    },
+    "en": {
+      "checkedPhrasesCount": 24,
+      "matchesFound": []
+    }
+  },
+  "axeViolations": [],
+  "screenshotsCaptured": [
+    "audit/phase-4/screenshots/home-reduced-motion-light-1440px-rtl.png",
+    "audit/phase-4/screenshots/home-reduced-motion-dark-1440px-rtl.png",
+    "audit/phase-4/screenshots/home-light-375px-ar-rtl.png",
+    "audit/phase-4/screenshots/home-light-768px-ar-rtl.png",
+    "audit/phase-4/screenshots/home-light-1440px-ar-rtl.png",
+    "audit/phase-4/screenshots/home-light-375px-en-ltr.png",
+    "audit/phase-4/screenshots/home-light-768px-en-ltr.png",
+    "audit/phase-4/screenshots/home-light-1440px-en-ltr.png",
+    "audit/phase-4/screenshots/home-dark-375px-ar-rtl.png",
+    "audit/phase-4/screenshots/home-dark-768px-ar-rtl.png",
+    "audit/phase-4/screenshots/home-dark-1440px-ar-rtl.png",
+    "audit/phase-4/screenshots/home-dark-375px-en-ltr.png",
+    "audit/phase-4/screenshots/home-dark-768px-en-ltr.png",
+    "audit/phase-4/screenshots/home-dark-1440px-en-ltr.png"
+  ],
+  "consoleErrors": [],
+  "pageErrors": []
+}

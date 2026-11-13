@@ -1,0 +1,719 @@
+{
+  "timestamp": "2026-11-04T13:13:26.936Z",
+  "bannedWordsCheck": [
+    {
+      "route": "/pricing",
+      "theme": "light",
+      "lang": "ar",
+      "matchedBannedWords": [],
+      "headingsWithQuestionMarks": [],
+      "exclamationMarksCount": 0
+    },
+    {
+      "route": "/pricing",
+      "theme": "light",
+      "lang": "en",
+      "matchedBannedWords": [],
+      "headingsWithQuestionMarks": [],
+      "exclamationMarksCount": 0
+    },
+    {
+      "route": "/pricing",
+      "theme": "dark",
+      "lang": "ar",
+      "matchedBannedWords": [],
+      "headingsWithQuestionMarks": [],
+      "exclamationMarksCount": 0
+    },
+    {
+      "route": "/pricing",
+      "theme": "dark",
+      "lang": "en",
+      "matchedBannedWords": [],
+      "headingsWithQuestionMarks": [],
+      "exclamationMarksCount": 0
+    },
+    {
+      "route": "/hosting",
+      "theme": "light",
+      "lang": "ar",
+      "matchedBannedWords": [],
+      "headingsWithQuestionMarks": [],
+      "exclamationMarksCount": 0
+    },
+    {
+      "route": "/hosting",
+      "theme": "light",
+      "lang": "en",
+      "matchedBannedWords": [],
+      "headingsWithQuestionMarks": [],
+      "exclamationMarksCount": 0
+    },
+    {
+      "route": "/hosting",
+      "theme": "dark",
+      "lang": "ar",
+      "matchedBannedWords": [],
+      "headingsWithQuestionMarks": [],
+      "exclamationMarksCount": 0
+    },
+    {
+      "route": "/hosting",
+      "theme": "dark",
+      "lang": "en",
+      "matchedBannedWords": [],
+      "headingsWithQuestionMarks": [],
+      "exclamationMarksCount": 0
+    }
+  ],
+  "screenshotMatrix": [
+    {
+      "route": "/pricing",
+      "theme": "light",
+      "lang": "ar",
+      "width": 375,
+      "fullPageScreenshot": "audit/phase-5/screenshots/pricing-light-375px-ar.png",
+      "compareSectionScreenshot": "audit/phase-5/screenshots/compare-table-pricing-light-375px-ar.png"
+    },
+    {
+      "route": "/pricing",
+      "theme": "light",
+      "lang": "ar",
+      "width": 768,
+      "fullPageScreenshot": "audit/phase-5/screenshots/pricing-light-768px-ar.png",
+      "compareSectionScreenshot": "audit/phase-5/screenshots/compare-table-pricing-light-768px-ar.png"
+    },
+    {
+      "route": "/pricing",
+      "theme": "light",
+      "lang": "ar",
+      "width": 1440,
+      "fullPageScreenshot": "audit/phase-5/screenshots/pricing-light-1440px-ar.png",
+      "compareSectionScreenshot": "audit/phase-5/screenshots/compare-table-pricing-light-1440px-ar.png"
+    },
+    {
+      "route": "/pricing",
+      "theme": "light",
+      "lang": "en",
+      "width": 1440,
+      "fullPageScreenshot": "audit/phase-5/screenshots/pricing-light-1440px-en.png",
+      "compareSectionScreenshot": "audit/phase-5/screenshots/compare-table-pricing-light-1440px-en.png"
+    },
+    {
+      "route": "/pricing",
+      "theme": "dark",
+      "lang": "ar",
+      "width": 375,
+      "fullPageScreenshot": "audit/phase-5/screenshots/pricing-dark-375px-ar.png",
+      "compareSectionScreenshot": "audit/phase-5/screenshots/compare-table-pricing-dark-375px-ar.png"
+    },
+    {
+      "route": "/pricing",
+      "theme": "dark",
+      "lang": "ar",
+      "width": 768,
+      "fullPageScreenshot": "audit/phase-5/screenshots/pricing-dark-768px-ar.png",
+      "compareSectionScreenshot": "audit/phase-5/screenshots/compare-table-pricing-dark-768px-ar.png"
+    },
+    {
+      "route": "/pricing",
+      "theme": "dark",
+      "lang": "ar",
+      "width": 1440,
+      "fullPageScreenshot": "audit/phase-5/screenshots/pricing-dark-1440px-ar.png",
+      "compareSectionScreenshot": "audit/phase-5/screenshots/compare-table-pricing-dark-1440px-ar.png"
+    },
+    {
+      "route": "/pricing",
+      "theme": "dark",
+      "lang": "en",
+      "width": 1440,
+      "fullPageScreenshot": "audit/phase-5/screenshots/pricing-dark-1440px-en.png",
+      "compareSectionScreenshot": "audit/phase-5/screenshots/compare-table-pricing-dark-1440px-en.png"
+    },
+    {
+      "route": "/hosting",
+      "theme": "light",
+      "lang": "ar",
+      "width": 375,
+      "fullPageScreenshot": "audit/phase-5/screenshots/hosting-light-375px-ar.png",
+      "compareSectionScreenshot": "audit/phase-5/screenshots/compare-table-hosting-light-375px-ar.png"
+    },
+    {
+      "route": "/hosting",
+      "theme": "light",
+      "lang": "ar",
+      "width": 768,
+      "fullPageScreenshot": "audit/phase-5/screenshots/hosting-light-768px-ar.png",
+      "compareSectionScreenshot": "audit/phase-5/screenshots/compare-table-hosting-light-768px-ar.png"
+    },
+    {
+      "route": "/hosting",
+      "theme": "light",
+      "lang": "ar",
+      "width": 1440,
+      "fullPageScreenshot": "audit/phase-5/screenshots/hosting-light-1440px-ar.png",
+      "compareSectionScreenshot": "audit/phase-5/screenshots/compare-table-hosting-light-1440px-ar.png"
+    },
+    {
+      "route": "/hosting",
+      "theme": "light",
+      "lang": "en",
+      "width": 1440,
+      "fullPageScreenshot": "audit/phase-5/screenshots/hosting-light-1440px-en.png",
+      "compareSectionScreenshot": "audit/phase-5/screenshots/compare-table-hosting-light-1440px-en.png"
+    },
+    {
+      "route": "/hosting",
+      "theme": "dark",
+      "lang": "ar",
+      "width": 375,
+      "fullPageScreenshot": "audit/phase-5/screenshots/hosting-dark-375px-ar.png",
+      "compareSectionScreenshot": "audit/phase-5/screenshots/compare-table-hosting-dark-375px-ar.png"
+    },
+    {
+      "route": "/hosting",
+      "theme": "dark",
+      "lang": "ar",
+      "width": 768,
+      "fullPageScreenshot": "audit/phase-5/screenshots/hosting-dark-768px-ar.png",
+      "compareSectionScreenshot": "audit/phase-5/screenshots/compare-table-hosting-dark-768px-ar.png"
+    },
+    {
+      "route": "/hosting",
+      "theme": "dark",
+      "lang": "ar",
+      "width": 1440,
+      "fullPageScreenshot": "audit/phase-5/screenshots/hosting-dark-1440px-ar.png",
+      "compareSectionScreenshot": "audit/phase-5/screenshots/compare-table-hosting-dark-1440px-ar.png"
+    },
+    {
+      "route": "/hosting",
+      "theme": "dark",
+      "lang": "en",
+      "width": 1440,
+      "fullPageScreenshot": "audit/phase-5/screenshots/hosting-dark-1440px-en.png",
+      "compareSectionScreenshot": "audit/phase-5/screenshots/compare-table-hosting-dark-1440px-en.png"
+    }
+  ],
+  "tableAndMobileVerification": {
+    "pricing_375px": {
+      "viewport": 375,
+      "tableVisible": false,
+      "mobileCardsVisible": true,
+      "pageOverflow": false,
+      "scrollWidth": 375
+    },
+    "pricing_768px": {
+      "viewport": 768,
+      "tableVisible": true,
+      "mobileCardsVisible": false,
+      "pageOverflow": false,
+      "scrollWidth": 768
+    },
+    "pricing_1440px": {
+      "viewport": 1440,
+      "tableVisible": true,
+      "mobileCardsVisible": false,
+      "pageOverflow": false,
+      "scrollWidth": 1440
+    },
+    "hosting_375px": {
+      "viewport": 375,
+      "tableVisible": false,
+      "mobileCardsVisible": true,
+      "pageOverflow": false,
+      "scrollWidth": 375
+    },
+    "hosting_768px": {
+      "viewport": 768,
+      "tableVisible": true,
+      "mobileCardsVisible": false,
+      "pageOverflow": false,
+      "scrollWidth": 768
+    },
+    "hosting_1440px": {
+      "viewport": 1440,
+      "tableVisible": true,
+      "mobileCardsVisible": false,
+      "pageOverflow": false,
+      "scrollWidth": 1440
+    }
+  },
+  "compareFeatureDemo": {
+    "initial": {
+      "stickyBarVisible": false,
+      "countText": null,
+      "limitAlertVisible": false,
+      "limitAlertText": null,
+      "planColumnCount": 4,
+      "visibleRowCount": 11,
+      "visibleSpecRows": [
+        "spec-row-vcpu",
+        "spec-row-ram",
+        "spec-row-isolation",
+        "spec-row-nvme",
+        "spec-row-backups",
+        "spec-row-bandwidth",
+        "spec-row-port-speed",
+        "spec-row-ddos",
+        "spec-row-panel",
+        "spec-row-support-level",
+        "spec-row-uptime-sla"
+      ]
+    },
+    "after1PlanSelected": {
+      "stickyBarVisible": true,
+      "countText": "1/3خطط للمقارنة",
+      "limitAlertVisible": false,
+      "limitAlertText": null,
+      "planColumnCount": 1,
+      "visibleRowCount": 11,
+      "visibleSpecRows": [
+        "spec-row-vcpu",
+        "spec-row-ram",
+        "spec-row-isolation",
+        "spec-row-nvme",
+        "spec-row-backups",
+        "spec-row-bandwidth",
+        "spec-row-port-speed",
+        "spec-row-ddos",
+        "spec-row-panel",
+        "spec-row-support-level",
+        "spec-row-uptime-sla"
+      ]
+    },
+    "after2PlansSelected": {
+      "stickyBarVisible": true,
+      "countText": "2/3خطط للمقارنة",
+      "limitAlertVisible": false,
+      "limitAlertText": null,
+      "planColumnCount": 2,
+      "visibleRowCount": 11,
+      "visibleSpecRows": [
+        "spec-row-vcpu",
+        "spec-row-ram",
+        "spec-row-isolation",
+        "spec-row-nvme",
+        "spec-row-backups",
+        "spec-row-bandwidth",
+        "spec-row-port-speed",
+        "spec-row-ddos",
+        "spec-row-panel",
+        "spec-row-support-level",
+        "spec-row-uptime-sla"
+      ]
+    },
+    "after3PlansSelected": {
+      "stickyBarVisible": true,
+      "countText": "3/3خطط للمقارنة",
+      "limitAlertVisible": false,
+      "limitAlertText": null,
+      "planColumnCount": 3,
+      "visibleRowCount": 11,
+      "visibleSpecRows": [
+        "spec-row-vcpu",
+        "spec-row-ram",
+        "spec-row-isolation",
+        "spec-row-nvme",
+        "spec-row-backups",
+        "spec-row-bandwidth",
+        "spec-row-port-speed",
+        "spec-row-ddos",
+        "spec-row-panel",
+        "spec-row-support-level",
+        "spec-row-uptime-sla"
+      ]
+    },
+    "after4thPlanAttempted": {
+      "stickyBarVisible": true,
+      "countText": "3/3خطط للمقارنة",
+      "limitAlertVisible": true,
+      "limitAlertText": "الحد الأقصى للمقارنة المباشرة هو 3 خطط في الوقت ذاته. قم بإلغاء تحديد إحدى الخطط المختارة أولاً.",
+      "planColumnCount": 3,
+      "visibleRowCount": 11,
+      "visibleSpecRows": [
+        "spec-row-vcpu",
+        "spec-row-ram",
+        "spec-row-isolation",
+        "spec-row-nvme",
+        "spec-row-backups",
+        "spec-row-bandwidth",
+        "spec-row-port-speed",
+        "spec-row-ddos",
+        "spec-row-panel",
+        "spec-row-support-level",
+        "spec-row-uptime-sla"
+      ]
+    },
+    "twoPlansBeforeDifferencesFilter": {
+      "stickyBarVisible": true,
+      "countText": "2/3خطط للمقارنة",
+      "limitAlertVisible": false,
+      "limitAlertText": null,
+      "planColumnCount": 2,
+      "visibleRowCount": 11,
+      "visibleSpecRows": [
+        "spec-row-vcpu",
+        "spec-row-ram",
+        "spec-row-isolation",
+        "spec-row-nvme",
+        "spec-row-backups",
+        "spec-row-bandwidth",
+        "spec-row-port-speed",
+        "spec-row-ddos",
+        "spec-row-panel",
+        "spec-row-support-level",
+        "spec-row-uptime-sla"
+      ]
+    },
+    "twoPlansAfterDifferencesFilter": {
+      "stickyBarVisible": true,
+      "countText": "2/3خطط للمقارنة",
+      "limitAlertVisible": false,
+      "limitAlertText": null,
+      "planColumnCount": 2,
+      "visibleRowCount": 6,
+      "visibleSpecRows": [
+        "spec-row-vcpu",
+        "spec-row-ram",
+        "spec-row-nvme",
+        "spec-row-bandwidth",
+        "spec-row-panel",
+        "spec-row-support-level"
+      ]
+    },
+    "afterClearSelection": {
+      "stickyBarVisible": false,
+      "countText": null,
+      "limitAlertVisible": false,
+      "limitAlertText": null,
+      "planColumnCount": 4,
+      "visibleRowCount": 11,
+      "visibleSpecRows": [
+        "spec-row-vcpu",
+        "spec-row-ram",
+        "spec-row-isolation",
+        "spec-row-nvme",
+        "spec-row-backups",
+        "spec-row-bandwidth",
+        "spec-row-port-speed",
+        "spec-row-ddos",
+        "spec-row-panel",
+        "spec-row-support-level",
+        "spec-row-uptime-sla"
+      ]
+    }
+  },
+  "collapsibleGroupsDemo": {
+    "rowsBeforeCollapse": 11,
+    "computeExpandedAfterClick": "false",
+    "rowsAfterComputeCollapsed": 8,
+    "rowsAfterComputeReExpanded": 11
+  },
+  "transparencyAndDatacenterAudit": {
+    "pricingPageTerms": {
+      "present": true,
+      "cards": [
+        "pricing-term-card-not-included",
+        "pricing-term-card-billing-terms",
+        "pricing-term-card-upgrade-path",
+        "pricing-term-card-sla-scope"
+      ],
+      "slaLinkHref": "/contact"
+    },
+    "hostingPageDatacenterAndTerms": {
+      "datacenterCardsCount": 4,
+      "datacenterCards": [
+        {
+          "id": "datacenter-card-dc-cairo",
+          "text": "مصرEG-CAIالقاهرةموقع محلي لتطبيقات الشركات والجهات التي تتطلب استضافة البيانات داخل جمهورية مصر العربية وتقليل زمن الاستجابة للمستخدمين المحليين."
+        },
+        {
+          "id": "datacenter-card-dc-frankfurt",
+          "text": "ألمانياEU-FRAفرانكفورتعقدة ربط أوروبية رئيسية للأنظمة الإقليمية والتطبيقات التي تخدم الشرق الأوسط وأوروبا."
+        },
+        {
+          "id": "datacenter-card-dc-riyadh",
+          "text": "المملكة العربية السعوديةSA-RUHالرياضموقع إقليمي لخدمة فروع الشركات والعملاء داخل سوق الخليج العربي."
+        },
+        {
+          "id": "datacenter-card-dc-amsterdam",
+          "text": "هولنداEU-AMSأمستردامموقع أوروبي بديل للنسخ الاحتياطي الجغرافي البعيد (Offsite DR) وتوزيع الأحمال الدولية."
+        }
+      ],
+      "infraCapabilityCards": [
+        "infra-capability-cap-nvme",
+        "infra-capability-cap-kvm",
+        "infra-capability-cap-backups"
+      ],
+      "termsSectionPresent": true,
+      "hasTierIII": false,
+      "hasIso27001": false
+    }
+  },
+  "keyboardNavigationAudit": {
+    "totalStepsRecorded": 18,
+    "compareToggleActivatedByEnter": true,
+    "tabSteps": [
+      {
+        "step": 1,
+        "tag": "button",
+        "testId": "billing-toggle-monthly",
+        "text": "فوترة شهرية",
+        "outlineStyle": "solid",
+        "outlineWidth": "2px",
+        "boxShadow": "none"
+      },
+      {
+        "step": 2,
+        "tag": "button",
+        "testId": "billing-toggle-yearly",
+        "text": "فوترة سنويةوفر شهرين",
+        "outlineStyle": "solid",
+        "outlineWidth": "2px",
+        "boxShadow": "none"
+      },
+      {
+        "step": 3,
+        "tag": "button",
+        "testId": null,
+        "text": "عرض المزايا المتضمنة",
+        "outlineStyle": "solid",
+        "outlineWidth": "2px",
+        "boxShadow": "none"
+      },
+      {
+        "step": 4,
+        "tag": "button",
+        "testId": null,
+        "text": "اطلب الخطة",
+        "outlineStyle": "solid",
+        "outlineWidth": "2px",
+        "boxShadow": "none"
+      },
+      {
+        "step": 5,
+        "tag": "button",
+        "testId": "card-compare-btn-shared-cpanel",
+        "text": "قارن الخطة",
+        "outlineStyle": "solid",
+        "outlineWidth": "2px",
+        "boxShadow": "none"
+      },
+      {
+        "step": 6,
+        "tag": "button",
+        "testId": null,
+        "text": "عرض المزايا المتضمنة",
+        "outlineStyle": "solid",
+        "outlineWidth": "2px",
+        "boxShadow": "none"
+      },
+      {
+        "step": 7,
+        "tag": "button",
+        "testId": null,
+        "text": "اطلب الخطة",
+        "outlineStyle": "solid",
+        "outlineWidth": "2px",
+        "boxShadow": "none"
+      },
+      {
+        "step": 8,
+        "tag": "button",
+        "testId": "card-compare-btn-wp-managed",
+        "text": "قارن الخطة",
+        "outlineStyle": "solid",
+        "outlineWidth": "2px",
+        "boxShadow": "none"
+      },
+      {
+        "step": 9,
+        "tag": "button",
+        "testId": null,
+        "text": "عرض المزايا المتضمنة",
+        "outlineStyle": "solid",
+        "outlineWidth": "2px",
+        "boxShadow": "none"
+      },
+      {
+        "step": 10,
+        "tag": "button",
+        "testId": null,
+        "text": "اطلب الخطة",
+        "outlineStyle": "solid",
+        "outlineWidth": "2px",
+        "boxShadow": "none"
+      },
+      {
+        "step": 11,
+        "tag": "button",
+        "testId": "card-compare-btn-linux-vps",
+        "text": "قارن الخطة",
+        "outlineStyle": "solid",
+        "outlineWidth": "2px",
+        "boxShadow": "none"
+      },
+      {
+        "step": 12,
+        "tag": "button",
+        "testId": null,
+        "text": "عرض المزايا المتضمنة",
+        "outlineStyle": "solid",
+        "outlineWidth": "2px",
+        "boxShadow": "none"
+      },
+      {
+        "step": 13,
+        "tag": "button",
+        "testId": null,
+        "text": "اطلب الخطة",
+        "outlineStyle": "solid",
+        "outlineWidth": "2px",
+        "boxShadow": "none"
+      },
+      {
+        "step": 14,
+        "tag": "button",
+        "testId": "card-compare-btn-windows-rdp",
+        "text": "قارن الخطة",
+        "outlineStyle": "solid",
+        "outlineWidth": "2px",
+        "boxShadow": "none"
+      },
+      {
+        "step": 15,
+        "tag": "button",
+        "testId": "compare-plan-toggle-shared-cpanel",
+        "text": "الاستضافة المشتركة للمواقع",
+        "outlineStyle": "solid",
+        "outlineWidth": "2px",
+        "boxShadow": "none"
+      },
+      {
+        "step": 16,
+        "tag": "button",
+        "testId": "compare-plan-toggle-wp-managed",
+        "text": "استضافة ووردبريس المدارة",
+        "outlineStyle": "solid",
+        "outlineWidth": "2px",
+        "boxShadow": "none"
+      },
+      {
+        "step": 17,
+        "tag": "button",
+        "testId": "compare-plan-toggle-linux-vps",
+        "text": "خادم Cloud VPS (لينكس)",
+        "outlineStyle": "solid",
+        "outlineWidth": "2px",
+        "boxShadow": "none"
+      },
+      {
+        "step": 18,
+        "tag": "button",
+        "testId": "compare-plan-toggle-windows-rdp",
+        "text": "خوادم سطح المكتب والعمل عن بُعد",
+        "outlineStyle": "solid",
+        "outlineWidth": "2px",
+        "boxShadow": "none"
+      }
+    ]
+  },
+  "mobilePerformanceMetrics": {
+    "pricing": {
+      "fcpMs": 988,
+      "lcpMs": 988,
+      "cls": 0.0194,
+      "tbtMs": 239,
+      "domInteractiveMs": 21,
+      "loadCompleteMs": 738,
+      "estimatedPerformanceScore": 94
+    },
+    "hosting": {
+      "fcpMs": 944,
+      "lcpMs": 944,
+      "cls": 0.0176,
+      "tbtMs": 216,
+      "domInteractiveMs": 20,
+      "loadCompleteMs": 683,
+      "estimatedPerformanceScore": 94
+    }
+  },
+  "axeSummary": [
+    {
+      "route": "/pricing",
+      "theme": "light",
+      "lang": "ar",
+      "totalViolations": 0,
+      "criticalOrSerious": 0,
+      "contrastViolations": 0,
+      "violations": []
+    },
+    {
+      "route": "/pricing",
+      "theme": "light",
+      "lang": "en",
+      "totalViolations": 0,
+      "criticalOrSerious": 0,
+      "contrastViolations": 0,
+      "violations": []
+    },
+    {
+      "route": "/pricing",
+      "theme": "dark",
+      "lang": "ar",
+      "totalViolations": 0,
+      "criticalOrSerious": 0,
+      "contrastViolations": 0,
+      "violations": []
+    },
+    {
+      "route": "/pricing",
+      "theme": "dark",
+      "lang": "en",
+      "totalViolations": 0,
+      "criticalOrSerious": 0,
+      "contrastViolations": 0,
+      "violations": []
+    },
+    {
+      "route": "/hosting",
+      "theme": "light",
+      "lang": "ar",
+      "totalViolations": 0,
+      "criticalOrSerious": 0,
+      "contrastViolations": 0,
+      "violations": []
+    },
+    {
+      "route": "/hosting",
+      "theme": "light",
+      "lang": "en",
+      "totalViolations": 0,
+      "criticalOrSerious": 0,
+      "contrastViolations": 0,
+      "violations": []
+    },
+    {
+      "route": "/hosting",
+      "theme": "dark",
+      "lang": "ar",
+      "totalViolations": 0,
+      "criticalOrSerious": 0,
+      "contrastViolations": 0,
+      "violations": []
+    },
+    {
+      "route": "/hosting",
+      "theme": "dark",
+      "lang": "en",
+      "totalViolations": 0,
+      "criticalOrSerious": 0,
+      "contrastViolations": 0,
+      "violations": []
+    }
+  ],
+  "consoleErrors": [],
+  "pageErrors": []
+}

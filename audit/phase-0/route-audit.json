@@ -1,0 +1,168 @@
+{
+  "consoleErrors": [],
+  "pageErrors": [],
+  "routeReport": [
+    {
+      "route": "/",
+      "dir": "rtl",
+      "lang": "ar",
+      "title": "نُزول تِك | Nuzul Tech — حلول البنية التحتية والسحابة والبرمجيات للمؤسسات",
+      "desc": "نُزول تِك (Nuzul Tech) — الشريك التقني للمؤسسات في مصر. حلول البنية التحتية والشبكات، السيرفرات السحابية والاستضافة، الأمن السيبراني، وتطوير أنظمة ERP والتطبيقات.",
+      "canonical": null,
+      "hreflangs": 2,
+      "h1Count": 1,
+      "h1s": [
+        "بنيتك التحتية، ضيفنا، وفي يد أمينة."
+      ],
+      "screenshots": [
+        "/audit/phase-0/home-375px-rtl.png",
+        "/audit/phase-0/home-768px-rtl.png",
+        "/audit/phase-0/home-1440px-rtl.png"
+      ]
+    },
+    {
+      "route": "/services",
+      "dir": "rtl",
+      "lang": "ar",
+      "title": "نُزول تِك | Nuzul Tech — حلول البنية التحتية والسحابة والبرمجيات للمؤسسات",
+      "desc": "نُزول تِك (Nuzul Tech) — الشريك التقني للمؤسسات في مصر. حلول البنية التحتية والشبكات، السيرفرات السحابية والاستضافة، الأمن السيبراني، وتطوير أنظمة ERP والتطبيقات.",
+      "canonical": null,
+      "hreflangs": 2,
+      "h1Count": 0,
+      "h1s": [],
+      "screenshots": [
+        "/audit/phase-0/services-375px-rtl.png",
+        "/audit/phase-0/services-768px-rtl.png",
+        "/audit/phase-0/services-1440px-rtl.png"
+      ]
+    },
+    {
+      "route": "/services/infrastructure",
+      "dir": "rtl",
+      "lang": "ar",
+      "title": "نُزول تِك | Nuzul Tech — حلول البنية التحتية والسحابة والبرمجيات للمؤسسات",
+      "desc": "نُزول تِك (Nuzul Tech) — الشريك التقني للمؤسسات في مصر. حلول البنية التحتية والشبكات، السيرفرات السحابية والاستضافة، الأمن السيبراني، وتطوير أنظمة ERP والتطبيقات.",
+      "canonical": null,
+      "hreflangs": 2,
+      "h1Count": 0,
+      "h1s": [],
+      "screenshots": [
+        "/audit/phase-0/services-slug-375px-rtl.png",
+        "/audit/phase-0/services-slug-768px-rtl.png",
+        "/audit/phase-0/services-slug-1440px-rtl.png"
+      ]
+    },
+    {
+      "route": "/pricing",
+      "dir": "rtl",
+      "lang": "ar",
+      "title": "نُزول تِك | Nuzul Tech — حلول البنية التحتية والسحابة والبرمجيات للمؤسسات",
+      "desc": "نُزول تِك (Nuzul Tech) — الشريك التقني للمؤسسات في مصر. حلول البنية التحتية والشبكات، السيرفرات السحابية والاستضافة، الأمن السيبراني، وتطوير أنظمة ERP والتطبيقات.",
+      "canonical": null,
+      "hreflangs": 2,
+      "h1Count": 0,
+      "h1s": [],
+      "screenshots": [
+        "/audit/phase-0/pricing-375px-rtl.png",
+        "/audit/phase-0/pricing-768px-rtl.png",
+        "/audit/phase-0/pricing-1440px-rtl.png"
+      ]
+    },
+    {
+      "route": "/hosting",
+      "dir": "rtl",
+      "lang": "ar",
+      "title": "نُزول تِك | Nuzul Tech — حلول البنية التحتية والسحابة والبرمجيات للمؤسسات",
+      "desc": "نُزول تِك (Nuzul Tech) — الشريك التقني للمؤسسات في مصر. حلول البنية التحتية والشبكات، السيرفرات السحابية والاستضافة، الأمن السيبراني، وتطوير أنظمة ERP والتطبيقات.",
+      "canonical": null,
+      "hreflangs": 2,
+      "h1Count": 0,
+      "h1s": [],
+      "screenshots": [
+        "/audit/phase-0/hosting-375px-rtl.png",
+        "/audit/phase-0/hosting-768px-rtl.png",
+        "/audit/phase-0/hosting-1440px-rtl.png"
+      ]
+    },
+    {
+      "route": "/case-studies",
+      "dir": "rtl",
+      "lang": "ar",
+      "title": "نُزول تِك | Nuzul Tech — حلول البنية التحتية والسحابة والبرمجيات للمؤسسات",
+      "desc": "نُزول تِك (Nuzul Tech) — الشريك التقني للمؤسسات في مصر. حلول البنية التحتية والشبكات، السيرفرات السحابية والاستضافة، الأمن السيبراني، وتطوير أنظمة ERP والتطبيقات.",
+      "canonical": null,
+      "hreflangs": 2,
+      "h1Count": 0,
+      "h1s": [],
+      "screenshots": [
+        "/audit/phase-0/case-studies-375px-rtl.png",
+        "/audit/phase-0/case-studies-768px-rtl.png",
+        "/audit/phase-0/case-studies-1440px-rtl.png"
+      ]
+    },
+    {
+      "route": "/case-studies/trust-specialized-hospital",
+      "dir": "rtl",
+      "lang": "ar",
+      "title": "نُزول تِك | Nuzul Tech — حلول البنية التحتية والسحابة والبرمجيات للمؤسسات",
+      "desc": "نُزول تِك (Nuzul Tech) — الشريك التقني للمؤسسات في مصر. حلول البنية التحتية والشبكات، السيرفرات السحابية والاستضافة، الأمن السيبراني، وتطوير أنظمة ERP والتطبيقات.",
+      "canonical": null,
+      "hreflangs": 2,
+      "h1Count": 0,
+      "h1s": [],
+      "screenshots": [
+        "/audit/phase-0/case-studies-slug-375px-rtl.png",
+        "/audit/phase-0/case-studies-slug-768px-rtl.png",
+        "/audit/phase-0/case-studies-slug-1440px-rtl.png"
+      ]
+    },
+    {
+      "route": "/blog",
+      "dir": "rtl",
+      "lang": "ar",
+      "title": "نُزول تِك | Nuzul Tech — حلول البنية التحتية والسحابة والبرمجيات للمؤسسات",
+      "desc": "نُزول تِك (Nuzul Tech) — الشريك التقني للمؤسسات في مصر. حلول البنية التحتية والشبكات، السيرفرات السحابية والاستضافة، الأمن السيبراني، وتطوير أنظمة ERP والتطبيقات.",
+      "canonical": null,
+      "hreflangs": 2,
+      "h1Count": 0,
+      "h1s": [],
+      "screenshots": [
+        "/audit/phase-0/blog-375px-rtl.png",
+        "/audit/phase-0/blog-768px-rtl.png",
+        "/audit/phase-0/blog-1440px-rtl.png"
+      ]
+    },
+    {
+      "route": "/blog/ransomware-protection-guide",
+      "dir": "rtl",
+      "lang": "ar",
+      "title": "نُزول تِك | Nuzul Tech — حلول البنية التحتية والسحابة والبرمجيات للمؤسسات",
+      "desc": "نُزول تِك (Nuzul Tech) — الشريك التقني للمؤسسات في مصر. حلول البنية التحتية والشبكات، السيرفرات السحابية والاستضافة، الأمن السيبراني، وتطوير أنظمة ERP والتطبيقات.",
+      "canonical": null,
+      "hreflangs": 2,
+      "h1Count": 0,
+      "h1s": [],
+      "screenshots": [
+        "/audit/phase-0/blog-slug-375px-rtl.png",
+        "/audit/phase-0/blog-slug-768px-rtl.png",
+        "/audit/phase-0/blog-slug-1440px-rtl.png"
+      ]
+    },
+    {
+      "route": "/contact",
+      "dir": "rtl",
+      "lang": "ar",
+      "title": "نُزول تِك | Nuzul Tech — حلول البنية التحتية والسحابة والبرمجيات للمؤسسات",
+      "desc": "نُزول تِك (Nuzul Tech) — الشريك التقني للمؤسسات في مصر. حلول البنية التحتية والشبكات، السيرفرات السحابية والاستضافة، الأمن السيبراني، وتطوير أنظمة ERP والتطبيقات.",
+      "canonical": null,
+      "hreflangs": 2,
+      "h1Count": 0,
+      "h1s": [],
+      "screenshots": [
+        "/audit/phase-0/contact-375px-rtl.png",
+        "/audit/phase-0/contact-768px-rtl.png",
+        "/audit/phase-0/contact-1440px-rtl.png"
+      ]
+    }
+  ]
+}

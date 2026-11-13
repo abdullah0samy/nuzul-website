@@ -1,464 +1,850 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
+import {
+  ALL_HOSTING_PLANS,
+  HOSTING_PLANS,
+  WEB_HOSTING_PLANS,
+  WINDOWS_HOSTING_PLANS,
+  HostingCategory,
+  HostingPlan,
+} from '../../data/nuzulData';
+import { useApp } from '../../context/AppContext';
 import {
   Check,
+  ChevronDown,
+  GitCompare,
+  HelpCircle,
+  AlertCircle,
   X,
-  Server,
-  Cpu,
-  HardDrive,
-  Activity,
-  ShieldCheck,
-  Globe,
-  SlidersHorizontal,
-  ChevronRight,
-  ChevronLeft,
-  Sparkles,
-  Zap,
+  Filter,
 } from 'lucide-react';
-import { useApp } from '../../context/AppContext';
-import { NUZUL_HOSTING_PLANS } from '../../data/nuzulData';
-import { RevealOnScroll } from '../common/RevealOnScroll';
+import {
+  useComparePlansStore,
+  toggleComparePlan,
+  clearComparePlans,
+  dismissMaxLimitWarning,
+  setShowDifferencesOnly,
+} from './comparePlansStore';
 
-interface TechnicalSpec {
-  categoryAr: string;
-  categoryEn: string;
-  specs: {
-    labelAr: string;
-    labelEn: string;
-    values: Record<string, string | boolean>;
-  }[];
+interface SpecRow {
+  id: string;
+  labelAr: string;
+  labelEn: string;
+  tooltipAr: string;
+  tooltipEn: string;
+  getValue: (plan: HostingPlan, lang: 'ar' | 'en') => string;
 }
 
-// Technical specifications comparison database
-const TECHNICAL_SPECS: TechnicalSpec[] = [
-  {
-    categoryAr: 'العتاد وقدرات المعالجة (Compute & Hardware)',
-    categoryEn: 'Compute & Hardware Specifications',
-    specs: [
-      {
-        labelAr: 'أنوية المعالج (CPU Cores)',
-        labelEn: 'vCPU Cores',
-        values: {
-          'shared-cpanel': '1 vCPU (Shared Core)',
-          'wp-managed': '2 vCPU (High Priority)',
-          'linux-vps': '2 Dedicated vCPU (Intel Xeon Gold)',
-          'windows-rdp': '4 High-Clock vCPU (3.8+ GHz)',
-        },
-      },
-      {
-        labelAr: 'الذاكرة العشوائية (RAM Memory)',
-        labelEn: 'RAM Memory',
-        values: {
-          'shared-cpanel': '2 GB DDR4 RAM',
-          'wp-managed': '4 GB High-Speed RAM',
-          'linux-vps': '4 GB DDR4 ECC Dedicated',
-          'windows-rdp': '8 GB High-Speed RAM',
-        },
-      },
-      {
-        labelAr: 'نوع وحجم التخزين (NVMe Storage)',
-        labelEn: 'NVMe Gen4 Storage',
-        values: {
-          'shared-cpanel': '25 GB NVMe Gen4',
-          'wp-managed': '40 GB Enterprise NVMe',
-          'linux-vps': '60 GB High-IOPS NVMe',
-          'windows-rdp': '100 GB High-IOPS NVMe',
-        },
-      },
-      {
-        labelAr: 'معمارية المحاكاة الافتراضية (Virtualization)',
-        labelEn: 'Virtualization Platform',
-        values: {
-          'shared-cpanel': 'CloudLinux OS Isolation',
-          'wp-managed': 'Isolated LiteSpeed Container',
-          'linux-vps': '100% Hardware KVM Isolation',
-          'windows-rdp': 'Dedicated KVM / Proxmox VE',
-        },
-      },
-    ],
-  },
-  {
-    categoryAr: 'الشبكة والاتصال وسعة البيانات (Network & Bandwidth)',
-    categoryEn: 'Networking & Data Transfer',
-    specs: [
-      {
-        labelAr: 'سعة نقل البيانات الشهرية (Bandwidth)',
-        labelEn: 'Monthly Bandwidth',
-        values: {
-          'shared-cpanel': '500 GB / شهر',
-          'wp-managed': '1,500 GB (1.5 TB) / شهر',
-          'linux-vps': '3,000 GB (3 TB) غير محدود',
-          'windows-rdp': '5,000 GB (5 TB) غير محدود',
-        },
-      },
-      {
-        labelAr: 'سرعة منفذ الشبكة (Network Port)',
-        labelEn: 'Uplink Port Speed',
-        values: {
-          'shared-cpanel': '1 Gbps Redundant',
-          'wp-managed': '1 Gbps Dedicated Link',
-          'linux-vps': '1 Gbps High-Speed Uplink',
-          'windows-rdp': '1 Gbps Low-Latency Link',
-        },
-      },
-      {
-        labelAr: 'عناوين IP مخصصة (Dedicated IP)',
-        labelEn: 'Dedicated IPv4 / IPv6',
-        values: {
-          'shared-cpanel': false,
-          'wp-managed': 'متاح كإضافة اختيارية',
-          'linux-vps': '1x IPv4 مخصص + /64 IPv6',
-          'windows-rdp': '1x IPv4 مخصص فوري',
-        },
-      },
-      {
-        labelAr: 'مواقع مراكز البيانات المتاحة (DC Location)',
-        labelEn: 'Available Datacenters',
-        values: {
-          'shared-cpanel': 'القاهرة / فرانكفورت',
-          'wp-managed': 'القاهرة / فرانكفورت',
-          'linux-vps': 'القاهرة (4ms) أو فرانكفورت (28ms)',
-          'windows-rdp': 'القاهرة (4ms) أو فرانكفورت (28ms)',
-        },
-      },
-    ],
-  },
-  {
-    categoryAr: 'نظام التشغيل والأمان والنسخ الاحتياطي (OS, Security & Backups)',
-    categoryEn: 'Operating System & Security',
-    specs: [
-      {
-        labelAr: 'صلاحيات الوصول الكامل (Root / Admin)',
-        labelEn: 'Root / Administrator Access',
-        values: {
-          'shared-cpanel': false,
-          'wp-managed': false,
-          'linux-vps': true,
-          'windows-rdp': true,
-        },
-      },
-      {
-        labelAr: 'أنظمة التشغيل المدعومة (Operating Systems)',
-        labelEn: 'Supported Operating Systems',
-        values: {
-          'shared-cpanel': 'CloudLinux 9 Enterprise',
-          'wp-managed': 'LiteSpeed Enterprise Linux',
-          'linux-vps': 'Ubuntu / Debian / AlmaLinux / Rocky',
-          'windows-rdp': 'Windows Server 2022 / 2025 / Win 11 Pro',
-        },
-      },
-      {
-        labelAr: 'حماية متقدمة ضد هجمات (DDoS Shield)',
-        labelEn: 'Anti-DDoS Protection',
-        values: {
-          'shared-cpanel': '1.2 Tbps L3/L4/L7 Shield',
-          'wp-managed': '1.2 Tbps L3/L4/L7 Shield + WAF',
-          'linux-vps': '1.2 Tbps Automated Mitigation',
-          'windows-rdp': '1.2 Tbps Automated Mitigation',
-        },
-      },
-      {
-        labelAr: 'النسخ الاحتياطي الآلي (Automated Backups)',
-        labelEn: 'Automated Snapshots & Backups',
-        values: {
-          'shared-cpanel': 'نسخ احتياطي يومي مجدول',
-          'wp-managed': 'نسخ احتياطي يومي وسحابي خارجي',
-          'linux-vps': 'لقطات Snapshots أسبوعية آلية',
-          'windows-rdp': 'نسخ احتياطي أسبوعي آلي كامل',
-        },
-      },
-      {
-        labelAr: 'لوحة التحكم وإدارة الخادم (Control Panel)',
-        labelEn: 'Control Panel',
-        values: {
-          'shared-cpanel': 'cPanel Official Suite',
-          'wp-managed': 'cPanel + LiteSpeed Cache Toolkit',
-          'linux-vps': 'لوحة سحابية لإعادة التثبيت وإعادة التشغيل (KVM)',
-          'windows-rdp': 'بروتوكول RDP مباشر + لوحة تحكم في الطاقة',
-        },
-      },
-    ],
-  },
-  {
-    categoryAr: 'الدعم الفني ومستوى الخدمة (SLA & Support)',
-    categoryEn: 'SLA Guarantee & Engineering Support',
-    specs: [
-      {
-        labelAr: 'ضمان وقت التشغيل الموثق (Uptime SLA)',
-        labelEn: 'Uptime SLA Guarantee',
-        values: {
-          'shared-cpanel': '99.9%',
-          'wp-managed': '99.95%',
-          'linux-vps': '99.99%',
-          'windows-rdp': '99.99%',
-        },
-      },
-      {
-        labelAr: 'المساعدة في نقل المواقع والبيانات (Migration)',
-        labelEn: 'Free Seamless Migration',
-        values: {
-          'shared-cpanel': true,
-          'wp-managed': true,
-          'linux-vps': 'متاح عبر فريق الدعم التقني',
-          'windows-rdp': 'مساعد في إعداد بيئة العمل',
-        },
-      },
-      {
-        labelAr: 'دعم فني هندسي مصري مباشر (Support)',
-        labelEn: '24/7 Engineering Support',
-        values: {
-          'shared-cpanel': 'تذاكر ودعم فوري',
-          'wp-managed': 'تذاكر وهاتف 24/7',
-          'linux-vps': 'دعم متخصص على مدار الساعة',
-          'windows-rdp': 'دعم مباشر + مساعدة عبر الهاتف والواتساب',
-        },
-      },
-    ],
-  },
+interface SpecCategory {
+  id: string;
+  titleAr: string;
+  titleEn: string;
+  rows: SpecRow[];
+}
+
+const COMPARE_FAMILY_TABS: { id: HostingCategory; ar: string; en: string }[] = [
+  { id: 'vps', ar: 'Cloud VPS (KVM)', en: 'Cloud VPS (KVM)' },
+  { id: 'web', ar: 'Managed Web & WP', en: 'Managed Web & WP' },
+  { id: 'windows', ar: 'Windows & RDP', en: 'Windows Cloud & RDP' },
 ];
 
 export const ComparePlansSection: React.FC = () => {
-  const { locale, formatPrice, addToCart, theme } = useApp();
-  const isAr = locale === 'ar';
-  const isDark = theme === 'dark';
+  const { lang, formatPrice, addToCart } = useApp();
+  const [activeFamily, setActiveFamily] = useState<HostingCategory>('vps');
+  const [openTooltipId, setOpenTooltipId] = useState<string | null>(null);
+  const [collapsedCategories, setCollapsedCategories] = useState<Record<string, boolean>>({});
+  const [stickyOffset, setStickyOffset] = useState<number>(0);
+  const [activeMobileCardIdx, setActiveMobileCardIdx] = useState<number>(0);
 
-  // State to toggle which plans are selected for comparison (default: all 4 or 3 active)
-  const [selectedPlanIds, setSelectedPlanIds] = useState<string[]>([
-    'shared-cpanel',
-    'linux-vps',
-    'windows-rdp',
-  ]);
+  const tableRef = useRef<HTMLTableElement | null>(null);
+  const theadRef = useRef<HTMLTableSectionElement | null>(null);
+  const mobileTrackRef = useRef<HTMLDivElement | null>(null);
 
-  const togglePlanSelection = (planId: string) => {
-    if (selectedPlanIds.includes(planId)) {
-      // Keep at least 2 plans selected
-      if (selectedPlanIds.length > 2) {
-        setSelectedPlanIds(selectedPlanIds.filter((id) => id !== planId));
+  const {
+    selectedPlanIds,
+    maxLimitWarning,
+    showDifferencesOnly,
+  } = useComparePlansStore();
+
+  useEffect(() => {
+    const updateStickyHeader = () => {
+      if (!tableRef.current || !theadRef.current) return;
+      const navbarHeight = 64;
+      const tableRect = tableRef.current.getBoundingClientRect();
+      const theadHeight = theadRef.current.offsetHeight || 120;
+
+      if (tableRect.top < navbarHeight && tableRect.bottom - theadHeight > navbarHeight) {
+        setStickyOffset(Math.round(navbarHeight - tableRect.top));
+      } else {
+        setStickyOffset(0);
       }
-    } else {
-      setSelectedPlanIds([...selectedPlanIds, planId]);
+    };
+
+    window.addEventListener('scroll', updateStickyHeader, { passive: true });
+    window.addEventListener('resize', updateStickyHeader);
+    updateStickyHeader();
+
+    return () => {
+      window.removeEventListener('scroll', updateStickyHeader);
+      window.removeEventListener('resize', updateStickyHeader);
+    };
+  }, []);
+
+  const toggleCategoryCollapse = (categoryId: string) => {
+    setCollapsedCategories((prev) => ({
+      ...prev,
+      [categoryId]: !prev[categoryId],
+    }));
+  };
+
+  const familyPlans = useMemo(() => {
+    if (activeFamily === 'vps') return HOSTING_PLANS;
+    if (activeFamily === 'web') return WEB_HOSTING_PLANS;
+    return WINDOWS_HOSTING_PLANS;
+  }, [activeFamily]);
+
+  const validSelectedIds = useMemo(
+    () =>
+      selectedPlanIds.filter((id) =>
+        ALL_HOSTING_PLANS.some((p) => p.id === id)
+      ),
+    [selectedPlanIds]
+  );
+
+  const visiblePlans: HostingPlan[] =
+    validSelectedIds.length > 0
+      ? ALL_HOSTING_PLANS.filter((p) => validSelectedIds.includes(p.id))
+      : familyPlans;
+
+  const specCategories: SpecCategory[] = useMemo(
+    () => [
+      {
+        id: 'compute',
+        titleAr: 'المعالج والذاكرة',
+        titleEn: 'Compute & Memory',
+        rows: [
+          {
+            id: 'vcpu',
+            labelAr: 'أنوية المعالج (vCPU)',
+            labelEn: 'vCPU Cores',
+            tooltipAr: 'أنوية المعالجة المخصصة على معالجات AMD EPYC أو Intel Xeon.',
+            tooltipEn: 'Allocated processor cores on AMD EPYC / Intel Xeon nodes.',
+            getValue: (p) => p.cpu,
+          },
+          {
+            id: 'ram',
+            labelAr: 'الذاكرة العشوائية (RAM)',
+            labelEn: 'Memory (RAM)',
+            tooltipAr: 'سعة الذاكرة DDR4 ECC لضمان استقرار قواعد البيانات وأنظمة التشغيل.',
+            tooltipEn: 'DDR4 ECC memory capacity for stable OS and database execution.',
+            getValue: (p) => p.ram,
+          },
+          {
+            id: 'isolation',
+            labelAr: 'بيئة العزل والتشغيل',
+            labelEn: 'Virtualization / Runtime',
+            tooltipAr: 'عزل KVM مخصص للخوادم الافتراضية أو حاوية CloudLinux LVE للاستضافة المدارة.',
+            tooltipEn: 'KVM kernel hypervisor for VPS/Windows or CloudLinux LVE for managed web.',
+            getValue: (p) =>
+              p.category === 'web'
+                ? 'CloudLinux LVE / LiteSpeed'
+                : 'KVM Hardware Virtualization',
+          },
+        ],
+      },
+      {
+        id: 'storage',
+        titleAr: 'التخزين واللقطات',
+        titleEn: 'Storage & Snapshots',
+        rows: [
+          {
+            id: 'nvme',
+            labelAr: 'مساحة التخزين NVMe',
+            labelEn: 'NVMe SSD Storage',
+            tooltipAr: 'وحدات تخزين NVMe فائقة السرعة في مصفوفة RAID-10.',
+            tooltipEn: 'Enterprise NVMe SSD capacity in RAID-10 configuration.',
+            getValue: (p) => p.storage,
+          },
+          {
+            id: 'backups',
+            labelAr: 'اللقطات والنسخ الاحتياطي',
+            labelEn: 'Snapshots & Backups',
+            tooltipAr: 'لقطات فورية (Snapshots) أو نسخ احتياطي يومي للاسترجاع السريع.',
+            tooltipEn: 'Included point-in-time Snapshots or automated daily off-site backups.',
+            getValue: (p) => p.snapshots,
+          },
+        ],
+      },
+      {
+        id: 'network',
+        titleAr: 'الشبكة والحماية',
+        titleEn: 'Network & Protection',
+        rows: [
+          {
+            id: 'bandwidth',
+            labelAr: 'حجم نقل البيانات',
+            labelEn: 'Monthly Traffic Quota',
+            tooltipAr: 'بيانات واردة غير محدودة مع حصة شهرية واضحة للبيانات الصادرة.',
+            tooltipEn: 'Unlimited incoming traffic with generous monthly outbound quota.',
+            getValue: (p) => p.bandwidth,
+          },
+          {
+            id: 'port-speed',
+            labelAr: 'سرعة منفذ الشبكة',
+            labelEn: 'Uplink Port Speed',
+            tooltipAr: 'سرعة الاتصال الشبكي المتاحة لكل خادم داخل مركز البيانات.',
+            tooltipEn: 'Network uplink speed assigned to each instance.',
+            getValue: (p) => p.portSpeed,
+          },
+          {
+            id: 'ddos',
+            labelAr: 'الحماية من هجمات DDoS',
+            labelEn: 'DDoS & Edge Protection',
+            tooltipAr: 'تنقية تلقائية لحركة المرور على مستوى الشبكة أو تطبيقات الويب.',
+            tooltipEn: 'Automated L3/L4 network scrubbing or L7 Web Application Firewall.',
+            getValue: (p) => p.ddos,
+          },
+        ],
+      },
+      {
+        id: 'management',
+        titleAr: 'الإدارة واتفاقية التشغيل',
+        titleEn: 'Access & SLA',
+        rows: [
+          {
+            id: 'panel',
+            labelAr: 'لوحة التحكم والصلاحيات',
+            labelEn: 'Access & Control Panel',
+            tooltipAr: 'وسيلة الوصول والإدارة المتوفرة للخادم أو موقع الويب.',
+            tooltipEn: 'Administrative console and remote protocol access.',
+            getValue: (p) => p.panel,
+          },
+          {
+            id: 'uptime-sla',
+            labelAr: 'اتفاقية التوافر (SLA)',
+            labelEn: 'Uptime SLA',
+            tooltipAr: 'نسبة توافر العتاد والشبكة المنصوص عليها شهرياً.',
+            tooltipEn: 'Documented monthly host and network availability target.',
+            getValue: (p) => p.uptime,
+          },
+          {
+            id: 'setup-fee',
+            labelAr: 'رسوم الإعداد',
+            labelEn: 'Setup Fee',
+            tooltipAr: 'تفعيل الخادم دون أي رسوم تأسيس إضافية عند الاشتراك الشهري أو السنوي.',
+            tooltipEn: 'Zero one-time provisioning fee across monthly and annual billing.',
+            getValue: (_, l) => (l === 'ar' ? '0 ج.م (مجاني)' : '$0 / Free Setup'),
+          },
+        ],
+      },
+    ],
+    []
+  );
+
+  const isRowDifferentAcrossVisiblePlans = (row: SpecRow): boolean => {
+    const relevantValues = visiblePlans.map((p) => row.getValue(p, lang));
+    if (relevantValues.length <= 1) return true;
+    return new Set(relevantValues).size > 1;
+  };
+
+  const handleSelectPlan = (plan: HostingPlan) => {
+    addToCart({
+      id: `${plan.id}-monthly-cai`,
+      name: `${lang === 'ar' ? plan.nameAr : plan.nameEn} (${lang === 'ar' ? 'شهري' : 'Monthly'})`,
+      type: 'hosting',
+      price: plan.monthlyPriceEGP,
+      billingCycle: 'monthly',
+      details: `${plan.cpu} · ${plan.ram} · ${plan.storage}`,
+    });
+  };
+
+  const scrollToMobileCompareCard = (index: number) => {
+    setActiveMobileCardIdx(index);
+    if (!mobileTrackRef.current) return;
+    const cards = mobileTrackRef.current.querySelectorAll('[data-mobile-compare-card]');
+    const card = cards[index] as HTMLElement | undefined;
+    if (card) {
+      card.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
     }
   };
 
-  const activePlans = NUZUL_HOSTING_PLANS.filter((p) => selectedPlanIds.includes(p.id));
-
   return (
-    <section
-      id="compare-plans"
-      className={`relative overflow-hidden scroll-mt-24 px-4 py-16 sm:py-20 sm:px-6 lg:px-8 border-t transition-colors ${
-        isDark ? 'bg-[#0a101d] border-white/10 text-white' : 'bg-slate-100/70 border-slate-200 text-slate-900'
-      }`}
-    >
-      <div className="mx-auto max-w-7xl">
-        {/* Section Header */}
-        <RevealOnScroll direction="up" threshold={0.2}>
-          <div className="mx-auto max-w-3xl text-center mb-10">
-            <div className="eyebrow-mono justify-center text-emerald-600 dark:text-emerald-400">
-              <SlidersHorizontal className="h-4 w-4" />
-              <span>{isAr ? 'المقارنة الفنية الدقيقة' : 'SIDE-BY-SIDE SPECIFICATIONS'}</span>
-            </div>
-
-            <h2 className="mt-3 text-2xl font-black leading-tight sm:text-3xl lg:text-4xl">
-              {isAr ? 'مقارنة مواصفات خوادم واستضافة نُزول تِك' : 'Compare VPS & Cloud Hosting Specifications'}
+    <section id="compare-plans" className="section-spacing bg-surface border-t border-token">
+      <div className="container-nuzul">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8">
+          <div className="max-w-2xl">
+            <p className="text-sm font-semibold text-accent mb-2">
+              {lang === 'ar' ? 'المواصفات الهندسية التفصيلية' : 'Detailed Hardware Specifications'}
+            </p>
+            <h2 className="text-2xl md:text-4xl font-bold text-main mb-3">
+              {lang === 'ar'
+                ? 'مقارنة الموارد والشبكة بين الخطط'
+                : 'Side-by-Side Resource & Network Matrix'}
             </h2>
-
-            <p className={`mt-3 text-sm leading-relaxed ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>
-              {isAr
-                ? 'قارن بين خيارات السيرفرات السحابية والـ VPS بحسب مواصفات المعالج (CPU)، الذاكرة (RAM)، التخزين وسعة الباندويث لاختيار البنية الملائمة لاحتياجاتك.'
-                : 'Evaluate cloud and VPS hosting plans side-by-side by CPU cores, RAM memory, NVMe storage, bandwidth, and SLA to choose the ideal infrastructure.'}
+            <p className="text-muted text-sm sm:text-base leading-relaxed">
+              {lang === 'ar'
+                ? 'قارن أنوية المعالج، ذاكرة ECC، سعة NVMe، واللقطات الاحتياطية لكل فئة، أو اختر حتى 3 خطط للمقارنة المباشرة.'
+                : 'Compare vCPU cores, ECC RAM, NVMe storage, and snapshot quotas per tier, or select up to 3 plans across categories.'}
             </p>
           </div>
-        </RevealOnScroll>
 
-        {/* Interactive Plan Selector Filter Bar */}
-        <div className="mb-8 flex flex-wrap items-center justify-center gap-2 sm:gap-3">
-          <span className="text-xs font-semibold text-slate-400 ml-1">
-            {isAr ? 'اختر الخطط المراد مقارنتها (حدد خطتين على الأقل):' : 'Select plans to compare (min. 2):'}
-          </span>
-          <div className="flex flex-wrap items-center gap-2">
-            {NUZUL_HOSTING_PLANS.map((plan) => {
-              const isSelected = selectedPlanIds.includes(plan.id);
-              const planName = isAr ? plan.nameAr : plan.nameEn;
+          {validSelectedIds.length === 0 && (
+            <div className="flex flex-wrap items-center gap-2 self-start lg:self-end">
+              {COMPARE_FAMILY_TABS.map((fam) => {
+                const active = activeFamily === fam.id;
+                return (
+                  <button
+                    key={fam.id}
+                    type="button"
+                    onClick={() => {
+                      setActiveFamily(fam.id);
+                      setActiveMobileCardIdx(0);
+                    }}
+                    data-testid={`compare-family-tab-${fam.id}`}
+                    className={`min-h-[40px] px-3.5 py-2 rounded-lg text-xs font-semibold border transition-colors whitespace-nowrap ${
+                      active
+                        ? 'bg-accent text-accent-contrast border-accent'
+                        : 'bg-page text-main border-token hover-surface-2'
+                    }`}
+                  >
+                    <bdi dir="ltr" className="ltr-num">
+                      {lang === 'ar' ? fam.ar : fam.en}
+                    </bdi>
+                  </button>
+                );
+              })}
+            </div>
+          )}
+        </div>
+
+        {/* Interactive Compare & Filter Controls Toolbar */}
+        <div
+          data-testid="compare-controls-toolbar"
+          className="clean-card p-4 sm:p-5 bg-page mb-6 flex flex-col lg:flex-row lg:items-center justify-between gap-4"
+        >
+          <div className="space-y-2">
+            <div className="flex items-center gap-2 text-xs font-bold text-main">
+              <GitCompare className="w-4 h-4 text-accent shrink-0" />
+              <span>
+                {lang === 'ar'
+                  ? `اختر حتى 3 خطط للمقارنة (${validSelectedIds.length}/3):`
+                  : `Pin up to 3 plans for side-by-side comparison (${validSelectedIds.length}/3):`}
+              </span>
+            </div>
+            <div className="flex flex-wrap items-center gap-2">
+              {familyPlans.map((plan) => {
+                const isSelected = validSelectedIds.includes(plan.id);
+                return (
+                  <button
+                    key={plan.id}
+                    type="button"
+                    onClick={() => toggleComparePlan(plan.id)}
+                    data-testid={`compare-plan-toggle-${plan.id}`}
+                    aria-pressed={isSelected}
+                    className={`min-h-[44px] px-3.5 py-2 rounded-lg text-xs font-semibold whitespace-nowrap border transition-colors inline-flex items-center gap-2 ${
+                      isSelected
+                        ? 'bg-accent text-accent-contrast border-accent'
+                        : 'bg-surface text-main border-token hover-surface-2'
+                    }`}
+                  >
+                    <span
+                      className={`w-4 h-4 rounded flex items-center justify-center border ${
+                        isSelected
+                          ? 'bg-surface text-accent border-transparent'
+                          : 'border-token bg-page'
+                      }`}
+                    >
+                      {isSelected && <Check className="w-3 h-3 stroke-[3]" />}
+                    </span>
+                    <bdi dir="ltr" className="ltr-num">
+                      {lang === 'ar' ? plan.nameAr : plan.nameEn}
+                    </bdi>
+                  </button>
+                );
+              })}
+
+              {validSelectedIds.length > 0 && (
+                <button
+                  type="button"
+                  onClick={clearComparePlans}
+                  data-testid="toolbar-clear-compare-btn"
+                  className="min-h-[44px] px-3 py-2 rounded-lg text-xs font-semibold whitespace-nowrap text-muted hover-text-main border border-token bg-surface"
+                >
+                  {lang === 'ar' ? 'عرض الفئة كاملة' : 'Show Category'}
+                </button>
+              )}
+            </div>
+          </div>
+
+          <div className="flex items-center gap-3 self-start lg:self-center">
+            <button
+              type="button"
+              onClick={() => setShowDifferencesOnly(!showDifferencesOnly)}
+              data-testid="toggle-differences-only"
+              aria-pressed={showDifferencesOnly}
+              className={`min-h-[44px] px-4 py-2.5 rounded-lg text-xs font-semibold whitespace-nowrap border transition-colors inline-flex items-center gap-2 ${
+                showDifferencesOnly
+                  ? 'bg-accent text-accent-contrast border-accent'
+                  : 'bg-surface text-main border-token hover-surface-2'
+              }`}
+            >
+              <Filter className="w-3.5 h-3.5 shrink-0" />
+              <span>
+                {lang === 'ar' ? 'إظهار الفروقات فقط' : 'Show differences only'}
+              </span>
+            </button>
+          </div>
+        </div>
+
+        {/* 4th Plan Selection Warning Alert */}
+        {maxLimitWarning && (
+          <div
+            role="alert"
+            data-testid="compare-limit-alert"
+            className="mb-6 p-4 rounded-xl bg-surface-2 border border-accent flex items-center justify-between gap-4"
+          >
+            <div className="flex items-center gap-3 text-sm font-semibold text-main">
+              <AlertCircle className="w-5 h-5 text-accent shrink-0" />
+              <span>
+                {lang === 'ar'
+                  ? 'يمكن مقارنة 3 خطط كحد أقصى في وقت واحد. قم بإلغاء تحديد إحدى الخطط المختارة أولاً.'
+                  : 'A maximum of 3 plans can be pinned at once. Deselect one active plan first.'}
+              </span>
+            </div>
+            <button
+              type="button"
+              onClick={dismissMaxLimitWarning}
+              aria-label={lang === 'ar' ? 'إغلاق التنبيه' : 'Dismiss warning'}
+              className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center rounded-lg text-muted hover-text-main"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          </div>
+        )}
+
+        {/* MOBILE VIEW (<768px) */}
+        <div className="md:hidden" data-testid="mobile-swipeable-compare-cards">
+          <div className="flex items-center gap-2 overflow-x-auto pb-2 mb-3">
+            {visiblePlans.map((plan, idx) => {
+              const active = activeMobileCardIdx === idx;
               return (
                 <button
                   key={plan.id}
                   type="button"
-                  onClick={() => togglePlanSelection(plan.id)}
-                  className={`inline-flex items-center gap-1.5 rounded-xl px-3 py-1.5 text-xs font-bold transition-all cursor-pointer border ${
-                    isSelected
-                      ? 'bg-emerald-500/15 border-emerald-500 text-emerald-600 dark:text-emerald-400 shadow-sm'
-                      : isDark
-                      ? 'bg-white/5 border-white/10 text-slate-400 hover:text-white hover:bg-white/10'
-                      : 'bg-white border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-50'
+                  onClick={() => scrollToMobileCompareCard(idx)}
+                  data-testid={`mobile-compare-tab-${plan.id}`}
+                  className={`min-h-[44px] px-3.5 py-2 rounded-lg text-xs font-semibold whitespace-nowrap border transition-colors ${
+                    active
+                      ? 'bg-accent text-accent-contrast border-accent'
+                      : 'bg-page text-main border-token'
                   }`}
-                  aria-pressed={isSelected}
                 >
-                  <span
-                    className={`h-2 w-2 rounded-full ${
-                      isSelected ? 'bg-emerald-500' : 'bg-slate-400 opacity-60'
-                    }`}
-                  />
-                  <span>{planName}</span>
+                  <bdi dir="ltr" className="ltr-num">
+                    {lang === 'ar' ? plan.nameAr : plan.nameEn}
+                  </bdi>
                 </button>
               );
             })}
           </div>
-        </div>
 
-        {/* Specifications Comparison Table Container */}
-        <div
-          className={`overflow-hidden rounded-2xl border shadow-xl backdrop-blur-xl transition-colors ${
-            isDark ? 'bg-[#0d1524] border-white/10' : 'bg-white border-slate-200'
-          }`}
-        >
-          {/* Scroll wrapper for mobile responsiveness */}
-          <div className="overflow-x-auto">
-            <table className="w-full text-right border-collapse min-w-[700px]" dir={isAr ? 'rtl' : 'ltr'}>
-              {/* Table Header: Plan Names, Pricing & Deploy Button */}
-              <thead>
-                <tr className={`border-b ${isDark ? 'border-white/10 bg-white/[0.02]' : 'border-slate-200 bg-slate-50/70'}`}>
-                  <th className="p-4 sm:p-6 w-[280px] min-w-[240px] text-start align-top">
-                    <span className="text-xs uppercase font-mono tracking-wider text-slate-400">
-                      {isAr ? 'المواصفة التقنية' : 'Technical Metric'}
-                    </span>
-                    <p className="mt-1 text-sm font-bold text-slate-700 dark:text-slate-300">
-                      {isAr ? `مقارنة ${activePlans.length} خطط مختارة` : `Comparing ${activePlans.length} selected plans`}
-                    </p>
-                  </th>
+          <div
+            ref={mobileTrackRef}
+            className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4"
+          >
+            {visiblePlans.map((plan, idx) => (
+              <div
+                key={plan.id}
+                data-mobile-compare-card={plan.id}
+                onFocus={() => setActiveMobileCardIdx(idx)}
+                className={`clean-card p-5 bg-page w-[88vw] max-w-[340px] shrink-0 snap-center flex flex-col justify-between ${
+                  plan.popular ? 'border-accent ring-1 ring-[var(--accent)]' : ''
+                }`}
+              >
+                <div>
+                  <div className="pb-4 mb-4 border-b border-token">
+                    <div className="flex items-center justify-between gap-2 mb-1">
+                      <span className="text-base font-bold text-main">
+                        <bdi dir="ltr" className="ltr-num">
+                          {lang === 'ar' ? plan.nameAr : plan.nameEn}
+                        </bdi>
+                      </span>
+                      {plan.popular && (
+                        <span className="px-2 py-0.5 rounded bg-accent text-accent-contrast text-[11px] font-semibold whitespace-nowrap">
+                          {lang === 'ar' ? 'الأكثر طلباً' : 'Popular'}
+                        </span>
+                      )}
+                    </div>
+                    <div className="text-xl font-bold text-accent mb-3">
+                      <bdi dir="ltr" className="ltr-num">
+                        {formatPrice(plan.monthlyPriceEGP)}
+                      </bdi>
+                      <span className="text-xs font-normal text-muted ms-1">
+                        /{lang === 'ar' ? 'شهرياً' : 'mo'}
+                      </span>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => handleSelectPlan(plan)}
+                      className={`w-full min-h-[44px] py-2.5 px-3 text-xs font-semibold whitespace-nowrap rounded-lg transition-colors ${
+                        plan.popular ? 'btn-primary' : 'btn-secondary'
+                      }`}
+                    >
+                      {lang === 'ar' ? 'طلب الخطة' : 'Select Plan'}
+                    </button>
+                  </div>
 
-                  {activePlans.map((plan) => {
-                    const planName = isAr ? plan.nameAr : plan.nameEn;
-                    return (
-                      <th
-                        key={plan.id}
-                        className={`p-4 sm:p-6 text-center align-top border-s ${
-                          isDark ? 'border-white/10' : 'border-slate-200'
-                        } ${plan.popular ? (isDark ? 'bg-emerald-950/20' : 'bg-emerald-50/50') : ''}`}
-                      >
-                        <div className="flex flex-col items-center justify-between h-full gap-3">
-                          <div>
-                            {plan.popular && (
-                              <span className="inline-flex items-center gap-1 mb-2 rounded-full border border-emerald-400/40 bg-emerald-400/10 px-2.5 py-0.5 font-mono text-[10px] font-bold text-emerald-600 dark:text-emerald-400">
-                                <Sparkles className="h-3 w-3" />
-                                {isAr ? 'الأكثر طلباً' : 'Popular'}
-                              </span>
-                            )}
-                            <h3 className="text-base font-bold text-slate-900 dark:text-white">{planName}</h3>
-                          </div>
+                  <div className="space-y-4">
+                    {specCategories.map((category) => {
+                      const isCollapsed = Boolean(collapsedCategories[category.id]);
+                      const filteredRows = showDifferencesOnly
+                        ? category.rows.filter(isRowDifferentAcrossVisiblePlans)
+                        : category.rows;
+                      if (filteredRows.length === 0) return null;
 
-                          <div className="my-1">
-                            <span className="text-[11px] text-slate-400 block">{isAr ? 'تبدأ من' : 'From'}</span>
-                            <div className="text-2xl font-black text-emerald-600 dark:text-emerald-400 font-mono">
-                              {formatPrice(plan.basePriceEGP)}
-                              <span className="text-xs font-normal text-slate-400">/{isAr ? 'شهر' : 'mo'}</span>
-                            </div>
-                          </div>
-
+                      return (
+                        <div key={category.id} className="border border-token rounded-lg overflow-hidden">
                           <button
                             type="button"
-                            onClick={() => addToCart(plan, 12, 'cairo')}
-                            className={`btn w-full py-2 px-3 text-xs font-bold uppercase tracking-wider rounded-xl cursor-pointer ${
-                              plan.popular ? 'btn-primary shadow-md shadow-emerald-500/20' : 'btn-secondary'
-                            }`}
+                            onClick={() => toggleCategoryCollapse(category.id)}
+                            aria-expanded={!isCollapsed}
+                            className="w-full min-h-[44px] px-3.5 py-2.5 bg-surface-2 text-start text-xs font-bold text-main flex items-center justify-between gap-2"
                           >
-                            <span>{isAr ? 'حجز وتفعيل' : 'Deploy Now'}</span>
+                            <span>{lang === 'ar' ? category.titleAr : category.titleEn}</span>
+                            <ChevronDown
+                              className={`w-4 h-4 text-muted transition-transform ${
+                                isCollapsed ? '-rotate-90' : ''
+                              }`}
+                            />
                           </button>
+                          {!isCollapsed && (
+                            <dl className="divide-y border-token bg-surface">
+                              {filteredRows.map((row) => (
+                                <div
+                                  key={row.id}
+                                  className="px-3.5 py-2.5 flex items-center justify-between gap-2 text-xs"
+                                >
+                                  <dt className="text-muted font-medium">
+                                    {lang === 'ar' ? row.labelAr : row.labelEn}
+                                  </dt>
+                                  <dd className="font-semibold text-main text-end">
+                                    <bdi dir="ltr" className="ltr-num">
+                                      {row.getValue(plan, lang)}
+                                    </bdi>
+                                  </dd>
+                                </div>
+                              ))}
+                            </dl>
+                          )}
                         </div>
-                      </th>
-                    );
-                  })}
-                </tr>
-              </thead>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
 
-              {/* Table Body: Grouped Technical Specifications */}
-              <tbody className="divide-y divide-current/5">
-                {TECHNICAL_SPECS.map((group, groupIdx) => (
-                  <React.Fragment key={groupIdx}>
-                    {/* Category Header Row */}
-                    <tr className={isDark ? 'bg-white/[0.04]' : 'bg-slate-100/80'}>
-                      <td
-                        colSpan={activePlans.length + 1}
-                        className="py-3 px-4 sm:px-6 text-xs font-bold font-mono tracking-wider uppercase text-emerald-600 dark:text-emerald-400"
-                      >
-                        {isAr ? group.categoryAr : group.categoryEn}
-                      </td>
-                    </tr>
+        {/* DESKTOP & TABLET VIEW (>=768px) */}
+        <div className="hidden md:block border border-token rounded-xl bg-surface shadow-xs overflow-x-auto relative">
+          <table
+            ref={tableRef}
+            className="w-full text-start border-collapse min-w-[720px]"
+            aria-label={
+              lang === 'ar'
+                ? 'جدول مقارنة مواصفات الخوادم والاستضافة'
+                : 'Hosting and Server Specifications Comparison Table'
+            }
+          >
+            <thead
+              ref={theadRef}
+              data-testid="compare-table-thead"
+              style={
+                stickyOffset > 0
+                  ? {
+                      transform: `translate3d(0, ${stickyOffset}px, 0)`,
+                      position: 'relative',
+                      zIndex: 30,
+                    }
+                  : {
+                      position: 'relative',
+                      zIndex: 20,
+                    }
+              }
+              className="bg-surface border-b-2 border-token transition-shadow"
+            >
+              <tr className="bg-surface">
+                <th
+                  scope="col"
+                  className="p-5 text-start font-bold text-main text-base w-64 sticky start-0 bg-surface z-30 border-e border-token align-bottom"
+                >
+                  <span className="block text-xs font-semibold text-muted mb-1">
+                    {lang === 'ar' ? 'المواصفة الهندسية' : 'Hardware & SLA'}
+                  </span>
+                  <span>{lang === 'ar' ? 'خطة التشغيل' : 'Instance Tier'}</span>
+                </th>
+                {visiblePlans.map((plan) => (
+                  <th
+                    key={plan.id}
+                    scope="col"
+                    className={`p-5 text-center align-top min-w-[165px] transition-colors ${
+                      plan.popular ? 'bg-surface-2' : 'bg-surface'
+                    }`}
+                  >
+                    <div className="flex flex-col items-center justify-between h-full gap-3">
+                      <div className="space-y-1">
+                        {plan.popular ? (
+                          <span className="inline-block px-2.5 py-0.5 rounded bg-accent text-accent-contrast text-xs font-semibold mb-1 whitespace-nowrap">
+                            {lang === 'ar' ? 'الأكثر طلباً' : 'Most Popular'}
+                          </span>
+                        ) : (
+                          <span className="inline-block h-5 mb-1" aria-hidden="true" />
+                        )}
+                        <div className="text-base font-bold text-main">
+                          <bdi dir="ltr" className="ltr-num">
+                            {lang === 'ar' ? plan.nameAr : plan.nameEn}
+                          </bdi>
+                        </div>
+                        <div className="text-xl font-bold text-accent">
+                          <bdi dir="ltr" className="ltr-num">
+                            {formatPrice(plan.monthlyPriceEGP)}
+                          </bdi>
+                          <span className="text-xs font-normal text-muted ms-1">
+                            /{lang === 'ar' ? 'شهرياً' : 'mo'}
+                          </span>
+                        </div>
+                      </div>
 
-                    {/* Individual Spec Rows */}
-                    {group.specs.map((spec, specIdx) => (
-                      <tr
-                        key={specIdx}
-                        className={`transition-colors hover:bg-emerald-500/[0.03] ${
-                          isDark ? 'even:bg-white/[0.01]' : 'even:bg-slate-50/50'
+                      <button
+                        type="button"
+                        onClick={() => handleSelectPlan(plan)}
+                        data-testid={`thead-cta-${plan.id}`}
+                        className={`w-full min-h-[44px] py-2 px-3 text-xs font-semibold whitespace-nowrap rounded-lg transition-colors ${
+                          plan.popular ? 'btn-primary' : 'btn-secondary'
                         }`}
                       >
-                        {/* Spec Name / Label */}
-                        <td className="p-3 sm:p-4 text-xs font-medium text-slate-600 dark:text-slate-300">
-                          {isAr ? spec.labelAr : spec.labelEn}
-                        </td>
-
-                        {/* Values for each active plan */}
-                        {activePlans.map((plan) => {
-                          const val = spec.values[plan.id];
-                          return (
-                            <td
-                              key={plan.id}
-                              className={`p-3 sm:p-4 text-center text-xs border-s ${
-                                isDark ? 'border-white/10' : 'border-slate-200'
-                              } ${
-                                plan.popular
-                                  ? isDark
-                                    ? 'bg-emerald-950/10 font-medium'
-                                    : 'bg-emerald-50/20 font-medium'
-                                  : ''
-                              }`}
-                            >
-                              {typeof val === 'boolean' ? (
-                                val ? (
-                                  <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400">
-                                    <Check className="h-4 w-4" />
-                                  </span>
-                                ) : (
-                                  <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-slate-500/10 text-slate-400">
-                                    <X className="h-3.5 w-3.5" />
-                                  </span>
-                                )
-                              ) : (
-                                <span className="font-medium text-slate-800 dark:text-slate-200">{val}</span>
-                              )}
-                            </td>
-                          );
-                        })}
-                      </tr>
-                    ))}
-                  </React.Fragment>
+                        {lang === 'ar' ? 'طلب الخطة' : 'Configure & Order'}
+                      </button>
+                    </div>
+                  </th>
                 ))}
-              </tbody>
-            </table>
-          </div>
+              </tr>
+            </thead>
 
-          {/* Table Footer Note */}
-          <div
-            className={`p-4 sm:p-5 text-center text-xs border-t ${
-              isDark ? 'border-white/10 text-slate-400 bg-white/[0.01]' : 'border-slate-200 text-slate-500 bg-slate-50'
-            }`}
-          >
-            <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
-              <span className="flex items-center gap-1.5">
-                <Check className="h-4 w-4 text-emerald-500" />
-                <span>{isAr ? 'تسليم وإعداد فوري مع كافة الخطط' : 'Instant Automated Provisioning'}</span>
-              </span>
-              <span className="flex items-center gap-1.5">
-                <ShieldCheck className="h-4 w-4 text-emerald-500" />
-                <span>{isAr ? 'تأمين كامل ضد هجمات حجب الخدمة DDoS' : 'Enterprise DDoS Shield Included'}</span>
-              </span>
-              <span className="flex items-center gap-1.5">
-                <Globe className="h-4 w-4 text-emerald-500" />
-                <span>{isAr ? 'إمكانية النقل والترقية بين الخطط دون انقطاع' : 'Zero-Downtime Live Scale-Up'}</span>
-              </span>
+            <tbody className="divide-y border-token">
+              {specCategories.map((category) => {
+                const isCollapsed = Boolean(collapsedCategories[category.id]);
+                const filteredRows = showDifferencesOnly
+                  ? category.rows.filter(isRowDifferentAcrossVisiblePlans)
+                  : category.rows;
+
+                return (
+                  <React.Fragment key={category.id}>
+                    <tr className="bg-surface-2 border-y border-token">
+                      <th
+                        colSpan={visiblePlans.length + 1}
+                        scope="colgroup"
+                        data-testid={`group-header-${category.id}`}
+                        className="p-0 text-start text-sm font-bold text-main"
+                      >
+                        <button
+                          type="button"
+                          onClick={() => toggleCategoryCollapse(category.id)}
+                          data-testid={`group-toggle-${category.id}`}
+                          aria-expanded={!isCollapsed}
+                          className="w-full py-3.5 px-5 text-start text-sm font-bold text-main flex items-center justify-between gap-3 hover-surface-2 transition-colors"
+                        >
+                          <span>{lang === 'ar' ? category.titleAr : category.titleEn}</span>
+                          <ChevronDown
+                            className={`w-4 h-4 text-muted transition-transform shrink-0 ${
+                              isCollapsed ? '-rotate-90' : ''
+                            }`}
+                          />
+                        </button>
+                      </th>
+                    </tr>
+
+                    {!isCollapsed &&
+                      filteredRows.map((row) => {
+                        const isTooltipOpen = openTooltipId === row.id;
+                        return (
+                          <tr
+                            key={row.id}
+                            data-testid={`spec-row-${row.id}`}
+                            className="bg-surface hover-surface-2 transition-colors border-b border-token"
+                          >
+                            <th
+                              scope="row"
+                              className="p-4 text-start text-sm font-semibold text-main sticky start-0 bg-surface z-10 border-e border-token"
+                            >
+                              <div className="flex items-center justify-between gap-2">
+                                <span>{lang === 'ar' ? row.labelAr : row.labelEn}</span>
+                                <div className="relative shrink-0">
+                                  <button
+                                    type="button"
+                                    onClick={() => setOpenTooltipId(isTooltipOpen ? null : row.id)}
+                                    aria-expanded={isTooltipOpen}
+                                    aria-label={
+                                      lang === 'ar'
+                                        ? `توضيح حول ${row.labelAr}`
+                                        : `More info about ${row.labelEn}`
+                                    }
+                                    className="p-1.5 rounded-md text-muted hover-text-accent transition-colors"
+                                  >
+                                    <HelpCircle className="w-4 h-4" />
+                                  </button>
+                                  {isTooltipOpen && (
+                                    <div
+                                      role="tooltip"
+                                      className="absolute z-40 bottom-full mb-2 start-0 w-64 p-3 rounded-lg bg-surface border border-token shadow-md text-xs font-normal text-main leading-relaxed"
+                                    >
+                                      <div className="flex items-start justify-between gap-2 mb-1">
+                                        <span className="font-bold text-accent">
+                                          {lang === 'ar' ? row.labelAr : row.labelEn}
+                                        </span>
+                                        <button
+                                          type="button"
+                                          onClick={() => setOpenTooltipId(null)}
+                                          aria-label={
+                                            lang === 'ar' ? 'إغلاق التوضيح' : 'Close tooltip'
+                                          }
+                                          className="text-muted hover-text-main"
+                                        >
+                                          <X className="w-3.5 h-3.5" />
+                                        </button>
+                                      </div>
+                                      <p className="text-muted">
+                                        {lang === 'ar' ? row.tooltipAr : row.tooltipEn}
+                                      </p>
+                                    </div>
+                                  )}
+                                </div>
+                              </div>
+                            </th>
+
+                            {visiblePlans.map((plan) => (
+                              <td
+                                key={plan.id}
+                                data-testid={`spec-cell-${row.id}-${plan.id}`}
+                                className={`p-4 text-center text-sm font-medium text-main ${
+                                  plan.popular ? 'bg-surface-2' : ''
+                                }`}
+                              >
+                                <bdi dir="ltr" className="ltr-num font-semibold text-main">
+                                  {row.getValue(plan, lang)}
+                                </bdi>
+                              </td>
+                            ))}
+                          </tr>
+                        );
+                      })}
+                  </React.Fragment>
+                );
+              })}
+            </tbody>
+
+            <tfoot>
+              <tr className="bg-surface border-t-2 border-token">
+                <td className="p-5 font-bold text-main text-sm sticky start-0 bg-surface z-10 border-e border-token">
+                  {lang === 'ar' ? 'التشغيل الفوري' : 'Deployment'}
+                </td>
+                {visiblePlans.map((plan) => (
+                  <td
+                    key={plan.id}
+                    className={`p-5 text-center ${plan.popular ? 'bg-surface-2' : 'bg-surface'}`}
+                  >
+                    <button
+                      type="button"
+                      onClick={() => handleSelectPlan(plan)}
+                      data-testid={`tfoot-cta-${plan.id}`}
+                      className={`w-full min-h-[44px] py-2.5 px-4 text-sm font-semibold whitespace-nowrap rounded-lg transition-colors ${
+                        plan.popular ? 'btn-primary' : 'btn-secondary'
+                      }`}
+                    >
+                      {lang === 'ar' ? 'إعداد وطلب الخادم' : 'Configure & Order'}
+                    </button>
+                  </td>
+                ))}
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+
+      {/* Sticky Compare Bar */}
+      {validSelectedIds.length > 0 && (
+        <div
+          data-testid="sticky-compare-bar"
+          role="region"
+          aria-label={lang === 'ar' ? 'شريط مقارنة الخطط المختارة' : 'Selected plans comparison bar'}
+          className="fixed bottom-4 inset-x-0 z-40 px-4 pointer-events-none"
+        >
+          <div className="container-nuzul">
+            <div className="pointer-events-auto clean-card p-3.5 sm:p-4 bg-surface border-2 border-accent shadow-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+              <div className="flex flex-wrap items-center gap-2">
+                <span
+                  data-testid="sticky-compare-count"
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-accent text-accent-contrast text-xs font-bold whitespace-nowrap"
+                >
+                  <GitCompare className="w-3.5 h-3.5" />
+                  <bdi dir="ltr" className="ltr-num">
+                    {validSelectedIds.length}/3
+                  </bdi>
+                  <span>{lang === 'ar' ? 'خطط للمقارنة' : 'Plans Pinned'}</span>
+                </span>
+
+                {visiblePlans.map((plan) => (
+                  <span
+                    key={plan.id}
+                    data-testid={`sticky-chip-${plan.id}`}
+                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-surface-2 border border-token text-xs font-semibold text-main whitespace-nowrap"
+                  >
+                    <bdi dir="ltr" className="ltr-num">
+                      {lang === 'ar' ? plan.nameAr : plan.nameEn}
+                    </bdi>
+                    <button
+                      type="button"
+                      onClick={() => toggleComparePlan(plan.id)}
+                      aria-label={
+                        lang === 'ar'
+                          ? `إزالة ${plan.nameAr} من المقارنة`
+                          : `Remove ${plan.nameEn} from comparison`
+                      }
+                      className="text-muted hover-text-main p-0.5"
+                    >
+                      <X className="w-3.5 h-3.5" />
+                    </button>
+                  </span>
+                ))}
+              </div>
+
+              <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto justify-end">
+                <button
+                  type="button"
+                  onClick={() => setShowDifferencesOnly(!showDifferencesOnly)}
+                  data-testid="sticky-bar-diff-toggle"
+                  aria-pressed={showDifferencesOnly}
+                  className={`min-h-[44px] px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap border transition-colors ${
+                    showDifferencesOnly
+                      ? 'bg-accent text-accent-contrast border-accent'
+                      : 'bg-page text-main border-token'
+                  }`}
+                >
+                  {lang === 'ar' ? 'إظهار الفروقات فقط' : 'Differences Only'}
+                </button>
+
+                <button
+                  type="button"
+                  onClick={clearComparePlans}
+                  data-testid="clear-compare-btn"
+                  className="min-h-[44px] px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap bg-page text-muted hover-text-main border border-token"
+                >
+                  {lang === 'ar' ? 'إلغاء التحديد' : 'Clear Selection'}
+                </button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </section>
   );
 };

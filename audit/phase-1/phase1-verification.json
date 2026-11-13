@@ -1,0 +1,1512 @@
+{
+  "timestamp": "2026-11-04T13:15:47.389Z",
+  "themePersistence": {
+    "initialWithDarkOS": {
+      "dataTheme": "dark",
+      "dataThemeMode": "system"
+    },
+    "afterLightReload": {
+      "stored": "light",
+      "dataTheme": "light",
+      "dataThemeMode": "light",
+      "colorScheme": "light"
+    },
+    "afterDarkReload": {
+      "stored": "dark",
+      "dataTheme": "dark",
+      "dataThemeMode": "dark",
+      "colorScheme": "dark"
+    },
+    "afterSystemReload": {
+      "stored": "system",
+      "dataTheme": "dark",
+      "dataThemeMode": "system",
+      "colorScheme": "dark"
+    }
+  },
+  "computedTokens": {
+    "light": {
+      "--bg": "#F8FAFC",
+      "--surface": "#FFFFFF",
+      "--surface-2": "#F1F5F9",
+      "--border": "#CBD5E1",
+      "--text": "#0F172A",
+      "--text-muted": "#475569",
+      "--accent": "#0F766E",
+      "--accent-contrast": "#FFFFFF",
+      "--success": "#15803D",
+      "--warning": "#B45309",
+      "--danger": "#B91C1C",
+      "--focus": "#0F766E"
+    },
+    "dark": {
+      "--bg": "#0B0F17",
+      "--surface": "#111827",
+      "--surface-2": "#1E293B",
+      "--border": "#334155",
+      "--text": "#F8FAFC",
+      "--text-muted": "#94A3B8",
+      "--accent": "#2DD4BF",
+      "--accent-contrast": "#042F2E",
+      "--success": "#4ADE80",
+      "--warning": "#FBBF24",
+      "--danger": "#F87171",
+      "--focus": "#2DD4BF"
+    }
+  },
+  "logoVariants": {
+    "lightModeHeaderLogo": "/assets/aistudio/nuzul-clean-light_cf8663fc.svg",
+    "lightModeFooterLogo": "/assets/aistudio/nuzul-clean-dark_0fce6014.svg",
+    "darkModeHeaderLogo": "/assets/aistudio/nuzul-clean-dark_0fce6014.svg",
+    "darkModeFooterLogo": "/assets/aistudio/nuzul-clean-dark_0fce6014.svg"
+  },
+  "tableVerification": {
+    "light": {
+      "stickyHeader": {
+        "tableTopInViewport": -100,
+        "theadTopInViewport": 81,
+        "stickyTransform": "translate3d(0px, 181px, 0px)"
+      },
+      "planHeaderCtas": [
+        {
+          "testId": "thead-cta-shared-cpanel",
+          "className": "w-full min-h-[44px] py-2 px-3 text-xs font-semibold whitespace-nowrap rounded-lg transition-colors btn-secondary",
+          "isFilledPrimary": false,
+          "isSecondary": true
+        },
+        {
+          "testId": "thead-cta-wp-managed",
+          "className": "w-full min-h-[44px] py-2 px-3 text-xs font-semibold whitespace-nowrap rounded-lg transition-colors btn-primary",
+          "isFilledPrimary": true,
+          "isSecondary": false
+        },
+        {
+          "testId": "thead-cta-linux-vps",
+          "className": "w-full min-h-[44px] py-2 px-3 text-xs font-semibold whitespace-nowrap rounded-lg transition-colors btn-secondary",
+          "isFilledPrimary": false,
+          "isSecondary": true
+        },
+        {
+          "testId": "thead-cta-windows-rdp",
+          "className": "w-full min-h-[44px] py-2 px-3 text-xs font-semibold whitespace-nowrap rounded-lg transition-colors btn-secondary",
+          "isFilledPrimary": false,
+          "isSecondary": true
+        }
+      ],
+      "groupHeaders": [
+        {
+          "id": "group-header-compute",
+          "text": "المعالج والذاكرة",
+          "fontFamily": "\"IBM Plex Sans Arabic\", Inter, -apple-system, BlinkMacSystemFont, sans-serif",
+          "color": "rgb(15, 23, 42)",
+          "bg": "rgb(241, 245, 249)",
+          "hasParentheses": false,
+          "isMonospace": false,
+          "contrastRatio": 16.3
+        },
+        {
+          "id": "group-header-storage",
+          "text": "التخزين والنسخ الاحتياطي",
+          "fontFamily": "\"IBM Plex Sans Arabic\", Inter, -apple-system, BlinkMacSystemFont, sans-serif",
+          "color": "rgb(15, 23, 42)",
+          "bg": "rgb(241, 245, 249)",
+          "hasParentheses": false,
+          "isMonospace": false,
+          "contrastRatio": 16.3
+        },
+        {
+          "id": "group-header-network",
+          "text": "الشبكة والحماية",
+          "fontFamily": "\"IBM Plex Sans Arabic\", Inter, -apple-system, BlinkMacSystemFont, sans-serif",
+          "color": "rgb(15, 23, 42)",
+          "bg": "rgb(241, 245, 249)",
+          "hasParentheses": false,
+          "isMonospace": false,
+          "contrastRatio": 16.3
+        },
+        {
+          "id": "group-header-management",
+          "text": "الإدارة والدعم",
+          "fontFamily": "\"IBM Plex Sans Arabic\", Inter, -apple-system, BlinkMacSystemFont, sans-serif",
+          "color": "rgb(15, 23, 42)",
+          "bg": "rgb(241, 245, 249)",
+          "hasParentheses": false,
+          "isMonospace": false,
+          "contrastRatio": 16.3
+        },
+        {
+          "id": "group-header-sla",
+          "text": "اتفاقية مستوى الخدمة",
+          "fontFamily": "\"IBM Plex Sans Arabic\", Inter, -apple-system, BlinkMacSystemFont, sans-serif",
+          "color": "rgb(15, 23, 42)",
+          "bg": "rgb(241, 245, 249)",
+          "hasParentheses": false,
+          "isMonospace": false,
+          "contrastRatio": 16.3
+        }
+      ],
+      "minGroupHeaderContrast": 16.3,
+      "minRowLabelContrast": 17.85,
+      "minSpecCellContrast": 16.3,
+      "sampleSpecCells": [
+        {
+          "testId": "spec-cell-vcpu-shared-cpanel",
+          "text": "1 vCPU Shared",
+          "hasBdiLtr": true,
+          "unicodeBidi": "isolate",
+          "direction": "ltr",
+          "color": "rgb(15, 23, 42)",
+          "bg": "rgb(255, 255, 255)",
+          "contrastRatio": 17.85
+        },
+        {
+          "testId": "spec-cell-vcpu-wp-managed",
+          "text": "2 vCPU Shared",
+          "hasBdiLtr": true,
+          "unicodeBidi": "isolate",
+          "direction": "ltr",
+          "color": "rgb(15, 23, 42)",
+          "bg": "rgb(241, 245, 249)",
+          "contrastRatio": 16.3
+        },
+        {
+          "testId": "spec-cell-vcpu-linux-vps",
+          "text": "2 vCPU Dedicated",
+          "hasBdiLtr": true,
+          "unicodeBidi": "isolate",
+          "direction": "ltr",
+          "color": "rgb(15, 23, 42)",
+          "bg": "rgb(255, 255, 255)",
+          "contrastRatio": 17.85
+        },
+        {
+          "testId": "spec-cell-vcpu-windows-rdp",
+          "text": "4 vCPU Dedicated",
+          "hasBdiLtr": true,
+          "unicodeBidi": "isolate",
+          "direction": "ltr",
+          "color": "rgb(15, 23, 42)",
+          "bg": "rgb(255, 255, 255)",
+          "contrastRatio": 17.85
+        },
+        {
+          "testId": "spec-cell-ram-shared-cpanel",
+          "text": "2 GB DDR4 RAM",
+          "hasBdiLtr": true,
+          "unicodeBidi": "isolate",
+          "direction": "ltr",
+          "color": "rgb(15, 23, 42)",
+          "bg": "rgb(255, 255, 255)",
+          "contrastRatio": 17.85
+        },
+        {
+          "testId": "spec-cell-ram-wp-managed",
+          "text": "4 GB DDR4 RAM",
+          "hasBdiLtr": true,
+          "unicodeBidi": "isolate",
+          "direction": "ltr",
+          "color": "rgb(15, 23, 42)",
+          "bg": "rgb(241, 245, 249)",
+          "contrastRatio": 16.3
+        },
+        {
+          "testId": "spec-cell-ram-linux-vps",
+          "text": "4 GB DDR4 ECC",
+          "hasBdiLtr": true,
+          "unicodeBidi": "isolate",
+          "direction": "ltr",
+          "color": "rgb(15, 23, 42)",
+          "bg": "rgb(255, 255, 255)",
+          "contrastRatio": 17.85
+        },
+        {
+          "testId": "spec-cell-ram-windows-rdp",
+          "text": "8 GB DDR4 ECC",
+          "hasBdiLtr": true,
+          "unicodeBidi": "isolate",
+          "direction": "ltr",
+          "color": "rgb(15, 23, 42)",
+          "bg": "rgb(255, 255, 255)",
+          "contrastRatio": 17.85
+        },
+        {
+          "testId": "spec-cell-isolation-shared-cpanel",
+          "text": "1 LVE Container",
+          "hasBdiLtr": true,
+          "unicodeBidi": "isolate",
+          "direction": "ltr",
+          "color": "rgb(15, 23, 42)",
+          "bg": "rgb(255, 255, 255)",
+          "contrastRatio": 17.85
+        },
+        {
+          "testId": "spec-cell-isolation-wp-managed",
+          "text": "1 LSCache Container",
+          "hasBdiLtr": true,
+          "unicodeBidi": "isolate",
+          "direction": "ltr",
+          "color": "rgb(15, 23, 42)",
+          "bg": "rgb(241, 245, 249)",
+          "contrastRatio": 16.3
+        },
+        {
+          "testId": "spec-cell-isolation-linux-vps",
+          "text": "1 KVM Hypervisor",
+          "hasBdiLtr": true,
+          "unicodeBidi": "isolate",
+          "direction": "ltr",
+          "color": "rgb(15, 23, 42)",
+          "bg": "rgb(255, 255, 255)",
+          "contrastRatio": 17.85
+        },
+        {
+          "testId": "spec-cell-isolation-windows-rdp",
+          "text": "1 KVM Hypervisor",
+          "hasBdiLtr": true,
+          "unicodeBidi": "isolate",
+          "direction": "ltr",
+          "color": "rgb(15, 23, 42)",
+          "bg": "rgb(255, 255, 255)",
+          "contrastRatio": 17.85
+        },
+        {
+          "testId": "spec-cell-nvme-shared-cpanel",
+          "text": "25 GB NVMe",
+          "hasBdiLtr": true,
+          "unicodeBidi": "isolate",
+          "direction": "ltr",
+          "color": "rgb(15, 23, 42)",
+          "bg": "rgb(255, 255, 255)",
+          "contrastRatio": 17.85
+        },
+        {
+          "testId": "spec-cell-nvme-wp-managed",
+          "text": "40 GB NVMe",
+          "hasBdiLtr": true,
+          "unicodeBidi": "isolate",
+          "direction": "ltr",
+          "color": "rgb(15, 23, 42)",
+          "bg": "rgb(241, 245, 249)",
+          "contrastRatio": 16.3
+        },
+        {
+          "testId": "spec-cell-nvme-linux-vps",
+          "text": "60 GB NVMe",
+          "hasBdiLtr": true,
+          "unicodeBidi": "isolate",
+          "direction": "ltr",
+          "color": "rgb(15, 23, 42)",
+          "bg": "rgb(255, 255, 255)",
+          "contrastRatio": 17.85
+        },
+        {
+          "testId": "spec-cell-nvme-windows-rdp",
+          "text": "100 GB NVMe",
+          "hasBdiLtr": true,
+          "unicodeBidi": "isolate",
+          "direction": "ltr",
+          "color": "rgb(15, 23, 42)",
+          "bg": "rgb(255, 255, 255)",
+          "contrastRatio": 17.85
+        }
+      ]
+    },
+    "dark": {
+      "stickyHeader": {
+        "tableTopInViewport": -100,
+        "theadTopInViewport": 81,
+        "stickyTransform": "translate3d(0px, 181px, 0px)"
+      },
+      "planHeaderCtas": [
+        {
+          "testId": "thead-cta-shared-cpanel",
+          "className": "w-full min-h-[44px] py-2 px-3 text-xs font-semibold whitespace-nowrap rounded-lg transition-colors btn-secondary",
+          "isFilledPrimary": false,
+          "isSecondary": true
+        },
+        {
+          "testId": "thead-cta-wp-managed",
+          "className": "w-full min-h-[44px] py-2 px-3 text-xs font-semibold whitespace-nowrap rounded-lg transition-colors btn-primary",
+          "isFilledPrimary": true,
+          "isSecondary": false
+        },
+        {
+          "testId": "thead-cta-linux-vps",
+          "className": "w-full min-h-[44px] py-2 px-3 text-xs font-semibold whitespace-nowrap rounded-lg transition-colors btn-secondary",
+          "isFilledPrimary": false,
+          "isSecondary": true
+        },
+        {
+          "testId": "thead-cta-windows-rdp",
+          "className": "w-full min-h-[44px] py-2 px-3 text-xs font-semibold whitespace-nowrap rounded-lg transition-colors btn-secondary",
+          "isFilledPrimary": false,
+          "isSecondary": true
+        }
+      ],
+      "groupHeaders": [
+        {
+          "id": "group-header-compute",
+          "text": "المعالج والذاكرة",
+          "fontFamily": "\"IBM Plex Sans Arabic\", Inter, -apple-system, BlinkMacSystemFont, sans-serif",
+          "color": "rgb(248, 250, 252)",
+          "bg": "rgb(30, 41, 59)",
+          "hasParentheses": false,
+          "isMonospace": false,
+          "contrastRatio": 13.98
+        },
+        {
+          "id": "group-header-storage",
+          "text": "التخزين والنسخ الاحتياطي",
+          "fontFamily": "\"IBM Plex Sans Arabic\", Inter, -apple-system, BlinkMacSystemFont, sans-serif",
+          "color": "rgb(248, 250, 252)",
+          "bg": "rgb(30, 41, 59)",
+          "hasParentheses": false,
+          "isMonospace": false,
+          "contrastRatio": 13.98
+        },
+        {
+          "id": "group-header-network",
+          "text": "الشبكة والحماية",
+          "fontFamily": "\"IBM Plex Sans Arabic\", Inter, -apple-system, BlinkMacSystemFont, sans-serif",
+          "color": "rgb(248, 250, 252)",
+          "bg": "rgb(30, 41, 59)",
+          "hasParentheses": false,
+          "isMonospace": false,
+          "contrastRatio": 13.98
+        },
+        {
+          "id": "group-header-management",
+          "text": "الإدارة والدعم",
+          "fontFamily": "\"IBM Plex Sans Arabic\", Inter, -apple-system, BlinkMacSystemFont, sans-serif",
+          "color": "rgb(248, 250, 252)",
+          "bg": "rgb(30, 41, 59)",
+          "hasParentheses": false,
+          "isMonospace": false,
+          "contrastRatio": 13.98
+        },
+        {
+          "id": "group-header-sla",
+          "text": "اتفاقية مستوى الخدمة",
+          "fontFamily": "\"IBM Plex Sans Arabic\", Inter, -apple-system, BlinkMacSystemFont, sans-serif",
+          "color": "rgb(248, 250, 252)",
+          "bg": "rgb(30, 41, 59)",
+          "hasParentheses": false,
+          "isMonospace": false,
+          "contrastRatio": 13.98
+        }
+      ],
+      "minGroupHeaderContrast": 13.98,
+      "minRowLabelContrast": 16.96,
+      "minSpecCellContrast": 13.98,
+      "sampleSpecCells": [
+        {
+          "testId": "spec-cell-vcpu-shared-cpanel",
+          "text": "1 vCPU Shared",
+          "hasBdiLtr": true,
+          "unicodeBidi": "isolate",
+          "direction": "ltr",
+          "color": "rgb(248, 250, 252)",
+          "bg": "rgb(17, 24, 39)",
+          "contrastRatio": 16.96
+        },
+        {
+          "testId": "spec-cell-vcpu-wp-managed",
+          "text": "2 vCPU Shared",
+          "hasBdiLtr": true,
+          "unicodeBidi": "isolate",
+          "direction": "ltr",
+          "color": "rgb(248, 250, 252)",
+          "bg": "rgb(30, 41, 59)",
+          "contrastRatio": 13.98
+        },
+        {
+          "testId": "spec-cell-vcpu-linux-vps",
+          "text": "2 vCPU Dedicated",
+          "hasBdiLtr": true,
+          "unicodeBidi": "isolate",
+          "direction": "ltr",
+          "color": "rgb(248, 250, 252)",
+          "bg": "rgb(17, 24, 39)",
+          "contrastRatio": 16.96
+        },
+        {
+          "testId": "spec-cell-vcpu-windows-rdp",
+          "text": "4 vCPU Dedicated",
+          "hasBdiLtr": true,
+          "unicodeBidi": "isolate",
+          "direction": "ltr",
+          "color": "rgb(248, 250, 252)",
+          "bg": "rgb(17, 24, 39)",
+          "contrastRatio": 16.96
+        },
+        {
+          "testId": "spec-cell-ram-shared-cpanel",
+          "text": "2 GB DDR4 RAM",
+          "hasBdiLtr": true,
+          "unicodeBidi": "isolate",
+          "direction": "ltr",
+          "color": "rgb(248, 250, 252)",
+          "bg": "rgb(17, 24, 39)",
+          "contrastRatio": 16.96
+        },
+        {
+          "testId": "spec-cell-ram-wp-managed",
+          "text": "4 GB DDR4 RAM",
+          "hasBdiLtr": true,
+          "unicodeBidi": "isolate",
+          "direction": "ltr",
+          "color": "rgb(248, 250, 252)",
+          "bg": "rgb(30, 41, 59)",
+          "contrastRatio": 13.98
+        },
+        {
+          "testId": "spec-cell-ram-linux-vps",
+          "text": "4 GB DDR4 ECC",
+          "hasBdiLtr": true,
+          "unicodeBidi": "isolate",
+          "direction": "ltr",
+          "color": "rgb(248, 250, 252)",
+          "bg": "rgb(17, 24, 39)",
+          "contrastRatio": 16.96
+        },
+        {
+          "testId": "spec-cell-ram-windows-rdp",
+          "text": "8 GB DDR4 ECC",
+          "hasBdiLtr": true,
+          "unicodeBidi": "isolate",
+          "direction": "ltr",
+          "color": "rgb(248, 250, 252)",
+          "bg": "rgb(17, 24, 39)",
+          "contrastRatio": 16.96
+        },
+        {
+          "testId": "spec-cell-isolation-shared-cpanel",
+          "text": "1 LVE Container",
+          "hasBdiLtr": true,
+          "unicodeBidi": "isolate",
+          "direction": "ltr",
+          "color": "rgb(248, 250, 252)",
+          "bg": "rgb(17, 24, 39)",
+          "contrastRatio": 16.96
+        },
+        {
+          "testId": "spec-cell-isolation-wp-managed",
+          "text": "1 LSCache Container",
+          "hasBdiLtr": true,
+          "unicodeBidi": "isolate",
+          "direction": "ltr",
+          "color": "rgb(248, 250, 252)",
+          "bg": "rgb(30, 41, 59)",
+          "contrastRatio": 13.98
+        },
+        {
+          "testId": "spec-cell-isolation-linux-vps",
+          "text": "1 KVM Hypervisor",
+          "hasBdiLtr": true,
+          "unicodeBidi": "isolate",
+          "direction": "ltr",
+          "color": "rgb(248, 250, 252)",
+          "bg": "rgb(17, 24, 39)",
+          "contrastRatio": 16.96
+        },
+        {
+          "testId": "spec-cell-isolation-windows-rdp",
+          "text": "1 KVM Hypervisor",
+          "hasBdiLtr": true,
+          "unicodeBidi": "isolate",
+          "direction": "ltr",
+          "color": "rgb(248, 250, 252)",
+          "bg": "rgb(17, 24, 39)",
+          "contrastRatio": 16.96
+        },
+        {
+          "testId": "spec-cell-nvme-shared-cpanel",
+          "text": "25 GB NVMe",
+          "hasBdiLtr": true,
+          "unicodeBidi": "isolate",
+          "direction": "ltr",
+          "color": "rgb(248, 250, 252)",
+          "bg": "rgb(17, 24, 39)",
+          "contrastRatio": 16.96
+        },
+        {
+          "testId": "spec-cell-nvme-wp-managed",
+          "text": "40 GB NVMe",
+          "hasBdiLtr": true,
+          "unicodeBidi": "isolate",
+          "direction": "ltr",
+          "color": "rgb(248, 250, 252)",
+          "bg": "rgb(30, 41, 59)",
+          "contrastRatio": 13.98
+        },
+        {
+          "testId": "spec-cell-nvme-linux-vps",
+          "text": "60 GB NVMe",
+          "hasBdiLtr": true,
+          "unicodeBidi": "isolate",
+          "direction": "ltr",
+          "color": "rgb(248, 250, 252)",
+          "bg": "rgb(17, 24, 39)",
+          "contrastRatio": 16.96
+        },
+        {
+          "testId": "spec-cell-nvme-windows-rdp",
+          "text": "100 GB NVMe",
+          "hasBdiLtr": true,
+          "unicodeBidi": "isolate",
+          "direction": "ltr",
+          "color": "rgb(248, 250, 252)",
+          "bg": "rgb(17, 24, 39)",
+          "contrastRatio": 16.96
+        }
+      ]
+    }
+  },
+  "axeSummary": [
+    {
+      "route": "/",
+      "routeName": "home",
+      "theme": "light",
+      "totalViolations": 0,
+      "contrastViolationsCount": 0,
+      "violations": []
+    },
+    {
+      "route": "/services",
+      "routeName": "services",
+      "theme": "light",
+      "totalViolations": 0,
+      "contrastViolationsCount": 0,
+      "violations": []
+    },
+    {
+      "route": "/services/service-1",
+      "routeName": "services-slug",
+      "theme": "light",
+      "totalViolations": 0,
+      "contrastViolationsCount": 0,
+      "violations": []
+    },
+    {
+      "route": "/pricing",
+      "routeName": "pricing",
+      "theme": "light",
+      "totalViolations": 0,
+      "contrastViolationsCount": 0,
+      "violations": []
+    },
+    {
+      "route": "/hosting",
+      "routeName": "hosting",
+      "theme": "light",
+      "totalViolations": 0,
+      "contrastViolationsCount": 0,
+      "violations": []
+    },
+    {
+      "route": "/case-studies",
+      "routeName": "case-studies",
+      "theme": "light",
+      "totalViolations": 0,
+      "contrastViolationsCount": 0,
+      "violations": []
+    },
+    {
+      "route": "/case-studies/case-1",
+      "routeName": "case-studies-slug",
+      "theme": "light",
+      "totalViolations": 0,
+      "contrastViolationsCount": 0,
+      "violations": []
+    },
+    {
+      "route": "/blog",
+      "routeName": "blog",
+      "theme": "light",
+      "totalViolations": 0,
+      "contrastViolationsCount": 0,
+      "violations": []
+    },
+    {
+      "route": "/blog/immutable-cloud-backup-ransomware-protection",
+      "routeName": "blog-slug",
+      "theme": "light",
+      "totalViolations": 0,
+      "contrastViolationsCount": 0,
+      "violations": []
+    },
+    {
+      "route": "/contact",
+      "routeName": "contact",
+      "theme": "light",
+      "totalViolations": 0,
+      "contrastViolationsCount": 0,
+      "violations": []
+    },
+    {
+      "route": "/",
+      "routeName": "home",
+      "theme": "dark",
+      "totalViolations": 0,
+      "contrastViolationsCount": 0,
+      "violations": []
+    },
+    {
+      "route": "/services",
+      "routeName": "services",
+      "theme": "dark",
+      "totalViolations": 0,
+      "contrastViolationsCount": 0,
+      "violations": []
+    },
+    {
+      "route": "/services/service-1",
+      "routeName": "services-slug",
+      "theme": "dark",
+      "totalViolations": 0,
+      "contrastViolationsCount": 0,
+      "violations": []
+    },
+    {
+      "route": "/pricing",
+      "routeName": "pricing",
+      "theme": "dark",
+      "totalViolations": 0,
+      "contrastViolationsCount": 0,
+      "violations": []
+    },
+    {
+      "route": "/hosting",
+      "routeName": "hosting",
+      "theme": "dark",
+      "totalViolations": 0,
+      "contrastViolationsCount": 0,
+      "violations": []
+    },
+    {
+      "route": "/case-studies",
+      "routeName": "case-studies",
+      "theme": "dark",
+      "totalViolations": 0,
+      "contrastViolationsCount": 0,
+      "violations": []
+    },
+    {
+      "route": "/case-studies/case-1",
+      "routeName": "case-studies-slug",
+      "theme": "dark",
+      "totalViolations": 0,
+      "contrastViolationsCount": 0,
+      "violations": []
+    },
+    {
+      "route": "/blog",
+      "routeName": "blog",
+      "theme": "dark",
+      "totalViolations": 0,
+      "contrastViolationsCount": 0,
+      "violations": []
+    },
+    {
+      "route": "/blog/immutable-cloud-backup-ransomware-protection",
+      "routeName": "blog-slug",
+      "theme": "dark",
+      "totalViolations": 0,
+      "contrastViolationsCount": 0,
+      "violations": []
+    },
+    {
+      "route": "/contact",
+      "routeName": "contact",
+      "theme": "dark",
+      "totalViolations": 0,
+      "contrastViolationsCount": 0,
+      "violations": []
+    }
+  ],
+  "routeMatrix": [
+    {
+      "route": "/",
+      "routeName": "home",
+      "theme": "light",
+      "viewport": 375,
+      "screenshot": "/audit/phase-1/home-light-375px-rtl.png",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "light",
+      "h1Count": 1,
+      "hasProxmox": false,
+      "hasTbps": false
+    },
+    {
+      "route": "/services",
+      "routeName": "services",
+      "theme": "light",
+      "viewport": 375,
+      "screenshot": "/audit/phase-1/services-light-375px-rtl.png",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "light",
+      "h1Count": 1,
+      "hasProxmox": false,
+      "hasTbps": false
+    },
+    {
+      "route": "/services/service-1",
+      "routeName": "services-slug",
+      "theme": "light",
+      "viewport": 375,
+      "screenshot": "/audit/phase-1/services-slug-light-375px-rtl.png",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "light",
+      "h1Count": 1,
+      "hasProxmox": false,
+      "hasTbps": false
+    },
+    {
+      "route": "/pricing",
+      "routeName": "pricing",
+      "theme": "light",
+      "viewport": 375,
+      "screenshot": "/audit/phase-1/pricing-light-375px-rtl.png",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "light",
+      "h1Count": 1,
+      "hasProxmox": false,
+      "hasTbps": false
+    },
+    {
+      "route": "/hosting",
+      "routeName": "hosting",
+      "theme": "light",
+      "viewport": 375,
+      "screenshot": "/audit/phase-1/hosting-light-375px-rtl.png",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "light",
+      "h1Count": 1,
+      "hasProxmox": false,
+      "hasTbps": false
+    },
+    {
+      "route": "/case-studies",
+      "routeName": "case-studies",
+      "theme": "light",
+      "viewport": 375,
+      "screenshot": "/audit/phase-1/case-studies-light-375px-rtl.png",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "light",
+      "h1Count": 1,
+      "hasProxmox": false,
+      "hasTbps": false
+    },
+    {
+      "route": "/case-studies/case-1",
+      "routeName": "case-studies-slug",
+      "theme": "light",
+      "viewport": 375,
+      "screenshot": "/audit/phase-1/case-studies-slug-light-375px-rtl.png",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "light",
+      "h1Count": 1,
+      "hasProxmox": false,
+      "hasTbps": false
+    },
+    {
+      "route": "/blog",
+      "routeName": "blog",
+      "theme": "light",
+      "viewport": 375,
+      "screenshot": "/audit/phase-1/blog-light-375px-rtl.png",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "light",
+      "h1Count": 1,
+      "hasProxmox": false,
+      "hasTbps": false
+    },
+    {
+      "route": "/blog/immutable-cloud-backup-ransomware-protection",
+      "routeName": "blog-slug",
+      "theme": "light",
+      "viewport": 375,
+      "screenshot": "/audit/phase-1/blog-slug-light-375px-rtl.png",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "light",
+      "h1Count": 1,
+      "hasProxmox": false,
+      "hasTbps": false
+    },
+    {
+      "route": "/contact",
+      "routeName": "contact",
+      "theme": "light",
+      "viewport": 375,
+      "screenshot": "/audit/phase-1/contact-light-375px-rtl.png",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "light",
+      "h1Count": 1,
+      "hasProxmox": false,
+      "hasTbps": false
+    },
+    {
+      "route": "/",
+      "routeName": "home",
+      "theme": "light",
+      "viewport": 768,
+      "screenshot": "/audit/phase-1/home-light-768px-rtl.png",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "light",
+      "h1Count": 1,
+      "hasProxmox": false,
+      "hasTbps": false
+    },
+    {
+      "route": "/services",
+      "routeName": "services",
+      "theme": "light",
+      "viewport": 768,
+      "screenshot": "/audit/phase-1/services-light-768px-rtl.png",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "light",
+      "h1Count": 1,
+      "hasProxmox": false,
+      "hasTbps": false
+    },
+    {
+      "route": "/services/service-1",
+      "routeName": "services-slug",
+      "theme": "light",
+      "viewport": 768,
+      "screenshot": "/audit/phase-1/services-slug-light-768px-rtl.png",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "light",
+      "h1Count": 1,
+      "hasProxmox": false,
+      "hasTbps": false
+    },
+    {
+      "route": "/pricing",
+      "routeName": "pricing",
+      "theme": "light",
+      "viewport": 768,
+      "screenshot": "/audit/phase-1/pricing-light-768px-rtl.png",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "light",
+      "h1Count": 1,
+      "hasProxmox": false,
+      "hasTbps": false
+    },
+    {
+      "route": "/hosting",
+      "routeName": "hosting",
+      "theme": "light",
+      "viewport": 768,
+      "screenshot": "/audit/phase-1/hosting-light-768px-rtl.png",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "light",
+      "h1Count": 1,
+      "hasProxmox": false,
+      "hasTbps": false
+    },
+    {
+      "route": "/case-studies",
+      "routeName": "case-studies",
+      "theme": "light",
+      "viewport": 768,
+      "screenshot": "/audit/phase-1/case-studies-light-768px-rtl.png",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "light",
+      "h1Count": 1,
+      "hasProxmox": false,
+      "hasTbps": false
+    },
+    {
+      "route": "/case-studies/case-1",
+      "routeName": "case-studies-slug",
+      "theme": "light",
+      "viewport": 768,
+      "screenshot": "/audit/phase-1/case-studies-slug-light-768px-rtl.png",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "light",
+      "h1Count": 1,
+      "hasProxmox": false,
+      "hasTbps": false
+    },
+    {
+      "route": "/blog",
+      "routeName": "blog",
+      "theme": "light",
+      "viewport": 768,
+      "screenshot": "/audit/phase-1/blog-light-768px-rtl.png",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "light",
+      "h1Count": 1,
+      "hasProxmox": false,
+      "hasTbps": false
+    },
+    {
+      "route": "/blog/immutable-cloud-backup-ransomware-protection",
+      "routeName": "blog-slug",
+      "theme": "light",
+      "viewport": 768,
+      "screenshot": "/audit/phase-1/blog-slug-light-768px-rtl.png",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "light",
+      "h1Count": 1,
+      "hasProxmox": false,
+      "hasTbps": false
+    },
+    {
+      "route": "/contact",
+      "routeName": "contact",
+      "theme": "light",
+      "viewport": 768,
+      "screenshot": "/audit/phase-1/contact-light-768px-rtl.png",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "light",
+      "h1Count": 1,
+      "hasProxmox": false,
+      "hasTbps": false
+    },
+    {
+      "route": "/",
+      "routeName": "home",
+      "theme": "light",
+      "viewport": 1440,
+      "screenshot": "/audit/phase-1/home-light-1440px-rtl.png",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "light",
+      "h1Count": 1,
+      "hasProxmox": false,
+      "hasTbps": false
+    },
+    {
+      "route": "/services",
+      "routeName": "services",
+      "theme": "light",
+      "viewport": 1440,
+      "screenshot": "/audit/phase-1/services-light-1440px-rtl.png",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "light",
+      "h1Count": 1,
+      "hasProxmox": false,
+      "hasTbps": false
+    },
+    {
+      "route": "/services/service-1",
+      "routeName": "services-slug",
+      "theme": "light",
+      "viewport": 1440,
+      "screenshot": "/audit/phase-1/services-slug-light-1440px-rtl.png",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "light",
+      "h1Count": 1,
+      "hasProxmox": false,
+      "hasTbps": false
+    },
+    {
+      "route": "/pricing",
+      "routeName": "pricing",
+      "theme": "light",
+      "viewport": 1440,
+      "screenshot": "/audit/phase-1/pricing-light-1440px-rtl.png",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "light",
+      "h1Count": 1,
+      "hasProxmox": false,
+      "hasTbps": false
+    },
+    {
+      "route": "/hosting",
+      "routeName": "hosting",
+      "theme": "light",
+      "viewport": 1440,
+      "screenshot": "/audit/phase-1/hosting-light-1440px-rtl.png",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "light",
+      "h1Count": 1,
+      "hasProxmox": false,
+      "hasTbps": false
+    },
+    {
+      "route": "/case-studies",
+      "routeName": "case-studies",
+      "theme": "light",
+      "viewport": 1440,
+      "screenshot": "/audit/phase-1/case-studies-light-1440px-rtl.png",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "light",
+      "h1Count": 1,
+      "hasProxmox": false,
+      "hasTbps": false
+    },
+    {
+      "route": "/case-studies/case-1",
+      "routeName": "case-studies-slug",
+      "theme": "light",
+      "viewport": 1440,
+      "screenshot": "/audit/phase-1/case-studies-slug-light-1440px-rtl.png",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "light",
+      "h1Count": 1,
+      "hasProxmox": false,
+      "hasTbps": false
+    },
+    {
+      "route": "/blog",
+      "routeName": "blog",
+      "theme": "light",
+      "viewport": 1440,
+      "screenshot": "/audit/phase-1/blog-light-1440px-rtl.png",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "light",
+      "h1Count": 1,
+      "hasProxmox": false,
+      "hasTbps": false
+    },
+    {
+      "route": "/blog/immutable-cloud-backup-ransomware-protection",
+      "routeName": "blog-slug",
+      "theme": "light",
+      "viewport": 1440,
+      "screenshot": "/audit/phase-1/blog-slug-light-1440px-rtl.png",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "light",
+      "h1Count": 1,
+      "hasProxmox": false,
+      "hasTbps": false
+    },
+    {
+      "route": "/contact",
+      "routeName": "contact",
+      "theme": "light",
+      "viewport": 1440,
+      "screenshot": "/audit/phase-1/contact-light-1440px-rtl.png",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "light",
+      "h1Count": 1,
+      "hasProxmox": false,
+      "hasTbps": false
+    },
+    {
+      "route": "/",
+      "routeName": "home",
+      "theme": "dark",
+      "viewport": 375,
+      "screenshot": "/audit/phase-1/home-dark-375px-rtl.png",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "dark",
+      "h1Count": 1,
+      "hasProxmox": false,
+      "hasTbps": false
+    },
+    {
+      "route": "/services",
+      "routeName": "services",
+      "theme": "dark",
+      "viewport": 375,
+      "screenshot": "/audit/phase-1/services-dark-375px-rtl.png",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "dark",
+      "h1Count": 1,
+      "hasProxmox": false,
+      "hasTbps": false
+    },
+    {
+      "route": "/services/service-1",
+      "routeName": "services-slug",
+      "theme": "dark",
+      "viewport": 375,
+      "screenshot": "/audit/phase-1/services-slug-dark-375px-rtl.png",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "dark",
+      "h1Count": 1,
+      "hasProxmox": false,
+      "hasTbps": false
+    },
+    {
+      "route": "/pricing",
+      "routeName": "pricing",
+      "theme": "dark",
+      "viewport": 375,
+      "screenshot": "/audit/phase-1/pricing-dark-375px-rtl.png",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "dark",
+      "h1Count": 1,
+      "hasProxmox": false,
+      "hasTbps": false
+    },
+    {
+      "route": "/hosting",
+      "routeName": "hosting",
+      "theme": "dark",
+      "viewport": 375,
+      "screenshot": "/audit/phase-1/hosting-dark-375px-rtl.png",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "dark",
+      "h1Count": 1,
+      "hasProxmox": false,
+      "hasTbps": false
+    },
+    {
+      "route": "/case-studies",
+      "routeName": "case-studies",
+      "theme": "dark",
+      "viewport": 375,
+      "screenshot": "/audit/phase-1/case-studies-dark-375px-rtl.png",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "dark",
+      "h1Count": 1,
+      "hasProxmox": false,
+      "hasTbps": false
+    },
+    {
+      "route": "/case-studies/case-1",
+      "routeName": "case-studies-slug",
+      "theme": "dark",
+      "viewport": 375,
+      "screenshot": "/audit/phase-1/case-studies-slug-dark-375px-rtl.png",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "dark",
+      "h1Count": 1,
+      "hasProxmox": false,
+      "hasTbps": false
+    },
+    {
+      "route": "/blog",
+      "routeName": "blog",
+      "theme": "dark",
+      "viewport": 375,
+      "screenshot": "/audit/phase-1/blog-dark-375px-rtl.png",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "dark",
+      "h1Count": 1,
+      "hasProxmox": false,
+      "hasTbps": false
+    },
+    {
+      "route": "/blog/immutable-cloud-backup-ransomware-protection",
+      "routeName": "blog-slug",
+      "theme": "dark",
+      "viewport": 375,
+      "screenshot": "/audit/phase-1/blog-slug-dark-375px-rtl.png",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "dark",
+      "h1Count": 1,
+      "hasProxmox": false,
+      "hasTbps": false
+    },
+    {
+      "route": "/contact",
+      "routeName": "contact",
+      "theme": "dark",
+      "viewport": 375,
+      "screenshot": "/audit/phase-1/contact-dark-375px-rtl.png",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "dark",
+      "h1Count": 1,
+      "hasProxmox": false,
+      "hasTbps": false
+    },
+    {
+      "route": "/",
+      "routeName": "home",
+      "theme": "dark",
+      "viewport": 768,
+      "screenshot": "/audit/phase-1/home-dark-768px-rtl.png",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "dark",
+      "h1Count": 1,
+      "hasProxmox": false,
+      "hasTbps": false
+    },
+    {
+      "route": "/services",
+      "routeName": "services",
+      "theme": "dark",
+      "viewport": 768,
+      "screenshot": "/audit/phase-1/services-dark-768px-rtl.png",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "dark",
+      "h1Count": 1,
+      "hasProxmox": false,
+      "hasTbps": false
+    },
+    {
+      "route": "/services/service-1",
+      "routeName": "services-slug",
+      "theme": "dark",
+      "viewport": 768,
+      "screenshot": "/audit/phase-1/services-slug-dark-768px-rtl.png",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "dark",
+      "h1Count": 1,
+      "hasProxmox": false,
+      "hasTbps": false
+    },
+    {
+      "route": "/pricing",
+      "routeName": "pricing",
+      "theme": "dark",
+      "viewport": 768,
+      "screenshot": "/audit/phase-1/pricing-dark-768px-rtl.png",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "dark",
+      "h1Count": 1,
+      "hasProxmox": false,
+      "hasTbps": false
+    },
+    {
+      "route": "/hosting",
+      "routeName": "hosting",
+      "theme": "dark",
+      "viewport": 768,
+      "screenshot": "/audit/phase-1/hosting-dark-768px-rtl.png",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "dark",
+      "h1Count": 1,
+      "hasProxmox": false,
+      "hasTbps": false
+    },
+    {
+      "route": "/case-studies",
+      "routeName": "case-studies",
+      "theme": "dark",
+      "viewport": 768,
+      "screenshot": "/audit/phase-1/case-studies-dark-768px-rtl.png",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "dark",
+      "h1Count": 1,
+      "hasProxmox": false,
+      "hasTbps": false
+    },
+    {
+      "route": "/case-studies/case-1",
+      "routeName": "case-studies-slug",
+      "theme": "dark",
+      "viewport": 768,
+      "screenshot": "/audit/phase-1/case-studies-slug-dark-768px-rtl.png",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "dark",
+      "h1Count": 1,
+      "hasProxmox": false,
+      "hasTbps": false
+    },
+    {
+      "route": "/blog",
+      "routeName": "blog",
+      "theme": "dark",
+      "viewport": 768,
+      "screenshot": "/audit/phase-1/blog-dark-768px-rtl.png",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "dark",
+      "h1Count": 1,
+      "hasProxmox": false,
+      "hasTbps": false
+    },
+    {
+      "route": "/blog/immutable-cloud-backup-ransomware-protection",
+      "routeName": "blog-slug",
+      "theme": "dark",
+      "viewport": 768,
+      "screenshot": "/audit/phase-1/blog-slug-dark-768px-rtl.png",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "dark",
+      "h1Count": 1,
+      "hasProxmox": false,
+      "hasTbps": false
+    },
+    {
+      "route": "/contact",
+      "routeName": "contact",
+      "theme": "dark",
+      "viewport": 768,
+      "screenshot": "/audit/phase-1/contact-dark-768px-rtl.png",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "dark",
+      "h1Count": 1,
+      "hasProxmox": false,
+      "hasTbps": false
+    },
+    {
+      "route": "/",
+      "routeName": "home",
+      "theme": "dark",
+      "viewport": 1440,
+      "screenshot": "/audit/phase-1/home-dark-1440px-rtl.png",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "dark",
+      "h1Count": 1,
+      "hasProxmox": false,
+      "hasTbps": false
+    },
+    {
+      "route": "/services",
+      "routeName": "services",
+      "theme": "dark",
+      "viewport": 1440,
+      "screenshot": "/audit/phase-1/services-dark-1440px-rtl.png",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "dark",
+      "h1Count": 1,
+      "hasProxmox": false,
+      "hasTbps": false
+    },
+    {
+      "route": "/services/service-1",
+      "routeName": "services-slug",
+      "theme": "dark",
+      "viewport": 1440,
+      "screenshot": "/audit/phase-1/services-slug-dark-1440px-rtl.png",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "dark",
+      "h1Count": 1,
+      "hasProxmox": false,
+      "hasTbps": false
+    },
+    {
+      "route": "/pricing",
+      "routeName": "pricing",
+      "theme": "dark",
+      "viewport": 1440,
+      "screenshot": "/audit/phase-1/pricing-dark-1440px-rtl.png",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "dark",
+      "h1Count": 1,
+      "hasProxmox": false,
+      "hasTbps": false
+    },
+    {
+      "route": "/hosting",
+      "routeName": "hosting",
+      "theme": "dark",
+      "viewport": 1440,
+      "screenshot": "/audit/phase-1/hosting-dark-1440px-rtl.png",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "dark",
+      "h1Count": 1,
+      "hasProxmox": false,
+      "hasTbps": false
+    },
+    {
+      "route": "/case-studies",
+      "routeName": "case-studies",
+      "theme": "dark",
+      "viewport": 1440,
+      "screenshot": "/audit/phase-1/case-studies-dark-1440px-rtl.png",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "dark",
+      "h1Count": 1,
+      "hasProxmox": false,
+      "hasTbps": false
+    },
+    {
+      "route": "/case-studies/case-1",
+      "routeName": "case-studies-slug",
+      "theme": "dark",
+      "viewport": 1440,
+      "screenshot": "/audit/phase-1/case-studies-slug-dark-1440px-rtl.png",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "dark",
+      "h1Count": 1,
+      "hasProxmox": false,
+      "hasTbps": false
+    },
+    {
+      "route": "/blog",
+      "routeName": "blog",
+      "theme": "dark",
+      "viewport": 1440,
+      "screenshot": "/audit/phase-1/blog-dark-1440px-rtl.png",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "dark",
+      "h1Count": 1,
+      "hasProxmox": false,
+      "hasTbps": false
+    },
+    {
+      "route": "/blog/immutable-cloud-backup-ransomware-protection",
+      "routeName": "blog-slug",
+      "theme": "dark",
+      "viewport": 1440,
+      "screenshot": "/audit/phase-1/blog-slug-dark-1440px-rtl.png",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "dark",
+      "h1Count": 1,
+      "hasProxmox": false,
+      "hasTbps": false
+    },
+    {
+      "route": "/contact",
+      "routeName": "contact",
+      "theme": "dark",
+      "viewport": 1440,
+      "screenshot": "/audit/phase-1/contact-dark-1440px-rtl.png",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "dark",
+      "h1Count": 1,
+      "hasProxmox": false,
+      "hasTbps": false
+    }
+  ],
+  "consoleErrors": [],
+  "pageErrors": [],
+  "forbiddenTextOccurrences": []
+}

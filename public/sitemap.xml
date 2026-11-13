@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Core Primary Routes -->
+  <url><loc>https://nuzultech.com/</loc><priority>1.0</priority></url>
+  <url><loc>https://nuzultech.com/about</loc><priority>0.8</priority></url>
+  <url><loc>https://nuzultech.com/services</loc><priority>0.9</priority></url>
+  <url><loc>https://nuzultech.com/pricing</loc><priority>0.9</priority></url>
+  <url><loc>https://nuzultech.com/hosting</loc><priority>0.9</priority></url>
+  <url><loc>https://nuzultech.com/case-studies</loc><priority>0.8</priority></url>
+  <url><loc>https://nuzultech.com/blog</loc><priority>0.8</priority></url>
+  <url><loc>https://nuzultech.com/contact</loc><priority>0.9</priority></url>
+
+  <!-- 23 Service Specification Pages (/services/:slug) -->
+  <url><loc>https://nuzultech.com/services/1</loc><priority>0.7</priority></url>
+  <url><loc>https://nuzultech.com/services/2</loc><priority>0.7</priority></url>
+  <url><loc>https://nuzultech.com/services/3</loc><priority>0.7</priority></url>
+  <url><loc>https://nuzultech.com/services/4</loc><priority>0.7</priority></url>
+  <url><loc>https://nuzultech.com/services/5</loc><priority>0.7</priority></url>
+  <url><loc>https://nuzultech.com/services/6</loc><priority>0.7</priority></url>
+  <url><loc>https://nuzultech.com/services/7</loc><priority>0.7</priority></url>
+  <url><loc>https://nuzultech.com/services/8</loc><priority>0.7</priority></url>
+  <url><loc>https://nuzultech.com/services/9</loc><priority>0.7</priority></url>
+  <url><loc>https://nuzultech.com/services/10</loc><priority>0.7</priority></url>
+  <url><loc>https://nuzultech.com/services/11</loc><priority>0.7</priority></url>
+  <url><loc>https://nuzultech.com/services/12</loc><priority>0.7</priority></url>
+  <url><loc>https://nuzultech.com/services/13</loc><priority>0.7</priority></url>
+  <url><loc>https://nuzultech.com/services/14</loc><priority>0.7</priority></url>
+  <url><loc>https://nuzultech.com/services/15</loc><priority>0.7</priority></url>
+  <url><loc>https://nuzultech.com/services/16</loc><priority>0.7</priority></url>
+  <url><loc>https://nuzultech.com/services/17</loc><priority>0.7</priority></url>
+  <url><loc>https://nuzultech.com/services/18</loc><priority>0.7</priority></url>
+  <url><loc>https://nuzultech.com/services/19</loc><priority>0.7</priority></url>
+  <url><loc>https://nuzultech.com/services/20</loc><priority>0.7</priority></url>
+  <url><loc>https://nuzultech.com/services/21</loc><priority>0.7</priority></url>
+  <url><loc>https://nuzultech.com/services/22</loc><priority>0.7</priority></url>
+  <url><loc>https://nuzultech.com/services/23</loc><priority>0.7</priority></url>
+
+  <!-- 12 Engineering Case Studies (/case-studies/:slug) -->
+  <url><loc>https://nuzultech.com/case-studies/case-1</loc><priority>0.7</priority></url>
+  <url><loc>https://nuzultech.com/case-studies/case-2</loc><priority>0.7</priority></url>
+  <url><loc>https://nuzultech.com/case-studies/case-3</loc><priority>0.7</priority></url>
+  <url><loc>https://nuzultech.com/case-studies/case-4</loc><priority>0.7</priority></url>
+  <url><loc>https://nuzultech.com/case-studies/case-5</loc><priority>0.7</priority></url>
+  <url><loc>https://nuzultech.com/case-studies/case-6</loc><priority>0.7</priority></url>
+  <url><loc>https://nuzultech.com/case-studies/case-7</loc><priority>0.7</priority></url>
+  <url><loc>https://nuzultech.com/case-studies/case-8</loc><priority>0.7</priority></url>
+  <url><loc>https://nuzultech.com/case-studies/case-9</loc><priority>0.7</priority></url>
+  <url><loc>https://nuzultech.com/case-studies/case-10</loc><priority>0.7</priority></url>
+  <url><loc>https://nuzultech.com/case-studies/case-11</loc><priority>0.7</priority></url>
+  <url><loc>https://nuzultech.com/case-studies/case-12</loc><priority>0.7</priority></url>
+
+  <!-- 22 Technical Blog Articles (/blog/:slug) -->
+  <url><loc>https://nuzultech.com/blog/oncology-center-pacs-email-governance</loc><priority>0.6</priority></url>
+  <url><loc>https://nuzultech.com/blog/cloud-vps-business-infrastructure-egypt</loc><priority>0.6</priority></url>
+  <url><loc>https://nuzultech.com/blog/it-as-a-service-egypt-enterprise</loc><priority>0.6</priority></url>
+  <url><loc>https://nuzultech.com/blog/enterprise-cybersecurity-ransomware-protection</loc><priority>0.6</priority></url>
+  <url><loc>https://nuzultech.com/blog/corporate-email-dmarc-phishing-egypt</loc><priority>0.6</priority></url>
+  <url><loc>https://nuzultech.com/blog/structured-cabling-cat6a-fiber-hospital-enterprise</loc><priority>0.6</priority></url>
+  <url><loc>https://nuzultech.com/blog/voip-telephony-branch-interconnection</loc><priority>0.6</priority></url>
+  <url><loc>https://nuzultech.com/blog/immutable-cloud-backup-ransomware-protection</loc><priority>0.6</priority></url>
+  <url><loc>https://nuzultech.com/blog/bare-metal-dedicated-servers-vs-vps</loc><priority>0.6</priority></url>
+  <url><loc>https://nuzultech.com/blog/active-directory-central-file-server-rbac</loc><priority>0.6</priority></url>
+  <url><loc>https://nuzultech.com/blog/software-qa-load-testing-enterprise-erp</loc><priority>0.6</priority></url>
+  <url><loc>https://nuzultech.com/blog/infrastructure-monitoring-siem-security-soc</loc><priority>0.6</priority></url>
+  <url><loc>https://nuzultech.com/blog/enterprise-cctv-nvr-raid6-surveillance</loc><priority>0.6</priority></url>
+  <url><loc>https://nuzultech.com/blog/modern-corporate-web-development-seo</loc><priority>0.6</priority></url>
+  <url><loc>https://nuzultech.com/blog/enterprise-erp-crm-egypt-tax-invoice</loc><priority>0.6</priority></url>
+  <url><loc>https://nuzultech.com/blog/cloud-rdp-workspaces-remote-work</loc><priority>0.6</priority></url>
+  <url><loc>https://nuzultech.com/blog/it-hardware-supply-procurement-egypt</loc><priority>0.6</priority></url>
+  <url><loc>https://nuzultech.com/blog/iot-fleet-telemetry-logistics-fuel-efficiency</loc><priority>0.6</priority></url>
+  <url><loc>https://nuzultech.com/blog/smart-clinic-queue-emr-systems-egypt</loc><priority>0.6</priority></url>
+  <url><loc>https://nuzultech.com/blog/hospital-virtualization-patient-relations-abch</loc><priority>0.6</priority></url>
+  <url><loc>https://nuzultech.com/blog/tax-accounting-disaster-recovery-egypt</loc><priority>0.6</priority></url>
+  <url><loc>https://nuzultech.com/blog/hybrid-cloud-data-sovereignty-egypt</loc><priority>0.6</priority></url>
+</urlset>

@@ -1,23 +1,84 @@
 <!doctype html>
-<html lang="ar" dir="rtl" class="dark">
+<html lang="ar" dir="rtl">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nuzul Tech | نُزول تِك — حلول IT والسيرفرات السحابية للمؤسسات</title>
-    <meta name="description" content="نُزول تِك (Nuzul Tech) — حلول تقنية متكاملة من البنية التحتية والشبكات والسيرفرات السحابية إلى تطوير البرمجيات للمؤسسات في مصر. بنيتك التحتية، ضيفنا." />
-    <meta property="og:title" content="Nuzul Tech | نُزول تِك — حلول IT والسيرفرات السحابية للمؤسسات" />
-    <meta property="og:description" content="حلول تقنية متكاملة من البنية التحتية والشبكات والسيرفرات السحابية إلى تطوير البرمجيات للمؤسسات في مصر. بنيتك التحتية، ضيفنا." />
+    <title>نُزول تِك | البنية التحتية السحابية والشبكات والأمن السيبراني للشركات</title>
+    <meta name="description" content="نُزول تِك شركة مصرية متخصصة في هندسة البنية التحتية السحابية، تصميم الشبكات المهيكلة، الأمن السيبراني، وتطوير أنظمة ERP للشركات في مصر والخليج بعقود SLA رسمية." />
+    <meta name="keywords" content="نُزول تِك, Nuzul Tech, استضافة سحابية, خوادم KVM, تأسيس شبكات, أمن سيبراني, أنظمة ERP, الفاتورة الإلكترونية المصرية" />
+
+    <!-- OpenGraph -->
     <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <link rel="icon" type="image/png" href="/brand/nuzul-logo-light.png" />
-    <!-- Google Fonts for Cairo, Alexandria, Plus Jakarta Sans, JetBrains Mono -->
+    <meta property="og:site_name" content="نُزول تِك | Nuzul Tech" />
+    <meta property="og:title" content="نُزول تِك | البنية التحتية السحابية والشبكات والأمن السيبراني للشركات" />
+    <meta property="og:description" content="فريق هندسي واحد لتصميم الشبكات، تشغيل خوادم KVM السحابية، تأمين الأنظمة السيبرانية، وتطوير منصات ERP بعقود مستوى خدمة SLA موثقة." />
+    <meta property="og:locale" content="ar_EG" />
+    <meta property="og:locale:alternate" content="en_US" />
+
+    <!-- Bilingual hreflang -->
+    <link rel="alternate" hreflang="ar" href="https://nuzultech.com/" />
+    <link rel="alternate" hreflang="en" href="https://nuzultech.com/?lang=en" />
+    <link rel="alternate" hreflang="x-default" href="https://nuzultech.com/" />
+
+    <!-- Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700;800;900&family=Cairo:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230E6B64'/%3E%3Cpath d='M18 46V18l28 28V18' fill='none' stroke='%23FFFFFF' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+
+    <!-- Organization Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Nuzul Tech",
+        "alternateName": "نُزول تِك",
+        "url": "https://nuzultech.com",
+        "email": "info@nuzultech.com",
+        "telephone": "+20-114-056-5057",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Cairo",
+          "addressCountry": "EG"
+        },
+        "areaServed": ["EG", "SA", "AE"],
+        "description": "Enterprise IT Infrastructure, Structured Networking, KVM Cloud Servers, Cybersecurity & Custom ERP Solutions."
+      }
+    </script>
+
+    <!-- No-flash theme + language initialization -->
+    <script>
+      (function () {
+        try {
+          var savedTheme = localStorage.getItem('nuzul-theme');
+          var themeMode =
+            savedTheme === 'light' || savedTheme === 'dark' || savedTheme === 'system'
+              ? savedTheme
+              : 'system';
+          var resolved =
+            themeMode === 'system'
+              ? window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+                ? 'dark'
+                : 'light'
+              : themeMode;
+          document.documentElement.setAttribute('data-theme', resolved);
+          document.documentElement.setAttribute('data-theme-mode', themeMode);
+
+          var savedLang = localStorage.getItem('nuzul-lang');
+          var lang = savedLang === 'en' ? 'en' : 'ar';
+          document.documentElement.lang = lang;
+          document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+        } catch (e) {}
+      })();
+    </script>
   </head>
-  <body class="antialiased selection:bg-emerald-500/30 selection:text-white">
+  <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
-

@@ -1,0 +1,1728 @@
+{
+  "timestamp": "2026-11-04T13:16:54.761Z",
+  "routeThemeLangMatrix": [
+    {
+      "route": "/",
+      "routeName": "home",
+      "expectedTheme": "light",
+      "expectedLang": "ar",
+      "title": "البنية التحتية السحابية والأمن السيبراني للشركات في مصر | نُزول تِك",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "light",
+      "h1Count": 1,
+      "h1Text": "نبني ونؤمّن البنية التحتية السحابية والشبكية التي تعتمد عليها أعمالك يومياً",
+      "canonical": "https://nuzultech.com/",
+      "hreflangs": [
+        {
+          "hreflang": "ar",
+          "href": "https://nuzultech.com/"
+        },
+        {
+          "hreflang": "en",
+          "href": "https://nuzultech.com/?lang=en"
+        },
+        {
+          "hreflang": "x-default",
+          "href": "https://nuzultech.com/"
+        }
+      ]
+    },
+    {
+      "route": "/services",
+      "routeName": "services",
+      "expectedTheme": "light",
+      "expectedLang": "ar",
+      "title": "الخدمات الهندسية وحلول تقنية المعلومات | نُزول تِك",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "light",
+      "h1Count": 1,
+      "h1Text": "حلول واستشارات تقنية المعلومات للشركات",
+      "canonical": "https://nuzultech.com/services",
+      "hreflangs": [
+        {
+          "hreflang": "ar",
+          "href": "https://nuzultech.com/services"
+        },
+        {
+          "hreflang": "en",
+          "href": "https://nuzultech.com/services?lang=en"
+        },
+        {
+          "hreflang": "x-default",
+          "href": "https://nuzultech.com/services"
+        }
+      ]
+    },
+    {
+      "route": "/services/service-1",
+      "routeName": "services-slug",
+      "expectedTheme": "light",
+      "expectedLang": "ar",
+      "title": "البوابات والمنصات الرقمية | نُزول تِك",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "light",
+      "h1Count": 1,
+      "h1Text": "البوابات والمنصات الرقمية",
+      "canonical": "https://nuzultech.com/services/service-1",
+      "hreflangs": [
+        {
+          "hreflang": "ar",
+          "href": "https://nuzultech.com/services/service-1"
+        },
+        {
+          "hreflang": "en",
+          "href": "https://nuzultech.com/services/service-1?lang=en"
+        },
+        {
+          "hreflang": "x-default",
+          "href": "https://nuzultech.com/services/service-1"
+        }
+      ]
+    },
+    {
+      "route": "/pricing",
+      "routeName": "pricing",
+      "expectedTheme": "light",
+      "expectedLang": "ar",
+      "title": "خطط الأسعار والباقات المؤسسية | نُزول تِك",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "light",
+      "h1Count": 1,
+      "h1Text": "خطط الأسعار وباقات البنية التحتية",
+      "canonical": "https://nuzultech.com/pricing",
+      "hreflangs": [
+        {
+          "hreflang": "ar",
+          "href": "https://nuzultech.com/pricing"
+        },
+        {
+          "hreflang": "en",
+          "href": "https://nuzultech.com/pricing?lang=en"
+        },
+        {
+          "hreflang": "x-default",
+          "href": "https://nuzultech.com/pricing"
+        }
+      ]
+    },
+    {
+      "route": "/hosting",
+      "routeName": "hosting",
+      "expectedTheme": "light",
+      "expectedLang": "ar",
+      "title": "الاستضافة السحابية والخوادم المخصصة | نُزول تِك",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "light",
+      "h1Count": 1,
+      "h1Text": "استضافة سحابية وخوادم افتراضية (Cloud VPS) للشركات",
+      "canonical": "https://nuzultech.com/hosting",
+      "hreflangs": [
+        {
+          "hreflang": "ar",
+          "href": "https://nuzultech.com/hosting"
+        },
+        {
+          "hreflang": "en",
+          "href": "https://nuzultech.com/hosting?lang=en"
+        },
+        {
+          "hreflang": "x-default",
+          "href": "https://nuzultech.com/hosting"
+        }
+      ]
+    },
+    {
+      "route": "/case-studies",
+      "routeName": "case-studies",
+      "expectedTheme": "light",
+      "expectedLang": "ar",
+      "title": "دراسات الحالة وسجل المشاريع | نُزول تِك",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "light",
+      "h1Count": 1,
+      "h1Text": "دراسات حالة لمشاريع البنية التحتية والسحابة",
+      "canonical": "https://nuzultech.com/case-studies",
+      "hreflangs": [
+        {
+          "hreflang": "ar",
+          "href": "https://nuzultech.com/case-studies"
+        },
+        {
+          "hreflang": "en",
+          "href": "https://nuzultech.com/case-studies?lang=en"
+        },
+        {
+          "hreflang": "x-default",
+          "href": "https://nuzultech.com/case-studies"
+        }
+      ]
+    },
+    {
+      "route": "/case-studies/case-1",
+      "routeName": "case-studies-slug",
+      "expectedTheme": "light",
+      "expectedLang": "ar",
+      "title": "البنية الأمنية والشبكات — مستشفى تراست | نُزول تِك",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "light",
+      "h1Count": 1,
+      "h1Text": "البنية الأمنية والشبكات — مستشفى تراست",
+      "canonical": "https://nuzultech.com/case-studies/case-1",
+      "hreflangs": [
+        {
+          "hreflang": "ar",
+          "href": "https://nuzultech.com/case-studies/case-1"
+        },
+        {
+          "hreflang": "en",
+          "href": "https://nuzultech.com/case-studies/case-1?lang=en"
+        },
+        {
+          "hreflang": "x-default",
+          "href": "https://nuzultech.com/case-studies/case-1"
+        }
+      ]
+    },
+    {
+      "route": "/blog",
+      "routeName": "blog",
+      "expectedTheme": "light",
+      "expectedLang": "ar",
+      "title": "المدونة التقنية والمقالات الهندسية | نُزول تِك",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "light",
+      "h1Count": 1,
+      "h1Text": "مقالات وأدلة تقنية لصناع القرار",
+      "canonical": "https://nuzultech.com/blog",
+      "hreflangs": [
+        {
+          "hreflang": "ar",
+          "href": "https://nuzultech.com/blog"
+        },
+        {
+          "hreflang": "en",
+          "href": "https://nuzultech.com/blog?lang=en"
+        },
+        {
+          "hreflang": "x-default",
+          "href": "https://nuzultech.com/blog"
+        }
+      ]
+    },
+    {
+      "route": "/blog/immutable-cloud-backup-ransomware-protection",
+      "routeName": "blog-slug",
+      "expectedTheme": "light",
+      "expectedLang": "ar",
+      "title": "استراتيجية النسخ الاحتياطي الهجين المعزول 3-2-1: كيف تحمي بيانات شركتك من فيروسات الفدية؟ | نُزول تِك",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "light",
+      "h1Count": 1,
+      "h1Text": "استراتيجية النسخ الاحتياطي الهجين المعزول 3-2-1: كيف تحمي بيانات شركتك من فيروسات الفدية؟",
+      "canonical": "https://nuzultech.com/blog/immutable-cloud-backup-ransomware-protection",
+      "hreflangs": [
+        {
+          "hreflang": "ar",
+          "href": "https://nuzultech.com/blog/immutable-cloud-backup-ransomware-protection"
+        },
+        {
+          "hreflang": "en",
+          "href": "https://nuzultech.com/blog/immutable-cloud-backup-ransomware-protection?lang=en"
+        },
+        {
+          "hreflang": "x-default",
+          "href": "https://nuzultech.com/blog/immutable-cloud-backup-ransomware-protection"
+        }
+      ]
+    },
+    {
+      "route": "/contact",
+      "routeName": "contact",
+      "expectedTheme": "light",
+      "expectedLang": "ar",
+      "title": "تواصل معنا واحجز استشارة هندسية | نُزول تِك",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "light",
+      "h1Count": 1,
+      "h1Text": "احجز استشارة هندسية أو اطلب عرض سعر مفصل",
+      "canonical": "https://nuzultech.com/contact",
+      "hreflangs": [
+        {
+          "hreflang": "ar",
+          "href": "https://nuzultech.com/contact"
+        },
+        {
+          "hreflang": "en",
+          "href": "https://nuzultech.com/contact?lang=en"
+        },
+        {
+          "hreflang": "x-default",
+          "href": "https://nuzultech.com/contact"
+        }
+      ]
+    },
+    {
+      "route": "/unknown-legacy-url-404",
+      "routeName": "not-found-404",
+      "expectedTheme": "light",
+      "expectedLang": "ar",
+      "title": "الصفحة غير موجودة (404) | نُزول تِك",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "light",
+      "h1Count": 1,
+      "h1Text": "عذراً، الصفحة التي تبحث عنها غير موجودة أو تم نقلها",
+      "canonical": "https://nuzultech.com/unknown-legacy-url-404",
+      "hreflangs": [
+        {
+          "hreflang": "ar",
+          "href": "https://nuzultech.com/unknown-legacy-url-404"
+        },
+        {
+          "hreflang": "en",
+          "href": "https://nuzultech.com/unknown-legacy-url-404?lang=en"
+        },
+        {
+          "hreflang": "x-default",
+          "href": "https://nuzultech.com/unknown-legacy-url-404"
+        }
+      ]
+    },
+    {
+      "route": "/",
+      "routeName": "home",
+      "expectedTheme": "light",
+      "expectedLang": "en",
+      "title": "Enterprise IT Infrastructure, Cloud & Cybersecurity in Egypt | Nuzul Tech",
+      "dir": "ltr",
+      "lang": "en",
+      "dataTheme": "light",
+      "h1Count": 1,
+      "h1Text": "We Engineer and Secure the Cloud & Network Infrastructure Your Business Relies On",
+      "canonical": "https://nuzultech.com/?lang=en",
+      "hreflangs": [
+        {
+          "hreflang": "ar",
+          "href": "https://nuzultech.com/"
+        },
+        {
+          "hreflang": "en",
+          "href": "https://nuzultech.com/?lang=en"
+        },
+        {
+          "hreflang": "x-default",
+          "href": "https://nuzultech.com/"
+        }
+      ]
+    },
+    {
+      "route": "/services",
+      "routeName": "services",
+      "expectedTheme": "light",
+      "expectedLang": "en",
+      "title": "Engineering Services & IT Solutions | Nuzul Tech",
+      "dir": "ltr",
+      "lang": "en",
+      "dataTheme": "light",
+      "h1Count": 1,
+      "h1Text": "Enterprise IT Solutions & Engineering Consultancy",
+      "canonical": "https://nuzultech.com/services?lang=en",
+      "hreflangs": [
+        {
+          "hreflang": "ar",
+          "href": "https://nuzultech.com/services"
+        },
+        {
+          "hreflang": "en",
+          "href": "https://nuzultech.com/services?lang=en"
+        },
+        {
+          "hreflang": "x-default",
+          "href": "https://nuzultech.com/services"
+        }
+      ]
+    },
+    {
+      "route": "/services/service-1",
+      "routeName": "services-slug",
+      "expectedTheme": "light",
+      "expectedLang": "en",
+      "title": "Enterprise Web Portals | Nuzul Tech",
+      "dir": "ltr",
+      "lang": "en",
+      "dataTheme": "light",
+      "h1Count": 1,
+      "h1Text": "Enterprise Web Portals",
+      "canonical": "https://nuzultech.com/services/service-1?lang=en",
+      "hreflangs": [
+        {
+          "hreflang": "ar",
+          "href": "https://nuzultech.com/services/service-1"
+        },
+        {
+          "hreflang": "en",
+          "href": "https://nuzultech.com/services/service-1?lang=en"
+        },
+        {
+          "hreflang": "x-default",
+          "href": "https://nuzultech.com/services/service-1"
+        }
+      ]
+    },
+    {
+      "route": "/pricing",
+      "routeName": "pricing",
+      "expectedTheme": "light",
+      "expectedLang": "en",
+      "title": "Pricing & Enterprise Packages | Nuzul Tech",
+      "dir": "ltr",
+      "lang": "en",
+      "dataTheme": "light",
+      "h1Count": 1,
+      "h1Text": "Cloud Pricing & Bundled IT Packages",
+      "canonical": "https://nuzultech.com/pricing?lang=en",
+      "hreflangs": [
+        {
+          "hreflang": "ar",
+          "href": "https://nuzultech.com/pricing"
+        },
+        {
+          "hreflang": "en",
+          "href": "https://nuzultech.com/pricing?lang=en"
+        },
+        {
+          "hreflang": "x-default",
+          "href": "https://nuzultech.com/pricing"
+        }
+      ]
+    },
+    {
+      "route": "/hosting",
+      "routeName": "hosting",
+      "expectedTheme": "light",
+      "expectedLang": "en",
+      "title": "Cloud Hosting & Dedicated Servers | Nuzul Tech",
+      "dir": "ltr",
+      "lang": "en",
+      "dataTheme": "light",
+      "h1Count": 1,
+      "h1Text": "Enterprise Cloud Hosting & KVM Virtual Servers",
+      "canonical": "https://nuzultech.com/hosting?lang=en",
+      "hreflangs": [
+        {
+          "hreflang": "ar",
+          "href": "https://nuzultech.com/hosting"
+        },
+        {
+          "hreflang": "en",
+          "href": "https://nuzultech.com/hosting?lang=en"
+        },
+        {
+          "hreflang": "x-default",
+          "href": "https://nuzultech.com/hosting"
+        }
+      ]
+    },
+    {
+      "route": "/case-studies",
+      "routeName": "case-studies",
+      "expectedTheme": "light",
+      "expectedLang": "en",
+      "title": "Case Studies & Engineering Portfolio | Nuzul Tech",
+      "dir": "ltr",
+      "lang": "en",
+      "dataTheme": "light",
+      "h1Count": 1,
+      "h1Text": "Infrastructure & Cloud Case Studies",
+      "canonical": "https://nuzultech.com/case-studies?lang=en",
+      "hreflangs": [
+        {
+          "hreflang": "ar",
+          "href": "https://nuzultech.com/case-studies"
+        },
+        {
+          "hreflang": "en",
+          "href": "https://nuzultech.com/case-studies?lang=en"
+        },
+        {
+          "hreflang": "x-default",
+          "href": "https://nuzultech.com/case-studies"
+        }
+      ]
+    },
+    {
+      "route": "/case-studies/case-1",
+      "routeName": "case-studies-slug",
+      "expectedTheme": "light",
+      "expectedLang": "en",
+      "title": "Turnkey Hospital Security & Networks — Trust Hospital | Nuzul Tech",
+      "dir": "ltr",
+      "lang": "en",
+      "dataTheme": "light",
+      "h1Count": 1,
+      "h1Text": "Turnkey Hospital Security & Networks — Trust Hospital",
+      "canonical": "https://nuzultech.com/case-studies/case-1?lang=en",
+      "hreflangs": [
+        {
+          "hreflang": "ar",
+          "href": "https://nuzultech.com/case-studies/case-1"
+        },
+        {
+          "hreflang": "en",
+          "href": "https://nuzultech.com/case-studies/case-1?lang=en"
+        },
+        {
+          "hreflang": "x-default",
+          "href": "https://nuzultech.com/case-studies/case-1"
+        }
+      ]
+    },
+    {
+      "route": "/blog",
+      "routeName": "blog",
+      "expectedTheme": "light",
+      "expectedLang": "en",
+      "title": "Technical Blog & Engineering Insights | Nuzul Tech",
+      "dir": "ltr",
+      "lang": "en",
+      "dataTheme": "light",
+      "h1Count": 1,
+      "h1Text": "Technical Guides for IT Leaders",
+      "canonical": "https://nuzultech.com/blog?lang=en",
+      "hreflangs": [
+        {
+          "hreflang": "ar",
+          "href": "https://nuzultech.com/blog"
+        },
+        {
+          "hreflang": "en",
+          "href": "https://nuzultech.com/blog?lang=en"
+        },
+        {
+          "hreflang": "x-default",
+          "href": "https://nuzultech.com/blog"
+        }
+      ]
+    },
+    {
+      "route": "/blog/immutable-cloud-backup-ransomware-protection",
+      "routeName": "blog-slug",
+      "expectedTheme": "light",
+      "expectedLang": "en",
+      "title": "The 3-2-1 Immutable Backup Architecture: Defeating Ransomware for Egyptian Enterprises | Nuzul Tech",
+      "dir": "ltr",
+      "lang": "en",
+      "dataTheme": "light",
+      "h1Count": 1,
+      "h1Text": "The 3-2-1 Immutable Backup Architecture: Defeating Ransomware for Egyptian Enterprises",
+      "canonical": "https://nuzultech.com/blog/immutable-cloud-backup-ransomware-protection?lang=en",
+      "hreflangs": [
+        {
+          "hreflang": "ar",
+          "href": "https://nuzultech.com/blog/immutable-cloud-backup-ransomware-protection"
+        },
+        {
+          "hreflang": "en",
+          "href": "https://nuzultech.com/blog/immutable-cloud-backup-ransomware-protection?lang=en"
+        },
+        {
+          "hreflang": "x-default",
+          "href": "https://nuzultech.com/blog/immutable-cloud-backup-ransomware-protection"
+        }
+      ]
+    },
+    {
+      "route": "/contact",
+      "routeName": "contact",
+      "expectedTheme": "light",
+      "expectedLang": "en",
+      "title": "Contact Us & Book an Engineering Consultation | Nuzul Tech",
+      "dir": "ltr",
+      "lang": "en",
+      "dataTheme": "light",
+      "h1Count": 1,
+      "h1Text": "Book an Engineering Consultation or Request a Proposal",
+      "canonical": "https://nuzultech.com/contact?lang=en",
+      "hreflangs": [
+        {
+          "hreflang": "ar",
+          "href": "https://nuzultech.com/contact"
+        },
+        {
+          "hreflang": "en",
+          "href": "https://nuzultech.com/contact?lang=en"
+        },
+        {
+          "hreflang": "x-default",
+          "href": "https://nuzultech.com/contact"
+        }
+      ]
+    },
+    {
+      "route": "/unknown-legacy-url-404",
+      "routeName": "not-found-404",
+      "expectedTheme": "light",
+      "expectedLang": "en",
+      "title": "Page Not Found (404) | Nuzul Tech",
+      "dir": "ltr",
+      "lang": "en",
+      "dataTheme": "light",
+      "h1Count": 1,
+      "h1Text": "Sorry, the page you are looking for does not exist or has moved",
+      "canonical": "https://nuzultech.com/unknown-legacy-url-404?lang=en",
+      "hreflangs": [
+        {
+          "hreflang": "ar",
+          "href": "https://nuzultech.com/unknown-legacy-url-404"
+        },
+        {
+          "hreflang": "en",
+          "href": "https://nuzultech.com/unknown-legacy-url-404?lang=en"
+        },
+        {
+          "hreflang": "x-default",
+          "href": "https://nuzultech.com/unknown-legacy-url-404"
+        }
+      ]
+    },
+    {
+      "route": "/",
+      "routeName": "home",
+      "expectedTheme": "dark",
+      "expectedLang": "ar",
+      "title": "البنية التحتية السحابية والأمن السيبراني للشركات في مصر | نُزول تِك",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "dark",
+      "h1Count": 1,
+      "h1Text": "نبني ونؤمّن البنية التحتية السحابية والشبكية التي تعتمد عليها أعمالك يومياً",
+      "canonical": "https://nuzultech.com/",
+      "hreflangs": [
+        {
+          "hreflang": "ar",
+          "href": "https://nuzultech.com/"
+        },
+        {
+          "hreflang": "en",
+          "href": "https://nuzultech.com/?lang=en"
+        },
+        {
+          "hreflang": "x-default",
+          "href": "https://nuzultech.com/"
+        }
+      ]
+    },
+    {
+      "route": "/services",
+      "routeName": "services",
+      "expectedTheme": "dark",
+      "expectedLang": "ar",
+      "title": "الخدمات الهندسية وحلول تقنية المعلومات | نُزول تِك",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "dark",
+      "h1Count": 1,
+      "h1Text": "حلول واستشارات تقنية المعلومات للشركات",
+      "canonical": "https://nuzultech.com/services",
+      "hreflangs": [
+        {
+          "hreflang": "ar",
+          "href": "https://nuzultech.com/services"
+        },
+        {
+          "hreflang": "en",
+          "href": "https://nuzultech.com/services?lang=en"
+        },
+        {
+          "hreflang": "x-default",
+          "href": "https://nuzultech.com/services"
+        }
+      ]
+    },
+    {
+      "route": "/services/service-1",
+      "routeName": "services-slug",
+      "expectedTheme": "dark",
+      "expectedLang": "ar",
+      "title": "البوابات والمنصات الرقمية | نُزول تِك",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "dark",
+      "h1Count": 1,
+      "h1Text": "البوابات والمنصات الرقمية",
+      "canonical": "https://nuzultech.com/services/service-1",
+      "hreflangs": [
+        {
+          "hreflang": "ar",
+          "href": "https://nuzultech.com/services/service-1"
+        },
+        {
+          "hreflang": "en",
+          "href": "https://nuzultech.com/services/service-1?lang=en"
+        },
+        {
+          "hreflang": "x-default",
+          "href": "https://nuzultech.com/services/service-1"
+        }
+      ]
+    },
+    {
+      "route": "/pricing",
+      "routeName": "pricing",
+      "expectedTheme": "dark",
+      "expectedLang": "ar",
+      "title": "خطط الأسعار والباقات المؤسسية | نُزول تِك",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "dark",
+      "h1Count": 1,
+      "h1Text": "خطط الأسعار وباقات البنية التحتية",
+      "canonical": "https://nuzultech.com/pricing",
+      "hreflangs": [
+        {
+          "hreflang": "ar",
+          "href": "https://nuzultech.com/pricing"
+        },
+        {
+          "hreflang": "en",
+          "href": "https://nuzultech.com/pricing?lang=en"
+        },
+        {
+          "hreflang": "x-default",
+          "href": "https://nuzultech.com/pricing"
+        }
+      ]
+    },
+    {
+      "route": "/hosting",
+      "routeName": "hosting",
+      "expectedTheme": "dark",
+      "expectedLang": "ar",
+      "title": "الاستضافة السحابية والخوادم المخصصة | نُزول تِك",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "dark",
+      "h1Count": 1,
+      "h1Text": "استضافة سحابية وخوادم افتراضية (Cloud VPS) للشركات",
+      "canonical": "https://nuzultech.com/hosting",
+      "hreflangs": [
+        {
+          "hreflang": "ar",
+          "href": "https://nuzultech.com/hosting"
+        },
+        {
+          "hreflang": "en",
+          "href": "https://nuzultech.com/hosting?lang=en"
+        },
+        {
+          "hreflang": "x-default",
+          "href": "https://nuzultech.com/hosting"
+        }
+      ]
+    },
+    {
+      "route": "/case-studies",
+      "routeName": "case-studies",
+      "expectedTheme": "dark",
+      "expectedLang": "ar",
+      "title": "دراسات الحالة وسجل المشاريع | نُزول تِك",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "dark",
+      "h1Count": 1,
+      "h1Text": "دراسات حالة لمشاريع البنية التحتية والسحابة",
+      "canonical": "https://nuzultech.com/case-studies",
+      "hreflangs": [
+        {
+          "hreflang": "ar",
+          "href": "https://nuzultech.com/case-studies"
+        },
+        {
+          "hreflang": "en",
+          "href": "https://nuzultech.com/case-studies?lang=en"
+        },
+        {
+          "hreflang": "x-default",
+          "href": "https://nuzultech.com/case-studies"
+        }
+      ]
+    },
+    {
+      "route": "/case-studies/case-1",
+      "routeName": "case-studies-slug",
+      "expectedTheme": "dark",
+      "expectedLang": "ar",
+      "title": "البنية الأمنية والشبكات — مستشفى تراست | نُزول تِك",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "dark",
+      "h1Count": 1,
+      "h1Text": "البنية الأمنية والشبكات — مستشفى تراست",
+      "canonical": "https://nuzultech.com/case-studies/case-1",
+      "hreflangs": [
+        {
+          "hreflang": "ar",
+          "href": "https://nuzultech.com/case-studies/case-1"
+        },
+        {
+          "hreflang": "en",
+          "href": "https://nuzultech.com/case-studies/case-1?lang=en"
+        },
+        {
+          "hreflang": "x-default",
+          "href": "https://nuzultech.com/case-studies/case-1"
+        }
+      ]
+    },
+    {
+      "route": "/blog",
+      "routeName": "blog",
+      "expectedTheme": "dark",
+      "expectedLang": "ar",
+      "title": "المدونة التقنية والمقالات الهندسية | نُزول تِك",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "dark",
+      "h1Count": 1,
+      "h1Text": "مقالات وأدلة تقنية لصناع القرار",
+      "canonical": "https://nuzultech.com/blog",
+      "hreflangs": [
+        {
+          "hreflang": "ar",
+          "href": "https://nuzultech.com/blog"
+        },
+        {
+          "hreflang": "en",
+          "href": "https://nuzultech.com/blog?lang=en"
+        },
+        {
+          "hreflang": "x-default",
+          "href": "https://nuzultech.com/blog"
+        }
+      ]
+    },
+    {
+      "route": "/blog/immutable-cloud-backup-ransomware-protection",
+      "routeName": "blog-slug",
+      "expectedTheme": "dark",
+      "expectedLang": "ar",
+      "title": "استراتيجية النسخ الاحتياطي الهجين المعزول 3-2-1: كيف تحمي بيانات شركتك من فيروسات الفدية؟ | نُزول تِك",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "dark",
+      "h1Count": 1,
+      "h1Text": "استراتيجية النسخ الاحتياطي الهجين المعزول 3-2-1: كيف تحمي بيانات شركتك من فيروسات الفدية؟",
+      "canonical": "https://nuzultech.com/blog/immutable-cloud-backup-ransomware-protection",
+      "hreflangs": [
+        {
+          "hreflang": "ar",
+          "href": "https://nuzultech.com/blog/immutable-cloud-backup-ransomware-protection"
+        },
+        {
+          "hreflang": "en",
+          "href": "https://nuzultech.com/blog/immutable-cloud-backup-ransomware-protection?lang=en"
+        },
+        {
+          "hreflang": "x-default",
+          "href": "https://nuzultech.com/blog/immutable-cloud-backup-ransomware-protection"
+        }
+      ]
+    },
+    {
+      "route": "/contact",
+      "routeName": "contact",
+      "expectedTheme": "dark",
+      "expectedLang": "ar",
+      "title": "تواصل معنا واحجز استشارة هندسية | نُزول تِك",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "dark",
+      "h1Count": 1,
+      "h1Text": "احجز استشارة هندسية أو اطلب عرض سعر مفصل",
+      "canonical": "https://nuzultech.com/contact",
+      "hreflangs": [
+        {
+          "hreflang": "ar",
+          "href": "https://nuzultech.com/contact"
+        },
+        {
+          "hreflang": "en",
+          "href": "https://nuzultech.com/contact?lang=en"
+        },
+        {
+          "hreflang": "x-default",
+          "href": "https://nuzultech.com/contact"
+        }
+      ]
+    },
+    {
+      "route": "/unknown-legacy-url-404",
+      "routeName": "not-found-404",
+      "expectedTheme": "dark",
+      "expectedLang": "ar",
+      "title": "الصفحة غير موجودة (404) | نُزول تِك",
+      "dir": "rtl",
+      "lang": "ar",
+      "dataTheme": "dark",
+      "h1Count": 1,
+      "h1Text": "عذراً، الصفحة التي تبحث عنها غير موجودة أو تم نقلها",
+      "canonical": "https://nuzultech.com/unknown-legacy-url-404",
+      "hreflangs": [
+        {
+          "hreflang": "ar",
+          "href": "https://nuzultech.com/unknown-legacy-url-404"
+        },
+        {
+          "hreflang": "en",
+          "href": "https://nuzultech.com/unknown-legacy-url-404?lang=en"
+        },
+        {
+          "hreflang": "x-default",
+          "href": "https://nuzultech.com/unknown-legacy-url-404"
+        }
+      ]
+    },
+    {
+      "route": "/",
+      "routeName": "home",
+      "expectedTheme": "dark",
+      "expectedLang": "en",
+      "title": "Enterprise IT Infrastructure, Cloud & Cybersecurity in Egypt | Nuzul Tech",
+      "dir": "ltr",
+      "lang": "en",
+      "dataTheme": "dark",
+      "h1Count": 1,
+      "h1Text": "We Engineer and Secure the Cloud & Network Infrastructure Your Business Relies On",
+      "canonical": "https://nuzultech.com/?lang=en",
+      "hreflangs": [
+        {
+          "hreflang": "ar",
+          "href": "https://nuzultech.com/"
+        },
+        {
+          "hreflang": "en",
+          "href": "https://nuzultech.com/?lang=en"
+        },
+        {
+          "hreflang": "x-default",
+          "href": "https://nuzultech.com/"
+        }
+      ]
+    },
+    {
+      "route": "/services",
+      "routeName": "services",
+      "expectedTheme": "dark",
+      "expectedLang": "en",
+      "title": "Engineering Services & IT Solutions | Nuzul Tech",
+      "dir": "ltr",
+      "lang": "en",
+      "dataTheme": "dark",
+      "h1Count": 1,
+      "h1Text": "Enterprise IT Solutions & Engineering Consultancy",
+      "canonical": "https://nuzultech.com/services?lang=en",
+      "hreflangs": [
+        {
+          "hreflang": "ar",
+          "href": "https://nuzultech.com/services"
+        },
+        {
+          "hreflang": "en",
+          "href": "https://nuzultech.com/services?lang=en"
+        },
+        {
+          "hreflang": "x-default",
+          "href": "https://nuzultech.com/services"
+        }
+      ]
+    },
+    {
+      "route": "/services/service-1",
+      "routeName": "services-slug",
+      "expectedTheme": "dark",
+      "expectedLang": "en",
+      "title": "Enterprise Web Portals | Nuzul Tech",
+      "dir": "ltr",
+      "lang": "en",
+      "dataTheme": "dark",
+      "h1Count": 1,
+      "h1Text": "Enterprise Web Portals",
+      "canonical": "https://nuzultech.com/services/service-1?lang=en",
+      "hreflangs": [
+        {
+          "hreflang": "ar",
+          "href": "https://nuzultech.com/services/service-1"
+        },
+        {
+          "hreflang": "en",
+          "href": "https://nuzultech.com/services/service-1?lang=en"
+        },
+        {
+          "hreflang": "x-default",
+          "href": "https://nuzultech.com/services/service-1"
+        }
+      ]
+    },
+    {
+      "route": "/pricing",
+      "routeName": "pricing",
+      "expectedTheme": "dark",
+      "expectedLang": "en",
+      "title": "Pricing & Enterprise Packages | Nuzul Tech",
+      "dir": "ltr",
+      "lang": "en",
+      "dataTheme": "dark",
+      "h1Count": 1,
+      "h1Text": "Cloud Pricing & Bundled IT Packages",
+      "canonical": "https://nuzultech.com/pricing?lang=en",
+      "hreflangs": [
+        {
+          "hreflang": "ar",
+          "href": "https://nuzultech.com/pricing"
+        },
+        {
+          "hreflang": "en",
+          "href": "https://nuzultech.com/pricing?lang=en"
+        },
+        {
+          "hreflang": "x-default",
+          "href": "https://nuzultech.com/pricing"
+        }
+      ]
+    },
+    {
+      "route": "/hosting",
+      "routeName": "hosting",
+      "expectedTheme": "dark",
+      "expectedLang": "en",
+      "title": "Cloud Hosting & Dedicated Servers | Nuzul Tech",
+      "dir": "ltr",
+      "lang": "en",
+      "dataTheme": "dark",
+      "h1Count": 1,
+      "h1Text": "Enterprise Cloud Hosting & KVM Virtual Servers",
+      "canonical": "https://nuzultech.com/hosting?lang=en",
+      "hreflangs": [
+        {
+          "hreflang": "ar",
+          "href": "https://nuzultech.com/hosting"
+        },
+        {
+          "hreflang": "en",
+          "href": "https://nuzultech.com/hosting?lang=en"
+        },
+        {
+          "hreflang": "x-default",
+          "href": "https://nuzultech.com/hosting"
+        }
+      ]
+    },
+    {
+      "route": "/case-studies",
+      "routeName": "case-studies",
+      "expectedTheme": "dark",
+      "expectedLang": "en",
+      "title": "Case Studies & Engineering Portfolio | Nuzul Tech",
+      "dir": "ltr",
+      "lang": "en",
+      "dataTheme": "dark",
+      "h1Count": 1,
+      "h1Text": "Infrastructure & Cloud Case Studies",
+      "canonical": "https://nuzultech.com/case-studies?lang=en",
+      "hreflangs": [
+        {
+          "hreflang": "ar",
+          "href": "https://nuzultech.com/case-studies"
+        },
+        {
+          "hreflang": "en",
+          "href": "https://nuzultech.com/case-studies?lang=en"
+        },
+        {
+          "hreflang": "x-default",
+          "href": "https://nuzultech.com/case-studies"
+        }
+      ]
+    },
+    {
+      "route": "/case-studies/case-1",
+      "routeName": "case-studies-slug",
+      "expectedTheme": "dark",
+      "expectedLang": "en",
+      "title": "Turnkey Hospital Security & Networks — Trust Hospital | Nuzul Tech",
+      "dir": "ltr",
+      "lang": "en",
+      "dataTheme": "dark",
+      "h1Count": 1,
+      "h1Text": "Turnkey Hospital Security & Networks — Trust Hospital",
+      "canonical": "https://nuzultech.com/case-studies/case-1?lang=en",
+      "hreflangs": [
+        {
+          "hreflang": "ar",
+          "href": "https://nuzultech.com/case-studies/case-1"
+        },
+        {
+          "hreflang": "en",
+          "href": "https://nuzultech.com/case-studies/case-1?lang=en"
+        },
+        {
+          "hreflang": "x-default",
+          "href": "https://nuzultech.com/case-studies/case-1"
+        }
+      ]
+    },
+    {
+      "route": "/blog",
+      "routeName": "blog",
+      "expectedTheme": "dark",
+      "expectedLang": "en",
+      "title": "Technical Blog & Engineering Insights | Nuzul Tech",
+      "dir": "ltr",
+      "lang": "en",
+      "dataTheme": "dark",
+      "h1Count": 1,
+      "h1Text": "Technical Guides for IT Leaders",
+      "canonical": "https://nuzultech.com/blog?lang=en",
+      "hreflangs": [
+        {
+          "hreflang": "ar",
+          "href": "https://nuzultech.com/blog"
+        },
+        {
+          "hreflang": "en",
+          "href": "https://nuzultech.com/blog?lang=en"
+        },
+        {
+          "hreflang": "x-default",
+          "href": "https://nuzultech.com/blog"
+        }
+      ]
+    },
+    {
+      "route": "/blog/immutable-cloud-backup-ransomware-protection",
+      "routeName": "blog-slug",
+      "expectedTheme": "dark",
+      "expectedLang": "en",
+      "title": "The 3-2-1 Immutable Backup Architecture: Defeating Ransomware for Egyptian Enterprises | Nuzul Tech",
+      "dir": "ltr",
+      "lang": "en",
+      "dataTheme": "dark",
+      "h1Count": 1,
+      "h1Text": "The 3-2-1 Immutable Backup Architecture: Defeating Ransomware for Egyptian Enterprises",
+      "canonical": "https://nuzultech.com/blog/immutable-cloud-backup-ransomware-protection?lang=en",
+      "hreflangs": [
+        {
+          "hreflang": "ar",
+          "href": "https://nuzultech.com/blog/immutable-cloud-backup-ransomware-protection"
+        },
+        {
+          "hreflang": "en",
+          "href": "https://nuzultech.com/blog/immutable-cloud-backup-ransomware-protection?lang=en"
+        },
+        {
+          "hreflang": "x-default",
+          "href": "https://nuzultech.com/blog/immutable-cloud-backup-ransomware-protection"
+        }
+      ]
+    },
+    {
+      "route": "/contact",
+      "routeName": "contact",
+      "expectedTheme": "dark",
+      "expectedLang": "en",
+      "title": "Contact Us & Book an Engineering Consultation | Nuzul Tech",
+      "dir": "ltr",
+      "lang": "en",
+      "dataTheme": "dark",
+      "h1Count": 1,
+      "h1Text": "Book an Engineering Consultation or Request a Proposal",
+      "canonical": "https://nuzultech.com/contact?lang=en",
+      "hreflangs": [
+        {
+          "hreflang": "ar",
+          "href": "https://nuzultech.com/contact"
+        },
+        {
+          "hreflang": "en",
+          "href": "https://nuzultech.com/contact?lang=en"
+        },
+        {
+          "hreflang": "x-default",
+          "href": "https://nuzultech.com/contact"
+        }
+      ]
+    },
+    {
+      "route": "/unknown-legacy-url-404",
+      "routeName": "not-found-404",
+      "expectedTheme": "dark",
+      "expectedLang": "en",
+      "title": "Page Not Found (404) | Nuzul Tech",
+      "dir": "ltr",
+      "lang": "en",
+      "dataTheme": "dark",
+      "h1Count": 1,
+      "h1Text": "Sorry, the page you are looking for does not exist or has moved",
+      "canonical": "https://nuzultech.com/unknown-legacy-url-404?lang=en",
+      "hreflangs": [
+        {
+          "hreflang": "ar",
+          "href": "https://nuzultech.com/unknown-legacy-url-404"
+        },
+        {
+          "hreflang": "en",
+          "href": "https://nuzultech.com/unknown-legacy-url-404?lang=en"
+        },
+        {
+          "hreflang": "x-default",
+          "href": "https://nuzultech.com/unknown-legacy-url-404"
+        }
+      ]
+    }
+  ],
+  "contentMigrationProofs": [
+    {
+      "oldSection": "HeroSection (src/components/hero/HeroSection.tsx)",
+      "newUrl": "/",
+      "snippetAr": "نبني ونؤمّن البنية التحتية السحابية والشبكية",
+      "foundAr": true,
+      "snippetEn": "We Engineer and Secure the Cloud & Network Infrastructure",
+      "foundEn": true
+    },
+    {
+      "oldSection": "HomeServicePillars (4 Pillars Summary)",
+      "newUrl": "/",
+      "snippetAr": "أربعة قطاعات هندسية تغطي دورة حياة التقنية",
+      "foundAr": true,
+      "snippetEn": "Four Engineering Pillars Covering Your Entire Technology Lifecycle",
+      "foundEn": true
+    },
+    {
+      "oldSection": "HomeFeaturedCaseStudy (Featured Project)",
+      "newUrl": "/",
+      "snippetAr": "دراسة حالة مميزة",
+      "foundAr": true,
+      "snippetEn": "Featured Case Study",
+      "foundEn": true
+    },
+    {
+      "oldSection": "HomeHowWeWork (Simplified 3-Step Process)",
+      "newUrl": "/",
+      "snippetAr": "منهجية عمل واضحة في 3 خطوات",
+      "foundAr": true,
+      "snippetEn": "How We Work in 3 Clear Steps",
+      "foundEn": true
+    },
+    {
+      "oldSection": "HomeHostingTeaser (199 EGP Hosting Teaser)",
+      "newUrl": "/",
+      "snippetAr": "199",
+      "foundAr": true,
+      "snippetEn": "199",
+      "foundEn": true
+    },
+    {
+      "oldSection": "HomeTestimonials (Max 3 Client Testimonials)",
+      "newUrl": "/",
+      "snippetAr": "شهادات قادة التقنية ومديري العمليات",
+      "foundAr": true,
+      "snippetEn": "Trusted by Engineering & Operations Leaders",
+      "foundEn": true
+    },
+    {
+      "oldSection": "HomeFAQ (Executive FAQ Accordion)",
+      "newUrl": "/",
+      "snippetAr": "هل تقدمون عقود مستوى خدمة (SLA) رسمية",
+      "foundAr": true,
+      "snippetEn": "Do you provide formal SLA contracts",
+      "foundEn": true
+    },
+    {
+      "oldSection": "HomeFinalCTA (Inline Consultation CTA)",
+      "newUrl": "/",
+      "snippetAr": "هل تخطط لتحديث البنية التحتية أو نقل خوادم شركتك؟",
+      "foundAr": true,
+      "snippetEn": "Planning an Infrastructure Upgrade or Server Migration?",
+      "foundEn": true
+    },
+    {
+      "oldSection": "ServicesSection (Full 23-Service Catalog)",
+      "newUrl": "/services",
+      "snippetAr": "حلول واستشارات تقنية المعلومات للشركات",
+      "foundAr": true,
+      "snippetEn": "Enterprise IT Solutions & Engineering Consultancy",
+      "foundEn": true
+    },
+    {
+      "oldSection": "ServiceDetailPage (Individual Service Spec)",
+      "newUrl": "/services/service-1",
+      "snippetAr": "نطاق التنفيذ والمخرجات الهندسية",
+      "foundAr": true,
+      "snippetEn": "Engineering Scope & Deliverables",
+      "foundEn": true
+    },
+    {
+      "oldSection": "PackagesSection (Turnkey Bundled Packages)",
+      "newUrl": "/services",
+      "snippetAr": "باقات تأسيس وتشغيل البنية التحتية للشركات",
+      "foundAr": true,
+      "snippetEn": "Corporate Infrastructure Setup & Operations Packages",
+      "foundEn": true
+    },
+    {
+      "oldSection": "ImplementationRoadmap (4-Stage Engineering Delivery)",
+      "newUrl": "/services",
+      "snippetAr": "كيف نحوّل رؤيتك إلى بنية تحتية مستقرة في 4 مراحل؟",
+      "foundAr": true,
+      "snippetEn": "How We Transform Your Vision into Reliable Infrastructure",
+      "foundEn": true
+    },
+    {
+      "oldSection": "LiveDemosSection (ERP & Software Preview)",
+      "newUrl": "/services",
+      "snippetAr": "شاهد جودة أنظمتنا البرمجية قبل التعاقد",
+      "foundAr": true,
+      "snippetEn": "Experience Our Enterprise Software Before You Commit",
+      "foundEn": true
+    },
+    {
+      "oldSection": "PricingSection (Hosting & Cloud Plan Cards)",
+      "newUrl": "/pricing",
+      "snippetAr": "خطط الخوادم السحابية (Cloud VPS) والخوادم المخصصة",
+      "foundAr": true,
+      "snippetEn": "Cloud VPS & Dedicated Server Plans",
+      "foundEn": true
+    },
+    {
+      "oldSection": "ComparePlansSection (Full Spec Comparison Table)",
+      "newUrl": "/pricing",
+      "snippetAr": "أنوية المعالج",
+      "foundAr": true,
+      "snippetEn": "vCPU Cores",
+      "foundEn": true
+    },
+    {
+      "oldSection": "HostingPage (Cloud VPS & Dedicated Servers)",
+      "newUrl": "/hosting",
+      "snippetAr": "استضافة سحابية وخوادم افتراضية (Cloud VPS) للشركات",
+      "foundAr": true,
+      "snippetEn": "Enterprise Cloud Hosting & KVM Virtual Servers",
+      "foundEn": true
+    },
+    {
+      "oldSection": "DomainSearchWidget (Domain Registration & DNS)",
+      "newUrl": "/hosting",
+      "snippetAr": "ابحث عن اسم النطاق الرسمي لشركتك",
+      "foundAr": true,
+      "snippetEn": "Search Your Corporate Domain Name",
+      "foundEn": true
+    },
+    {
+      "oldSection": "DatacenterZones (Static Regional Deployment Zones)",
+      "newUrl": "/hosting",
+      "snippetAr": "مناطق مراكز البيانات المتاحة لنشر الخوادم",
+      "foundAr": true,
+      "snippetEn": "Available Datacenter Regions for Server Provisioning",
+      "foundEn": true
+    },
+    {
+      "oldSection": "TechStackSection (Enterprise Technology Stack)",
+      "newUrl": "/hosting",
+      "snippetAr": "توزيعات أنظمة التشغيل وقواعد البيانات المدعومة",
+      "foundAr": true,
+      "snippetEn": "Supported Operating Systems, Runtimes & Databases",
+      "foundEn": true
+    },
+    {
+      "oldSection": "ProjectsSection (Case Studies Grid)",
+      "newUrl": "/case-studies",
+      "snippetAr": "دراسات حالة لمشاريع البنية التحتية والسحابة",
+      "foundAr": true,
+      "snippetEn": "Infrastructure & Cloud Case Studies",
+      "foundEn": true
+    },
+    {
+      "oldSection": "CaseStudyDetailPage (Single Project Breakdown)",
+      "newUrl": "/case-studies/case-1",
+      "snippetAr": "التحدي التشغيلي",
+      "foundAr": true,
+      "snippetEn": "The Operational Challenge",
+      "foundEn": true
+    },
+    {
+      "oldSection": "BlogSection (Engineering Blog Index)",
+      "newUrl": "/blog",
+      "snippetAr": "مقالات وأدلة تقنية لصناع القرار",
+      "foundAr": true,
+      "snippetEn": "Technical Guides for IT Leaders",
+      "foundEn": true
+    },
+    {
+      "oldSection": "BlogDetailPage (Single Technical Article)",
+      "newUrl": "/blog/immutable-cloud-backup-ransomware-protection",
+      "snippetAr": "العودة إلى المدونة",
+      "foundAr": true,
+      "snippetEn": "Back to Blog",
+      "foundEn": true
+    },
+    {
+      "oldSection": "ContactConsultationSection (Consultation & RFP Form)",
+      "newUrl": "/contact",
+      "snippetAr": "احجز استشارة هندسية أو اطلب عرض سعر مفصل",
+      "foundAr": true,
+      "snippetEn": "Book an Engineering Consultation or Request a Proposal",
+      "foundEn": true
+    },
+    {
+      "oldSection": "TeamSection (Certified Engineering Divisions & Real Photo Slot)",
+      "newUrl": "/contact",
+      "snippetAr": "فريق هندسي معتمد يدير بنيتك التحتية",
+      "foundAr": true,
+      "snippetEn": "Certified Architects Managing Your Infrastructure",
+      "foundEn": true
+    },
+    {
+      "oldSection": "PaymentBadges (Single Footer-Only Payment Rail Strip)",
+      "newUrl": "/",
+      "snippetAr": "وسائل الدفع المعتمدة للشركات والأفراد",
+      "foundAr": true,
+      "snippetEn": "Accepted payment methods in Egypt & GCC",
+      "foundEn": true
+    },
+    {
+      "oldSection": "FloatingWhatsApp (Single Floating Contact Channel)",
+      "newUrl": "/",
+      "snippetAr": "تواصل عبر واتساب",
+      "foundAr": true,
+      "snippetEn": "Chat on WhatsApp",
+      "foundEn": true
+    }
+  ],
+  "headerFooterAudit": {
+    "headerLogoPresent": true,
+    "desktopNavLinkCount": 5,
+    "desktopNavLinks": [
+      {
+        "text": "الخدمات",
+        "href": "/services"
+      },
+      {
+        "text": "الاستضافة",
+        "href": "/hosting"
+      },
+      {
+        "text": "الأسعار",
+        "href": "/pricing"
+      },
+      {
+        "text": "دراسات الحالة",
+        "href": "/case-studies"
+      },
+      {
+        "text": "المدونة",
+        "href": "/blog"
+      }
+    ],
+    "hasNavCounters": false,
+    "hasSearchIcon": true,
+    "hasThemeToggle": true,
+    "hasLangToggle": true,
+    "desktopPrimaryCtaCount": 1,
+    "footerColumnCount": 4,
+    "paymentBadgesInstancesOnPage": 1,
+    "floatingWhatsAppPresent": true
+  },
+  "keyboardNavigationAudit": {
+    "headerTabSequence": [
+      {
+        "step": 1,
+        "tag": "a",
+        "testId": "skip-to-content",
+        "text": "تخطي إلى المحتوى الرئيسي",
+        "href": "#main-content",
+        "inHeader": true,
+        "outlineStyle": "solid",
+        "outlineColor": "rgb(15, 118, 110)",
+        "outlineWidth": "2px"
+      },
+      {
+        "step": 2,
+        "tag": "a",
+        "testId": "header-logo-link",
+        "text": "نُزول تِك - الصفحة الرئيسية",
+        "href": "/",
+        "inHeader": true,
+        "outlineStyle": "solid",
+        "outlineColor": "rgb(15, 118, 110)",
+        "outlineWidth": "2px"
+      },
+      {
+        "step": 3,
+        "tag": "a",
+        "testId": "nav-link-services",
+        "text": "الخدمات",
+        "href": "/services",
+        "inHeader": true,
+        "outlineStyle": "solid",
+        "outlineColor": "rgb(71, 85, 105)",
+        "outlineWidth": "2px"
+      },
+      {
+        "step": 4,
+        "tag": "a",
+        "testId": "nav-link-hosting",
+        "text": "الاستضافة",
+        "href": "/hosting",
+        "inHeader": true,
+        "outlineStyle": "solid",
+        "outlineColor": "rgb(71, 85, 105)",
+        "outlineWidth": "2px"
+      },
+      {
+        "step": 5,
+        "tag": "a",
+        "testId": "nav-link-pricing",
+        "text": "الأسعار",
+        "href": "/pricing",
+        "inHeader": true,
+        "outlineStyle": "solid",
+        "outlineColor": "rgb(71, 85, 105)",
+        "outlineWidth": "2px"
+      },
+      {
+        "step": 6,
+        "tag": "a",
+        "testId": "nav-link-case-studies",
+        "text": "دراسات الحالة",
+        "href": "/case-studies",
+        "inHeader": true,
+        "outlineStyle": "solid",
+        "outlineColor": "rgb(71, 85, 105)",
+        "outlineWidth": "2px"
+      },
+      {
+        "step": 7,
+        "tag": "a",
+        "testId": "nav-link-blog",
+        "text": "المدونة",
+        "href": "/blog",
+        "inHeader": true,
+        "outlineStyle": "solid",
+        "outlineColor": "rgb(71, 85, 105)",
+        "outlineWidth": "2px"
+      },
+      {
+        "step": 8,
+        "tag": "button",
+        "testId": "header-search-btn",
+        "text": "بحث في الخدمات والحلول",
+        "href": null,
+        "inHeader": true,
+        "outlineStyle": "solid",
+        "outlineColor": "rgb(71, 85, 105)",
+        "outlineWidth": "2px"
+      },
+      {
+        "step": 9,
+        "tag": "button",
+        "testId": "theme-menu-btn",
+        "text": "تغيير المظهر (الحالي: فاتح)",
+        "href": null,
+        "inHeader": true,
+        "outlineStyle": "solid",
+        "outlineColor": "rgb(71, 85, 105)",
+        "outlineWidth": "2px"
+      },
+      {
+        "step": 10,
+        "tag": "button",
+        "testId": "lang-toggle-btn",
+        "text": "EN",
+        "href": null,
+        "inHeader": true,
+        "outlineStyle": "solid",
+        "outlineColor": "rgb(71, 85, 105)",
+        "outlineWidth": "2px"
+      },
+      {
+        "step": 11,
+        "tag": "a",
+        "testId": "header-primary-cta",
+        "text": "احجز استشارة",
+        "href": "/contact",
+        "inHeader": true,
+        "outlineStyle": "solid",
+        "outlineColor": "rgb(15, 118, 110)",
+        "outlineWidth": "2px"
+      },
+      {
+        "step": 12,
+        "tag": "a",
+        "testId": "hero-primary-cta",
+        "text": "احجز استشارة",
+        "href": "/contact",
+        "inHeader": false,
+        "outlineStyle": "solid",
+        "outlineColor": "rgb(15, 118, 110)",
+        "outlineWidth": "2px"
+      }
+    ],
+    "footerTabSequence": [
+      {
+        "step": 1,
+        "tag": "a",
+        "text": "نُزول تِك - الصفحة الرئيسية",
+        "href": "/",
+        "outlineStyle": "solid",
+        "outlineWidth": "2px"
+      },
+      {
+        "step": 2,
+        "tag": "a",
+        "text": "الخدمات الهندسية",
+        "href": "/services",
+        "outlineStyle": "solid",
+        "outlineWidth": "2px"
+      },
+      {
+        "step": 3,
+        "tag": "a",
+        "text": "الاستضافة والخوادم",
+        "href": "/hosting",
+        "outlineStyle": "solid",
+        "outlineWidth": "2px"
+      },
+      {
+        "step": 4,
+        "tag": "a",
+        "text": "خطط الأسعار والباقات",
+        "href": "/pricing",
+        "outlineStyle": "solid",
+        "outlineWidth": "2px"
+      },
+      {
+        "step": 5,
+        "tag": "a",
+        "text": "دراسات الحالة",
+        "href": "/case-studies",
+        "outlineStyle": "solid",
+        "outlineWidth": "2px"
+      },
+      {
+        "step": 6,
+        "tag": "a",
+        "text": "المدونة التقنية",
+        "href": "/blog",
+        "outlineStyle": "solid",
+        "outlineWidth": "2px"
+      },
+      {
+        "step": 7,
+        "tag": "a",
+        "text": "الشبكات والبنية التحتية",
+        "href": "/services?category=infrastructure",
+        "outlineStyle": "solid",
+        "outlineWidth": "2px"
+      },
+      {
+        "step": 8,
+        "tag": "a",
+        "text": "السحابة والخوادم",
+        "href": "/services?category=cloud",
+        "outlineStyle": "solid",
+        "outlineWidth": "2px"
+      },
+      {
+        "step": 9,
+        "tag": "a",
+        "text": "الأمن السيبراني",
+        "href": "/services?category=security",
+        "outlineStyle": "solid",
+        "outlineWidth": "2px"
+      },
+      {
+        "step": 10,
+        "tag": "a",
+        "text": "البرمجيات وأنظمة الإدارة",
+        "href": "/services?category=software",
+        "outlineStyle": "solid",
+        "outlineWidth": "2px"
+      },
+      {
+        "step": 11,
+        "tag": "a",
+        "text": "+20 114 0565057",
+        "href": "tel:+201140565057",
+        "outlineStyle": "solid",
+        "outlineWidth": "2px"
+      },
+      {
+        "step": 12,
+        "tag": "a",
+        "text": "info@nuzultech.com",
+        "href": "mailto:info@nuzultech.com",
+        "outlineStyle": "solid",
+        "outlineWidth": "2px"
+      },
+      {
+        "step": 13,
+        "tag": "a",
+        "text": "خطط الأسعار",
+        "href": "/pricing",
+        "outlineStyle": "solid",
+        "outlineWidth": "2px"
+      },
+      {
+        "step": 14,
+        "tag": "a",
+        "text": "تواصل معنا",
+        "href": "/contact",
+        "outlineStyle": "solid",
+        "outlineWidth": "2px"
+      }
+    ],
+    "mobileDrawerKeyboard": {
+      "drawerOpenedByEnter": true,
+      "drawerClosedByEscape": true
+    }
+  },
+  "seoAndStaticFiles": {
+    "sitemapStatus": 200,
+    "sitemapUrlCount": 38,
+    "sitemapPreview": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\"\n        xmlns:xhtml=\"http://www.w3.org/1999/xhtml\">\n  <!-- Core Pages -->\n  <url>\n    <loc>https://nuzultech.com/</loc>\n    <xhtml:link rel=\"alternate\" hreflang=\"ar\" href=\"https://nuzultech.com/\" />\n    <xhtml:link rel=\"alternate\" hreflang=\"en\" href=\"https://nuzultech.com/?lang=en\" />\n    <xhtml:link rel=\"alternate\" hreflang=\"x-default\" href=\"https://nuzultech.com/\" />\n    <changefreq>weekly</changefreq>\n    <priority>1.0</priority>\n  </url>\n  <url>\n    <loc>https://nuzultech.com/services</loc>\n    <xhtml:link rel=\"alternate\" hreflang=\"ar\" href=\"https://nuzultech.com/services\" />\n    <xhtml:link rel=\"alternate\" hreflang=\"en\" href=\"https://nuzultech.com/services?lang=en\" />\n    <xhtml:link rel=\"alternate\" hreflang=\"x-default\" href=\"https://nuzultech.com/services\" />\n    <changefreq>weekly</changefreq>\n    <priority>0.9</priority>\n  </url>\n  <url>\n    <loc>https://nuzultech.com/pricing</loc>",
+    "robotsStatus": 200,
+    "robotsContent": "User-agent: *\nAllow: /\n\nSitemap: https://nuzultech.com/sitemap.xml",
+    "notFoundPage": {
+      "present": true,
+      "h1Text": "عذراً، الصفحة التي تبحث عنها غير موجودة أو تم نقلها",
+      "recoveryLinksCount": 9,
+      "hreflangs": [
+        {
+          "hreflang": "ar",
+          "href": "https://nuzultech.com/non-existent-page-check"
+        },
+        {
+          "hreflang": "en",
+          "href": "https://nuzultech.com/non-existent-page-check?lang=en"
+        },
+        {
+          "hreflang": "x-default",
+          "href": "https://nuzultech.com/non-existent-page-check"
+        }
+      ]
+    }
+  },
+  "axeViolations": [],
+  "consoleErrors": [],
+  "pageErrors": []
+}

@@ -10,7 +10,8 @@ export type ServiceCategoryKey =
   | 'servers'
   | 'private_cloud'
   | 'observability'
-  | 'infrastructure';
+  | 'infrastructure'
+  | 'network_infra';
 
 export interface ServiceItem {
   id: number;
@@ -85,13 +86,15 @@ export interface CaseStudy {
 }
 
 export interface Testimonial {
+  id: string;
   name_en: string;
   name_ar: string;
   role_en: string;
   role_ar: string;
+  company_en: string;
+  company_ar: string;
   text_en: string;
   text_ar: string;
-  rating: number;
 }
 
 export interface BlogPost {

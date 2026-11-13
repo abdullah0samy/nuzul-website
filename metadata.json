@@ -1,6 +1,6 @@
 {
-  "name": "IM Host — Cloud VPS & Dedicated Hosting",
-  "description": "Cloud VPS, Windows RDP and dedicated servers in the United States and Europe, with full root access, clear monthly pricing and 24/7 guru support.",
+  "name": "نُزول تِك | البنية التحتية السحابية والأمن السيبراني للشركات في مصر",
+  "description": "نُزول تِك (Nuzul Tech) — شركة مصرية متخصصة في هندسة البنية التحتية لتكنولوجيا المعلومات، الاستضافة السحابية (Cloud VPS)، الأمن السيبراني، وتطوير أنظمة ERP للشركات في مصر والخليج.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

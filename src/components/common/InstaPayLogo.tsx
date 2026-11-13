@@ -2,52 +2,30 @@ import React from 'react';
 
 interface InstaPayLogoProps {
   className?: string;
-  size?: 'sm' | 'md' | 'lg' | 'xl';
-  variant?: 'wordmark' | 'badge';
-  showInstantTag?: boolean;
+  size?: number;
 }
 
-/**
- * Authentic Official InstaPay Egypt Brand Typographic Identity
- * Displays the signature 'insta' in white/plum and 'pay' in vibrant Egyptian Orange (#FF7A00).
- */
-export const InstaPayLogo: React.FC<InstaPayLogoProps> = ({
-  className = '',
-  size = 'md',
-  variant = 'wordmark',
-  showInstantTag = false,
-}) => {
-  const sizeMap = {
-    sm: 'text-xs tracking-tight',
-    md: 'text-sm tracking-tight',
-    lg: 'text-base tracking-tight',
-    xl: 'text-xl tracking-tight',
-  };
-
-  const wordmark = (
-    <span
-      className={`font-sans font-black select-none inline-flex items-center ${sizeMap[size]} ${className}`}
-      dir="ltr"
-    >
-      <span className="text-white font-black drop-shadow-sm">insta</span>
-      <span className="text-[#FF7A00] font-black drop-shadow-sm">pay</span>
-    </span>
-  );
-
-  if (variant === 'wordmark') {
-    return wordmark;
-  }
-
+export const InstaPayLogo: React.FC<InstaPayLogoProps> = ({ className = '', size = 28 }) => {
   return (
-    <div
-      className={`inline-flex items-center gap-1.5 rounded-xl border border-purple-500/40 bg-gradient-to-r from-[#2c0830] via-[#1a051d] to-[#120314] px-2.5 py-1 text-white shadow-md transition-all ${className}`}
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 48 48"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={`shrink-0 ${className}`}
+      aria-label="InstaPay Logo"
     >
-      {wordmark}
-      {showInstantTag && (
-        <span className="rounded-md bg-emerald-500/20 border border-emerald-500/40 px-1.5 py-0.2 text-[9px] font-mono font-bold text-emerald-400">
-          تحويل لحظي
-        </span>
-      )}
-    </div>
+      <rect width="48" height="48" rx="12" fill="var(--accent)" />
+      {/* Fast transfer arrows */}
+      <path
+        d="M15 19H31L26 14M33 29H17L22 34"
+        stroke="var(--accent-contrast)"
+        strokeWidth="3.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <circle cx="24" cy="24" r="3" fill="var(--accent-contrast)" />
+    </svg>
   );
 };

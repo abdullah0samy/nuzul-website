@@ -1,893 +1,390 @@
-import React, { useState, useRef, useEffect } from 'react';
-import {
-  Menu,
-  X,
-  ShoppingCart,
-  User,
-  PhoneCall,
-  ChevronDown,
-  Linkedin,
-  Sun,
-  Moon,
-  ShieldCheck,
-  Shield,
-  Server,
-  Activity,
-  Layers,
-  ArrowRight,
-  ArrowLeft,
-  Building2,
-  Code2,
-  Lock,
-  Headphones,
-  BookOpen,
-} from 'lucide-react';
-import { useApp } from '../../context/AppContext';
+import React, { useState, useEffect, useRef } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { useApp, ThemeMode } from '../../context/AppContext';
+import { Menu, X, Globe, Sun, Moon, Monitor, Search, Check } from 'lucide-react';
 import { NuzulLogo } from '../common/NuzulLogo';
-import {
-  NUZUL_CONTACT,
-  NUZUL_SERVICES,
-  NUZUL_BLOG_POSTS,
-  NUZUL_CASE_STUDIES,
-} from '../../data/nuzulData';
+import { openGlobalSearch } from '../search/GlobalSearchCommandPalette';
 
 export const Navbar: React.FC = () => {
-  const {
-    locale,
-    setLocale,
-    currency,
-    setCurrency,
-    theme,
-    toggleTheme,
-    cart,
-    setIsCartOpen,
-    setIsClientAreaOpen,
-    setActiveArticle,
-  } = useApp();
-
-  const isAr = locale === 'ar';
-  const isDark = theme === 'dark';
-  const cartCount = cart.length;
-
+  const { lang, setLang, themeMode, setThemeMode } = useApp();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-  const [mobileExpandedSection, setMobileExpandedSection] = useState<string | null>(null);
+  const [themeMenuOpen, setThemeMenuOpen] = useState(false);
+  const location = useLocation();
 
-  const navRef = useRef<HTMLElement>(null);
+  const themeDropdownRef = useRef<HTMLDivElement>(null);
+  const drawerRef = useRef<HTMLDivElement>(null);
+  const mobileMenuBtnRef = useRef<HTMLButtonElement>(null);
 
-  // Close dropdown on click outside
+  // Section 3.10: Strictly 5 concise top-level links, zero counters, white-space: nowrap
+  const navLinks = [
+    { name: lang === 'ar' ? 'الخدمات' : 'Services', href: '/services' },
+    { name: lang === 'ar' ? 'الاستضافة' : 'Hosting', href: '/hosting' },
+    { name: lang === 'ar' ? 'الأسعار' : 'Pricing', href: '/pricing' },
+    { name: lang === 'ar' ? 'دراسات الحالة' : 'Case Studies', href: '/case-studies' },
+    { name: lang === 'ar' ? 'المدونة' : 'Blog', href: '/blog' },
+  ];
+
+  const isActive = (href: string) => {
+    if (href === '/') return location.pathname === '/';
+    return location.pathname.startsWith(href);
+  };
+
+  // Close menus on route change
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (navRef.current && !navRef.current.contains(event.target as Node)) {
-        setActiveDropdown(null);
+    setMobileMenuOpen(false);
+    setThemeMenuOpen(false);
+  }, [location.pathname]);
+
+  // Close theme menu on outside click (Desktop)
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (!themeMenuOpen) return;
+      const target = e.target as Node;
+      if (!themeDropdownRef.current?.contains(target)) {
+        setThemeMenuOpen(false);
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+  }, [themeMenuOpen]);
 
-  const handleDropdownToggle = (id: string) => {
-    setActiveDropdown((prev) => (prev === id ? null : id));
+  // Keyboard handling: Escape closes theme menu or mobile drawer; Focus Trap inside mobile drawer
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        if (themeMenuOpen) {
+          setThemeMenuOpen(false);
+          return;
+        }
+        if (mobileMenuOpen) {
+          setMobileMenuOpen(false);
+          mobileMenuBtnRef.current?.focus();
+          return;
+        }
+      }
+
+      // Focus trap when mobile drawer is open
+      if (e.key === 'Tab' && mobileMenuOpen && drawerRef.current) {
+        const focusable = Array.from(
+          drawerRef.current.querySelectorAll<HTMLElement>(
+            'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+          )
+        );
+        if (focusable.length === 0) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        const active = document.activeElement as HTMLElement | null;
+
+        if (e.shiftKey) {
+          if (!active || active === first || !drawerRef.current.contains(active)) {
+            e.preventDefault();
+            last.focus();
+          }
+        } else {
+          if (!active || active === last || !drawerRef.current.contains(active)) {
+            e.preventDefault();
+            first.focus();
+          }
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [mobileMenuOpen, themeMenuOpen]);
+
+  // Move focus into drawer when opened via keyboard/click
+  useEffect(() => {
+    if (mobileMenuOpen && drawerRef.current) {
+      const firstFocusable = drawerRef.current.querySelector<HTMLElement>('a[href], button:not([disabled])');
+      firstFocusable?.focus();
+    }
+  }, [mobileMenuOpen]);
+
+  const handleSearchTrigger = () => {
+    setMobileMenuOpen(false);
+    setThemeMenuOpen(false);
+    openGlobalSearch('');
   };
 
-  const handleMobileSectionToggle = (id: string) => {
-    setMobileExpandedSection((prev) => (prev === id ? null : id));
-  };
-
-  const liveDemosList = [
-    {
-      id: 'his',
-      titleAr: 'ديمو نظام المستشفيات (HIS Demo)',
-      titleEn: 'Hospital Information System (HIS)',
-      tagAr: 'EMR والصيدليات والعمليات',
-      tagEn: 'EMR, Pharmacy & Surgery Core',
-    },
-    {
-      id: 'clinic',
-      titleAr: 'منصة العيادات (ClinicCore™)',
-      titleEn: 'ClinicCore™ SaaS Platform',
-      tagAr: 'سحابي أو ترخيص ملكية كاملة',
-      tagEn: 'SaaS or Self-Hosted License',
-    },
+  const themeOptions: { mode: ThemeMode; labelAr: string; labelEn: string; icon: React.ReactNode }[] = [
+    { mode: 'light', labelAr: 'فاتح', labelEn: 'Light', icon: <Sun className="w-4 h-4 shrink-0" /> },
+    { mode: 'dark', labelAr: 'داكن', labelEn: 'Dark', icon: <Moon className="w-4 h-4 shrink-0" /> },
+    { mode: 'system', labelAr: 'تلقائي', labelEn: 'System', icon: <Monitor className="w-4 h-4 shrink-0" /> },
   ];
 
-  // Group services into 3 concise high-impact enterprise columns
-  const softwareServices = NUZUL_SERVICES.filter((s) => s.category_key === 'software');
-  const infraCloudServices = NUZUL_SERVICES.filter((s) => s.category_key === 'infra_cloud');
-  const securityObsServices = NUZUL_SERVICES.filter((s) => s.category_key === 'security_obs');
+  const currentThemeOpt = themeOptions.find((o) => o.mode === themeMode) || themeOptions[2];
+  const currentThemeLabel = lang === 'ar' ? currentThemeOpt.labelAr : currentThemeOpt.labelEn;
 
   return (
-    <header
-      ref={navRef}
-      className={`sticky top-0 z-50 w-full border-b backdrop-blur-md transition-colors ${
-        isDark
-          ? 'bg-[#070c14]/95 border-white/10 text-white'
-          : 'bg-white/95 border-slate-200 text-slate-900 shadow-sm'
-      }`}
-    >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <nav className="flex h-17 w-full items-center justify-between gap-4">
-          {/* Brand Logo & Name */}
-          <div className="flex items-center gap-4 xl:gap-6 shrink-0">
-            <a
-              href={`#${locale}`}
-              className="group inline-flex items-center gap-2.5 select-none"
-              aria-label="Nuzul Tech Homepage"
-            >
-              <NuzulLogo size="md" />
-            </a>
+    <header className="sticky top-0 z-50 bg-header-glass border-b border-token transition-colors">
+      {/* Keyboard Skip to Main Content Link */}
+      <a
+        href="#main-content"
+        data-testid="skip-to-content"
+        className="sr-only top-0 start-0 focus:not-sr-only focus:fixed focus:top-3 focus:start-4 focus:z-[100] focus:px-4 focus:py-2.5 focus:min-h-[44px] focus:inline-flex focus:items-center focus:rounded-lg focus:bg-accent focus:text-accent-contrast focus:text-sm focus:font-bold whitespace-nowrap"
+      >
+        {lang === 'ar' ? 'تخطي إلى المحتوى الرئيسي' : 'Skip to main content'}
+      </a>
 
-            {/* Desktop Navigation Links: 4 Consolidated Executive Pillars */}
-            <div className="hidden lg:flex lg:items-center lg:gap-1 xl:gap-2">
-              {/* 1. Services & Solutions Mega Dropdown */}
-              <div className="relative">
-                <button
-                  type="button"
-                  onClick={() => handleDropdownToggle('services')}
-                  onMouseEnter={() => setActiveDropdown('services')}
-                  className={`inline-flex items-center gap-1.5 rounded-xl px-3 py-1.5 text-xs font-bold transition-all cursor-pointer ${
-                    activeDropdown === 'services'
-                      ? 'bg-emerald-500/15 text-emerald-600 dark:text-emerald-400'
-                      : 'text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-slate-500/5'
-                  }`}
-                >
-                  <span>{isAr ? 'الخدمات والحلول (23)' : 'Services & Solutions (23)'}</span>
-                  <ChevronDown
-                    className={`h-3.5 w-3.5 transition-transform duration-200 ${
-                      activeDropdown === 'services' ? 'rotate-180 text-emerald-500' : 'text-slate-400'
-                    }`}
-                  />
-                </button>
+      <div className="container-nuzul h-16 flex items-center justify-between gap-2 sm:gap-4">
+        {/* Logo */}
+        <Link
+          to="/"
+          data-testid="header-logo-link"
+          className="inline-flex items-center min-h-[44px] py-1.5 rounded-lg shrink-0 whitespace-nowrap"
+          aria-label={lang === 'ar' ? 'نزول تك - الصفحة الرئيسية' : 'Nuzul Tech - Home'}
+        >
+          <NuzulLogo size={30} variant="auto" />
+        </Link>
 
-                {activeDropdown === 'services' && (
-                  <div
-                    onMouseLeave={() => setActiveDropdown(null)}
-                    className={`absolute top-full mt-2 w-[840px] overflow-hidden rounded-2xl border p-4 shadow-2xl backdrop-blur-xl z-50 transition-all ${
-                      isDark ? 'border-white/10 bg-[#0d1524]' : 'border-slate-200 bg-white'
-                    } ${isAr ? 'right-0' : 'left-0'}`}
-                  >
-                    <div className="flex items-center justify-between border-b border-current/10 pb-2 mb-3">
-                      <span className="text-xs font-mono font-bold uppercase text-emerald-600 dark:text-emerald-400">
-                        {isAr ? 'كافة الخدمات والحلول التقنية المتكاملة' : 'Integrated Enterprise IT Solutions'}
-                      </span>
-                      <a
-                        href="#services"
-                        onClick={() => setActiveDropdown(null)}
-                        className="text-[11px] font-bold text-emerald-600 dark:text-emerald-400 hover:underline inline-flex items-center gap-1"
-                      >
-                        <span>{isAr ? 'استعراض الكل في الصفحة' : 'Browse All'}</span>
-                        {isAr ? <ArrowLeft className="h-3 w-3" /> : <ArrowRight className="h-3 w-3" />}
-                      </a>
-                    </div>
-
-                    <div className="grid grid-cols-3 gap-4">
-                      {/* Col 1: Software & Digital */}
-                      <div className="space-y-1">
-                        <div className="flex items-center gap-1 text-[11px] font-bold text-slate-900 dark:text-white border-b border-current/10 pb-1 mb-1.5">
-                          <Code2 className="h-3.5 w-3.5 text-emerald-500" />
-                          <span>{isAr ? 'البرمجيات والحلول الرقمية' : 'Software & Digital (6)'}</span>
-                        </div>
-                        {softwareServices.map((svc) => (
-                          <a
-                            key={svc.id}
-                            href="#services"
-                            onClick={() => setActiveDropdown(null)}
-                            className="block rounded-lg px-2 py-1 text-xs text-slate-600 dark:text-slate-300 hover:bg-emerald-500/10 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
-                          >
-                            {isAr ? svc.title_ar : svc.title_en}
-                          </a>
-                        ))}
-                      </div>
-
-                      {/* Col 2: Infrastructure & Cloud */}
-                      <div className="space-y-1">
-                        <div className="flex items-center gap-1 text-[11px] font-bold text-slate-900 dark:text-white border-b border-current/10 pb-1 mb-1.5">
-                          <Server className="h-3.5 w-3.5 text-emerald-500" />
-                          <span>{isAr ? 'البنية التحتية والسحابية' : 'Infrastructure & Cloud (10)'}</span>
-                        </div>
-                        {infraCloudServices.map((svc) => (
-                          <a
-                            key={svc.id}
-                            href="#services"
-                            onClick={() => setActiveDropdown(null)}
-                            className="block rounded-lg px-2 py-1 text-xs text-slate-600 dark:text-slate-300 hover:bg-emerald-500/10 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
-                          >
-                            {isAr ? svc.title_ar : svc.title_en}
-                          </a>
-                        ))}
-                      </div>
-
-                      {/* Col 3: Security & Observability */}
-                      <div className="space-y-1">
-                        <div className="flex items-center gap-1 text-[11px] font-bold text-slate-900 dark:text-white border-b border-current/10 pb-1 mb-1.5">
-                          <Lock className="h-3.5 w-3.5 text-emerald-500" />
-                          <span>{isAr ? 'الأمن والمراقبة والسنترال' : 'Security & Telephony (7)'}</span>
-                        </div>
-                        {securityObsServices.map((svc) => (
-                          <a
-                            key={svc.id}
-                            href="#services"
-                            onClick={() => setActiveDropdown(null)}
-                            className="block rounded-lg px-2 py-1 text-xs text-slate-600 dark:text-slate-300 hover:bg-emerald-500/10 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
-                          >
-                            {isAr ? svc.title_ar : svc.title_en}
-                          </a>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              {/* 2. Packages & Cloud Pricing */}
-              <div className="relative">
-                <button
-                  type="button"
-                  onClick={() => handleDropdownToggle('pricing')}
-                  onMouseEnter={() => setActiveDropdown('pricing')}
-                  className={`inline-flex items-center gap-1.5 rounded-xl px-3 py-1.5 text-xs font-bold transition-all cursor-pointer ${
-                    activeDropdown === 'pricing'
-                      ? 'bg-emerald-500/15 text-emerald-600 dark:text-emerald-400'
-                      : 'text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-slate-500/5'
-                  }`}
-                >
-                  <span>{isAr ? 'الباقات والسيرفرات' : 'Packages & Servers'}</span>
-                  <ChevronDown
-                    className={`h-3.5 w-3.5 transition-transform duration-200 ${
-                      activeDropdown === 'pricing' ? 'rotate-180 text-emerald-500' : 'text-slate-400'
-                    }`}
-                  />
-                </button>
-
-                {activeDropdown === 'pricing' && (
-                  <div
-                    onMouseLeave={() => setActiveDropdown(null)}
-                    className={`absolute top-full mt-2 w-84 overflow-hidden rounded-2xl border p-3.5 shadow-2xl backdrop-blur-xl z-50 ${
-                      isDark ? 'border-white/10 bg-[#0d1524]' : 'border-slate-200 bg-white'
-                    } ${isAr ? 'right-0' : 'left-0'}`}
-                  >
-                    <div className="space-y-1.5">
-                      <a
-                        href="#packages"
-                        onClick={() => setActiveDropdown(null)}
-                        className="group flex items-center justify-between rounded-xl px-3 py-2 text-xs hover:bg-emerald-500/10 transition-colors"
-                      >
-                        <div>
-                          <div className="font-bold text-slate-900 dark:text-white group-hover:text-emerald-500">
-                            {isAr ? 'باقات قطاع تقني كامل (ITaaS)' : 'IT as a Service Packages'}
-                          </div>
-                          <div className="text-[10px] text-slate-400">
-                            {isAr ? 'Starter, Business, Pro, Enterprise' : '4 Turnkey Enterprise Tiers'}
-                          </div>
-                        </div>
-                        <span className="text-[10px] font-mono font-bold text-emerald-400">SLA 24/7</span>
-                      </a>
-
-                      <a
-                        href="#pricing"
-                        onClick={() => setActiveDropdown(null)}
-                        className="group flex items-center justify-between rounded-xl px-3 py-2 text-xs hover:bg-emerald-500/10 transition-colors"
-                      >
-                        <div>
-                          <div className="font-bold text-slate-900 dark:text-white group-hover:text-emerald-500">
-                            {isAr ? 'خوادم سطح المكتب السحابي VPS' : 'Cloud Desktop VPS'}
-                          </div>
-                          <div className="text-[10px] text-slate-400">
-                            {isAr ? 'وصول آمن وسريع للموظفين والمحاسبين' : 'Remote Access for Distributed Teams'}
-                          </div>
-                        </div>
-                        <span className="text-[10px] font-mono font-bold text-emerald-500">1,000 ج.م</span>
-                      </a>
-
-                      <a
-                        href="#pricing"
-                        onClick={() => setActiveDropdown(null)}
-                        className="group flex items-center justify-between rounded-xl px-3 py-2 text-xs hover:bg-emerald-500/10 transition-colors"
-                      >
-                        <div>
-                          <div className="font-bold text-slate-900 dark:text-white group-hover:text-emerald-500">
-                            {isAr ? 'سيرفرات KVM NVMe المدارة' : 'Managed KVM NVMe VPS'}
-                          </div>
-                          <div className="text-[10px] text-slate-400">
-                            {isAr ? 'تحكم كامل مع صيانة ونسخ احتياطي' : 'Root Access with Managed Backup'}
-                          </div>
-                        </div>
-                        <span className="text-[10px] font-mono text-cyan-400">1 Gbps</span>
-                      </a>
-
-                      <a
-                        href="#compare-plans"
-                        onClick={() => setActiveDropdown(null)}
-                        className="group flex items-center justify-between rounded-xl px-3 py-2 text-xs bg-emerald-500/5 hover:bg-emerald-500/10 transition-colors border border-emerald-500/20"
-                      >
-                        <div>
-                          <div className="font-bold text-emerald-600 dark:text-emerald-400">
-                            {isAr ? 'مقارنة مواصفات السيرفرات' : 'Compare VPS Specs'}
-                          </div>
-                          <div className="text-[10px] text-slate-400">
-                            {isAr ? 'جدول مقارنة المواصفات التقنية جنباً إلى جنب' : 'Side-by-side technical specs table'}
-                          </div>
-                        </div>
-                        <span className="text-[10px] font-mono font-bold text-emerald-500">{isAr ? 'جديد' : 'New'}</span>
-                      </a>
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              {/* 3. Live Demos & Case Studies */}
-              <div className="relative">
-                <button
-                  type="button"
-                  onClick={() => handleDropdownToggle('demos')}
-                  onMouseEnter={() => setActiveDropdown('demos')}
-                  className={`inline-flex items-center gap-1.5 rounded-xl px-3 py-1.5 text-xs font-bold transition-all cursor-pointer ${
-                    activeDropdown === 'demos'
-                      ? 'bg-emerald-500/15 text-emerald-600 dark:text-emerald-400'
-                      : 'text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-slate-500/5'
-                  }`}
-                >
-                  <span>{isAr ? 'الأنظمة وسابقة الأعمال' : 'Systems & Portfolio'}</span>
-                  <ChevronDown
-                    className={`h-3.5 w-3.5 transition-transform duration-200 ${
-                      activeDropdown === 'demos' ? 'rotate-180 text-emerald-500' : 'text-slate-400'
-                    }`}
-                  />
-                </button>
-
-                {activeDropdown === 'demos' && (
-                  <div
-                    onMouseLeave={() => setActiveDropdown(null)}
-                    className={`absolute top-full mt-2 w-[480px] overflow-hidden rounded-2xl border p-4 shadow-2xl backdrop-blur-xl z-50 ${
-                      isDark ? 'border-white/10 bg-[#0d1524]' : 'border-slate-200 bg-white'
-                    } ${isAr ? 'right-0' : 'left-0'}`}
-                  >
-                    <div className="space-y-3">
-                      <div>
-                        <div className="text-[11px] font-mono font-bold text-emerald-600 dark:text-emerald-400 uppercase mb-1.5">
-                          {isAr ? 'الأنظمة الطبية الحية' : 'Live Healthcare Demos'}
-                        </div>
-                        <div className="grid grid-cols-2 gap-2">
-                          {liveDemosList.map((demo) => (
-                            <a
-                              key={demo.id}
-                              href="#live-demos"
-                              onClick={() => setActiveDropdown(null)}
-                              className="rounded-xl border border-current/10 p-2.5 transition-all hover:border-emerald-500/40 hover:bg-emerald-500/10"
-                            >
-                              <div className="text-xs font-bold text-slate-800 dark:text-slate-200">
-                                {isAr ? demo.titleAr : demo.titleEn}
-                              </div>
-                              <div className="text-[10px] text-emerald-500 font-mono mt-0.5">
-                                {isAr ? demo.tagAr : demo.tagEn}
-                              </div>
-                            </a>
-                          ))}
-                        </div>
-                      </div>
-
-                      <div className="border-t border-current/10 pt-2.5">
-                        <div className="flex items-center justify-between mb-1.5">
-                          <span className="text-[11px] font-mono font-bold text-slate-400 uppercase">
-                            {isAr ? `سابقة أعمال المستشفيات والشركات (${NUZUL_CASE_STUDIES.length})` : `Enterprise Case Studies (${NUZUL_CASE_STUDIES.length})`}
-                          </span>
-                          <a
-                            href="#projects"
-                            onClick={() => setActiveDropdown(null)}
-                            className="text-[11px] font-bold text-emerald-500 hover:underline"
-                          >
-                            {isAr ? 'عرض الكل' : 'View All'}
-                          </a>
-                        </div>
-                        <div className="grid grid-cols-2 gap-1 text-xs">
-                          {NUZUL_CASE_STUDIES.slice(0, 4).map((c) => (
-                            <a
-                              key={c.id}
-                              href="#projects"
-                              onClick={() => setActiveDropdown(null)}
-                              className="truncate rounded-lg px-2 py-1 text-slate-600 dark:text-slate-300 hover:bg-emerald-500/10 hover:text-emerald-500 transition-colors"
-                            >
-                              • {isAr ? c.client_ar.split('—')[0] : c.client_en.split('—')[0]}
-                            </a>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              {/* 4. Engineering Knowledge Base */}
-              <div className="relative">
-                <a
-                  href="#blog"
-                  className="inline-flex items-center gap-1.5 rounded-xl px-3 py-1.5 text-xs font-bold text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-slate-500/5 transition-all cursor-pointer"
-                >
-                  <BookOpen className="h-3.5 w-3.5 text-emerald-500" />
-                  <span>{isAr ? `المكتبة الهندسية (${NUZUL_BLOG_POSTS.length})` : `Guides (${NUZUL_BLOG_POSTS.length})`}</span>
-                </a>
-              </div>
-            </div>
-          </div>
-
-          {/* Right Action Zone */}
-          <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
-            {/* 1. Direct WhatsApp Action */}
-            <a
-              href={NUZUL_CONTACT.whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden sm:inline-flex items-center gap-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white px-3 py-1.5 text-xs font-bold transition-all shadow-sm hover:shadow cursor-pointer"
-              title={isAr ? 'تواصل عبر واتساب' : 'Chat via WhatsApp'}
-            >
-              <PhoneCall className="h-3.5 w-3.5" />
-              <span>{isAr ? 'واتساب' : 'WhatsApp'}</span>
-            </a>
-
-            {/* 3. Cart Trigger */}
-            <button
-              type="button"
-              onClick={() => setIsCartOpen(true)}
-              aria-label={isAr ? 'عربة الخدمات والسيرفرات' : 'Services & Server Cart'}
-              className={`relative inline-flex h-9 w-9 items-center justify-center rounded-xl border transition-all cursor-pointer ${
-                isDark
-                  ? 'border-white/10 bg-white/[0.04] text-slate-300 hover:border-emerald-500/40 hover:text-white'
-                  : 'border-slate-200 bg-slate-100 text-slate-700 hover:border-emerald-500 hover:text-slate-900'
+        {/* Desktop Navigation (Switches to hamburger drawer below 1024px / lg) */}
+        <nav
+          className="hidden lg:flex items-center gap-5 xl:gap-8 shrink-0"
+          aria-label={lang === 'ar' ? 'التنقل الرئيسي' : 'Main Navigation'}
+        >
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              to={link.href}
+              data-testid={`nav-link-${link.href.replace('/', '')}`}
+              className={`inline-flex items-center min-h-[44px] text-sm xl:text-base font-medium transition-colors py-2.5 border-b-2 whitespace-nowrap ${
+                isActive(link.href)
+                  ? 'text-accent border-accent font-semibold'
+                  : 'text-muted border-transparent hover-text-main'
               }`}
             >
-              <ShoppingCart className="h-4 w-4" />
-              {cartCount > 0 && (
-                <span className="absolute -top-1.5 -right-1.5 flex h-4.5 min-w-[1.125rem] items-center justify-center rounded-full bg-emerald-500 px-1 font-mono text-[10px] font-bold text-white shadow-md">
-                  {cartCount}
-                </span>
-              )}
-            </button>
-
-            {/* 4. Primary CTA: Portal (Compact on small phones, full text on sm+) */}
-            <button
-              type="button"
-              onClick={() => setIsClientAreaOpen(true)}
-              className="btn btn-primary inline-flex h-9 items-center gap-1.5 px-2.5 sm:px-4 text-xs font-bold uppercase tracking-wider cursor-pointer shadow-sm"
-              title={isAr ? 'بوابة العميل' : 'Portal'}
-            >
-              <User className="h-3.5 w-3.5" />
-              <span className="hidden sm:inline">{isAr ? 'بوابة العميل' : 'Portal'}</span>
-            </button>
-
-            {/* 5. Mobile & Tablet 3-Stripes / Hamburger Menu (Prominent, High-Contrast & Always Visible on Mobile) */}
-            <button
-              type="button"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className={`inline-flex h-9 w-9 items-center justify-center rounded-xl border transition-all lg:hidden cursor-pointer shadow-sm ${
-                mobileMenuOpen
-                  ? 'border-emerald-500/60 bg-emerald-500/20 text-emerald-400 ring-2 ring-emerald-500/30'
-                  : isDark
-                  ? 'border-emerald-500/40 bg-emerald-500/10 text-white hover:border-emerald-500 hover:bg-emerald-500/20'
-                  : 'border-emerald-600/30 bg-emerald-50 text-slate-900 hover:bg-emerald-100'
-              }`}
-              aria-label={isAr ? 'قائمة خريطة الموقع والروابط' : 'Toggle navigation menu'}
-              title={isAr ? 'روابط وخريطة الموقع' : 'Navigation Menu'}
-            >
-              {mobileMenuOpen ? (
-                <X className="h-5 w-5 stroke-[2.5]" />
-              ) : (
-                <Menu className="h-5 w-5 stroke-[2.5] text-emerald-500 dark:text-emerald-400" />
-              )}
-            </button>
-          </div>
+              {link.name}
+            </Link>
+          ))}
         </nav>
+
+        {/* Desktop Actions: Search Icon + Single Theme Icon Button w/ Menu + Compact Language Toggle + Short CTA */}
+        <div className="hidden lg:flex items-center gap-2 shrink-0">
+          {/* Search Icon Trigger */}
+          <button
+            type="button"
+            onClick={handleSearchTrigger}
+            data-testid="header-search-btn"
+            aria-label={lang === 'ar' ? 'بحث في الخدمات والحلول' : 'Search services and solutions'}
+            title={lang === 'ar' ? 'بحث (الانتقال إلى دليل الخدمات)' : 'Search (Jump to services catalog)'}
+            className="inline-flex items-center justify-center min-w-[44px] min-h-[44px] w-11 h-11 p-2.5 text-muted hover-text-main hover-surface-2 rounded-lg transition-colors border border-token whitespace-nowrap shrink-0"
+          >
+            <Search className="w-4 h-4 shrink-0" />
+          </button>
+
+          {/* Single Theme Icon Button with Dropdown Menu (فاتح / داكن / تلقائي) */}
+          <div className="relative" ref={themeDropdownRef}>
+            <button
+              type="button"
+              onClick={() => setThemeMenuOpen((prev) => !prev)}
+              data-testid="theme-menu-btn"
+              aria-haspopup="menu"
+              aria-expanded={themeMenuOpen}
+              aria-label={
+                lang === 'ar'
+                  ? `تغيير المظهر (الحالي: ${currentThemeLabel})`
+                  : `Change theme (Current: ${currentThemeLabel})`
+              }
+              title={
+                lang === 'ar'
+                  ? `المظهر: ${currentThemeLabel}`
+                  : `Theme: ${currentThemeLabel}`
+              }
+              className="inline-flex items-center justify-center min-w-[44px] min-h-[44px] w-11 h-11 p-2.5 text-muted hover-text-main hover-surface-2 rounded-lg transition-colors border border-token whitespace-nowrap shrink-0"
+            >
+              {currentThemeOpt.icon}
+            </button>
+
+            {themeMenuOpen && (
+              <div
+                role="menu"
+                data-testid="theme-dropdown-menu"
+                aria-label={lang === 'ar' ? 'قائمة المظهر' : 'Theme menu'}
+                className="absolute end-0 mt-2 w-40 rounded-xl bg-surface border border-token shadow-lg p-1.5 z-50"
+              >
+                {themeOptions.map((opt) => {
+                  const active = themeMode === opt.mode;
+                  const label = lang === 'ar' ? opt.labelAr : opt.labelEn;
+                  return (
+                    <button
+                      key={opt.mode}
+                      type="button"
+                      role="menuitemradio"
+                      aria-checked={active}
+                      onClick={() => {
+                        setThemeMode(opt.mode);
+                        setThemeMenuOpen(false);
+                      }}
+                      data-testid={`theme-btn-${opt.mode}`}
+                      className={`w-full min-h-[44px] px-3 py-2.5 rounded-lg text-xs font-semibold flex items-center justify-between gap-2 transition-colors whitespace-nowrap ${
+                        active
+                          ? 'bg-surface-2 text-accent'
+                          : 'text-main hover-surface-2'
+                      }`}
+                    >
+                      <span className="inline-flex items-center gap-2 whitespace-nowrap">
+                        {opt.icon}
+                        <span>{label}</span>
+                      </span>
+                      {active && <Check className="w-3.5 h-3.5 text-accent shrink-0" />}
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+
+          {/* Compact Language Toggle */}
+          <button
+            type="button"
+            onClick={() => setLang(lang === 'ar' ? 'en' : 'ar')}
+            data-testid="lang-toggle-btn"
+            className="inline-flex items-center justify-center gap-1.5 min-w-[44px] min-h-[44px] px-3 py-2.5 text-xs font-semibold text-muted hover-text-main hover-surface-2 rounded-lg transition-colors border border-token whitespace-nowrap shrink-0"
+            aria-label={lang === 'ar' ? 'EN - Switch to English' : 'عربي - التبديل إلى العربية'}
+          >
+            <Globe className="w-4 h-4 text-muted shrink-0" />
+            <span className="ltr-num whitespace-nowrap">{lang === 'ar' ? 'EN' : 'عربي'}</span>
+          </button>
+
+          {/* Primary CTA (Shortened per Section 3.10: "احجز استشارة" / "Book Consultation") */}
+          <Link
+            to="/contact"
+            data-testid="header-primary-cta"
+            className="btn-primary min-h-[44px] px-4 xl:px-5 py-2.5 text-sm whitespace-nowrap shrink-0"
+          >
+            {lang === 'ar' ? 'احجز استشارة' : 'Book Consultation'}
+          </Link>
+        </div>
+
+        {/* Mobile / Tablet Controls (< 1024px) — Strictly 3 controls: Logo, Search, Menu (Section 3.10 & 3.11) */}
+        <div className="flex lg:hidden items-center gap-2 shrink-0">
+          <button
+            type="button"
+            onClick={handleSearchTrigger}
+            data-testid="mobile-header-search-btn"
+            aria-label={lang === 'ar' ? 'بحث في الخدمات والحلول' : 'Search services and solutions'}
+            className="inline-flex items-center justify-center min-w-[44px] min-h-[44px] w-11 h-11 p-2.5 text-muted hover-text-main border border-token rounded-lg bg-surface whitespace-nowrap shrink-0"
+          >
+            <Search className="w-4 h-4 shrink-0" />
+          </button>
+
+          <button
+            ref={mobileMenuBtnRef}
+            type="button"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            data-testid="mobile-menu-toggle-btn"
+            className="inline-flex items-center justify-center min-w-[44px] min-h-[44px] w-11 h-11 p-2.5 text-main hover-surface-2 border border-token rounded-lg transition-colors whitespace-nowrap shrink-0"
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-nav-drawer"
+            aria-label={lang === 'ar' ? 'القائمة' : 'Menu'}
+          >
+            {mobileMenuOpen ? <X className="w-5 h-5 shrink-0" /> : <Menu className="w-5 h-5 shrink-0" />}
+          </button>
+        </div>
       </div>
 
-      {/* Responsive Mobile Drawer with Backdrop Overlay & Organized Hierarchical Accordions */}
+      {/* Mobile Drawer with Focus Trap, Escape Support & Preferences (Theme & Lang inside) */}
       {mobileMenuOpen && (
-        <>
-          {/* Backdrop Overlay */}
-          <div
-            className="fixed inset-0 top-17 z-40 bg-black/60 backdrop-blur-sm lg:hidden transition-opacity"
-            onClick={() => setMobileMenuOpen(false)}
-            aria-hidden="true"
-          />
-
-          {/* Drawer Container */}
-          <div
-            className={`fixed inset-x-0 top-17 z-50 max-h-[calc(100vh-4.25rem)] overflow-y-auto border-b px-4 sm:px-6 py-5 shadow-2xl lg:hidden transition-all duration-300 ${
-              isDark ? 'bg-[#0a111c]/98 border-white/10 text-white' : 'bg-white/98 border-slate-200 text-slate-900'
-            }`}
+        <div
+          id="mobile-nav-drawer"
+          ref={drawerRef}
+          role="dialog"
+          aria-modal="true"
+          aria-label={lang === 'ar' ? 'قائمة التنقل' : 'Navigation Menu'}
+          data-testid="mobile-nav-drawer"
+          className="lg:hidden bg-surface border-b border-token px-6 py-5 space-y-4 shadow-xl"
+        >
+          <nav
+            className="flex flex-col space-y-1"
+            aria-label={lang === 'ar' ? 'قائمة الجوال' : 'Mobile Navigation'}
           >
-            <div className="space-y-3">
-              {/* Quick Utility Row */}
-              <div
-                className={`flex items-center justify-between rounded-2xl border p-2 text-xs ${
-                  isDark ? 'bg-[#0d1524] border-white/10' : 'bg-slate-100 border-slate-200'
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                to={link.href}
+                onClick={() => setMobileMenuOpen(false)}
+                className={`min-h-[44px] py-3 px-3 rounded-lg text-base font-medium flex items-center transition-colors whitespace-nowrap ${
+                  isActive(link.href)
+                    ? 'bg-accent-soft text-accent font-semibold'
+                    : 'text-main hover-surface-2'
                 }`}
               >
-                {/* Language Switch */}
-                <div className="flex items-center gap-1">
-                  <button
-                    type="button"
-                    onClick={() => setLocale('ar')}
-                    className={`rounded-lg px-2.5 py-1 font-bold text-xs cursor-pointer ${
-                      isAr ? 'bg-emerald-500 text-white' : 'text-slate-400'
-                    }`}
-                  >
-                    العربية
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setLocale('en')}
-                    className={`rounded-lg px-2.5 py-1 font-bold text-xs cursor-pointer ${
-                      !isAr ? 'bg-emerald-500 text-white' : 'text-slate-400'
-                    }`}
-                  >
-                    EN
-                  </button>
-                </div>
+                {link.name}
+              </Link>
+            ))}
+          </nav>
 
-                {/* Theme Switcher */}
-                <button
-                  type="button"
-                  onClick={toggleTheme}
-                  className={`flex items-center gap-1.5 rounded-lg border px-2.5 py-1 text-xs font-bold cursor-pointer ${
-                    isDark ? 'border-white/10 bg-white/5 text-amber-300' : 'border-slate-300 bg-white text-indigo-600'
-                  }`}
-                  aria-label="Toggle Theme"
-                >
-                  {isDark ? <Sun className="h-3.5 w-3.5 text-amber-400" /> : <Moon className="h-3.5 w-3.5 text-indigo-600" />}
-                  <span>{isDark ? 'النهار' : 'الليل'}</span>
-                </button>
-
-                {/* Currency */}
-                <div className="flex items-center gap-1 font-mono text-xs">
-                  {(['EGP', 'USD', 'SAR'] as const).map((curr) => (
-                    <button
-                      key={curr}
-                      type="button"
-                      onClick={() => setCurrency(curr)}
-                      className={`rounded px-1.5 py-0.5 cursor-pointer ${
-                        currency === curr ? 'bg-emerald-500 text-white font-bold' : 'text-slate-400'
-                      }`}
-                    >
-                      {curr}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Mobile Nav Accordions with Concise Lists */}
-              <div className="space-y-2">
-                {/* Header Label: Full Site Navigation */}
-                <div className="flex items-center justify-between px-1 text-[11px] font-mono font-bold text-slate-400 uppercase tracking-wider">
-                  <span>{isAr ? 'خريطة أقسام وخدمات الموقع' : 'Full Site Map & Navigation'}</span>
-                  <span className="text-emerald-500 font-bold">{NUZUL_SERVICES.length + NUZUL_CASE_STUDIES.length + NUZUL_BLOG_POSTS.length} {isAr ? 'رابط' : 'Links'}</span>
-                </div>
-
-                {/* 1. Services by Category Pillar (Software, Cloud, Security) */}
-                <div
-                  className={`rounded-2xl border overflow-hidden transition-colors ${
-                    isDark ? 'bg-[#0d1524] border-white/10' : 'bg-slate-50 border-slate-200'
-                  }`}
-                >
-                  <button
-                    type="button"
-                    onClick={() => handleMobileSectionToggle('m-services')}
-                    className="w-full flex items-center justify-between p-3.5 text-start font-bold text-xs cursor-pointer"
-                  >
-                    <div className="flex items-center gap-2">
-                      <Layers className="h-4 w-4 text-emerald-500" />
-                      <span>{isAr ? `دليل كافة الخدمات التقنية (${NUZUL_SERVICES.length})` : `All Technical Services (${NUZUL_SERVICES.length})`}</span>
-                    </div>
-                    <ChevronDown
-                      className={`h-4 w-4 transition-transform duration-200 ${
-                        mobileExpandedSection === 'm-services' ? 'rotate-180 text-emerald-500' : 'text-slate-400'
-                      }`}
-                    />
-                  </button>
-                  {mobileExpandedSection === 'm-services' && (
-                    <div className="px-3 pb-3 pt-1 space-y-3 border-t border-current/10 max-h-72 overflow-y-auto">
-                      {/* Software Pillar */}
-                      <div className="space-y-1">
-                        <div className="text-[10px] font-bold font-mono text-emerald-600 dark:text-emerald-400 uppercase">
-                          {isAr ? '1. البرمجيات والحلول الرقمية' : '1. Software & Digital Solutions'}
-                        </div>
-                        {softwareServices.map((s) => (
-                          <a
-                            key={s.id}
-                            href="#services"
-                            onClick={() => setMobileMenuOpen(false)}
-                            className="block py-1 px-2 rounded-lg text-xs text-slate-300 dark:text-slate-300 hover:bg-emerald-500/10 hover:text-emerald-500 transition-colors"
-                          >
-                            • {isAr ? s.title_ar : s.title_en}
-                          </a>
-                        ))}
-                      </div>
-
-                      {/* Infrastructure & Cloud Pillar */}
-                      <div className="space-y-1 border-t border-white/5 pt-2">
-                        <div className="text-[10px] font-bold font-mono text-emerald-600 dark:text-emerald-400 uppercase">
-                          {isAr ? '2. البنية التحتية والسحابية' : '2. Infrastructure & Cloud'}
-                        </div>
-                        {infraCloudServices.map((s) => (
-                          <a
-                            key={s.id}
-                            href="#services"
-                            onClick={() => setMobileMenuOpen(false)}
-                            className="block py-1 px-2 rounded-lg text-xs text-slate-300 dark:text-slate-300 hover:bg-emerald-500/10 hover:text-emerald-500 transition-colors"
-                          >
-                            • {isAr ? s.title_ar : s.title_en}
-                          </a>
-                        ))}
-                      </div>
-
-                      {/* Security & Observability Pillar */}
-                      <div className="space-y-1 border-t border-white/5 pt-2">
-                        <div className="text-[10px] font-bold font-mono text-emerald-600 dark:text-emerald-400 uppercase">
-                          {isAr ? '3. الأمن والمراقبة' : '3. Security & Observability'}
-                        </div>
-                        {securityObsServices.map((s) => (
-                          <a
-                            key={s.id}
-                            href="#services"
-                            onClick={() => setMobileMenuOpen(false)}
-                            className="block py-1 px-2 rounded-lg text-xs text-slate-300 dark:text-slate-300 hover:bg-emerald-500/10 hover:text-emerald-500 transition-colors"
-                          >
-                            • {isAr ? s.title_ar : s.title_en}
-                          </a>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-
-                {/* 2. Live System Demos */}
-                <div
-                  className={`rounded-2xl border overflow-hidden transition-colors ${
-                    isDark ? 'bg-[#0d1524] border-white/10' : 'bg-slate-50 border-slate-200'
-                  }`}
-                >
-                  <button
-                    type="button"
-                    onClick={() => handleMobileSectionToggle('m-demos')}
-                    className="w-full flex items-center justify-between p-3.5 text-start font-bold text-xs cursor-pointer"
-                  >
-                    <div className="flex items-center gap-2">
-                      <Activity className="h-4 w-4 text-emerald-500" />
-                      <span>{isAr ? 'المعاينة الحية للأنظمة الطبية والعيادات' : 'Live Clinical & Hospital Demos'}</span>
-                    </div>
-                    <ChevronDown
-                      className={`h-4 w-4 transition-transform duration-200 ${
-                        mobileExpandedSection === 'm-demos' ? 'rotate-180 text-emerald-500' : 'text-slate-400'
-                      }`}
-                    />
-                  </button>
-                  {mobileExpandedSection === 'm-demos' && (
-                    <div className="px-3 pb-3 pt-1 space-y-1 border-t border-current/10">
-                      {liveDemosList.map((d) => (
-                        <a
-                          key={d.id}
-                          href="#live-demos"
-                          onClick={() => setMobileMenuOpen(false)}
-                          className="block py-1 px-2 rounded-lg text-xs text-slate-300 hover:bg-emerald-500/10 hover:text-emerald-500 transition-colors"
-                        >
-                          • {isAr ? d.titleAr : d.titleEn}
-                        </a>
-                      ))}
-                    </div>
-                  )}
-                </div>
-
-                {/* 3. Case Studies (12) */}
-                <div
-                  className={`rounded-2xl border overflow-hidden transition-colors ${
-                    isDark ? 'bg-[#0d1524] border-white/10' : 'bg-slate-50 border-slate-200'
-                  }`}
-                >
-                  <button
-                    type="button"
-                    onClick={() => handleMobileSectionToggle('m-cases')}
-                    className="w-full flex items-center justify-between p-3.5 text-start font-bold text-xs cursor-pointer"
-                  >
-                    <div className="flex items-center gap-2">
-                      <Shield className="h-4 w-4 text-emerald-500" />
-                      <span>{isAr ? `قصص نجاح عملائنا ودراسات الحالة التقنية (${NUZUL_CASE_STUDIES.length})` : `Client Success Stories & Case Studies (${NUZUL_CASE_STUDIES.length})`}</span>
-                    </div>
-                    <ChevronDown
-                      className={`h-4 w-4 transition-transform duration-200 ${
-                        mobileExpandedSection === 'm-cases' ? 'rotate-180 text-emerald-500' : 'text-slate-400'
-                      }`}
-                    />
-                  </button>
-                  {mobileExpandedSection === 'm-cases' && (
-                    <div className="px-3 pb-3 pt-1 space-y-1 border-t border-current/10 max-h-60 overflow-y-auto">
-                      {NUZUL_CASE_STUDIES.map((c) => (
-                        <a
-                          key={c.id}
-                          href="#projects"
-                          onClick={() => setMobileMenuOpen(false)}
-                          className="block py-1 px-2 rounded-lg text-xs text-slate-300 hover:bg-emerald-500/10 hover:text-emerald-500 transition-colors"
-                        >
-                          • {c.id}. {isAr ? c.title_ar.split('—')[0] : c.title_en.split('—')[0]}
-                        </a>
-                      ))}
-                    </div>
-                  )}
-                </div>
-
-              {/* 4. Servers & Pricing */}
-              <div
-                className={`rounded-2xl border overflow-hidden transition-colors ${
-                  isDark ? 'bg-[#0d1524] border-white/10' : 'bg-slate-50 border-slate-200'
-                }`}
-              >
-                <button
-                  type="button"
-                  onClick={() => handleMobileSectionToggle('m-pricing')}
-                  className="w-full flex items-center justify-between p-3.5 text-start font-bold text-xs cursor-pointer"
-                >
-                  <div className="flex items-center gap-2">
-                    <Server className="h-4 w-4 text-emerald-500" />
-                    <span>{isAr ? 'السيرفرات والأسعار وباقات ITaaS' : 'Servers & ITaaS Pricing'}</span>
-                  </div>
-                  <ChevronDown
-                    className={`h-4 w-4 transition-transform duration-200 ${
-                      mobileExpandedSection === 'm-pricing' ? 'rotate-180 text-emerald-500' : 'text-slate-400'
-                    }`}
-                  />
-                </button>
-                {mobileExpandedSection === 'm-pricing' && (
-                  <div className="px-3 pb-3 pt-1 space-y-1 border-t border-current/10">
-                    <a
-                      href="#pricing"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="block py-1 px-2 rounded-lg text-xs text-slate-300 hover:bg-emerald-500/10 hover:text-emerald-500 transition-colors"
-                    >
-                      • {isAr ? 'خوادم سطح المكتب السحابي (1000 ج.م)' : 'Cloud Desktop VPS (1,000 EGP)'}
-                    </a>
-                    <a
-                      href="#pricing"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="block py-1 px-2 rounded-lg text-xs text-slate-300 hover:bg-emerald-500/10 hover:text-emerald-500 transition-colors"
-                    >
-                      • {isAr ? 'السيرفرات السحابية المدارة (Managed VPS)' : 'Managed Cloud VPS'}
-                    </a>
-                    <a
-                      href="#packages"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="block py-1 px-2 rounded-lg text-xs text-slate-300 hover:bg-emerald-500/10 hover:text-emerald-500 transition-colors"
-                    >
-                      • {isAr ? 'باقات قطاع تقني كامل كخدمة (ITaaS)' : 'IT as a Service (ITaaS)'}
-                    </a>
-                  </div>
-                )}
-              </div>
-
-              {/* 5. Guides (22) */}
-              <div
-                className={`rounded-2xl border overflow-hidden transition-colors ${
-                  isDark ? 'bg-[#0d1524] border-white/10' : 'bg-slate-50 border-slate-200'
-                }`}
-              >
-                <button
-                  type="button"
-                  onClick={() => handleMobileSectionToggle('m-guides')}
-                  className="w-full flex items-center justify-between p-3.5 text-start font-bold text-xs cursor-pointer"
-                >
-                  <div className="flex items-center gap-2">
-                    <BookOpen className="h-4 w-4 text-emerald-500" />
-                    <span>{isAr ? `الأدلة الهندسية والمدونة (${NUZUL_BLOG_POSTS.length})` : `Guides & Articles (${NUZUL_BLOG_POSTS.length})`}</span>
-                  </div>
-                  <ChevronDown
-                    className={`h-4 w-4 transition-transform duration-200 ${
-                      mobileExpandedSection === 'm-guides' ? 'rotate-180 text-emerald-500' : 'text-slate-400'
-                    }`}
-                  />
-                </button>
-                {mobileExpandedSection === 'm-guides' && (
-                  <div className="px-3 pb-3 pt-1 space-y-1 border-t border-current/10 max-h-60 overflow-y-auto">
-                    {NUZUL_BLOG_POSTS.map((a) => (
-                      <button
-                        key={a.id}
-                        type="button"
-                        onClick={() => {
-                          setMobileMenuOpen(false);
-                          setActiveArticle(a);
-                        }}
-                        className="block w-full text-start py-1 px-2 rounded-lg text-xs text-slate-300 hover:bg-emerald-500/10 hover:text-emerald-500 transition-colors cursor-pointer"
-                      >
-                        • {a.id}. {isAr ? a.title_ar.split(':')[0] : a.title_en.split(':')[0]}
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
-
-              {/* 6. Consultation & WhatsApp */}
-              <div
-                className={`rounded-2xl border overflow-hidden transition-colors ${
-                  isDark ? 'bg-[#0d1524] border-white/10' : 'bg-slate-50 border-slate-200'
-                }`}
-              >
-                <button
-                  type="button"
-                  onClick={() => handleMobileSectionToggle('m-consult')}
-                  className="w-full flex items-center justify-between p-3.5 text-start font-bold text-xs cursor-pointer"
-                >
-                  <div className="flex items-center gap-2">
-                    <PhoneCall className="h-4 w-4 text-emerald-500" />
-                    <span>{isAr ? 'طلب استشارة والتواصل المباشر' : 'Consultation & Direct Contact'}</span>
-                  </div>
-                  <ChevronDown
-                    className={`h-4 w-4 transition-transform duration-200 ${
-                      mobileExpandedSection === 'm-consult' ? 'rotate-180 text-emerald-500' : 'text-slate-400'
-                    }`}
-                  />
-                </button>
-                {mobileExpandedSection === 'm-consult' && (
-                  <div className="px-3 pb-3 pt-1 space-y-1.5 border-t border-current/10">
-                    <a
-                      href="#contact"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="block py-1 px-2 rounded-lg text-xs text-slate-300 hover:bg-emerald-500/10 hover:text-emerald-500 transition-colors"
-                    >
-                      • {isAr ? 'معاينة هندسية فيزيائية لمقر المنشأة' : 'On-Site Physical Inspection'}
-                    </a>
-                    <a
-                      href={NUZUL_CONTACT.whatsappUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-between py-1 px-2 rounded-lg text-xs text-emerald-400 font-bold bg-emerald-500/10"
-                    >
-                      <span>• {isAr ? 'محادثة فورية (واتساب 24/7): 01140565057' : 'WhatsApp 24/7: +201140565057'}</span>
-                      <PhoneCall className="h-3 w-3" />
-                    </a>
-                    <a
-                      href={`tel:${NUZUL_CONTACT.rawPhone2}`}
-                      className="block py-1 px-2 rounded-lg text-xs text-slate-300 hover:text-emerald-400"
-                    >
-                      • {isAr ? 'هاتف الطوارئ الهندسي: 01011678830' : 'Direct Line: +201011678830'}
-                    </a>
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* Mobile Actions: WhatsApp, LinkedIn, Portal */}
-            <div className="space-y-2 pt-2">
-              <a
-                href={NUZUL_CONTACT.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 rounded-xl bg-[#0a66c2] p-2.5 text-xs font-bold text-white shadow-sm"
-              >
-                <Linkedin className="h-4 w-4 fill-current" />
-                <span>Nuzul Tech Official LinkedIn</span>
-              </a>
-
-              <a
-                href={NUZUL_CONTACT.whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 rounded-xl bg-emerald-600 p-2.5 text-xs font-bold text-white shadow-sm"
-              >
-                <PhoneCall className="h-4 w-4" />
-                <span>{isAr ? 'تواصل معنا مباشرة عبر واتساب' : 'Chat Directly via WhatsApp'}</span>
-              </a>
-
+          {/* Preferences inside mobile drawer: Language & Theme per Section 3.11 */}
+          <div className="pt-3 border-t border-token space-y-3">
+            <div className="flex items-center justify-between gap-3">
+              <span className="text-xs font-semibold text-muted">
+                {lang === 'ar' ? 'اللغة:' : 'Language:'}
+              </span>
               <button
                 type="button"
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  setIsClientAreaOpen(true);
-                }}
-                className="btn btn-primary w-full py-2.5 text-xs font-bold uppercase tracking-wider cursor-pointer shadow-md"
+                onClick={() => setLang(lang === 'ar' ? 'en' : 'ar')}
+                data-testid="mobile-drawer-lang-btn"
+                className="inline-flex items-center gap-1.5 min-h-[44px] px-3.5 py-2 text-xs font-semibold text-main hover-surface-2 border border-token rounded-lg bg-surface whitespace-nowrap"
+                aria-label={lang === 'ar' ? 'EN - Switch to English' : 'عربي - التبديل إلى العربية'}
               >
-                <User className="h-4 w-4" />
-                <span>{isAr ? 'دخول بوابة عملاء نُزول تِك' : 'Nuzul Tech Client Portal'}</span>
+                <Globe className="w-4 h-4 text-muted shrink-0" />
+                <span className="ltr-num">{lang === 'ar' ? 'English (EN)' : 'العربية (AR)'}</span>
               </button>
             </div>
+
+            <div>
+              <span className="text-xs font-semibold text-muted block mb-2">
+                {lang === 'ar' ? 'المظهر:' : 'Theme:'}
+              </span>
+              <div className="grid grid-cols-3 gap-2">
+                {themeOptions.map((opt) => {
+                  const active = themeMode === opt.mode;
+                  const label = lang === 'ar' ? opt.labelAr : opt.labelEn;
+                  return (
+                    <button
+                      key={opt.mode}
+                      type="button"
+                      onClick={() => setThemeMode(opt.mode)}
+                      data-testid={`mobile-drawer-theme-btn-${opt.mode}`}
+                      className={`min-h-[44px] px-2 py-2 text-xs font-semibold rounded-lg border flex items-center justify-center gap-1.5 whitespace-nowrap transition-colors ${
+                        active
+                          ? 'border-accent bg-accent-soft text-accent'
+                          : 'border-token bg-surface text-muted hover-text-main'
+                      }`}
+                    >
+                      {opt.icon}
+                      <span>{label}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+
+          <div className="pt-2 border-t border-token flex flex-col gap-2">
+            <Link
+              to="/contact"
+              onClick={() => setMobileMenuOpen(false)}
+              data-testid="drawer-primary-cta"
+              className="btn-primary w-full min-h-[44px] py-3 text-center text-sm whitespace-nowrap"
+            >
+              {lang === 'ar' ? 'احجز استشارة' : 'Book Consultation'}
+            </Link>
+            <button
+              type="button"
+              onClick={() => {
+                setMobileMenuOpen(false);
+                mobileMenuBtnRef.current?.focus();
+              }}
+              data-testid="drawer-close-btn"
+              className="btn-secondary w-full min-h-[44px] py-2.5 text-center text-xs whitespace-nowrap"
+            >
+              {lang === 'ar' ? 'إغلاق القائمة (Esc)' : 'Close Menu (Esc)'}
+            </button>
           </div>
         </div>
-      </>
-    )}
-  </header>
+      )}
+    </header>
   );
 };

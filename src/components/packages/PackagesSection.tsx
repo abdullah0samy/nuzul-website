@@ -1,190 +1,201 @@
 import React, { useState } from 'react';
-import { Check, Sparkles, ChevronDown, ChevronUp, PhoneCall, ShieldCheck, ArrowRight, ArrowLeft } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { BUNDLED_PACKAGES, BundledPackage } from '../../data/nuzulData';
 import { useApp } from '../../context/AppContext';
-import { NUZUL_PACKAGES, NUZUL_CONTACT } from '../../data/nuzulData';
-import { EnterprisePackage } from '../../types';
-import { RevealOnScroll, StaggerContainer, StaggerItem } from '../common/RevealOnScroll';
+import { Check, ArrowLeft, ArrowRight, ChevronDown } from 'lucide-react';
 
 export const PackagesSection: React.FC = () => {
-  const { locale, currency, theme } = useApp();
-  const isAr = locale === 'ar';
-  const isDark = theme === 'dark';
+  const { lang, formatPrice, addToCart } = useApp();
+  const ArrowIcon = lang === 'ar' ? ArrowLeft : ArrowRight;
+  const [expandedPkgIds, setExpandedPkgIds] = useState<Record<string, boolean>>({});
 
-  const [expandedId, setExpandedId] = useState<string | null>('business');
+  const togglePkgExpand = (id: string) => {
+    setExpandedPkgIds((prev) => ({ ...prev, [id]: !prev[id] }));
+  };
 
-  const toggleExpand = (id: string) => {
-    setExpandedId(expandedId === id ? null : id);
+  const handleSelectPackage = (pkg: BundledPackage) => {
+    if (pkg.priceEGP === null) return;
+    addToCart({
+      id: pkg.id,
+      name: lang === 'ar' ? pkg.title : pkg.titleEn,
+      type: 'package',
+      price: pkg.priceEGP,
+      billingCycle: pkg.billingType === 'monthly' ? 'monthly' : 'one-time',
+      details: lang === 'ar' ? pkg.subtitle : pkg.subtitleEn,
+    });
   };
 
   return (
-    <section
-      id="packages"
-      className={`relative overflow-hidden scroll-mt-24 px-5 py-20 sm:py-24 sm:px-6 lg:px-8 border-t transition-colors ${
-        isDark ? 'bg-[#070c14] border-white/10 text-white' : 'bg-slate-50 border-slate-200 text-slate-900'
-      }`}
-    >
-      <div className="mx-auto max-w-7xl">
-        {/* Section Header with Reveal */}
-        <RevealOnScroll direction="up" threshold={0.2}>
-          <div className="mx-auto max-w-3xl text-center">
-            <div className="eyebrow-mono justify-center text-emerald-600 dark:text-emerald-400">
-              <ShieldCheck className="h-4 w-4" />
-              <span>{isAr ? 'خطط وباقات التأسيس' : 'ENTERPRISE PACKAGES'}</span>
-            </div>
-            <h2 className="mt-4 text-3xl font-black leading-tight sm:text-4xl">
-              {isAr ? 'باقات تأسيس تقنية متكاملة لكل مرحلة نمو' : 'Transparent Turnkey Packages for Every Stage'}
-            </h2>
-            <p
-              className={`mt-3 text-base leading-relaxed ${
-                isDark ? 'text-slate-300' : 'text-slate-600'
-              }`}
-            >
-              {isAr
-                ? 'سواء كنت عيادة جديدة، شركة في مرحلة التوسع، أو مؤسسة كبرى — لدينا الباقة التقنية المصممة لك مع الدعم والصيانة.'
-                : 'From new clinics and startups to enterprise multi-branch operations — choose the exact plan that fits your growth.'}
-            </p>
-          </div>
-        </RevealOnScroll>
+    <section id="packages" className="section-spacing bg-surface-band border-t border-token">
+      <div className="container-nuzul">
+        <div className="max-w-3xl mb-10">
+          <h2 className="text-2xl md:text-4xl font-bold text-main mb-3">
+            {lang === 'ar'
+              ? 'باقات تجهيز المقرات والفروع'
+              : 'Turnkey Office Infrastructure Packages'}
+          </h2>
+          <p className="text-muted text-sm md:text-base leading-relaxed">
+            {lang === 'ar'
+              ? 'الشبكة والحماية والخوادم لمكتبك أو فروعك، مع عقد دعم بعد التسليم.'
+              : 'Network, security, and servers for your office or branches, backed by support post-handover.'}
+          </p>
+        </div>
 
-        {/* 4 Packages Grid with Staggered Scroll Reveal */}
-        <StaggerContainer staggerDelay={0.12} className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {NUZUL_PACKAGES.map((pkg: EnterprisePackage) => {
-            const name = isAr ? pkg.name_ar : pkg.name_en;
-            const subtitle = isAr ? pkg.subtitle_ar : pkg.subtitle_en;
-            const badge = isAr ? pkg.badge_ar : pkg.badge_en;
-            const summary = isAr ? pkg.summary_ar : pkg.summary_en;
-            const details = isAr ? pkg.details_ar : pkg.details_en;
-            const isExpanded = expandedId === pkg.id;
-
-            const setupPrice = currency === 'USD' ? pkg.price_setup_usd : pkg.price_setup_egp;
-            const monthlyPrice = currency === 'USD' ? pkg.price_monthly_usd : pkg.price_monthly_egp;
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
+          {BUNDLED_PACKAGES.map((pkg) => {
+            const features = lang === 'ar' ? pkg.features : pkg.featuresEn;
+            const isExpanded = Boolean(expandedPkgIds[pkg.id]);
+            const badgeLabel = lang === 'ar' ? pkg.badgeAr : pkg.badgeEn;
 
             return (
-              <StaggerItem key={pkg.id} className="h-full">
-                <article
-                  className={`relative flex flex-col justify-between h-full rounded-2xl border p-6 transition-all duration-300 backdrop-blur-xl ${
-                    pkg.highlighted
-                      ? isDark
-                        ? 'border-emerald-400/60 bg-gradient-to-b from-emerald-950/30 to-[#0d1524] shadow-[0_20px_45px_-10px_rgba(16,185,129,0.25)] ring-1 ring-emerald-400/40'
-                        : 'border-emerald-500 bg-white shadow-xl ring-2 ring-emerald-400/30'
-                      : isDark
-                      ? 'border-white/10 bg-[#0d1524] hover:border-emerald-500/30 shadow-xl'
-                      : 'border-slate-200 bg-white hover:border-emerald-300 shadow-md'
-                  }`}
-                >
+              <div
+                key={pkg.id}
+                className={`clean-card clean-card-hover p-6 sm:p-7 flex flex-col justify-between ${
+                  pkg.popular ? 'border-accent ring-1 ring-[var(--accent)]' : ''
+                }`}
+              >
                 <div>
-                  {/* Top Badge */}
-                  {badge && (
-                    <div className="mb-3">
-                      <span className="inline-flex items-center gap-1 rounded-full border border-emerald-400/40 bg-emerald-400/10 px-2.5 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-300">
-                        <Sparkles className="h-3 w-3" />
-                        {badge}
+                  <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
+                    <span className="text-xs font-semibold text-muted">
+                      {pkg.pricingModel === 'fixed'
+                        ? pkg.billingType === 'monthly'
+                          ? lang === 'ar'
+                            ? 'تعاقد شهري SLA'
+                            : 'Monthly SLA Retainer'
+                          : lang === 'ar'
+                          ? 'تأسيس لمرة واحدة'
+                          : 'One-Time Setup'
+                        : lang === 'ar'
+                        ? 'مقايسة هندسية'
+                        : 'Scoped Proposal'}
+                    </span>
+                    {badgeLabel && (
+                      <span className="text-xs font-semibold text-accent">
+                        {badgeLabel}
                       </span>
-                    </div>
-                  )}
-
-                  <h3 className="text-xl font-bold leading-snug">{name}</h3>
-                  <p className="mt-1 text-xs text-slate-400">{subtitle}</p>
-
-                  {/* Pricing Box */}
-                  <div
-                    className={`mt-4 rounded-2xl border p-3.5 space-y-1.5 ${
-                      isDark ? 'bg-white/5 border-white/5' : 'bg-slate-50 border-slate-200'
-                    }`}
-                  >
-                    <div>
-                      <span className="text-[10px] uppercase font-mono text-slate-400 block">
-                        {isAr ? 'رسوم التأسيس والتجهيز:' : 'Setup & Installation:'}
-                      </span>
-                      <span className="figures text-base font-black text-emerald-600 dark:text-emerald-400">{setupPrice}</span>
-                    </div>
-
-                    <div className="border-t border-current/10 pt-1.5">
-                      <span className="text-[10px] uppercase font-mono text-slate-400 block">
-                        {isAr ? 'الدعم والإدارة الشهرية:' : 'Monthly Maintenance:'}
-                      </span>
-                      <span className="figures text-sm font-bold text-cyan-600 dark:text-cyan-400">{monthlyPrice}</span>
-                    </div>
+                    )}
                   </div>
 
-                  {/* High-Level Summary List */}
-                  <ul
-                    className={`mt-5 space-y-2 text-xs font-medium ${
-                      isDark ? 'text-slate-300' : 'text-slate-700'
+                  <h3 className="text-xl font-bold text-main mb-1.5">
+                    {lang === 'ar' ? pkg.title : pkg.titleEn}
+                  </h3>
+                  <p
+                    className={`text-muted text-sm leading-relaxed mb-4 ${
+                      isExpanded ? '' : 'line-clamp-2'
                     }`}
                   >
-                    {summary.map((item, idx) => (
-                      <li key={idx} className="flex items-center gap-2">
-                        <Check className="h-3.5 w-3.5 text-emerald-500 shrink-0" />
-                        <span>{item}</span>
+                    {lang === 'ar' ? pkg.subtitle : pkg.subtitleEn}
+                  </p>
+
+                  {/* Pricing or Scoped Quote Header */}
+                  <div className="py-4 border-y border-token mb-5">
+                    {pkg.pricingModel === 'fixed' && pkg.priceEGP !== null ? (
+                      <>
+                        <div className="flex items-baseline gap-2">
+                          <span className="text-3xl font-bold text-main">
+                            <bdi dir="ltr" className="ltr-num">
+                              {formatPrice(pkg.priceEGP)}
+                            </bdi>
+                          </span>
+                          <span className="text-xs text-muted">
+                            {pkg.billingType === 'monthly'
+                              ? lang === 'ar'
+                                ? '/ شهرياً'
+                                : '/ month'
+                              : lang === 'ar'
+                              ? 'دفعة التأسيس'
+                              : 'one-time'}
+                          </span>
+                        </div>
+                        <p className="text-xs text-muted mt-1">
+                          {lang === 'ar' ? pkg.billingLabelAr : pkg.billingLabelEn}
+                        </p>
+                      </>
+                    ) : (
+                      <>
+                        <div className="text-xl sm:text-2xl font-bold text-main">
+                          {pkg.id === 'professional'
+                            ? lang === 'ar'
+                              ? 'تسعير حسب المعاينة الميدانية'
+                              : 'Custom Quote via Site Survey'
+                            : lang === 'ar'
+                            ? 'عرض سعر هندسي مخصص'
+                            : 'Custom Engineering Proposal'}
+                        </div>
+                        <p className="text-xs text-muted mt-1">
+                          {lang === 'ar' ? pkg.billingLabelAr : pkg.billingLabelEn}
+                        </p>
+                      </>
+                    )}
+                  </div>
+
+                  <ul className="space-y-2.5 mb-3">
+                    {(isExpanded ? features : features.slice(0, 2)).map((feat, idx) => (
+                      <li key={idx} className="flex items-start gap-2.5 text-sm text-main">
+                        <Check className="w-4 h-4 text-accent shrink-0 mt-1" />
+                        <span>{feat}</span>
                       </li>
                     ))}
                   </ul>
 
-                  {/* Expandable Technical Details */}
-                  {isExpanded && (
-                    <div className="mt-4 pt-4 border-t border-current/10 space-y-2.5">
-                      <div className="text-[11px] font-mono font-bold text-slate-400 uppercase">
-                        {isAr ? 'المواصفات الهندسية التفصيلية:' : 'Detailed Technical Specs:'}
-                      </div>
-
-                      <ul className="space-y-1.5 text-[11px] text-slate-400">
-                        {details.map((item, idx) => (
-                          <li key={idx} className="flex items-start gap-1.5">
-                            <span className="text-emerald-500 font-bold">•</span>
-                            <span>{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+                  {features.length > 2 && (
+                    <button
+                      type="button"
+                      onClick={() => togglePkgExpand(pkg.id)}
+                      data-testid={`package-expand-${pkg.id}`}
+                      aria-expanded={isExpanded}
+                      className="inline-flex items-center gap-1.5 min-h-[44px] text-xs font-semibold text-accent hover:underline mb-3"
+                    >
+                      <span>
+                        {isExpanded
+                          ? lang === 'ar'
+                            ? 'إخفاء التفاصيل'
+                            : 'Show less'
+                          : lang === 'ar'
+                          ? 'إظهار المزيد'
+                          : 'Show more'}
+                      </span>
+                      <ChevronDown
+                        className={`w-3.5 h-3.5 transition-transform ${
+                          isExpanded ? 'rotate-180' : ''
+                        }`}
+                      />
+                    </button>
                   )}
+                </div>
 
-                  {/* Accordion Toggle */}
+                {pkg.pricingModel === 'fixed' && pkg.priceEGP !== null ? (
                   <button
                     type="button"
-                    onClick={() => toggleExpand(pkg.id)}
-                    className="mt-4 flex w-full items-center justify-center gap-1 py-1.5 text-[11px] font-bold text-slate-400 hover:text-emerald-500 transition-colors cursor-pointer"
-                  >
-                    <span>
-                      {isExpanded
-                        ? isAr
-                          ? 'إخفاء التفاصيل'
-                          : 'Hide Technical Specs'
-                        : isAr
-                        ? 'عرض التفاصيل الكاملة'
-                        : 'View Full Specs'}
-                    </span>
-                    {isExpanded ? <ChevronUp className="h-3.5 w-3.5" /> : <ChevronDown className="h-3.5 w-3.5" />}
-                  </button>
-                </div>
-
-                {/* Actions */}
-                <div className="mt-6 pt-4 border-t border-current/10 space-y-2">
-                  <a
-                    href="#contact"
-                    className={`btn w-full py-2.5 text-xs font-bold uppercase tracking-wider cursor-pointer ${
-                      pkg.highlighted ? 'btn-primary shadow-lg shadow-emerald-500/20' : 'btn-secondary'
+                    onClick={() => handleSelectPackage(pkg)}
+                    className={`w-full min-h-[44px] py-3 px-6 text-sm rounded-lg font-semibold whitespace-nowrap inline-flex items-center justify-center gap-2 transition-colors ${
+                      pkg.popular ? 'btn-primary' : 'btn-secondary'
                     }`}
                   >
-                    <span>{isAr ? 'طلب الباقة' : 'Choose Package'}</span>
-                  </a>
-
-                  <a
-                    href={NUZUL_CONTACT.whatsappUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex w-full items-center justify-center gap-1.5 text-[11px] text-slate-400 hover:text-emerald-500 transition-colors py-1 cursor-pointer"
+                    <span>{lang === 'ar' ? 'اطلب عرض سعر' : 'Request a Quote'}</span>
+                    <ArrowIcon className="w-4 h-4" />
+                  </button>
+                ) : (
+                  <Link
+                    to={`/contact?package=${pkg.id}`}
+                    className="btn-secondary w-full min-h-[44px] py-3 px-6 text-sm rounded-lg font-semibold whitespace-nowrap inline-flex items-center justify-center gap-2 transition-colors"
                   >
-                    <PhoneCall className="h-3 w-3 text-emerald-500" />
-                    <span>{isAr ? 'استفسار عبر واتساب' : 'Inquire via WhatsApp'}</span>
-                  </a>
-                </div>
-              </article>
-            </StaggerItem>
-          );
-        })}
-      </StaggerContainer>
-    </div>
-  </section>
+                    <span>{lang === 'ar' ? 'اطلب عرض سعر' : 'Request a Quote'}</span>
+                    <ArrowIcon className="w-4 h-4" />
+                  </Link>
+                )}
+              </div>
+            );
+          })}
+        </div>
+
+        {/* VAT Disclaimer */}
+        <p className="text-xs text-muted text-center mt-6">
+          {lang === 'ar'
+            ? 'الأسعار [تشمل / لا تشمل] ضريبة القيمة المضافة. [VERIFY Q4]'
+            : 'Prices [include / exclude] VAT. [VERIFY Q4]'}
+        </p>
+      </div>
+    </section>
   );
 };
