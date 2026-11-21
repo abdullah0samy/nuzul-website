@@ -11,76 +11,76 @@ export const HomeHostingTeaser: React.FC = () => {
   const highlights =
     lang === 'ar'
       ? [
-          'خوادم KVM بعزل كامل: 4 إلى 12 نواة vCPU و8 إلى 48 GB ذاكرة ECC',
-          'أقراص NVMe بمصفوفة RAID-10 مع 32 TB نقل بيانات شهرياً',
-          'لقطات استرجاع Snapshots وحماية L3/L4 DDoS وإعداد مجاني',
+          'موارد KVM مخصصة: من 4 إلى 12 vCPU و8 إلى 48 GB RAM',
+          'تخزين NVMe على مصفوفة RAID-10 مع 32 TB ترافيك شهري',
+          'لقطات استرجاع Snapshots وحماية DDoS بدون مصاريف إعداد',
         ]
       : [
-          'Dedicated KVM isolation: 4 to 12 vCPU cores & 8 to 48 GB ECC RAM',
-          'Enterprise RAID-10 NVMe arrays with 32 TB monthly outbound traffic',
-          'Included recovery Snapshots, L3/L4 DDoS scrubbing & $0 setup fee',
+          'Dedicated KVM isolation: 4 to 12 vCPU & 8 to 48 GB ECC RAM',
+          'RAID-10 NVMe storage with 32 TB monthly outbound traffic',
+          'Snapshots, L3/L4 DDoS filtering & zero setup fees',
         ];
 
   return (
     <section
       data-testid="home-hosting-teaser"
-      className="section-spacing-home bg-hero-band text-hero border-y border-hero"
+      className="section-spacing-home bg-page-band"
     >
       <div className="container-nuzul">
-        <ScrollReveal className="rounded-2xl bg-hero-surface p-6 sm:p-10 shadow-md">
+        <ScrollReveal className="glass-panel p-6 sm:p-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             <div className="lg:col-span-8 space-y-4">
-              <h2 className="text-2xl sm:text-3xl font-bold text-hero">
+              <h2 className="text-2xl sm:text-3xl font-bold text-main">
                 {lang === 'ar'
-                  ? 'خوادم Cloud VPS واستضافة مدارة بمعايير عالمية'
-                  : 'Predictable Cloud VPS & Managed Hosting'}
+                  ? 'خوادم Cloud VPS بمواصفات حقيقية وفاتورة محلية'
+                  : 'Cloud VPS with Clear Specs & Local Billing'}
               </h2>
-              <p className="text-hero-muted text-base leading-relaxed max-w-2xl">
+              <p className="text-muted text-sm sm:text-base leading-relaxed max-w-2xl">
                 {lang === 'ar'
-                  ? 'خوادم Linux وWindows جاهزة لتشغيل المتاجر، قواعد البيانات، وأنظمة ERP في القاهرة أو فرانكفورت بفاتورة محلية.'
-                  : 'Linux KVM and licensed Windows RDP instances sized for production apps, SQL databases, and ERP suites in Cairo or Frankfurt.'}
+                  ? 'سيرفرات Linux وWindows جاهزة لتشغيل المتاجر، قواعد البيانات، وأنظمة ERP في القاهرة أو فرانكفورت، بفاتورة واضحة بالجنيه أو الدولار.'
+                  : 'Linux KVM and licensed Windows RDP servers sized for production stores, SQL databases, and ERP in Cairo or Frankfurt.'}
               </p>
 
               <ul className="space-y-2.5 pt-2">
                 {highlights.map((item, idx) => (
-                  <li key={idx} className="flex items-center gap-2.5 text-sm text-hero">
-                    <Check className="w-4 h-4 text-hero-accent shrink-0" />
+                  <li key={idx} className="flex items-center gap-2.5 text-sm text-main">
+                    <Check className="w-4 h-4 text-accent shrink-0" aria-hidden="true" />
                     <span>{item}</span>
                   </li>
                 ))}
               </ul>
             </div>
 
-            <div className="lg:col-span-4 lg:border-s lg:border-hero lg:ps-8 flex flex-col justify-center space-y-4">
+            <div className="lg:col-span-4 lg:border-s lg:border-token lg:ps-8 flex flex-col justify-center space-y-4">
               <div>
-                <span className="text-xs font-semibold text-hero-muted block mb-1">
-                  {lang === 'ar'
-                    ? 'Cloud VPS 10 (4 vCPU · 8 GB · 75 GB NVMe)'
-                    : 'Cloud VPS 10 (4 vCPU · 8 GB · 75 GB NVMe)'}
+                <span className="text-xs font-semibold text-muted block mb-1">
+                  <bdi dir="ltr" className="ltr-num">
+                    Cloud VPS 10 · 4 vCPU · 8 GB · 75 GB NVMe
+                  </bdi>
                 </span>
                 <div className="flex items-baseline gap-1.5">
-                  <span className="text-3xl sm:text-4xl font-bold text-hero">
+                  <span className="text-3xl sm:text-4xl font-bold text-main">
                     <bdi dir="ltr" className="ltr-num">
                       {formatPrice(320)}
                     </bdi>
                   </span>
-                  <span className="text-sm text-hero-muted">
+                  <span className="text-sm text-muted">
                     / {lang === 'ar' ? 'شهرياً' : 'mo'}
                   </span>
                 </div>
-                <p className="text-xs text-hero-muted mt-1">
+                <p className="text-xs text-muted mt-1">
                   {lang === 'ar' ? (
                     <>
-                      وتبدأ استضافة المواقع من{' '}
-                      <bdi dir="ltr" className="ltr-num font-semibold text-hero">
+                      واستضافة المواقع تبدأ من{' '}
+                      <bdi dir="ltr" className="ltr-num font-semibold text-main">
                         {formatPrice(195)}
                       </bdi>
-                      /شهرياً
+                      /شهر
                     </>
                   ) : (
                     <>
-                      Managed Web hosting starts from{' '}
-                      <bdi dir="ltr" className="ltr-num font-semibold text-hero">
+                      Managed Web hosting starts at{' '}
+                      <bdi dir="ltr" className="ltr-num font-semibold text-main">
                         {formatPrice(195)}
                       </bdi>
                       /mo
@@ -94,14 +94,14 @@ export const HomeHostingTeaser: React.FC = () => {
                   to="/pricing"
                   className="btn-primary w-full py-3 text-sm hover-lift"
                 >
-                  <span>{lang === 'ar' ? 'استعرض خطط الأسعار' : 'View Pricing Plans'}</span>
-                  <ArrowIcon className="w-4 h-4 shrink-0" />
+                  <span>{lang === 'ar' ? 'عرض كل الخطط والأسعار' : 'View All Plans'}</span>
+                  <ArrowIcon className="w-4 h-4 shrink-0" aria-hidden="true" />
                 </Link>
                 <Link
                   to="/hosting"
-                  className="btn-hero-secondary rounded-lg w-full py-3 text-sm hover-lift"
+                  className="btn-hero-secondary w-full py-3 text-sm hover-lift"
                 >
-                  {lang === 'ar' ? 'مقارنة مواصفات الخوادم' : 'Compare Server Specs'}
+                  {lang === 'ar' ? 'مقارنة مواصفات السيرفرات' : 'Compare Server Specs'}
                 </Link>
               </div>
             </div>

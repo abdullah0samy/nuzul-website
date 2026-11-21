@@ -37,7 +37,7 @@ export const PricingTermsSection: React.FC = () => {
       titleAr: 'شروط الفوترة والدفع',
       titleEn: 'Billing & Invoicing Terms',
       bodyAr:
-        'تُصدر الفواتير الضريبية الرسمية بالجنيه المصري (EGP) عبر التحويل البنكي لحسابات الشركات أو وسائل الدفع الإلكتروني المعتمدة. خطط الاستضافة السحابية تُفوتر شهرياً أو سنوياً مقدماً، وباقات التأسيس الميداني تُسدد على دفعات مرتبطة بمحاضر الاستلام الفعلي.',
+        'تُصدر الفواتير الضريبية الرسمية بالجنيه المصري (EGP) عبر التحويل البنكي لحسابات الشركات أو وسائل الدفع الإلكتروني المتاحة. خطط الاستضافة السحابية تُفوتر شهرياً أو سنوياً مقدماً، وباقات التأسيس الميداني تُسدد على دفعات مرتبطة بمحاضر الاستلام الفعلي.',
       bodyEn:
         'Official tax invoices are issued in Egyptian Pounds (EGP) payable via corporate bank transfer or electronic payment gateways. Cloud plans bill monthly or annually in advance; on-premise projects bill against milestone handover certificates.',
     },

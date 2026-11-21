@@ -141,12 +141,17 @@ export const FloatingWhatsApp: React.FC = () => {
   // Simple event tracker on click to monitor engagement
   const handleWhatsAppClick = () => {
     try {
-      console.info('[Nuzul Analytics] whatsapp_fab_click', {
+      const payload = {
+        event: 'whatsapp_fab_click',
         timestamp: new Date().toISOString(),
         status: isOnline ? 'Online' : 'Away',
         soundMuted: isSoundMuted,
         lang,
-      });
+      };
+      console.info('[Nuzul Analytics] whatsapp_fab_click', payload);
+      const win = window as unknown as { __nuzulAnalytics?: Array<typeof payload> };
+      win.__nuzulAnalytics = win.__nuzulAnalytics || [];
+      win.__nuzulAnalytics.push(payload);
     } catch {
       // Safe fallback
     }
@@ -239,7 +244,7 @@ export const FloatingWhatsApp: React.FC = () => {
         }`}
       >
         <MessageCircle
-          className={`shrink-0 transition-all duration-200 ${isMinimized ? 'w-5 h-5' : 'w-5 h-5'}`}
+          className="w-5 h-5 shrink-0 transition-all duration-200"
           aria-hidden="true"
         />
 
@@ -251,15 +256,9 @@ export const FloatingWhatsApp: React.FC = () => {
               animate={{ opacity: 1, width: 'auto' }}
               exit={reducedMotion ? undefined : { opacity: 0, width: 0 }}
               transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-              className="hidden sm:inline-flex items-center gap-1.5 overflow-hidden whitespace-nowrap text-xs font-bold"
+              className="hidden sm:inline-flex items-center overflow-hidden whitespace-nowrap text-xs font-bold"
             >
               <span>{lang === 'ar' ? 'واتساب' : 'WhatsApp'}</span>
-              <span
-                aria-hidden="true"
-                className="w-1.5 h-1.5 rounded-full"
-                style={{ backgroundColor: isOnline ? 'var(--success)' : 'var(--warning)' }}
-              />
-              <span className="text-[11px] font-medium opacity-90">{statusText}</span>
             </motion.span>
           )}
         </AnimatePresence>

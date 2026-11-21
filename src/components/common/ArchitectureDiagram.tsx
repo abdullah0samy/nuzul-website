@@ -68,7 +68,7 @@ const CASE_DIAGRAMS: Record<string, DiagramSpec> = {
     hasSufficientTopologyFacts: true,
     diagramTitleAr: 'مخطط السحابة المالية والنسخ الاحتياطي المعزول',
     diagramTitleEn: 'Financial Cloud VPS & Immutable Backup Topology',
-    topologySummaryAr: 'وصول مشفر لـ 30 مراجعاً مالياً إلى خوادم NVMe مع نسخ احتياطي يومي معزول وبريد موثق',
+    topologySummaryAr: 'وصول مشفر لـ 30 مراجعاً مالياً إلى خوادم NVMe مع نسخ احتياطي يومي معزول وبريد مخصص',
     topologySummaryEn: 'Encrypted access for 30 concurrent auditors to NVMe SQL/ERP VPS with daily off-site backups',
     nodes: [
       { id: 'n1', label: '30 Financial Auditors', sublabel: 'Remote & Office Access', x: 24, y: 28, w: 170, h: 60 },
@@ -107,9 +107,9 @@ const CASE_DIAGRAMS: Record<string, DiagramSpec> = {
   'case-4': {
     id: 'case-4',
     hasSufficientTopologyFacts: true,
-    diagramTitleAr: 'مخطط العنقود الافتراضي المزدوج (HA Cluster) والأنظمة الطبية',
+    diagramTitleAr: 'مخطط بيئة Virtualization عالية التوافر (HA Cluster) والأنظمة الطبية',
     diagramTitleEn: 'HA Virtualization Cluster & Hospital Systems Topology',
-    topologySummaryAr: 'دمج السيرفرات الطبية في عنقود افتراضي عالي التوافر خلف جدار حماية Fortinet وشبكة فايبر',
+    topologySummaryAr: 'دمج السيرفرات الطبية في بيئة عالية التوافر (HA Cluster) خلف جهاز Firewall من Fortinet وشبكة ألياف ضوئية',
     topologySummaryEn: 'High-Availability Virtualization Cluster hosting portal, PR, approvals & ticketing behind Fortinet NGFW',
     nodes: [
       { id: 'n1', label: 'Fortinet NGFW', sublabel: 'Fiber & Cat6A Backbone', x: 24, y: 28, w: 170, h: 60, accent: true },
@@ -259,11 +259,11 @@ const CASE_DIAGRAMS: Record<string, DiagramSpec> = {
     hasSufficientTopologyFacts: false,
     diagramTitleAr: 'بطاقة مشروع هندسي: فحص واعتماد جودة البرمجيات (QA & UAT Sign-off)',
     diagramTitleEn: 'Engineering Audit Card: Software QA & Vendor Handover Sign-Off',
-    topologySummaryAr: 'اختبارات الوظائف الشاملة (E2E)، تطبيقات iOS/Android، محاكاة ضغط مكالمات WebRTC، وفحص صلاحيات وأمان قواعد البيانات.',
+    topologySummaryAr: 'اختبارات الوظائف الكاملة (E2E)، تطبيقات iOS/Android، محاكاة ضغط مكالمات WebRTC، وفحص صلاحيات وأمان قواعد البيانات.',
     topologySummaryEn: 'End-to-End CRM functional validation, iOS/Android compatibility, WebRTC call stress testing, and security privilege audit.',
     nodes: [],
     edges: [],
-    missingFactsNoteAr: 'ملاحظة منهجية: يركز النص الموثق لهذا المشروع على مصفوفة الفحص البرمجي (QA Test Matrix) واعتماد الاستلام دون تفاصيل معمارية الخوادم المستضيفة؛ لذا تم عرض بطاقة التوثيق الهندسي بدلاً من رسم طوبولوجيا افتراضية.',
+    missingFactsNoteAr: 'ملاحظة منهجية: يركز نطاق هذا المشروع على مصفوفة الفحص البرمجي (QA Test Matrix) واعتماد الاستلام دون تفاصيل معمارية الخوادم المستضيفة؛ لذا تم عرض بطاقة التوثيق الهندسي بدلاً من رسم طوبولوجيا افتراضية.',
     missingFactsNoteEn: 'Methodology Note: Documented project facts describe the QA test matrix and acceptance audit rather than host network topology; displaying a typographic engineering cover card instead of inventing nodes.',
   },
   'case-12': {

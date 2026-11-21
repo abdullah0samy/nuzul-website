@@ -1,0 +1,284 @@
+{
+  "consoleErrors": [],
+  "pageErrors": [],
+  "totalChecks": 28,
+  "anyOverflow": false,
+  "anyForbiddenMatches": [],
+  "results": [
+    {
+      "viewport": "1440",
+      "theme": "light",
+      "route": "/",
+      "overflow": false,
+      "footerBg": "rgba(15, 39, 68, 0.9)",
+      "footerColor": "rgb(248, 250, 252)",
+      "forbiddenMatches": [],
+      "cardCount": 0,
+      "title": "البنية التحتية السحابية والأمن السيبراني للشركات في مصر | نزول تك"
+    },
+    {
+      "viewport": "1440",
+      "theme": "light",
+      "route": "/services",
+      "overflow": false,
+      "footerBg": "rgba(15, 39, 68, 0.9)",
+      "footerColor": "rgb(248, 250, 252)",
+      "forbiddenMatches": [],
+      "cardCount": 9,
+      "title": "الخدمات | نزول تك"
+    },
+    {
+      "viewport": "1440",
+      "theme": "light",
+      "route": "/services?cat=infrastructure",
+      "overflow": false,
+      "footerBg": "rgba(15, 39, 68, 0.9)",
+      "footerColor": "rgb(248, 250, 252)",
+      "forbiddenMatches": [],
+      "cardCount": 3,
+      "title": "الخدمات | نزول تك"
+    },
+    {
+      "viewport": "1440",
+      "theme": "light",
+      "route": "/pricing",
+      "overflow": false,
+      "footerBg": "rgba(15, 39, 68, 0.9)",
+      "footerColor": "rgb(248, 250, 252)",
+      "forbiddenMatches": [],
+      "cardCount": 0,
+      "title": "خطط الأسعار والباقات المؤسسية | نزول تك"
+    },
+    {
+      "viewport": "1440",
+      "theme": "light",
+      "route": "/hosting",
+      "overflow": false,
+      "footerBg": "rgba(15, 39, 68, 0.9)",
+      "footerColor": "rgb(248, 250, 252)",
+      "forbiddenMatches": [],
+      "cardCount": 0,
+      "title": "الاستضافة السحابية والخوادم المخصصة | نزول تك"
+    },
+    {
+      "viewport": "1440",
+      "theme": "light",
+      "route": "/case-studies",
+      "overflow": false,
+      "footerBg": "rgba(15, 39, 68, 0.9)",
+      "footerColor": "rgb(248, 250, 252)",
+      "forbiddenMatches": [],
+      "cardCount": 0,
+      "title": "دراسات الحالة وسجل المشاريع | نزول تك"
+    },
+    {
+      "viewport": "1440",
+      "theme": "light",
+      "route": "/blog",
+      "overflow": false,
+      "footerBg": "rgba(15, 39, 68, 0.9)",
+      "footerColor": "rgb(248, 250, 252)",
+      "forbiddenMatches": [],
+      "cardCount": 0,
+      "title": "المدونة التقنية والمقالات الهندسية | نزول تك"
+    },
+    {
+      "viewport": "1440",
+      "theme": "light",
+      "route": "/about",
+      "overflow": false,
+      "footerBg": "rgba(15, 39, 68, 0.9)",
+      "footerColor": "rgb(248, 250, 252)",
+      "forbiddenMatches": [],
+      "cardCount": 0,
+      "title": "عن نزول تك — المنهجية الهندسية وعقود SLA | نزول تك"
+    },
+    {
+      "viewport": "1440",
+      "theme": "light",
+      "route": "/contact",
+      "overflow": false,
+      "footerBg": "rgba(15, 39, 68, 0.9)",
+      "footerColor": "rgb(248, 250, 252)",
+      "forbiddenMatches": [],
+      "cardCount": 0,
+      "title": "تواصل معنا واحجز استشارة هندسية | نزول تك"
+    },
+    {
+      "viewport": "1440",
+      "theme": "dark",
+      "route": "/",
+      "overflow": false,
+      "footerBg": "rgba(11, 18, 32, 0.9)",
+      "footerColor": "rgb(248, 250, 252)",
+      "forbiddenMatches": [],
+      "cardCount": 0,
+      "title": "البنية التحتية السحابية والأمن السيبراني للشركات في مصر | نزول تك"
+    },
+    {
+      "viewport": "1440",
+      "theme": "dark",
+      "route": "/services",
+      "overflow": false,
+      "footerBg": "rgba(11, 18, 32, 0.9)",
+      "footerColor": "rgb(248, 250, 252)",
+      "forbiddenMatches": [],
+      "cardCount": 9,
+      "title": "الخدمات | نزول تك"
+    },
+    {
+      "viewport": "1440",
+      "theme": "dark",
+      "route": "/services?cat=infrastructure",
+      "overflow": false,
+      "footerBg": "rgba(11, 18, 32, 0.9)",
+      "footerColor": "rgb(248, 250, 252)",
+      "forbiddenMatches": [],
+      "cardCount": 3,
+      "title": "الخدمات | نزول تك"
+    },
+    {
+      "viewport": "1440",
+      "theme": "dark",
+      "route": "/pricing",
+      "overflow": false,
+      "footerBg": "rgba(11, 18, 32, 0.9)",
+      "footerColor": "rgb(248, 250, 252)",
+      "forbiddenMatches": [],
+      "cardCount": 0,
+      "title": "خطط الأسعار والباقات المؤسسية | نزول تك"
+    },
+    {
+      "viewport": "1440",
+      "theme": "dark",
+      "route": "/hosting",
+      "overflow": false,
+      "footerBg": "rgba(11, 18, 32, 0.9)",
+      "footerColor": "rgb(248, 250, 252)",
+      "forbiddenMatches": [],
+      "cardCount": 0,
+      "title": "الاستضافة السحابية والخوادم المخصصة | نزول تك"
+    },
+    {
+      "viewport": "1440",
+      "theme": "dark",
+      "route": "/case-studies",
+      "overflow": false,
+      "footerBg": "rgba(11, 18, 32, 0.9)",
+      "footerColor": "rgb(248, 250, 252)",
+      "forbiddenMatches": [],
+      "cardCount": 0,
+      "title": "دراسات الحالة وسجل المشاريع | نزول تك"
+    },
+    {
+      "viewport": "1440",
+      "theme": "dark",
+      "route": "/blog",
+      "overflow": false,
+      "footerBg": "rgba(11, 18, 32, 0.9)",
+      "footerColor": "rgb(248, 250, 252)",
+      "forbiddenMatches": [],
+      "cardCount": 0,
+      "title": "المدونة التقنية والمقالات الهندسية | نزول تك"
+    },
+    {
+      "viewport": "1440",
+      "theme": "dark",
+      "route": "/about",
+      "overflow": false,
+      "footerBg": "rgba(11, 18, 32, 0.9)",
+      "footerColor": "rgb(248, 250, 252)",
+      "forbiddenMatches": [],
+      "cardCount": 0,
+      "title": "عن نزول تك — المنهجية الهندسية وعقود SLA | نزول تك"
+    },
+    {
+      "viewport": "1440",
+      "theme": "dark",
+      "route": "/contact",
+      "overflow": false,
+      "footerBg": "rgba(11, 18, 32, 0.9)",
+      "footerColor": "rgb(248, 250, 252)",
+      "forbiddenMatches": [],
+      "cardCount": 0,
+      "title": "تواصل معنا واحجز استشارة هندسية | نزول تك"
+    },
+    {
+      "viewport": "375",
+      "theme": "light",
+      "route": "/",
+      "overflow": false,
+      "footerBg": "rgba(15, 39, 68, 0.9)",
+      "forbiddenMatches": []
+    },
+    {
+      "viewport": "375",
+      "theme": "light",
+      "route": "/services",
+      "overflow": false,
+      "footerBg": "rgba(15, 39, 68, 0.9)",
+      "forbiddenMatches": []
+    },
+    {
+      "viewport": "375",
+      "theme": "light",
+      "route": "/pricing",
+      "overflow": false,
+      "footerBg": "rgba(15, 39, 68, 0.9)",
+      "forbiddenMatches": []
+    },
+    {
+      "viewport": "375",
+      "theme": "light",
+      "route": "/contact",
+      "overflow": false,
+      "footerBg": "rgba(15, 39, 68, 0.9)",
+      "forbiddenMatches": []
+    },
+    {
+      "test": "pillar-1-filter-navigation",
+      "url": "/services?cat=infrastructure",
+      "activeChip": "الشبكات والبنية التحتية",
+      "cardsCount": 3
+    },
+    {
+      "viewport": "375",
+      "theme": "dark",
+      "route": "/",
+      "overflow": false,
+      "footerBg": "rgba(11, 18, 32, 0.9)",
+      "forbiddenMatches": []
+    },
+    {
+      "viewport": "375",
+      "theme": "dark",
+      "route": "/services",
+      "overflow": false,
+      "footerBg": "rgba(11, 18, 32, 0.9)",
+      "forbiddenMatches": []
+    },
+    {
+      "viewport": "375",
+      "theme": "dark",
+      "route": "/pricing",
+      "overflow": false,
+      "footerBg": "rgba(11, 18, 32, 0.9)",
+      "forbiddenMatches": []
+    },
+    {
+      "viewport": "375",
+      "theme": "dark",
+      "route": "/contact",
+      "overflow": false,
+      "footerBg": "rgba(11, 18, 32, 0.9)",
+      "forbiddenMatches": []
+    },
+    {
+      "test": "en-services-localization",
+      "firstBadge": "Infrastructure & Networks",
+      "hasArabicBadge": false,
+      "showMoreCount": 0,
+      "title": "Services | Nuzul Tech"
+    }
+  ]
+}

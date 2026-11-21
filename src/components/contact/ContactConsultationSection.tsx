@@ -186,28 +186,28 @@ export const ContactConsultationSection: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="section-spacing bg-page">
+    <section id="contact" className="section-spacing bg-page-band">
       <div className="container-nuzul">
         <div className="max-w-3xl mb-12">
-          <p className="text-sm font-semibold text-accent mb-2">
-            {lang === 'ar' ? 'تواصل مع الفريق الهندسي' : 'Contact Our Engineering Team'}
+          <p className="text-xs font-semibold text-accent mb-2">
+            {lang === 'ar' ? 'القاهرة، مصر · المبيعات والمشاريع' : 'Cairo, Egypt · Engineering Desk'}
           </p>
           <h1 className="text-3xl md:text-5xl font-bold text-main mb-4">
             {lang === 'ar'
-              ? 'احجز استشارة هندسية أو اطلب عرض سعر مفصل'
-              : 'Book an Engineering Consultation or Request a Proposal'}
+              ? 'اطلب معاينة فنية أو عرض سعر'
+              : 'Request a Site Audit or Quote'}
           </h1>
           <p className="text-muted text-base md:text-lg leading-relaxed">
             {lang === 'ar'
-              ? 'تحدث مباشرة مع مهندسي البنية التحتية والسحابة في نُزول تِك لمناقشة احتياجات شركتك الفنية وتحديد النطاق المناسب.'
-              : 'Speak directly with Nuzul Tech infrastructure and cloud architects to scope your project requirements.'}
+              ? 'ابعث لنا تفاصيل مشروعك أو عدد الفروع والسيرفرات المطلوبة، وسيتواصل معك مهندس مختص بمقايسة واضحة.'
+              : 'Share your branch count, network setup, or server requirements and an engineer will reply with a clear scope.'}
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
           {/* Contact Form Column */}
           <div className="lg:col-span-7">
-            <div className="clean-card p-6 sm:p-10 bg-surface">
+            <div className="clean-card p-6 sm:p-10">
               {submissionResult ? (
                 <div
                   data-testid="contact-success-state"
@@ -223,7 +223,7 @@ export const ContactConsultationSection: React.FC = () => {
                   </h2>
                   <p className="text-muted text-sm max-w-md mx-auto leading-relaxed">
                     {lang === 'ar'
-                      ? 'تم توجيه بيانات مشروعك إلى الفريق الهندسي المختص في نُزول تِك للمراجعة الفنية والتواصل معك خلال ساعات العمل الرسمية.'
+                      ? 'تم توجيه بيانات مشروعك إلى الفريق الهندسي المختص في نزول تك للمراجعة الفنية والتواصل معك خلال ساعات العمل الرسمية.'
                       : 'Your project scope has been routed to Nuzul Tech’s engineering desk for technical review during business hours.'}
                   </p>
 
@@ -516,8 +516,8 @@ export const ContactConsultationSection: React.FC = () => {
                     )}
                   </div>
 
-                  {/* Spam Protection: Turnstile / Anti-Bot Verification */}
-                  <div className="p-4 rounded-xl bg-page border border-token">
+                  {/* Anti-Spam Verification */}
+                  <div className="p-4 rounded-xl bg-surface-2 border border-token">
                     <div className="flex items-center justify-between gap-3">
                       <label
                         htmlFor="contact-turnstile"
@@ -535,15 +535,15 @@ export const ContactConsultationSection: React.FC = () => {
                           aria-describedby={
                             errors.turnstileVerified ? 'error-turnstile' : undefined
                           }
-                          className="w-5 h-5 accent-current rounded cursor-pointer"
+                          className="w-5 h-5 accent-[var(--accent)] rounded cursor-pointer"
                         />
                         <span>
                           {lang === 'ar'
-                            ? 'تأكيد أنني مستخدم بشري (حماية Cloudflare Turnstile ضد الرسائل الآلية)'
-                            : 'Verify human submission (Turnstile anti-spam protection)'}
+                            ? 'لست روبوتاً — تأكيد إرسال الطلب'
+                            : 'I am not a robot — confirm submission'}
                         </span>
                       </label>
-                      <ShieldCheck className="w-5 h-5 text-accent shrink-0" />
+                      <ShieldCheck className="w-5 h-5 text-accent shrink-0" aria-hidden="true" />
                     </div>
                     {errors.turnstileVerified && (
                       <p
@@ -557,7 +557,7 @@ export const ContactConsultationSection: React.FC = () => {
                     )}
                   </div>
 
-                  {/* Submit Button + Secondary WhatsApp Option (No unverified response-time promises) */}
+                  {/* Submit Button + Direct WhatsApp Option */}
                   <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
                     <button
                       type="submit"
@@ -567,11 +567,11 @@ export const ContactConsultationSection: React.FC = () => {
                     >
                       {isSubmitting
                         ? lang === 'ar'
-                          ? 'جاري إرسال الطلب...'
-                          : 'Submitting Request...'
+                          ? 'جاري الإرسال...'
+                          : 'Sending...'
                         : lang === 'ar'
-                        ? 'إرسال طلب الاستشارة'
-                        : 'Submit Consultation Request'}
+                        ? 'إرسال الطلب'
+                        : 'Send Request'}
                     </button>
 
                     <a
@@ -579,54 +579,35 @@ export const ContactConsultationSection: React.FC = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       data-testid="contact-secondary-whatsapp"
-                      className="inline-flex items-center justify-center gap-2 min-h-[44px] px-4 py-2 rounded-xl border border-token bg-page text-xs sm:text-sm font-semibold text-main hover-text-accent transition-colors whitespace-nowrap"
+                      className="btn-secondary min-h-[44px] px-4 py-2 text-xs sm:text-sm whitespace-nowrap"
                     >
-                      <MessageCircle className="w-4 h-4 text-success shrink-0" />
+                      <MessageCircle className="w-4 h-4 text-success shrink-0" aria-hidden="true" />
                       <span>
                         {lang === 'ar'
-                          ? 'خيار ثانوي: محادثة واتساب'
-                          : 'Secondary option: WhatsApp Chat'}
+                          ? 'تواصل عبر واتساب'
+                          : 'Chat on WhatsApp'}
                       </span>
                     </a>
                   </div>
 
-                  {/* Plain-language Privacy Notice ([VERIFY with legal] per Master Brief Phase 8) */}
                   <div
                     data-testid="contact-privacy-notice"
-                    className="pt-4 border-t border-token text-[11px] sm:text-xs text-muted leading-relaxed"
+                    className="pt-4 border-t border-token text-xs text-muted leading-relaxed"
                   >
-                    {lang === 'ar' ? (
-                      <p>
-                        <strong>إشعار الخصوصية وسرية البيانات:</strong> تُستخدم البيانات
-                        المدخلة في هذا النموذج حصرياً للتواصل معك بشأن طلبك الفني وإعداد
-                        عرض السعر، ولا يتم بيعها أو مشاركتها مع أي جهات تسويقية خارجية.{' '}
-                        <span
-                          dir="ltr"
-                          className="ltr-num font-semibold text-accent"
-                        >
-                          [VERIFY with legal]
-                        </span>
-                      </p>
-                    ) : (
-                      <p>
-                        <strong>Privacy &amp; Confidentiality Notice:</strong> Information
-                        submitted through this form is used solely by Nuzul Tech engineers
-                        to evaluate your technical inquiry and prepare a quotation, and is
-                        never shared with third-party marketers.{' '}
-                        <span className="font-semibold text-accent">
-                          [VERIFY with legal]
-                        </span>
-                      </p>
-                    )}
+                    <p>
+                      {lang === 'ar'
+                        ? 'بياناتك تُستخدم للتواصل بخصوص طلبك وإعداد عرض السعر فقط، ولا تُشارك مع أي طرف خارجي.'
+                        : 'Your details are used solely to review your request and prepare a quote—never shared with third parties.'}
+                    </p>
                   </div>
                 </form>
               )}
             </div>
           </div>
 
-          {/* Direct Contact Info + Marked Real Photo Slot */}
+          {/* Direct Contact Info + Office Photography */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="clean-card p-8 bg-surface space-y-6">
+            <div className="clean-card p-8 space-y-6">
               <h2 className="text-lg font-bold text-main">
                 {lang === 'ar' ? 'قنوات التواصل المباشر' : 'Direct Contact Channels'}
               </h2>
@@ -682,12 +663,14 @@ export const ContactConsultationSection: React.FC = () => {
               </ul>
             </div>
 
-            {/* Clearly marked real team/office photo slot (Section 3.9) */}
             <ImageSlot
               testId="contact-hq-image-slot"
+              photoVariant="office"
               aspectRatio="video"
-              descriptionAr="مساحة مخصصة لصورة فوتوغرافية حقيقية لمقر شركة نُزول تِك بالقاهرة وغرفة عمليات الشبكات"
-              descriptionEn="Reserved slot for an authentic photograph of Nuzul Tech’s Cairo headquarters and network operations desk"
+              descriptionAr="مقر فريق نزول تك الهندسي في القاهرة"
+              descriptionEn="Nuzul Tech Cairo engineering office and meeting space"
+              captionAr="المقر الرئيسي — القاهرة، مصر"
+              captionEn="Cairo Headquarters — Engineering & Client Briefing Space"
             />
           </div>
         </div>

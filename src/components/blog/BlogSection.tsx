@@ -9,7 +9,6 @@ import {
   Clock,
   ArrowLeft,
   ArrowRight,
-  FileText,
   SlidersHorizontal,
   Search,
   X,
@@ -178,8 +177,8 @@ export const BlogSection: React.FC = () => {
                     {queryParam
                       ? queryParam
                       : lang === 'ar'
-                      ? 'بحث شامل (Ctrl+K)'
-                      : 'Global Search (Ctrl+K)'}
+                      ? 'بحث (Ctrl+K)'
+                      : 'Search (Ctrl+K)'}
                   </span>
                 </span>
                 <kbd className="px-1.5 py-0.5 rounded bg-surface border border-token text-[10px] ltr-num shrink-0">
@@ -368,7 +367,7 @@ export const BlogSection: React.FC = () => {
             ) : (
               <>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {visibleArticles.map((article, idx) => {
+                  {visibleArticles.map((article) => {
                     const isExpanded = Boolean(expandedBlogIds[article.id]);
                     return (
                       <article
@@ -377,30 +376,19 @@ export const BlogSection: React.FC = () => {
                         className="clean-card clean-card-hover overflow-hidden flex flex-col justify-between"
                       >
                         <div>
-                          <div className="px-6 py-4 bg-surface-2 border-b border-token flex items-center justify-between gap-3">
-                            <span className="px-2.5 py-1 rounded bg-surface text-accent text-xs font-semibold border border-token whitespace-nowrap">
-                              {lang === 'ar' ? article.category : article.categoryEn}
-                            </span>
-                            <span className="inline-flex items-center gap-1.5 text-xs text-muted font-semibold whitespace-nowrap">
-                              <FileText className="w-3.5 h-3.5 text-accent shrink-0" />
-                              <span>
-                                {lang === 'ar' ? 'دليل' : 'Guide'}{' '}
-                                <bdi dir="ltr" className="ltr-num">
-                                  {String(idx + 1).padStart(2, '0')}
-                                </bdi>
-                              </span>
-                            </span>
-                          </div>
-
                           <div className="p-6">
-                            <div className="flex items-center gap-3 text-xs text-muted mb-2.5">
-                              <span className="inline-flex items-center gap-1.5">
-                                <Calendar className="w-3.5 h-3.5 shrink-0" />
+                            <div className="flex flex-wrap items-center gap-2 text-xs text-muted mb-3">
+                              <span className="font-semibold text-accent whitespace-nowrap">
+                                {lang === 'ar' ? article.category : article.categoryEn}
+                              </span>
+                              <span aria-hidden="true">·</span>
+                              <span className="inline-flex items-center gap-1">
+                                <Calendar className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
                                 <bdi dir="ltr" className="ltr-num">{article.date}</bdi>
                               </span>
                               <span aria-hidden="true">·</span>
                               <span className="inline-flex items-center gap-1">
-                                <Clock className="w-3.5 h-3.5 shrink-0" />
+                                <Clock className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
                                 <span>{lang === 'ar' ? article.readTime : article.readTimeEn}</span>
                               </span>
                             </div>

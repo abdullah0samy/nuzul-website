@@ -31,7 +31,7 @@ export const LiveDemosSection: React.FC = () => {
   };
 
   return (
-    <section id="demos" className="section-spacing bg-surface border-t border-token">
+    <section id="demos" className="section-spacing bg-surface-band border-t border-token">
       <div className="container-nuzul">
         <div className="max-w-3xl mb-10">
           <h2 className="text-2xl md:text-4xl font-bold text-main mb-3">
@@ -68,7 +68,7 @@ export const LiveDemosSection: React.FC = () => {
           </div>
         )}
 
-        <div className="clean-card overflow-hidden bg-page">
+        <div className="clean-card overflow-hidden">
           <div className="grid grid-cols-1 lg:grid-cols-12">
             <div className="lg:col-span-7 p-6 sm:p-8 lg:p-10 flex flex-col justify-between">
               <div>
@@ -113,22 +113,24 @@ export const LiveDemosSection: React.FC = () => {
               </div>
             </div>
 
-            <div className="lg:col-span-5 bg-surface border-t lg:border-t-0 lg:border-s border-token p-6 sm:p-8 flex flex-col justify-center">
+            <div className="lg:col-span-5 bg-surface-2 border-t lg:border-t-0 lg:border-s border-token p-6 sm:p-8 flex flex-col justify-center">
               <div className="text-xs font-bold text-muted mb-4">
-                {lang === 'ar' ? 'المواصفات التقنية:' : 'Technical Specifications:'}
+                {lang === 'ar' ? 'المواصفات الفنية:' : 'Technical Specifications:'}
               </div>
-              <div className="space-y-4">
+              <dl className="divide-y divide-[var(--border)]">
                 {activeDemo.kpis.map((kpi, idx) => (
-                  <div key={idx} className="p-4 rounded-xl bg-page border border-token flex items-center justify-between gap-4">
-                    <span className="text-sm font-medium text-main">
+                  <div key={idx} className="py-4 first:pt-0 last:pb-0 flex items-center justify-between gap-4">
+                    <dt className="text-sm font-medium text-main">
                       {lang === 'ar' ? kpi.label : kpi.labelEn}
-                    </span>
-                    <bdi dir="ltr" className="ltr-num text-lg font-bold text-accent">
-                      {kpi.value}
-                    </bdi>
+                    </dt>
+                    <dd>
+                      <bdi dir="ltr" className="ltr-num text-sm sm:text-base font-bold text-accent">
+                        {kpi.value}
+                      </bdi>
+                    </dd>
                   </div>
                 ))}
-              </div>
+              </dl>
             </div>
           </div>
         </div>

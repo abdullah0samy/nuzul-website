@@ -25,10 +25,10 @@ export const NuzulLogo: React.FC<NuzulLogoProps> = ({
       : 32;
 
   const isDarkSurface = effectiveVariant === 'dark';
-  const primaryWordClass = isDarkSurface ? 'text-slate-50' : 'text-[var(--text)]';
-  const accentWordClass = isDarkSurface ? 'text-teal-400' : 'text-[var(--accent)]';
-  const cloudStroke = isDarkSurface ? '#94A3B8' : '#0B4F6C';
-  const arrowStroke = isDarkSurface ? '#2DD4BF' : '#0E6B64';
+  const primaryWordClass = isDarkSurface ? 'text-[var(--navy-text)]' : 'text-[var(--text)]';
+  const accentWordClass = isDarkSurface ? 'text-[var(--logo-arrow-on-dark)]' : 'text-[var(--accent)]';
+  const cloudStroke = isDarkSurface ? 'var(--logo-cloud-on-dark)' : 'var(--logo-cloud)';
+  const arrowStroke = isDarkSurface ? 'var(--logo-arrow-on-dark)' : 'var(--accent)';
 
   return (
     <div
@@ -64,8 +64,8 @@ export const NuzulLogo: React.FC<NuzulLogoProps> = ({
       <span className="text-lg sm:text-[1.2rem] font-bold tracking-tight leading-none whitespace-nowrap">
         {lang === 'ar' ? (
           <>
-            <span className={primaryWordClass}>نُزول</span>{' '}
-            <span className={accentWordClass}>تِك</span>
+            <span className={primaryWordClass}>نزول</span>{' '}
+            <span className={accentWordClass}>تك</span>
           </>
         ) : (
           <bdi dir="ltr" className="ltr-num">

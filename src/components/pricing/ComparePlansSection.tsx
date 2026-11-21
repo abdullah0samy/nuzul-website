@@ -48,7 +48,7 @@ const COMPARE_FAMILY_TABS: { id: HostingCategory; ar: string; en: string }[] = [
 ];
 
 export const ComparePlansSection: React.FC = () => {
-  const { lang, formatPrice, addToCart } = useApp();
+  const { lang, formatPrice, openServerConfigurator } = useApp();
   const [activeFamily, setActiveFamily] = useState<HostingCategory>('vps');
   const [openTooltipId, setOpenTooltipId] = useState<string | null>(null);
   const [collapsedCategories, setCollapsedCategories] = useState<Record<string, boolean>>({});
@@ -168,7 +168,7 @@ export const ComparePlansSection: React.FC = () => {
             id: 'backups',
             labelAr: 'اللقطات والنسخ الاحتياطي',
             labelEn: 'Snapshots & Backups',
-            tooltipAr: 'لقطات فورية (Snapshots) أو نسخ احتياطي يومي للاسترجاع السريع.',
+            tooltipAr: 'لقطات استرجاع عند الطلب (Snapshots) أو نسخ احتياطي يومي.',
             tooltipEn: 'Included point-in-time Snapshots or automated daily off-site backups.',
             getValue: (p) => p.snapshots,
           },
@@ -247,14 +247,7 @@ export const ComparePlansSection: React.FC = () => {
   };
 
   const handleSelectPlan = (plan: HostingPlan) => {
-    addToCart({
-      id: `${plan.id}-monthly-cai`,
-      name: `${lang === 'ar' ? plan.nameAr : plan.nameEn} (${lang === 'ar' ? 'شهري' : 'Monthly'})`,
-      type: 'hosting',
-      price: plan.monthlyPriceEGP,
-      billingCycle: 'monthly',
-      details: `${plan.cpu} · ${plan.ram} · ${plan.storage}`,
-    });
+    openServerConfigurator(plan, 'cai', 'yearly');
   };
 
   const scrollToMobileCompareCard = (index: number) => {
@@ -268,7 +261,7 @@ export const ComparePlansSection: React.FC = () => {
   };
 
   return (
-    <section id="compare-plans" className="section-spacing bg-surface border-t border-token">
+    <section id="compare-plans" className="section-spacing bg-surface-band border-t border-token">
       <div className="container-nuzul">
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8">
           <div className="max-w-2xl">
@@ -545,7 +538,7 @@ export const ComparePlansSection: React.FC = () => {
         </div>
 
         {/* DESKTOP & TABLET VIEW (>=768px) */}
-        <div className="hidden md:block border border-token rounded-xl bg-surface shadow-xs overflow-x-auto relative">
+        <div className="hidden md:block glass-panel overflow-x-auto relative">
           <table
             ref={tableRef}
             className="w-full text-start border-collapse min-w-[720px]"

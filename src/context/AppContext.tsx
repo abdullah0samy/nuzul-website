@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { Article } from '../data/nuzulData';
+import { Article, HostingPlan } from '../data/nuzulData';
 
 export type Language = 'ar' | 'en';
 export type Currency = 'EGP' | 'SAR' | 'USD';
@@ -10,9 +10,16 @@ export interface CartItem {
   id: string;
   name: string;
   type: 'hosting' | 'domain' | 'service' | 'package';
-  price: number;
+  price: number; // Unit price in EGP
+  quantity?: number;
   billingCycle?: 'monthly' | 'yearly' | 'one-time';
   details?: string;
+}
+
+export interface ServerConfiguratorRequest {
+  plan: HostingPlan;
+  initialRegion?: string;
+  initialCycle?: 'monthly' | 'yearly';
 }
 
 interface AppContextType {
@@ -28,11 +35,20 @@ interface AppContextType {
   resolvedTheme: ResolvedTheme;
   theme: ResolvedTheme;
   cart: CartItem[];
+  cartCount: number;
   addToCart: (item: CartItem) => void;
+  updateCartQuantity: (id: string, delta: number) => void;
   removeFromCart: (id: string) => void;
   clearCart: () => void;
   isCartOpen: boolean;
   setIsCartOpen: (open: boolean) => void;
+  configuratorRequest: ServerConfiguratorRequest | null;
+  openServerConfigurator: (
+    plan: HostingPlan,
+    initialRegion?: string,
+    initialCycle?: 'monthly' | 'yearly'
+  ) => void;
+  closeServerConfigurator: () => void;
   isClientAreaOpen: boolean;
   setIsClientAreaOpen: (open: boolean) => void;
   isPaymentModalOpen: boolean;
@@ -53,8 +69,11 @@ const AppContext = createContext<AppContextType | undefined>(undefined);
 const EXCHANGE_RATES: Record<Currency, { rate: number; symbol: string }> = {
   EGP: { rate: 1, symbol: 'ج.م' },
   SAR: { rate: 3.75 / 49.5, symbol: 'ر.س' },
-  USD: { rate: 1 / 49.5, symbol: '$' }
+  USD: { rate: 1 / 49.5, symbol: '$' },
 };
+
+const CART_STORAGE_KEY = 'nuzul-cart-v2';
+const CURRENCY_STORAGE_KEY = 'nuzul-currency';
 
 function getInitialThemeMode(): ThemeMode {
   if (typeof window === 'undefined') return 'system';
@@ -95,13 +114,49 @@ function getInitialLang(): Language {
   return 'ar';
 }
 
+function getInitialCurrency(): Currency {
+  if (typeof window === 'undefined') return 'EGP';
+  try {
+    const saved = localStorage.getItem(CURRENCY_STORAGE_KEY);
+    if (saved === 'EGP' || saved === 'USD' || saved === 'SAR') {
+      return saved;
+    }
+  } catch {
+    // ignore storage errors
+  }
+  return 'EGP';
+}
+
+function getInitialCart(): CartItem[] {
+  if (typeof window === 'undefined') return [];
+  try {
+    const raw = localStorage.getItem(CART_STORAGE_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    if (!Array.isArray(parsed)) return [];
+    return parsed
+      .filter((item) => item && typeof item.id === 'string' && typeof item.name === 'string')
+      .map((item) => ({
+        ...item,
+        price: Number(item.price) || 0,
+        quantity: Math.max(1, Math.min(20, Math.floor(Number(item.quantity) || 1))),
+      }));
+  } catch {
+    return [];
+  }
+}
+
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [lang, setLangState] = useState<Language>(getInitialLang);
-  const [currency, setCurrency] = useState<Currency>('EGP');
+  const [currency, setCurrencyState] = useState<Currency>(getInitialCurrency);
   const [themeMode, setThemeModeState] = useState<ThemeMode>(getInitialThemeMode);
-  const [resolvedTheme, setResolvedTheme] = useState<ResolvedTheme>(() => resolveTheme(getInitialThemeMode()));
-  const [cart, setCart] = useState<CartItem[]>([]);
+  const [resolvedTheme, setResolvedTheme] = useState<ResolvedTheme>(() =>
+    resolveTheme(getInitialThemeMode())
+  );
+  const [cart, setCart] = useState<CartItem[]>(getInitialCart);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [configuratorRequest, setConfiguratorRequest] =
+    useState<ServerConfiguratorRequest | null>(null);
   const [isClientAreaOpen, setIsClientAreaOpen] = useState(false);
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
   const [isChatOpen, setIsChatOpen] = useState(false);
@@ -117,6 +172,23 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       // ignore storage errors
     }
   };
+
+  const setCurrency = (curr: Currency) => {
+    setCurrencyState(curr);
+    try {
+      localStorage.setItem(CURRENCY_STORAGE_KEY, curr);
+    } catch {
+      // ignore storage errors
+    }
+  };
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
+    } catch {
+      // ignore storage errors
+    }
+  }, [cart]);
 
   const resetServiceFilters = () => {
     setServiceCategoryFilter('all');
@@ -167,9 +239,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         : `$${usdRounded.toLocaleString('en-US')}`;
     }
     const converted =
-      currency === 'EGP'
-        ? Math.round(priceInEGP)
-        : Math.round(priceInEGP * rate);
+      currency === 'EGP' ? Math.round(priceInEGP) : Math.round(priceInEGP * rate);
     if (lang === 'en') {
       return `${converted.toLocaleString('en-US')} ${currency}`;
     }
@@ -178,11 +248,32 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
   const addToCart = (item: CartItem) => {
     setCart((prev) => {
-      const exists = prev.find((i) => i.id === item.id);
-      if (exists) return prev;
-      return [...prev, item];
+      const existing = prev.find((i) => i.id === item.id);
+      if (existing) {
+        // Domains are unique per name; servers/services can increment quantity
+        if (item.type === 'domain') return prev;
+        return prev.map((i) =>
+          i.id === item.id
+            ? { ...i, quantity: Math.min(20, (i.quantity || 1) + (item.quantity || 1)) }
+            : i
+        );
+      }
+      return [...prev, { ...item, quantity: item.quantity || 1 }];
     });
     setIsCartOpen(true);
+  };
+
+  const updateCartQuantity = (id: string, delta: number) => {
+    setCart((prev) =>
+      prev
+        .map((item) => {
+          if (item.id !== id) return item;
+          const nextQty = (item.quantity || 1) + delta;
+          if (nextQty <= 0) return null;
+          return { ...item, quantity: Math.min(20, nextQty) };
+        })
+        .filter((x): x is CartItem => x !== null)
+    );
   };
 
   const removeFromCart = (id: string) => {
@@ -190,6 +281,18 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   };
 
   const clearCart = () => setCart([]);
+
+  const openServerConfigurator = (
+    plan: HostingPlan,
+    initialRegion = 'cai',
+    initialCycle: 'monthly' | 'yearly' = 'yearly'
+  ) => {
+    setConfiguratorRequest({ plan, initialRegion, initialCycle });
+  };
+
+  const closeServerConfigurator = () => setConfiguratorRequest(null);
+
+  const cartCount = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
 
   return (
     <AppContext.Provider
@@ -206,11 +309,16 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         resolvedTheme,
         theme: resolvedTheme,
         cart,
+        cartCount,
         addToCart,
+        updateCartQuantity,
         removeFromCart,
         clearCart,
         isCartOpen,
         setIsCartOpen,
+        configuratorRequest,
+        openServerConfigurator,
+        closeServerConfigurator,
         isClientAreaOpen,
         setIsClientAreaOpen,
         isPaymentModalOpen,
@@ -223,7 +331,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         setServiceCategoryFilter,
         serviceSearchQuery,
         setServiceSearchQuery,
-        resetServiceFilters
+        resetServiceFilters,
       }}
     >
       {children}

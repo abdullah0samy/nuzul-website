@@ -153,16 +153,28 @@ async function runVerification() {
   await menuBtn.click();
   await page.waitForTimeout(200);
 
-  // 5. Check WhatsApp Floating Widget (no red dot, Cairo status, muted sound, analytics call)
+  // 5. Check WhatsApp Floating Widget (no red dot, Cairo status, muted sound, inline status dot, analytics call)
   const whatsappPulseDot = await page.locator('[data-testid="whatsapp-fab-pulse-dot"]').count();
+  const whatsappInlineDotVisible = await page.locator('[data-testid="whatsapp-inline-status-dot"]').isVisible();
   const whatsappFabLink = page.locator('[data-testid="whatsapp-fab-link"]');
   const whatsappStatus = await whatsappFabLink.getAttribute('data-status');
   const whatsappSoundMuted = await whatsappFabLink.getAttribute('data-sound-muted');
   const fabBox = await whatsappFabLink.boundingBox();
+  // Verify click event tracker without navigating away
+  const analyticsFired = await page.evaluate(() => {
+    const link = document.querySelector('[data-testid="whatsapp-fab-link"]');
+    if (!link) return false;
+    link.addEventListener('click', (e) => e.preventDefault(), { once: true });
+    link.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
+    const events = window.__nuzulAnalytics || [];
+    return events.some((ev) => ev.event === 'whatsapp_fab_click');
+  });
   results.checks.whatsapp = {
     hasPulseDot: whatsappPulseDot > 0,
+    inlineStatusDotVisibleOn375: whatsappInlineDotVisible,
     status: whatsappStatus,
     soundMuted: whatsappSoundMuted === 'true',
+    clickAnalyticsTracked: analyticsFired,
     boundingBox: fabBox ? { x: Math.round(fabBox.x), y: Math.round(fabBox.y), w: Math.round(fabBox.width), h: Math.round(fabBox.height) } : null,
   };
   console.log(`WhatsApp check:`, results.checks.whatsapp);
@@ -207,9 +219,11 @@ async function runVerification() {
     const fabText = document.querySelector('[data-testid="floating-whatsapp-wrapper"]')?.innerText || '';
     return `${headerText}\n${mainText}\n${fabText}`;
   });
+  // Strip official permitted tax system name before checking standalone منظومة
+  const normalizedForCheck = scopedText.replace(/ب?منظومة الفاتورة الإلكترونية/g, '');
   const EXTRA_CHECK_TERMS = [...BANNED_WORDS, 'DEMO', 'نُزول', 'في مصر والخليج', 'المصانع وسلاسل الإمداد', 'منظومة'];
   for (const word of EXTRA_CHECK_TERMS) {
-    if (scopedText.includes(word)) {
+    if (normalizedForCheck.includes(word)) {
       results.bannedWordsMatches.push(word);
     }
   }

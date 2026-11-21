@@ -57,18 +57,18 @@ export const HomeArchitectureDiagram: React.FC = () => {
       <div className="container-nuzul">
         <ScrollReveal className="max-w-2xl mb-8">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-main">
-            {lang === 'ar' ? 'معمارية التشغيل القياسية' : 'Standard Infrastructure Architecture'}
+            {lang === 'ar' ? 'كيف نؤمّن مسار الشبكة والبيانات' : 'How We Structure Your Network & Data Path'}
           </h2>
           <p className="text-muted mt-2.5 text-base leading-relaxed">
             {lang === 'ar'
-              ? 'مسار البيانات وتأمينها من نقطة الدخول حتى النسخ الاحتياطي المنفصل عن الشبكة.'
-              : 'Data and security path from public ingress to off-site backup storage.'}
+              ? 'نفس التصميم المعماري الذي نطبّقه في مشاريعنا: من خط الإنترنت الخارجي حتى النسخة الاحتياطية المعزولة.'
+              : 'The standard topology we deploy across client sites—from public ingress to isolated off-site backups.'}
           </p>
         </ScrollReveal>
 
         <div
           data-testid="architecture-svg-wrapper"
-          className="rounded-2xl bg-page border border-token p-4 sm:p-6 overflow-hidden"
+          className="glass-panel p-4 sm:p-6 overflow-hidden"
         >
           {/* Desktop / Tablet Horizontal SVG (>= 768px) */}
           <svg

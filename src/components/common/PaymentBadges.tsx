@@ -58,15 +58,15 @@ export const PaymentBadges: React.FC<PaymentBadgesProps> = ({ variant = 'default
           </div>
           <div>
             <div className="text-xs sm:text-sm font-bold text-main flex items-center gap-2">
-              <span>{lang === 'ar' ? 'بوابات دفع محلية ودولية مؤمنة بالكامل' : '100% Secured Local & International Payment Gateways'}</span>
+              <span>{lang === 'ar' ? 'وسائل دفع محلية ودولية مشفرة' : 'Encrypted Local & International Payment Methods'}</span>
               <span className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-accent-soft text-accent text-[10px] font-semibold">
-                <Lock className="w-2.5 h-2.5" /> 256-Bit SSL
+                <Lock className="w-2.5 h-2.5" /> TLS / SSL
               </span>
             </div>
             <p className="text-[11px] text-muted mt-0.5">
               {lang === 'ar'
-                ? 'تفعيل فوري للخدمات مع إصدار فاتورة ضريبية رسمية معتمدة للشركات والمؤسسات.'
-                : 'Instant service activation with official tax invoices for enterprises.'}
+                ? 'إصدار فاتورة ضريبية إلكترونية رسمية للشركات والمؤسسات عند التعاقد.'
+                : 'Official electronic tax invoices issued for corporate and institutional contracts.'}
             </p>
           </div>
         </div>
@@ -76,7 +76,7 @@ export const PaymentBadges: React.FC<PaymentBadgesProps> = ({ variant = 'default
             <InstaPayLogo size={20} />
             <div className="text-start">
               <div className="text-xs font-bold text-main leading-none">InstaPay</div>
-              <div className="text-[9px] text-accent font-semibold mt-0.5">{lang === 'ar' ? 'تحويل لحظي' : 'Instant'}</div>
+              <div className="text-[9px] text-accent font-semibold mt-0.5">{lang === 'ar' ? 'تحويل بنكي سريع' : 'IPN Transfer'}</div>
             </div>
           </div>
 

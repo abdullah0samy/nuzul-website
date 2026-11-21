@@ -142,8 +142,71 @@ export function expandQueryWithSynonyms(rawQuery: string): {
 }
 
 /**
+ * Bounded Levenshtein distance for typo-tolerant Arabic & English search.
+ */
+function levenshteinDistance(a: string, b: string, maxDist = 2): number {
+  if (a === b) return 0;
+  const lenA = a.length;
+  const lenB = b.length;
+  if (Math.abs(lenA - lenB) > maxDist) return maxDist + 1;
+  if (lenA === 0) return lenB;
+  if (lenB === 0) return lenA;
+
+  let prev = new Array<number>(lenB + 1);
+  let curr = new Array<number>(lenB + 1);
+  for (let j = 0; j <= lenB; j++) prev[j] = j;
+
+  for (let i = 1; i <= lenA; i++) {
+    curr[0] = i;
+    let rowMin = curr[0];
+    const chA = a.charCodeAt(i - 1);
+    for (let j = 1; j <= lenB; j++) {
+      const cost = chA === b.charCodeAt(j - 1) ? 0 : 1;
+      const val = Math.min(prev[j] + 1, curr[j - 1] + 1, prev[j - 1] + cost);
+      curr[j] = val;
+      if (val < rowMin) rowMin = val;
+    }
+    if (rowMin > maxDist) return maxDist + 1;
+    const tmp = prev;
+    prev = curr;
+    curr = tmp;
+  }
+  return prev[lenB];
+}
+
+function hasFuzzyTokenMatch(needle: string, haystackWords: string[]): boolean {
+  if (needle.length < 4) return false;
+  const maxDist = needle.length >= 7 ? 2 : 1;
+  for (const word of haystackWords) {
+    if (word.length < 3) continue;
+    if (Math.abs(word.length - needle.length) > maxDist) continue;
+    if (levenshteinDistance(needle, word, maxDist) <= maxDist) {
+      return true;
+    }
+  }
+  return false;
+}
+
+/**
+ * Detects whether a search query looks like a domain name (e.g. "company.com", "nuzul.com.eg").
+ */
+export function detectDomainQuery(rawQuery: string): string | null {
+  const cleaned = rawQuery
+    .trim()
+    .toLowerCase()
+    .replace(/^https?:\/\//, '')
+    .replace(/^www\./, '')
+    .split('/')[0];
+  if (/^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.(com|net|org|io|com\.eg|eg)$/.test(cleaned)) {
+    return cleaned;
+  }
+  return null;
+}
+
+/**
  * Evaluates whether a target document matches the Arabic/English query,
  * returning a numeric relevance score (0 = no match, >0 = match).
+ * Supports exact phrase matching, synonym expansion, and typo-tolerant fuzzy matching.
  */
 export function scoreArabicMatch(
   rawQuery: string,
@@ -176,7 +239,9 @@ export function scoreArabicMatch(
     score += 25;
   }
 
-  // Every token group must match at least once across the document (or at least 1 group if multi-word synonym phrase)
+  let titleWords: string[] | null = null;
+  let allWords: string[] | null = null;
+
   let matchedGroupsCount = 0;
   for (const group of tokenGroups) {
     let bestGroupScore = 0;
@@ -190,13 +255,29 @@ export function scoreArabicMatch(
         bestGroupScore = Math.max(bestGroupScore, 10);
       }
     }
+
+    // Typo-tolerant fallback when exact/synonym substring didn't hit
+    if (bestGroupScore === 0) {
+      const primaryToken = group[0];
+      if (primaryToken && primaryToken.length >= 4 && !primaryToken.includes(' ')) {
+        if (!titleWords) titleWords = normTitle.split(' ').filter(Boolean);
+        if (hasFuzzyTokenMatch(primaryToken, titleWords)) {
+          bestGroupScore = 18;
+        } else {
+          if (!allWords) allWords = combined.split(' ').filter(Boolean);
+          if (hasFuzzyTokenMatch(primaryToken, allWords)) {
+            bestGroupScore = 10;
+          }
+        }
+      }
+    }
+
     if (bestGroupScore > 0) {
       matchedGroupsCount += 1;
       score += bestGroupScore;
     }
   }
 
-  // Require all token groups to match, UNLESS the query is a 2-word synonym phrase like "باك اب" or "جدار ناري" where matchedGroupsCount >= 1 and score >= 20
   if (matchedGroupsCount === tokenGroups.length) {
     return score;
   }

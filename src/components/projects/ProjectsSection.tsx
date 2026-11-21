@@ -181,8 +181,8 @@ export const ProjectsSection: React.FC = () => {
                     {queryParam
                       ? queryParam
                       : lang === 'ar'
-                      ? 'بحث شامل (Ctrl+K)'
-                      : 'Global Search (Ctrl+K)'}
+                      ? 'بحث (Ctrl+K)'
+                      : 'Search (Ctrl+K)'}
                   </span>
                 </span>
                 <kbd className="px-1.5 py-0.5 rounded bg-surface border border-token text-[10px] ltr-num shrink-0">
@@ -397,12 +397,13 @@ export const ProjectsSection: React.FC = () => {
                           </div>
 
                           <div className="p-6 space-y-3">
-                            <div className="flex flex-wrap items-center justify-between gap-2">
-                              <span className="text-xs font-semibold text-accent px-2.5 py-1 rounded bg-surface-2 border border-token whitespace-nowrap">
+                            <div className="flex flex-wrap items-center gap-2 text-xs text-muted">
+                              <span className="font-semibold text-accent whitespace-nowrap">
                                 {lang === 'ar' ? project.category : project.categoryEn}
                               </span>
-                              <span className="text-xs text-muted inline-flex items-center gap-1">
-                                <Clock className="w-3.5 h-3.5 text-accent" />
+                              <span aria-hidden="true">·</span>
+                              <span className="inline-flex items-center gap-1">
+                                <Clock className="w-3.5 h-3.5 text-accent" aria-hidden="true" />
                                 <span>{lang === 'ar' ? project.timelineAr : project.timelineEn}</span>
                               </span>
                             </div>
@@ -450,15 +451,14 @@ export const ProjectsSection: React.FC = () => {
                                   </strong>
                                   {lang === 'ar' ? project.solution : project.solutionEn}
                                 </p>
-                                <div className="flex flex-wrap gap-1.5 pt-1">
+                                <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1 pt-1 text-[11px] text-muted">
                                   {project.technologies.map((tech, i) => (
-                                    <span
-                                      key={i}
-                                      dir="ltr"
-                                      className="ltr-num text-[11px] px-2 py-0.5 rounded bg-surface-2 text-muted border border-token whitespace-nowrap"
-                                    >
-                                      {tech}
-                                    </span>
+                                    <React.Fragment key={i}>
+                                      {i > 0 && <span aria-hidden="true">·</span>}
+                                      <bdi dir="ltr" className="ltr-num font-medium text-main whitespace-nowrap">
+                                        {tech}
+                                      </bdi>
+                                    </React.Fragment>
                                   ))}
                                 </div>
                               </div>

@@ -8,86 +8,84 @@ export const HomeServicePillars: React.FC = () => {
   const { lang } = useApp();
   const ArrowIcon = lang === 'ar' ? ArrowLeft : ArrowRight;
 
-  // 4 Core Practices strictly adhering to NUZUL_COPY_STYLE_REFERENCE.md Glossary & Section 5 Structure
-  // No numbering ('01.'), no 'إظهار المزيد', whole card is link, each Latin term written once per card.
   const pillars = [
     {
       id: 'infrastructure',
-      titleAr: 'الشبكات والبنية التحتية',
-      titleEn: 'Networks & Infrastructure',
+      titleAr: 'الشبكات وغرف الخوادم',
+      titleEn: 'Networks & Server Rooms',
       descAr:
-        'تجهيز غرف الخوادم، وتمديد كابلات Cat6A والألياف، وشبكات Access Points، وربط الفروع عبر IPsec VPN.',
+        'تمديد كابلات Cat6A وفايبر، تجميع الراكات، توزيع Access Points، وربط الفروع عبر IPsec VPN.',
       descEn:
-        'Server rooms, Cat6A and fiber cabling, enterprise Access Points, and multi-branch IPsec VPN.',
+        'Cat6A and fiber cabling, rack buildouts, office Wi-Fi coverage, and site-to-site IPsec VPN.',
       itemsAr: [
-        'Structured Cabling وتركيب Rack',
-        'تركيب Firewall وتقسيم VLANs',
-        'سنترال VoIP PBX للاتصالات',
+        'تجهيز غرف الخوادم وتنظيم الكابلات (Rack & Patch Panels)',
+        'تركيب أجهزة Fortinet Firewall وتقسيم VLANs',
+        'سنترال داخلي VoIP PBX لربط المكاتب والفروع',
       ],
       itemsEn: [
-        'Structured Cabling & Rack setup',
-        'Firewall configuration & VLAN segmentation',
-        'VoIP PBX office telephony',
+        'Structured cabling, racks & patch panel termination',
+        'Fortinet firewall setup & 802.1Q VLAN isolation',
+        'Multi-branch VoIP PBX office telephony',
       ],
-      href: '/services?cat=network',
+      href: '/services?cat=infrastructure',
     },
     {
       id: 'cloud',
-      titleAr: 'الخوادم السحابية والاستضافة',
+      titleAr: 'السيرفرات والاستضافة',
       titleEn: 'Cloud Servers & Hosting',
       descAr:
-        'تشغيل خوادم مخصصة وسحابية بأقراص NVMe، مع إدارة النظام ونقل قواعد البيانات.',
+        'خوادم Cloud VPS بعزل KVM وأقراص NVMe، بريد شركات رسمي، ونقل قواعد البيانات بدون توقف.',
       descEn:
-        'Dedicated and cloud servers on NVMe storage, with system administration and database migration.',
+        'Dedicated KVM Cloud VPS on NVMe arrays, authenticated business email, and planned database migrations.',
       itemsAr: [
-        'خوادم Cloud VPS بعزل KVM',
-        'بريد الشركة بتوثيق SPF وDKIM وDMARC',
-        'نسخ احتياطي دوري خارج الموقع',
+        'خوادم Cloud VPS بصلاحيات Root وفاتورة بالجنيه أو الدولار',
+        'بريد رسمي للشركة مضبوط بـ SPF وDKIM وDMARC',
+        'نسخ احتياطي يومي ومجدول خارج السيرفر الأساسي',
       ],
       itemsEn: [
-        'KVM Cloud VPS instances',
-        'Company email with SPF, DKIM & DMARC',
-        'Scheduled off-site backups',
+        'KVM Cloud VPS with full root access & EGP/USD billing',
+        'Corporate email secured with SPF, DKIM & DMARC',
+        'Automated off-server daily backups & snapshots',
       ],
       href: '/services?cat=cloud',
     },
     {
       id: 'security',
-      titleAr: 'الأمن السيبراني',
-      titleEn: 'Cybersecurity',
+      titleAr: 'الأمن السيبراني والنسخ الاحتياطي',
+      titleEn: 'Security & Backups',
       descAr:
-        'فحص الثغرات، وتأمين الخوادم ضد هجمات DDoS، ومراقبة سجلات الأمان SIEM.',
+        'فحص الثغرات، حماية الخوادم ضد DDoS، وبناء نسخ احتياطي معزول 3-2-1 يحمي بياناتك من الفدية.',
       descEn:
-        'Vulnerability audits, server DDoS mitigation, and SIEM security log monitoring.',
+        'Vulnerability checks, server DDoS filtering, and isolated 3-2-1 backups to protect against ransomware.',
       itemsAr: [
-        'تقييم الثغرات واختبار الاختراق',
-        'نسخ احتياطي منفصل عن الشبكة (3-2-1)',
-        'رصد التهديدات والتعامل مع الحوادث',
+        'مراجعة إعدادات الشبكة وفحص الثغرات واختبار الاختراق',
+        'نسخ احتياطي منفصل غير قابل للتعديل (Immutable 3-2-1)',
+        'متابعة سجلات الأمان والتنبيه الفوري عند أي محاولة اختراق',
       ],
       itemsEn: [
-        'Vulnerability scanning & penetration testing',
-        'Off-site 3-2-1 backup protection',
-        'Threat monitoring & incident response',
+        'Network audits, vulnerability scans & penetration testing',
+        'Immutable off-site 3-2-1 backup architecture',
+        'SIEM log monitoring & incident alerting',
       ],
       href: '/services?cat=security',
     },
     {
       id: 'software',
-      titleAr: 'البرمجيات وأنظمة ERP',
-      titleEn: 'Software & ERP',
+      titleAr: 'أنظمة ERP والبرمجيات',
+      titleEn: 'ERP & Business Software',
       descAr:
-        'تطوير أنظمة ERP للحسابات والمخازن، والربط بنظام الفاتورة الإلكترونية، وبناء المواقع وتطبيقات الموبايل.',
+        'أنظمة حسابات ومخازن مربوطة بالفاتورة الإلكترونية المصرية، ومواقع وتطبيقات عملية لإدارة شغلك.',
       descEn:
-        'ERP systems for accounting and inventory, e-invoicing integration, and web/mobile applications.',
+        'Accounting and inventory ERP linked with Egyptian ETA e-invoicing, plus custom web and mobile apps.',
       itemsAr: [
-        'نظام الحسابات والمخازن والمبيعات',
-        'ربط مباشر بنظام الفاتورة الإلكترونية المصرية',
-        'اختبار وقبول الأنظمة (QA / UAT)',
+        'إدارة الحسابات والمخازن والمبيعات وشؤون الموظفين',
+        'ربط مباشر بمنظومة الفاتورة الإلكترونية (مصلحة الضرائب)',
+        'فحص واختبار البرمجيات قبل الاستلام (QA / UAT)',
       ],
       itemsEn: [
-        'Accounting, inventory & sales modules',
-        'Egyptian Tax Authority e-invoicing integration',
-        'Independent software testing (QA / UAT)',
+        'General ledger, inventory, sales & payroll modules',
+        'Direct Egyptian Tax Authority (ETA) e-invoicing link',
+        'Independent software QA & acceptance testing (UAT)',
       ],
       href: '/services?cat=software',
     },
@@ -101,14 +99,13 @@ export const HomeServicePillars: React.FC = () => {
       <div className="container-nuzul">
         <ScrollReveal className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
           <div className="max-w-2xl">
-            {/* Title strictly 'الخدمات' / 'Services' */}
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-main">
-              {lang === 'ar' ? 'الخدمات' : 'Services'}
+              {lang === 'ar' ? 'ماذا ننفّذ لك؟' : 'What We Build & Manage'}
             </h2>
-            <p className="text-muted mt-3 text-base leading-relaxed">
+            <p className="text-muted mt-2.5 text-base leading-relaxed">
               {lang === 'ar'
-                ? 'نصمم وننفذ الشبكات وغرف الخوادم، ونشغل الخوادم السحابية، ونؤمن الأنظمة، ونطور برامج الأعمال بعقود SLA.'
-                : 'Networks and server rooms, cloud servers, cybersecurity, and business software under formal SLA contracts.'}
+                ? 'أربع خدمات أساسية تغطي البنية التحتية لشركتك من كابل الشبكة وحتى السيرفر والبرنامج.'
+                : 'Four practical practices covering your infrastructure from office cabling to servers and business software.'}
             </p>
           </div>
 
@@ -117,12 +114,11 @@ export const HomeServicePillars: React.FC = () => {
             data-testid="home-all-services-link"
             className="inline-flex items-center gap-2 min-h-[44px] text-sm font-semibold text-accent hover:underline shrink-0 whitespace-nowrap"
           >
-            <span>{lang === 'ar' ? 'عرض جميع الخدمات' : 'View all services'}</span>
-            <ArrowIcon className="w-4 h-4 shrink-0" />
+            <span>{lang === 'ar' ? 'تصفح كل الخدمات' : 'View all services'}</span>
+            <ArrowIcon className="w-4 h-4 shrink-0" aria-hidden="true" />
           </Link>
         </ScrollReveal>
 
-        {/* 4 Clean Cards: Whole card is a single link, NO numbering, NO 'إظهار المزيد' */}
         <StaggerGroup className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {pillars.map((pillar) => {
             const items = lang === 'ar' ? pillar.itemsAr : pillar.itemsEn;
@@ -135,11 +131,11 @@ export const HomeServicePillars: React.FC = () => {
                 <Link
                   to={pillar.href}
                   data-testid={`pillar-card-link-${pillar.id}`}
-                  className="clean-card clean-card-hover p-6 sm:p-7 flex flex-col justify-between h-full group focus:outline-none focus:ring-2 focus:ring-[var(--focus)] rounded-2xl block"
+                  className="clean-card clean-card-hover p-6 sm:p-7 flex flex-col justify-between h-full group rounded-2xl block"
                   aria-label={`${lang === 'ar' ? pillar.titleAr : pillar.titleEn} — ${lang === 'ar' ? 'التفاصيل' : 'Details'}`}
                 >
                   <div>
-                    <h3 className="text-lg sm:text-xl font-bold text-main mb-2.5 group-hover:text-accent transition-colors">
+                    <h3 className="text-lg sm:text-xl font-bold text-main mb-2 group-hover:text-accent transition-colors">
                       {lang === 'ar' ? pillar.titleAr : pillar.titleEn}
                     </h3>
 
@@ -158,8 +154,8 @@ export const HomeServicePillars: React.FC = () => {
                   </div>
 
                   <div className="pt-3 border-t border-token flex items-center justify-between text-xs font-semibold text-accent">
-                    <span>{lang === 'ar' ? 'التفاصيل' : 'Details'}</span>
-                    <ArrowIcon className="w-4 h-4 shrink-0 transform group-hover:translate-x-[-4px] transition-transform rtl:group-hover:translate-x-[-4px] ltr:group-hover:translate-x-[4px]" />
+                    <span>{lang === 'ar' ? 'عرض التفاصيل' : 'Explore service'}</span>
+                    <ArrowIcon className="w-4 h-4 shrink-0 transform transition-transform rtl:group-hover:-translate-x-1 ltr:group-hover:translate-x-1" />
                   </div>
                 </Link>
               </StaggerItem>

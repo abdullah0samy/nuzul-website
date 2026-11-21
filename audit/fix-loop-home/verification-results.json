@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-11-13T09:26:16.349Z",
+  "timestamp": "2026-11-20T14:32:14.232Z",
   "viewports": {
     "375px": {
       "lightScreenshot": "/app/applet/audit/fix-loop-home/screenshots/home-375px-light.png",
@@ -22,9 +22,7 @@
     "screensToFirstCard": 1.39,
     "passesUnder1_5Screens": true
   },
-  "bannedWordsMatches": [
-    "نُزول"
-  ],
+  "bannedWordsMatches": [],
   "consoleErrors": [],
   "pageErrors": [],
   "checks": {
@@ -49,12 +47,14 @@
     },
     "whatsapp": {
       "hasPulseDot": false,
+      "inlineStatusDotVisibleOn375": true,
       "status": "away",
       "soundMuted": true,
+      "clickAnalyticsTracked": true,
       "boundingBox": {
         "x": 16,
         "y": 607,
-        "w": 48,
+        "w": 64,
         "h": 44
       }
     },
@@ -81,10 +81,10 @@
     }
   },
   "performance": {
-    "domContentLoadedMs": 993,
-    "loadCompleteMs": 1025,
-    "fcpMs": 1424,
-    "lcpMs": 1424,
+    "domContentLoadedMs": 816,
+    "loadCompleteMs": 818,
+    "fcpMs": 1212,
+    "lcpMs": 1212,
     "cls": 0.0049,
     "transferSizeKb": 0
   }

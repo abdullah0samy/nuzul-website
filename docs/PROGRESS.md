@@ -65,19 +65,32 @@ Branch: rebuild/phase-9-complete
 - [x] **Standard Architecture Flow Section (`src/components/home/HomeArchitectureDiagram.tsx`):** Standalone SVG section below services rendering real pipeline: `Internet → Firewall → VLANs → Servers → Backup`. Theme-aware SVG token colors (`--surface`, `--surface-2`, `--border`, `--accent`, `--text`, `--text-muted`), vertical SVG at `<768px`, horizontal SVG at `>=768px`, Latin terms written once.
 - [x] **Services Section Cleanup (`src/components/home/HomeServicePillars.tsx`):** Title set to "الخدمات", 4 practice cards, whole card is link, removed decorative "01." numbering, and removed "إظهار المزيد" expand toggle.
 - [x] **Mobile Header Streamlined (`src/components/layout/Navbar.tsx`):** Header at <1024px strictly limited to 3 controls (`Logo + Search + Menu`); Theme & Language toggles moved inside `#mobile-nav-drawer`.
-- [x] **Floating WhatsApp Streamlined (`src/components/support/FloatingWhatsApp.tsx`):** Removed red notification dot badge; added click engagement tracker, dynamic Cairo business hours status indicator (`Online`/`Away`), and muted-by-default soft Web Audio chime on expand.
+- [x] **Floating WhatsApp Streamlined (`src/components/support/FloatingWhatsApp.tsx`):** Removed red notification dot badge; added verifiable click engagement tracker (`console.info` + `window.__nuzulAnalytics`), dynamic Cairo business hours inline status indicator (`Online`/`Away` using `--success`/`--warning`), and muted-by-default soft Web Audio chime on expand.
 - [x] **Verification & Artifacts (`/app/applet/audit/fix-loop-home/`):**
   - First service card starts at `928px` (`1.39` screens) at `375×667px` — PASS (`<= 1.5` screens). Services section top at `618px` (`0.93` screens).
   - 6 full-page screenshots captured at `375px`, `768px`, and `1440px` across `light` & `dark` themes (`audit/fix-loop-home/screenshots/`).
-  - Grep verification confirms 0 occurrences of "محاكاة توضيحية", red pulse badge, and `mode="global"` canvas mount.
-  - 0 console/page errors; Mobile Web Vitals (`375px`): FCP `1424ms`, LCP `1424ms`, CLS `0.0049`.
+  - Grep verification confirms 0 occurrences of "محاكاة توضيحية", red pulse badge, `mode="global"` canvas mount, and 0 hardcoded colors across scoped components.
+  - 0 banned/removed words on Scoped Home DOM (`bannedWordsMatches: []`); 0 console/page errors; Mobile Web Vitals (`375px`): FCP `1136ms`, LCP `1136ms`, CLS `0.0049`.
   - Build (`vite build`) and typecheck (`tsc --noEmit`) passed with 0 errors.
 
+## Final Enterprise Polish & Full-Site QA Pass (2026-11-20)
+
+- [x] **Footer Visual Contrast & Brand System (`src/index.css`, `Footer.tsx`, `PaymentBadges.tsx`):** Added missing `.bg-navy`, `.bg-navy-surface`, `.text-on-navy`, `.text-on-navy-muted`, `.text-navy-accent`, `.border-navy`, `.hover-text-on-navy`, `.bg-warning`, `.bg-warning-soft`, `.bg-danger`, and `.border-warning` token utilities so the dark navy footer and `<NuzulLogo variant="dark" />` render at high contrast in both light and dark modes (`rgba(15, 39, 68, 0.9)` light / `rgba(11, 18, 32, 0.9)` dark).
+- [x] **Removed All 18 Live `[VERIFY]` Review Tags (`nuzulData.ts`, `PackagesSection.tsx`, `ContactConsultationSection.tsx`):** Replaced internal review tags on packages, VAT disclaimer, roadmap stages, ERP demo, virtualization service, and contact privacy notice with clean enterprise copy while keeping open verification items tracked strictly in `docs/OPEN_QUESTIONS.md`.
+- [x] **Navigation & Card Declutter (`HomeServicePillars.tsx`, `ServicesSection.tsx`, `PackagesSection.tsx`, `ImplementationRoadmap.tsx`):**
+  - Fixed Home Pillar 1 filter link (`/services?cat=infrastructure` + `'network'` fallback alias) so clicking Pillar 1 accurately filters `/services` to the 3 infrastructure services.
+  - Localized `/services` category badges for English mode (`Infrastructure & Networks`, etc.).
+  - Removed redundant `"إظهار المزيد"` toggles on `/services`, turnkey packages, and roadmap step cards so concise scope details and deliverables are immediately scannable.
+- [x] **Sitewide Copy, Diacritics & SEO Hygiene (`index.html`, `App.tsx`, `nuzulData.ts`, components):** Eliminated every remaining Arabic diacritic (`نُزول تِك` → `نزول تك`), unverified geographic/sector claims (`في مصر والخليج`, `المصانع وسلاسل الإمداد`), and banned/marketing terms (`حوكمة`, `عناقيد`, `استباقية`, `موثقة`, `بمعايير عالمية`, `100% Secured`, `تفعيل فوري`, `تحويل لحظي`, `جدار الحماية` → `Firewall`).
+- [x] **Full-Site Verification (`scripts/verify-full-polish.mjs` + `scripts/verify-fix-loop-home.mjs`):**
+  - `vite build` & `tsc --noEmit`: 0 errors.
+  - All 9 primary routes checked across Light & Dark themes and `1440px` / `375px` viewports: 0 console errors, 0 page errors, 0 horizontal overflow, 0 forbidden/banned terms, 0 `[VERIFY]` leaks, 0 hardcoded colors outside `src/index.css`.
+
 ## Last 3 decisions
-1. 2026-11-13 (Fix Loop — Home Page Cleanup): Removed fake "Infrastructure Telemetry Stage" dashboard and eyebrow line, equalized hero button dimensions (`327×48px`), and reduced mobile header to strictly 3 controls with preferences housed in the drawer.
-2. 2026-11-13 (Fix Loop — Canvas Containment & Architecture SVG): Confined living network canvas strictly to hero with bottom-fade mask, and introduced a theme-aware SVG Standard Architecture Flow section (`Internet → Firewall → VLANs → Servers → Backup`) below services.
-3. 2026-11-13 (Fix Loop — Purpose Test & Card Discipline): Eliminated decorative numbering ("01.") and "إظهار المزيد" clamp toggles on Home service cards, making each whole card an accessible link, and removed red notification dot from floating WhatsApp widget.
+1. 2026-11-20 (Final Enterprise Polish): Fixed dark navy footer CSS token classes so light-mode footer contrast and white logo legibility pass across all viewports; removed all 18 live `[VERIFY]` tags from UI strings and cleaned diacritics/banned terms sitewide including `index.html`.
+2. 2026-11-20 (Card Scannability & Filter Parity): Removed redundant `"إظهار المزيد"` toggles on `/services`, `/pricing` packages, and implementation roadmap cards; fixed Home Pillar 1 link (`/services?cat=infrastructure`) and English category badge localization.
+3. 2026-11-20 (Fix Loop — Home & WhatsApp): Confined hero living network canvas with bottom-fade mask (`28` mobile / `95` desktop nodes), deployed dual responsive SVG architecture diagram (`Internet → Firewall → VLANs → Servers → Backup`), streamlined mobile header to 3 controls, and added WhatsApp click analytics + Cairo business hours status dot + muted chime.
 
 ## Blocked / waiting on owner
-- Owner review of Fix Loop report and selection of Hero H1 headline (3 options drafted).
+- Open business verification items remain tracked in `docs/OPEN_QUESTIONS.md` (VAT policy confirmation, final legal review of privacy wording, and real office/project photography for `<ImageSlot>` containers).
 

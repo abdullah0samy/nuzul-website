@@ -11,7 +11,6 @@ import {
   X,
   Search,
   ArrowUpDown,
-  ChevronDown,
 } from 'lucide-react';
 import { scoreArabicMatch } from '../../utils/arabicSearch';
 import { openGlobalSearch } from '../search/GlobalSearchCommandPalette';
@@ -62,16 +61,12 @@ export const ServicesSection: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [mobileSheetOpen, setMobileSheetOpen] = useState(false);
   const [isSkeletonLoading, setIsSkeletonLoading] = useState(false);
-  const [expandedServiceIds, setExpandedServiceIds] = useState<Record<string, boolean>>({});
-
-  const toggleServiceExpand = (id: string) => {
-    setExpandedServiceIds((prev) => ({ ...prev, [id]: !prev[id] }));
-  };
 
   const ArrowIcon = lang === 'ar' ? ArrowLeft : ArrowRight;
 
   // Read filters from URL query params (?cat= or ?category=, ?q=, ?sort=, ?page=, ?skeleton=)
-  const rawCatParam = searchParams.get('cat') || searchParams.get('category') || 'all';
+  const rawCatParamRaw = searchParams.get('cat') || searchParams.get('category') || 'all';
+  const rawCatParam = rawCatParamRaw === 'network' ? 'infrastructure' : rawCatParamRaw;
   const activeCatDef =
     CATEGORY_DEFS.find(
       (c) => c.slug === rawCatParam || c.internalAr === rawCatParam
@@ -158,7 +153,9 @@ export const ServicesSection: React.FC = () => {
     sort?: string | null;
     page?: number | null;
   }) => {
-    setIsSkeletonLoading(true);
+    if (updates.q === undefined) {
+      setIsSkeletonLoading(true);
+    }
     const next = new URLSearchParams(searchParams);
     // Normalize legacy 'category' param to 'cat'
     next.delete('category');
@@ -238,28 +235,46 @@ export const ServicesSection: React.FC = () => {
             data-testid="services-filter-sidebar"
             className="hidden lg:block lg:col-span-3 sticky top-24 clean-card p-5 space-y-6"
           >
-            {/* Global Search Trigger Button (No per-section text box per Section 3.7) */}
+            {/* Live Inline Search Input */}
             <div>
-              <button
-                type="button"
-                onClick={() => openGlobalSearch(queryParam)}
-                data-testid="sidebar-global-search-trigger"
-                className="w-full min-h-[44px] px-3.5 py-2.5 rounded-xl bg-page border border-token text-xs font-semibold text-muted hover-text-main flex items-center justify-between gap-2 transition-colors"
-              >
-                <span className="inline-flex items-center gap-2 truncate">
-                  <Search className="w-4 h-4 text-accent shrink-0" />
-                  <span className="truncate">
-                    {queryParam
-                      ? queryParam
-                      : lang === 'ar'
-                      ? 'بحث (Ctrl+K)'
-                      : 'Search (Ctrl+K)'}
-                  </span>
-                </span>
-                <kbd className="px-1.5 py-0.5 rounded bg-surface border border-token text-[10px] ltr-num shrink-0">
-                  ⌘K
-                </kbd>
-              </button>
+              <label htmlFor="services-inline-search" className="sr-only">
+                {lang === 'ar' ? 'ابحث داخل دليل الخدمات' : 'Search services catalog'}
+              </label>
+              <div className="relative flex items-center bg-surface border border-token focus-within:border-accent rounded-xl overflow-hidden">
+                <Search className="w-4 h-4 text-accent ms-3 shrink-0" aria-hidden="true" />
+                <input
+                  id="services-inline-search"
+                  type="text"
+                  value={queryParam}
+                  onChange={(e) => updateUrlParams({ q: e.target.value })}
+                  data-testid="sidebar-search-input"
+                  placeholder={
+                    lang === 'ar'
+                      ? 'ابحث عن خدمة (مثلاً: سيرفر، VoIP)...'
+                      : 'Filter services (e.g. VPS, VoIP)...'
+                  }
+                  className="w-full min-h-[44px] px-2.5 py-2 bg-transparent text-xs font-medium text-main focus:outline-none"
+                />
+                {queryParam ? (
+                  <button
+                    type="button"
+                    onClick={() => updateUrlParams({ q: '' })}
+                    aria-label={lang === 'ar' ? 'مسح البحث' : 'Clear search'}
+                    className="min-h-[40px] min-w-[36px] inline-flex items-center justify-center text-muted hover-text-main"
+                  >
+                    <X className="w-3.5 h-3.5" />
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => openGlobalSearch('')}
+                    title={lang === 'ar' ? 'بحث شامل في الموقع (Ctrl+K)' : 'Global search (Ctrl+K)'}
+                    className="me-2 px-1.5 py-0.5 rounded bg-surface-2 border border-token text-[10px] text-muted hover-text-main ltr-num shrink-0"
+                  >
+                    ⌘K
+                  </button>
+                )}
+              </div>
             </div>
 
             {/* Category Filters with Counts */}
@@ -530,7 +545,12 @@ export const ServicesSection: React.FC = () => {
                   {visibleServices.map((service) => {
                     const features =
                       lang === 'ar' ? service.features : service.featuresEn;
-                    const isExpanded = Boolean(expandedServiceIds[service.id]);
+                    const catObj = CATEGORY_DEFS.find((c) => c.internalAr === service.category);
+                    const categoryLabel = catObj
+                      ? lang === 'ar'
+                        ? catObj.nameAr
+                        : catObj.nameEn
+                      : service.category;
                     return (
                       <div
                         key={service.id}
@@ -538,9 +558,9 @@ export const ServicesSection: React.FC = () => {
                         className="clean-card clean-card-hover p-6 flex flex-col justify-between"
                       >
                         <div>
-                          <div className="mb-3">
-                            <span className="inline-block text-xs font-semibold text-accent px-2.5 py-1 rounded bg-surface-2 border border-token">
-                              {service.category}
+                          <div className="mb-2">
+                            <span className="text-xs font-semibold text-accent">
+                              {categoryLabel}
                             </span>
                           </div>
 
@@ -553,69 +573,38 @@ export const ServicesSection: React.FC = () => {
                             </Link>
                           </h3>
 
-                          <p
-                            className={`text-muted text-sm leading-relaxed mb-4 ${
-                              isExpanded ? '' : 'line-clamp-2'
-                            }`}
-                          >
+                          <p className="text-muted text-sm leading-relaxed mb-4">
                             {lang === 'ar' ? service.shortDesc : service.shortDescEn}
                           </p>
 
-                          {isExpanded && (
-                            <ul className="space-y-2 border-t border-token pt-3 mb-4">
-                              {features.map((feat, idx) => (
-                                <li
-                                  key={idx}
-                                  className="flex items-start gap-2 text-xs text-main"
-                                >
-                                  <Check className="w-3.5 h-3.5 text-accent shrink-0 mt-0.5" />
-                                  <span>{feat}</span>
-                                </li>
-                              ))}
-                            </ul>
-                          )}
+                          <ul className="space-y-1.5 border-t border-token pt-3 mb-5">
+                            {features.slice(0, 3).map((feat, idx) => (
+                              <li
+                                key={idx}
+                                className="flex items-start gap-2 text-xs text-main"
+                              >
+                                <Check className="w-3.5 h-3.5 text-accent shrink-0 mt-0.5" />
+                                <span>{feat}</span>
+                              </li>
+                            ))}
+                          </ul>
                         </div>
 
                         <div className="pt-3 border-t border-token flex items-center justify-between gap-2">
+                          <Link
+                            to={`/services/${service.id}`}
+                            className="btn-secondary flex-1 min-h-[44px] px-3 py-2 text-xs whitespace-nowrap"
+                          >
+                            {lang === 'ar' ? 'التفاصيل' : 'Details'}
+                          </Link>
                           <button
                             type="button"
-                            onClick={() => toggleServiceExpand(service.id)}
-                            data-testid={`service-expand-${service.id}`}
-                            aria-expanded={isExpanded}
-                            className="inline-flex items-center gap-1 min-h-[44px] text-xs font-semibold text-muted hover-text-main transition-colors whitespace-nowrap"
+                            onClick={() => handleRequestService(service)}
+                            className="btn-primary flex-1 min-h-[44px] px-3.5 py-2 text-xs whitespace-nowrap"
                           >
-                            <span>
-                              {isExpanded
-                                ? lang === 'ar'
-                                  ? 'إخفاء التفاصيل'
-                                  : 'Show less'
-                                : lang === 'ar'
-                                ? 'إظهار المزيد'
-                                : 'Show more'}
-                            </span>
-                            <ChevronDown
-                              className={`w-3.5 h-3.5 transition-transform ${
-                                isExpanded ? 'rotate-180 text-accent' : ''
-                              }`}
-                            />
+                            <span>{lang === 'ar' ? 'اطلب' : 'Request'}</span>
+                            <ArrowIcon className="w-3.5 h-3.5" />
                           </button>
-
-                          <div className="flex items-center gap-2">
-                            <Link
-                              to={`/services/${service.id}`}
-                              className="btn-secondary min-h-[44px] px-3 py-2 text-xs whitespace-nowrap"
-                            >
-                              {lang === 'ar' ? 'التفاصيل' : 'Details'}
-                            </Link>
-                            <button
-                              type="button"
-                              onClick={() => handleRequestService(service)}
-                              className="btn-primary min-h-[44px] px-3.5 py-2 text-xs whitespace-nowrap"
-                            >
-                              <span>{lang === 'ar' ? 'اطلب' : 'Request'}</span>
-                              <ArrowIcon className="w-3.5 h-3.5" />
-                            </button>
-                          </div>
                         </div>
                       </div>
                     );

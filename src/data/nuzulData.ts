@@ -146,7 +146,7 @@ export const NUZUL_SERVICES: ServiceItem[] = [
     title_ar: 'Server Virtualization',
     title_en: 'Server Virtualization',
     description_ar:
-      'دمج عدة خوادم فيزيائية على Cluster واحد (KVM أو VMware)، لتقليل عدد الأجهزة وتسهيل الصيانة. [VERIFY Q1]',
+      'دمج عدة خوادم فيزيائية على Cluster واحد (KVM أو VMware)، لتقليل عدد الأجهزة وتسهيل الصيانة.',
     description_en:
       'Consolidate physical servers onto a unified KVM or VMware cluster to reduce hardware footprint and simplify maintenance.',
     icon: 'Layers',
@@ -391,18 +391,18 @@ export const NUZUL_SERVICES: ServiceItem[] = [
     title_ar: 'مراقبة أداء الخوادم والشبكة',
     title_en: 'Infrastructure Monitoring & Telemetry',
     description_ar:
-      'مراقبة مستمرة للأجهزة والسيرفرات وسعات التخزين ومسجلات NVR، مع تنبيهات فورية عند الأعطال.',
+      'مراقبة مستمرة للأجهزة والسيرفرات وسعات التخزين ومسجلات NVR، مع تنبيهات تلقائية عند الأعطال.',
     description_en:
       'Continuous monitoring of servers, network switches, storage volumes, and NVR feeds with automated threshold alerts.',
     icon: 'Activity',
     useCaseStory_ar:
-      'ربط أجهزة الشبكة والخوادم بمنظومة مراقبة ترسل تنبيهاً فورياً لفريق الصيانة عند توقف أي جهاز.',
+      'ربط أجهزة الشبكة والخوادم بنظام مراقبة يرسل تنبيهاً تلقائياً لفريق الصيانة عند توقف أي جهاز.',
     useCaseStory_en:
       'Implemented continuous infrastructure probers generating automated alerts upon host or port failures.',
     features_ar: [
       'متابعة حية لاستهلاك المعالج والذاكرة وسعات التخزين في الخوادم',
       'فحص اتصال أجهزة الشبكة ومسجلات كاميرات المراقبة NVR',
-      'إرسال تنبيهات فورية عبر البريد ورسائل الهاتف عند حدوث خلل',
+      'إرسال تنبيهات تلقائية عبر البريد ورسائل الهاتف عند حدوث خلل',
     ],
     features_en: [
       'Continuous CPU, RAM, and disk utilization telemetry',
@@ -592,7 +592,7 @@ export const NUZUL_SERVICES: ServiceItem[] = [
       'Engineered a clinic mobile application enabling appointments and viewing medical results.',
     features_ar: [
       'تطوير يعمل على هواتف آيفون (iOS) وأندرويد (Android)',
-      'إرسال إشعارات وتنبيهات فورية للمستخدمين بحالة الطلبات',
+      'إرسال إشعارات وتنبيهات تلقائية للمستخدمين بحالة الطلبات',
       'ربط آمن ومشفر مع قاعدة بيانات الشركة المركزية',
     ],
     features_en: [
@@ -645,7 +645,7 @@ export const NUZUL_SERVICES: ServiceItem[] = [
     useCaseStory_en:
       'Redesigned reception workflows to speed up patient intake and prevent entry errors.',
     features_ar: [
-      'تصميم مسارات عمل واضحة تمنع تشتت الموظفين وتقلل أخطاء الإدخال',
+      'تصميم مسارات عمل منظمة تقلل تشتت الموظفين وأخطاء الإدخال',
       'نماذج أولية تفاعلية لتجربة النظام واختباره قبل البدء في البرمجة',
       'واجهات متناسقة تدعم اللغتين العربية والإنجليزية والوضعين الفاتح والداكن',
     ],
@@ -667,9 +667,9 @@ export const NUZUL_PACKAGES: EnterprisePackage[] = [
     badge_en: 'Fixed Pricing',
     badge_ar: 'سعر محدد',
     price_setup_egp: 'رسوم التأسيس: 15,000 – 25,000 ج.م',
-    price_monthly_egp: 'الدعم الشهري: 1,000 – 2,000 ج.م [VERIFY Q3]',
+    price_monthly_egp: 'الدعم الشهري: 1,000 – 2,000 ج.م',
     price_setup_usd: 'Setup fee: 15,000 – 25,000 EGP',
-    price_monthly_usd: 'Monthly support: 1,000 – 2,000 EGP [VERIFY Q3]',
+    price_monthly_usd: 'Monthly support: 1,000 – 2,000 EGP',
     highlighted: false,
     summary_en: [
       'Structured cabling for up to 15 drops',
@@ -680,8 +680,8 @@ export const NUZUL_PACKAGES: EnterprisePackage[] = [
     summary_ar: [
       'Structured Cabling حتى 15 نقطة شبكة',
       'تسجيل الدومين وإعداد سجلات DNS',
-      '10 صناديق بريد الشركة مع توثيق كامل',
-      'ضبط جدار الحماية وعزل المنافذ',
+      '10 صناديق بريد الشركة بتوثيق SPF وDKIM وDMARC',
+      'ضبط Firewall وعزل المنافذ',
     ],
     details_en: [
       'Structured cabling for up to 15 network drops',
@@ -693,7 +693,7 @@ export const NUZUL_PACKAGES: EnterprisePackage[] = [
       'Structured Cabling حتى 15 نقطة شبكة',
       'تسجيل الدومين وإعداد سجلات DNS',
       'إعداد 10 صناديق بريد الشركة مع توثيق SPF وDKIM وDMARC',
-      'ضبط جدار الحماية وعزل المنافذ غير المستخدمة',
+      'ضبط Firewall وعزل المنافذ غير المستخدمة',
     ],
   },
   {
@@ -751,25 +751,25 @@ export const NUZUL_PACKAGES: EnterprisePackage[] = [
       'Site-to-Site VPN across branches',
       'Corporate email for up to 100 mailboxes',
       'Compact server room or central rack',
-      'Periodic maintenance and SLA agreement [VERIFY]',
+      'Periodic maintenance and SLA agreement',
     ],
     summary_ar: [
       'ربط الفروع عبر Site-to-Site VPN مشفر',
-      'بريد الشركة حتى 100 صندوق مع حماية كاملة',
+      'بريد الشركة حتى 100 صندوق بتوثيق DMARC',
       'غرفة خوادم مصغرة أو كابينة Rack مركزية',
-      'عقد صيانة ودعم دوري [VERIFY]',
+      'عقد صيانة ودعم دوري وفق SLA',
     ],
     details_en: [
       'Encrypted Site-to-Site VPN connecting regional branches',
       'Corporate email for up to 100 mailboxes with DMARC',
       'Compact server room or centralized rack fitting',
-      'Periodic maintenance and SLA support agreement [VERIFY]',
+      'Periodic maintenance and SLA support agreement',
     ],
     details_ar: [
       'ربط الفروع عبر Site-to-Site VPN مشفر',
-      'بريد الشركة حتى 100 صندوق مع حماية كاملة',
+      'بريد الشركة حتى 100 صندوق بتوثيق DMARC',
       'غرفة خوادم مصغرة أو كابينة Rack مركزية',
-      'عقد صيانة ودعم دوري [VERIFY]',
+      'عقد صيانة ودعم دوري وفق SLA',
     ],
   },
   {
@@ -780,33 +780,33 @@ export const NUZUL_PACKAGES: EnterprisePackage[] = [
     subtitle_ar: 'أكثر من 100 مستخدم · تغطية المباني والفروع',
     badge_en: 'Custom Scope',
     badge_ar: 'حسب المعاينة',
-    price_setup_egp: 'حسب المعاينة [VERIFY Q2]',
+    price_setup_egp: 'حسب المعاينة الميدانية',
     price_monthly_egp: 'مقايسة تفصيلية مكتوبة بعد المعاينة',
-    price_setup_usd: 'Scoped via site survey [VERIFY Q2]',
+    price_setup_usd: 'Scoped via site survey',
     price_monthly_usd: 'Detailed itemized bill of materials post-survey',
     highlighted: false,
     summary_en: [
       'Turnkey server room fit-out & redundant power',
       'Site-to-Site VPN with dual-ISP failover',
-      'Dedicated engineer or 24/7 SLA [VERIFY Q6]',
-      'As-Built runbook & handover certification',
+      'Dedicated engineer or SLA operations retainer',
+      'As-Built runbook & handover documentation',
     ],
     summary_ar: [
       'تصميم وتنفيذ غرفة خوادم وتجهيزات الطاقة',
-      'Site-to-Site VPN بين كافة المقرات مع خطوط مزدوجة',
-      'مهندس مقيم أو عقد تشغيل 24/7 [VERIFY Q6]',
+      'Site-to-Site VPN بين المقرات مع خطوط إنترنت مزدوجة',
+      'مهندس مقيم أو عقد تشغيل SLA مخصص',
       'توثيق هندسي للبنية التحتية ومحضر استلام فني',
     ],
     details_en: [
       'Turnkey server room fit-out and redundant power sizing',
       'Site-to-Site VPN across all offices with dual-ISP failover',
-      'Dedicated resident engineer or tailored 24/7 SLA retainer [VERIFY Q6]',
-      'Complete As-Built infrastructure runbook and handover certification',
+      'Dedicated resident engineer or tailored SLA operations retainer',
+      'Complete As-Built infrastructure runbook and handover documentation',
     ],
     details_ar: [
       'تصميم وتنفيذ غرفة خوادم وتجهيزات الطاقة الاحتياطية',
-      'Site-to-Site VPN بين كافة المقرات والفروع مع خطوط إنترنت مزدوجة',
-      'مهندس مقيم أو عقد تشغيل (SLA) مخصص 24/7 [VERIFY Q6]',
+      'Site-to-Site VPN بين المقرات والفروع مع خطوط إنترنت مزدوجة',
+      'مهندس مقيم أو عقد تشغيل (SLA) مخصص',
       'توثيق هندسي للبنية التحتية ومحضر استلام فني',
     ],
   },
@@ -934,40 +934,40 @@ export const NUZUL_CASE_STUDIES: CaseStudy[] = [
       'Clinical terminals sharing network broadcast domains with general facility access.',
     ],
     solution_ar: [
-      'عزل كامل لحركة بيانات غرف العمليات والأشعة عبر VLANs وجدار حماية Fortinet NGFW مع نفق VPN للأطباء.',
+      'عزل حركة بيانات غرف العمليات والأشعة عبر VLANs وجهاز Firewall من Fortinet (NGFW) مع نفق VPN للأطباء.',
       'تأسيس تمديدات فايبر وكابلات Cat6A وتركيب 180+ كاميرا 4K متصلة بمصفوفات NVR RAID-6 لأرشفة 90 يوماً.',
-      'هجرة وتوثيق 200+ صندوق بريد طبي بسجلات SPF وDKIM وDMARC تحت إدارة استباقية 24/7.',
+      'هجرة وتوثيق 200+ صندوق بريد طبي بسجلات SPF وDKIM وDMARC تحت إدارة ومراقبة دورية وفق SLA.',
     ],
     solution_en: [
       'Implemented strict VLAN segmentation and Fortinet NGFW policies isolating surgical and imaging networks.',
       'Deployed fiber backbone, Cat6A cabling, and 180+ 4K cameras backed by redundant RAID-6 NVR storage.',
-      'Migrated and hardened 200+ corporate mailboxes under SPF/DKIM/DMARC with 24/7 proactive operations.',
+      'Migrated and hardened 200+ corporate mailboxes under SPF/DKIM/DMARC with continuous SLA operations.',
     ],
     deliverables_ar: [
       'شبكة كاميرات مراقبة رقمية 4K (180+ كاميرا) وخوادم تسجيل NVR RAID-6',
       'بنية تحتية للشبكات وكابلات الفايبر المنظمة Cat6A',
-      'جدار ناري Fortinet NGFW مع عزل شبكي VLAN ونفق VPN',
+      'جهاز Firewall من Fortinet NGFW مع عزل شبكي VLAN ونفق VPN',
       'بريد طبي رسمي مشفر بتوثيق SPF/DKIM/DMARC',
-      'تشغيل ومراقبة استباقية ضمن خدمة IT as a Service 24/7',
+      'تشغيل ومراقبة دورية ضمن خدمة IT as a Service وفق SLA',
     ],
     deliverables_en: [
       '180+ 4K IP Surveillance Grid & Redundant NVR RAID-6 Cluster',
       'Structured Fiber & Cat6A Network Cabling',
       'Fortinet NGFW Security Perimeter & Zero-Trust VLAN Segmentation',
       'Hardened Corporate Email System with SPF/DKIM/DMARC',
-      '24/7 Managed Operations under IT as a Service SLA',
+      'Managed Operations under IT as a Service SLA',
     ],
     result_ar:
-      'عزل كامل لحركة بيانات غرف العمليات والأشعة عبر VLANs وجدار حماية Fortinet، وتغطية بصرية موثقة مع أرشفة 90 يوماً.',
+      'عزل حركة بيانات غرف العمليات والأشعة عبر VLANs وجهاز Firewall من Fortinet، وتغطية بصرية مسجّلة بأرشفة 90 يوماً.',
     result_en:
-      'Complete VLAN and Fortinet NGFW isolation for clinical networks backed by audited 90-day 4K NVR retention.',
+      'VLAN and Fortinet NGFW isolation for clinical networks backed by 90-day 4K NVR retention.',
     icon: 'Shield',
   },
   {
     id: 2,
     badge: 'FINANCIAL CONSULTING CLIENT',
-    title_ar: 'الاستضافة السحابية الخاصة وحوكمة البريد المالي لمكتب استشارات',
-    title_en: 'Private Cloud Hosting & Email Governance for Financial Consultancy',
+    title_ar: 'الاستضافة السحابية الخاصة وإدارة البريد المالي لمكتب استشارات',
+    title_en: 'Private Cloud Hosting & Email Management for Financial Consultancy',
     category_ar: 'السحابة والاستضافة',
     category_en: 'Cloud & Servers',
     client_ar: 'مكتب استشارات مالية ومحاسبية — القاهرة',
@@ -1010,7 +1010,7 @@ export const NUZUL_CASE_STUDIES: CaseStudy[] = [
       'خوادم سحابية بأقراص NVMe لتشغيل المنظومات المالية والـ ERP',
       'هجرة وتأمين 150+ صندوق بريد مالي رسمي',
       'منظومة نسخ احتياطي يومي مشفر معزول خارج المقر',
-      'إدارة ومراقبة استباقية ضمن عقد IT as a Service 24/7',
+      'إدارة ومراقبة دورية ضمن عقد IT as a Service',
     ],
     deliverables_en: [
       'High-IOPS Enterprise Cloud Hosting for Financial ERP Suites',
@@ -1072,16 +1072,16 @@ export const NUZUL_CASE_STUDIES: CaseStudy[] = [
       'خادم تخزين محلي عالي السرعة لأرشيف الأشعة (DICOM PACS)',
       'هجرة وتأمين 120 صندوق بريد طبي رسمي',
       'منظومة نسخ احتياطي هجين مشفر AES-256',
-      'إدارة استباقية ومراقبة دورية ضمن IT as a Service',
+      'إدارة ومراقبة دورية ضمن IT as a Service',
     ],
     deliverables_en: [
       'Local High-Speed NVMe DICOM PACS Archiving Node',
       '120 Migrated & Hardened Clinical Email Accounts',
       'Encrypted AES-256 Hybrid Cloud Backup Pipeline',
-      'Proactive Monitoring & Managed Support (ITaaS)',
+      'Continuous Monitoring & Managed Support (ITaaS)',
     ],
     result_ar:
-      'فصل كامل لأرشيف الأشعة الطبية على خادم تخزين محلي مع نسخ احتياطي سحابي مشفر وهجرة 120 صندوق بريد دون فقدان سجلات.',
+      'فصل أرشيف الأشعة الطبية على خادم تخزين محلي مع نسخ احتياطي سحابي مشفر وهجرة 120 صندوق بريد دون فقدان سجلات.',
     result_en:
       'Decoupled medical imaging onto local NVMe storage with encrypted cloud replication and 120 stabilized mailboxes.',
     icon: 'Shield',
@@ -1089,18 +1089,18 @@ export const NUZUL_CASE_STUDIES: CaseStudy[] = [
   {
     id: 4,
     badge: 'HOSPITAL INFRASTRUCTURE & PR',
-    title_ar: 'العناقيد الافتراضية المزدوجة ونظام علاقات المرضى لمستشفى جراحي',
+    title_ar: 'خوادم Virtualization عالية التوافر ونظام علاقات المرضى لمستشفى جراحي',
     title_en: 'High-Availability Virtualization & Patient Relations System for Hospital',
     category_ar: 'الشبكات والبنية التحتية',
     category_en: 'Infrastructure & Networks',
     client_ar: 'مستشفى جراحي وتخصصي — القاهرة',
     client_en: 'Surgical & Specialized Hospital — Cairo',
     executiveSummary_ar:
-      'تحديث شامل للبنية البرمجية والفيزيائية لمستشفى جراحي: عنقود افتراضي عالي التوافر (HA Cluster)، شبكة فايبر وكابلات Cat6A، جدران حماية Fortinet NGFW، بوابة مرضى، نظام علاقات المرضى (PR System)، ونظام تذاكر وموافقات طبية.',
+      'تحديث البنية البرمجية والفيزيائية لمستشفى جراحي: Cluster عالي التوافر (HA Cluster)، شبكة فايبر وكابلات Cat6A، أجهزة Firewall من Fortinet NGFW، بوابة مرضى، نظام علاقات المرضى (PR System)، ونظام تذاكر وموافقات طبية.',
     executiveSummary_en:
       'Turnkey hospital modernization: High-Availability virtualization cluster, fiber/Cat6A backbone, Fortinet NGFW, Patient Relations (PR) suite, engineering ticketing, and insurance approvals engine.',
     description_ar:
-      'دمج الخوادم في عنقود افتراضي عالي التوافر وتطوير بوابة المرضى ونظام علاقات المرضى (PR) والتذاكر والموافقات الطبية.',
+      'دمج الخوادم في Cluster عالي التوافر وتطوير بوابة المرضى ونظام علاقات المرضى (PR) والتذاكر والموافقات الطبية.',
     description_en:
       'Server consolidation onto HA virtualization clusters paired with hospital portal, PR system, and approvals workflows.',
     tech: [
@@ -1113,7 +1113,7 @@ export const NUZUL_CASE_STUDIES: CaseStudy[] = [
       'Fortinet NGFW',
     ],
     challenges_ar: [
-      'تعدد الخوادم الفيزيائية المنفصلة وغياب عنقود افتراضي موحد يدعم الاستمرارية عند صيانة أي جهاز.',
+      'تعدد الخوادم الفيزيائية المنفصلة وغياب Cluster موحد يدعم الاستمرارية عند صيانة أي جهاز.',
       'تشتت شكاوى واستفسارات المراجعين بين الأقسام وبطء دورة الموافقات الطبية الورقية.',
       'تمديدات شبكية قديمة سببت تقطع الاتصال داخل المعامل والعيادات.',
     ],
@@ -1123,7 +1123,7 @@ export const NUZUL_CASE_STUDIES: CaseStudy[] = [
       'Aging cabling causing intermittent connectivity in diagnostic units.',
     ],
     solution_ar: [
-      'بناء عنقود افتراضي مزدوج الحماية (HA Cluster) مع شبكات فايبر وكابلات Cat6A وجدار حماية Fortinet.',
+      'بناء بيئة Virtualization عالية التوافر (HA Cluster) مع شبكات فايبر وكابلات Cat6A وجهاز Firewall من Fortinet.',
       'إطلاق بوابة المستشفى، ونظام علاقات المرضى (PR System)، ونظام التذاكر الداخلية، ومنصة الموافقات التأمينية.',
     ],
     solution_en: [
@@ -1135,8 +1135,8 @@ export const NUZUL_CASE_STUDIES: CaseStudy[] = [
       'نظام إدارة علاقات المرضى (Patient Relations / PR System)',
       'نظام التذاكر والدعم الفني لصيانة الأجهزة الطبية والهندسية',
       'نظام الموافقات الطبية والتأمينية السريعة',
-      'عنقود أنظمة افتراضية عالي التوافر (HA Virtualization Cluster)',
-      'شبكات الألياف الضوئية وجدران الحماية Fortinet NGFW',
+      'بيئة Virtualization عالية التوافر (HA Cluster)',
+      'شبكات الألياف الضوئية وأجهزة Firewall من Fortinet NGFW',
     ],
     deliverables_en: [
       'Hospital Website & Patient Booking Portal',
@@ -1147,7 +1147,7 @@ export const NUZUL_CASE_STUDIES: CaseStudy[] = [
       'Structured Fiber Network & Fortinet NGFW Security',
     ],
     result_ar:
-      'دمج الخوادم في عنقود افتراضي عالي التوافر، وتحديث شبكة الألياف الضوئية وجدران الحماية، وتشغيل بوابة المرضى والموافقات.',
+      'دمج الخوادم في بيئة Virtualization عالية التوافر، وتحديث شبكة الألياف الضوئية وأجهزة Firewall، وتشغيل بوابة المرضى والموافقات.',
     result_en:
       'Unified hospital servers onto HA virtualization clusters alongside modernized fiber cabling and integrated patient workflows.',
     icon: 'Building2',
@@ -1475,9 +1475,9 @@ export const NUZUL_CASE_STUDIES: CaseStudy[] = [
     executiveSummary_en:
       'Independent QA, load concurrency, and security acceptance audit prior to software vendor sign-off across a multi-tenant web CRM, native mobile builds, and embedded WebRTC calling.',
     description_ar:
-      'اختبار شامل لمنصة الويب وتطبيقات الجوال ونظام الاتصالات السحابية واعتماد محضر الاستلام البرمجي.',
+      'اختبار منصة الويب وتطبيقات الجوال ونظام الاتصالات السحابية واعتماد محضر الاستلام البرمجي.',
     description_en:
-      'Comprehensive QA, concurrency load testing, and security audit across web CRM, mobile apps, and WebRTC telephony.',
+      'End-to-end QA, concurrency load testing, and security audit across web CRM, mobile apps, and WebRTC telephony.',
     tech: [
       'QA Acceptance Testing',
       'Web CRM Portal Testing',
@@ -1497,7 +1497,7 @@ export const NUZUL_CASE_STUDIES: CaseStudy[] = [
       'Need to detect API concurrency bottlenecks and multi-tenant authorization leaks prior to launch.',
     ],
     solution_ar: [
-      'تنفيذ مصفوفة اختبارات وظيفية شاملة (E2E) ومحاكاة ضغط مكالمات WebRTC وتدقيق صلاحيات قواعد البيانات.',
+      'تنفيذ مصفوفة اختبارات وظيفية (E2E) ومحاكاة ضغط مكالمات WebRTC وتدقيق صلاحيات قواعد البيانات.',
     ],
     solution_en: [
       'Executed E2E functional matrices, iOS/Android compatibility checks, WebRTC call load tests, and RBAC security audits.',
@@ -1608,7 +1608,7 @@ export const NUZUL_TESTIMONIALS: Testimonial[] = [
     text_en:
       'Nuzul Tech executed structured QA and UAT testing across our web portal, mobile builds, and embedded WebRTC calling system prior to vendor sign-off, giving our launch team clear engineering confidence.',
     text_ar:
-      'نُفذت اختبارات القبول والفحص الهندسي لمنصة الويب وتطبيقات الجوال ونظام الاتصالات المدمج بمنهجية واضحة قبل الاستلام الرسمي من الشركة المطورة، مما أسهم في معالجة الملاحظات الحرجة قبل الإطلاق.',
+      'نُفذت اختبارات القبول والفحص الهندسي لمنصة الويب وتطبيقات الجوال ونظام الاتصالات المدمج بمنهجية منظمة قبل الاستلام الرسمي من الشركة المطورة، مما أسهم في معالجة الملاحظات الحرجة قبل الإطلاق.',
   },
   {
     id: 'test-3',
@@ -1619,9 +1619,9 @@ export const NUZUL_TESTIMONIALS: Testimonial[] = [
     company_en: 'Medical Infrastructure — Cairo',
     company_ar: 'القطاع الطبي — القاهرة',
     text_en:
-      'Nuzul Tech deployed our hospital surveillance grid, Fortinet perimeter firewall, structured fiber cabling, and authenticated medical mail under ongoing 24/7 SLA engineering coverage.',
+      'Nuzul Tech deployed our hospital surveillance grid, Fortinet perimeter firewall, structured fiber cabling, and authenticated medical mail under ongoing SLA engineering coverage.',
     text_ar:
-      'أسست نُزول تِك شبكة المراقبة البصرية عالية الدقة وجدار الحماية Fortinet وتمديدات الفايبر وتوثيق البريد الطبي الرسمي مع متابعة هندسية مستمرة على مدار الساعة.',
+      'أسست نزول تك شبكة المراقبة البصرية عالية الدقة وجهاز Firewall من Fortinet وتمديدات الفايبر وتوثيق البريد الطبي الرسمي مع متابعة هندسية وفق SLA.',
   },
   {
     id: 'test-4',
@@ -1634,7 +1634,7 @@ export const NUZUL_TESTIMONIALS: Testimonial[] = [
     text_en:
       'Consolidating our physical servers into a High-Availability virtualization cluster alongside the Patient Relations and approvals workflows improved daily ward stability and cross-department coordination.',
     text_ar:
-      'دمج الخوادم الفيزيائية داخل عنقود افتراضي عالي التوافر مع إطلاق بوابة المرضى ونظام علاقات المرضى والموافقات الطبية عزز استقرار التشغيل اليومي وتنسيق العمل بين الأقسام.',
+      'دمج الخوادم الفيزيائية داخل Cluster عالي التوافر مع إطلاق بوابة المرضى ونظام علاقات المرضى والموافقات الطبية عزز استقرار التشغيل اليومي وتنسيق العمل بين الأقسام.',
   },
   {
     id: 'test-5',
@@ -1642,7 +1642,7 @@ export const NUZUL_TESTIMONIALS: Testimonial[] = [
     name_ar: 'إدارة المركز الطبي',
     role_en: 'Specialized Oncology Center',
     role_ar: 'مركز طبي تخصصي للأورام',
-    company_en: 'Medical Imaging & Governance — Cairo',
+    company_en: 'Medical Imaging & Infrastructure — Cairo',
     company_ar: 'الرعاية الصحية التخصصية — القاهرة',
     text_en:
       'Decoupling heavy DICOM PACS imaging files from corporate email onto local NVMe storage with hybrid cloud backup relieved mailbox congestion and stabilized physician workstations immediately.',
@@ -1660,7 +1660,7 @@ export const NUZUL_TESTIMONIALS: Testimonial[] = [
     text_en:
       'Hosting our accounting databases on Nuzul Tech private cloud enabled 30 field auditors to collaborate concurrently with encrypted access, authenticated email, and automated daily snapshots.',
     text_ar:
-      'استضافة قواعد البيانات المحاسبية على خوادم نُزول تِك السحابية أتاح لـ 30 مستشاراً ومراجعاً العمل المتزامن من مقرات العملاء مع توثيق البريد ونسخ احتياطي يومي مشفر.',
+      'استضافة قواعد البيانات المحاسبية على خوادم نزول تك السحابية أتاح لـ 30 مستشاراً ومراجعاً العمل المتزامن من مقرات العملاء مع توثيق البريد ونسخ احتياطي يومي مشفر.',
   },
   {
     id: 'test-7',
@@ -1695,10 +1695,10 @@ export const NUZUL_BLOG_POSTS: BlogPost[] = [
     id: 1,
     slug: 'oncology-center-pacs-email-governance',
     title_en: 'Architecture Guide: Decoupling Medical PACS Storage from Corporate Email',
-    title_ar: 'دليل معماري: فصل أرشيف الأشعة الطبية (PACS) عن البريد الإلكتروني وحوكمة السحابة الهجينة',
+    title_ar: 'دليل معماري: فصل أرشيف الأشعة الطبية (PACS) عن البريد الإلكتروني وإدارة السحابة الهجينة',
     date: '10 يناير 2026',
-    category_en: 'Healthcare IT & Governance',
-    category_ar: 'حوكمة النظم الطبية',
+    category_en: 'Healthcare IT Systems',
+    category_ar: 'النظم الطبية',
     excerpt_en:
       'Why exchanging diagnostic DICOM images over standard mailboxes stalls clinical PCs, and how hybrid NVMe local storage resolves the bottleneck.',
     excerpt_ar:
@@ -1706,7 +1706,7 @@ export const NUZUL_BLOG_POSTS: BlogPost[] = [
     content_en:
       'When clinics and diagnostic centers send large DICOM imaging studies as email attachments, physician mailboxes balloon to tens of gigabytes, local Outlook profiles freeze, and recurring external cloud storage fees climb steeply.\n\nDecoupling PACS radiological storage onto a local high-IOPS NVMe node keeps image retrieval inside the clinic LAN while restricting mailboxes strictly to structured correspondence under SPF, DKIM, and DMARC.\n\nPairing the local storage cluster with scheduled encrypted off-site backups gives clinical management verifiable disaster recovery without vendor lock-in or rising foreign-currency storage bills.',
     content_ar:
-      'عند تداول ملفات الأشعة التشخيصية (DICOM) كمرفقات عبر البريد الإلكتروني، تتضخم مساحات صناديق البريد وتتجمد تطبيقات المراسلة على أجهزة الأطباء والاستقبال، كما ترتفع تكاليف التخزين السحابي الخارجي.\n\nتعتمد المعمارية الهندسية السليمة على فصل أرشيف الأشعة PACS في خادم تخزين محلي سريع بأقراص NVMe داخل شبكة المركز، مع تخصيص خوادم البريد للمراسلات النصية والرسمية الموثقة ببروتوكولات SPF وDKIM وDMARC.\n\nتُستكمل البنية عبر ربط الخادم المحلي بخط نسخ احتياطي هجين مشفر خارج الموقع لحماية ملفات المرضى ضد أعطال العتاد أو برمجيات الفدية دون تضخم التكاليف الدورية.',
+      'عند تداول ملفات الأشعة التشخيصية (DICOM) كمرفقات عبر البريد الإلكتروني، تتضخم مساحات صناديق البريد وتتجمد تطبيقات المراسلة على أجهزة الأطباء والاستقبال، كما ترتفع تكاليف التخزين السحابي الخارجي.\n\nتعتمد المعمارية الهندسية السليمة على فصل أرشيف الأشعة PACS في خادم تخزين محلي سريع بأقراص NVMe داخل شبكة المركز، مع تخصيص خوادم البريد للمراسلات النصية والرسمية ببروتوكولات SPF وDKIM وDMARC.\n\nتُستكمل البنية عبر ربط الخادم المحلي بخط نسخ احتياطي هجين مشفر خارج الموقع لحماية ملفات المرضى ضد أعطال العتاد أو برمجيات الفدية دون تضخم التكاليف الدورية.',
   },
   {
     id: 2,
@@ -1729,18 +1729,18 @@ export const NUZUL_BLOG_POSTS: BlogPost[] = [
     id: 3,
     slug: 'it-as-a-service-egypt-enterprise',
     title_en: 'IT as a Service (ITaaS): Structured Infrastructure Governance for Growing Enterprises',
-    title_ar: 'نموذج القطاع التقني كخدمة (IT as a Service): حوكمة البنية التحتية بعقود SLA واضحة',
+    title_ar: 'نموذج القطاع التقني كخدمة (IT as a Service): إدارة البنية التحتية بعقود SLA',
     date: '20 يناير 2026',
     category_en: 'Enterprise IT Strategy',
     category_ar: 'استراتيجيات الـ IT للمؤسسات',
     excerpt_en:
       'How multi-discipline engineering teams cover networking, firewall hardening, virtualization, and backup verification under a single SLA.',
     excerpt_ar:
-      'كيف يجمع التعاقد على إدارة البنية التحتية كخدمة خبرات الشبكات والسحابة والأمن السيبراني ضمن اتفاقية مستوى خدمة موثقة.',
+      'كيف يجمع التعاقد على إدارة البنية التحتية كخدمة خبرات الشبكات والسحابة والأمن السيبراني ضمن اتفاقية مستوى خدمة (SLA).',
     content_en:
       'Managing modern enterprise environments demands specialized knowledge spanning Layer-2/Layer-3 networking, next-generation firewalls, Linux/Windows server administration, and tested disaster recovery pipelines.\n\nUnder the IT as a Service (ITaaS) model, organizations partner with an accountable multidisciplinary engineering team operating under explicit P1–P4 SLA response tiers and scheduled preventive audits.\n\nAll credentials, network diagrams, and Runbooks remain owned by the client with complete operational transparency.',
     content_ar:
-      'تتطلب إدارة البنية التحتية للمؤسسات الحديثة تكامل تخصصات متعددة تشمل هندسة الشبكات المهيكلة، جدران الحماية NGFW، إدارة الخوادم السحابية والمحلية، واختبارات استعادة النسخ الاحتياطي.\n\nيتيح نموذج IT as a Service للشركات والمراكز الطبية الاعتماد على فريق هندسي متعدد التخصصات يعمل وفق اتفاقية مستوى خدمة (SLA) تحدد أولويات البلاغات (P1–P4) ونوافذ الصيانة الوقائية.\n\nيحتفظ العميل بكامل الصلاحيات الإدارية والوثائق الهندسية (Runbooks) مع متابعة استباقية مستمرة للبنية التشغيلية.',
+      'تتطلب إدارة البنية التحتية للمؤسسات الحديثة تكامل تخصصات متعددة تشمل هندسة الشبكات، وأجهزة Firewall (NGFW)، وإدارة الخوادم السحابية والمحلية، واختبارات استعادة النسخ الاحتياطي.\n\nيتيح نموذج IT as a Service للشركات والمراكز الطبية الاعتماد على فريق هندسي متعدد التخصصات يعمل وفق اتفاقية مستوى خدمة (SLA) تحدد أولويات البلاغات (P1–P4) ونوافذ الصيانة الوقائية.\n\nيحتفظ العميل بكامل الصلاحيات الإدارية والوثائق الهندسية (Runbooks) مع متابعة دورية مستمرة للبنية التشغيلية.',
   },
   {
     id: 4,
@@ -1757,20 +1757,20 @@ export const NUZUL_BLOG_POSTS: BlogPost[] = [
     content_en:
       'Disconnected spreadsheets across purchasing, warehouse stock, and finance teams introduce reconciliation errors and delay statutory reporting.\n\nA unified ERP relational architecture ensures records are captured once at origin, updating inventory balances, general ledger entries, and Egyptian ETA e-invoicing payloads consistently.\n\nRole-based permissions and immutable audit trails protect financial integrity across branches.',
     content_ar:
-      'يسبب الاعتماد على الجداول الإلكترونية المنفصلة بين المشتريات والمخازن والإدارة المالية أخطاء في المطابقة الدورية وتأخيراً في إصدار التقارير الضريبية.\n\nتعتمد منظومات ERP الحديثة على قاعدة بيانات علائقية موحدة تضمن تسجيل الحركة التشغيلية مرة واحدة لتنعكس تلقائياً في المخزن ودفاتر الأستاذ وإرسالات الفاتورة الإلكترونية.\n\nتُضبط المنظومة بصلاحيات وظيفية دقيقة (RBAC) وسجلات تدقيق تمنع التعديل غير المصرح على القيود المالية.',
+      'يسبب الاعتماد على الجداول الإلكترونية المنفصلة بين المشتريات والمخازن والإدارة المالية أخطاء في المطابقة الدورية وتأخيراً في إصدار التقارير الضريبية.\n\nتعتمد أنظمة ERP الحديثة على قاعدة بيانات علائقية موحدة لتسجيل الحركة التشغيلية مرة واحدة بحيث تنعكس تلقائياً في المخزن ودفاتر الأستاذ وإرسالات الفاتورة الإلكترونية.\n\nتُضبط المنظومة بصلاحيات وظيفية دقيقة (RBAC) وسجلات تدقيق تمنع التعديل غير المصرح على القيود المالية.',
   },
   {
     id: 5,
     slug: 'corporate-email-dmarc-phishing-egypt',
-    title_en: 'Corporate Email Governance: Preventing Invoice Spoofing with SPF, DKIM, and DMARC',
-    title_ar: 'حوكمة البريد الإلكتروني للشركات: حماية النطاق من التزييف عبر SPF وDKIM وDMARC',
+    title_en: 'Corporate Email Security: Preventing Invoice Spoofing with SPF, DKIM, and DMARC',
+    title_ar: 'أمن البريد الإلكتروني للشركات: حماية النطاق من التزييف عبر SPF وDKIM وDMARC',
     date: '28 ديسمبر 2025',
     category_en: 'Cybersecurity & Email',
     category_ar: 'أمن البريد والنطاقات',
     excerpt_en:
       'Technical deployment steps for 2048-bit DKIM signing and DMARC p=reject enforcement to safeguard corporate financial correspondence.',
     excerpt_ar:
-      'خطوات ضبط سجلات المصادقة البريدية لحماية الفواتير التجارية وضمان وصول المراسلات الرسمية لصناديق الوارد.',
+      'خطوات ضبط سجلات المصادقة البريدية لحماية الفواتير التجارية وتحسين وصول المراسلات الرسمية لصناديق الوارد.',
     content_en:
       'Business email compromise and invoice spoofing exploit domains that lack strict cryptographic authentication records.\n\nDeploying aligned SPF rules, rotating 2048-bit DKIM keys, and progressively tightening DMARC policies to p=reject instructs global mail providers to block forged messages claiming to originate from your domain.\n\nCombined with TLS 1.3 transport encryption and inbound attachment scanning, enterprise correspondence remains auditable and reliable.',
     content_ar:
@@ -1780,10 +1780,10 @@ export const NUZUL_BLOG_POSTS: BlogPost[] = [
     id: 6,
     slug: 'network-firewalls-vlan-security',
     title_en: 'Next-Gen Firewalls & VLAN Segmentation: Isolating Critical Enterprise Workloads',
-    title_ar: 'أمن الشبكات وجدران الحماية: تقسيم الشبكات وعزل الأنظمة الحساسة عبر VLANs',
+    title_ar: 'أمن الشبكات وأجهزة Firewall: تقسيم الشبكات وعزل الأنظمة الحساسة عبر VLANs',
     date: '10 ديسمبر 2025',
     category_en: 'Infrastructure & Firewalls',
-    category_ar: 'الشبكات والجدران النارية',
+    category_ar: 'الشبكات وFirewall',
     excerpt_en:
       'Designing segmented network boundaries between accounting databases, clinical hardware, IP CCTV grids, and guest Wi-Fi.',
     excerpt_ar:
@@ -1791,7 +1791,7 @@ export const NUZUL_BLOG_POSTS: BlogPost[] = [
     content_en:
       'Operating workstations, servers, IP cameras, and visitor smartphones inside a single flat broadcast domain exposes critical systems to lateral movement.\n\nEnterprise network architecture isolates traffic across dedicated VLANs controlled by hardware NGFW access policies (ACLs) and encrypted site-to-site VPN tunnels between branches.\n\nContinuous telemetry ensures rogue endpoints or unauthorized port scans are logged immediately.',
     content_ar:
-      'يُعرّض دمج محطات العمل والخوادم وكاميرات المراقبة وشبكة الواي فاي للضيوف في نطاق شبكي واحد الأنظمة الحرجة لمخاطر الحركة الجانبية والاختراق الداخلي.\n\nتعتمد الهندسة الآمنة على تقسيم الشبكة إلى مقاطع VLAN معزولة تحكمها قوائم وصول (ACLs) عبر جدار حماية فيزيائي NGFW مع أنفاق VPN مشفرة بين الفروع.\n\nوتضمن المراقبة اللحظية توثيق محاولات الوصول غير المصرح وعزلها مبكراً.',
+      'يُعرّض دمج محطات العمل والخوادم وكاميرات المراقبة وشبكة الواي فاي للضيوف في نطاق شبكي واحد الأنظمة الحرجة لمخاطر الحركة الجانبية والاختراق الداخلي.\n\nتعتمد الهندسة الآمنة على تقسيم الشبكة إلى مقاطع VLAN معزولة تحكمها قوائم وصول (ACLs) عبر جهاز Firewall فيزيائي NGFW مع أنفاق VPN مشفرة بين الفروع.\n\nوتساعد المراقبة المستمرة في تسجيل محاولات الوصول غير المصرح وعزلها مبكراً.',
   },
   {
     id: 7,
@@ -1808,7 +1808,7 @@ export const NUZUL_BLOG_POSTS: BlogPost[] = [
     content_en:
       'Isolated PSTN lines across regional branches inflate call routing delays and lack centralized recording or call analytics.\n\nAn IP-PBX telephony architecture assigns unified internal extension plans over encrypted SIP trunks, providing customizable IVR greetings, queue monitoring, and compliant call recording.\n\nIsolating voice traffic onto a prioritized QoS voice VLAN preserves call clarity during peak network utilization.',
     content_ar:
-      'يؤدي اعتماد كل فرع على خطوط هاتفية تقليدية منفصلة إلى صعوبة تحويل المكالمات بين الإدارات وغياب سجل التحليلات والتسجيل المركزي.\n\nتتيح منظومات IP-PBX توحيد خطط التحويلات الداخلية عبر الفروع من خلال قنوات SIP مشفرة، مع شجرة رد آلي (IVR) وتسجيل مركزي للمكالمات.\n\nكما يضمن تخصيص VLAN منفصلة للصوت بأولوية مرور (QoS) نقاء المكالمات أثناء أوقات الضغط الشبكي.',
+      'يؤدي اعتماد كل فرع على خطوط هاتفية تقليدية منفصلة إلى صعوبة تحويل المكالمات بين الإدارات وغياب سجل التحليلات والتسجيل المركزي.\n\nتتيح أنظمة IP-PBX توحيد خطط التحويلات الداخلية عبر الفروع من خلال قنوات SIP مشفرة، مع شجرة رد آلي (IVR) وتسجيل مركزي للمكالمات.\n\nكما يساعد تخصيص VLAN منفصلة للصوت بأولوية مرور (QoS) على الحفاظ على نقاء المكالمات أثناء أوقات الضغط الشبكي.',
   },
   {
     id: 8,
@@ -1881,8 +1881,8 @@ export const NUZUL_BLOG_POSTS: BlogPost[] = [
   {
     id: 12,
     slug: 'egyptian-domain-registration-dns-security',
-    title_en: 'Digital Identity & DNS Governance: Securing Official Egyptian Domains (.eg & .com.eg)',
-    title_ar: 'الهوية الرقمية وحوكمة النطاقات: تسجيل وحماية النطاقات المصرية الرسمية .eg و.com.eg',
+    title_en: 'Digital Identity & DNS Security: Securing Official Egyptian Domains (.eg & .com.eg)',
+    title_ar: 'الهوية الرقمية وإدارة النطاقات: تسجيل وحماية النطاقات المصرية الرسمية .eg و.com.eg',
     date: '1 أكتوبر 2025',
     category_en: 'Domains & DNS Infrastructure',
     category_ar: 'النطاقات والـ DNS',
@@ -1893,7 +1893,7 @@ export const NUZUL_BLOG_POSTS: BlogPost[] = [
     content_en:
       'Registering official national TLDs (.eg, .com.eg) reinforces institutional authenticity across Egyptian regulatory, banking, and commercial channels.\n\nEnabling DNSSEC validation protects DNS resolution against cache poisoning, while registrar transfer locks and role-controlled DNS access prevent accidental record alterations.\n\nCombined domain and mail record governance avoids sudden service blackouts.',
     content_ar:
-      'يعزز حجز النطاقات المصرية الرسمية (.eg و.com.eg) الموثوقية القانونية والتجارية للمؤسسة في تعاملاتها المحلية.\n\nويحمي تفعيل التوقيع التشفيري DNSSEC استعلامات التوجيه من التلاعب، بينما يمنع قفل النقل وحوكمة لوحة التحكم تغيير السجلات دون مراجعة.\n\nكما يضمن توحيد إدارة النطاقات مع سجلات البريد استقرار الخدمات الرقمية.',
+      'يعزز حجز النطاقات المصرية الرسمية (.eg و.com.eg) الموثوقية القانونية والتجارية للمؤسسة في تعاملاتها المحلية.\n\nويحمي تفعيل التوقيع التشفيري DNSSEC استعلامات التوجيه من التلاعب، بينما يمنع قفل النقل وضبط صلاحيات لوحة التحكم تغيير السجلات دون مراجعة.\n\nكما يساعد توحيد إدارة النطاقات مع سجلات البريد على استقرار الخدمات الرقمية.',
   },
   {
     id: 13,
@@ -1927,7 +1927,7 @@ export const NUZUL_BLOG_POSTS: BlogPost[] = [
     content_en:
       'Corporate web portals represent technical competence: sluggish bundles, broken RTL alignment, and missing semantic headings undermine user trust immediately.\n\nEngineering clean typographic hierarchies, accessible keyboard landmarks, and structured JSON-LD metadata equips search engines and decision-makers to evaluate capabilities clearly.\n\nLean asset budgets preserve responsiveness on mobile networks across regions.',
     content_ar:
-      'تعكس البوابة الرقمية للمؤسسة جودة عملها الهندسي؛ فالأداء البطيء أو تداخل الاتجاهين العربي والإنجليزي يضعف وضوح الرسالة.\n\nيركز التطوير المنضبط على البنية الدلالية الصحيحة للعناوين، دعم لوحة المفاتيح وقارئات الشاشة، وإعداد البيانات المهيكلة لمحركات البحث.\n\nكما يضمن ضبط حجم الموارد سرعة التصفح على شبكات المحمول والشاشات المختلفة.',
+      'تعكس البوابة الرقمية للمؤسسة جودة عملها الهندسي؛ فالأداء البطيء أو تداخل الاتجاهين العربي والإنجليزي يضعف وضوح الرسالة.\n\nيركز التطوير المنضبط على البنية الدلالية الصحيحة للعناوين، دعم لوحة المفاتيح وقارئات الشاشة، وإعداد البيانات المهيكلة لمحركات البحث.\n\nكما يساعد ضبط حجم الموارد في سرعة التصفح على شبكات المحمول والشاشات المختلفة.',
   },
   {
     id: 15,
@@ -1944,7 +1944,7 @@ export const NUZUL_BLOG_POSTS: BlogPost[] = [
     content_en:
       'Enterprise interfaces succeed when front-desk staff and operators complete high-frequency workflows with minimal cognitive load.\n\nEstablishing token-driven component libraries with WCAG-compliant contrast across Light and Dark modes, clear inline validation, and bilingual RTL/LTR spacing discipline removes repetitive friction.\n\nUsability testing validates real operator speed prior to deployment.',
     content_ar:
-      'تقاس جودة واجهات الأنظمة الإدارية والطبية بقدرة الموظف على إنجاز المهام المتكررة بأقل عدد من الخطوات والأخطاء.\n\nيسهم بناء مكتبة مكونات معتمدة على متغيرات لونية موحدة في الوضعين النهاري والداكن وتباين قرائي معتمد مع رسائل تحقق فورية واضحة في رفع دقة البيانات.\n\nوتضمن اختبارات القابلية للاستخدام ملاءمة الواجهة لسير العمل الفعلي.',
+      'تقاس جودة واجهات الأنظمة الإدارية والطبية بقدرة الموظف على إنجاز المهام المتكررة بأقل عدد من الخطوات والأخطاء.\n\nيسهم بناء مكتبة مكونات قائمة على متغيرات لونية موحدة في الوضعين النهاري والداكن وتباين قرائي مناسب مع رسائل تحقق دقيقة في رفع دقة البيانات.\n\nوتساعد اختبارات القابلية للاستخدام على ملاءمة الواجهة لسير العمل الفعلي.',
   },
   {
     id: 16,
@@ -1961,13 +1961,13 @@ export const NUZUL_BLOG_POSTS: BlogPost[] = [
     content_en:
       'Compliant Egyptian Tax Authority (ETA) integration requires accurate GS1/EGS item mapping, cryptographic hardware token signing, and resilient retry queues for temporary network disruptions.\n\nEmbedding submission status tracking directly into invoice ledgers lets accounting teams monitor UUID validation immediately without switching portals.\n\nConsolidated audit logs retain accepted payloads cleanly for statutory review.',
     content_ar:
-      'يتطلب التكامل المستقر مع منظومة مصلحة الضرائب المصرية مطابقة دقيقة لأكواد الأصناف (GS1/EGS) والتوقيع عبر التوكن الرقمي وإدارة طوابير إعادة الإرسال عند انقطاع الإنترنت.\n\nيتيح دمج حالة التحقق (UUID) مباشرة داخل شاشة الفواتير لفرق المحاسبة متابعة الاعتماد لحظياً من مكان واحد.\n\nمع حفظ أرشيف رقمي منظم للفواتير المعتمدة لتسهيل المراجعة الدورية.',
+      'يتطلب التكامل المستقر مع منظومة مصلحة الضرائب المصرية مطابقة دقيقة لأكواد الأصناف (GS1/EGS) والتوقيع عبر التوكن الرقمي وإدارة طوابير إعادة الإرسال عند انقطاع الإنترنت.\n\nيتيح دمج حالة التحقق (UUID) مباشرة داخل شاشة الفواتير لفرق المحاسبة متابعة حالة القبول مباشرة من مكان واحد.\n\nمع حفظ أرشيف رقمي منظم للفواتير المقبولة لتسهيل المراجعة الدورية.',
   },
   {
     id: 17,
     slug: 'non-profit-it-infrastructure-active-directory',
-    title_en: 'Foundation IT Governance: Active Directory, File Security & VoIP Standardization',
-    title_ar: 'حوكمة البنية الرقمية للمؤسسات الأهلية: الدومين المركزي وخادم الملفات والسنترال',
+    title_en: 'Foundation IT Infrastructure: Active Directory, File Security & VoIP Standardization',
+    title_ar: 'البنية الرقمية للمؤسسات الأهلية: الدومين المركزي وخادم الملفات والسنترال',
     date: '15 فبراير 2026',
     category_en: 'Infrastructure & Active Directory',
     category_ar: 'البنية التحتية والشبكات',
@@ -2025,11 +2025,11 @@ export const NUZUL_BLOG_POSTS: BlogPost[] = [
     excerpt_en:
       'Combining failover hypervisor clusters with internal ticketing, insurance approvals workflows, and structured patient relations tracking.',
     excerpt_ar:
-      'معمارية الدمج بين عناقيد المحاكاة الافتراضية ومنظومات متابعة شكاوى المرضى والموافقات التأمينية.',
+      'معمارية الدمج بين خوادم Virtualization (HA Cluster) وأنظمة متابعة شكاوى المرضى والموافقات التأمينية.',
     content_en:
       'Modern surgical facilities rely on both resilient compute infrastructure and coordinated patient workflows spanning approvals, feedback tracking, and engineering maintenance tickets.\n\nMigrating fragmented single servers onto a High-Availability KVM/VMware virtualization cluster behind fiber uplinks eliminates single-host downtime during maintenance.\n\nCo-deploying unified web portals and Patient Relations tracking aligns clinical operations cleanly.',
     content_ar:
-      'يعتمد استقرار التشغيل في المستشفيات الجراحية على تكامل البنية التحتية التحتية عالية التوافر مع المنظومات الإدارية الداعمة للمريض.\n\nيقضي دمج الخوادم المتفرقة داخل عنقود افتراضي مزدوج الحماية خلف جدران Fortinet وشبكات الفايبر على توقف الأنظمة أثناء صيانة العتاد.\n\nوتتكامل البنية مع منصات علاقات المرضى والتذاكر الهندسية والموافقات التأمينية لتنظيم سير الخدمة.',
+      'يعتمد استقرار التشغيل في المستشفيات الجراحية على تكامل البنية التحتية عالية التوافر مع الأنظمة الإدارية الداعمة للمريض.\n\nيقضي دمج الخوادم المتفرقة داخل بيئة Virtualization عالية التوافر (HA Cluster) خلف أجهزة Firewall من Fortinet وشبكات الفايبر على توقف الأنظمة أثناء صيانة العتاد.\n\nوتتكامل البنية مع منصات علاقات المرضى والتذاكر الهندسية والموافقات التأمينية لتنظيم سير الخدمة.',
   },
   {
     id: 21,
@@ -2042,11 +2042,11 @@ export const NUZUL_BLOG_POSTS: BlogPost[] = [
     excerpt_en:
       'Encrypted hourly snapshots, isolated off-site standby servers, and access governance protecting financial firms during tax deadlines.',
     excerpt_ar:
-      'ضوابط النسخ الاحتياطي التراكمي وخوادم الاستضافة المعزولة لضمان سلامة السجلات أثناء مواسم الإقرارات.',
+      'ضوابط النسخ الاحتياطي التراكمي وخوادم الاستضافة المعزولة لحماية السجلات أثناء مواسم الإقرارات.',
     content_en:
       'Fiscal closing cycles and tax submission deadlines tolerate zero ledger corruption or ransomware disruption.\n\nSeparating central financial databases onto managed cloud instances protected by encrypted hourly snapshots, off-site immutable storage, and strict RDP access lists eliminates workstation single points of failure.\n\nVerified standby recovery procedures safeguard auditor continuity across client engagements.',
     content_ar:
-      'تستدعي مواسم إقفال الميزانيات وتقديم الإقرارات الضريبية أعلى درجات الاستقرار وحماية قواعد البيانات المحاسبية من التلف أو برمجيات الفدية.\n\nتؤمّن استضافة المنظومات على خوادم سحابية معزولة مع نسخ احتياطي مشفر وجدار حماية صارم للوصول البعيد سلامة الدفاتر والسجلات.\n\nمع إجراء اختبارات استعادة مجدولة تضمن استمرارية عمل المراجعين من مختلف المواقع.',
+      'تستدعي مواسم إقفال الميزانيات وتقديم الإقرارات الضريبية أعلى درجات الاستقرار وحماية قواعد البيانات المحاسبية من التلف أو برمجيات الفدية.\n\nتؤمّن استضافة الأنظمة على خوادم سحابية معزولة مع نسخ احتياطي مشفر وسياسات Firewall للوصول البعيد سلامة الدفاتر والسجلات.\n\nمع إجراء اختبارات استعادة مجدولة لاستمرارية عمل المراجعين من مختلف المواقع.',
   },
   {
     id: 22,
@@ -2317,7 +2317,7 @@ export const HOSTING_PLANS: NormalizedHostingPlan[] = [
     basePriceUSD: 31.9,
     monthlyPriceEGP: 1580,
     yearlyPriceEGP: 15800,
-    targetAudience: 'أحمال التحليلات، ERP متعدد الفروع، والعناقيد',
+    targetAudience: 'أحمال التحليلات، ERP متعدد الفروع، وبيئات Clusters',
     targetAudienceEn: 'Heavy analytics, multi-branch ERP & CI/CD runners',
     cpu: '12 vCPU Cores',
     ram: '48 GB DDR4 ECC',
@@ -2525,10 +2525,10 @@ export const WINDOWS_HOSTING_PLANS: NormalizedHostingPlan[] = [
     panel: 'Admin RDP + KVM',
     uptime: '99.95% SLA',
     features: [
-      'شامل ترخيص Windows Server 2022 القياسي',
+      'يتضمن ترخيص Windows Server 2022 القياسي',
       'اتصال سطح مكتب بعيد مشفر مع حماية ضد التخمين',
       'جاهز لتشغيل أنظمة ERP وبرامج المحاسبة المحلية',
-      'أقراص NVMe سريعة لضمان استجابة قواعد البيانات',
+      'أقراص NVMe سريعة لاستجابة قواعد البيانات',
     ],
     featuresEn: [
       'Includes licensed Windows Server 2022 Standard',
@@ -2566,7 +2566,7 @@ export const WINDOWS_HOSTING_PLANS: NormalizedHostingPlan[] = [
       'ذاكرة 16 GB ECC مناسبة لقواعد بيانات MS SQL Server',
       'نفق VPN خاص لربط الفروع بالخادم السحابي بأمان',
       'لقطتان احتياطيتان + نسخ احتياطي آلي خارج الموقع',
-      'مراقبة استباقية 24/7 للأقراص والذاكرة',
+      'مراقبة مستمرة للأقراص والذاكرة على مدار الساعة',
     ],
     featuresEn: [
       '16 GB ECC RAM sized for MS SQL Server instances',
@@ -2834,10 +2834,10 @@ export const ARTICLES: Article[] = NUZUL_BLOG_POSTS.map((post) => {
       headingEn: '3. Operational Governance & Continuity Checklist',
       bodyAr:
         parasAr[2] ||
-        'يوصي الفريق الهندسي في نُزول تِك بتوثيق الإعدادات، وجدولة اختبارات دورية للنسخ الاحتياطي، وربط الأنظمة الحرجة بعقود مستوى خدمة (SLA) تضمن المراقبة الاستباقية.',
+        'يوصي الفريق الهندسي في نزول تك بتوثيق الإعدادات، وجدولة اختبارات دورية للنسخ الاحتياطي، وربط الأنظمة الحرجة بعقود مستوى خدمة (SLA) للمراقبة المستمرة.',
       bodyEn:
         parasEn[2] ||
-        'Nuzul Tech engineers recommend documenting As-Built configurations, scheduling regular backup restoration drills, and governing production workloads under formal SLA monitoring.',
+        'Nuzul Tech engineers recommend documenting As-Built configurations, scheduling regular backup restoration drills, and operating production workloads under formal SLA monitoring.',
     },
   ];
 
@@ -2852,7 +2852,7 @@ export const ARTICLES: Article[] = NUZUL_BLOG_POSTS.map((post) => {
     date: post.date,
     readTime: '5 دقائق قراءة',
     readTimeEn: '5 min read',
-    author: 'الفريق الهندسي — نُزول تِك',
+    author: 'الفريق الهندسي — نزول تك',
     authorEn: 'Nuzul Tech Engineering Team',
     authorRole: 'مهندسو البنية التحتية والسحابة',
     authorRoleEn: 'Cloud & Infrastructure Architects',
@@ -2868,8 +2868,8 @@ export const ARTICLES: Article[] = NUZUL_BLOG_POSTS.map((post) => {
 export const CLIENT_SECTORS = [
   { id: 'sec-1', nameAr: 'القطاع الطبي والمراكز التخصصية', nameEn: 'Healthcare & Medical Centers' },
   { id: 'sec-2', nameAr: 'مكاتب المحاسبة والاستشارات المالية', nameEn: 'Accounting & Financial Firms' },
-  { id: 'sec-3', nameAr: 'المصانع وسلاسل الإمداد', nameEn: 'Manufacturing & Supply Chain' },
-  { id: 'sec-4', nameAr: 'شركات التطوير العقاري والمقاولات', nameEn: 'Real Estate & Construction' },
+  { id: 'sec-3', nameAr: 'النقل والخدمات اللوجستية', nameEn: 'Logistics & Freight Transport' },
+  { id: 'sec-4', nameAr: 'الجمعيات والمؤسسات الأهلية', nameEn: 'Non-Profit & Foundations' },
   { id: 'sec-5', nameAr: 'منصات التجارة الإلكترونية والتجزئة', nameEn: 'E-Commerce & Retail Chains' },
   { id: 'sec-6', nameAr: 'المؤسسات التعليمية والتدريبية', nameEn: 'Education & Training Academies' },
 ];
@@ -2879,7 +2879,7 @@ export const FAQS = [
     question: 'هل تقدمون عقود مستوى خدمة (SLA) رسمية وفواتير ضريبية للشركات؟',
     questionEn: 'Do you provide formal SLA contracts and official tax invoices for enterprises?',
     answer:
-      'نعم، جميع تعاقدات الشركات تشمل اتفاقية مستوى خدمة (SLA) موثقة تحدد مستويات الأولوية وأوقات الاستجابة، مع إصدار فواتير إلكترونية رسمية معتمدة في مصر.',
+      'نعم، تشمل تعاقدات الشركات اتفاقية مستوى خدمة (SLA) تحدد مستويات الأولوية وأوقات الاستجابة، مع إصدار فواتير إلكترونية رسمية في مصر.',
     answerEn:
       'Yes, corporate engagements include a formal Service Level Agreement (SLA) defining priority tiers and acknowledgment windows, alongside official Egyptian electronic tax invoices.',
   },
@@ -2895,7 +2895,7 @@ export const FAQS = [
     question: 'ما وسائل الدفع المتاحة للشركات داخل مصر وخارجها؟',
     questionEn: 'What payment methods are supported in Egypt and internationally?',
     answer:
-      'نوفر التحويل البنكي المباشر لحسابات الشركات، الدفع الفوري عبر InstaPay، محافظ الهاتف (Vodafone Cash)، فوري، بالإضافة إلى البطاقات البنكية بموجب عرض سعر وفاتورة رسمية.',
+      'نوفر التحويل البنكي المباشر لحسابات الشركات، والتحويل عبر InstaPay، ومحافظ الهاتف (Vodafone Cash)، وفوري، بالإضافة إلى البطاقات البنكية بموجب عرض سعر وفاتورة رسمية.',
     answerEn:
       'We support corporate bank wire transfers, InstaPay transfers, Vodafone Cash, Fawry, and bank cards arranged via official quotation and invoice.',
   },
@@ -2903,7 +2903,7 @@ export const FAQS = [
     question: 'هل تشمل خطط الاستضافة السحابية نسخاً احتياطياً خارج الموقع؟',
     questionEn: 'Do cloud hosting plans include off-site backups?',
     answer:
-      'نعم، تتضمن جميع خطط الاستضافة نسخاً احتياطياً آلياً مشفراً يُحفظ في موقع ثانوي مستقل لضمان إمكانية استعادة البيانات عند الطوارئ.',
+      'نعم، تتضمن جميع خطط الاستضافة نسخاً احتياطياً آلياً مشفراً يُحفظ في موقع ثانوي مستقل لاستعادة البيانات عند الطوارئ.',
     answerEn:
       'Yes, all hosting plans include automated encrypted backups stored off-site for verified disaster recovery.',
   },
@@ -2954,10 +2954,11 @@ export const INFRASTRUCTURE_LOCATIONS = [
 
 export const DOMAIN_TLDS = [
   { tld: '.com', priceEGP: 750 },
-  { tld: '.com.eg', priceEGP: 1250 },
-  { tld: '.eg', priceEGP: 2200 },
   { tld: '.net', priceEGP: 850 },
   { tld: '.org', priceEGP: 800 },
+  { tld: '.io', priceEGP: 2650 },
+  { tld: '.com.eg', priceEGP: 1250 },
+  { tld: '.eg', priceEGP: 2200 },
 ];
 
 export const LIVE_DEMOS = [
@@ -2972,7 +2973,7 @@ export const LIVE_DEMOS = [
     modules: ['الحسابات العامة', 'المخازن', 'الفاتورة الإلكترونية', 'الموارد البشرية'],
     modulesEn: ['General Ledger', 'Inventory', 'E-Invoicing', 'HR & Payroll'],
     kpis: [
-      { label: 'الربط الضريبي', labelEn: 'Tax Integration', value: 'ETA SDK v1.0 [VERIFY Q8]', trend: 'ETA Ready' },
+      { label: 'الربط الضريبي', labelEn: 'Tax Integration', value: 'ETA E-Invoicing SDK', trend: 'ETA Ready' },
       { label: 'تتبع الأصناف', labelEn: 'Inventory Tracking', value: 'FIFO / Batch', trend: 'Multi-Branch' },
       { label: 'الصلاحيات', labelEn: 'Access Control', value: 'RBAC + Audit Log', trend: 'Role-Based' },
     ],
@@ -2987,7 +2988,7 @@ export const IMPLEMENTATION_STEPS = [
     titleEn: 'Discovery & Requirements',
     duration: '2 - 3 أيام',
     durationEn: '2 - 3 Days',
-    description: 'مراجعة البنية الحالية، وتحديد نقاط الاختناق والمخاطر الأمنية. [VERIFY Q5]',
+    description: 'مراجعة البنية الحالية، وتحديد نقاط الاختناق والمخاطر الأمنية.',
     descriptionEn: 'Reviewing existing infrastructure, identifying bottlenecks, and mapping security risks.',
     deliverable: 'وثيقة التصميم الهندسي (Architecture Blueprint)',
     deliverableEn: 'Architecture Blueprint',
@@ -2998,7 +2999,7 @@ export const IMPLEMENTATION_STEPS = [
     titleEn: 'Staging & Data Migration',
     duration: '3 - 7 أيام',
     durationEn: '3 - 7 Days',
-    description: 'إعداد الخوادم والشبكة، ونقل البيانات خارج أوقات الذروة. [VERIFY Q5]',
+    description: 'إعداد الخوادم والشبكة، ونقل البيانات خارج أوقات الذروة.',
     descriptionEn: 'Configuring servers and networks, and migrating data during off-peak hours.',
     deliverable: 'بيئة تشغيل مختبرة (Validated Setup)',
     deliverableEn: 'Validated Production Setup',
@@ -3009,7 +3010,7 @@ export const IMPLEMENTATION_STEPS = [
     titleEn: 'Testing & Hardening',
     duration: '1 - 2 يوم',
     durationEn: '1 - 2 Days',
-    description: 'فحص الثغرات (Vulnerability Scan)، وتفعيل Firewall، وإعداد Backup منفصل عن الشبكة. [VERIFY Q5]',
+    description: 'فحص الثغرات (Vulnerability Scan)، وتفعيل Firewall، وإعداد Backup منفصل عن الشبكة.',
     descriptionEn: 'Vulnerability scanning, firewall rule enforcement, and immutable backup configuration.',
     deliverable: 'تقرير الفحص والاعتماد (Security Report)',
     deliverableEn: 'Security Sign-off Report',
@@ -3020,7 +3021,7 @@ export const IMPLEMENTATION_STEPS = [
     titleEn: 'Monitoring & Support',
     duration: 'مستمر',
     durationEn: 'Ongoing',
-    description: 'مراقبة الأداء [VERIFY Q6: 24/7]، والرد على البلاغات حسب مستويات الخدمة في العقد. [VERIFY Q6]',
+    description: 'مراقبة الأداء الدورية، والرد على البلاغات حسب مستويات الخدمة في العقد.',
     descriptionEn: 'Continuous performance telemetry and SLA-governed incident resolution.',
     deliverable: 'اتفاقية مستوى الخدمة (SLA Contract)',
     deliverableEn: 'Active SLA Agreement',
@@ -3034,7 +3035,7 @@ export const STATS = [
     suffix: '',
     label: 'التزام بعقود مستوى الخدمة',
     labelEn: 'Formal SLA Governance',
-    description: 'مراقبة مستمرة للخوادم والشبكات ونوافذ استجابة موثقة',
+    description: 'مراقبة مستمرة للخوادم والشبكات ونوافذ استجابة محددة بالعقد',
     descriptionEn: 'Continuous monitoring paired with contractual escalation tiers',
   },
   {

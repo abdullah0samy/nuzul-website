@@ -57,7 +57,7 @@
 | **Section Title** | باقات الشركات وعقود التشغيل / عقود التشغيل المدارة وتجهيز المقرات<br>_Turnkey IT Packages & Managed Retainers / Managed IT Retainers & Office Infrastructure Buildouts_ | **باقات تجهيز المقرات والفروع**<br>_Turnkey Office Infrastructure Packages_ | Duplicate removed / Wording | Section 6.3 model benchmark: single clean title. |
 | **Section Sub-line** | تسعير ثابت للتجهيز السحابي وعقود الإدارة الشهرية، ومقايسات هندسية مكتوبة لأعمال الشبكات الميدانية والأنظمة المخصصة.<br>_Fixed transparent pricing for cloud onboarding and monthly SLA retainers, paired with site-survey quotes for physical cabling and custom ERP._ | **الشبكة والحماية والخوادم لمكتبك أو فروعك، مع عقد دعم بعد التسليم.**<br>_Network, security, and servers for your office or branches, backed by support post-handover._ | Wording | Section 6.3 model benchmark. |
 | **Card Action (All)** | اطلب هذه الباقة / اشترك في عقد الإدارة / احجز معاينة فنية<br>_Order Launchpad / Start Monthly Retainer / Book Site Survey_ | **اطلب عرض سعر**<br>_Request a Quote_ | Terminology / Button family | Section 5 single button family. |
-| **Package 1 (Starter)** | **الاسم**: باقة التأسيس السحابي والبريد الرسمي<br>**مناسبة لـ**: للشركات الجديدة لتجهيز النطاق، البريد الرسمي، وأول خادم سحابي<br>**السعر**: 6,500 ج.م (تأسيس لمرة واحدة)<br>**تشمل**: 10 صناديق بريد · Cloud VPS 10 · WAF وSSL · دعم 30 يوماً | **الاسم**: البداية<br>**مناسبة لـ**: عيادة · مكتب · شركة صغيرة<br>**السعر**: رسوم التأسيس: 15,000 – 25,000 ج.م. الدعم الشهري: 1,000 – 2,000 ج.م `[VERIFY Q3]`<br>**تشمل**: Structured Cabling حتى 15 نقطة شبكة · تسجيل الدومين وإعداد DNS · إعداد 10 صناديق بريد الشركة · ضبط جدار الحماية | Wording / Pricing structure | Section 6.3 benchmark. Unlabeled money fixed. |
+| **Package 1 (Starter)** | **الاسم**: باقة التأسيس السحابي والبريد الرسمي<br>**مناسبة لـ**: للشركات الجديدة لتجهيز النطاق، البريد الرسمي، وأول خادم سحابي<br>**السعر**: 6,500 ج.م (تأسيس لمرة واحدة)<br>**تشمل**: 10 صناديق بريد · Cloud VPS 10 · WAF وSSL · دعم 30 يوماً | **الاسم**: البداية<br>**مناسبة لـ**: عيادة · مكتب · شركة صغيرة<br>**السعر**: رسوم التأسيس: 15,000 – 25,000 ج.م. الدعم الشهري: 1,000 – 2,000 ج.م `[VERIFY Q3]`<br>**تشمل**: Structured Cabling حتى 15 نقطة شبكة · تسجيل الدومين وإعداد DNS · إعداد 10 صناديق بريد الشركة · ضبط Firewall | Wording / Pricing structure | Section 6.3 benchmark. Unlabeled money fixed. |
 | **Package 2 (Growth)** | **الاسم**: عقد الإدارة والأمن السيبراني الشهري<br>**مناسبة لـ**: إدارة شهرية شاملة حتى 25 جهاز عمل وخادمين مع عقد SLA<br>**السعر**: 8,500 ج.م / شهرياً<br>**تشمل**: مراقبة 24/7 · إدارة جدار الحماية · نسخ احتياطي 3-2-1 · دعم 8×5 | **الاسم**: النمو<br>**مناسبة لـ**: حتى 50 مستخدماً · حتى 3 Access Points<br>**السعر**: رسوم التأسيس: من 45,000 ج.م<br>**تشمل**: Structured Cabling وتركيب Rack · تركيب Firewall وإعداد VLANs لفصل الشبكات · عقد صيانة ودعم (SLA) لمدة 3 أشهر | Wording / Pricing structure | Section 6.3 benchmark. Duplicate lines removed. |
 | **Package 3 (Multi-Branch)** | **الاسم**: تأسيس الشبكة المهيكلة والمراقبة للمقر<br>**مناسبة لـ**: تمديد Cat6A، تجميع الراك، جدار حماية، وكاميرات IP<br>**السعر**: تسعير وفق المعاينة الهندسية<br>**تشمل**: كابلات Cat6A وفايبر · كابينة Rack · كاميرات IP وNVR | **الاسم**: الفروع المتعددة<br>**مناسبة لـ**: حتى 100 مستخدم · ربط آمن بين الفروع<br>**السعر**: رسوم التأسيس: من 75,000 ج.م<br>**تشمل**: Site-to-Site VPN بين الفروع · بريد الشركة حتى 100 صندوق · عقد صيانة ودعم دوري `[VERIFY]` | Wording / Pricing structure | Section 6.3 benchmark. Contradictory price removed. |
 | **Package 4 (Enterprise)** | **الاسم**: ربط الفروع والأنظمة المؤسسية (ERP)<br>**مناسبة لـ**: ربط الفروع بـ VPN، عناقيد خوادم HA، ونظام ERP مربوط بالفاتورة الإلكترونية<br>**السعر**: عرض سعر هندسي مخصص<br>**تشمل**: IPsec VPN · عنقود خوادم KVM · نظام ERP والفاتورة الإلكترونية · عقد SLA 24/7 | **الاسم**: المؤسسات<br>**مناسبة لـ**: أكثر من 100 مستخدم · تغطية المباني والفروع<br>**السعر**: حسب المعاينة `[VERIFY Q2]`<br>**تشمل**: تصميم وتنفيذ غرفة خوادم · Site-to-Site VPN بين الفروع · مهندس مقيم أو عقد تشغيل (SLA) مخصص 24/7 `[VERIFY Q6]` | Wording / Flagged | Section 6.3 benchmark. "من X" and "حسب المعاينة" not shown together. |
@@ -65,7 +65,7 @@
 
 ---
 
-## 3. Implementation Roadmap Section (`ImplementationRoadmap.tsx`)
+## 4. Implementation Roadmap Section (`ImplementationRoadmap.tsx`)
 
 | Element / Step | Current Content (AR / EN) | Proposed Content (AR / EN) | Change Type | Notes / Rule |
 |---|---|---|---|---|
@@ -78,7 +78,7 @@
 
 ---
 
-## 4. ERP Live Demo Section (`LiveDemosSection.tsx`)
+## 5. ERP Live Demo Section (`LiveDemosSection.tsx`)
 
 | Element / Field | Current Content (AR / EN) | Proposed Content (AR / EN) | Change Type | Notes / Rule |
 |---|---|---|---|---|
@@ -93,7 +93,7 @@
 
 ---
 
-## 5. Summary of Fact & Claim Audit on `/services`
+## 6. Summary of Fact & Claim Audit on `/services`
 - **Total Facts Checked:** 41 facts (technical features, protocols, hardware units, pricing models).
 - **Facts Lost:** 0 (all specs: Cat6A, fiber, Fortinet, VLAN, VoIP PBX, KVM, VMware, NVMe, RDP, cPanel, LiteSpeed, DNS, DMARC, ETA SDK, FIFO/Batch, RBAC).
 - **Facts Added:** 0 (strictly zero added claims, numbers, certifications, or tool names).

@@ -4,6 +4,7 @@ import { AppProvider, useApp } from './context/AppContext';
 import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
 // Home Page Sections
+import { HeroNetworkCanvas } from './components/hero/HeroNetworkCanvas';
 import { HeroSection } from './components/hero/HeroSection';
 import { HomeServicePillars } from './components/home/HomeServicePillars';
 import { HomeArchitectureDiagram } from './components/home/HomeArchitectureDiagram';
@@ -40,12 +41,13 @@ import {
 
 // Modals & Single Floating Contact Channel
 import { CartDrawer } from './components/modals/CartDrawer';
-import { ClientAreaModal } from './components/modals/ClientAreaModal';
+import { ServerConfiguratorModal } from './components/modals/ServerConfiguratorModal';
 import { PaymentModal } from './components/modals/PaymentModal';
 import { FloatingWhatsApp } from './components/support/FloatingWhatsApp';
 import { GlobalSearchCommandPalette } from './components/search/GlobalSearchCommandPalette';
 import { ArchitectureDiagram } from './components/common/ArchitectureDiagram';
 import { ImageSlot } from './components/common/ImageSlot';
+import { ErrorBoundary, RouteErrorBoundary } from './components/common/ErrorBoundary';
 import {
   ArrowLeft,
   ArrowRight,
@@ -55,7 +57,6 @@ import {
   Server,
   Compass,
   ShieldCheck,
-  Building2,
 } from 'lucide-react';
 
 const ScrollToTop: React.FC = () => {
@@ -73,7 +74,7 @@ const PageMeta: React.FC<{ titleAr: string; titleEn: string }> = ({ titleAr, tit
   useEffect(() => {
     document.title =
       lang === 'ar'
-        ? `${titleAr} | نُزول تِك`
+        ? `${titleAr} | نزول تك`
         : `${titleEn} | Nuzul Tech`;
 
     const cleanPath = pathname === '/' ? '/' : pathname.replace(/\/+$/, '');
@@ -110,7 +111,7 @@ const NotFoundPage: React.FC = () => {
 
   const recoveryLinks = [
     { to: '/', labelAr: 'الصفحة الرئيسية', labelEn: 'Home Page' },
-    { to: '/about', labelAr: 'عن نُزول تِك', labelEn: 'About Us' },
+    { to: '/about', labelAr: 'عن نزول تك', labelEn: 'About Us' },
     { to: '/services', labelAr: 'الخدمات الهندسية', labelEn: 'Engineering Services' },
     { to: '/hosting', labelAr: 'الاستضافة والخوادم', labelEn: 'Hosting & Servers' },
     { to: '/pricing', labelAr: 'خطط الأسعار', labelEn: 'Pricing Plans' },
@@ -144,7 +145,7 @@ const NotFoundPage: React.FC = () => {
 
             <p className="text-muted text-base leading-relaxed max-w-xl mx-auto">
               {lang === 'ar'
-                ? 'يمكنك العودة إلى الصفحة الرئيسية أو الانتقال مباشرة إلى أحد الأقسام الرئيسية لموقع نُزول تِك عبر الروابط التالية:'
+                ? 'يمكنك العودة إلى الصفحة الرئيسية أو الانتقال مباشرة إلى أحد الأقسام الرئيسية لموقع نزول تك عبر الروابط التالية:'
                 : 'You can return to the home page or jump directly to any of Nuzul Tech’s core sections below:'}
             </p>
 
@@ -188,12 +189,18 @@ const HomePage: React.FC = () => (
       titleAr="البنية التحتية السحابية والأمن السيبراني للشركات في مصر"
       titleEn="Enterprise IT Infrastructure, Cloud & Cybersecurity in Egypt"
     />
-    <HeroSection />
+    <RouteErrorBoundary sectionName="HomeHero" variant="section">
+      <HeroSection />
+    </RouteErrorBoundary>
     <HomeServicePillars />
-    <HomeArchitectureDiagram />
+    <RouteErrorBoundary sectionName="HomeArchitectureDiagram" variant="section">
+      <HomeArchitectureDiagram />
+    </RouteErrorBoundary>
     <HomeFeaturedCaseStudy />
     <HomeHowWeWork />
-    <HomeHostingTeaser />
+    <RouteErrorBoundary sectionName="HomeHostingTeaser" variant="section">
+      <HomeHostingTeaser />
+    </RouteErrorBoundary>
     <HomeTestimonials />
     <HomeFAQ />
     <HomeFinalCTA />
@@ -210,14 +217,14 @@ const AboutPage: React.FC = () => {
       titleAr: 'ملكية كاملة للعميل دون قيود احتكار',
       titleEn: 'Full Client Ownership & Zero Vendor Lock-In',
       bodyAr:
-        'يستلم العميل كامل الصلاحيات الإدارية (Root / Admin)، الأكواد البرمجية، وقواعد البيانات مع وثيقة تشغيل هندسية مفصلة (Runbook) تضمن استقلالية الإدارة.',
+        'يستلم العميل كامل الصلاحيات الإدارية (Root / Admin)، الأكواد البرمجية، وقواعد البيانات مع وثيقة تشغيل هندسية مفصلة (Runbook) لاستقلالية الإدارة.',
       bodyEn:
         'Clients receive complete Root/Admin credentials, source repositories, and database schemas alongside a formal operational Runbook.',
     },
     {
       id: 'sla',
-      titleAr: 'عقود مستوى خدمة SLA بمعايير قياس واضحة',
-      titleEn: 'Formal SLAs with Clear Escalation Tiers',
+      titleAr: 'عقود مستوى خدمة SLA بمستويات استجابة محددة',
+      titleEn: 'Formal SLAs with Defined Escalation Tiers',
       bodyAr:
         'نحدد مستويات الأولوية للحوادث (P1–P4)، أوقات الاستجابة الأولية، ونوافذ الصيانة المجدولة مسبقاً ضمن العقود السنوية للشركات.',
       bodyEn:
@@ -228,7 +235,7 @@ const AboutPage: React.FC = () => {
       titleAr: 'شفافية مالية وتعاقدية بالجنيه المصري',
       titleEn: 'Transparent Local EGP Commercial Contracting',
       bodyAr:
-        'تسعير واضح بالعملة المحلية للاستضافة وعقود الإدارة دون الاعتماد على تسعير متذبذب غير محدد، مع فواتير رسمية لقطاعات الأعمال.',
+        'تسعير محدد بالعملة المحلية للاستضافة وعقود الإدارة، مع فواتير ضريبية رسمية لقطاعات الأعمال.',
       bodyEn:
         'Clear EGP contracting for managed hosting and infrastructure projects with formal corporate invoicing.',
     },
@@ -239,8 +246,8 @@ const AboutPage: React.FC = () => {
       tier: 'P1',
       nameAr: 'انقطاع حرج بالنظام الرئيسي',
       nameEn: 'Critical System Outage',
-      ackAr: 'استجابة فورية وفق عقد الطوارئ 24/7',
-      ackEn: 'Immediate 24/7 emergency escalation',
+      ackAr: 'تصعيد عاجل وفق عقد الطوارئ المتفق عليه',
+      ackEn: 'Priority emergency escalation per SLA',
     },
     {
       tier: 'P2',
@@ -268,28 +275,25 @@ const AboutPage: React.FC = () => {
   return (
     <>
       <PageMeta
-        titleAr="عن نُزول تِك — المنهجية الهندسية والحوكمة"
-        titleEn="About Nuzul Tech — Engineering Governance & SLA"
+        titleAr="عن نزول تك — المنهجية الهندسية وعقود SLA"
+        titleEn="About Nuzul Tech — Engineering Methodology & SLA"
       />
-      <section className="bg-surface-band border-b border-token py-16">
+      <section className="bg-surface-band border-b border-token py-14">
         <div className="container-nuzul">
-          <div className="inline-flex items-center gap-2 text-accent text-xs font-semibold mb-2">
-            <Building2 className="w-4 h-4 shrink-0" />
-            <span>
-              {lang === 'ar'
-                ? 'شركة هندسة واستشارات تقنية في القاهرة'
-                : 'Cairo-Based Enterprise IT Engineering Partner'}
-            </span>
+          <div className="text-accent text-xs font-semibold mb-2">
+            {lang === 'ar'
+              ? 'القاهرة، مصر · هندسة البنية التحتية'
+              : 'Cairo, Egypt · IT Infrastructure Engineering'}
           </div>
           <h1 className="text-3xl md:text-5xl font-bold text-main mb-4">
             {lang === 'ar'
-              ? 'نُزول تِك: فريق هندسي مسؤول عن البنية التحتية والأنظمة المؤسسية'
-              : 'Nuzul Tech: Accountable Infrastructure & Systems Engineering'}
+              ? 'نزول تك: فريق هندسي مسؤول عن شبكتك وخوادمك'
+              : 'Nuzul Tech: One Accountable Infrastructure Team'}
           </h1>
           <p className="text-muted text-base md:text-lg max-w-3xl leading-relaxed">
             {lang === 'ar'
-              ? 'نعمل مع الشركات، المراكز الطبية، المكاتب الاستشارية، والمصانع في مصر والخليج لتأسيس الشبكات المهيكلة، إدارة الخوادم السحابية، وتأمين البرمجيات بمنهجية توثيق هندسية واضحة.'
-              : 'We partner with enterprises, medical facilities, financial consultancies, and industrial sites across Egypt and the GCC to build structured networks, cloud servers, and business software under documented governance.'}
+              ? 'نعمل مع الشركات، المستشفيات، مكاتب المحاسبة، وشركات النقل لتجهيز الشبكات وإدارة السيرفرات السحابية وتطوير برامج العمل بتوثيق كامل وصلاحيات باسم العميل.'
+              : 'We work with businesses, hospitals, accounting firms, and logistics fleets to build structured networks, run cloud servers, and deliver business software with full client ownership.'}
           </p>
         </div>
       </section>
@@ -369,10 +373,14 @@ const ServicesPage: React.FC = () => {
           </p>
         </div>
       </section>
-      <ServicesSection />
+      <RouteErrorBoundary sectionName="ServicesCatalog" variant="section">
+        <ServicesSection />
+      </RouteErrorBoundary>
       <PackagesSection />
       <ImplementationRoadmap />
-      <LiveDemosSection />
+      <RouteErrorBoundary sectionName="LiveDemos" variant="section">
+        <LiveDemosSection />
+      </RouteErrorBoundary>
     </>
   );
 };
@@ -406,25 +414,29 @@ const PricingPage: React.FC = () => {
         titleAr="خطط الأسعار والباقات المؤسسية"
         titleEn="Pricing & Enterprise Packages"
       />
-      <section className="bg-surface-band border-b border-token py-16">
+      <section className="bg-surface-band border-b border-token py-14">
         <div className="container-nuzul">
-          <p className="text-sm font-semibold text-accent mb-2">
-            {lang === 'ar' ? 'تسعير شفاف ومرن' : 'Transparent & Predictable Pricing'}
+          <p className="text-xs font-semibold text-accent mb-2">
+            {lang === 'ar' ? 'تسعير واضح بدون مفاجآت' : 'Clear, Predictable Pricing'}
           </p>
           <h1 className="text-3xl md:text-5xl font-bold text-main mb-4">
             {lang === 'ar'
-              ? 'خطط الأسعار وباقات البنية التحتية'
-              : 'Cloud Pricing & Bundled IT Packages'}
+              ? 'أسعار السيرفرات وباقات التجهيز'
+              : 'Server Pricing & Office Packages'}
           </h1>
           <p className="text-muted text-base md:text-lg max-w-2xl leading-relaxed">
             {lang === 'ar'
-              ? 'اختر الخطة المناسبة لحجم أعمالك، سواء كنت تبحث عن خوادم سحابية بموارد مخصصة أو باقات تأسيس وتشغيل تقني لمقر شركتك.'
-              : 'Choose the right plan for your organization, from isolated cloud servers to structured turnkey IT packages.'}
+              ? 'مواصفات هاردوير محددة للخوادم السحابية، وباقات واضحة لتجهيز شبكات المقرات والفروع بفاتورة محلية.'
+              : 'Transparent hardware specs for cloud servers and turnkey office infrastructure packages.'}
           </p>
         </div>
       </section>
-      <PricingSection />
-      <ComparePlansSection />
+      <RouteErrorBoundary sectionName="PricingPlans" variant="section">
+        <PricingSection />
+      </RouteErrorBoundary>
+      <RouteErrorBoundary sectionName="ComparePlans" variant="section">
+        <ComparePlansSection />
+      </RouteErrorBoundary>
       <PackagesSection />
       <PricingTermsSection />
     </>
@@ -450,7 +462,7 @@ const HostingPage: React.FC = () => {
       titleAr: 'عزل على مستوى النواة (KVM) وحماية الشبكة',
       titleEn: 'Kernel-Level KVM Isolation & Network Filtering',
       bodyAr:
-        'يتم عزل كل خادم افتراضي عبر تقنية KVM لضمان عدم تداخل الموارد، مع تصفية حركة المرور ضد هجمات حجب الخدمة (DDoS) وتطبيق سياسات جدار الحماية.',
+        'يتم عزل كل خادم افتراضي عبر تقنية KVM لمنع تداخل الموارد، مع تصفية حركة المرور ضد هجمات حجب الخدمة (DDoS) وتطبيق سياسات Firewall.',
       bodyEn:
         'Each VPS is isolated via KVM virtualization to prevent resource contention, backed by network-layer DDoS filtering and firewall policy enforcement.',
     },
@@ -459,7 +471,7 @@ const HostingPage: React.FC = () => {
       titleAr: 'نسخ احتياطي مجدول ودعم هندسي',
       titleEn: 'Scheduled Backups & Systems Engineering Support',
       bodyAr:
-        'جدولة نسخ احتياطي آلي (أسبوعي أو يومي حسب الخطة) مع إمكانية استعادة اللقطات الفورية (Snapshots) والتواصل المباشر مع مهندسي النظم.',
+        'جدولة نسخ احتياطي آلي (أسبوعي أو يومي حسب الخطة) مع إمكانية استعادة اللقطات السريعة (Snapshots) والتواصل المباشر مع مهندسي النظم.',
       bodyEn:
         'Automated weekly or daily backup retention with on-demand Snapshots and direct escalation to Linux/Windows systems engineers.',
     },
@@ -491,13 +503,19 @@ const HostingPage: React.FC = () => {
         </div>
       </section>
 
-      <PricingSection />
-      <ComparePlansSection />
+      <RouteErrorBoundary sectionName="HostingPricing" variant="section">
+        <PricingSection />
+      </RouteErrorBoundary>
+      <RouteErrorBoundary sectionName="HostingComparePlans" variant="section">
+        <ComparePlansSection />
+      </RouteErrorBoundary>
 
       {/* Datacenter Regions & Domain Registration Inquiry */}
       <section id="datacenter-architecture" className="section-spacing bg-page-band border-t border-token">
         <div className="container-nuzul">
-          <DomainSearchWidget />
+          <RouteErrorBoundary sectionName="DomainSearch" variant="section">
+            <DomainSearchWidget />
+          </RouteErrorBoundary>
 
           <div className="max-w-3xl mb-10">
             <div className="inline-flex items-center gap-2 text-accent text-xs font-semibold mb-2">
@@ -597,8 +615,8 @@ const CaseStudiesPage: React.FC = () => {
           </h1>
           <p className="text-muted text-base md:text-lg max-w-2xl leading-relaxed">
             {lang === 'ar'
-              ? 'استعرض كيف ساعدنا المؤسسات في مصر والخليج على رفع كفاءة أنظمتها، تقليل الأعطال، وتأمين بياناتها الحيوية.'
-              : 'Explore how we helped organizations in Egypt and the GCC improve uptime, modernize infrastructure, and secure critical workloads.'}
+              ? 'استعرض كيف ساعدنا الشركات والمراكز الطبية والمؤسسات على رفع كفاءة أنظمتها وتقليل الأعطال وتأمين بياناتها.'
+              : 'Explore how we helped enterprises, medical centers, and institutions improve uptime, modernize infrastructure, and secure critical workloads.'}
           </p>
         </div>
       </section>
@@ -645,15 +663,17 @@ const CaseStudyDetailPage: React.FC = () => {
             </div>
 
             <div className="p-6 sm:p-8 md:p-12">
-              <div className="flex flex-wrap items-center gap-3 mb-4">
-                <span className="px-3 py-1 rounded-md bg-surface-2 text-accent text-xs font-semibold border border-token whitespace-nowrap">
+              <div className="flex flex-wrap items-center gap-2.5 text-xs text-muted mb-4">
+                <span className="font-semibold text-accent whitespace-nowrap">
                   {lang === 'ar' ? project.category : project.categoryEn}
                 </span>
-                <span className="text-sm text-muted">
+                <span aria-hidden="true">·</span>
+                <span>
                   {lang === 'ar' ? project.client : project.clientEn}
                 </span>
-                <span className="ms-auto inline-flex items-center gap-1.5 text-xs font-semibold text-muted px-3 py-1 rounded-md bg-page border border-token">
-                  <Clock className="w-3.5 h-3.5 text-accent" />
+                <span aria-hidden="true">·</span>
+                <span className="inline-flex items-center gap-1 font-medium">
+                  <Clock className="w-3.5 h-3.5 text-accent" aria-hidden="true" />
                   <span>{lang === 'ar' ? project.timelineAr : project.timelineEn}</span>
                 </span>
               </div>
@@ -725,8 +745,8 @@ const CaseStudyDetailPage: React.FC = () => {
               >
                 <h2 className="text-lg font-bold text-main mb-2">
                   {lang === 'ar'
-                    ? 'الأثر التشغيلي الموثق'
-                    : 'Documented Qualitative Outcome'}
+                    ? 'الأثر التشغيلي'
+                    : 'Operational Outcome'}
                 </h2>
                 <p className="text-main text-base leading-relaxed">
                   {lang === 'ar'
@@ -735,27 +755,29 @@ const CaseStudyDetailPage: React.FC = () => {
                 </p>
               </div>
 
-              {/* Reserved Field Photo Slot */}
+              {/* Field Hardware & Rack Photography */}
               <div className="mb-10">
                 <ImageSlot
                   testId={`case-study-image-slot-${project.id}`}
+                  photoVariant="rack"
                   aspectRatio="video"
-                  descriptionAr={`صورة ميدانية موثقة لمشروع (${project.title}) بعد موافقة العميل الخطية`}
-                  descriptionEn={`Verified field photograph for (${project.titleEn}) upon written client permission`}
+                  descriptionAr={`تجهيز كبائن الشبكات والخوادم — ${project.title}`}
+                  descriptionEn={`Server rack and network switch commissioning — ${project.titleEn}`}
+                  captionAr={`تنظيم كابلات الشبكة ومفاتيح التبديل — ${project.category}`}
+                  captionEn={`Structured switching and rack cabling — ${project.categoryEn}`}
                 />
               </div>
 
               {/* Tech Stack */}
               <div className="pt-6 border-t border-token flex flex-wrap items-center justify-between gap-6">
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-xs text-muted">
                   {project.technologies.map((tech, i) => (
-                    <span
-                      key={i}
-                      dir="ltr"
-                      className="ltr-num px-3 py-1 rounded-md bg-surface-2 text-main text-xs font-medium border border-token whitespace-nowrap"
-                    >
-                      {tech}
-                    </span>
+                    <React.Fragment key={i}>
+                      {i > 0 && <span aria-hidden="true">·</span>}
+                      <bdi dir="ltr" className="ltr-num font-semibold text-main whitespace-nowrap">
+                        {tech}
+                      </bdi>
+                    </React.Fragment>
                   ))}
                 </div>
                 <Link to="/contact" className="btn-primary px-6 py-3 min-h-[44px] text-sm whitespace-nowrap">
@@ -791,8 +813,8 @@ const BlogPage: React.FC = () => {
           </h1>
           <p className="text-muted text-base md:text-lg max-w-2xl leading-relaxed">
             {lang === 'ar'
-              ? 'تحليلات معمقة حول البنية التحتية، الأمن السيبراني، وإدارة الخوادم السحابية مكتوبة بواسطة مهندسي نُزول تِك.'
-              : 'In-depth articles on infrastructure, cybersecurity, and cloud engineering written by Nuzul Tech engineers.'}
+              ? 'تحليلات عملية حول البنية التحتية، والأمن السيبراني، وإدارة الخوادم السحابية بقلم مهندسي نزول تك.'
+              : 'Practical technical articles on infrastructure, cybersecurity, and cloud operations written by Nuzul Tech engineers.'}
           </p>
         </div>
       </section>
@@ -882,16 +904,18 @@ const BlogDetailPage: React.FC = () => {
             {/* Main Article Body */}
             <article className="lg:col-span-8 clean-card overflow-hidden">
               <div className="p-6 sm:p-8 md:p-12">
-                <div className="flex flex-wrap items-center gap-4 text-xs text-muted mb-4">
-                  <span className="px-2.5 py-1 rounded-md bg-surface-2 text-accent font-semibold border border-token whitespace-nowrap">
+                <div className="flex flex-wrap items-center gap-2.5 text-xs text-muted mb-4">
+                  <span className="text-accent font-semibold whitespace-nowrap">
                     {lang === 'ar' ? article.category : article.categoryEn}
                   </span>
+                  <span aria-hidden="true">·</span>
                   <span className="inline-flex items-center gap-1.5 whitespace-nowrap">
-                    <Calendar className="w-3.5 h-3.5 shrink-0" />
+                    <Calendar className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
                     <bdi dir="ltr" className="ltr-num">{article.date}</bdi>
                   </span>
+                  <span aria-hidden="true">·</span>
                   <span className="inline-flex items-center gap-1.5 whitespace-nowrap">
-                    <Clock className="w-3.5 h-3.5 shrink-0" />
+                    <Clock className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
                     <span>{lang === 'ar' ? article.readTime : article.readTimeEn}</span>
                   </span>
                 </div>
@@ -982,7 +1006,9 @@ const ContactPage: React.FC = () => {
         titleAr="تواصل معنا واحجز استشارة هندسية"
         titleEn="Contact Us & Book an Engineering Consultation"
       />
-      <ContactConsultationSection />
+      <RouteErrorBoundary sectionName="ContactConsultation" variant="section">
+        <ContactConsultationSection />
+      </RouteErrorBoundary>
       <TeamSection />
     </>
   );
@@ -993,34 +1019,52 @@ export function App() {
     <AppProvider>
       <BrowserRouter>
         <ScrollToTop />
-        <div className="relative min-h-screen flex flex-col bg-page text-main selection:bg-accent-soft selection:text-accent">
-          <Navbar />
+        {/* Global Living Network Topology visible behind frosted glass UI across all pages */}
+        <HeroNetworkCanvas mode="global" />
+        <div className="relative z-10 min-h-screen flex flex-col bg-transparent text-main selection:bg-accent-soft selection:text-accent">
+          <RouteErrorBoundary sectionName="Navbar" variant="section">
+            <Navbar />
+          </RouteErrorBoundary>
 
           <main id="main-content" tabIndex={-1} className="relative z-10 flex-grow focus:outline-none">
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/about" element={<AboutPage />} />
-              <Route path="/services" element={<ServicesPage />} />
-              <Route path="/services/:slug" element={<ServiceDetailPage />} />
-              <Route path="/pricing" element={<PricingPage />} />
-              <Route path="/hosting" element={<HostingPage />} />
-              <Route path="/case-studies" element={<CaseStudiesPage />} />
-              <Route path="/case-studies/:slug" element={<CaseStudyDetailPage />} />
-              <Route path="/blog" element={<BlogPage />} />
-              <Route path="/blog/:slug" element={<BlogDetailPage />} />
-              <Route path="/contact" element={<ContactPage />} />
-              <Route path="*" element={<NotFoundPage />} />
-            </Routes>
+            <RouteErrorBoundary sectionName="MainRouter" variant="page">
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/about" element={<AboutPage />} />
+                <Route path="/services" element={<ServicesPage />} />
+                <Route path="/services/:slug" element={<ServiceDetailPage />} />
+                <Route path="/pricing" element={<PricingPage />} />
+                <Route path="/hosting" element={<HostingPage />} />
+                <Route path="/case-studies" element={<CaseStudiesPage />} />
+                <Route path="/case-studies/:slug" element={<CaseStudyDetailPage />} />
+                <Route path="/blog" element={<BlogPage />} />
+                <Route path="/blog/:slug" element={<BlogDetailPage />} />
+                <Route path="/contact" element={<ContactPage />} />
+                <Route path="*" element={<NotFoundPage />} />
+              </Routes>
+            </RouteErrorBoundary>
           </main>
 
-          <Footer />
+          <RouteErrorBoundary sectionName="Footer" variant="section">
+            <Footer />
+          </RouteErrorBoundary>
 
           {/* Modals & Single Floating Contact Channel (WhatsApp Only) */}
-          <GlobalSearchCommandPalette />
-          <CartDrawer />
-          <ClientAreaModal />
-          <PaymentModal />
-          <FloatingWhatsApp />
+          <ErrorBoundary sectionName="GlobalSearch" variant="silent">
+            <GlobalSearchCommandPalette />
+          </ErrorBoundary>
+          <ErrorBoundary sectionName="CartDrawer" variant="silent">
+            <CartDrawer />
+          </ErrorBoundary>
+          <ErrorBoundary sectionName="ServerConfiguratorModal" variant="silent">
+            <ServerConfiguratorModal />
+          </ErrorBoundary>
+          <ErrorBoundary sectionName="PaymentModal" variant="silent">
+            <PaymentModal />
+          </ErrorBoundary>
+          <ErrorBoundary sectionName="FloatingWhatsApp" variant="silent">
+            <FloatingWhatsApp />
+          </ErrorBoundary>
         </div>
       </BrowserRouter>
     </AppProvider>

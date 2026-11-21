@@ -63,9 +63,9 @@ export const ServiceDetailView: React.FC<ServiceDetailViewProps> = ({ service })
     : isSecurity
     ? {
         ar: [
-          'المستشفيات والمؤسسات المالية التي تتطلب عزل شبكاتها الحساسة عن شبكة الزوار عبر جدران الحماية (NGFW) وتقسيم VLANs.',
+          'المستشفيات والمؤسسات المالية التي تتطلب عزل شبكاتها الحساسة عن شبكة الزوار عبر أجهزة Firewall (NGFW) وتقسيم VLANs.',
           'الشركات التي تسعى لحماية مراسلاتها وفواتيرها الرسمية من الانتحال والتصيد عبر توثيق البريد (SPF / DKIM / DMARC).',
-          'الجهات التي تحتاج إلى خطة نسخ احتياطي معزول (3-2-1 Immutable Backup) لضمان استعادة البيانات عند الكوارث.',
+          'الجهات التي تحتاج إلى خطة نسخ احتياطي معزول (3-2-1 Immutable Backup) لاستعادة البيانات عند الكوارث.',
         ],
         en: [
           'Hospitals and financial firms requiring strict network isolation via hardware NGFW firewalls and 802.1Q VLAN segmentation.',
@@ -76,25 +76,25 @@ export const ServiceDetailView: React.FC<ServiceDetailViewProps> = ({ service })
     : isSoftware
     ? {
         ar: [
-          'الشركات التجارية والمصانع والعيادات التي تبحث عن أتمتة الحسابات والمخازن والربط المباشر مع منظومة الفاتورة الإلكترونية المصرية (ETA).',
+          'الشركات التجارية والعيادات التي تبحث عن أتمتة الحسابات والمخازن والربط المباشر مع منظومة الفاتورة الإلكترونية المصرية (ETA).',
           'المؤسسات التي تستعد لاستلام مشروع برمجي من شركة تطوير خارجية وتحتاج إلى فحص واعتماد هندسي مستقل (QA & Load Testing).',
           'قطاعات الأعمال التي تحتاج إلى بوابات ويب أو تطبيقات جوال مربوطة مباشرة بقواعد البيانات المركزية.',
         ],
         en: [
-          'Commercial enterprises, factories, and clinics automating inventory, billing, and Egyptian Tax Authority (ETA) e-invoicing.',
+          'Commercial enterprises and clinics automating inventory, billing, and Egyptian Tax Authority (ETA) e-invoicing.',
           'Organizations preparing to accept software from an external vendor and requiring independent QA and load testing.',
           'Businesses needing responsive web portals or mobile apps integrated directly with core ERP databases.',
         ],
       }
     : {
         ar: [
-          'المقرات الإدارية والمستشفيات والمصانع التي تؤسس بنية كابلات شبكية منظمة (Cat6A / Fiber) وغرف خوادم قياسية.',
-          'المؤسسات التي تعاني من غياب الحوكمة المركزية لحسابات الموظفين وتحتاج إلى خادم دومين (Active Directory) وخادم ملفات بصلاحيات دقيقة.',
+          'المقرات الإدارية والمستشفيات التي تؤسس بنية كابلات شبكية منظمة (Cat6A / Fiber) وغرف خوادم قياسية.',
+          'المؤسسات التي تحتاج إلى إدارة مركزية لحسابات الموظفين عبر خادم دومين (Active Directory) وخادم ملفات بصلاحيات دقيقة.',
           'الشركات متعددة الفروع التي ترغب في توحيد الاتصالات الداخلية عبر سنترال رقمي (VoIP PBX) وشبكات مراقبة CCTV معزولة.',
         ],
         en: [
-          'Corporate headquarters, hospitals, and factories deploying structured Cat6A/Fiber cabling and standardized server racks.',
-          'Organizations lacking centralized endpoint governance that need Active Directory domain controllers and role-based file servers.',
+          'Corporate headquarters and hospitals deploying structured Cat6A/Fiber cabling and standardized server racks.',
+          'Organizations needing centralized endpoint management via Active Directory domain controllers and role-based file servers.',
           'Multi-branch companies unifying internal communications via IP-PBX VoIP telephony and isolated IP CCTV surveillance grids.',
         ],
       };
@@ -203,7 +203,7 @@ export const ServiceDetailView: React.FC<ServiceDetailViewProps> = ({ service })
     {
       labelAr: 'قنوات الدعم والتصعيد',
       labelEn: 'Support & Escalation Channels',
-      valueAr: 'نظام تذاكر هندسي موثق + قناة طوارئ مباشرة للحالات الحرجة',
+      valueAr: 'نظام تذاكر هندسي مسجّل + قناة طوارئ مباشرة للحالات الحرجة',
       valueEn: 'Tracked engineering ticket desk + direct emergency escalation line',
     },
     {
@@ -258,19 +258,19 @@ export const ServiceDetailView: React.FC<ServiceDetailViewProps> = ({ service })
     {
       qAr: 'هل يتطلب تنفيذ هذه الخدمة إيقاف العمل أو تعطيل الموظفين؟',
       qEn: 'Does deploying this service require operational downtime for our staff?',
-      aAr: 'لا؛ نقوم ببناء وتجهيز البيئة الجديدة واختبارها بالكامل بشكل موازٍ أثناء ساعات العمل العادية، ويتم التحويل النهائي خارج أوقات الذروة مع وجود خطة تراجع فورية.',
+      aAr: 'لا؛ نقوم ببناء وتجهيز البيئة الجديدة واختبارها بشكل موازٍ أثناء ساعات العمل العادية، ويتم التحويل النهائي خارج أوقات الذروة مع وجود خطة تراجع جاهزة.',
       aEn: 'No. We build, configure, and validate the new environment in parallel during normal hours, executing final cutover outside peak business hours with a tested rollback plan.',
     },
     {
       qAr: 'من يمتلك بيانات الدخول والكود المصدري أو إعدادات الخوادم بعد التسليم؟',
       qEn: 'Who owns the administrative credentials, data, and configurations after handover?',
-      aAr: 'يمتلك العميل السيادة الكاملة على بياناته وأسماء النطاقات وصلاحيات الجذر (Root / Domain Admin)، ونسلّم وثيقة إعدادات مفصلة تضمن استقلال التشغيل دون احتكار.',
+      aAr: 'يمتلك العميل كامل السيادة على بياناته وأسماء النطاقات وصلاحيات الجذر (Root / Domain Admin)، ونسلّم وثيقة إعدادات مفصلة لاستقلال التشغيل دون احتكار.',
       aEn: 'You retain full ownership of your data, domain names, and root/domain administrator credentials. We deliver complete As-Built documentation so you are never locked in.',
     },
     {
-      qAr: 'هل يتم إصدار فاتورة ضريبية رسمية وعقد مستوى خدمة (SLA) موثق؟',
+      qAr: 'هل يتم إصدار فاتورة ضريبية رسمية وعقد مستوى خدمة (SLA)؟',
       qEn: 'Do you provide an official Egyptian tax invoice and a formal SLA contract?',
-      aAr: 'نعم، كافة التعاقدات المؤسسية تشمل عقداً رسمياً يوضح النطاق والجدول الزمني ومستوى الخدمة (SLA)، مع إصدار فاتورة ضريبية إلكترونية معتمدة.',
+      aAr: 'نعم، تشمل التعاقدات المؤسسية عقداً رسمياً يوضح النطاق والجدول الزمني ومستوى الخدمة (SLA)، مع إصدار فاتورة ضريبية إلكترونية رسمية.',
       aEn: 'Yes. All corporate engagements include a formal contract specifying scope, timeline, and SLA response commitments, accompanied by an official Egyptian electronic tax invoice.',
     },
   ];
@@ -567,7 +567,7 @@ export const ServiceDetailView: React.FC<ServiceDetailViewProps> = ({ service })
             </div>
             <h2 className="text-xl font-bold text-main mb-5">
               {lang === 'ar'
-                ? 'التقنيات والمواصفات القياسية المعتمدة'
+                ? 'التقنيات والمواصفات القياسية'
                 : 'Technology & Technical Specifications'}
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -741,7 +741,7 @@ export const ServiceDetailView: React.FC<ServiceDetailViewProps> = ({ service })
             </h2>
             <p className="text-xs sm:text-sm text-muted leading-relaxed">
               {lang === 'ar'
-                ? 'تواصل مباشرة مع مهندسي نُزول تِك لمناقشة متطلباتك وتحديد النطاق الزمني والمالي بدقة.'
+                ? 'تواصل مباشرة مع مهندسي نزول تك لمناقشة متطلباتك وتحديد النطاق الزمني والمالي بدقة.'
                 : 'Speak directly with Nuzul Tech engineers to scope your environment, timeline, and budget.'}
             </p>
           </div>

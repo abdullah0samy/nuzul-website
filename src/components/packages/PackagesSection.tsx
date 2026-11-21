@@ -1,17 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { BUNDLED_PACKAGES, BundledPackage } from '../../data/nuzulData';
 import { useApp } from '../../context/AppContext';
-import { Check, ArrowLeft, ArrowRight, ChevronDown } from 'lucide-react';
+import { Check, ArrowLeft, ArrowRight } from 'lucide-react';
 
 export const PackagesSection: React.FC = () => {
   const { lang, formatPrice, addToCart } = useApp();
   const ArrowIcon = lang === 'ar' ? ArrowLeft : ArrowRight;
-  const [expandedPkgIds, setExpandedPkgIds] = useState<Record<string, boolean>>({});
-
-  const togglePkgExpand = (id: string) => {
-    setExpandedPkgIds((prev) => ({ ...prev, [id]: !prev[id] }));
-  };
 
   const handleSelectPackage = (pkg: BundledPackage) => {
     if (pkg.priceEGP === null) return;
@@ -44,7 +39,6 @@ export const PackagesSection: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
           {BUNDLED_PACKAGES.map((pkg) => {
             const features = lang === 'ar' ? pkg.features : pkg.featuresEn;
-            const isExpanded = Boolean(expandedPkgIds[pkg.id]);
             const badgeLabel = lang === 'ar' ? pkg.badgeAr : pkg.badgeEn;
 
             return (
@@ -79,11 +73,7 @@ export const PackagesSection: React.FC = () => {
                   <h3 className="text-xl font-bold text-main mb-1.5">
                     {lang === 'ar' ? pkg.title : pkg.titleEn}
                   </h3>
-                  <p
-                    className={`text-muted text-sm leading-relaxed mb-4 ${
-                      isExpanded ? '' : 'line-clamp-2'
-                    }`}
-                  >
+                  <p className="text-muted text-sm leading-relaxed mb-4">
                     {lang === 'ar' ? pkg.subtitle : pkg.subtitleEn}
                   </p>
 
@@ -129,39 +119,14 @@ export const PackagesSection: React.FC = () => {
                     )}
                   </div>
 
-                  <ul className="space-y-2.5 mb-3">
-                    {(isExpanded ? features : features.slice(0, 2)).map((feat, idx) => (
+                  <ul className="space-y-2.5 mb-6">
+                    {features.map((feat, idx) => (
                       <li key={idx} className="flex items-start gap-2.5 text-sm text-main">
                         <Check className="w-4 h-4 text-accent shrink-0 mt-1" />
                         <span>{feat}</span>
                       </li>
                     ))}
                   </ul>
-
-                  {features.length > 2 && (
-                    <button
-                      type="button"
-                      onClick={() => togglePkgExpand(pkg.id)}
-                      data-testid={`package-expand-${pkg.id}`}
-                      aria-expanded={isExpanded}
-                      className="inline-flex items-center gap-1.5 min-h-[44px] text-xs font-semibold text-accent hover:underline mb-3"
-                    >
-                      <span>
-                        {isExpanded
-                          ? lang === 'ar'
-                            ? 'إخفاء التفاصيل'
-                            : 'Show less'
-                          : lang === 'ar'
-                          ? 'إظهار المزيد'
-                          : 'Show more'}
-                      </span>
-                      <ChevronDown
-                        className={`w-3.5 h-3.5 transition-transform ${
-                          isExpanded ? 'rotate-180' : ''
-                        }`}
-                      />
-                    </button>
-                  )}
                 </div>
 
                 {pkg.pricingModel === 'fixed' && pkg.priceEGP !== null ? (
@@ -189,11 +154,11 @@ export const PackagesSection: React.FC = () => {
           })}
         </div>
 
-        {/* VAT Disclaimer */}
+        {/* VAT & Quotation Note */}
         <p className="text-xs text-muted text-center mt-6">
           {lang === 'ar'
-            ? 'الأسعار [تشمل / لا تشمل] ضريبة القيمة المضافة. [VERIFY Q4]'
-            : 'Prices [include / exclude] VAT. [VERIFY Q4]'}
+            ? 'الأسعار لا تشمل ضريبة القيمة المضافة ما لم يُذكر خلاف ذلك في عرض السعر الرسمي.'
+            : 'Prices exclude VAT unless stated otherwise in the written quotation.'}
         </p>
       </div>
     </section>

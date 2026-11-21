@@ -8,70 +8,61 @@ export const HomeHowWeWork: React.FC = () => {
   const steps = [
     {
       num: '01',
-      titleAr: 'فحص الموقع وتحديد المتطلبات',
+      titleAr: 'المعاينة وتحديد الاحتياج الفعلي',
       titleEn: 'Site Audit & Technical Sizing',
       descAr:
-        'نراجع الشبكة والخوادم القائمة، نحصر الأحمال والثغرات، ونقدم نطاق عمل ومواصفات مكتوبة قبل التعاقد.',
+        'نفحص الشبكة أو السيرفرات الحالية، نحدد الاحتياج الحقيقي بدون مبالغة في العتاد، ونسلّمك عرض سعر ومواصفات مكتوبة.',
       descEn:
-        'We inspect existing switches, racks, and servers, size real workloads, and issue a written technical scope.',
+        'We inspect existing switches, racks, and servers, size actual workloads without overselling hardware, and issue a written scope.',
     },
     {
       num: '02',
-      titleAr: 'التجهيز والترحيل خارج الذروة',
-      titleEn: 'Off-Peak Cutover & Rollout',
+      titleAr: 'التنفيذ والترحيل خارج ساعات العمل',
+      titleEn: 'Off-Peak Rollout & Cutover',
       descAr:
-        'ننفذ التمديدات أو نرحّل الخوادم وقواعد البيانات في أوقات التوقف المجدولة مع خطة تراجع Rollback مختبرة.',
+        'ننفّذ التمديدات أو نركّب الفايروول أو ننقل قواعد البيانات في عطلة نهاية الأسبوع أو خارج الذروة مع خطة رجوع فورية.',
       descEn:
-        'Cabling, firewall swap, or server migration happens in scheduled off-peak windows with a tested rollback plan.',
+        'Cabling, firewall swap, or server migration runs during off-peak windows with a tested rollback plan.',
     },
     {
       num: '03',
-      titleAr: 'تسليم التوثيق والتشغيل وفق SLA',
-      titleEn: 'Runbook Handover & SLA Support',
+      titleAr: 'تسليم الصلاحيات وعقد الصيانة',
+      titleEn: 'Full Handover & SLA Support',
       descAr:
-        'يتسلم العميل كلمات المرور ومخططات الشبكة كاملةً، مع مراقبة 24/7 وتحديثات أمان مجدولة.',
+        'تستلم كل كلمات المرور ومخططات الشبكة باسم شركتك بالكامل، مع متابعة مستمرة وتحديثات أمان بعقد SLA.',
       descEn:
-        'Full credentials and As-Built diagrams stay in your hands, backed by 24/7 monitoring and contract SLAs.',
+        'Every password and network diagram stays under your ownership, backed by ongoing monitoring and clear SLA terms.',
     },
   ];
 
   return (
     <section
       data-testid="home-how-we-work"
-      className="section-spacing-home bg-page-band"
+      className="section-spacing-home bg-surface-band border-y border-token"
     >
       <div className="container-nuzul">
         <ScrollReveal className="max-w-2xl mb-10">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-main">
-            {lang === 'ar'
-              ? 'مراحل التنفيذ والترحيل المنضبط'
-              : 'Disciplined Delivery & Migration Workflow'}
+            {lang === 'ar' ? 'كيف ننفّذ مشروعك؟' : 'How We Deliver Projects'}
           </h2>
-          <p className="text-muted mt-3 text-base leading-relaxed">
+          <p className="text-muted mt-2.5 text-base leading-relaxed">
             {lang === 'ar'
-              ? 'مسار عمل مجدول خارج أوقات الذروة من الفحص الميداني حتى التسليم وفق SLA.'
-              : 'Scheduled off-peak execution from initial site survey to documented SLA handover.'}
+              ? 'من أول معاينة فنية حتى استلامك كل الصلاحيات ومخططات الشبكة.'
+              : 'From initial site audit to complete credential handover—clear milestones, zero surprises.'}
           </p>
         </ScrollReveal>
 
-        {/* Horizontal 3-Step Engineering Pipeline Track (Distinct from Card Grid) */}
-        <StaggerGroup className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <StaggerGroup className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {steps.map((step) => (
             <StaggerItem
               key={step.num}
-              className="border-t-2 border-accent pt-5 flex flex-col justify-between"
+              className="clean-card p-6 sm:p-7 flex flex-col justify-between"
             >
               <div>
-                <span className="text-xs font-bold text-accent block mb-2">
-                  {lang === 'ar' ? (
-                    <>
-                      الخطوة <bdi dir="ltr" className="ltr-num">{step.num}</bdi>
-                    </>
-                  ) : (
-                    <bdi dir="ltr" className="ltr-num">STEP {step.num}</bdi>
-                  )}
+                <span dir="ltr" className="ltr-num text-xs font-bold text-accent block mb-3">
+                  {step.num}
                 </span>
-                <h3 className="text-lg sm:text-xl font-bold text-main mb-2.5">
+                <h3 className="text-lg font-bold text-main mb-2.5">
                   {lang === 'ar' ? step.titleAr : step.titleEn}
                 </h3>
                 <p className="text-muted text-sm leading-relaxed">

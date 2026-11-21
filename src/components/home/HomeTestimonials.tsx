@@ -5,70 +5,66 @@ import { ScrollReveal, StaggerGroup, StaggerItem } from '../common/MotionPrimiti
 export const HomeTestimonials: React.FC = () => {
   const { lang } = useApp();
 
-  // Maximum 3 testimonials (cleaned of colloquialisms & unverified percentages; personal names anonymized pending written release per CLAIMS.md #9, #50-52)
   const testimonials = [
     {
       id: 'quote-1',
       quoteAr:
-        'ساهم نظام إدارة العيادات والنداء الرقمي في تنظيم حركة المراجعين داخل الصالات وربط ملف المريض مباشرة بغرفة الكشف والأشعة دون تعقيد.',
+        'النظام نظّم حركة المرضى في العيادة وربط الملف الطبي مباشرة بغرفة الكشف والأشعة، ووفّر علينا وقتاً كبيراً في المتابعة اليومية.',
       quoteEn:
-        'The clinic management and digital queue system organized patient flow in our waiting lounges and linked patient records directly to examination rooms.',
+        'The clinic and queue system organized patient flow and linked medical records directly with exam rooms without complicating staff workflows.',
       roleAr: 'استشاري جراحة العظام والمفاصل',
       roleEn: 'Consultant Orthopedic Surgeon',
-      orgAr: 'عيادة تخصصية — القاهرة',
-      orgEn: 'Specialized Medical Clinic — Cairo',
+      orgAr: 'عيادة تخصصية · القاهرة',
+      orgEn: 'Specialized Medical Clinic · Cairo',
     },
     {
       id: 'quote-2',
       quoteAr:
-        'تولى فريق نزول تك فحص واختبار قبول نظام إدارة علاقات العملاء قبل استلامه من شركة التطوير، مما ساعد على رصد ومعالجة الأخطاء قبل الإطلاق.',
+        'استعنا بفريق نزول تك لمراجعة واختبار نظام الـ CRM قبل استلامه من شركة التطوير، وفعلاً كشفوا ملاحظات فنية مهمة اتعدّلت قبل التشغيل.',
       quoteEn:
-        'Nuzul Tech conducted the QA audit and user acceptance testing for our CRM platform prior to vendor handover, resolving defects before launch.',
+        'Nuzul Tech audited and acceptance-tested our CRM platform before vendor sign-off, catching real defects before launch.',
       roleAr: 'المؤسس والمدير التنفيذي',
-      roleEn: 'Founder & Chief Executive Officer',
-      orgAr: 'منصة برمجيات سحابية للشركات — مصر',
-      orgEn: 'B2B Cloud CRM Platform — Egypt',
+      roleEn: 'Founder & CEO',
+      orgAr: 'شركة برمجيات سحابية · مصر',
+      orgEn: 'B2B Cloud CRM Platform · Egypt',
     },
     {
       id: 'quote-3',
       quoteAr:
-        'أعادت نزول تك تنفيذ الشبكة الداخلية للمستشفى مع عزل حركة الأجهزة الطبية وتحديث كاميرات المراقبة وبريد الشركة وفق جدول تنفيذ خارج ساعات الذروة.',
+        'أعادوا تقسيم الشبكة الداخلية للمستشفى وفصلوا الأجهزة الطبية عن باقي الشبكة وركّبوا الكاميرات الجديدة خارج أوقات العمل بدون تعطيل العيادات.',
       quoteEn:
-        'Nuzul Tech rebuilt our internal hospital network, isolating medical device traffic and upgrading our surveillance and company mail infrastructure during off-peak hours.',
+        'They rebuilt our hospital network, isolated medical devices on dedicated VLANs, and deployed the new CCTV system off-hours without disrupting clinics.',
       roleAr: 'المدير العام',
       roleEn: 'General Director',
-      orgAr: 'مستشفى تخصصي خاص — القاهرة',
-      orgEn: 'Private Specialized Hospital — Cairo',
+      orgAr: 'مستشفى تخصصي خاص · القاهرة',
+      orgEn: 'Private Specialized Hospital · Cairo',
     },
   ];
 
   return (
     <section
       data-testid="home-testimonials"
-      className="section-spacing-home bg-page-band"
+      className="section-spacing-home bg-surface-band border-t border-token"
     >
       <div className="container-nuzul">
         <ScrollReveal className="max-w-2xl mb-10">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-main">
-            {lang === 'ar'
-              ? 'آراء العملاء'
-              : 'Client Feedback'}
+            {lang === 'ar' ? 'تجارب عملائنا' : 'What Clients Say'}
           </h2>
-          <p className="text-muted mt-3 text-base leading-relaxed">
+          <p className="text-muted mt-2.5 text-base leading-relaxed">
             {lang === 'ar'
-              ? 'إفادات من مسؤولي التشغيل وتقنية المعلومات في المؤسسات المتعاقدة مع نزول تك.'
-              : 'Direct feedback from operations and IT directors across organizations supported by Nuzul Tech.'}
+              ? 'آراء مسؤولي التشغيل وتقنية المعلومات في جهات نفّذنا لها مشاريع شبكات وأنظمة.'
+              : 'Feedback from operations and IT leads on network and software projects we delivered.'}
           </p>
         </ScrollReveal>
 
-        {/* 3 Editorial Pull-Quote Columns (No Italic, No 5-Star Rows, Not a Boxed Card Grid) */}
-        <StaggerGroup className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <StaggerGroup className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {testimonials.map((item) => (
             <StaggerItem
               key={item.id}
-              className="border-s-2 border-accent ps-6 py-2 flex flex-col justify-between"
+              className="clean-card p-6 sm:p-7 flex flex-col justify-between gap-6"
             >
-              <blockquote className="text-main text-base leading-relaxed mb-6">
+              <blockquote className="text-main text-sm sm:text-base leading-relaxed">
                 «{lang === 'ar' ? item.quoteAr : item.quoteEn}»
               </blockquote>
 

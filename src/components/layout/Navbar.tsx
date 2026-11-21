@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useApp, ThemeMode } from '../../context/AppContext';
-import { Menu, X, Globe, Sun, Moon, Monitor, Search, Check } from 'lucide-react';
+import { Menu, X, Globe, Sun, Moon, Monitor, Search, Check, ShoppingBag } from 'lucide-react';
 import { NuzulLogo } from '../common/NuzulLogo';
 import { openGlobalSearch } from '../search/GlobalSearchCommandPalette';
 
 export const Navbar: React.FC = () => {
-  const { lang, setLang, themeMode, setThemeMode } = useApp();
+  const { lang, setLang, themeMode, setThemeMode, cartCount, setIsCartOpen } = useApp();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [themeMenuOpen, setThemeMenuOpen] = useState(false);
   const location = useLocation();
@@ -167,11 +167,29 @@ export const Navbar: React.FC = () => {
             onClick={handleSearchTrigger}
             data-testid="header-search-btn"
             aria-label={lang === 'ar' ? 'بحث في الخدمات والحلول' : 'Search services and solutions'}
-            title={lang === 'ar' ? 'بحث (الانتقال إلى دليل الخدمات)' : 'Search (Jump to services catalog)'}
+            title={lang === 'ar' ? 'بحث (Ctrl+K)' : 'Search (Ctrl+K)'}
             className="inline-flex items-center justify-center min-w-[44px] min-h-[44px] w-11 h-11 p-2.5 text-muted hover-text-main hover-surface-2 rounded-lg transition-colors border border-token whitespace-nowrap shrink-0"
           >
             <Search className="w-4 h-4 shrink-0" />
           </button>
+
+          {/* Order Cart Trigger (Visible with count badge when items added) */}
+          {cartCount > 0 && (
+            <button
+              type="button"
+              onClick={() => setIsCartOpen(true)}
+              data-testid="header-cart-btn"
+              aria-label={
+                lang === 'ar'
+                  ? `سلة الطلبات (${cartCount} عناصر)`
+                  : `Order cart (${cartCount} items)`
+              }
+              className="relative inline-flex items-center justify-center gap-1.5 min-w-[44px] min-h-[44px] px-3 py-2.5 text-accent bg-accent-soft hover-surface-2 rounded-lg transition-colors border border-accent whitespace-nowrap shrink-0"
+            >
+              <ShoppingBag className="w-4 h-4 shrink-0" />
+              <span className="text-xs font-bold ltr-num">{cartCount}</span>
+            </button>
+          )}
 
           {/* Single Theme Icon Button with Dropdown Menu (فاتح / داكن / تلقائي) */}
           <div className="relative" ref={themeDropdownRef}>
@@ -363,6 +381,24 @@ export const Navbar: React.FC = () => {
           </div>
 
           <div className="pt-2 border-t border-token flex flex-col gap-2">
+            {cartCount > 0 && (
+              <button
+                type="button"
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  setIsCartOpen(true);
+                }}
+                data-testid="drawer-cart-btn"
+                className="btn-secondary w-full min-h-[44px] py-2.5 text-sm font-bold inline-flex items-center justify-center gap-2 whitespace-nowrap border-accent text-accent"
+              >
+                <ShoppingBag className="w-4 h-4 shrink-0" />
+                <span>
+                  {lang === 'ar'
+                    ? `عرض سلة الطلبات (${cartCount})`
+                    : `View Order Cart (${cartCount})`}
+                </span>
+              </button>
+            )}
             <Link
               to="/contact"
               onClick={() => setMobileMenuOpen(false)}

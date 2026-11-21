@@ -11,7 +11,15 @@ interface NetworkNode {
   vx: number;
   vy: number;
   radius: number;
+  isHub: boolean;
   isAccent: boolean;
+}
+
+interface DataPulse {
+  fromIdx: number;
+  toIdx: number;
+  progress: number;
+  speed: number;
 }
 
 export const HeroNetworkCanvas: React.FC<HeroNetworkCanvasProps> = ({
@@ -30,8 +38,9 @@ export const HeroNetworkCanvas: React.FC<HeroNetworkCanvasProps> = ({
       const isMobile = vw < 768;
       return {
         isMobile,
-        nodeCount: isMobile ? 28 : 95,
-        linkDist: isMobile ? 105 : 145,
+        nodeCount: isMobile ? 34 : 88,
+        linkDist: isMobile ? 125 : 168,
+        pointerDist: isMobile ? 0 : 190,
         dpr: Math.min(window.devicePixelRatio || 1, 2),
         w: vw,
         h: vh,
@@ -48,22 +57,27 @@ export const HeroNetworkCanvas: React.FC<HeroNetworkCanvasProps> = ({
     let isHeroOutOfView = false;
     let rafId = 0;
 
+    const pointer = { x: -9999, y: -9999, active: false };
+
     const createNodes = (count: number, w: number, h: number): NetworkNode[] => {
       const generated: NetworkNode[] = [];
       for (let i = 0; i < count; i++) {
+        const isHub = i % 6 === 0;
         generated.push({
           x: Math.random() * w,
           y: Math.random() * h,
-          vx: (Math.random() - 0.5) * 0.42,
-          vy: (Math.random() - 0.5) * 0.42,
-          radius: i % 5 === 0 ? 3.2 : 1.9 + Math.random() * 1.4,
-          isAccent: i % 3 === 0,
+          vx: (Math.random() - 0.5) * 0.38,
+          vy: (Math.random() - 0.5) * 0.38,
+          radius: isHub ? 3.6 : 1.9 + Math.random() * 1.4,
+          isHub,
+          isAccent: i % 3 !== 2,
         });
       }
       return generated;
     };
 
     let nodes: NetworkNode[] = createNodes(metrics.nodeCount, width, height);
+    let pulses: DataPulse[] = [];
 
     const getPauseReason = (): string => {
       if (prefersReduced) return 'reduced-motion';
@@ -103,16 +117,19 @@ export const HeroNetworkCanvas: React.FC<HeroNetworkCanvasProps> = ({
 
       if (countChanged || nodes.length === 0) {
         nodes = createNodes(metrics.nodeCount, width, height);
+        pulses = [];
       }
       syncCanvasAttributes();
     };
 
     const readThemeColors = () => {
       const styles = getComputedStyle(document.documentElement);
+      const accent = styles.getPropertyValue('--accent').trim();
       return {
-        nodePrimary: styles.getPropertyValue('--canvas-node-primary').trim() || '#0E6B64',
-        nodeSecondary: styles.getPropertyValue('--canvas-node-secondary').trim() || '#1D4ED8',
+        nodePrimary: styles.getPropertyValue('--canvas-node-primary').trim() || accent,
+        nodeSecondary: styles.getPropertyValue('--canvas-node-secondary').trim() || accent,
         lineRgb: styles.getPropertyValue('--canvas-line-rgb').trim() || '14, 107, 100',
+        pulseRgb: styles.getPropertyValue('--canvas-pulse-rgb').trim() || '14, 107, 100',
         lineAlpha: parseFloat(styles.getPropertyValue('--canvas-line-alpha')) || 0.44,
         nodeAlpha: parseFloat(styles.getPropertyValue('--canvas-node-alpha')) || 0.86,
       };
@@ -139,6 +156,7 @@ export const HeroNetworkCanvas: React.FC<HeroNetworkCanvasProps> = ({
       const maxDist = metrics.linkDist;
       const maxDistSq = maxDist * maxDist;
 
+      // Mesh edges
       ctx.lineWidth = 1.15;
       for (let i = 0; i < nodes.length; i++) {
         const a = nodes[i];
@@ -149,16 +167,79 @@ export const HeroNetworkCanvas: React.FC<HeroNetworkCanvasProps> = ({
           const distSq = dx * dx + dy * dy;
           if (distSq < maxDistSq) {
             const dist = Math.sqrt(distSq);
-            const alpha = (1 - dist / maxDist) * colors.lineAlpha;
+            const ratio = 1 - dist / maxDist;
+            const alpha = ratio * colors.lineAlpha;
             ctx.strokeStyle = `rgba(${colors.lineRgb}, ${alpha.toFixed(3)})`;
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
             ctx.lineTo(b.x, b.y);
             ctx.stroke();
+
+            // Occasionally spawn subtle travelling signal pulses along hub connections
+            if (
+              advance &&
+              (a.isHub || b.isHub) &&
+              pulses.length < (metrics.isMobile ? 4 : 10) &&
+              Math.random() < 0.0025
+            ) {
+              pulses.push({
+                fromIdx: i,
+                toIdx: j,
+                progress: 0,
+                speed: 0.012 + Math.random() * 0.012,
+              });
+            }
           }
         }
       }
 
+      // Subtle pointer proximity links on desktop
+      if (pointer.active && metrics.pointerDist > 0) {
+        const pDistSq = metrics.pointerDist * metrics.pointerDist;
+        ctx.lineWidth = 1.25;
+        for (let i = 0; i < nodes.length; i++) {
+          const n = nodes[i];
+          const dx = n.x - pointer.x;
+          const dy = n.y - pointer.y;
+          const distSq = dx * dx + dy * dy;
+          if (distSq < pDistSq) {
+            const dist = Math.sqrt(distSq);
+            const alpha = (1 - dist / metrics.pointerDist) * (colors.lineAlpha * 0.95);
+            ctx.strokeStyle = `rgba(${colors.pulseRgb}, ${alpha.toFixed(3)})`;
+            ctx.beginPath();
+            ctx.moveTo(n.x, n.y);
+            ctx.lineTo(pointer.x, pointer.y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      // Travelling data-packet pulses along active links
+      if (advance && pulses.length > 0) {
+        const nextPulses: DataPulse[] = [];
+        for (let i = 0; i < pulses.length; i++) {
+          const p = pulses[i];
+          p.progress += p.speed;
+          if (p.progress < 1) {
+            const from = nodes[p.fromIdx];
+            const to = nodes[p.toIdx];
+            if (from && to) {
+              const px = from.x + (to.x - from.x) * p.progress;
+              const py = from.y + (to.y - from.y) * p.progress;
+              const fade = Math.sin(p.progress * Math.PI);
+              ctx.globalAlpha = fade * colors.nodeAlpha;
+              ctx.fillStyle = colors.nodePrimary;
+              ctx.beginPath();
+              ctx.arc(px, py, 2.3, 0, Math.PI * 2);
+              ctx.fill();
+              nextPulses.push(p);
+            }
+          }
+        }
+        pulses = nextPulses;
+      }
+
+      // Nodes & Hub Rings
       for (let i = 0; i < nodes.length; i++) {
         const n = nodes[i];
         ctx.globalAlpha = colors.nodeAlpha;
@@ -167,12 +248,12 @@ export const HeroNetworkCanvas: React.FC<HeroNetworkCanvasProps> = ({
         ctx.arc(n.x, n.y, n.radius, 0, Math.PI * 2);
         ctx.fill();
 
-        if (i % 5 === 0) {
+        if (n.isHub) {
           ctx.globalAlpha = colors.nodeAlpha * 0.28;
           ctx.strokeStyle = colors.nodePrimary;
-          ctx.lineWidth = 1;
+          ctx.lineWidth = 1.15;
           ctx.beginPath();
-          ctx.arc(n.x, n.y, n.radius + 3.2, 0, Math.PI * 2);
+          ctx.arc(n.x, n.y, n.radius + 4.5, 0, Math.PI * 2);
           ctx.stroke();
         }
       }
@@ -222,6 +303,18 @@ export const HeroNetworkCanvas: React.FC<HeroNetworkCanvasProps> = ({
       startOrStopLoop();
     };
 
+    const onPointerMove = (e: MouseEvent) => {
+      if (mode === 'global') {
+        pointer.x = e.clientX;
+        pointer.y = e.clientY;
+        pointer.active = true;
+      }
+    };
+
+    const onPointerLeave = () => {
+      pointer.active = false;
+    };
+
     const themeObserver = new MutationObserver(() => {
       colors = readThemeColors();
       drawFrame(false);
@@ -245,12 +338,16 @@ export const HeroNetworkCanvas: React.FC<HeroNetworkCanvasProps> = ({
     }
 
     window.addEventListener('resize', onResize, { passive: true });
+    window.addEventListener('mousemove', onPointerMove, { passive: true });
+    document.addEventListener('mouseleave', onPointerLeave);
     document.addEventListener('visibilitychange', onVisibility);
     mediaQuery.addEventListener('change', onReducedMotionChange);
 
     return () => {
       if (rafId) window.cancelAnimationFrame(rafId);
       window.removeEventListener('resize', onResize);
+      window.removeEventListener('mousemove', onPointerMove);
+      document.removeEventListener('mouseleave', onPointerLeave);
       document.removeEventListener('visibilitychange', onVisibility);
       mediaQuery.removeEventListener('change', onReducedMotionChange);
       themeObserver.disconnect();
@@ -266,8 +363,8 @@ export const HeroNetworkCanvas: React.FC<HeroNetworkCanvasProps> = ({
       aria-hidden="true"
       className={`${
         mode === 'global'
-          ? 'fixed inset-0 w-full h-full pointer-events-none z-0'
-          : 'absolute inset-0 w-full h-full pointer-events-none z-0 opacity-25 sm:opacity-45 [mask-image:linear-gradient(to_bottom,black_45%,transparent_98%)] [-webkit-mask-image:linear-gradient(to_bottom,black_45%,transparent_98%)]'
+          ? 'fixed inset-0 w-full h-full pointer-events-none z-0 opacity-75 sm:opacity-90'
+          : 'absolute inset-0 w-full h-full pointer-events-none z-0 opacity-60 sm:opacity-80'
       } ${className}`}
     />
   );

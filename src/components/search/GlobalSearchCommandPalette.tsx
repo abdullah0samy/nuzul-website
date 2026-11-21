@@ -12,9 +12,11 @@ import {
   Briefcase,
   FileText,
   CornerDownLeft,
+  Globe,
 } from 'lucide-react';
 import {
   searchGlobalCatalog,
+  detectDomainQuery,
   GlobalSearchResultItem,
 } from '../../utils/arabicSearch';
 
@@ -147,17 +149,33 @@ export const GlobalSearchCommandPalette: React.FC = () => {
     }
   }, [isOpen, initialQuery]);
 
+  const detectedDomain = useMemo(() => detectDomainQuery(query), [query]);
   const groupedResults = useMemo(() => searchGlobalCatalog(query, 4), [query]);
 
-  const flatResults: GlobalSearchResultItem[] = useMemo(
-    () => [
+  const flatResults: GlobalSearchResultItem[] = useMemo(() => {
+    const items: GlobalSearchResultItem[] = [];
+    if (detectedDomain) {
+      items.push({
+        id: `domain-live-${detectedDomain}`,
+        type: 'plan',
+        titleAr: `فحص توافر النطاق: ${detectedDomain}`,
+        titleEn: `Check Live Domain Availability: ${detectedDomain}`,
+        subtitleAr: 'فحص مباشر عبر سجلات RDAP وDNS العالمية ومعرفة السعر',
+        subtitleEn: 'Real-time RDAP registry & live DNS availability lookup',
+        badgeAr: 'فحص نطاق مباشر',
+        badgeEn: 'Live Domain Check',
+        href: `/hosting?domain=${encodeURIComponent(detectedDomain)}`,
+        score: 999,
+      });
+    }
+    return [
+      ...items,
       ...groupedResults.services,
       ...groupedResults.plans,
       ...groupedResults.caseStudies,
       ...groupedResults.articles,
-    ],
-    [groupedResults]
-  );
+    ];
+  }, [detectedDomain, groupedResults]);
 
   useEffect(() => {
     setActiveIndex(0);
@@ -316,12 +334,12 @@ export const GlobalSearchCommandPalette: React.FC = () => {
         aria-modal="true"
         aria-label={
           lang === 'ar'
-            ? 'البحث الشامل في خدمات وحلول نُزول تِك'
-            : 'Global Search across Nuzul Tech'
+            ? 'البحث في خدمات وحلول نزول تك'
+            : 'Search across Nuzul Tech'
         }
         data-testid="global-search-dialog"
         onKeyDown={handleDialogKeyDown}
-        className="relative z-10 w-full max-w-2xl rounded-2xl bg-surface border-2 border-token shadow-2xl overflow-hidden"
+        className="relative z-10 w-full max-w-2xl glass-panel border border-token shadow-2xl overflow-hidden"
       >
         {/* Top Search Input Bar */}
         <div className="p-4 border-b border-token flex items-center gap-3 bg-page">
@@ -337,7 +355,7 @@ export const GlobalSearchCommandPalette: React.FC = () => {
                 ? 'ابحث عن خدمة، خادم سحابي، دراسة حالة، أو مقال تقني (مثال: سيرفر، كاميرات، سنترال، ERP)...'
                 : 'Search services, cloud plans, case studies, or articles (e.g., VPS, CCTV, VoIP, ERP)...'
             }
-            aria-label={lang === 'ar' ? 'حقل البحث الشامل' : 'Global search input'}
+            aria-label={lang === 'ar' ? 'حقل البحث في الموقع' : 'Site search input'}
             className="w-full min-h-[44px] bg-transparent text-sm sm:text-base text-main focus:outline-none"
           />
           {query && (
@@ -456,6 +474,14 @@ export const GlobalSearchCommandPalette: React.FC = () => {
           ) : (
             /* Grouped Search Results */
             <div data-testid="global-search-results">
+              {detectedDomain &&
+                renderGroup(
+                  'domain-live',
+                  'فحص النطاق المباشر (RDAP / DNS)',
+                  'Live Domain Registry Check',
+                  Globe,
+                  flatResults.filter((r) => r.id.startsWith('domain-live-'))
+                )}
               {renderGroup(
                 'services',
                 'الخدمات الهندسية',

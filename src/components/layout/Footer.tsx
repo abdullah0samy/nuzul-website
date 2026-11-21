@@ -23,31 +23,31 @@ export const Footer: React.FC = () => {
               to="/"
               data-testid="footer-logo-link"
               className="inline-block rounded-lg"
-              aria-label={lang === 'ar' ? 'نُزول تِك - الصفحة الرئيسية' : 'Nuzul Tech - Home'}
+              aria-label={lang === 'ar' ? 'نزول تك - الصفحة الرئيسية' : 'Nuzul Tech - Home'}
             >
               <NuzulLogo size={32} variant="dark" />
             </Link>
             <p className="text-on-navy-muted text-sm leading-relaxed max-w-sm">
               {lang === 'ar'
-                ? 'شركة هندسة بنية تحتية وتقنية معلومات في القاهرة. نصمم ونشغّل الشبكات المهيكلة، خوادم KVM السحابية، جدران الحماية، وأنظمة ERP للشركات بعقود SLA واضحة.'
-                : 'Cairo-based IT infrastructure engineering firm delivering structured networks, KVM cloud servers, hardware firewalls, and ERP systems under clear SLAs.'}
+                ? 'فريق هندسي في القاهرة لتجهيز شبكات الشركات، تشغيل خوادم KVM، تأمين البيانات، وتطوير أنظمة ERP بعقود صيانة واضحة.'
+                : 'Cairo-based infrastructure team building office networks, KVM cloud servers, security systems, and ERP software under clear SLAs.'}
             </p>
           </div>
 
           {/* Column 2: Primary Pages */}
           <div className="lg:col-span-2 space-y-3">
             <h3 className="text-sm font-bold text-on-navy">
-              {lang === 'ar' ? 'روابط سريعة' : 'Quick Links'}
+              {lang === 'ar' ? 'الموقع' : 'Site'}
             </h3>
             <ul className="space-y-2.5 text-sm text-on-navy-muted">
               <li>
                 <Link to="/about" className="hover-text-on-navy transition-colors">
-                  {lang === 'ar' ? 'عن نُزول تِك' : 'About Nuzul Tech'}
+                  {lang === 'ar' ? 'عن نزول تك' : 'About Nuzul Tech'}
                 </Link>
               </li>
               <li>
                 <Link to="/services" className="hover-text-on-navy transition-colors">
-                  {lang === 'ar' ? 'الخدمات الهندسية' : 'Engineering Services'}
+                  {lang === 'ar' ? 'الخدمات' : 'Services'}
                 </Link>
               </li>
               <li>
@@ -57,7 +57,7 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <Link to="/pricing" className="hover-text-on-navy transition-colors">
-                  {lang === 'ar' ? 'خطط الأسعار والباقات' : 'Pricing & Packages'}
+                  {lang === 'ar' ? 'الأسعار والباقات' : 'Pricing & Packages'}
                 </Link>
               </li>
               <li>
@@ -76,27 +76,27 @@ export const Footer: React.FC = () => {
           {/* Column 3: Solution Pillars */}
           <div className="lg:col-span-3 space-y-3">
             <h3 className="text-sm font-bold text-on-navy">
-              {lang === 'ar' ? 'قطاعات الحلول' : 'Solution Pillars'}
+              {lang === 'ar' ? 'الخدمات' : 'Services'}
             </h3>
             <ul className="space-y-2.5 text-sm text-on-navy-muted">
               <li>
-                <Link to="/services?category=infrastructure" className="hover-text-on-navy transition-colors">
-                  {lang === 'ar' ? 'الشبكات والبنية التحتية' : 'Infrastructure & Networks'}
+                <Link to="/services?cat=infrastructure" className="hover-text-on-navy transition-colors">
+                  {lang === 'ar' ? 'الشبكات والبنية التحتية' : 'Networks & Infrastructure'}
                 </Link>
               </li>
               <li>
-                <Link to="/services?category=cloud" className="hover-text-on-navy transition-colors">
-                  {lang === 'ar' ? 'السحابة والخوادم' : 'Cloud & Servers'}
+                <Link to="/services?cat=cloud" className="hover-text-on-navy transition-colors">
+                  {lang === 'ar' ? 'السحابة والاستضافة' : 'Cloud & Hosting'}
                 </Link>
               </li>
               <li>
-                <Link to="/services?category=security" className="hover-text-on-navy transition-colors">
+                <Link to="/services?cat=security" className="hover-text-on-navy transition-colors">
                   {lang === 'ar' ? 'الأمن السيبراني' : 'Cybersecurity'}
                 </Link>
               </li>
               <li>
-                <Link to="/services?category=software" className="hover-text-on-navy transition-colors">
-                  {lang === 'ar' ? 'البرمجيات وأنظمة الإدارة' : 'Software & ERP'}
+                <Link to="/services?cat=software" className="hover-text-on-navy transition-colors">
+                  {lang === 'ar' ? 'البرمجيات وأنظمة ERP' : 'Software & ERP'}
                 </Link>
               </li>
             </ul>
@@ -105,7 +105,7 @@ export const Footer: React.FC = () => {
           {/* Column 4: Direct Contact */}
           <div className="lg:col-span-3 space-y-3">
             <h3 className="text-sm font-bold text-on-navy">
-              {lang === 'ar' ? 'بيانات التواصل' : 'Contact Info'}
+              {lang === 'ar' ? 'التواصل' : 'Contact'}
             </h3>
             <ul className="space-y-3 text-sm text-on-navy-muted">
               <li className="flex items-start gap-2.5">
@@ -142,9 +142,7 @@ export const Footer: React.FC = () => {
           className="py-8 border-b border-navy flex flex-col md:flex-row items-start md:items-center justify-between gap-4"
         >
           <span className="text-xs text-on-navy-muted font-medium">
-            {lang === 'ar'
-              ? 'وسائل الدفع للشركات والأفراد في مصر والخليج:'
-              : 'Accepted payment methods in Egypt & GCC:'}
+            {lang === 'ar' ? 'طرق الدفع:' : 'Payment methods:'}
           </span>
           <PaymentBadges variant="footer" />
         </div>
@@ -154,7 +152,7 @@ export const Footer: React.FC = () => {
           <p>
             © <span className="ltr-num">{new Date().getFullYear()}</span>{' '}
             {lang === 'ar'
-              ? 'شركة نُزول تِك لتقنية المعلومات. جميع الحقوق محفوظة.'
+              ? 'نزول تك لتقنية المعلومات. جميع الحقوق محفوظة.'
               : 'Nuzul Tech IT Solutions. All rights reserved.'}
           </p>
           <div className="flex items-center gap-6">

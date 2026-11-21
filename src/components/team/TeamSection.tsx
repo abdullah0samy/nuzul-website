@@ -1,33 +1,27 @@
 import React from 'react';
 import { TEAM_MEMBERS } from '../../data/nuzulData';
 import { useApp } from '../../context/AppContext';
-import { Award, ShieldCheck, Users } from 'lucide-react';
 import { ImageSlot } from '../common/ImageSlot';
 
 export const TeamSection: React.FC = () => {
   const { lang } = useApp();
 
   return (
-    <section id="engineering-team" className="section-spacing bg-surface border-t border-token">
+    <section id="engineering-team" className="section-spacing bg-surface-band border-t border-token">
       <div className="container-nuzul">
-        <div className="max-w-3xl mb-12">
-          <div className="inline-flex items-center gap-2 text-accent text-xs font-semibold mb-2">
-            <Users className="w-4 h-4 shrink-0" />
-            <span>
-              {lang === 'ar'
-                ? 'القيادة الهندسية والخبراء المعتمدون'
-                : 'Engineering Leadership & Certified Experts'}
-            </span>
-          </div>
+        <div className="max-w-3xl mb-10">
+          <p className="text-accent text-xs font-semibold mb-2">
+            {lang === 'ar' ? 'فريق التنفيذ والدعم' : 'Engineering & Operations Team'}
+          </p>
           <h2 className="text-2xl md:text-3xl font-bold text-main mb-3">
             {lang === 'ar'
-              ? 'فريق هندسي معتمد يدير بنيتك التحتية'
-              : 'Certified Architects Managing Your Infrastructure'}
+              ? 'مهندسون يعملون معك مباشرة من التصميم حتى الصيانة'
+              : 'Dedicated Engineers Managing Your Infrastructure'}
           </h2>
           <p className="text-muted text-sm md:text-base leading-relaxed">
             {lang === 'ar'
-              ? 'يضم فريق نُزول تِك نخبة من مهندسي السحابة، الشبكات، الأمن السيبراني، ومطوري النظم الحاصلين على الشهادات الهندسية المعتمدة.'
-              : 'Nuzul Tech brings together senior cloud, network, cybersecurity, and software architects holding industry-recognized engineering certifications.'}
+              ? 'يجمع فريق نزول تك بين مهندسي الشبكات، مديري خوادم Linux وWindows، ومختصي الأمان ومطوري أنظمة العمل.'
+              : 'Nuzul Tech combines network engineers, Linux and Windows systems administrators, security specialists, and software developers.'}
           </p>
         </div>
 
@@ -36,40 +30,38 @@ export const TeamSection: React.FC = () => {
             {TEAM_MEMBERS.map((member) => (
               <div
                 key={member.id}
-                className="clean-card p-6 bg-page flex flex-col justify-between h-full"
+                className="clean-card p-6 sm:p-7 flex flex-col justify-between h-full"
               >
                 <div>
-                  <div className="flex flex-wrap items-center justify-between gap-3 mb-3">
-                    <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-accent">
-                      <ShieldCheck className="w-4 h-4 shrink-0" />
+                  <div className="flex flex-wrap items-center gap-2 text-xs text-muted mb-3">
+                    <span className="font-semibold text-accent">
                       {lang === 'ar' ? member.experience : member.experienceEn}
                     </span>
-                    <span className="text-xs text-muted">
+                    <span aria-hidden="true">·</span>
+                    <span>
                       {lang === 'ar' ? member.role : member.roleEn}
                     </span>
                   </div>
-                  <h3 className="text-lg font-bold text-main mb-2">
+                  <h3 className="text-xl font-bold text-main mb-2.5">
                     {lang === 'ar' ? member.name : member.nameEn}
                   </h3>
-                  <p className="text-sm text-muted leading-relaxed mb-5">
+                  <p className="text-sm text-muted leading-relaxed mb-6">
                     {lang === 'ar' ? member.bio : member.bioEn}
                   </p>
                 </div>
 
                 <div className="pt-4 border-t border-token">
-                  <div className="flex items-center gap-1.5 text-xs text-muted mb-2 font-semibold">
-                    <Award className="w-3.5 h-3.5 text-accent shrink-0" />
-                    <span>{lang === 'ar' ? 'مجالات التخصص الهندسي:' : 'Engineering Specialties:'}</span>
+                  <div className="text-xs text-muted mb-2 font-semibold">
+                    {lang === 'ar' ? 'التخصصات الفنية:' : 'Core Specialties:'}
                   </div>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1.5 text-xs text-main">
                     {member.certifications.map((cert, i) => (
-                      <span
-                        key={i}
-                        dir="ltr"
-                        className="px-2.5 py-1 rounded-md bg-surface border border-token text-xs ltr-num text-main font-semibold whitespace-nowrap"
-                      >
-                        {cert}
-                      </span>
+                      <React.Fragment key={i}>
+                        {i > 0 && <span className="text-muted" aria-hidden="true">·</span>}
+                        <bdi dir="ltr" className="ltr-num font-semibold whitespace-nowrap">
+                          {cert}
+                        </bdi>
+                      </React.Fragment>
                     ))}
                   </div>
                 </div>
@@ -80,12 +72,13 @@ export const TeamSection: React.FC = () => {
           <div className="lg:col-span-6">
             <ImageSlot
               testId="team-office-image-slot"
+              photoVariant="server-room"
               aspectRatio="wide"
               className="h-full"
-              descriptionAr="صورة حقيقية لفريق مهندسي نُزول تِك داخل المقر الرئيسي بالقاهرة أو أثناء فحص وتجهيز كبائن الشبكات والخوادم"
-              descriptionEn="Real photograph of Nuzul Tech engineering team inside the Cairo headquarters or commissioning enterprise server racks"
-              specsAr="1600×1000px • أفقي (16:10) • إضاءة طبيعية • طمس شاشات المراقبة وعناوين IP"
-              specsEn="1600×1000px • Landscape (16:10) • Natural lighting • Blur NOC monitors & IP labels"
+              descriptionAr="غرفة خوادم وكبائن شبكات منظمة — فريق نزول تك الهندسي"
+              descriptionEn="Structured enterprise server racks and cabling aisle — Nuzul Tech Engineering"
+              captionAr="تجهيز وفحص كبائن الشبكات والخوادم — القاهرة"
+              captionEn="Rack commissioning & structured cabling operations — Cairo"
             />
           </div>
         </div>

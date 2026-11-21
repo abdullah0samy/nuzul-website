@@ -21,7 +21,7 @@ export const HomeFinalCTA: React.FC = () => {
     if (!name.trim() || !phone.trim() || !email.trim()) {
       setError(
         lang === 'ar'
-          ? 'يرجى إدخال الاسم ورقم الهاتف والبريد الإلكتروني للتواصل.'
+          ? 'يرجى كتابة الاسم ورقم الهاتف والبريد الإلكتروني.'
           : 'Please enter your name, phone number, and email address.'
       );
       return;
@@ -29,7 +29,7 @@ export const HomeFinalCTA: React.FC = () => {
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
       setError(
         lang === 'ar'
-          ? 'صيغة البريد الإلكتروني غير صحيحة.'
+          ? 'يرجى التأكد من صيغة البريد الإلكتروني.'
           : 'Please enter a valid email address.'
       );
       return;
@@ -43,14 +43,14 @@ export const HomeFinalCTA: React.FC = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           name: name.trim(),
-          company: company.trim() || (lang === 'ar' ? 'شركة / عميل مباشر' : 'Direct Enterprise Inquiry'),
+          company: company.trim() || (lang === 'ar' ? 'شركة / عميل مباشر' : 'Direct Business Inquiry'),
           phone: phone.trim(),
           email: email.trim(),
           serviceType: need || 'infrastructure',
           details:
             lang === 'ar'
-              ? `طلب استشارة سريعة من الصفحة الرئيسية — القطاع: ${need || 'infrastructure'}`
-              : `Quick consultation request from Home page — Pillar: ${need || 'infrastructure'}`,
+              ? `طلب معاينة أو عرض سعر من الصفحة الرئيسية — الخدمة: ${need || 'infrastructure'}`
+              : `Consultation request from Home page — Service: ${need || 'infrastructure'}`,
           turnstileVerified,
           website_url: '',
           lang,
@@ -61,8 +61,8 @@ export const HomeFinalCTA: React.FC = () => {
         setError(
           data?.message ||
             (lang === 'ar'
-              ? 'تعذر إرسال الطلب الآن، يرجى المحاولة مرة أخرى.'
-              : 'Unable to submit request right now. Please try again.')
+              ? 'تعذّر إرسال الطلب حالياً، حاول مرة أخرى.'
+              : 'Unable to send your request right now. Please try again.')
         );
       } else {
         setReferenceId(data.referenceId);
@@ -70,8 +70,8 @@ export const HomeFinalCTA: React.FC = () => {
     } catch {
       setError(
         lang === 'ar'
-          ? 'تعذر الاتصال بالخادم، يرجى التواصل عبر واتساب أو صفحة التواصل.'
-          : 'Connection error. Please reach us directly via WhatsApp or the Contact page.'
+          ? 'تعذّر الاتصال بالخادم، يمكنك التواصل مباشرة عبر واتساب.'
+          : 'Connection error. Please reach us directly on WhatsApp.'
       );
     } finally {
       setSubmitting(false);
@@ -81,39 +81,35 @@ export const HomeFinalCTA: React.FC = () => {
   return (
     <section
       data-testid="home-final-cta"
-      aria-label={
-        lang === 'ar'
-          ? 'حجز استشارة هندسية لتقييم البنية التحتية'
-          : 'Book an Infrastructure Architecture Consultation'
-      }
-      className="section-spacing-home bg-hero-band text-hero border-t border-hero"
+      aria-label={lang === 'ar' ? 'طلب معاينة أو عرض سعر' : 'Request a Quote'}
+      className="section-spacing-home bg-surface-band border-t border-token"
     >
       <div className="container-nuzul">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
           {/* Start Column */}
           <ScrollReveal className="lg:col-span-5 space-y-4">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-hero leading-tight">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-main leading-tight">
               {lang === 'ar'
-                ? 'تواصل مباشرة مع مهندس حلول البنية التحتية'
-                : 'Talk Directly with an Infrastructure Engineer'}
+                ? 'تواصل مباشرة مع مهندس شبكات أو سيرفرات'
+                : 'Speak Directly with an Infrastructure Engineer'}
             </h2>
-            <p className="text-hero-muted text-base leading-relaxed">
+            <p className="text-muted text-sm sm:text-base leading-relaxed">
               {lang === 'ar'
-                ? 'شاركنا تفاصيل مشروعك أو عدد الفروع لنتواصل معك خلال ساعات العمل الرسمية بعرض سعر مكتوب وجدول تنفيذ محدد.'
-                : 'Send your environment details or branch count and a systems engineer will reply during business hours with a written scope and quote.'}
+                ? 'ابعث لنا تفاصيل مقر شركتك أو احتياج السيرفرات، ونرد عليك خلال ساعات العمل بمقايسة فنية وعرض سعر واضح.'
+                : 'Share your office setup or server needs and an engineer will reply during business hours with a clear scope and quote.'}
             </p>
 
-            <div className="pt-3 space-y-2.5 border-t border-hero">
+            <div className="pt-3 space-y-2 border-t border-token">
               <div>
                 <a
                   href={NUZUL_CONTACT.whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 min-h-[44px] text-sm font-semibold text-hero-accent hover:underline"
+                  className="inline-flex items-center gap-2 min-h-[44px] text-sm font-semibold text-accent hover:underline"
                 >
-                  <MessageCircle className="w-4 h-4 shrink-0" />
+                  <MessageCircle className="w-4 h-4 shrink-0" aria-hidden="true" />
                   <span>
-                    {lang === 'ar' ? 'واتساب مباشر:' : 'Direct WhatsApp:'}{' '}
+                    {lang === 'ar' ? 'واتساب مباشر:' : 'WhatsApp:'}{' '}
                     <bdi dir="ltr" className="ltr-num">
                       {NUZUL_CONTACT.phone1}
                     </bdi>
@@ -123,9 +119,9 @@ export const HomeFinalCTA: React.FC = () => {
               <div>
                 <a
                   href={`mailto:${NUZUL_CONTACT.email}`}
-                  className="inline-flex items-center gap-2 min-h-[44px] text-sm font-medium text-hero-muted hover-text-main transition-colors"
+                  className="inline-flex items-center gap-2 min-h-[44px] text-sm font-medium text-muted hover-text-main transition-colors"
                 >
-                  <Mail className="w-4 h-4 shrink-0 text-hero-accent" />
+                  <Mail className="w-4 h-4 shrink-0 text-accent" aria-hidden="true" />
                   <bdi dir="ltr" className="ltr-num">
                     {NUZUL_CONTACT.email}
                   </bdi>
@@ -134,25 +130,23 @@ export const HomeFinalCTA: React.FC = () => {
             </div>
           </ScrollReveal>
 
-          {/* End Column: Consultation Form Wired to /api/contact */}
+          {/* End Column: Consultation Form */}
           <ScrollReveal className="lg:col-span-7" delay={0.06}>
             <div className="clean-card p-6 sm:p-8 text-main">
               {referenceId ? (
                 <div className="p-6 rounded-xl bg-success-soft border border-success text-center space-y-3">
                   <CheckCircle2 className="w-10 h-10 text-success mx-auto" />
                   <h3 className="text-lg font-bold text-main">
-                    {lang === 'ar'
-                      ? 'تم تسجيل طلب الاستشارة بنجاح'
-                      : 'Consultation Request Recorded'}
+                    {lang === 'ar' ? 'تم استلام طلبك بنجاح' : 'Request Received'}
                   </h3>
                   <p className="text-xs font-semibold text-main">
-                    {lang === 'ar' ? 'رقم المرجع:' : 'Reference ID:'}{' '}
+                    {lang === 'ar' ? 'رقم الطلب:' : 'Reference:'}{' '}
                     <bdi dir="ltr" className="ltr-num text-accent">{referenceId}</bdi>
                   </p>
                   <p className="text-sm text-muted">
                     {lang === 'ar'
-                      ? 'سيتواصل معك مهندس الحلول المختص خلال يوم عمل واحد.'
-                      : 'A solutions engineer will contact you within one business day.'}
+                      ? 'سيتواصل معك أحد مهندسينا خلال يوم عمل واحد.'
+                      : 'An engineer will get back to you within one business day.'}
                   </p>
                   <button
                     type="button"
@@ -166,7 +160,7 @@ export const HomeFinalCTA: React.FC = () => {
                     }}
                     className="text-xs font-semibold text-accent underline pt-2 min-h-[44px]"
                   >
-                    {lang === 'ar' ? 'إرسال طلب آخر' : 'Send another request'}
+                    {lang === 'ar' ? 'إرسال طلب جديد' : 'Send another request'}
                   </button>
                 </div>
               ) : (
@@ -174,7 +168,7 @@ export const HomeFinalCTA: React.FC = () => {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label htmlFor="cta-name" className="block text-xs font-semibold text-main mb-1.5">
-                        {lang === 'ar' ? 'الاسم الكامل *' : 'Full Name *'}
+                        {lang === 'ar' ? 'الاسم *' : 'Name *'}
                       </label>
                       <input
                         id="cta-name"
@@ -188,14 +182,14 @@ export const HomeFinalCTA: React.FC = () => {
                     </div>
                     <div>
                       <label htmlFor="cta-company" className="block text-xs font-semibold text-main mb-1.5">
-                        {lang === 'ar' ? 'اسم الشركة أو المؤسسة' : 'Company / Organization'}
+                        {lang === 'ar' ? 'اسم الشركة' : 'Company'}
                       </label>
                       <input
                         id="cta-company"
                         type="text"
                         value={company}
                         onChange={(e) => setCompany(e.target.value)}
-                        placeholder={lang === 'ar' ? 'اسم المؤسسة أو الشركة' : 'Organization name'}
+                        placeholder={lang === 'ar' ? 'اسم الشركة أو الجهة' : 'Company name'}
                         className="w-full min-h-[44px] px-3.5 py-2.5 text-sm input-token"
                       />
                     </div>
@@ -204,7 +198,7 @@ export const HomeFinalCTA: React.FC = () => {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label htmlFor="cta-email" className="block text-xs font-semibold text-main mb-1.5">
-                        {lang === 'ar' ? 'البريد الإلكتروني الرسمي *' : 'Work Email *'}
+                        {lang === 'ar' ? 'البريد الإلكتروني *' : 'Work Email *'}
                       </label>
                       <input
                         id="cta-email"
@@ -219,7 +213,7 @@ export const HomeFinalCTA: React.FC = () => {
                     </div>
                     <div>
                       <label htmlFor="cta-phone" className="block text-xs font-semibold text-main mb-1.5">
-                        {lang === 'ar' ? 'رقم الهاتف أو واتساب *' : 'Phone / WhatsApp *'}
+                        {lang === 'ar' ? 'الهاتف أو واتساب *' : 'Phone / WhatsApp *'}
                       </label>
                       <input
                         id="cta-phone"
@@ -236,7 +230,7 @@ export const HomeFinalCTA: React.FC = () => {
 
                   <div>
                     <label htmlFor="cta-need" className="block text-xs font-semibold text-main mb-1.5">
-                      {lang === 'ar' ? 'القطاع الهندسي المطلوب' : 'Engineering Pillar'}
+                      {lang === 'ar' ? 'الخدمة المطلوبة' : 'Service Needed'}
                     </label>
                     <select
                       id="cta-need"
@@ -245,16 +239,16 @@ export const HomeFinalCTA: React.FC = () => {
                       className="w-full min-h-[44px] px-3.5 py-2.5 text-sm input-token"
                     >
                       <option value="infrastructure">
-                        {lang === 'ar' ? 'الشبكات والبنية التحتية' : 'Infrastructure & Networks'}
+                        {lang === 'ar' ? 'الشبكات وغرف الخوادم' : 'Networks & Server Rooms'}
                       </option>
                       <option value="cloud">
-                        {lang === 'ar' ? 'السحابة والخوادم' : 'Cloud & Servers'}
+                        {lang === 'ar' ? 'السيرفرات والاستضافة' : 'Cloud Servers & Hosting'}
                       </option>
                       <option value="security">
-                        {lang === 'ar' ? 'الأمن السيبراني واستمرارية الأعمال' : 'Cybersecurity & Continuity'}
+                        {lang === 'ar' ? 'الأمن السيبراني والنسخ الاحتياطي' : 'Security & Backups'}
                       </option>
                       <option value="software">
-                        {lang === 'ar' ? 'البرمجيات وأنظمة ERP' : 'Software & Enterprise ERP'}
+                        {lang === 'ar' ? 'أنظمة ERP والبرمجيات' : 'ERP & Business Software'}
                       </option>
                     </select>
                   </div>
@@ -268,8 +262,8 @@ export const HomeFinalCTA: React.FC = () => {
                     />
                     <span>
                       {lang === 'ar'
-                        ? 'أقر بأن هذا الطلب يخص جهة أو مشروعاً فعلياً'
-                        : 'I confirm this is a genuine business inquiry'}
+                        ? 'تأكيد إرسال الطلب'
+                        : 'Confirm request submission'}
                     </span>
                   </label>
 
@@ -287,17 +281,17 @@ export const HomeFinalCTA: React.FC = () => {
                     {submitting ? (
                       <>
                         <Loader2 className="w-4 h-4 animate-spin shrink-0" />
-                        <span>{lang === 'ar' ? 'جاري التسجيل...' : 'Submitting...'}</span>
+                        <span>{lang === 'ar' ? 'جاري الإرسال...' : 'Sending...'}</span>
                       </>
                     ) : (
-                      <span>{lang === 'ar' ? 'اطلب استشارة هندسية' : 'Request Engineering Consultation'}</span>
+                      <span>{lang === 'ar' ? 'إرسال الطلب' : 'Send Request'}</span>
                     )}
                   </button>
 
                   <p className="text-[11px] text-muted text-center">
                     {lang === 'ar'
-                      ? 'تُستخدم بياناتك حصرياً للتواصل الهندسي بشأن طلبك ولا تُشارك مع أطراف خارجية.'
-                      : 'Your details are used solely to respond to your technical inquiry and are never shared with third parties.'}
+                      ? 'بياناتك للتواصل بخصوص طلبك فقط ولا نشاركها مع أي طرف ثالث.'
+                      : 'We only use your details to reply to your inquiry—never shared with third parties.'}
                   </p>
                 </form>
               )}

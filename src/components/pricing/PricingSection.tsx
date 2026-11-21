@@ -50,7 +50,7 @@ const REGIONS = [
 ];
 
 export const PricingSection: React.FC = () => {
-  const { lang, currency, setCurrency, formatPrice, addToCart } = useApp();
+  const { lang, currency, setCurrency, formatPrice, openServerConfigurator } = useApp();
   const [activeCategory, setActiveCategory] = useState<HostingCategory>('vps');
   const [billingCycle, setBillingCycle] = useState<'monthly' | 'yearly'>('yearly');
   const [region, setRegion] = useState<string>('cai');
@@ -71,25 +71,7 @@ export const PricingSection: React.FC = () => {
   const activeRegion = REGIONS.find((r) => r.id === region) || REGIONS[0];
 
   const handleOrderPlan = (plan: HostingPlan) => {
-    const price = billingCycle === 'yearly' ? plan.yearlyPriceEGP : plan.monthlyPriceEGP;
-    addToCart({
-      id: `${plan.id}-${billingCycle}-${region}`,
-      name: `${lang === 'ar' ? plan.name : plan.nameEn} (${
-        billingCycle === 'yearly'
-          ? lang === 'ar'
-            ? 'سنوي'
-            : 'Annual'
-          : lang === 'ar'
-          ? 'شهري'
-          : 'Monthly'
-      })`,
-      type: 'hosting',
-      price,
-      billingCycle,
-      details: `${plan.cpu} · ${plan.ram} · ${plan.storage} · ${
-        lang === 'ar' ? activeRegion.ar : activeRegion.en
-      } (${activeRegion.code})`,
-    });
+    openServerConfigurator(plan, region, billingCycle);
   };
 
   const scrollToMobileCard = (index: number) => {
@@ -108,12 +90,12 @@ export const PricingSection: React.FC = () => {
         {/* Section Heading */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-8 gap-6">
           <div className="max-w-2xl">
-            <p className="text-sm font-semibold text-accent mb-2">
-              {lang === 'ar' ? 'تسعير عالمي بمواصفات قياسية' : 'Predictable Cloud Infrastructure Pricing'}
+            <p className="text-xs font-semibold text-accent mb-2">
+              {lang === 'ar' ? 'مواصفات واضحة وأسعار ثابتة' : 'Clear Specs & Transparent Billing'}
             </p>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-main mb-3">
               {lang === 'ar'
-                ? 'خطط الخوادم السحابية والاستضافة المدارة'
+                ? 'خطط السيرفرات السحابية والاستضافة'
                 : 'Cloud VPS, Managed Web & Windows RDP Plans'}
             </h2>
             <p className="text-sm sm:text-base text-muted leading-relaxed">
@@ -292,20 +274,20 @@ export const PricingSection: React.FC = () => {
                 }`}
               >
                 <div>
-                  {/* Optional Recommended Label */}
-                  <div className="min-h-[26px] mb-2.5 flex items-center justify-between gap-2">
+                  {/* Unboxed Status & Region Metadata */}
+                  <div className="min-h-[24px] mb-2 flex items-center justify-between gap-2 text-xs">
                     {plan.popular ? (
-                      <span className="inline-block px-2.5 py-0.5 rounded bg-accent text-accent-contrast text-[11px] font-bold whitespace-nowrap">
+                      <span className="font-bold text-accent whitespace-nowrap">
                         {lang === 'ar' ? 'الأكثر طلباً' : 'Most Popular'}
                       </span>
                     ) : (
-                      <span className="text-[11px] font-medium text-muted">
+                      <span className="font-medium text-muted">
                         <bdi dir="ltr" className="ltr-num">{activeRegion.code}</bdi>
                       </span>
                     )}
                     {isSelectedForCompare && (
-                      <span className="text-[11px] font-bold text-accent whitespace-nowrap">
-                        {lang === 'ar' ? 'بالمقارنة' : 'In Compare'}
+                      <span className="font-semibold text-accent whitespace-nowrap">
+                        {lang === 'ar' ? 'في المقارنة' : 'Comparing'}
                       </span>
                     )}
                   </div>
@@ -459,30 +441,28 @@ export const PricingSection: React.FC = () => {
                     {lang === 'ar' ? 'إعداد وطلب الخادم' : 'Configure & Order'}
                   </button>
 
-                  {activeCategory === 'vps' && (
-                    <button
-                      type="button"
-                      onClick={() => toggleComparePlan(plan.id)}
-                      data-testid={`card-compare-btn-${plan.id}`}
-                      aria-pressed={isSelectedForCompare}
-                      className={`w-full min-h-[40px] py-2 px-3 rounded-lg text-xs font-semibold whitespace-nowrap border transition-colors inline-flex items-center justify-center gap-1.5 ${
-                        isSelectedForCompare
-                          ? 'bg-accent-soft border-accent text-accent'
-                          : 'bg-surface border-token text-muted hover-text-main'
-                      }`}
-                    >
-                      <GitCompare className="w-3.5 h-3.5 shrink-0" />
-                      <span>
-                        {isSelectedForCompare
-                          ? lang === 'ar'
-                            ? 'في جدول المقارنة'
-                            : 'Selected to Compare'
-                          : lang === 'ar'
-                          ? 'أضف للمقارنة'
-                          : 'Add to Compare'}
-                      </span>
-                    </button>
-                  )}
+                  <button
+                    type="button"
+                    onClick={() => toggleComparePlan(plan.id)}
+                    data-testid={`card-compare-btn-${plan.id}`}
+                    aria-pressed={isSelectedForCompare}
+                    className={`w-full min-h-[40px] py-2 px-3 rounded-lg text-xs font-semibold whitespace-nowrap border transition-colors inline-flex items-center justify-center gap-1.5 ${
+                      isSelectedForCompare
+                        ? 'bg-accent-soft border-accent text-accent'
+                        : 'bg-surface border-token text-muted hover-text-main'
+                    }`}
+                  >
+                    <GitCompare className="w-3.5 h-3.5 shrink-0" />
+                    <span>
+                      {isSelectedForCompare
+                        ? lang === 'ar'
+                          ? 'في جدول المقارنة'
+                          : 'Selected to Compare'
+                        : lang === 'ar'
+                        ? 'أضف للمقارنة'
+                        : 'Add to Compare'}
+                    </span>
+                  </button>
                 </div>
               </div>
             );
