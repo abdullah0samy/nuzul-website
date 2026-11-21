@@ -27,23 +27,23 @@ export const HeroSection: React.FC = () => {
 
   const keySpecs = [
     {
-      labelAr: 'تجهيز الشبكات',
+      labelAr: 'تأسيس الشبكات',
       labelEn: 'Office Networking',
       value: 'Cat6A · Fiber · Fortinet',
     },
     {
-      labelAr: 'السيرفرات السحابية',
+      labelAr: 'سيرفرات Cloud VPS',
       labelEn: 'Cloud Compute',
       value: 'KVM · NVMe RAID-10',
     },
     {
-      labelAr: 'النسخ الاحتياطي',
+      labelAr: 'الـ Backup والحماية',
       labelEn: 'Disaster Recovery',
       value: '3-2-1 Immutable Backup',
     },
     {
-      labelAr: 'مواقع الاستضافة',
-      labelEn: 'Regions',
+      labelAr: 'الداتا سنتر',
+      labelEn: 'Data Centers',
       value: lang === 'ar' ? 'القاهرة · فرانكفورت · الرياض' : 'Cairo · Frankfurt · Riyadh',
     },
   ];
@@ -63,14 +63,14 @@ export const HeroSection: React.FC = () => {
               }`}
             >
               {lang === 'ar'
-                ? 'تأسيس الشبكات، خوادم KVM، وأنظمة ERP للشركات'
-                : 'Office Networks, KVM Cloud Servers & ERP for Growing Businesses'}
+                ? 'تأسيس شبكات، سيرفرات Cloud VPS، وأنظمة ERP للشركات'
+                : 'Office Networks, KVM Cloud VPS & ERP for Growing Businesses'}
             </h1>
 
             <p className="text-base sm:text-lg text-hero-muted leading-relaxed max-w-2xl">
               {lang === 'ar'
-                ? 'نجهّز غرف الخوادم والشبكات الداخلية، نشغّل سيرفراتك على أقراص NVMe، ونتولى التأمين والصيانة بعقد SLA واضح وفريق واحد مسؤول.'
-                : 'We build office networks, run dedicated NVMe servers, and manage security and support under one clear SLA—no finger-pointing across vendors.'}
+                ? 'بنجهّز السيرفر رووم والشبكات الداخلية، بنشغّل سيرفراتك على هاردات NVMe، ونتولى التأمين والـ Backup والصيانة بعقد SLA واضح وفريق واحد مسؤول.'
+                : 'We build office networks and server rooms, run NVMe KVM servers, and handle security, backups, and SLA support under one accountable team.'}
             </p>
 
             {/* Primary & Secondary CTAs */}
@@ -89,7 +89,7 @@ export const HeroSection: React.FC = () => {
                 data-testid="hero-secondary-cta"
                 className="btn-hero-secondary w-full sm:w-auto h-12 px-7 text-sm sm:text-base hover-lift"
               >
-                <span>{lang === 'ar' ? 'أسعار الخوادم' : 'Server Pricing'}</span>
+                <span>{lang === 'ar' ? 'أسعار السيرفرات' : 'Server Pricing'}</span>
               </Link>
             </div>
 
@@ -120,7 +120,7 @@ export const HeroSection: React.FC = () => {
           <div className="lg:col-span-5 glass-panel p-6 sm:p-7 space-y-5">
             <div className="flex items-center justify-between gap-3 pb-3.5 border-b border-token">
               <h2 className="text-sm font-bold text-main">
-                {lang === 'ar' ? 'نطاق العمل الأساسي' : 'Core Infrastructure Stack'}
+                {lang === 'ar' ? 'التخصصات الأساسية' : 'Core Infrastructure Stack'}
               </h2>
               <span dir="ltr" className="ltr-num text-xs font-semibold text-accent">
                 Cairo · Egypt
@@ -148,7 +148,7 @@ export const HeroSection: React.FC = () => {
             <div className="pt-3 border-t border-token flex items-center justify-between gap-3 text-xs">
               <span className="text-muted">
                 {lang === 'ar'
-                  ? 'تسليم كامل لكلمات المرور ومخططات الشبكة'
+                  ? 'تسليم كامل للـ Root Access ومخطط الشبكة'
                   : 'Full root credentials & network handover'}
               </span>
               <Link

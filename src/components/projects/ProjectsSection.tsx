@@ -24,10 +24,10 @@ interface CaseCategoryDef {
 
 const CASE_CATEGORIES: CaseCategoryDef[] = [
   { slug: 'all', nameAr: 'جميع المشاريع', nameEn: 'All Case Studies' },
-  { slug: 'infrastructure', nameAr: 'الشبكات والبنية التحتية', nameEn: 'Infrastructure & Networks' },
-  { slug: 'cloud', nameAr: 'السحابة والاستضافة', nameEn: 'Cloud & Servers' },
-  { slug: 'security', nameAr: 'الأمن السيبراني', nameEn: 'Cybersecurity' },
-  { slug: 'software', nameAr: 'البرمجيات وأنظمة الإدارة', nameEn: 'Software & ERP' },
+  { slug: 'infrastructure', nameAr: 'الشبكات والسيرفر رووم', nameEn: 'Networks & Server Rooms' },
+  { slug: 'cloud', nameAr: 'سيرفرات Cloud VPS والاستضافة', nameEn: 'Cloud VPS & Hosting' },
+  { slug: 'security', nameAr: 'الأمن السيبراني والـ Backup', nameEn: 'Cybersecurity & Backup' },
+  { slug: 'software', nameAr: 'أنظمة ERP والبرمجيات', nameEn: 'ERP & Business Software' },
 ];
 
 const SORT_OPTIONS = [
@@ -193,7 +193,7 @@ export const ProjectsSection: React.FC = () => {
 
             <div>
               <h2 className="text-xs font-bold text-accent mb-3">
-                {lang === 'ar' ? 'تصفية حسب القطاع التقني' : 'Filter by Engineering Pillar'}
+                {lang === 'ar' ? 'تصفية حسب القسم' : 'Filter by Category'}
               </h2>
               <div className="space-y-1.5" role="group" aria-label={lang === 'ar' ? 'تصنيفات المشاريع' : 'Case study categories'}>
                 {CASE_CATEGORIES.map((cat) => {
@@ -276,13 +276,13 @@ export const ProjectsSection: React.FC = () => {
                 >
                   {lang === 'ar' ? (
                     <span>
-                      عرض <bdi dir="ltr" className="ltr-num text-accent">{visibleProjects.length}</bdi> من أصل{' '}
-                      <bdi dir="ltr" className="ltr-num">{filteredProjects.length}</bdi> دراسة حالة هندسية
+                      عرض <bdi dir="ltr" className="ltr-num text-accent">{visibleProjects.length}</bdi> من{' '}
+                      <bdi dir="ltr" className="ltr-num">{filteredProjects.length}</bdi> مشروع منفّذ
                     </span>
                   ) : (
                     <span>
                       Showing <bdi dir="ltr" className="ltr-num text-accent">{visibleProjects.length}</bdi> of{' '}
-                      <bdi dir="ltr" className="ltr-num">{filteredProjects.length}</bdi> engineering case studies
+                      <bdi dir="ltr" className="ltr-num">{filteredProjects.length}</bdi> delivered projects
                     </span>
                   )}
                 </div>
@@ -359,13 +359,13 @@ export const ProjectsSection: React.FC = () => {
               >
                 <h3 className="text-xl font-bold text-main">
                   {lang === 'ar'
-                    ? 'لا توجد دراسات حالة مطابقة للفلاتر المحددة'
-                    : 'No case studies match your selected filters'}
+                    ? 'مفيش مشاريع مطابقة للفلتر ده'
+                    : 'No projects match your selected filters'}
                 </h3>
                 <p className="text-sm text-muted max-w-md mx-auto">
                   {lang === 'ar'
-                    ? 'يمكنك مسح الفلاتر لاستعراض كافة المشاريع المنفذة أو التواصل مع فريقنا الهندسي لمناقشة مشروع مماثل.'
-                    : 'Clear the active filters to view all documented deployments or contact our engineering team directly.'}
+                    ? 'امسح الفلاتر عشان تشوف كل سابقة أعمالنا، أو تواصل مع فريقنا لو عندك مشروع مشابه.'
+                    : 'Clear active filters to view all delivered projects or contact our team about a similar scope.'}
                 </p>
                 <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
                   <button
@@ -373,10 +373,10 @@ export const ProjectsSection: React.FC = () => {
                     onClick={handleClearAllFilters}
                     className="btn-secondary px-5 py-2.5 text-xs font-bold"
                   >
-                    {lang === 'ar' ? 'عرض جميع المشاريع' : 'Show All Case Studies'}
+                    {lang === 'ar' ? 'عرض كل المشاريع' : 'Show All Projects'}
                   </button>
                   <Link to="/contact" className="btn-primary px-5 py-2.5 text-xs font-bold">
-                    {lang === 'ar' ? 'احجز استشارة هندسية' : 'Book Engineering Consultation'}
+                    {lang === 'ar' ? 'اطلب عرض سعر' : 'Request a Quote'}
                   </Link>
                 </div>
               </div>

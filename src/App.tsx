@@ -112,11 +112,11 @@ const NotFoundPage: React.FC = () => {
   const recoveryLinks = [
     { to: '/', labelAr: 'الصفحة الرئيسية', labelEn: 'Home Page' },
     { to: '/about', labelAr: 'عن نزول تك', labelEn: 'About Us' },
-    { to: '/services', labelAr: 'الخدمات الهندسية', labelEn: 'Engineering Services' },
-    { to: '/hosting', labelAr: 'الاستضافة والخوادم', labelEn: 'Hosting & Servers' },
-    { to: '/pricing', labelAr: 'خطط الأسعار', labelEn: 'Pricing Plans' },
-    { to: '/case-studies', labelAr: 'دراسات الحالة', labelEn: 'Case Studies' },
-    { to: '/blog', labelAr: 'المدونة التقنية', labelEn: 'Technical Blog' },
+    { to: '/services', labelAr: 'الخدمات', labelEn: 'Services' },
+    { to: '/hosting', labelAr: 'السيرفرات والاستضافة', labelEn: 'Servers & Hosting' },
+    { to: '/pricing', labelAr: 'الأسعار والباقات', labelEn: 'Pricing Plans' },
+    { to: '/case-studies', labelAr: 'سابقة الأعمال', labelEn: 'Case Studies' },
+    { to: '/blog', labelAr: 'المدونة', labelEn: 'Tech Blog' },
     { to: '/contact', labelAr: 'تواصل معنا', labelEn: 'Contact Us' },
   ];
 
@@ -139,23 +139,23 @@ const NotFoundPage: React.FC = () => {
 
             <h1 className="text-3xl md:text-4xl font-bold text-main">
               {lang === 'ar'
-                ? 'عذراً، الصفحة التي تبحث عنها غير موجودة أو تم نقلها'
-                : 'Sorry, the page you are looking for does not exist or has moved'}
+                ? 'الصفحة اللي بتدور عليها مش موجودة أو رابطها اتغير'
+                : 'The page you are looking for does not exist or has moved'}
             </h1>
 
             <p className="text-muted text-base leading-relaxed max-w-xl mx-auto">
               {lang === 'ar'
-                ? 'يمكنك العودة إلى الصفحة الرئيسية أو الانتقال مباشرة إلى أحد الأقسام الرئيسية لموقع نزول تك عبر الروابط التالية:'
-                : 'You can return to the home page or jump directly to any of Nuzul Tech’s core sections below:'}
+                ? 'تقدر ترجع للصفحة الرئيسية أو تدخل مباشرة على أي قسم من أقسام نزول تك من الروابط دي:'
+                : 'Return to the home page or jump straight to any section of Nuzul Tech below:'}
             </p>
 
             <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
               <Link to="/" className="btn-primary px-6 py-3 text-sm">
-                <span>{lang === 'ar' ? 'العودة إلى الصفحة الرئيسية' : 'Back to Home Page'}</span>
+                <span>{lang === 'ar' ? 'الرجوع للرئيسية' : 'Back to Home'}</span>
                 <ArrowIcon className="w-4 h-4" />
               </Link>
               <Link to="/contact" className="btn-secondary px-6 py-3 text-sm">
-                {lang === 'ar' ? 'تواصل مع الفريق الهندسي' : 'Contact Engineering Team'}
+                {lang === 'ar' ? 'تواصل مع فريقنا' : 'Contact Our Team'}
               </Link>
             </div>
 
@@ -186,8 +186,8 @@ const NotFoundPage: React.FC = () => {
 const HomePage: React.FC = () => (
   <>
     <PageMeta
-      titleAr="البنية التحتية السحابية والأمن السيبراني للشركات في مصر"
-      titleEn="Enterprise IT Infrastructure, Cloud & Cybersecurity in Egypt"
+      titleAr="سيرفرات Cloud VPS وشبكات وأمن سيبراني للشركات في مصر"
+      titleEn="Cloud VPS, Enterprise Networks & Cybersecurity in Egypt"
     />
     <RouteErrorBoundary sectionName="HomeHero" variant="section">
       <HeroSection />
@@ -214,60 +214,60 @@ const AboutPage: React.FC = () => {
   const governancePillars = [
     {
       id: 'ownership',
-      titleAr: 'ملكية كاملة للعميل دون قيود احتكار',
+      titleAr: 'ملكية كاملة للعميل بدون أي احتكار',
       titleEn: 'Full Client Ownership & Zero Vendor Lock-In',
       bodyAr:
-        'يستلم العميل كامل الصلاحيات الإدارية (Root / Admin)، الأكواد البرمجية، وقواعد البيانات مع وثيقة تشغيل هندسية مفصلة (Runbook) لاستقلالية الإدارة.',
+        'بتستلم كامل صلاحيات الـ Root والـ Admin، والأكواد، وقواعد البيانات مع ملف توثيق تشغيل واضح (Runbook) عشان تكون مستقل تماماً في إدارة أنظمتك.',
       bodyEn:
-        'Clients receive complete Root/Admin credentials, source repositories, and database schemas alongside a formal operational Runbook.',
+        'Clients receive complete Root/Admin credentials, source code, and database schemas alongside a practical operational Runbook.',
     },
     {
       id: 'sla',
-      titleAr: 'عقود مستوى خدمة SLA بمستويات استجابة محددة',
-      titleEn: 'Formal SLAs with Defined Escalation Tiers',
+      titleAr: 'عقود SLA بمواعيد استجابة واضحة',
+      titleEn: 'Formal SLAs with Clear Response Tiers',
       bodyAr:
-        'نحدد مستويات الأولوية للحوادث (P1–P4)، أوقات الاستجابة الأولية، ونوافذ الصيانة المجدولة مسبقاً ضمن العقود السنوية للشركات.',
+        'في كل عقد شركة بنحدد أولويات الأعطال (P1–P4)، ومواعيد الاستجابة، وأوقات الصيانة المجدولة عشان ما يبقاش فيه أي مفاجآت وقت الضغط.',
       bodyEn:
-        'Every corporate contract specifies P1–P4 incident severities, acknowledgment windows, and pre-notified maintenance schedules.',
+        'Every corporate contract specifies P1–P4 incident severities, response windows, and scheduled maintenance slots.',
     },
     {
       id: 'invoicing',
-      titleAr: 'شفافية مالية وتعاقدية بالجنيه المصري',
-      titleEn: 'Transparent Local EGP Commercial Contracting',
+      titleAr: 'تسعير شفاف وفواتير ضريبية بالجنيه المصري',
+      titleEn: 'Transparent Local EGP Contracting',
       bodyAr:
-        'تسعير محدد بالعملة المحلية للاستضافة وعقود الإدارة، مع فواتير ضريبية رسمية لقطاعات الأعمال.',
+        'أسعار واضحة بالجنيه المصري لسيرفرات الـ Cloud VPS وعقود الإدارة والصيانة، مع فواتير إلكترونية ضريبية رسمية للشركات.',
       bodyEn:
-        'Clear EGP contracting for managed hosting and infrastructure projects with formal corporate invoicing.',
+        'Clear EGP contracting for managed hosting and infrastructure projects with official Egyptian tax invoicing.',
     },
   ];
 
   const slaMatrix = [
     {
       tier: 'P1',
-      nameAr: 'انقطاع حرج بالنظام الرئيسي',
+      nameAr: 'توقف حرج في السيرفر أو السيستم الرئيسي',
       nameEn: 'Critical System Outage',
-      ackAr: 'تصعيد عاجل وفق عقد الطوارئ المتفق عليه',
+      ackAr: 'تدخل فوري عبر خط الطوارئ حسب بنود عقد الـ SLA',
       ackEn: 'Priority emergency escalation per SLA',
     },
     {
       tier: 'P2',
-      nameAr: 'تأثر أداء خدمة أو قاعدة بيانات',
+      nameAr: 'بطء أو خلل في خدمة أو قاعدة بيانات',
       nameEn: 'High Service Degradation',
-      ackAr: 'استجابة ذات أولوية خلال ساعات التغطية',
+      ackAr: 'أولوية قصوى للفحص والمعالجة خلال ساعات التغطية',
       ackEn: 'Priority triage during active coverage',
     },
     {
       tier: 'P3',
-      nameAr: 'طلب تعديل إعدادات أو صلاحيات',
+      nameAr: 'طلب تعديل إعدادات أو صلاحيات مستخدمين',
       nameEn: 'Standard Configuration Request',
-      ackAr: 'خلال نفس يوم العمل الرسمي',
+      ackAr: 'يُنفذ خلال نفس يوم العمل الرسمي',
       ackEn: 'Same business day turnaround',
     },
     {
       tier: 'P4',
-      nameAr: 'مراجعة وقائية أو استفسار استشاري',
+      nameAr: 'مراجعة دورية أو استشارة تقنية',
       nameEn: 'Advisory & Preventive Review',
-      ackAr: 'مجدول ضمن خطة الصيانة الدورية',
+      ackAr: 'مجدول ضمن خطة الصيانة الشهرية',
       ackEn: 'Scheduled within maintenance cycle',
     },
   ];
@@ -275,25 +275,25 @@ const AboutPage: React.FC = () => {
   return (
     <>
       <PageMeta
-        titleAr="عن نزول تك — المنهجية الهندسية وعقود SLA"
-        titleEn="About Nuzul Tech — Engineering Methodology & SLA"
+        titleAr="عن نزول تك — طريقة شغلنا وعقود الـ SLA"
+        titleEn="About Nuzul Tech — How We Work & SLA"
       />
       <section className="bg-surface-band border-b border-token py-14">
         <div className="container-nuzul">
           <div className="text-accent text-xs font-semibold mb-2">
             {lang === 'ar'
-              ? 'القاهرة، مصر · هندسة البنية التحتية'
-              : 'Cairo, Egypt · IT Infrastructure Engineering'}
+              ? 'القاهرة، مصر · البنية التحتية والـ IT للشركات'
+              : 'Cairo, Egypt · Enterprise IT Infrastructure'}
           </div>
           <h1 className="text-3xl md:text-5xl font-bold text-main mb-4">
             {lang === 'ar'
-              ? 'نزول تك: فريق هندسي مسؤول عن شبكتك وخوادمك'
+              ? 'نزول تك: فريق IT مسؤول عن شبكتك وسيرفراتك'
               : 'Nuzul Tech: One Accountable Infrastructure Team'}
           </h1>
           <p className="text-muted text-base md:text-lg max-w-3xl leading-relaxed">
             {lang === 'ar'
-              ? 'نعمل مع الشركات، المستشفيات، مكاتب المحاسبة، وشركات النقل لتجهيز الشبكات وإدارة السيرفرات السحابية وتطوير برامج العمل بتوثيق كامل وصلاحيات باسم العميل.'
-              : 'We work with businesses, hospitals, accounting firms, and logistics fleets to build structured networks, run cloud servers, and deliver business software with full client ownership.'}
+              ? 'بنشتغل مع الشركات، المستشفيات، مكاتب المحاسبة، وشركات الشحن في تجهيز الشبكات والسيرفر رووم، وتشغيل سيرفرات الـ Cloud VPS، وتطوير أنظمة العمل بتوثيق كامل وصلاحيات باسم العميل.'
+              : 'We work with businesses, hospitals, accounting firms, and logistics fleets to build structured networks, run Cloud VPS servers, and deliver business software with full client ownership.'}
           </p>
         </div>
       </section>
@@ -318,13 +318,13 @@ const AboutPage: React.FC = () => {
             <div>
               <h2 className="text-xl sm:text-2xl font-bold text-main mb-2">
                 {lang === 'ar'
-                  ? 'تصنيف أولويات البلاغات في عقود مستوى الخدمة (SLA)'
+                  ? 'تصنيف أولويات البلاغات في عقود الـ SLA'
                   : 'Incident Severity Classification in SLA Contracts'}
               </h2>
               <p className="text-sm text-muted leading-relaxed">
                 {lang === 'ar'
-                  ? 'نحدد مع كل عميل مستوى التغطية (8×5 أو 24/7) ومسار التصعيد الهندسي حسب أهمية كل خدمة تشغيلية.'
-                  : 'Each enterprise agreement defines coverage hours (8x5 or 24/7) and direct escalation paths mapped to system criticality.'}
+                  ? 'بنحدد مع كل عميل ساعات التغطية (8×5 أو 24/7) ومسار التصعيد الفني المباشر حسب أهمية كل سيرفر وخدمة.'
+                  : 'Each corporate agreement defines coverage hours (8x5 or 24/7) and direct escalation paths mapped to system criticality.'}
               </p>
             </div>
 
@@ -368,8 +368,8 @@ const ServicesPage: React.FC = () => {
           </h1>
           <p className="text-muted text-base md:text-lg max-w-2xl leading-relaxed">
             {lang === 'ar'
-              ? 'نصمم وننفذ الشبكات وغرف الخوادم، ونشغّل الخوادم السحابية، ونؤمّن الأنظمة، ونطوّر أنظمة الأعمال (ERP وتطبيقات الويب والموبايل). الدعم والصيانة بعقود SLA.'
-              : 'We design and deploy networks and server rooms, operate cloud servers, harden systems, and develop business software (ERP, web, and mobile apps) with SLA support.'}
+              ? 'بنصمم وننفذ الشبكات والسيرفر رووم، ونشغّل سيرفرات الـ Cloud VPS، ونأمّن الأنظمة بالـ Firewall والـ Backup، ونطوّر أنظمة ERP وتطبيقات الويب والموبايل بعقود دعم SLA.'
+              : 'We design and deploy networks and server rooms, operate Cloud VPS servers, harden systems with firewalls and backups, and build ERP, web, and mobile apps under SLA support.'}
           </p>
         </div>
       </section>
@@ -411,8 +411,8 @@ const PricingPage: React.FC = () => {
   return (
     <>
       <PageMeta
-        titleAr="خطط الأسعار والباقات المؤسسية"
-        titleEn="Pricing & Enterprise Packages"
+        titleAr="الأسعار وباقات تجهيز الشركات"
+        titleEn="Pricing & Office Packages"
       />
       <section className="bg-surface-band border-b border-token py-14">
         <div className="container-nuzul">
@@ -426,8 +426,8 @@ const PricingPage: React.FC = () => {
           </h1>
           <p className="text-muted text-base md:text-lg max-w-2xl leading-relaxed">
             {lang === 'ar'
-              ? 'مواصفات هاردوير محددة للخوادم السحابية، وباقات واضحة لتجهيز شبكات المقرات والفروع بفاتورة محلية.'
-              : 'Transparent hardware specs for cloud servers and turnkey office infrastructure packages.'}
+              ? 'مواصفات هاردوير حقيقية لسيرفرات الـ Cloud VPS، وباقات واضحة لتجهيز شبكات المقرات والفروع بفاتورة ضريبية مصرية.'
+              : 'Transparent hardware specs for Cloud VPS servers and turnkey office infrastructure packages.'}
           </p>
         </div>
       </section>
@@ -450,55 +450,55 @@ const HostingPage: React.FC = () => {
   const infraCapabilities = [
     {
       id: 'cap-nvme',
-      titleAr: 'تخزين NVMe ومعالجات خوادم مخصصة',
-      titleEn: 'NVMe Arrays & Server-Grade Compute',
+      titleAr: 'هاردات NVMe ومعالجات سيرفرات مخصصة',
+      titleEn: 'NVMe Storage & Server-Grade Compute',
       bodyAr:
-        'تعتمد الخوادم الافتراضية على مصفوفات تخزين NVMe (مع RAID-10 في خطط الشركات) لتسريع عمليات القراءة والكتابة لقواعد البيانات وأنظمة ERP.',
+        'كل سيرفرات الـ Cloud VPS شغالة على هاردات NVMe سريعة (بمصفوفة RAID-10 في باقات الشركات) عشان قواعد البيانات وأنظمة الـ ERP تشتغل بسرعة واستقرار.',
       bodyEn:
-        'Virtual machines run on NVMe storage (with RAID-10 on Enterprise tiers) to sustain high IOPS for transactional databases and ERP workloads.',
+        'All Cloud VPS instances run on fast NVMe storage (RAID-10 on business tiers) to keep SQL databases and ERP systems responsive.',
     },
     {
       id: 'cap-kvm',
-      titleAr: 'عزل على مستوى النواة (KVM) وحماية الشبكة',
-      titleEn: 'Kernel-Level KVM Isolation & Network Filtering',
+      titleAr: 'عزل كامل عبر KVM وحماية ضد هجمات DDoS',
+      titleEn: 'Kernel-Level KVM Isolation & DDoS Protection',
       bodyAr:
-        'يتم عزل كل خادم افتراضي عبر تقنية KVM لمنع تداخل الموارد، مع تصفية حركة المرور ضد هجمات حجب الخدمة (DDoS) وتطبيق سياسات Firewall.',
+        'كل سيرفر معزول تماماً عبر KVM عشان ما يحصلش أي تداخل في الموارد، مع فلترة للترافيك ضد هجمات الـ DDoS وقواعد Firewall جاهزة.',
       bodyEn:
-        'Each VPS is isolated via KVM virtualization to prevent resource contention, backed by network-layer DDoS filtering and firewall policy enforcement.',
+        'Each VPS is isolated via KVM virtualization to prevent resource contention, backed by network-layer DDoS filtering and firewall rules.',
     },
     {
       id: 'cap-backups',
-      titleAr: 'نسخ احتياطي مجدول ودعم هندسي',
-      titleEn: 'Scheduled Backups & Systems Engineering Support',
+      titleAr: 'Backup مجدول وSnapshots ودعم فني مباشر',
+      titleEn: 'Scheduled Backups, Snapshots & Direct Support',
       bodyAr:
-        'جدولة نسخ احتياطي آلي (أسبوعي أو يومي حسب الخطة) مع إمكانية استعادة اللقطات السريعة (Snapshots) والتواصل المباشر مع مهندسي النظم.',
+        'نسخ احتياطي أوتوماتيك (أسبوعي أو يومي حسب الباقة) مع إمكانية أخذ واسترجاع Snapshots في ثواني وتواصل مباشر مع مهندسي الـ Linux والـ Windows.',
       bodyEn:
-        'Automated weekly or daily backup retention with on-demand Snapshots and direct escalation to Linux/Windows systems engineers.',
+        'Automated weekly or daily backups with instant Snapshots and direct escalation to Linux/Windows systems engineers.',
     },
   ];
 
   return (
     <>
       <PageMeta
-        titleAr="الاستضافة السحابية والخوادم المخصصة"
-        titleEn="Cloud Hosting & Dedicated Servers"
+        titleAr="السيرفرات السحابية (Cloud VPS) والاستضافة"
+        titleEn="Cloud VPS & Dedicated Hosting"
       />
       <section className="bg-surface-band border-b border-token py-16">
         <div className="container-nuzul">
           <p className="text-sm font-semibold text-accent mb-2">
             {lang === 'ar'
-              ? 'البنية السحابية واستضافة الأعمال'
-              : 'Cloud Infrastructure & Business Hosting'}
+              ? 'السيرفرات السحابية واستضافة الأعمال'
+              : 'Cloud Servers & Business Hosting'}
           </p>
           <h1 className="text-3xl md:text-5xl font-bold text-main mb-4">
             {lang === 'ar'
-              ? 'استضافة سحابية وخوادم افتراضية (Cloud VPS) للشركات'
+              ? 'استضافة وسيرفرات Cloud VPS للشركات'
               : 'Enterprise Cloud Hosting & KVM Virtual Servers'}
           </h1>
           <p className="text-muted text-base md:text-lg max-w-2xl leading-relaxed">
             {lang === 'ar'
-              ? 'خوادم لينكس وويندوز بمعالجات AMD EPYC وIntel Xeon وأقراص NVMe، مع عزل موارد كامل على مستوى النواة (KVM) ودعم فني هندسي.'
-              : 'Linux and Windows servers powered by AMD EPYC and Intel Xeon processors with NVMe storage, kernel-level KVM isolation, and engineering support.'}
+              ? 'سيرفرات Linux وWindows بمعالجات AMD EPYC وIntel Xeon وهاردات NVMe، مع عزل موارد كامل عبر KVM ودعم فني من مهندسين حقيقيين.'
+              : 'Linux and Windows servers powered by AMD EPYC and Intel Xeon processors with NVMe storage, KVM isolation, and direct engineer support.'}
           </p>
         </div>
       </section>
@@ -522,19 +522,19 @@ const HostingPage: React.FC = () => {
               <Server className="w-4 h-4" />
               <span>
                 {lang === 'ar'
-                  ? 'مواقع التشغيل والاستضافة'
-                  : 'Deployment Regions'}
+                  ? 'مواقع الداتا سنتر'
+                  : 'Datacenter Regions'}
               </span>
             </div>
             <h2 className="text-2xl md:text-3xl font-bold text-main mb-3">
               {lang === 'ar'
-                ? 'مناطق مراكز البيانات المتاحة لنشر الخوادم'
+                ? 'مواقع الداتا سنتر المتاحة لتشغيل سيرفرك'
                 : 'Available Datacenter Regions for Server Provisioning'}
             </h2>
             <p className="text-muted text-sm md:text-base leading-relaxed">
               {lang === 'ar'
-                ? 'اختر موقع النشر الأقرب لعملائك ومقرات عملك لتقليل زمن الاستجابة الشبكي (Latency) والامتثال لمتطلبات توطين البيانات.'
-                : 'Select the deployment region closest to your users and branch offices to optimize network latency and data residency.'}
+                ? 'اختار الداتا سنتر الأقرب لعملائك وفروعك عشان تاخد أقل Latency ممكن وتلتزم بمتطلبات استضافة البيانات.'
+                : 'Pick the datacenter closest to your users and offices to minimize network latency and meet data residency needs.'}
             </p>
           </div>
 
@@ -600,23 +600,23 @@ const CaseStudiesPage: React.FC = () => {
   return (
     <>
       <PageMeta
-        titleAr="دراسات الحالة وسجل المشاريع"
-        titleEn="Case Studies & Engineering Portfolio"
+        titleAr="سابقة الأعمال والمشاريع المنفذة"
+        titleEn="Case Studies & Delivered Projects"
       />
       <section className="bg-surface-band border-b border-token py-16">
         <div className="container-nuzul">
           <p className="text-sm font-semibold text-accent mb-2">
-            {lang === 'ar' ? 'سجل المشاريع والحلول المنفذة' : 'Documented Engineering Engagements'}
+            {lang === 'ar' ? 'شغل حقيقي على أرض الواقع' : 'Real Production Deployments'}
           </p>
           <h1 className="text-3xl md:text-5xl font-bold text-main mb-4">
             {lang === 'ar'
-              ? 'دراسات حالة لمشاريع البنية التحتية والسحابة'
+              ? 'سابقة أعمالنا في الشبكات والسيرفرات والأنظمة'
               : 'Infrastructure & Cloud Case Studies'}
           </h1>
           <p className="text-muted text-base md:text-lg max-w-2xl leading-relaxed">
             {lang === 'ar'
-              ? 'استعرض كيف ساعدنا الشركات والمراكز الطبية والمؤسسات على رفع كفاءة أنظمتها وتقليل الأعطال وتأمين بياناتها.'
-              : 'Explore how we helped enterprises, medical centers, and institutions improve uptime, modernize infrastructure, and secure critical workloads.'}
+              ? 'شوف إزاي ساعدنا شركات ومستشفيات ومكاتب محاسبة في تجهيز شبكاتها ونقل أنظمتها على سيرفرات مستقرة وتأمين بياناتها.'
+              : 'See how we helped companies, hospitals, and accounting firms stabilize networks, move to Cloud VPS, and secure their data.'}
           </p>
         </div>
       </section>
@@ -653,7 +653,7 @@ const CaseStudyDetailPage: React.FC = () => {
               to="/case-studies"
               className="inline-flex items-center gap-2 min-h-[44px] text-sm font-semibold text-accent hover:underline"
             >
-              {lang === 'ar' ? 'العودة إلى جميع دراسات الحالة' : 'Back to all case studies'}
+              {lang === 'ar' ? 'الرجوع لسابقة الأعمال' : 'Back to all case studies'}
             </Link>
           </div>
 
@@ -688,7 +688,7 @@ const CaseStudyDetailPage: React.FC = () => {
                 className="p-6 rounded-xl bg-page border border-token mb-6"
               >
                 <h2 className="text-lg font-bold text-main mb-2">
-                  {lang === 'ar' ? 'سياق المشروع وبيئة العميل' : 'Project Context & Environment'}
+                  {lang === 'ar' ? 'خلفية المشروع وبيئة العمل' : 'Project Context & Environment'}
                 </h2>
                 <p className="text-muted text-base leading-relaxed">
                   {lang === 'ar' ? project.contextAr : project.contextEn}
@@ -702,7 +702,7 @@ const CaseStudyDetailPage: React.FC = () => {
                   className="p-6 rounded-xl bg-page border border-token"
                 >
                   <h2 className="text-lg font-bold text-main mb-3">
-                    {lang === 'ar' ? 'التحدي التشغيلي' : 'The Operational Challenge'}
+                    {lang === 'ar' ? 'التحدي والمشكلة' : 'The Challenge'}
                   </h2>
                   <p className="text-muted text-base leading-relaxed">
                     {lang === 'ar' ? project.challenge : project.challengeEn}
@@ -713,7 +713,7 @@ const CaseStudyDetailPage: React.FC = () => {
                   className="p-6 rounded-xl bg-page border border-token"
                 >
                   <h2 className="text-lg font-bold text-main mb-3">
-                    {lang === 'ar' ? 'الحل الهندسي المنفذ' : 'Engineering Solution'}
+                    {lang === 'ar' ? 'اللي نفذناه' : 'What We Built'}
                   </h2>
                   <p className="text-muted text-base leading-relaxed">
                     {lang === 'ar' ? project.solution : project.solutionEn}
@@ -725,7 +725,7 @@ const CaseStudyDetailPage: React.FC = () => {
               {deliverables.length > 0 && (
                 <div className="p-6 rounded-xl bg-page border border-token mb-8">
                   <h2 className="text-lg font-bold text-main mb-4">
-                    {lang === 'ar' ? 'المخرجات والنطاق الهندسي المنفذ' : 'Delivered Engineering Scope'}
+                    {lang === 'ar' ? 'نطاق التنفيذ والتسليم' : 'Delivered Scope'}
                   </h2>
                   <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     {deliverables.map((item, idx) => (
@@ -745,7 +745,7 @@ const CaseStudyDetailPage: React.FC = () => {
               >
                 <h2 className="text-lg font-bold text-main mb-2">
                   {lang === 'ar'
-                    ? 'الأثر التشغيلي'
+                    ? 'النتيجة على أرض الواقع'
                     : 'Operational Outcome'}
                 </h2>
                 <p className="text-main text-base leading-relaxed">
@@ -761,9 +761,9 @@ const CaseStudyDetailPage: React.FC = () => {
                   testId={`case-study-image-slot-${project.id}`}
                   photoVariant="rack"
                   aspectRatio="video"
-                  descriptionAr={`تجهيز كبائن الشبكات والخوادم — ${project.title}`}
+                  descriptionAr={`تجهيز الراكات والسيرفر رووم — ${project.title}`}
                   descriptionEn={`Server rack and network switch commissioning — ${project.titleEn}`}
-                  captionAr={`تنظيم كابلات الشبكة ومفاتيح التبديل — ${project.category}`}
+                  captionAr={`تنظيم كابلات الشبكة والسويتشات — ${project.category}`}
                   captionEn={`Structured switching and rack cabling — ${project.categoryEn}`}
                 />
               </div>
@@ -781,7 +781,7 @@ const CaseStudyDetailPage: React.FC = () => {
                   ))}
                 </div>
                 <Link to="/contact" className="btn-primary px-6 py-3 min-h-[44px] text-sm whitespace-nowrap">
-                  {lang === 'ar' ? 'اطلب استشارة لمشروع مماثل' : 'Discuss a Similar Project'}
+                  {lang === 'ar' ? 'اطلب عرض سعر لمشروع مماثل' : 'Discuss a Similar Project'}
                 </Link>
               </div>
             </div>
@@ -798,23 +798,23 @@ const BlogPage: React.FC = () => {
   return (
     <>
       <PageMeta
-        titleAr="المدونة التقنية والمقالات الهندسية"
-        titleEn="Technical Blog & Engineering Insights"
+        titleAr="المدونة والشروحات التقنية"
+        titleEn="Technical Blog & Guides"
       />
       <section className="bg-surface-band border-b border-token py-16">
         <div className="container-nuzul">
           <p className="text-sm font-semibold text-accent mb-2">
-            {lang === 'ar' ? 'مركز المعرفة الهندسية' : 'Engineering Knowledge Base'}
+            {lang === 'ar' ? 'المدونة والشروحات' : 'Tech Blog & Guides'}
           </p>
           <h1 className="text-3xl md:text-5xl font-bold text-main mb-4">
             {lang === 'ar'
-              ? 'مقالات وأدلة تقنية لصناع القرار'
-              : 'Technical Guides for IT Leaders'}
+              ? 'مقالات وشروحات تقنية عملية'
+              : 'Practical Guides for IT Teams'}
           </h1>
           <p className="text-muted text-base md:text-lg max-w-2xl leading-relaxed">
             {lang === 'ar'
-              ? 'تحليلات عملية حول البنية التحتية، والأمن السيبراني، وإدارة الخوادم السحابية بقلم مهندسي نزول تك.'
-              : 'Practical technical articles on infrastructure, cybersecurity, and cloud operations written by Nuzul Tech engineers.'}
+              ? 'شروحات وحلول عملية في الشبكات، السيرفرات، الـ Cloud VPS، والأمن السيبراني من واقع الشغل اليومي لفريق نزول تك.'
+              : 'Practical articles on networking, cybersecurity, and Cloud VPS operations written by Nuzul Tech engineers.'}
           </p>
         </div>
       </section>
@@ -868,7 +868,7 @@ const BlogDetailPage: React.FC = () => {
               className="lg:col-span-4 lg:sticky lg:top-24 clean-card p-6 space-y-4"
             >
               <div className={`text-xs font-bold text-accent ${lang === 'en' ? 'uppercase' : ''}`}>
-                {lang === 'ar' ? 'محتويات الدليل التقني' : 'Table of Contents'}
+                {lang === 'ar' ? 'محتويات المقال' : 'Table of Contents'}
               </div>
               <nav>
                 <ol className="space-y-2.5 text-xs sm:text-sm">
@@ -895,7 +895,7 @@ const BlogDetailPage: React.FC = () => {
                     to="/contact"
                     className="btn-primary w-full py-2.5 text-xs whitespace-nowrap"
                   >
-                    {lang === 'ar' ? 'استشر مهندسينا' : 'Consult Our Engineers'}
+                    {lang === 'ar' ? 'تواصل مع مهندسينا' : 'Talk to Our Engineers'}
                   </Link>
                 </div>
               </div>
@@ -952,8 +952,8 @@ const BlogDetailPage: React.FC = () => {
             >
               <h2 className="text-xl sm:text-2xl font-bold text-main mb-6">
                 {lang === 'ar'
-                  ? 'مقالات وأدلة تقنية ذات صلة'
-                  : 'Related Technical Guides'}
+                  ? 'مقالات مشابهة ممكن تهمك'
+                  : 'Related Articles'}
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {relatedArticles.map((rel) => (
@@ -983,7 +983,7 @@ const BlogDetailPage: React.FC = () => {
                         to={`/blog/${rel.id}`}
                         className="inline-flex items-center gap-1 min-h-[44px] font-bold text-accent hover:underline"
                       >
-                        <span>{lang === 'ar' ? 'اقرأ الدليل' : 'Read Guide'}</span>
+                        <span>{lang === 'ar' ? 'اقرأ المقال' : 'Read Article'}</span>
                         <ArrowIcon className="w-3.5 h-3.5" />
                       </Link>
                     </div>
@@ -1003,8 +1003,8 @@ const ContactPage: React.FC = () => {
   return (
     <>
       <PageMeta
-        titleAr="تواصل معنا واحجز استشارة هندسية"
-        titleEn="Contact Us & Book an Engineering Consultation"
+        titleAr="تواصل معنا واطلب عرض سعر أو معاينة فنية"
+        titleEn="Contact Us & Request a Site Audit or Quote"
       />
       <RouteErrorBoundary sectionName="ContactConsultation" variant="section">
         <ContactConsultationSection />

@@ -21,14 +21,14 @@ export const TechStackSection: React.FC = () => {
             </div>
             <h2 className="text-2xl md:text-3xl font-bold text-main">
               {lang === 'ar'
-                ? 'توزيعات أنظمة التشغيل وقواعد البيانات المدعومة'
+                ? 'أنظمة التشغيل وقواعد البيانات المدعومة'
                 : 'Supported Operating Systems, Runtimes & Databases'}
             </h2>
           </div>
           <p className="text-xs sm:text-sm text-muted max-w-md leading-relaxed">
             {lang === 'ar'
-              ? 'بيئات تشغيل مهيأة لدعم أطر العمل البرمجية، قواعد البيانات، وحاويات التطبيقات القياسية.'
-              : 'Server environments configured to run standard enterprise frameworks, relational databases, and container workloads.'}
+              ? 'سيرفرات مجهزة لتشغيل أطر العمل البرمجية، قواعد البيانات، والـ Docker Containers بدون تعقيد.'
+              : 'Server environments configured to run standard frameworks, SQL databases, and Docker containers smoothly.'}
           </p>
         </div>
 

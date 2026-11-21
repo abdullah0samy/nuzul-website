@@ -39,8 +39,8 @@ export const LiveDemosSection: React.FC = () => {
           </h2>
           <p className="text-muted text-base leading-relaxed">
             {lang === 'ar'
-              ? 'واجهات النظام ووحداته، والربط مع منظومة الفاتورة الإلكترونية.'
-              : 'System screens, core modules, and ETA e-invoicing integration.'}
+              ? 'شاشات النظام ووحداته الأساسية، مع الربط المباشر مع الفاتورة الإلكترونية المصرية (ETA).'
+              : 'System screens, core modules, and direct ETA e-invoicing integration.'}
           </p>
         </div>
 
@@ -106,7 +106,7 @@ export const LiveDemosSection: React.FC = () => {
                   className="btn-primary px-6 py-3 text-sm"
                 >
                   <span>
-                    {lang === 'ar' ? 'احجز عرضاً تجريبياً' : 'Book a Demo'}
+                    {lang === 'ar' ? 'اطلب Demo مباشر' : 'Book a Live Demo'}
                   </span>
                   <ArrowIcon className="w-4 h-4" />
                 </Link>

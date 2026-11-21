@@ -18,9 +18,9 @@ export const Navbar: React.FC = () => {
   // Section 3.10: Strictly 5 concise top-level links, zero counters, white-space: nowrap
   const navLinks = [
     { name: lang === 'ar' ? 'الخدمات' : 'Services', href: '/services' },
-    { name: lang === 'ar' ? 'الاستضافة' : 'Hosting', href: '/hosting' },
+    { name: lang === 'ar' ? 'السيرفرات والاستضافة' : 'Hosting', href: '/hosting' },
     { name: lang === 'ar' ? 'الأسعار' : 'Pricing', href: '/pricing' },
-    { name: lang === 'ar' ? 'دراسات الحالة' : 'Case Studies', href: '/case-studies' },
+    { name: lang === 'ar' ? 'سابقة الأعمال' : 'Case Studies', href: '/case-studies' },
     { name: lang === 'ar' ? 'المدونة' : 'Blog', href: '/blog' },
   ];
 
@@ -265,13 +265,13 @@ export const Navbar: React.FC = () => {
             <span className="ltr-num whitespace-nowrap">{lang === 'ar' ? 'EN' : 'عربي'}</span>
           </button>
 
-          {/* Primary CTA (Shortened per Section 3.10: "احجز استشارة" / "Book Consultation") */}
+          {/* Primary CTA */}
           <Link
             to="/contact"
             data-testid="header-primary-cta"
             className="btn-primary min-h-[44px] px-4 xl:px-5 py-2.5 text-sm whitespace-nowrap shrink-0"
           >
-            {lang === 'ar' ? 'احجز استشارة' : 'Book Consultation'}
+            {lang === 'ar' ? 'اطلب عرض سعر' : 'Get a Quote'}
           </Link>
         </div>
 
@@ -405,7 +405,7 @@ export const Navbar: React.FC = () => {
               data-testid="drawer-primary-cta"
               className="btn-primary w-full min-h-[44px] py-3 text-center text-sm whitespace-nowrap"
             >
-              {lang === 'ar' ? 'احجز استشارة' : 'Book Consultation'}
+              {lang === 'ar' ? 'اطلب عرض سعر' : 'Get a Quote'}
             </Link>
             <button
               type="button"

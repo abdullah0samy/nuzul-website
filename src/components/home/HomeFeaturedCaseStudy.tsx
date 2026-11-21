@@ -17,21 +17,21 @@ export const HomeFeaturedCaseStudy: React.FC = () => {
       id: 'cameras',
       value: 180,
       suffix: '+',
-      labelAr: 'كاميرا 4K IP مربوطة بالشبكة',
+      labelAr: 'كاميرا 4K IP على الشبكة',
       labelEn: '4K IP cameras deployed',
     },
     {
       id: 'retention',
       value: 90,
       suffix: '',
-      labelAr: 'يوم تسجيل متصل على RAID-6',
+      labelAr: 'يوم تسجيل متواصل على RAID-6',
       labelEn: 'Days RAID-6 NVR retention',
     },
     {
       id: 'mailboxes',
       value: 200,
       suffix: '+',
-      labelAr: 'حساب بريد طبي وإداري مؤمّن',
+      labelAr: 'إيميل طبي وإداري مؤمّن',
       labelEn: 'Secured clinical mailboxes',
     },
   ];
@@ -60,13 +60,13 @@ export const HomeFeaturedCaseStudy: React.FC = () => {
 
               <h2 className="text-2xl sm:text-3xl font-bold text-main leading-snug">
                 {lang === 'ar'
-                  ? 'إعادة بناء شبكة مستشفى تخصصي وعزل الأجهزة الطبية وكاميرات المراقبة'
+                  ? 'إعادة تأسيس شبكة مستشفى تخصصي وعزل الأجهزة الطبية وكاميرات الـ CCTV'
                   : 'Hospital Network Rebuild, Medical VLAN Isolation & 4K IP CCTV'}
               </h2>
 
               <p className="text-muted text-sm sm:text-base leading-relaxed">
                 {lang === 'ar'
-                  ? 'فصلنا شبكة أجهزة الأشعة والملفات الطبية عن شبكة الضيوف والإدارة عبر Fortinet NGFW وVLANs، وربطنا كاميرات المراقبة بمصفوفة RAID-6 مع أرشفة 90 يوماً وبريد مؤسسي بـ DMARC.'
+                  ? 'فصلنا شبكة أجهزة الأشعة والملفات الطبية عن شبكة الضيوف والإدارة بـ Fortinet Firewall وVLANs، وربطنا كاميرات المراقبة على RAID-6 بأرشفة 90 يوم مع إيميلات رسمية مؤمّنة بـ DMARC.'
                   : 'Separated clinical imaging and patient records from guest and admin networks using Fortinet NGFW and VLANs, paired with 90-day RAID-6 NVR storage and DMARC-authenticated mail.'}
               </p>
 

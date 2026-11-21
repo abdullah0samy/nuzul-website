@@ -11,7 +11,7 @@ export const HomeArchitectureDiagram: React.FC = () => {
       id: 'internet',
       title: 'Internet',
       sublabel: 'DDoS (L3/L4/L7)',
-      captionAr: 'تصفية حركة الدخول',
+      captionAr: 'فلترة الترافيك الخارجي',
       captionEn: 'Edge traffic filtering',
     },
     {
@@ -25,21 +25,21 @@ export const HomeArchitectureDiagram: React.FC = () => {
       id: 'vlans',
       title: 'VLANs',
       sublabel: '802.1Q · Cat6A',
-      captionAr: 'عزل شبكات العمل',
+      captionAr: 'عزل شبكات الأقسام',
       captionEn: 'Isolated work subnets',
     },
     {
       id: 'servers',
       title: 'Servers',
       sublabel: 'KVM · NVMe RAID-10',
-      captionAr: 'التطبيقات وقواعد البيانات',
+      captionAr: 'التطبيقات والـ Databases',
       captionEn: 'Apps & databases',
     },
     {
       id: 'backup',
       title: 'Backup',
       sublabel: '3-2-1 · Immutable',
-      captionAr: 'نسخ احتياطي منفصل',
+      captionAr: 'نسخ احتياطي معزول',
       captionEn: 'Off-site storage',
     },
   ];
@@ -57,12 +57,12 @@ export const HomeArchitectureDiagram: React.FC = () => {
       <div className="container-nuzul">
         <ScrollReveal className="max-w-2xl mb-8">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-main">
-            {lang === 'ar' ? 'كيف نؤمّن مسار الشبكة والبيانات' : 'How We Structure Your Network & Data Path'}
+            {lang === 'ar' ? 'إزاي بنأمن مسار الشبكة والبيانات' : 'How We Structure Your Network & Data Path'}
           </h2>
           <p className="text-muted mt-2.5 text-base leading-relaxed">
             {lang === 'ar'
-              ? 'نفس التصميم المعماري الذي نطبّقه في مشاريعنا: من خط الإنترنت الخارجي حتى النسخة الاحتياطية المعزولة.'
-              : 'The standard topology we deploy across client sites—from public ingress to isolated off-site backups.'}
+              ? 'نفس التصميم العملي اللي بننفذه في مواقع عملائنا: من خط الإنترنت والفايروول لحد السيرفرات والـ Backup المعزول.'
+              : 'The standard topology we deploy across client sites—from public ingress and firewall to servers and isolated off-site backups.'}
           </p>
         </ScrollReveal>
 

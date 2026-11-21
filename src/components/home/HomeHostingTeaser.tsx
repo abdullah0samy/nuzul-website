@@ -12,8 +12,8 @@ export const HomeHostingTeaser: React.FC = () => {
     lang === 'ar'
       ? [
           'موارد KVM مخصصة: من 4 إلى 12 vCPU و8 إلى 48 GB RAM',
-          'تخزين NVMe على مصفوفة RAID-10 مع 32 TB ترافيك شهري',
-          'لقطات استرجاع Snapshots وحماية DDoS بدون مصاريف إعداد',
+          'هاردات NVMe على مصفوفة RAID-10 مع 32 TB ترافيك شهري',
+          'Snapshots وحماية DDoS بدون مصاريف تأسيس',
         ]
       : [
           'Dedicated KVM isolation: 4 to 12 vCPU & 8 to 48 GB ECC RAM',
@@ -32,12 +32,12 @@ export const HomeHostingTeaser: React.FC = () => {
             <div className="lg:col-span-8 space-y-4">
               <h2 className="text-2xl sm:text-3xl font-bold text-main">
                 {lang === 'ar'
-                  ? 'خوادم Cloud VPS بمواصفات حقيقية وفاتورة محلية'
+                  ? 'سيرفرات Cloud VPS بمواصفات حقيقية وفاتورة محلية'
                   : 'Cloud VPS with Clear Specs & Local Billing'}
               </h2>
               <p className="text-muted text-sm sm:text-base leading-relaxed max-w-2xl">
                 {lang === 'ar'
-                  ? 'سيرفرات Linux وWindows جاهزة لتشغيل المتاجر، قواعد البيانات، وأنظمة ERP في القاهرة أو فرانكفورت، بفاتورة واضحة بالجنيه أو الدولار.'
+                  ? 'سيرفرات Linux وWindows جاهزة لتشغيل المتاجر، قواعد البيانات، وأنظمة الـ ERP في داتا سنتر القاهرة أو فرانكفورت، بفاتورة واضحة بالجنيه أو الدولار.'
                   : 'Linux KVM and licensed Windows RDP servers sized for production stores, SQL databases, and ERP in Cairo or Frankfurt.'}
               </p>
 

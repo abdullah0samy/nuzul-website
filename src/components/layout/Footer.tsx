@@ -29,8 +29,8 @@ export const Footer: React.FC = () => {
             </Link>
             <p className="text-on-navy-muted text-sm leading-relaxed max-w-sm">
               {lang === 'ar'
-                ? 'فريق هندسي في القاهرة لتجهيز شبكات الشركات، تشغيل خوادم KVM، تأمين البيانات، وتطوير أنظمة ERP بعقود صيانة واضحة.'
-                : 'Cairo-based infrastructure team building office networks, KVM cloud servers, security systems, and ERP software under clear SLAs.'}
+                ? 'فريق فني في القاهرة لتأسيس شبكات الشركات والسيرفر رووم، تشغيل سيرفرات Cloud VPS، تأمين البيانات، وتطوير أنظمة ERP بعقود صيانة SLA واضحة.'
+                : 'Cairo-based IT infrastructure team building office networks, KVM Cloud VPS servers, security & backups, and ERP software under clear SLAs.'}
             </p>
           </div>
 
@@ -52,7 +52,7 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <Link to="/hosting" className="hover-text-on-navy transition-colors">
-                  {lang === 'ar' ? 'الاستضافة والخوادم' : 'Hosting & Servers'}
+                  {lang === 'ar' ? 'السيرفرات والاستضافة' : 'Hosting & VPS'}
                 </Link>
               </li>
               <li>
@@ -62,12 +62,12 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <Link to="/case-studies" className="hover-text-on-navy transition-colors">
-                  {lang === 'ar' ? 'دراسات الحالة' : 'Case Studies'}
+                  {lang === 'ar' ? 'سابقة الأعمال' : 'Case Studies'}
                 </Link>
               </li>
               <li>
                 <Link to="/blog" className="hover-text-on-navy transition-colors">
-                  {lang === 'ar' ? 'المدونة التقنية' : 'Technical Blog'}
+                  {lang === 'ar' ? 'المدونة والشروحات' : 'Tech Blog'}
                 </Link>
               </li>
             </ul>
@@ -81,22 +81,22 @@ export const Footer: React.FC = () => {
             <ul className="space-y-2.5 text-sm text-on-navy-muted">
               <li>
                 <Link to="/services?cat=infrastructure" className="hover-text-on-navy transition-colors">
-                  {lang === 'ar' ? 'الشبكات والبنية التحتية' : 'Networks & Infrastructure'}
+                  {lang === 'ar' ? 'الشبكات والسيرفر رووم' : 'Networks & Server Rooms'}
                 </Link>
               </li>
               <li>
                 <Link to="/services?cat=cloud" className="hover-text-on-navy transition-colors">
-                  {lang === 'ar' ? 'السحابة والاستضافة' : 'Cloud & Hosting'}
+                  {lang === 'ar' ? 'سيرفرات Cloud VPS والاستضافة' : 'Cloud VPS & Hosting'}
                 </Link>
               </li>
               <li>
                 <Link to="/services?cat=security" className="hover-text-on-navy transition-colors">
-                  {lang === 'ar' ? 'الأمن السيبراني' : 'Cybersecurity'}
+                  {lang === 'ar' ? 'الأمن السيبراني والـ Backup' : 'Cybersecurity & Backup'}
                 </Link>
               </li>
               <li>
                 <Link to="/services?cat=software" className="hover-text-on-navy transition-colors">
-                  {lang === 'ar' ? 'البرمجيات وأنظمة ERP' : 'Software & ERP'}
+                  {lang === 'ar' ? 'أنظمة ERP والبرمجيات' : 'ERP & Software'}
                 </Link>
               </li>
             </ul>

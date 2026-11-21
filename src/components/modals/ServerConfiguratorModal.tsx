@@ -47,25 +47,25 @@ interface AddonOption {
 const ADDONS: AddonOption[] = [
   {
     id: 'backup-321',
-    labelAr: 'نسخ احتياطي يومي معزول (3-2-1 Immutable)',
+    labelAr: 'Backup يومي معزول (3-2-1 Immutable)',
     labelEn: 'Daily Immutable Offsite Backup (3-2-1)',
-    descAr: 'استعادة تلقائية مع حماية ضد الفدية خارج الخادم الأساسي',
+    descAr: 'نسخ احتياطي يومي أوتوماتيك خارج السيرفر الأساسي مع حماية ضد الفدية',
     descEn: 'Automated daily off-server snapshots with ransomware immutability',
     monthlyEGP: 180,
   },
   {
     id: 'managed-ops',
-    labelAr: 'إدارة وتشغيل كامل للخادم (Managed Ops)',
+    labelAr: 'إدارة وتشغيل كامل للسيرفر (Managed Ops)',
     labelEn: 'Full Managed Operations & Patching',
-    descAr: 'تحديثات أمان دورية، مراقبة استباقية، وضبط أداء قواعد البيانات',
+    descAr: 'تحديثات أمان دورية، متابعة 24/7، وضبط أداء قواعد البيانات',
     descEn: 'OS security patching, 24/7 monitoring, and database tuning',
     monthlyEGP: 450,
   },
   {
     id: 'extra-ipv4',
-    labelAr: 'عنوان IPv4 مخصص إضافي',
+    labelAr: 'Dedicated IPv4 إضافي',
     labelEn: 'Additional Dedicated IPv4 Address',
-    descAr: 'لعزل خدمات البريد أو شهادات SSL المستقلة',
+    descAr: 'مناسب لعزل سيرفر الإيميلات أو شهادات SSL المستقلة',
     descEn: 'For dedicated mail gateways or isolated SSL endpoints',
     monthlyEGP: 120,
   },
@@ -174,7 +174,7 @@ export const ServerConfiguratorModal: React.FC = () => {
       <div
         role="dialog"
         aria-modal="true"
-        aria-label={lang === 'ar' ? 'إعداد وتخصيص الخادم' : 'Configure Your Server'}
+        aria-label={lang === 'ar' ? 'تخصيص السيرفر' : 'Configure Your Server'}
         className="relative z-10 w-full max-w-3xl glass-panel overflow-hidden my-8 shadow-2xl"
       >
         {/* Header */}
@@ -185,7 +185,7 @@ export const ServerConfiguratorModal: React.FC = () => {
             </div>
             <div className="min-w-0">
               <h3 className="text-base sm:text-lg font-bold text-main truncate">
-                {lang === 'ar' ? 'إعداد الخادم:' : 'Configure Server:'}{' '}
+                {lang === 'ar' ? 'تخصيص السيرفر:' : 'Configure Server:'}{' '}
                 <bdi dir="ltr" className="ltr-num text-accent">
                   {plan.name}
                 </bdi>
@@ -212,7 +212,7 @@ export const ServerConfiguratorModal: React.FC = () => {
           <div>
             <div className="text-xs font-bold text-accent mb-2.5 flex items-center gap-1.5">
               <Cpu className="w-3.5 h-3.5" />
-              <span>{lang === 'ar' ? '1. دورة الفوترة' : '1. Billing Cycle'}</span>
+              <span>{lang === 'ar' ? '1. نظام الدفع' : '1. Billing Cycle'}</span>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <button
@@ -266,7 +266,7 @@ export const ServerConfiguratorModal: React.FC = () => {
           <div>
             <div className="text-xs font-bold text-accent mb-2.5 flex items-center gap-1.5">
               <MapPin className="w-3.5 h-3.5" />
-              <span>{lang === 'ar' ? '2. مركز البيانات (Region)' : '2. Datacenter Region'}</span>
+              <span>{lang === 'ar' ? '2. الداتا سنتر (Region)' : '2. Datacenter Region'}</span>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
               {REGIONS.map((r) => {
@@ -301,7 +301,7 @@ export const ServerConfiguratorModal: React.FC = () => {
           <div>
             <div className="text-xs font-bold text-accent mb-2.5 flex items-center gap-1.5">
               <HardDrive className="w-3.5 h-3.5" />
-              <span>{lang === 'ar' ? '3. نظام التشغيل والصورة الأساسية' : '3. Operating System Image'}</span>
+              <span>{lang === 'ar' ? '3. نظام التشغيل (OS Image)' : '3. Operating System Image'}</span>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               {osList.map((os) => {
@@ -406,7 +406,7 @@ export const ServerConfiguratorModal: React.FC = () => {
             className="min-h-[46px] px-6 py-3 rounded-xl btn-primary font-bold text-sm inline-flex items-center justify-center gap-2 whitespace-nowrap"
           >
             <ShoppingBag className="w-4 h-4" />
-            <span>{lang === 'ar' ? 'إضافة الخادم للسلة' : 'Add Configured Server to Cart'}</span>
+            <span>{lang === 'ar' ? 'إضافة السيرفر للسلة' : 'Add Configured Server to Cart'}</span>
           </button>
         </div>
       </div>

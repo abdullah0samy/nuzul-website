@@ -15,12 +15,12 @@ export const TeamSection: React.FC = () => {
           </p>
           <h2 className="text-2xl md:text-3xl font-bold text-main mb-3">
             {lang === 'ar'
-              ? 'مهندسون يعملون معك مباشرة من التصميم حتى الصيانة'
+              ? 'مهندسين بيشتغلوا معاك مباشرة من أول المعاينة لحد الصيانة'
               : 'Dedicated Engineers Managing Your Infrastructure'}
           </h2>
           <p className="text-muted text-sm md:text-base leading-relaxed">
             {lang === 'ar'
-              ? 'يجمع فريق نزول تك بين مهندسي الشبكات، مديري خوادم Linux وWindows، ومختصي الأمان ومطوري أنظمة العمل.'
+              ? 'فريق نزول تك بيضم مهندسي شبكات، مديري سيرفرات Linux وWindows، متخصصي أمن سيبراني، ومطوري أنظمة أعمال.'
               : 'Nuzul Tech combines network engineers, Linux and Windows systems administrators, security specialists, and software developers.'}
           </p>
         </div>
@@ -75,9 +75,9 @@ export const TeamSection: React.FC = () => {
               photoVariant="server-room"
               aspectRatio="wide"
               className="h-full"
-              descriptionAr="غرفة خوادم وكبائن شبكات منظمة — فريق نزول تك الهندسي"
+              descriptionAr="سيرفر رووم وراكات شبكات منظمة — فريق نزول تك"
               descriptionEn="Structured enterprise server racks and cabling aisle — Nuzul Tech Engineering"
-              captionAr="تجهيز وفحص كبائن الشبكات والخوادم — القاهرة"
+              captionAr="تجهيز وفحص الراكات والسيرفر رووم — القاهرة"
               captionEn="Rack commissioning & structured cabling operations — Cairo"
             />
           </div>

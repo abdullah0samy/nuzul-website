@@ -31,8 +31,8 @@ export const PackagesSection: React.FC = () => {
           </h2>
           <p className="text-muted text-sm md:text-base leading-relaxed">
             {lang === 'ar'
-              ? 'الشبكة والحماية والخوادم لمكتبك أو فروعك، مع عقد دعم بعد التسليم.'
-              : 'Network, security, and servers for your office or branches, backed by support post-handover.'}
+              ? 'الشبكة، الفايروول، والسيرفرات لمكتبك أو فروعك، ومعاها عقد دعم SLA بعد التسليم.'
+              : 'Network, firewall, and servers for your office or branches, backed by SLA support post-handover.'}
           </p>
         </div>
 
@@ -60,7 +60,7 @@ export const PackagesSection: React.FC = () => {
                           ? 'تأسيس لمرة واحدة'
                           : 'One-Time Setup'
                         : lang === 'ar'
-                        ? 'مقايسة هندسية'
+                        ? 'عرض سعر حسب المعاينة'
                         : 'Scoped Proposal'}
                     </span>
                     {badgeLabel && (
@@ -106,11 +106,11 @@ export const PackagesSection: React.FC = () => {
                         <div className="text-xl sm:text-2xl font-bold text-main">
                           {pkg.id === 'professional'
                             ? lang === 'ar'
-                              ? 'تسعير حسب المعاينة الميدانية'
+                              ? 'تسعير بعد معاينة المقر'
                               : 'Custom Quote via Site Survey'
                             : lang === 'ar'
-                            ? 'عرض سعر هندسي مخصص'
-                            : 'Custom Engineering Proposal'}
+                            ? 'عرض سعر فني مخصص'
+                            : 'Custom Technical Proposal'}
                         </div>
                         <p className="text-xs text-muted mt-1">
                           {lang === 'ar' ? pkg.billingLabelAr : pkg.billingLabelEn}

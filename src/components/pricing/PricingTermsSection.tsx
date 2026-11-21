@@ -24,40 +24,40 @@ export const PricingTermsSection: React.FC = () => {
     {
       id: 'not-included',
       icon: FileText,
-      titleAr: 'ما لا تشمله الباقات القياسية',
+      titleAr: 'حاجات مش داخلة في السعر الأساسي',
       titleEn: 'What Is Not Included',
       bodyAr:
-        'الأسعار المعلنة لا تشمل ضريبة القيمة المضافة المصرية (14% VAT)، وتراخيص البرمجيات التجارية الاختيارية (مثل تراخيص Windows Server أو cPanel أو SQL Server المخصصة)، وأعمال الحفر المدني الخارجي في باقات الشبكات الميدانية.',
+        'الأسعار المعلنة غير شاملة ضريبة القيمة المضافة (14% VAT)، ولا تراخيص البرامج الإضافية الاختيارية (زي Windows Server أو cPanel أو SQL Server المخصصة)، ولا أعمال التكسير أو الحفر المدني في مشاريع الشبكات الميدانية.',
       bodyEn:
         'Listed prices exclude 14% Egyptian VAT, optional commercial third-party software licenses (such as Windows Server, cPanel, or SQL Server), and external civil trenching works for physical network packages.',
     },
     {
       id: 'billing-terms',
       icon: Receipt,
-      titleAr: 'شروط الفوترة والدفع',
+      titleAr: 'نظام الدفع والفواتير الضريبية',
       titleEn: 'Billing & Invoicing Terms',
       bodyAr:
-        'تُصدر الفواتير الضريبية الرسمية بالجنيه المصري (EGP) عبر التحويل البنكي لحسابات الشركات أو وسائل الدفع الإلكتروني المتاحة. خطط الاستضافة السحابية تُفوتر شهرياً أو سنوياً مقدماً، وباقات التأسيس الميداني تُسدد على دفعات مرتبطة بمحاضر الاستلام الفعلي.',
+        'بنصدر فواتير ضريبية رسمية بالجنيه المصري (EGP) عن طريق التحويل البنكي لحساب الشركة أو InstaPay أو وسائل الدفع المتاحة. باقات السيرفرات بتتدفع شهرياً أو سنوياً مقدم، ومشاريع تأسيس الشبكات بتتدفع على دفعات مرتبطة بمحاضر الاستلام الفعلي.',
       bodyEn:
         'Official tax invoices are issued in Egyptian Pounds (EGP) payable via corporate bank transfer or electronic payment gateways. Cloud plans bill monthly or annually in advance; on-premise projects bill against milestone handover certificates.',
     },
     {
       id: 'upgrade-path',
       icon: ArrowUpRight,
-      titleAr: 'مسار الترقية والتوسع',
+      titleAr: 'الترقية والتوسع (Scaling)',
       titleEn: 'Upgrade Path',
       bodyAr:
-        'يمكن ترقية موارد الخادم السحابي (أنوية المعالج vCPU، الذاكرة ECC RAM، ومساحة التخزين NVMe) إلى خطة أعلى في أي وقت مع احتساب فرق المدة المتبقية تلقائياً دون تغيير عناوين IPv4 المخصصة.',
+        'تقدر تزوّد موارد السيرفر (vCPU، رامات ECC، وهاردات NVMe) لباقة أعلى في أي وقت، وبنحسب فرق المدة المتبقية بس من غير ما نغيّر عنوان الـ IPv4 بتاعك.',
       bodyEn:
         'Cloud VPS compute (vCPU, ECC RAM) and NVMe storage can be upgraded to a higher tier at any time with prorated billing and zero change to assigned IPv4 addresses.',
     },
     {
       id: 'sla-scope',
       icon: ShieldCheck,
-      titleAr: 'تعريف التوافر الشهري واتفاقية SLA',
+      titleAr: 'وقت التشغيل (Uptime) وعقد الـ SLA',
       titleEn: 'Monthly Availability & SLA Scope',
       bodyAr:
-        'يُحتسب التوافر الشهري المستهدف (99.90% أي ما يعادل ≤ 43.8 دقيقة توقف شهرياً، و99.99% أي ≤ 4.4 دقيقة شهرياً) كنسبة زمن تشغيل الشبكة والطاقة والعتاد المضيف خلال الشهر الميلادي، باستثناء نوافذ الصيانة المجدولة المخطر بها قبل 48 ساعة. تُرفق جداول رصيد التعويض التعاقدي في العقود الرسمية للشركات.',
+        'نسبة الـ Uptime الشهرية (99.90% يعني حد أقصى 43.8 دقيقة توقف في الشهر، و99.99% يعني ≤ 4.4 دقيقة في الشهر) بتغطي الشبكة والكهرباء وهاردوير السيرفر في الداتا سنتر، ما عدا مواعيد الصيانة المجدولة اللي بنبلغك بيها قبلها بـ 48 ساعة. تفاصيل التعويض (Service Credits) بتكون مكتوبة في عقد الشركات.',
       bodyEn:
         'Target monthly availability (99.90% ≈ ≤ 43.8 min/month; 99.99% ≈ ≤ 4.4 min/month) measures host hardware, power, and network uptime per calendar month, excluding scheduled maintenance announced 48 hours in advance. Formal service-credit schedules are provided in commercial contracts.',
       hasSlaLink: true,
@@ -74,17 +74,17 @@ export const PricingTermsSection: React.FC = () => {
         <div className="max-w-3xl mb-10">
           <p className="text-sm font-semibold text-accent mb-2">
             {lang === 'ar'
-              ? 'شفافية التعاقد ومستوى الخدمة'
+              ? 'شروط واضحة من غير تفاصيل مخفية'
               : 'Contract Transparency & Service Scope'}
           </p>
           <h2 className="text-2xl md:text-4xl font-bold text-main mb-3">
             {lang === 'ar'
-              ? 'شروط التسعير، الفوترة، واتفاقية مستوى الخدمة (SLA)'
+              ? 'نظام الدفع، الترقية، وعقد الـ SLA'
               : 'Pricing Terms, Billing & SLA Scope'}
           </h2>
           <p className="text-muted text-sm md:text-base leading-relaxed">
             {lang === 'ar'
-              ? 'توضيح مباشر لما تشمله الأسعار المعلنة، آلية الفوترة والترقية، وكيفية احتساب نسب التوافر الشهري.'
+              ? 'توضيح مباشر للي داخل في السعر، طريقة إصدار الفاتورة الضريبية، وإزاي بنحسب الـ Uptime الشهري.'
               : 'Direct summary of what listed prices include, billing procedures, and monthly availability measurement.'}
           </p>
         </div>

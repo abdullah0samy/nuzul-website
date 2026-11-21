@@ -82,7 +82,7 @@ export const CartDrawer: React.FC = () => {
               </h4>
               <p className="text-xs text-muted max-w-xs leading-relaxed">
                 {lang === 'ar'
-                  ? 'أضف خادماً سحابياً، نطاقاً تم فحصه، أو خدمة بنية تحتية للمتابعة وإصدار عرض سعر أو طلب تفعيل.'
+                  ? 'ضيف سيرفر Cloud VPS، دومين متاح، أو باقة تجهيز شركات عشان تكمل الطلب وتستلم عرض السعر.'
                   : 'Add a configured cloud server, verified domain, or infrastructure service to proceed.'}
               </p>
             </div>
@@ -100,19 +100,19 @@ export const CartDrawer: React.FC = () => {
                       <span className="text-[11px] font-semibold text-accent block">
                         {item.type === 'hosting'
                           ? lang === 'ar'
-                            ? 'خادم سحابي / استضافة'
+                            ? 'سيرفر Cloud VPS / استضافة'
                             : 'Cloud Server / Hosting'
                           : item.type === 'domain'
                           ? lang === 'ar'
-                            ? 'حجز نطاق'
+                            ? 'حجز دومين'
                             : 'Domain Registration'
                           : item.type === 'package'
                           ? lang === 'ar'
                             ? 'باقة تجهيز شركات'
                             : 'Turnkey Package'
                           : lang === 'ar'
-                          ? 'خدمة هندسية'
-                          : 'Engineering Service'}
+                          ? 'خدمة IT'
+                          : 'IT Service'}
                       </span>
                       <h4 className="text-sm font-bold text-main leading-snug">{item.name}</h4>
                       {item.details && (
@@ -188,7 +188,7 @@ export const CartDrawer: React.FC = () => {
               <ShieldCheck className="w-4 h-4 text-accent shrink-0" />
               <span>
                 {lang === 'ar'
-                  ? 'فاتورة ضريبية رسمية بالجنيه المصري · إعداد مجاني بدون رسوم خفية'
+                  ? 'فاتورة ضريبية رسمية بالجنيه المصري · بدون مصاريف تأسيس خفية'
                   : 'Official local invoice · $0 setup fee with transparent billing'}
               </span>
             </div>

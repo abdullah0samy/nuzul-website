@@ -9,34 +9,34 @@ export const HomeFAQ: React.FC = () => {
 
   const homeFaqs = [
     {
-      questionAr: 'هل توفرون عقود صيانة SLA وفواتير ضريبية في مصر؟',
+      questionAr: 'هل بتوفروا عقود صيانة SLA وفواتير ضريبية في مصر؟',
       questionEn: 'Do you provide formal SLA contracts and tax invoices in Egypt?',
       answerAr:
-        'نعم. كل تعاقد شركات يشمل ملحق SLA يحدد أوقات الاستجابة حسب أولوية العطل (P1–P4) وساعات التغطية، مع فواتير ضريبية رسمية بالجنيه المصري.',
+        'أيوه. أي تعاقد شركات بيكون معاه ملحق SLA واضح بيحدد أوقات الاستجابة حسب أولوية المشكلة (P1–P4) وساعات الدعم، ومعاه فواتير ضريبية رسمية بالجنيه المصري.',
       answerEn:
         'Yes. Corporate agreements include an SLA annex defining P1–P4 response windows and coverage hours, with official EGP tax invoices.',
     },
     {
-      questionAr: 'كيف تنقلون السيرفرات أو تحدّثون الشبكة بدون تعطيل الشغل؟',
+      questionAr: 'إزاي بتنقلوا السيرفرات أو تحدثوا الشبكة من غير ما الشغل يقف؟',
       questionEn: 'How do you migrate servers or upgrade networks without downtime?',
       answerAr:
-        'نجهّز البيئة الجديدة بالتوازي ونزامن البيانات أولاً، ثم ننفّذ التحويل النهائي خارج ساعات العمل الرسمية أو في الإجازة الأسبوعية مع خطة رجوع فورية.',
+        'بنجهّز السيرفر أو الشبكة الجديدة بالتوازي ونعمل مزامنة للبيانات الأول، وبعدها نعمل التحويل النهائي (Cutover) بعد مواعيد الشغل أو في الإجازة الأسبوعية مع خطة Rollback جاهزة.',
       answerEn:
         'We provision the new setup in parallel, pre-sync data, and perform the final cutover off-hours or on weekends with an immediate rollback plan.',
     },
     {
-      questionAr: 'من يمتلك الكود وبيانات السيرفرات بعد التسليم؟',
+      questionAr: 'مين بيمتلك الكود وبيانات السيرفرات بعد التسليم؟',
       questionEn: 'Who owns the code, data, and server root access after handover?',
       answerAr:
-        'أنت بالكامل. نسلّمك صلاحيات Root وAdmin، ومخططات الشبكة (As-Built)، وكل الأكواد وقواعد البيانات باسم شركتك بدون أي قيود.',
+        'شركتك بالكامل. بنسلّمك صلاحيات Root وAdmin، ومخطط الشبكة (As-Built)، وكل الأكواد وقواعد البيانات باسم شركتك بدون أي قيود.',
       answerEn:
         'You do. We hand over full Root/Admin credentials, As-Built network diagrams, source code, and databases under your company name with zero lock-in.',
     },
     {
-      questionAr: 'كيف تحمون البيانات من أعطال الهاردوير أو الفدية؟',
+      questionAr: 'إزاي بتحموا البيانات من أعطال الهاردوير أو الفدية (Ransomware)؟',
       questionEn: 'How are servers backed up against hardware failure or ransomware?',
       answerAr:
-        'نطبّق قاعدة النسخ الاحتياطي 3-2-1 مع نسخة خارجية منفصلة غير قابلة للتعديل (Immutable)، ونضبط زمن وتكرار النسخ حسب حجم البيانات وطبيعة النشاط.',
+        'بنطبّق قاعدة 3-2-1 Backup مع نسخة خارجية معزولة غير قابلة للتعديل (Immutable)، وبنضبط مواعيد الـ Backup والاسترجاع حسب حجم الداتا وطبيعة شغلك.',
       answerEn:
         'We configure 3-2-1 backups with off-site immutable copies, tailoring backup frequency and recovery targets to your dataset size.',
     },
@@ -52,11 +52,11 @@ export const HomeFAQ: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
             <ScrollReveal className="lg:col-span-5">
               <h2 className="text-2xl sm:text-3xl font-bold text-main">
-                {lang === 'ar' ? 'أسئلة متكررة قبل التعاقد' : 'Common Questions'}
+                {lang === 'ar' ? 'أسئلة شائعة قبل التعاقد' : 'Common Questions'}
               </h2>
               <p className="text-muted mt-2.5 text-sm sm:text-base leading-relaxed">
                 {lang === 'ar'
-                  ? 'إجابات مباشرة حول عقود الصيانة، ملكية الصلاحيات، الفواتير، والنسخ الاحتياطي.'
+                  ? 'إجابات مباشرة عن عقود الـ SLA، ملكية الـ Root Access، الفواتير، والـ Backup.'
                   : 'Straight answers on SLAs, credential ownership, invoicing, and backup policy.'}
               </p>
             </ScrollReveal>

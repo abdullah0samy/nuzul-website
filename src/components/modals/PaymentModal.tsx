@@ -118,7 +118,7 @@ export const PaymentModal: React.FC = () => {
     } catch {
       setSubmitError(
         lang === 'ar'
-          ? 'حدث خطأ في الاتصال بالخادم، يرجى المحاولة مرة أخرى.'
+          ? 'حصل مشكلة في الاتصال بالسيرفر، جرب تاني من فضلك.'
           : 'Network error while submitting order. Please try again.'
       );
     } finally {
@@ -150,12 +150,12 @@ export const PaymentModal: React.FC = () => {
             <div>
               <h3 className="text-base sm:text-lg font-bold text-main">
                 {lang === 'ar'
-                  ? 'تأكيد الطلب وإتمام الدفع'
+                  ? 'تأكيد الطلب وطريقة الدفع'
                   : 'Order Confirmation & Billing'}
               </h3>
               <p className="text-xs text-muted">
                 {lang === 'ar'
-                  ? 'اختر وسيلة السداد المناسبة وسجل بياناتك لتفعيل الطلب وإصدار الفاتورة الضريبية'
+                  ? 'اختار طريقة الدفع المناسبة وسجّل بياناتك لتأكيد الطلب وإصدار الفاتورة الضريبية'
                   : 'Select your preferred billing method to record your order and receive your official invoice'}
               </p>
             </div>
@@ -182,7 +182,7 @@ export const PaymentModal: React.FC = () => {
             </h4>
             <p className="text-sm text-muted max-w-lg mx-auto leading-relaxed">
               {lang === 'ar'
-                ? 'تم حفظ تفاصيل الطلب لدى فريق المبيعات والتشغيل السحابي. سيتواصل معك مهندس مختص عبر الواتساب أو البريد الإلكتروني لتأكيد السداد وتسليم بيانات الخدمة.'
+                ? 'تم تسجيل طلبك عند فريق التشغيل والمبيعات. هيتواصل معاك مهندس مختص على الواتساب أو الإيميل لتأكيد الدفع وتسليم بيانات السيرفر أو الخدمة.'
                 : 'Your order has been logged with our provisioning and billing team. An engineer will reach out via WhatsApp or email to finalize activation.'}
             </p>
             <div className="p-4 rounded-xl bg-surface border border-token max-w-md mx-auto text-xs text-muted space-y-1.5">
@@ -218,7 +218,7 @@ export const PaymentModal: React.FC = () => {
             {/* Payment Methods Column */}
             <div className="lg:col-span-5 space-y-2.5">
               <div className="text-xs font-bold text-muted mb-2">
-                {lang === 'ar' ? '1. اختر وسيلة السداد:' : '1. Choose Billing Method:'}
+                {lang === 'ar' ? '1. اختار طريقة الدفع:' : '1. Choose Billing Method:'}
               </div>
 
               <button

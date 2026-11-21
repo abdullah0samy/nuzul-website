@@ -74,19 +74,19 @@ export const DomainSearchWidget: React.FC = () => {
           if (data.error === 'INVALID_DOMAIN_LABEL') {
             setErrorMsg(
               lang === 'ar'
-                ? 'يرجى كتابة اسم النطاق بحروف إنجليزية وأرقام أو شرطة (-) فقط، بين حرفين و63 حرفاً.'
+                ? 'اكتب اسم الدومين بحروف إنجليزية وأرقام أو شرطة (-) بس، من حرفين لـ 63 حرف.'
                 : 'Enter a valid domain label using English letters, digits, or hyphens (2–63 chars).'
             );
           } else if (data.error === 'RATE_LIMITED') {
             setErrorMsg(
               lang === 'ar'
-                ? 'تم تنفيذ عدد كبير من عمليات الفحص، يرجى الانتظار دقيقة والمحاولة مرة أخرى.'
+                ? 'عملت فحوصات كتير في وقت قصير، استنى دقيقة وجرب تاني.'
                 : 'Too many lookups. Please wait a minute and try again.'
             );
           } else {
             setErrorMsg(
               lang === 'ar'
-                ? 'تعذر الاتصال بخدمة الفحص المباشر حالياً، يرجى المحاولة مرة أخرى.'
+                ? 'في مشكلة مؤقتة في الاتصال بسجل الدومينات، جرب مرة تانية.'
                 : 'Unable to reach live registry right now. Please try again.'
             );
           }
@@ -101,7 +101,7 @@ export const DomainSearchWidget: React.FC = () => {
         setResults(null);
         setErrorMsg(
           lang === 'ar'
-            ? 'حدث خطأ في الاتصال بالخادم أثناء فحص النطاق.'
+            ? 'حصل مشكلة في الاتصال بالسيرفر وقت فحص الدومين.'
             : 'Network error while verifying domain availability.'
         );
       } finally {
@@ -131,14 +131,14 @@ export const DomainSearchWidget: React.FC = () => {
   const handleAddDomain = (item: LiveDomainResult) => {
     addToCart({
       id: `domain-${item.domain}`,
-      name: `${lang === 'ar' ? 'تسجيل نطاق:' : 'Domain:'} ${item.domain}`,
+      name: `${lang === 'ar' ? 'حجز دومين:' : 'Domain:'} ${item.domain}`,
       type: 'domain',
       price: item.priceEGP,
       quantity: 1,
       billingCycle: 'yearly',
       details:
         lang === 'ar'
-          ? 'تسجيل لمدة سنة + إدارة سجلات DNS وتوجيه الخادم'
+          ? 'حجز لمدة سنة + ضبط سجلات الـ DNS وربطه بالسيرفر'
           : '1-Year Registration + Managed DNS & Server Pointing',
     });
   };
@@ -159,18 +159,18 @@ export const DomainSearchWidget: React.FC = () => {
             <Globe className="w-4 h-4 shrink-0" />
             <span>
               {lang === 'ar'
-                ? 'فحص مباشر عبر سجلات RDAP وDNS العالمية'
+                ? 'فحص حقيقي مباشر عبر RDAP وDNS'
                 : 'Live RDAP Registry & DNS Domain Lookup'}
             </span>
           </div>
           <h3 className="text-xl md:text-2xl font-bold text-main">
             {lang === 'ar'
-              ? 'افحص توافر اسم النطاق الرسمي لشركتك'
+              ? 'ابحث عن دومين شركتك وتأكد إنه متاح'
               : 'Check Live Domain Availability'}
           </h3>
           <p className="text-xs sm:text-sm text-muted leading-relaxed">
             {lang === 'ar'
-              ? 'فحص فوري وحقيقي مقابل سجلات Verisign وPIR وIdentity Digital وسجلات DNS الحية لنطاقات .eg و.com.eg.'
+              ? 'فحص لحظي مباشر من سجلات Verisign وPIR وIdentity Digital وسجلات الـ DNS لدومينات .eg و.com.eg.'
               : 'Real-time lookup against authoritative Verisign, PIR, Identity Digital RDAP registries and live DNS for .eg & .com.eg.'}
           </p>
         </div>
@@ -187,7 +187,7 @@ export const DomainSearchWidget: React.FC = () => {
                 data-testid="domain-search-input"
                 placeholder={
                   lang === 'ar'
-                    ? 'اكتب اسم النطاق (مثال: mycompany أو google.com)'
+                    ? 'اكتب اسم الدومين (مثال: mycompany أو google.com)'
                     : 'Enter domain name (e.g. mycompany or google.com)'
                 }
                 dir="ltr"
@@ -218,10 +218,10 @@ export const DomainSearchWidget: React.FC = () => {
               <span>
                 {isSearching
                   ? lang === 'ar'
-                    ? 'جاري الفحص المباشر...'
+                    ? 'جاري الفحص...'
                     : 'Checking Registry...'
                   : lang === 'ar'
-                  ? 'فحص التوافر'
+                  ? 'فحص الدومين'
                   : 'Check Availability'}
               </span>
             </button>
@@ -299,7 +299,7 @@ export const DomainSearchWidget: React.FC = () => {
                 {primaryResult.status === 'available' && (
                   <p className="text-xs font-semibold text-success">
                     {lang === 'ar'
-                      ? 'متاح للتسجيل الفوري — تم التحقق من السجل الرسمي (RDAP)'
+                      ? 'متاح للحجز دلوقتي — تم التحقق مباشر عبر RDAP'
                       : 'Available to register — Verified against authoritative RDAP registry'}
                   </p>
                 )}
@@ -307,7 +307,7 @@ export const DomainSearchWidget: React.FC = () => {
                 {primaryResult.status === 'likely_available' && (
                   <p className="text-xs font-medium text-accent">
                     {lang === 'ar'
-                      ? 'لم تُرصد سجلات DNS نشطة — متاح لطلب التسجيل الرسمي عبر فريقنا'
+                      ? 'مفيش سجلات DNS شغالة عليه — متاح لطلب الحجز عن طريقنا'
                       : 'No active DNS records detected — Open for official registration request'}
                   </p>
                 )}
@@ -316,7 +316,7 @@ export const DomainSearchWidget: React.FC = () => {
                   <div className="space-y-1">
                     <p className="text-xs font-semibold text-danger">
                       {lang === 'ar'
-                        ? 'هذا النطاق مسجّل بالفعل وغير متاح للتسجيل الجديد'
+                        ? 'الدومين ده محجوز بالفعل ومش متاح للتسجيل'
                         : 'This domain is already registered'}
                     </p>
                     <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-[11px] text-muted ltr-num">
@@ -377,7 +377,7 @@ export const DomainSearchWidget: React.FC = () => {
             <div>
               <div className="text-xs font-bold text-muted mb-2.5">
                 {lang === 'ar'
-                  ? 'نتائج الامتدادات الأخرى (فحص متوازٍ مباشر):'
+                  ? 'باقي الامتدادات المتاحة:'
                   : 'Other Extensions (Live Parallel Lookup):'}
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">

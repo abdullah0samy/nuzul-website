@@ -11,15 +11,15 @@ export const HomeServicePillars: React.FC = () => {
   const pillars = [
     {
       id: 'infrastructure',
-      titleAr: 'الشبكات وغرف الخوادم',
+      titleAr: 'الشبكات والسيرفر رووم',
       titleEn: 'Networks & Server Rooms',
       descAr:
         'تمديد كابلات Cat6A وفايبر، تجميع الراكات، توزيع Access Points، وربط الفروع عبر IPsec VPN.',
       descEn:
         'Cat6A and fiber cabling, rack buildouts, office Wi-Fi coverage, and site-to-site IPsec VPN.',
       itemsAr: [
-        'تجهيز غرف الخوادم وتنظيم الكابلات (Rack & Patch Panels)',
-        'تركيب أجهزة Fortinet Firewall وتقسيم VLANs',
+        'تجهيز السيرفر رووم وترتيب الكابلات (Racks & Patch Panels)',
+        'تركيب فايروول Fortinet وتقسيم الشبكة لـ VLANs',
         'سنترال داخلي VoIP PBX لربط المكاتب والفروع',
       ],
       itemsEn: [
@@ -31,16 +31,16 @@ export const HomeServicePillars: React.FC = () => {
     },
     {
       id: 'cloud',
-      titleAr: 'السيرفرات والاستضافة',
-      titleEn: 'Cloud Servers & Hosting',
+      titleAr: 'سيرفرات Cloud VPS والاستضافة',
+      titleEn: 'Cloud VPS & Hosting',
       descAr:
-        'خوادم Cloud VPS بعزل KVM وأقراص NVMe، بريد شركات رسمي، ونقل قواعد البيانات بدون توقف.',
+        'سيرفرات Cloud VPS بعزل KVM وهاردات NVMe، إيميلات شركات رسمية، ونقل قواعد البيانات بدون تعطيل الشغل.',
       descEn:
-        'Dedicated KVM Cloud VPS on NVMe arrays, authenticated business email, and planned database migrations.',
+        'Dedicated KVM Cloud VPS on NVMe arrays, business email, and planned database migrations.',
       itemsAr: [
-        'خوادم Cloud VPS بصلاحيات Root وفاتورة بالجنيه أو الدولار',
-        'بريد رسمي للشركة مضبوط بـ SPF وDKIM وDMARC',
-        'نسخ احتياطي يومي ومجدول خارج السيرفر الأساسي',
+        'سيرفرات Cloud VPS بـ Root Access كامل وفاتورة بالجنيه أو الدولار',
+        'إيميلات رسمية للشركة مضبوطة بـ SPF وDKIM وDMARC',
+        'Backup يومي أوتوماتيك وSnapshots خارج السيرفر الأساسي',
       ],
       itemsEn: [
         'KVM Cloud VPS with full root access & EGP/USD billing',
@@ -51,16 +51,16 @@ export const HomeServicePillars: React.FC = () => {
     },
     {
       id: 'security',
-      titleAr: 'الأمن السيبراني والنسخ الاحتياطي',
+      titleAr: 'الأمن السيبراني والـ Backup',
       titleEn: 'Security & Backups',
       descAr:
-        'فحص الثغرات، حماية الخوادم ضد DDoS، وبناء نسخ احتياطي معزول 3-2-1 يحمي بياناتك من الفدية.',
+        'فحص الثغرات، حماية السيرفرات من DDoS، وبناء نظام 3-2-1 Backup معزول يحمي بياناتك من الفدية.',
       descEn:
         'Vulnerability checks, server DDoS filtering, and isolated 3-2-1 backups to protect against ransomware.',
       itemsAr: [
-        'مراجعة إعدادات الشبكة وفحص الثغرات واختبار الاختراق',
-        'نسخ احتياطي منفصل غير قابل للتعديل (Immutable 3-2-1)',
-        'متابعة سجلات الأمان والتنبيه الفوري عند أي محاولة اختراق',
+        'مراجعة إعدادات الشبكة وفحص الثغرات واختبار الاختراق (Pentest)',
+        'Backup منفصل غير قابل للتعديل أو الحذف (Immutable 3-2-1)',
+        'متابعة سجلات الأمان (SIEM) والتنبيه الفوري عند أي محاولة اختراق',
       ],
       itemsEn: [
         'Network audits, vulnerability scans & penetration testing',
@@ -78,9 +78,9 @@ export const HomeServicePillars: React.FC = () => {
       descEn:
         'Accounting and inventory ERP linked with Egyptian ETA e-invoicing, plus custom web and mobile apps.',
       itemsAr: [
-        'إدارة الحسابات والمخازن والمبيعات وشؤون الموظفين',
-        'ربط مباشر بمنظومة الفاتورة الإلكترونية (مصلحة الضرائب)',
-        'فحص واختبار البرمجيات قبل الاستلام (QA / UAT)',
+        'إدارة الحسابات والمخازن والمبيعات وشؤون الموظفين (HR)',
+        'ربط مباشر مع الفاتورة الإلكترونية (مصلحة الضرائب ETA)',
+        'اختبار ومراجعة البرمجيات قبل الاستلام (QA / UAT)',
       ],
       itemsEn: [
         'General ledger, inventory, sales & payroll modules',
@@ -100,12 +100,12 @@ export const HomeServicePillars: React.FC = () => {
         <ScrollReveal className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
           <div className="max-w-2xl">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-main">
-              {lang === 'ar' ? 'ماذا ننفّذ لك؟' : 'What We Build & Manage'}
+              {lang === 'ar' ? 'الخدمات' : 'Services'}
             </h2>
             <p className="text-muted mt-2.5 text-base leading-relaxed">
               {lang === 'ar'
-                ? 'أربع خدمات أساسية تغطي البنية التحتية لشركتك من كابل الشبكة وحتى السيرفر والبرنامج.'
-                : 'Four practical practices covering your infrastructure from office cabling to servers and business software.'}
+                ? 'أربع خدمات أساسية تغطي البنية التحتية لشركتك من كابل الشبكة والسيرفر رووم لحد الـ Cloud VPS ونظام الـ ERP.'
+                : 'Four core practices covering your infrastructure from office cabling and server rooms to Cloud VPS and ERP.'}
             </p>
           </div>
 

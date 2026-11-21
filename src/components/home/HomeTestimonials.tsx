@@ -49,11 +49,11 @@ export const HomeTestimonials: React.FC = () => {
       <div className="container-nuzul">
         <ScrollReveal className="max-w-2xl mb-10">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-main">
-            {lang === 'ar' ? 'تجارب عملائنا' : 'What Clients Say'}
+            {lang === 'ar' ? 'آراء عملائنا' : 'What Clients Say'}
           </h2>
           <p className="text-muted mt-2.5 text-base leading-relaxed">
             {lang === 'ar'
-              ? 'آراء مسؤولي التشغيل وتقنية المعلومات في جهات نفّذنا لها مشاريع شبكات وأنظمة.'
+              ? 'تجارب مديري التشغيل والـ IT في شركات وعيادات نفّذنا لها مشاريع شبكات وأنظمة.'
               : 'Feedback from operations and IT leads on network and software projects we delivered.'}
           </p>
         </ScrollReveal>

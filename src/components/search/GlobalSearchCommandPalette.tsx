@@ -158,11 +158,11 @@ export const GlobalSearchCommandPalette: React.FC = () => {
       items.push({
         id: `domain-live-${detectedDomain}`,
         type: 'plan',
-        titleAr: `فحص توافر النطاق: ${detectedDomain}`,
+        titleAr: `فحص دومين: ${detectedDomain}`,
         titleEn: `Check Live Domain Availability: ${detectedDomain}`,
-        subtitleAr: 'فحص مباشر عبر سجلات RDAP وDNS العالمية ومعرفة السعر',
+        subtitleAr: 'فحص مباشر من سجلات RDAP وDNS ومعرفة السعر',
         subtitleEn: 'Real-time RDAP registry & live DNS availability lookup',
-        badgeAr: 'فحص نطاق مباشر',
+        badgeAr: 'فحص دومين مباشر',
         badgeEn: 'Live Domain Check',
         href: `/hosting?domain=${encodeURIComponent(detectedDomain)}`,
         score: 999,
@@ -234,7 +234,7 @@ export const GlobalSearchCommandPalette: React.FC = () => {
 
   const suggestedQueries =
     lang === 'ar'
-      ? ['سيرفر سحابي', 'كاميرات مراقبة', 'سنترال VoIP', 'جدار ناري Fortinet', 'نظام ERP']
+      ? ['سيرفر Cloud VPS', 'كاميرات مراقبة', 'سنترال VoIP', 'فايروول Fortinet', 'نظام ERP']
       : ['Cloud VPS', 'CCTV Surveillance', 'VoIP PBX', 'Fortinet Firewall', 'ERP System'];
 
   const renderGroup = (
@@ -352,8 +352,8 @@ export const GlobalSearchCommandPalette: React.FC = () => {
             data-testid="global-search-input"
             placeholder={
               lang === 'ar'
-                ? 'ابحث عن خدمة، خادم سحابي، دراسة حالة، أو مقال تقني (مثال: سيرفر، كاميرات، سنترال، ERP)...'
-                : 'Search services, cloud plans, case studies, or articles (e.g., VPS, CCTV, VoIP, ERP)...'
+                ? 'ابحث عن خدمة، سيرفر VPS، دومين (مثال: mycompany.com)، مشروع، أو مقال...'
+                : 'Search services, VPS plans, domains (e.g. mycompany.com), case studies, or articles...'
             }
             aria-label={lang === 'ar' ? 'حقل البحث في الموقع' : 'Site search input'}
             className="w-full min-h-[44px] bg-transparent text-sm sm:text-base text-main focus:outline-none"
@@ -452,7 +452,7 @@ export const GlobalSearchCommandPalette: React.FC = () => {
               </p>
               <p className="text-xs sm:text-sm text-muted max-w-md mx-auto leading-relaxed">
                 {lang === 'ar'
-                  ? 'جرب البحث بمصطلح تقني آخر (مثل: خادم، شبكة، كاميرات، VoIP، ERP) أو تواصل مباشرة مع مهندسينا لتفصيل الحل المناسب لشركتك.'
+                  ? 'جرب كلمة بحث تانية (زي: سيرفر، شبكة، كاميرات، VoIP، ERP، أو اسم دومين) أو تواصل معانا مباشرة.'
                   : 'Try another technical keyword (e.g., VPS, Network, CCTV, VoIP, ERP) or speak directly with our engineers for a custom requirement.'}
               </p>
               <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
@@ -464,8 +464,8 @@ export const GlobalSearchCommandPalette: React.FC = () => {
                 >
                   <span>
                     {lang === 'ar'
-                      ? 'احجز استشارة هندسية'
-                      : 'Book an Engineering Consultation'}
+                      ? 'اطلب استشارة أو عرض سعر'
+                      : 'Request a Quote'}
                   </span>
                   <ArrowIcon className="w-4 h-4" />
                 </Link>
@@ -477,35 +477,35 @@ export const GlobalSearchCommandPalette: React.FC = () => {
               {detectedDomain &&
                 renderGroup(
                   'domain-live',
-                  'فحص النطاق المباشر (RDAP / DNS)',
+                  'فحص الدومين المباشر (RDAP / DNS)',
                   'Live Domain Registry Check',
                   Globe,
                   flatResults.filter((r) => r.id.startsWith('domain-live-'))
                 )}
               {renderGroup(
                 'services',
-                'الخدمات الهندسية',
-                'Engineering Services',
+                'الخدمات',
+                'Services',
                 Wrench,
                 groupedResults.services
               )}
               {renderGroup(
                 'plans',
-                'خطط الاستضافة والباقات',
-                'Plans & Packages',
+                'باقات السيرفرات والاستضافة',
+                'VPS & Hosting Plans',
                 Server,
                 groupedResults.plans
               )}
               {renderGroup(
                 'caseStudies',
-                'دراسات الحالة',
+                'سابقة الأعمال',
                 'Case Studies',
                 Briefcase,
                 groupedResults.caseStudies
               )}
               {renderGroup(
                 'articles',
-                'المقالات والأدلة التقنية',
+                'المقالات والشروحات',
                 'Technical Articles',
                 FileText,
                 groupedResults.articles

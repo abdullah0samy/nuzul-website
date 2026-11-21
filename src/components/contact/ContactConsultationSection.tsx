@@ -178,8 +178,8 @@ export const ContactConsultationSection: React.FC = () => {
     } catch {
       setServerError(
         lang === 'ar'
-          ? 'حدث خطأ في الاتصال بالخادم. يرجى المحاولة مرة أخرى أو التواصل عبر القنوات المباشرة.'
-          : 'Network error while connecting to server. Please try again or use direct contact channels.'
+          ? 'حصل خطأ في الاتصال بالسيرفر. حاول مرة تانية أو تواصل معانا مباشرة على واتساب.'
+          : 'Network error while connecting to server. Please try again or reach us directly on WhatsApp.'
       );
       setIsSubmitting(false);
     }
@@ -199,7 +199,7 @@ export const ContactConsultationSection: React.FC = () => {
           </h1>
           <p className="text-muted text-base md:text-lg leading-relaxed">
             {lang === 'ar'
-              ? 'ابعث لنا تفاصيل مشروعك أو عدد الفروع والسيرفرات المطلوبة، وسيتواصل معك مهندس مختص بمقايسة واضحة.'
+              ? 'ابعث لنا تفاصيل مشروعك أو عدد الفروع والسيرفرات المطلوبة، وهيتواصل معاك مهندس مختص بعرض سعر فني واضح.'
               : 'Share your branch count, network setup, or server requirements and an engineer will reply with a clear scope.'}
           </p>
         </div>
@@ -218,13 +218,13 @@ export const ContactConsultationSection: React.FC = () => {
                   <CheckCircle2 className="w-12 h-12 text-success mx-auto" />
                   <h2 className="text-2xl font-bold text-main">
                     {lang === 'ar'
-                      ? 'تم تسجيل طلب الاستشارة الهندسية بنجاح'
-                      : 'Engineering Consultation Request Received'}
+                      ? 'تم استلام طلبك بنجاح'
+                      : 'Request Received Successfully'}
                   </h2>
                   <p className="text-muted text-sm max-w-md mx-auto leading-relaxed">
                     {lang === 'ar'
-                      ? 'تم توجيه بيانات مشروعك إلى الفريق الهندسي المختص في نزول تك للمراجعة الفنية والتواصل معك خلال ساعات العمل الرسمية.'
-                      : 'Your project scope has been routed to Nuzul Tech’s engineering desk for technical review during business hours.'}
+                      ? 'تفاصيل مشروعك وصلت لفريق نزول تك، وهنراجعها ونتواصل معاك خلال ساعات العمل الرسمية.'
+                      : 'Your project scope has been routed to Nuzul Tech’s engineering team for review during business hours.'}
                   </p>
 
                   <div className="max-w-sm mx-auto p-4 rounded-xl bg-page border border-token text-xs space-y-2 text-start">
@@ -458,23 +458,23 @@ export const ContactConsultationSection: React.FC = () => {
                     >
                       <option value="infrastructure">
                         {lang === 'ar'
-                          ? 'الشبكات والبنية التحتية'
-                          : 'Infrastructure & Networks'}
+                          ? 'الشبكات والسيرفر رووم'
+                          : 'Networks & Server Rooms'}
                       </option>
                       <option value="cloud">
                         {lang === 'ar'
-                          ? 'الاستضافة والخوادم السحابية'
-                          : 'Cloud Hosting & Servers'}
+                          ? 'سيرفرات Cloud VPS والاستضافة'
+                          : 'Cloud VPS & Hosting'}
                       </option>
                       <option value="security">
                         {lang === 'ar'
-                          ? 'الأمن السيبراني والنسخ الاحتياطي'
+                          ? 'الأمن السيبراني والـ Backup'
                           : 'Cybersecurity & Backups'}
                       </option>
                       <option value="software">
                         {lang === 'ar'
-                          ? 'البرمجيات وأنظمة ERP'
-                          : 'Software & ERP Systems'}
+                          ? 'أنظمة ERP والبرمجيات'
+                          : 'ERP & Business Software'}
                       </option>
                     </select>
                   </div>
@@ -485,7 +485,7 @@ export const ContactConsultationSection: React.FC = () => {
                       className="block text-sm font-semibold text-main mb-1.5"
                     >
                       {lang === 'ar'
-                        ? 'نبذة عن متطلباتك الفنية *'
+                        ? 'تفاصيل مشروعك أو طلبك *'
                         : 'Project Details & Scope *'}
                     </label>
                     <textarea
@@ -499,7 +499,7 @@ export const ContactConsultationSection: React.FC = () => {
                       onChange={(e) => handleFieldChange('details', e.target.value)}
                       placeholder={
                         lang === 'ar'
-                          ? 'اذكر عدد الفروع أو المستخدمين أو مواصفات الخادم المطلوبة...'
+                          ? 'اذكر عدد الفروع أو المستخدمين أو مواصفات السيرفر المطلوبة...'
                           : 'Describe your branches, user count, or server requirements...'
                       }
                       className="w-full px-4 py-2.5 text-sm input-token"
@@ -632,8 +632,8 @@ export const ContactConsultationSection: React.FC = () => {
                   <div>
                     <div className="font-semibold text-main">
                       {lang === 'ar'
-                        ? 'المبيعات والاستشارات الهندسية'
-                        : 'Engineering Sales'}
+                        ? 'المبيعات والدعم الفني'
+                        : 'Sales & Technical Support'}
                     </div>
                     <a
                       href={`tel:${NUZUL_CONTACT.rawPhone1}`}
@@ -649,7 +649,7 @@ export const ContactConsultationSection: React.FC = () => {
                   <Mail className="w-5 h-5 text-accent shrink-0 mt-0.5" />
                   <div>
                     <div className="font-semibold text-main">
-                      {lang === 'ar' ? 'البريد الرسمي' : 'Official Email'}
+                      {lang === 'ar' ? 'الإيميل الرسمي' : 'Official Email'}
                     </div>
                     <a
                       href={`mailto:${NUZUL_CONTACT.email}`}

@@ -17,8 +17,8 @@ export const ImplementationRoadmap: React.FC = () => {
           </h2>
           <p className="text-muted text-base leading-relaxed">
             {lang === 'ar'
-              ? 'ننفذ على مراحل، خارج ساعات الذروة عند الحاجة، ونسلّم توثيق البنية التحتية مع المشروع.'
-              : 'We implement in phases, off-peak when needed, and deliver infrastructure documentation upon completion.'}
+              ? 'بننفذ الشغل على مراحل خارج أوقات الذروة لما يلزم، وبتستلم توثيق كامل للشبكة والسيرفرات بعد التسليم.'
+              : 'We implement in phases, off-peak when needed, and deliver full infrastructure documentation upon handover.'}
           </p>
         </div>
 
@@ -51,7 +51,7 @@ export const ImplementationRoadmap: React.FC = () => {
               <div className="pt-3 border-t border-token">
                 <div className="flex items-center gap-1.5 text-[11px] font-bold text-accent mb-1">
                   <FileCheck className="w-3.5 h-3.5" />
-                  <span>{lang === 'ar' ? 'المخرج الهندسي:' : 'Key Deliverable:'}</span>
+                  <span>{lang === 'ar' ? 'اللي بتستلمه:' : 'Deliverable:'}</span>
                 </div>
                 <div className="text-xs text-main font-medium flex items-start gap-1.5">
                   <CheckCircle2 className="w-3.5 h-3.5 text-accent shrink-0 mt-0.5" />

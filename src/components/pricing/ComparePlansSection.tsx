@@ -119,30 +119,30 @@ export const ComparePlansSection: React.FC = () => {
     () => [
       {
         id: 'compute',
-        titleAr: 'المعالج والذاكرة',
+        titleAr: 'المعالج والرامات (CPU & RAM)',
         titleEn: 'Compute & Memory',
         rows: [
           {
             id: 'vcpu',
-            labelAr: 'أنوية المعالج (vCPU)',
+            labelAr: 'المعالج (vCPU)',
             labelEn: 'vCPU Cores',
-            tooltipAr: 'أنوية المعالجة المخصصة على معالجات AMD EPYC أو Intel Xeon.',
+            tooltipAr: 'أنوية معالج مخصصة على سيرفرات AMD EPYC أو Intel Xeon.',
             tooltipEn: 'Allocated processor cores on AMD EPYC / Intel Xeon nodes.',
             getValue: (p) => p.cpu,
           },
           {
             id: 'ram',
-            labelAr: 'الذاكرة العشوائية (RAM)',
+            labelAr: 'الرامات (ECC RAM)',
             labelEn: 'Memory (RAM)',
-            tooltipAr: 'سعة الذاكرة DDR4 ECC لضمان استقرار قواعد البيانات وأنظمة التشغيل.',
+            tooltipAr: 'رامات DDR4 ECC لاستقرار قواعد البيانات وتشغيل التطبيقات بدون تهنيج.',
             tooltipEn: 'DDR4 ECC memory capacity for stable OS and database execution.',
             getValue: (p) => p.ram,
           },
           {
             id: 'isolation',
-            labelAr: 'بيئة العزل والتشغيل',
+            labelAr: 'نظام العزل (Virtualization)',
             labelEn: 'Virtualization / Runtime',
-            tooltipAr: 'عزل KVM مخصص للخوادم الافتراضية أو حاوية CloudLinux LVE للاستضافة المدارة.',
+            tooltipAr: 'عزل KVM كامل لسيرفرات الـ VPS والـ Windows، أو CloudLinux LVE لاستضافة المواقع.',
             tooltipEn: 'KVM kernel hypervisor for VPS/Windows or CloudLinux LVE for managed web.',
             getValue: (p) =>
               p.category === 'web'
@@ -153,22 +153,22 @@ export const ComparePlansSection: React.FC = () => {
       },
       {
         id: 'storage',
-        titleAr: 'التخزين واللقطات',
+        titleAr: 'الهاردات والـ Snapshots',
         titleEn: 'Storage & Snapshots',
         rows: [
           {
             id: 'nvme',
-            labelAr: 'مساحة التخزين NVMe',
+            labelAr: 'هاردات NVMe',
             labelEn: 'NVMe SSD Storage',
-            tooltipAr: 'وحدات تخزين NVMe فائقة السرعة في مصفوفة RAID-10.',
+            tooltipAr: 'هاردات NVMe سريعة شغالة على مصفوفة RAID-10.',
             tooltipEn: 'Enterprise NVMe SSD capacity in RAID-10 configuration.',
             getValue: (p) => p.storage,
           },
           {
             id: 'backups',
-            labelAr: 'اللقطات والنسخ الاحتياطي',
+            labelAr: 'الـ Snapshots والـ Backup',
             labelEn: 'Snapshots & Backups',
-            tooltipAr: 'لقطات استرجاع عند الطلب (Snapshots) أو نسخ احتياطي يومي.',
+            tooltipAr: 'Snapshots سريعة قبل أي تحديث، أو Backup يومي خارج السيرفر.',
             tooltipEn: 'Included point-in-time Snapshots or automated daily off-site backups.',
             getValue: (p) => p.snapshots,
           },
@@ -176,30 +176,30 @@ export const ComparePlansSection: React.FC = () => {
       },
       {
         id: 'network',
-        titleAr: 'الشبكة والحماية',
+        titleAr: 'الشبكة وحماية DDoS',
         titleEn: 'Network & Protection',
         rows: [
           {
             id: 'bandwidth',
-            labelAr: 'حجم نقل البيانات',
+            labelAr: 'الترافيك الشهري (Traffic)',
             labelEn: 'Monthly Traffic Quota',
-            tooltipAr: 'بيانات واردة غير محدودة مع حصة شهرية واضحة للبيانات الصادرة.',
+            tooltipAr: 'ترافيك وارد مفتوح مع باقة شهرية كبيرة للبيانات الصادرة.',
             tooltipEn: 'Unlimited incoming traffic with generous monthly outbound quota.',
             getValue: (p) => p.bandwidth,
           },
           {
             id: 'port-speed',
-            labelAr: 'سرعة منفذ الشبكة',
+            labelAr: 'سرعة البورت (Port Speed)',
             labelEn: 'Uplink Port Speed',
-            tooltipAr: 'سرعة الاتصال الشبكي المتاحة لكل خادم داخل مركز البيانات.',
+            tooltipAr: 'سرعة بورت الشبكة المخصص لكل سيرفر داخل الداتا سنتر.',
             tooltipEn: 'Network uplink speed assigned to each instance.',
             getValue: (p) => p.portSpeed,
           },
           {
             id: 'ddos',
-            labelAr: 'الحماية من هجمات DDoS',
+            labelAr: 'حماية DDoS',
             labelEn: 'DDoS & Edge Protection',
-            tooltipAr: 'تنقية تلقائية لحركة المرور على مستوى الشبكة أو تطبيقات الويب.',
+            tooltipAr: 'فلترة تلقائية للترافيك ضد هجمات DDoS على مستوى الشبكة أو الـ WAF.',
             tooltipEn: 'Automated L3/L4 network scrubbing or L7 Web Application Firewall.',
             getValue: (p) => p.ddos,
           },
@@ -207,30 +207,30 @@ export const ComparePlansSection: React.FC = () => {
       },
       {
         id: 'management',
-        titleAr: 'الإدارة واتفاقية التشغيل',
+        titleAr: 'الإدارة والـ Uptime SLA',
         titleEn: 'Access & SLA',
         rows: [
           {
             id: 'panel',
-            labelAr: 'لوحة التحكم والصلاحيات',
+            labelAr: 'لوحة التحكم والـ Access',
             labelEn: 'Access & Control Panel',
-            tooltipAr: 'وسيلة الوصول والإدارة المتوفرة للخادم أو موقع الويب.',
+            tooltipAr: 'طريقة الدخول وإدارة السيرفر (SSH Root أو RDP أو cPanel).',
             tooltipEn: 'Administrative console and remote protocol access.',
             getValue: (p) => p.panel,
           },
           {
             id: 'uptime-sla',
-            labelAr: 'اتفاقية التوافر (SLA)',
+            labelAr: 'استقرار التشغيل (Uptime SLA)',
             labelEn: 'Uptime SLA',
-            tooltipAr: 'نسبة توافر العتاد والشبكة المنصوص عليها شهرياً.',
+            tooltipAr: 'نسبة وقت التشغيل الشهرية المضمونة للهاردوير والشبكة في الداتا سنتر.',
             tooltipEn: 'Documented monthly host and network availability target.',
             getValue: (p) => p.uptime,
           },
           {
             id: 'setup-fee',
-            labelAr: 'رسوم الإعداد',
+            labelAr: 'تكلفة التأسيس (Setup)',
             labelEn: 'Setup Fee',
-            tooltipAr: 'تفعيل الخادم دون أي رسوم تأسيس إضافية عند الاشتراك الشهري أو السنوي.',
+            tooltipAr: 'تفعيل السيرفر بدون أي مصاريف تأسيس إضافية مع الاشتراك الشهري أو السنوي.',
             tooltipEn: 'Zero one-time provisioning fee across monthly and annual billing.',
             getValue: (_, l) => (l === 'ar' ? '0 ج.م (مجاني)' : '$0 / Free Setup'),
           },
@@ -266,16 +266,16 @@ export const ComparePlansSection: React.FC = () => {
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8">
           <div className="max-w-2xl">
             <p className="text-sm font-semibold text-accent mb-2">
-              {lang === 'ar' ? 'المواصفات الهندسية التفصيلية' : 'Detailed Hardware Specifications'}
+              {lang === 'ar' ? 'المواصفات الفنية التفصيلية' : 'Detailed Hardware Specifications'}
             </p>
             <h2 className="text-2xl md:text-4xl font-bold text-main mb-3">
               {lang === 'ar'
-                ? 'مقارنة الموارد والشبكة بين الخطط'
+                ? 'مقارنة مواصفات السيرفرات والباقات'
                 : 'Side-by-Side Resource & Network Matrix'}
             </h2>
             <p className="text-muted text-sm sm:text-base leading-relaxed">
               {lang === 'ar'
-                ? 'قارن أنوية المعالج، ذاكرة ECC، سعة NVMe، واللقطات الاحتياطية لكل فئة، أو اختر حتى 3 خطط للمقارنة المباشرة.'
+                ? 'قارن المعالج، الرامات ECC، هاردات NVMe، والـ Snapshots لكل فئة، أو اختار لحد 3 باقات للمقارنة المباشرة.'
                 : 'Compare vCPU cores, ECC RAM, NVMe storage, and snapshot quotas per tier, or select up to 3 plans across categories.'}
             </p>
           </div>
@@ -544,7 +544,7 @@ export const ComparePlansSection: React.FC = () => {
             className="w-full text-start border-collapse min-w-[720px]"
             aria-label={
               lang === 'ar'
-                ? 'جدول مقارنة مواصفات الخوادم والاستضافة'
+                ? 'جدول مقارنة مواصفات السيرفرات والاستضافة'
                 : 'Hosting and Server Specifications Comparison Table'
             }
           >
@@ -571,9 +571,9 @@ export const ComparePlansSection: React.FC = () => {
                   className="p-5 text-start font-bold text-main text-base w-64 sticky start-0 bg-surface z-30 border-e border-token align-bottom"
                 >
                   <span className="block text-xs font-semibold text-muted mb-1">
-                    {lang === 'ar' ? 'المواصفة الهندسية' : 'Hardware & SLA'}
+                    {lang === 'ar' ? 'الهاردوير والـ SLA' : 'Hardware & SLA'}
                   </span>
-                  <span>{lang === 'ar' ? 'خطة التشغيل' : 'Instance Tier'}</span>
+                  <span>{lang === 'ar' ? 'باقة السيرفر' : 'Instance Tier'}</span>
                 </th>
                 {visiblePlans.map((plan) => (
                   <th
@@ -753,7 +753,7 @@ export const ComparePlansSection: React.FC = () => {
                         plan.popular ? 'btn-primary' : 'btn-secondary'
                       }`}
                     >
-                      {lang === 'ar' ? 'إعداد وطلب الخادم' : 'Configure & Order'}
+                      {lang === 'ar' ? 'تخصيص وطلب السيرفر' : 'Configure & Order'}
                     </button>
                   </td>
                 ))}

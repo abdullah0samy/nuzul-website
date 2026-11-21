@@ -48,7 +48,7 @@ export const ImageSlot: React.FC<ImageSlotProps> = ({
   const altText = lang === 'ar' ? descriptionAr : descriptionEn;
   const caption =
     lang === 'ar'
-      ? captionAr || 'تجهيز كبائن الشبكات وغرف الخوادم — نزول تك القاهرة'
+      ? captionAr || 'تجهيز راكات الشبكات والـ Server Rooms — نزول تك القاهرة'
       : captionEn || 'Structured cabling & server room operations — Nuzul Tech Cairo';
 
   const aspectClass =

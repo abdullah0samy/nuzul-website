@@ -24,11 +24,11 @@ interface BlogCategoryDef {
 }
 
 const BLOG_CATEGORIES: BlogCategoryDef[] = [
-  { slug: 'all', nameAr: 'جميع المقالات والأدلة', nameEn: 'All Technical Guides' },
-  { slug: 'infrastructure', nameAr: 'الشبكات والبنية التحتية', nameEn: 'Infrastructure & Networks' },
-  { slug: 'cloud', nameAr: 'السحابة والاستضافة', nameEn: 'Cloud & Servers' },
-  { slug: 'security', nameAr: 'الأمن السيبراني والنسخ الاحتياطي', nameEn: 'Cybersecurity & Backups' },
-  { slug: 'software', nameAr: 'البرمجيات وأنظمة الإدارة', nameEn: 'Software & ERP' },
+  { slug: 'all', nameAr: 'كل المقالات والشروحات', nameEn: 'All Articles & Guides' },
+  { slug: 'infrastructure', nameAr: 'الشبكات والسيرفر رووم', nameEn: 'Networks & Server Rooms' },
+  { slug: 'cloud', nameAr: 'سيرفرات Cloud VPS والاستضافة', nameEn: 'Cloud VPS & Hosting' },
+  { slug: 'security', nameAr: 'الأمن السيبراني والـ Backup', nameEn: 'Cybersecurity & Backup' },
+  { slug: 'software', nameAr: 'أنظمة ERP والبرمجيات', nameEn: 'ERP & Business Software' },
 ];
 
 const SORT_OPTIONS = [
@@ -189,7 +189,7 @@ export const BlogSection: React.FC = () => {
 
             <div>
               <h2 className="text-xs font-bold text-accent mb-3">
-                {lang === 'ar' ? 'تصنيفات الأدلة الهندسية' : 'Knowledge Pillars'}
+                {lang === 'ar' ? 'أقسام المدونة' : 'Topics'}
               </h2>
               <div className="space-y-1.5" role="group" aria-label={lang === 'ar' ? 'تصنيفات المدونة' : 'Blog categories'}>
                 {BLOG_CATEGORIES.map((cat) => {
@@ -271,13 +271,13 @@ export const BlogSection: React.FC = () => {
                 >
                   {lang === 'ar' ? (
                     <span>
-                      عرض <bdi dir="ltr" className="ltr-num text-accent">{visibleArticles.length}</bdi> من أصل{' '}
-                      <bdi dir="ltr" className="ltr-num">{filteredArticles.length}</bdi> مقال ودليل تقني
+                      عرض <bdi dir="ltr" className="ltr-num text-accent">{visibleArticles.length}</bdi> من{' '}
+                      <bdi dir="ltr" className="ltr-num">{filteredArticles.length}</bdi> مقال تقني
                     </span>
                   ) : (
                     <span>
                       Showing <bdi dir="ltr" className="ltr-num text-accent">{visibleArticles.length}</bdi> of{' '}
-                      <bdi dir="ltr" className="ltr-num">{filteredArticles.length}</bdi> technical guides
+                      <bdi dir="ltr" className="ltr-num">{filteredArticles.length}</bdi> technical articles
                     </span>
                   )}
                 </div>
@@ -353,7 +353,7 @@ export const BlogSection: React.FC = () => {
               >
                 <h3 className="text-xl font-bold text-main">
                   {lang === 'ar'
-                    ? 'لا توجد مقالات مطابقة للفلاتر المحددة'
+                    ? 'مفيش مقالات مطابقة للفلتر ده'
                     : 'No articles match your selected filters'}
                 </h3>
                 <button
@@ -361,7 +361,7 @@ export const BlogSection: React.FC = () => {
                   onClick={handleClearAllFilters}
                   className="btn-secondary px-5 py-2.5 text-xs font-bold"
                 >
-                  {lang === 'ar' ? 'عرض جميع المقالات' : 'Show All Articles'}
+                  {lang === 'ar' ? 'عرض كل المقالات' : 'Show All Articles'}
                 </button>
               </div>
             ) : (

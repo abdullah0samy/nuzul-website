@@ -38,124 +38,132 @@ export const ServiceDetailView: React.FC<ServiceDetailViewProps> = ({ service })
   const isSecurity = service.category === 'الأمن السيبراني';
   const isSoftware = service.category === 'البرمجيات وأنظمة الإدارة';
 
-  const categoryLabelEn = isCloud
-    ? 'Cloud & Servers'
+  const categoryLabelAr = isCloud
+    ? 'سيرفرات Cloud VPS والاستضافة'
     : isSecurity
-    ? 'Cybersecurity'
+    ? 'الأمن السيبراني والـ Backup'
     : isSoftware
-    ? 'Software & ERP'
-    : 'Infrastructure & Networks';
+    ? 'أنظمة ERP والبرمجيات'
+    : 'الشبكات والسيرفر رووم';
+
+  const categoryLabelEn = isCloud
+    ? 'Cloud VPS & Hosting'
+    : isSecurity
+    ? 'Cybersecurity & Backup'
+    : isSoftware
+    ? 'ERP & Business Software'
+    : 'Networks & Server Rooms';
 
   // Block 2: Who It Is For
   const whoItIsFor = isCloud
     ? {
         ar: [
-          'الشركات ومكاتب المحاسبة التي تشغّل أنظمة ERP وقواعد بيانات مركزية وتحتاج إلى أداء مستقر لعشرات المستخدمين المتزامنين.',
-          'فرق التطوير والمنصات الرقمية التي تتطلب خوادم معزولة على مستوى النواة (KVM) وأقراص NVMe بتسعير محلي واضح بالجنيه المصري.',
-          'المؤسسات الراغبة في التخلص من أعطال الخوادم المكتبية المحلية وتأمين وصول مشفر لفرق العمل عن بُعد.',
+          'الشركات ومكاتب المحاسبة اللي مشغّلة أنظمة ERP وقواعد بيانات وعايزة أداء مستقر لعشرات المستخدمين في نفس الوقت.',
+          'فرق التطوير والمواقع اللي محتاجة سيرفرات Cloud VPS معزولة عبر KVM وهاردات NVMe بتسعير واضح بالجنيه المصري.',
+          'الشركات اللي عايزة تستبدل السيرفر المكتبي المتعب بسيرفر سحابي آمن بدخول مشفر للفرق عن بُعد وBackup يومي.',
         ],
         en: [
-          'Enterprises and accounting firms running centralized ERP and SQL databases requiring stable multi-user performance.',
-          'Engineering teams and digital platforms needing kernel-isolated KVM servers and NVMe storage with predictable EGP billing.',
-          'Organizations looking to replace fragile office desktop servers with encrypted remote access and scheduled off-site backups.',
+          'Companies and accounting firms running central ERP and SQL databases that need stable multi-user performance.',
+          'Dev teams and platforms needing KVM-isolated Cloud VPS servers and NVMe storage with clear EGP billing.',
+          'Businesses replacing fragile office PCs with encrypted remote access and automated off-site backups.',
         ],
       }
     : isSecurity
     ? {
         ar: [
-          'المستشفيات والمؤسسات المالية التي تتطلب عزل شبكاتها الحساسة عن شبكة الزوار عبر أجهزة Firewall (NGFW) وتقسيم VLANs.',
-          'الشركات التي تسعى لحماية مراسلاتها وفواتيرها الرسمية من الانتحال والتصيد عبر توثيق البريد (SPF / DKIM / DMARC).',
-          'الجهات التي تحتاج إلى خطة نسخ احتياطي معزول (3-2-1 Immutable Backup) لاستعادة البيانات عند الكوارث.',
+          'المستشفيات والشركات اللي محتاجة تفصل شبكتها الحساسة عن شبكة الضيوف والموبايل عبر Firewall (NGFW) وتقسيم VLANs.',
+          'الشركات اللي عايزة تحمي إيميلاتها وفواتيرها الرسمية من الانتحال والتزوير بضبط SPF وDKIM وDMARC.',
+          'المؤسسات اللي محتاجة خطة Backup معزول (3-2-1 Immutable Backup) تحمي بياناتها من فيروسات الفدية.',
         ],
         en: [
-          'Hospitals and financial firms requiring strict network isolation via hardware NGFW firewalls and 802.1Q VLAN segmentation.',
-          'Companies protecting official domain communications and invoices from spoofing via SPF, DKIM, and DMARC enforcement.',
-          'Organizations mandating 3-2-1 immutable off-site backups for rapid disaster recovery against ransomware.',
+          'Hospitals and companies needing strict network separation via hardware NGFW firewalls and 802.1Q VLANs.',
+          'Businesses protecting official domain emails and invoices from spoofing via SPF, DKIM, and DMARC.',
+          'Organizations requiring 3-2-1 immutable off-site backups for rapid recovery against ransomware.',
         ],
       }
     : isSoftware
     ? {
         ar: [
-          'الشركات التجارية والعيادات التي تبحث عن أتمتة الحسابات والمخازن والربط المباشر مع منظومة الفاتورة الإلكترونية المصرية (ETA).',
-          'المؤسسات التي تستعد لاستلام مشروع برمجي من شركة تطوير خارجية وتحتاج إلى فحص واعتماد هندسي مستقل (QA & Load Testing).',
-          'قطاعات الأعمال التي تحتاج إلى بوابات ويب أو تطبيقات جوال مربوطة مباشرة بقواعد البيانات المركزية.',
+          'الشركات التجارية والعيادات اللي عايزة تنظم الحسابات والمخازن وتربطها مباشرة بالفاتورة الإلكترونية المصرية (ETA).',
+          'الشركات اللي هتستلم سيستم أو تطبيق من شركة برمجة وعايزة فحص واختبار تحميل مستقل (QA & Load Testing) قبل التوقيع.',
+          'البيزنس اللي محتاج موقع شركة أو تطبيق موبايل مربوط مباشرة بقاعدة البيانات الأساسية.',
         ],
         en: [
-          'Commercial enterprises and clinics automating inventory, billing, and Egyptian Tax Authority (ETA) e-invoicing.',
-          'Organizations preparing to accept software from an external vendor and requiring independent QA and load testing.',
+          'Commercial businesses and clinics automating inventory, accounting, and Egyptian ETA e-invoicing.',
+          'Organizations preparing to sign off on vendor-built software and needing independent QA & load testing.',
           'Businesses needing responsive web portals or mobile apps integrated directly with core ERP databases.',
         ],
       }
     : {
         ar: [
-          'المقرات الإدارية والمستشفيات التي تؤسس بنية كابلات شبكية منظمة (Cat6A / Fiber) وغرف خوادم قياسية.',
-          'المؤسسات التي تحتاج إلى إدارة مركزية لحسابات الموظفين عبر خادم دومين (Active Directory) وخادم ملفات بصلاحيات دقيقة.',
-          'الشركات متعددة الفروع التي ترغب في توحيد الاتصالات الداخلية عبر سنترال رقمي (VoIP PBX) وشبكات مراقبة CCTV معزولة.',
+          'الشركات والمستشفيات اللي بتجهّز شبكة كابلات منظمة (Cat6A / Fiber) وسيرفر رووم وراكات قياسية.',
+          'الشركات اللي عايزة تحكم مركزي في أجهزة الموظفين عبر Active Directory وFile Server بصلاحيات لكل قسم.',
+          'الشركات اللي عندها أكتر من فرع وعايزة توحّد التليفونات الداخلية بسنترال VoIP وتفصل كاميرات الـ CCTV في شبكة مستقلة.',
         ],
         en: [
-          'Corporate headquarters and hospitals deploying structured Cat6A/Fiber cabling and standardized server racks.',
-          'Organizations needing centralized endpoint management via Active Directory domain controllers and role-based file servers.',
-          'Multi-branch companies unifying internal communications via IP-PBX VoIP telephony and isolated IP CCTV surveillance grids.',
+          'Offices and hospitals building structured Cat6A/Fiber cabling and clean server rooms.',
+          'Companies needing central endpoint control via Active Directory domain controllers and role-based File Servers.',
+          'Multi-branch businesses unifying internal calls via VoIP IP-PBX and isolating IP CCTV networks.',
         ],
       };
 
   // Block 3: Scope Included vs Not Included
   const includedScopeAr = [
     ...(service.features || []),
-    'المعاينة الفنية المبدئية وتوثيق المخطط الهندسي (As-Built Documentation).',
-    'إعداد بيئة التشغيل والاختبار الوظيفي والأمني قبل الإطلاق الفعلي.',
-    'تسليم كافة بيانات الدخول والصلاحيات الإدارية الكاملة للعميل.',
+    'المعاينة الفنية وتوثيق مخطط الشبكة والإعدادات (As-Built Documentation).',
+    'تجهيز بيئة التشغيل وعمل اختبارات الأداء والأمان قبل التسليم الفعلي.',
+    'تسليم كل بيانات الدخول وصلاحيات الـ Admin وRoot كاملة باسم العميل.',
   ];
   const includedScopeEn = [
     ...(service.featuresEn || []),
-    'Initial technical discovery and As-Built architecture documentation.',
-    'Staging configuration, functional verification, and security hardening prior to go-live.',
-    'Full handover of administrative credentials and configuration documentation.',
+    'Initial site audit and As-Built architecture documentation.',
+    'Staging setup, functional testing, and security hardening before go-live.',
+    'Full handover of administrative credentials and configuration runbooks.',
   ];
 
   const excludedScopeAr = [
-    'رسوم تراخيص البرمجيات التجارية المملوكة لأطراف ثالثة (مثل تراخيص Windows Server أو اشتراكات FortiGuard السنوية) ما لم تُدرج صراحة في عرض السعر.',
-    'الأعمال المدنية والإنشائية وتكسير الحوائط أو تأسيس شبكات الكهرباء الرئيسية والمولدات.',
-    'إدارة الأنظمة المستمرة 24/7 بعد انتهاء فترة ضمان التسليم ما لم يتم التعاقد على عقد صيانة ودعم دوري (SLA / ITaaS).',
+    'تراخيص البرامج التجارية لطرف ثالث (زي تراخيص Windows Server أو اشتراكات FortiGuard السنوية) إلا لو متسعّرة بوضوح في العرض.',
+    'الأعمال المدنية وتكسير الحوائط أو تأسيس خطوط الكهرباء الرئيسية والمولدات.',
+    'الإدارة المستمرة 24/7 بعد فترة ضمان التسليم إلا لو تم التعاقد على عقد صيانة ودعم دوري (SLA / ITaaS).',
   ];
   const excludedScopeEn = [
-    'Third-party commercial software license fees (e.g., Microsoft Windows Server CALs or annual FortiGuard subscriptions) unless explicitly itemized in the quotation.',
-    'Civil construction, masonry trenching, or primary electrical generator and UPS wiring.',
-    'Ongoing 24/7 managed administration beyond the handover warranty window unless covered by an active SLA / ITaaS agreement.',
+    'Third-party commercial licenses (e.g., Windows Server CALs or annual FortiGuard subscriptions) unless itemized in the quote.',
+    'Civil works, wall trenching, or primary electrical generator wiring.',
+    'Ongoing 24/7 managed operations after the handover warranty unless covered by an active SLA / ITaaS retainer.',
   ];
 
   // Block 4: How Delivery Works
   const deliverySteps = [
     {
       step: '01',
-      titleAr: 'التدقيق الفني وحصر المتطلبات',
-      titleEn: 'Technical Discovery & Sizing',
+      titleAr: 'المعاينة وحصر المتطلبات',
+      titleEn: 'Discovery & Sizing',
       durationAr: '1 – 2 يوم عمل',
       durationEn: '1 – 2 Business Days',
       descAr:
-        'فحص البيئة الحالية، حصر أعداد المستخدمين والأحمال، وتحديد المواصفات الفنية الدقيقة دون مبالغة في التكاليف.',
+        'فحص الوضع الحالي، وحصر عدد المستخدمين والأحمال، وتحديد المواصفات المطلوبة بالظبط بدون تكاليف زايدة.',
       descEn:
-        'Auditing current systems, sizing user concurrency and workloads, and defining exact technical specifications.',
+        'Auditing current systems, sizing user concurrency and workloads, and defining exact technical specs.',
     },
     {
       step: '02',
-      titleAr: 'التجهيز في بيئة موازية',
+      titleAr: 'التجهيز في بيئة اختبار موازية',
       titleEn: 'Staging & Pre-Configuration',
       durationAr: '2 – 5 أيام عمل',
       durationEn: '2 – 5 Business Days',
       descAr:
-        'إعداد الخوادم أو الشبكات أو الأنظمة وتطبيق سياسات الحماية والنسخ الاحتياطي في بيئة اختبار معزولة.',
+        'تجهيز السيرفرات أو الشبكة وتطبيق قواعد الـ Firewall والـ Backup وتجربتها في بيئة موازية قبل التشغيل.',
       descEn:
         'Provisioning servers, network policies, or software modules and validating backups in an isolated staging setup.',
     },
     {
       step: '03',
-      titleAr: 'النقل والتحويل الآمن',
+      titleAr: 'النقل والتشغيل الآمن',
       titleEn: 'Scheduled Cutover & QA',
       durationAr: '1 – 2 يوم عمل',
       durationEn: '1 – 2 Business Days',
       descAr:
-        'تنفيذ التحويل النهائي خارج أوقات الذروة التشغيلية مع وجود خطة تراجع مختبرة والتحقق من استقرار الأداء.',
+        'النقل الفعلي خارج أوقات الذروة مع وجود خطة رجوع (Rollback) مجرّبة والتأكد من استقرار الأداء بالكامل.',
       descEn:
         'Executing production cutover during off-peak hours with a verified rollback plan and end-to-end validation.',
     },
@@ -166,7 +174,7 @@ export const ServiceDetailView: React.FC<ServiceDetailViewProps> = ({ service })
       durationAr: 'يوم عمل واحد',
       durationEn: '1 Business Day',
       descAr:
-        'تسليم وثيقة الإعدادات الكاملة، بيانات الإدارة، وتدريب الفريق المسؤول مع بدء سريان ضمان التشغيل.',
+        'تسليم ملف الإعدادات الكامل، وبيانات الـ Admin، وتدريب فريقك مع بداية فترة ضمان التشغيل.',
       descEn:
         'Delivering full configuration runbooks, admin credentials, and team onboarding alongside active SLA coverage.',
     },
@@ -175,19 +183,19 @@ export const ServiceDetailView: React.FC<ServiceDetailViewProps> = ({ service })
   // Block 5: Deliverables
   const deliverablesList = [
     {
-      ar: 'وثيقة المعمارية والإعدادات المنفذة (As-Built Topology & Configuration Runbook).',
+      ar: 'مخطط الشبكة وملف الإعدادات المنفذة (As-Built Topology & Runbook).',
       en: 'As-Built Network/System Topology & Configuration Runbook.',
     },
     {
-      ar: 'تقرير الفحص والاعتماد الفني بعد الاختبار (QA & Security Verification Report).',
+      ar: 'تقرير الفحص والاختبار الأمني والوظيفي بعد التنفيذ (QA & Security Report).',
       en: 'Post-deployment QA & Security Verification Checklist.',
     },
     {
-      ar: 'ملف مشفر ببيانات الدخول والصلاحيات الإدارية (Admin Credentials Vault).',
+      ar: 'ملف مشفر بكل بيانات الدخول وصلاحيات الإدارة (Admin Credentials Vault).',
       en: 'Encrypted Administrative Credentials & Access Matrix Handover.',
     },
     {
-      ar: 'دليل إجراءات النسخ الاحتياطي واستعادة التشغيل (Backup & Disaster Recovery Playbook).',
+      ar: 'دليل إجراءات الـ Backup واسترجاع البيانات وقت الطوارئ (DR Playbook).',
       en: 'Scheduled Backup Verification & Disaster Recovery Playbook.',
     },
   ];
@@ -195,22 +203,22 @@ export const ServiceDetailView: React.FC<ServiceDetailViewProps> = ({ service })
   // Block 6: SLA & Support Terms
   const slaTerms = [
     {
-      labelAr: 'توافر البنية السحابية',
+      labelAr: 'استقرار التشغيل (Uptime)',
       labelEn: 'Cloud Uptime Target',
-      valueAr: 'حتى 99.99% للخوادم الافتراضية والمخصصة وفق خطة التعاقد',
+      valueAr: 'حتى 99.99% لسيرفرات الـ Cloud VPS والسيرفرات المخصصة حسب الباقة',
       valueEn: 'Up to 99.99% for Cloud VPS & Dedicated tiers per contracted plan',
     },
     {
-      labelAr: 'قنوات الدعم والتصعيد',
+      labelAr: 'قنوات الدعم الفني',
       labelEn: 'Support & Escalation Channels',
-      valueAr: 'نظام تذاكر هندسي مسجّل + قناة طوارئ مباشرة للحالات الحرجة',
-      valueEn: 'Tracked engineering ticket desk + direct emergency escalation line',
+      valueAr: 'نظام تذاكر متابع + خط طوارئ مباشر للمشاكل الحرجة (P1)',
+      valueEn: 'Tracked ticket desk + direct emergency escalation line for P1 incidents',
     },
     {
-      labelAr: 'فترة الضمان بعد التسليم',
+      labelAr: 'الضمان بعد التسليم',
       labelEn: 'Post-Handover Warranty',
-      valueAr: 'متابعة استقرار مجانية بعد الإطلاق مع إمكانية التعاقد على إدارة سنوية (ITaaS)',
-      valueEn: 'Post-launch stabilization coverage with optional annual ITaaS management',
+      valueAr: 'متابعة استقرار مجانية بعد الإطلاق، مع إمكانية التعاقد على إدارة شهرية أو سنوية (ITaaS)',
+      valueEn: 'Post-launch stabilization coverage with optional monthly/annual ITaaS management',
     },
   ];
 
@@ -226,19 +234,19 @@ export const ServiceDetailView: React.FC<ServiceDetailViewProps> = ({ service })
   // Block 8: What Drives the Price
   const priceDrivers = [
     {
-      ar: 'عدد المستخدمين المتزامنين أو نقاط الشبكة والأجهزة المراد ربطها.',
+      ar: 'عدد المستخدمين المتزامنين أو عدد نقاط الشبكة والأجهزة اللي هتتربط.',
       en: 'Number of concurrent users, physical network drops, or endpoints.',
     },
     {
-      ar: 'حجم قواعد البيانات وسعات التخزين (NVMe) ودورية النسخ الاحتياطي المطلوبة.',
+      ar: 'حجم قواعد البيانات ومساحة هاردات الـ NVMe وعدد نسخ الـ Backup المطلوبة.',
       en: 'Database volume, NVMe storage capacity, and backup retention frequency.',
     },
     {
-      ar: 'مستوى الاعتمادية المطلوب (خادم مفرد مقابل بيئة مزدوجة عالية التوافرية HA).',
+      ar: 'مستوى الاستمرارية المطلوب (سيرفر واحد ولا Cluster بـ Failover تلقائي).',
       en: 'Resilience architecture (single instance vs. High-Availability failover cluster).',
     },
     {
-      ar: 'نطاق عقد مستوى الخدمة والدعم الفني بعد التسليم (ساعات العمل الرسمية مقابل تغطية 24/7).',
+      ar: 'مستوى الدعم الفني بعد التسليم (ساعات العمل الرسمية ولا تغطية 24/7).',
       en: 'SLA support coverage window (standard business hours vs. 24/7 engineering coverage).',
     },
   ];
@@ -256,21 +264,21 @@ export const ServiceDetailView: React.FC<ServiceDetailViewProps> = ({ service })
   // Block 10: FAQs (Real objections)
   const serviceFaqs = [
     {
-      qAr: 'هل يتطلب تنفيذ هذه الخدمة إيقاف العمل أو تعطيل الموظفين؟',
+      qAr: 'هل تنفيذ الخدمة هيوقف شغل الموظفين أو يعطل الشركة؟',
       qEn: 'Does deploying this service require operational downtime for our staff?',
-      aAr: 'لا؛ نقوم ببناء وتجهيز البيئة الجديدة واختبارها بشكل موازٍ أثناء ساعات العمل العادية، ويتم التحويل النهائي خارج أوقات الذروة مع وجود خطة تراجع جاهزة.',
+      aAr: 'لأ؛ بنجهّز البيئة الجديدة ونختبرها بشكل موازي أثناء الشغل العادي، والنقل الفعلي بيكون خارج أوقات الذروة مع خطة رجوع جاهزة.',
       aEn: 'No. We build, configure, and validate the new environment in parallel during normal hours, executing final cutover outside peak business hours with a tested rollback plan.',
     },
     {
-      qAr: 'من يمتلك بيانات الدخول والكود المصدري أو إعدادات الخوادم بعد التسليم؟',
+      qAr: 'مين بيكون مالك الدومين والـ Root Access وإعدادات السيرفرات بعد التسليم؟',
       qEn: 'Who owns the administrative credentials, data, and configurations after handover?',
-      aAr: 'يمتلك العميل كامل السيادة على بياناته وأسماء النطاقات وصلاحيات الجذر (Root / Domain Admin)، ونسلّم وثيقة إعدادات مفصلة لاستقلال التشغيل دون احتكار.',
+      aAr: 'العميل هو المالك الوحيد للبيانات والدومين وصلاحيات الـ Root وDomain Admin، وبنسلّمك ملف توثيق كامل للإعدادات عشان ما تكونش مقيد بأي طرف.',
       aEn: 'You retain full ownership of your data, domain names, and root/domain administrator credentials. We deliver complete As-Built documentation so you are never locked in.',
     },
     {
-      qAr: 'هل يتم إصدار فاتورة ضريبية رسمية وعقد مستوى خدمة (SLA)؟',
+      qAr: 'هل بتطلعوا فاتورة ضريبية رسمية وعقد SLA؟',
       qEn: 'Do you provide an official Egyptian tax invoice and a formal SLA contract?',
-      aAr: 'نعم، تشمل التعاقدات المؤسسية عقداً رسمياً يوضح النطاق والجدول الزمني ومستوى الخدمة (SLA)، مع إصدار فاتورة ضريبية إلكترونية رسمية.',
+      aAr: 'أيوة، كل تعاقدات الشركات بيكون معاها عقد رسمي يوضح نطاق التنفيذ والجدول الزمني والـ SLA، وفاتورة إلكترونية ضريبية رسمية في مصر.',
       aEn: 'Yes. All corporate engagements include a formal contract specifying scope, timeline, and SLA response commitments, accompanied by an official Egyptian electronic tax invoice.',
     },
   ];
@@ -300,10 +308,10 @@ export const ServiceDetailView: React.FC<ServiceDetailViewProps> = ({ service })
             <div className="lg:col-span-8 space-y-5">
               <div className="flex flex-wrap items-center gap-2.5">
                 <span className="px-3 py-1 rounded-md bg-accent-tint text-accent text-xs font-bold border border-token whitespace-nowrap">
-                  {lang === 'ar' ? service.category : categoryLabelEn}
+                  {lang === 'ar' ? categoryLabelAr : categoryLabelEn}
                 </span>
                 <span className="px-3 py-1 rounded-md bg-surface-2 text-muted text-xs font-medium border border-token whitespace-nowrap">
-                  {lang === 'ar' ? 'توصيف هندسي قياسي' : 'Standard Engineering Specification'}
+                  {lang === 'ar' ? 'تفاصيل الخدمة' : 'Service Specification'}
                 </span>
               </div>
 
@@ -323,7 +331,7 @@ export const ServiceDetailView: React.FC<ServiceDetailViewProps> = ({ service })
               {rawService && (
                 <div className="p-4 rounded-xl bg-surface-2 border border-token text-xs sm:text-sm text-muted leading-relaxed">
                   <strong className="text-main font-bold block mb-1">
-                    {lang === 'ar' ? 'تطبيق عملي من واقع المشاريع:' : 'Practical Field Application:'}
+                    {lang === 'ar' ? 'مثال من شغلنا الفعلي:' : 'Real Deployment Example:'}
                   </strong>
                   {lang === 'ar' ? rawService.useCaseStory_ar : rawService.useCaseStory_en}
                 </div>
@@ -335,17 +343,17 @@ export const ServiceDetailView: React.FC<ServiceDetailViewProps> = ({ service })
               <div className="p-6 rounded-xl bg-surface-2 border border-token space-y-5">
                 <div>
                   <div className="text-xs font-semibold text-muted mb-1">
-                    {lang === 'ar' ? 'آلية التسعير والتنفيذ' : 'Quotation & Execution Model'}
+                    {lang === 'ar' ? 'التسعير والتنفيذ' : 'Quotation & Execution'}
                   </div>
                   <div className="text-xl font-bold text-main">
                     {lang === 'ar'
-                      ? 'مقايسة هندسية حسب النطاق'
-                      : 'Scoped Engineering Proposal'}
+                      ? 'عرض سعر فني حسب المشروع'
+                      : 'Custom Technical Quote'}
                   </div>
                   <div className="text-xs text-muted mt-1.5 leading-relaxed">
                     {lang === 'ar'
-                      ? 'يُحدد العرض المالي والجدول الزمني كتابةً بعد المعاينة الفنية وحصر عدد المستخدمين والأصول.'
-                      : 'Fixed pricing and timeline are documented in writing after technical audit and workload sizing.'}
+                      ? 'بنحدد التكلفة والجدول الزمني كتابةً بعد المعاينة الفنية وحصر عدد المستخدمين والأجهزة.'
+                      : 'Fixed pricing and timeline are documented in writing after site audit and workload sizing.'}
                   </div>
                 </div>
 
@@ -356,7 +364,7 @@ export const ServiceDetailView: React.FC<ServiceDetailViewProps> = ({ service })
                     className="btn-primary w-full py-3.5 text-sm whitespace-nowrap"
                   >
                     <span>
-                      {lang === 'ar' ? 'اطلب عرض سعر فني مفصل' : 'Request Technical Proposal'}
+                      {lang === 'ar' ? 'اطلب عرض سعر فني' : 'Request Technical Quote'}
                     </span>
                     <ArrowIcon className="w-4 h-4" />
                   </Link>
@@ -364,7 +372,7 @@ export const ServiceDetailView: React.FC<ServiceDetailViewProps> = ({ service })
                     to="/pricing"
                     className="btn-secondary w-full py-3 text-xs sm:text-sm whitespace-nowrap"
                   >
-                    {lang === 'ar' ? 'قارن الباقات والخطط' : 'Compare Bundled Plans'}
+                    {lang === 'ar' ? 'قارن الباقات والأسعار' : 'Compare Plans & Pricing'}
                   </Link>
                 </div>
               </div>
@@ -379,10 +387,10 @@ export const ServiceDetailView: React.FC<ServiceDetailViewProps> = ({ service })
         >
           <div className="flex items-center gap-2.5 text-accent text-xs font-bold mb-2">
             <Users className="w-4 h-4" />
-            <span>{lang === 'ar' ? 'الفئات المستفيدة' : 'Target Organizations'}</span>
+            <span>{lang === 'ar' ? 'الخدمة دي لمين؟' : 'Who This Is For'}</span>
           </div>
           <h2 className="text-xl sm:text-2xl font-bold text-main mb-5">
-            {lang === 'ar' ? 'الجهات والمنشآت المستفيدة من هذه الخدمة' : 'Target Organizations for This Service'}
+            {lang === 'ar' ? 'الشركات والقطاعات المناسبة للخدمة دي' : 'Best Fit for These Organizations'}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {(lang === 'ar' ? whoItIsFor.ar : whoItIsFor.en).map((item, idx) => (
@@ -404,13 +412,13 @@ export const ServiceDetailView: React.FC<ServiceDetailViewProps> = ({ service })
         >
           <h2 className="text-xl sm:text-2xl font-bold text-main mb-2">
             {lang === 'ar'
-              ? 'نطاق التنفيذ والمخرجات الهندسية'
-              : 'Engineering Scope & Deliverables'}
+              ? 'نطاق الشغل واللي داخل العرض'
+              : 'Scope & Deliverables'}
           </h2>
           <p className="text-xs sm:text-sm text-muted mb-6">
             {lang === 'ar'
-              ? 'توصيف واضح لما يشمله التعاقد القياسي وما يتم تسعيره بشكل منفصل لضمان شفافية التكلفة.'
-              : 'Clear boundary between standard included engineering work and separately quoted items.'}
+              ? 'توضيح مباشر للي مشمول في التنفيذ القياسي، واللي بيتسعّر بشكل منفصل عشان التكلفة تبقى واضحة من الأول.'
+              : 'Clear boundary between standard included work and separately quoted items.'}
           </p>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -420,7 +428,7 @@ export const ServiceDetailView: React.FC<ServiceDetailViewProps> = ({ service })
                 <CheckCircle2 className="w-4 h-4 text-accent shrink-0" />
                 <span>
                   {lang === 'ar'
-                    ? 'ما يشمله النطاق القياسي (Included)'
+                    ? 'مشمول في التنفيذ (Included)'
                     : 'Included in Standard Scope'}
                 </span>
               </div>
@@ -440,7 +448,7 @@ export const ServiceDetailView: React.FC<ServiceDetailViewProps> = ({ service })
                 <XCircle className="w-4 h-4 text-muted shrink-0" />
                 <span>
                   {lang === 'ar'
-                    ? 'ما لا يشمله النطاق الافتراضي (Not Included)'
+                    ? 'خارج النطاق الافتراضي (Not Included)'
                     : 'Not Included by Default (Quoted Separately)'}
                 </span>
               </div>
@@ -463,8 +471,8 @@ export const ServiceDetailView: React.FC<ServiceDetailViewProps> = ({ service })
         >
           <h2 className="text-xl sm:text-2xl font-bold text-main mb-6">
             {lang === 'ar'
-              ? 'آلية التنفيذ والتسليم الهندسي (4 مراحل)'
-              : 'How Delivery Works (4 Engineering Stages)'}
+              ? 'خطوات التنفيذ والتسليم (4 مراحل)'
+              : 'How Delivery Works (4 Stages)'}
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {deliverySteps.map((stepItem) => (
@@ -502,12 +510,12 @@ export const ServiceDetailView: React.FC<ServiceDetailViewProps> = ({ service })
           >
             <div className="flex items-center gap-2 text-accent text-xs font-bold mb-2">
               <FileCheck className="w-4 h-4" />
-              <span>{lang === 'ar' ? 'وثائق ومحاضر التسليم' : 'Handover Artifacts'}</span>
+              <span>{lang === 'ar' ? 'ملفات التسليم' : 'Handover Artifacts'}</span>
             </div>
             <h2 className="text-xl font-bold text-main mb-5">
               {lang === 'ar'
-                ? 'المخرجات الهندسية التي يتسلمها العميل'
-                : 'Engineering Deliverables You Receive'}
+                ? 'اللي بتستلمه بعد التنفيذ'
+                : 'What You Receive on Handover'}
             </h2>
             <ul className="space-y-3.5">
               {deliverablesList.map((item, idx) => (
@@ -529,11 +537,11 @@ export const ServiceDetailView: React.FC<ServiceDetailViewProps> = ({ service })
           >
             <div className="flex items-center gap-2 text-accent text-xs font-bold mb-2">
               <ShieldCheck className="w-4 h-4" />
-              <span>{lang === 'ar' ? 'اتفاقية مستوى الخدمة' : 'Service Level Agreement'}</span>
+              <span>{lang === 'ar' ? 'عقد الـ SLA والدعم' : 'Service Level Agreement'}</span>
             </div>
             <h2 className="text-xl font-bold text-main mb-5">
               {lang === 'ar'
-                ? 'شروط مستوى الخدمة والدعم الفني (SLA)'
+                ? 'شروط الـ SLA والدعم الفني'
                 : 'SLA & Post-Deployment Support Terms'}
             </h2>
             <div className="space-y-3.5">
@@ -563,7 +571,7 @@ export const ServiceDetailView: React.FC<ServiceDetailViewProps> = ({ service })
           >
             <div className="flex items-center gap-2 text-accent text-xs font-bold mb-2">
               <Cpu className="w-4 h-4" />
-              <span>{lang === 'ar' ? 'المكدس التقني' : 'Verified Stack'}</span>
+              <span>{lang === 'ar' ? 'التقنيات المستخدمة' : 'Verified Stack'}</span>
             </div>
             <h2 className="text-xl font-bold text-main mb-5">
               {lang === 'ar'
@@ -591,12 +599,12 @@ export const ServiceDetailView: React.FC<ServiceDetailViewProps> = ({ service })
           >
             <div className="flex items-center gap-2 text-accent text-xs font-bold mb-2">
               <Sliders className="w-4 h-4" />
-              <span>{lang === 'ar' ? 'محددات التسعير' : 'Pricing Factors'}</span>
+              <span>{lang === 'ar' ? 'التسعير' : 'Pricing Factors'}</span>
             </div>
             <h2 className="text-xl font-bold text-main mb-5">
               {lang === 'ar'
-                ? 'العوامل المحددة للتكلفة النهائية'
-                : 'Factors Determining Final Cost'}
+                ? 'إيه اللي بيحدد التكلفة النهائية؟'
+                : 'What Determines the Final Cost'}
             </h2>
             <ul className="space-y-3">
               {priceDrivers.map((driver, idx) => (
@@ -632,8 +640,8 @@ export const ServiceDetailView: React.FC<ServiceDetailViewProps> = ({ service })
                     <FolderGit2 className="w-4 h-4" />
                     <span>
                       {lang === 'ar'
-                        ? 'دراسة حالة مرتبطة من سجل مشاريعنا'
-                        : 'Related Case Study from Our Portfolio'}
+                        ? 'مشروع مشابه من سابقة أعمالنا'
+                        : 'Related Project from Our Portfolio'}
                     </span>
                   </div>
                   <h2 className="text-xl sm:text-2xl font-bold text-main mb-3">
@@ -647,7 +655,7 @@ export const ServiceDetailView: React.FC<ServiceDetailViewProps> = ({ service })
                   </p>
                   <p className="text-xs sm:text-sm text-muted leading-relaxed mb-6">
                     <strong className="text-main">
-                      {lang === 'ar' ? 'الحل المنفذ: ' : 'Delivered Solution: '}
+                      {lang === 'ar' ? 'اللي نفذناه: ' : 'Delivered Solution: '}
                     </strong>
                     {lang === 'ar' ? relatedCase.solution : relatedCase.solutionEn}
                   </p>
@@ -671,7 +679,7 @@ export const ServiceDetailView: React.FC<ServiceDetailViewProps> = ({ service })
                   >
                     <span>
                       {lang === 'ar'
-                        ? 'استعرض دراسة الحالة الكاملة'
+                        ? 'تفاصيل المشروع الكاملة'
                         : 'Read Full Case Study'}
                     </span>
                     <ArrowIcon className="w-4 h-4" />
@@ -689,11 +697,11 @@ export const ServiceDetailView: React.FC<ServiceDetailViewProps> = ({ service })
         >
           <div className="flex items-center gap-2 text-accent text-xs font-bold mb-2">
             <HelpCircle className="w-4 h-4" />
-            <span>{lang === 'ar' ? 'إجابات هندسية وتجارية' : 'Technical & Commercial FAQ'}</span>
+            <span>{lang === 'ar' ? 'إجابات سريعة وواضحة' : 'Technical & Commercial FAQ'}</span>
           </div>
           <h2 className="text-xl sm:text-2xl font-bold text-main mb-6">
             {lang === 'ar'
-              ? 'الأسئلة الشائعة حول تنفيذ الخدمة'
+              ? 'أسئلة شائعة قبل البدء'
               : 'Frequently Asked Questions'}
           </h2>
           <div className="space-y-3">
@@ -736,12 +744,12 @@ export const ServiceDetailView: React.FC<ServiceDetailViewProps> = ({ service })
           <div className="max-w-2xl">
             <h2 className="text-xl sm:text-2xl font-bold text-main mb-2">
               {lang === 'ar'
-                ? 'اطلب معاينة فنية أو عرض سعر مخصص لمنشأتك'
-                : 'Request a Technical Assessment or Custom Proposal'}
+                ? 'اطلب معاينة فنية أو عرض سعر لشركتك'
+                : 'Request a Site Audit or Custom Quote'}
             </h2>
             <p className="text-xs sm:text-sm text-muted leading-relaxed">
               {lang === 'ar'
-                ? 'تواصل مباشرة مع مهندسي نزول تك لمناقشة متطلباتك وتحديد النطاق الزمني والمالي بدقة.'
+                ? 'تواصل مباشرة مع مهندسي نزول تك لمناقشة متطلباتك وتحديد التكلفة والجدول الزمني بوضوح.'
                 : 'Speak directly with Nuzul Tech engineers to scope your environment, timeline, and budget.'}
             </p>
           </div>
@@ -750,14 +758,14 @@ export const ServiceDetailView: React.FC<ServiceDetailViewProps> = ({ service })
               to={`/contact?service=${service.id}`}
               className="btn-primary px-6 py-3.5 text-sm whitespace-nowrap"
             >
-              <span>{lang === 'ar' ? 'احجز استشارة هندسية' : 'Book Engineering Consultation'}</span>
+              <span>{lang === 'ar' ? 'اطلب معاينة أو عرض سعر' : 'Request Quote or Audit'}</span>
               <ArrowIcon className="w-4 h-4" />
             </Link>
             <Link
               to="/services"
               className="btn-secondary px-5 py-3.5 text-sm whitespace-nowrap"
             >
-              {lang === 'ar' ? 'تصفح بقية الخدمات' : 'Browse All Services'}
+              {lang === 'ar' ? 'تصفح باقي الخدمات' : 'Browse All Services'}
             </Link>
           </div>
         </div>

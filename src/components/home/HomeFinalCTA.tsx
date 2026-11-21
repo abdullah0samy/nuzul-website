@@ -70,7 +70,7 @@ export const HomeFinalCTA: React.FC = () => {
     } catch {
       setError(
         lang === 'ar'
-          ? 'تعذّر الاتصال بالخادم، يمكنك التواصل مباشرة عبر واتساب.'
+          ? 'حصل مشكلة في الاتصال بالسيرفر، تقدر تتواصل معانا مباشرة على واتساب.'
           : 'Connection error. Please reach us directly on WhatsApp.'
       );
     } finally {
@@ -95,7 +95,7 @@ export const HomeFinalCTA: React.FC = () => {
             </h2>
             <p className="text-muted text-sm sm:text-base leading-relaxed">
               {lang === 'ar'
-                ? 'ابعث لنا تفاصيل مقر شركتك أو احتياج السيرفرات، ونرد عليك خلال ساعات العمل بمقايسة فنية وعرض سعر واضح.'
+                ? 'ابعث لنا تفاصيل مقر شركتك أو مواصفات السيرفر المطلوب، ونرد عليك خلال ساعات العمل بعرض سعر فني ومواصفات واضحة.'
                 : 'Share your office setup or server needs and an engineer will reply during business hours with a clear scope and quote.'}
             </p>
 
@@ -239,13 +239,13 @@ export const HomeFinalCTA: React.FC = () => {
                       className="w-full min-h-[44px] px-3.5 py-2.5 text-sm input-token"
                     >
                       <option value="infrastructure">
-                        {lang === 'ar' ? 'الشبكات وغرف الخوادم' : 'Networks & Server Rooms'}
+                        {lang === 'ar' ? 'الشبكات والسيرفر رووم' : 'Networks & Server Rooms'}
                       </option>
                       <option value="cloud">
-                        {lang === 'ar' ? 'السيرفرات والاستضافة' : 'Cloud Servers & Hosting'}
+                        {lang === 'ar' ? 'سيرفرات Cloud VPS والاستضافة' : 'Cloud VPS & Hosting'}
                       </option>
                       <option value="security">
-                        {lang === 'ar' ? 'الأمن السيبراني والنسخ الاحتياطي' : 'Security & Backups'}
+                        {lang === 'ar' ? 'الأمن السيبراني والـ Backup' : 'Security & Backups'}
                       </option>
                       <option value="software">
                         {lang === 'ar' ? 'أنظمة ERP والبرمجيات' : 'ERP & Business Software'}

@@ -25,33 +25,33 @@ const CATEGORY_DEFS = [
   {
     slug: 'infrastructure',
     internalAr: 'الشبكات والبنية التحتية',
-    nameAr: 'الشبكات والبنية التحتية',
-    nameEn: 'Infrastructure & Networks',
+    nameAr: 'الشبكات والسيرفر رووم',
+    nameEn: 'Networks & Server Rooms',
   },
   {
     slug: 'cloud',
     internalAr: 'السحابة والاستضافة',
-    nameAr: 'السحابة والاستضافة',
-    nameEn: 'Cloud & Servers',
+    nameAr: 'سيرفرات Cloud VPS والاستضافة',
+    nameEn: 'Cloud VPS & Hosting',
   },
   {
     slug: 'security',
     internalAr: 'الأمن السيبراني',
-    nameAr: 'الأمن السيبراني',
-    nameEn: 'Cybersecurity',
+    nameAr: 'الأمن السيبراني والـ Backup',
+    nameEn: 'Cybersecurity & Backup',
   },
   {
     slug: 'software',
     internalAr: 'البرمجيات وأنظمة الإدارة',
-    nameAr: 'البرمجيات وأنظمة الإدارة',
-    nameEn: 'Software & ERP',
+    nameAr: 'أنظمة ERP والبرمجيات',
+    nameEn: 'ERP & Business Software',
   },
 ];
 
 const SORT_OPTIONS = [
   { id: 'default', labelAr: 'الترتيب الافتراضي', labelEn: 'Default Order' },
   { id: 'title', labelAr: 'الترتيب الأبجدي', labelEn: 'Alphabetical' },
-  { id: 'category', labelAr: 'حسب القطاع الهندسي', labelEn: 'By Engineering Pillar' },
+  { id: 'category', labelAr: 'حسب القسم', labelEn: 'By Category' },
 ];
 
 const PAGE_SIZE = 9;
@@ -280,7 +280,7 @@ export const ServicesSection: React.FC = () => {
             {/* Category Filters with Counts */}
             <div>
               <h2 className="text-xs font-bold text-accent mb-3">
-                {lang === 'ar' ? 'القطاعات الهندسية' : 'Engineering Pillars'}
+                {lang === 'ar' ? 'الأقسام' : 'Categories'}
               </h2>
               <div className="space-y-1.5" role="group" aria-label={lang === 'ar' ? 'تصنيفات الخدمات' : 'Service categories'}>
                 {CATEGORY_DEFS.map((cat) => {
@@ -505,13 +505,13 @@ export const ServicesSection: React.FC = () => {
               >
                 <p className="text-lg font-bold text-main">
                   {lang === 'ar'
-                    ? 'لم يتم العثور على خدمات مطابقة للفلاتر المحددة'
-                    : 'No engineering services match the selected filters'}
+                    ? 'مفيش خدمات مطابقة للفلتر ده'
+                    : 'No services match the selected filters'}
                 </p>
                 <p className="text-sm text-muted max-w-md mx-auto leading-relaxed">
                   {lang === 'ar'
-                    ? 'يمكنك مسح الفلاتر لعرض جميع الخدمات الهندسية (23 خدمة) أو التواصل مباشرة مع مهندسينا لطلب مشروع مخصص.'
-                    : 'Clear active filters to browse all 23 engineering services, or contact our team for a custom architectural requirement.'}
+                    ? 'امسح الفلاتر عشان تشوف كل الخدمات (23 خدمة)، أو تواصل مباشرة مع فريقنا لو عندك طلب مخصص.'
+                    : 'Clear active filters to browse all 23 services, or reach out to our team for a custom scope.'}
                 </p>
                 <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
                   <button
@@ -521,7 +521,7 @@ export const ServicesSection: React.FC = () => {
                     className="btn-secondary min-h-[44px] px-5 py-2.5 text-xs font-bold whitespace-nowrap inline-flex items-center gap-2"
                   >
                     <RotateCcw className="w-4 h-4" />
-                    <span>{lang === 'ar' ? 'مسح جميع الفلاتر' : 'Clear All Filters'}</span>
+                    <span>{lang === 'ar' ? 'مسح كل الفلاتر' : 'Clear All Filters'}</span>
                   </button>
                   <Link
                     to="/contact"
@@ -669,7 +669,7 @@ export const ServicesSection: React.FC = () => {
 
             <div className="space-y-2">
               <div className="text-xs font-bold text-accent">
-                {lang === 'ar' ? 'القطاعات الهندسية' : 'Engineering Pillars'}
+                {lang === 'ar' ? 'الأقسام' : 'Categories'}
               </div>
               {CATEGORY_DEFS.map((cat) => {
                 const isActive = activeCatSlug === cat.slug;

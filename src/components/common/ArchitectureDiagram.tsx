@@ -43,9 +43,9 @@ const CASE_DIAGRAMS: Record<string, DiagramSpec> = {
   'case-1': {
     id: 'case-1',
     hasSufficientTopologyFacts: true,
-    diagramTitleAr: 'مخطط الشبكة والأمن السيبراني (VLAN + Fortinet NGFW + NVR RAID-6)',
+    diagramTitleAr: 'مخطط الشبكة والحماية (VLAN + Fortinet NGFW + NVR RAID-6)',
     diagramTitleEn: 'Network & Security Topology (VLAN + Fortinet NGFW + NVR RAID-6)',
-    topologySummaryAr: 'عزل شبكي لأقسام الرعاية وغرف العمليات وكاميرات 4K عبر فايبر Cat6A وجدار حماية Fortinet',
+    topologySummaryAr: 'فصل شبكي لأقسام الرعاية وغرف العمليات وكاميرات 4K عبر فايبر Cat6A وفايروول Fortinet',
     topologySummaryEn: 'VLAN segmentation for ICU/OR and 180+ 4K cameras over Fiber/Cat6A and Fortinet NGFW',
     nodes: [
       { id: 'n1', label: 'Fortinet NGFW', sublabel: 'IPS + Encrypted VPN', x: 24, y: 28, w: 170, h: 60, accent: true },
@@ -66,9 +66,9 @@ const CASE_DIAGRAMS: Record<string, DiagramSpec> = {
   'case-2': {
     id: 'case-2',
     hasSufficientTopologyFacts: true,
-    diagramTitleAr: 'مخطط السحابة المالية والنسخ الاحتياطي المعزول',
+    diagramTitleAr: 'مخطط سيرفرات Cloud VPS والـ Immutable Backup',
     diagramTitleEn: 'Financial Cloud VPS & Immutable Backup Topology',
-    topologySummaryAr: 'وصول مشفر لـ 30 مراجعاً مالياً إلى خوادم NVMe مع نسخ احتياطي يومي معزول وبريد مخصص',
+    topologySummaryAr: 'دخول مشفر لـ 30 مراجع مالي على سيرفرات NVMe مع Backup يومي معزول وإيميلات مخصصة',
     topologySummaryEn: 'Encrypted access for 30 concurrent auditors to NVMe SQL/ERP VPS with daily off-site backups',
     nodes: [
       { id: 'n1', label: '30 Financial Auditors', sublabel: 'Remote & Office Access', x: 24, y: 28, w: 170, h: 60 },
@@ -130,9 +130,9 @@ const CASE_DIAGRAMS: Record<string, DiagramSpec> = {
   'case-5': {
     id: 'case-5',
     hasSufficientTopologyFacts: true,
-    diagramTitleAr: 'مخطط منظومة إدارة المستشفيات (Hospital ERP & EMR Core)',
+    diagramTitleAr: 'مخطط سيستم إدارة المستشفيات (Hospital ERP & EMR Core)',
     diagramTitleEn: 'Hospital ERP, EMR & Pharmacy Core Architecture',
-    topologySummaryAr: 'نواة PostgreSQL وRedis تشغل وحدات السجلات الطبية (EMR) والجدولة والتأمين والصيدلية',
+    topologySummaryAr: 'قاعدة PostgreSQL وRedis بتشغّل وحدات السجلات الطبية (EMR) والمواعيد والتأمين والصيدلية',
     topologySummaryEn: 'Containerized Node.js, PostgreSQL & Redis core powering EMR, scheduling, billing & pharmacy',
     nodes: [
       { id: 'n1', label: 'Outpatient & OR Scheduling', sublabel: 'Clinic Booking Module', x: 24, y: 28, w: 170, h: 60 },
@@ -151,9 +151,9 @@ const CASE_DIAGRAMS: Record<string, DiagramSpec> = {
   'case-6': {
     id: 'case-6',
     hasSufficientTopologyFacts: true,
-    diagramTitleAr: 'مخطط استضافة الأنظمة الضريبية وتأمين 500+ صندوق بريد',
+    diagramTitleAr: 'مخطط استضافة الأنظمة الضريبية وتأمين 500+ إيميل',
     diagramTitleEn: 'Tax Cloud VPS & 500+ Hardened Mailboxes Architecture',
-    topologySummaryAr: 'خادم سحابي مخصص لـ 25 محاسباً ضريبياً مع هجرة وتوثيق 500+ حساب بريد ونسخ احتياطي يومي',
+    topologySummaryAr: 'سيرفر Cloud VPS مخصص لـ 25 محاسب ضرائب مع نقل وتوثيق 500+ إيميل وBackup يومي',
     topologySummaryEn: 'Dedicated Cloud VPS for 25 concurrent tax auditors with 500+ DMARC-hardened mailboxes',
     nodes: [
       { id: 'n1', label: '25 Tax Auditors', sublabel: 'Concurrent Remote Access', x: 24, y: 28, w: 170, h: 60 },
@@ -192,9 +192,9 @@ const CASE_DIAGRAMS: Record<string, DiagramSpec> = {
   'case-8': {
     id: 'case-8',
     hasSufficientTopologyFacts: true,
-    diagramTitleAr: 'مخطط حماية النطاق اللوجستي (DNSSEC + DMARC Reject + TLS 1.3)',
+    diagramTitleAr: 'مخطط حماية الدومين اللوجستي (DNSSEC + DMARC Reject + TLS 1.3)',
     diagramTitleEn: 'Logistics Domain Hardening (DNSSEC + DMARC Reject + TLS 1.3)',
-    topologySummaryAr: 'تأمين 120 صندوق بريد تجاري عبر TLS 1.3 وتوقيع DNSSEC وسياسة DMARC Reject لمنع انتحال الفواتير',
+    topologySummaryAr: 'تأمين 120 إيميل تجاري بـ TLS 1.3 وتوقيع DNSSEC وسياسة DMARC Reject لمنع تزوير الفواتير',
     topologySummaryEn: '120 commercial mailboxes secured via TLS 1.3, DNSSEC, anti-phishing gateway & DMARC Reject',
     nodes: [
       { id: 'n1', label: 'DNSSEC & DMARC Reject', sublabel: 'Domain Spoofing Block', x: 24, y: 28, w: 170, h: 60, accent: true },
@@ -215,7 +215,7 @@ const CASE_DIAGRAMS: Record<string, DiagramSpec> = {
     hasSufficientTopologyFacts: true,
     diagramTitleAr: 'مخطط منصة تتبع الأسطول وحساسات الوقود (MQTT IoT Telemetry)',
     diagramTitleEn: 'IoT Fleet Telemetry & Fuel Sensor Pipeline (MQTT + PostgreSQL)',
-    topologySummaryAr: 'ربط وحدات GPS وحساسات الوقود عبر بروتوكول MQTT بلوحة العمليات المركزية وتطبيق السائقين',
+    topologySummaryAr: 'ربط أجهزة GPS وحساسات الوقود عبر MQTT بلوحة المتابعة المركزية وتطبيق السائقين',
     topologySummaryEn: 'Industrial GPS & fuel sensors streaming via MQTT broker to Node.js/PostgreSQL and dispatch console',
     nodes: [
       { id: 'n1', label: 'Truck GPS & Fuel Sensors', sublabel: 'Highway Telemetry Units', x: 24, y: 28, w: 170, h: 60 },
@@ -234,9 +234,9 @@ const CASE_DIAGRAMS: Record<string, DiagramSpec> = {
   'case-10': {
     id: 'case-10',
     hasSufficientTopologyFacts: true,
-    diagramTitleAr: 'مخطط البنية الشبكية والدومين المركزي (Active Directory + VoIP + File Server)',
+    diagramTitleAr: 'مخطط الشبكة والـ Active Directory وVoIP وFile Server',
     diagramTitleEn: 'Enterprise Active Directory, File Server, VoIP & CCTV Topology',
-    topologySummaryAr: 'تمديدات Cat6A وسويتشات جيجابت تربط خادم الدومين AD DS وخادم الملفات وسنترال VoIP والنسخ الاحتياطي',
+    topologySummaryAr: 'تمديدات Cat6A وسويتشات جيجابت بتربط سيرفر Active Directory وFile Server وسنترال VoIP والـ Backup',
     topologySummaryEn: 'Cat6A & Gigabit switches uniting Active Directory, RBAC File Server, VoIP PBX, CCTV & cloud backup',
     nodes: [
       { id: 'n1', label: 'Cat6A & Gigabit Core', sublabel: 'Enterprise Wi-Fi VLANs', x: 24, y: 28, w: 170, h: 60, accent: true },
@@ -257,13 +257,13 @@ const CASE_DIAGRAMS: Record<string, DiagramSpec> = {
   'case-11': {
     id: 'case-11',
     hasSufficientTopologyFacts: false,
-    diagramTitleAr: 'بطاقة مشروع هندسي: فحص واعتماد جودة البرمجيات (QA & UAT Sign-off)',
+    diagramTitleAr: 'ملخص المشروع: فحص واعتماد جودة البرمجيات (QA & UAT Sign-off)',
     diagramTitleEn: 'Engineering Audit Card: Software QA & Vendor Handover Sign-Off',
-    topologySummaryAr: 'اختبارات الوظائف الكاملة (E2E)، تطبيقات iOS/Android، محاكاة ضغط مكالمات WebRTC، وفحص صلاحيات وأمان قواعد البيانات.',
+    topologySummaryAr: 'اختبارات E2E كاملة للويب وتطبيقات iOS/Android، واختبار ضغط مكالمات WebRTC، ومراجعة صلاحيات قواعد البيانات.',
     topologySummaryEn: 'End-to-End CRM functional validation, iOS/Android compatibility, WebRTC call stress testing, and security privilege audit.',
     nodes: [],
     edges: [],
-    missingFactsNoteAr: 'ملاحظة منهجية: يركز نطاق هذا المشروع على مصفوفة الفحص البرمجي (QA Test Matrix) واعتماد الاستلام دون تفاصيل معمارية الخوادم المستضيفة؛ لذا تم عرض بطاقة التوثيق الهندسي بدلاً من رسم طوبولوجيا افتراضية.',
+    missingFactsNoteAr: 'ملحوظة: المشروع ده كان مركز على فحص الجودة البرمجية (QA Test Matrix) واعتماد الاستلام مش تصميم شبكة أو سيرفرات، عشان كده عرضنا ملخص الفحص بدل مخطط شبكة.',
     missingFactsNoteEn: 'Methodology Note: Documented project facts describe the QA test matrix and acceptance audit rather than host network topology; displaying a typographic engineering cover card instead of inventing nodes.',
   },
   'case-12': {

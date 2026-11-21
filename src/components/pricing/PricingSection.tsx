@@ -22,23 +22,23 @@ const CATEGORY_TABS: {
 }[] = [
   {
     id: 'vps',
-    labelAr: 'خوادم Cloud VPS (KVM)',
+    labelAr: 'سيرفرات Cloud VPS (KVM)',
     labelEn: 'Cloud VPS (KVM)',
-    descAr: 'عزل KVM مخصص، معالجات AMD EPYC/Xeon، تخزين NVMe، و32 TB نقل بيانات شهرياً.',
-    descEn: 'Dedicated KVM isolation, AMD EPYC/Xeon vCPU, NVMe storage arrays, and 32 TB outbound traffic.',
+    descAr: 'عزل KVM مخصص، معالجات AMD EPYC/Xeon، هاردات NVMe RAID-10، وترافيك 32 TB شهرياً.',
+    descEn: 'Dedicated KVM isolation, AMD EPYC/Xeon vCPU, NVMe RAID-10 storage, and 32 TB outbound traffic.',
   },
   {
     id: 'web',
-    labelAr: 'استضافة المواقع وووردبريس',
+    labelAr: 'استضافة مواقع وووردبريس',
     labelEn: 'Managed Web & WP',
-    descAr: 'خوادم LiteSpeed مع ذاكرة LSCache، لوحة cPanel، شهادات SSL مجانية، ونسخ احتياطي يومي.',
+    descAr: 'سيرفرات LiteSpeed مع LSCache، لوحة cPanel، شهادات SSL مجانية، وBackup يومي أوتوماتيك.',
     descEn: 'LiteSpeed Enterprise with LSCache, cPanel/WHM, automated AutoSSL, and daily backups.',
   },
   {
     id: 'windows',
-    labelAr: 'خوادم Windows & RDP',
+    labelAr: 'سيرفرات Windows & RDP',
     labelEn: 'Windows Cloud & RDP',
-    descAr: 'مرخصة رسمياً بـ Windows Server 2022 لتشغيل قواعد بيانات SQL وأنظمة ERP المحاسبية عن بُعد.',
+    descAr: 'مرخصة رسمياً بـ Windows Server 2022 لتشغيل قواعد بيانات MS SQL وأنظمة ERP والحسابات عن بُعد.',
     descEn: 'Licensed Windows Server 2022 instances tuned for MS SQL Server, accounting suites & RDP.',
   },
 ];
@@ -95,7 +95,7 @@ export const PricingSection: React.FC = () => {
             </p>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-main mb-3">
               {lang === 'ar'
-                ? 'خطط السيرفرات السحابية والاستضافة'
+                ? 'باقات سيرفرات Cloud VPS والاستضافة'
                 : 'Cloud VPS, Managed Web & Windows RDP Plans'}
             </h2>
             <p className="text-sm sm:text-base text-muted leading-relaxed">
@@ -132,7 +132,7 @@ export const PricingSection: React.FC = () => {
             <div
               className="inline-flex items-center bg-surface p-1 rounded-xl border border-token"
               role="group"
-              aria-label={lang === 'ar' ? 'دورة الفوترة' : 'Billing cycle'}
+              aria-label={lang === 'ar' ? 'نظام الدفع' : 'Billing cycle'}
             >
               <button
                 type="button"
@@ -176,7 +176,7 @@ export const PricingSection: React.FC = () => {
           <div
             className="flex flex-wrap items-center gap-2"
             role="tablist"
-            aria-label={lang === 'ar' ? 'فئات الخوادم والاستضافة' : 'Server categories'}
+            aria-label={lang === 'ar' ? 'أنواع السيرفرات والاستضافة' : 'Server categories'}
           >
             {CATEGORY_TABS.map((tab) => {
               const active = activeCategory === tab.id;
@@ -207,7 +207,7 @@ export const PricingSection: React.FC = () => {
           <div className="flex items-center gap-2 self-start md:self-auto">
             <MapPin className="w-4 h-4 text-accent shrink-0" aria-hidden="true" />
             <label htmlFor="region-select" className="text-xs font-medium text-muted whitespace-nowrap">
-              {lang === 'ar' ? 'موقع النشر:' : 'Region:'}
+              {lang === 'ar' ? 'الداتا سنتر:' : 'Data Center:'}
             </label>
             <select
               id="region-select"
@@ -352,13 +352,13 @@ export const PricingSection: React.FC = () => {
                       </dd>
                     </div>
                     <div className="flex items-center justify-between gap-2">
-                      <dt className="text-muted">{lang === 'ar' ? 'التخزين' : 'Storage'}</dt>
+                      <dt className="text-muted">{lang === 'ar' ? 'الهارد (NVMe)' : 'Storage'}</dt>
                       <dd className="font-semibold text-main">
                         <bdi dir="ltr" className="ltr-num">{plan.storage}</bdi>
                       </dd>
                     </div>
                     <div className="flex items-center justify-between gap-2">
-                      <dt className="text-muted">{lang === 'ar' ? 'نقل البيانات' : 'Traffic'}</dt>
+                      <dt className="text-muted">{lang === 'ar' ? 'الترافيك الشهري' : 'Traffic'}</dt>
                       <dd className="font-semibold text-main">
                         <bdi dir="ltr" className="ltr-num">{plan.bandwidth}</bdi>
                       </dd>
@@ -367,25 +367,25 @@ export const PricingSection: React.FC = () => {
                     {isExpanded && (
                       <>
                         <div className="flex items-center justify-between gap-2 pt-2 border-t border-token">
-                          <dt className="text-muted">{lang === 'ar' ? 'اللقطات' : 'Snapshots'}</dt>
+                          <dt className="text-muted">{lang === 'ar' ? 'الـ Snapshots' : 'Snapshots'}</dt>
                           <dd className="font-semibold text-main">
                             <bdi dir="ltr" className="ltr-num">{plan.snapshots}</bdi>
                           </dd>
                         </div>
                         <div className="flex items-center justify-between gap-2">
-                          <dt className="text-muted">{lang === 'ar' ? 'منفذ الشبكة' : 'Port Speed'}</dt>
+                          <dt className="text-muted">{lang === 'ar' ? 'سرعة البورت' : 'Port Speed'}</dt>
                           <dd className="font-semibold text-main">
                             <bdi dir="ltr" className="ltr-num">{plan.portSpeed}</bdi>
                           </dd>
                         </div>
                         <div className="flex items-center justify-between gap-2">
-                          <dt className="text-muted">{lang === 'ar' ? 'لوحة الإدارة' : 'Access'}</dt>
+                          <dt className="text-muted">{lang === 'ar' ? 'الإدارة والتحكم' : 'Access'}</dt>
                           <dd className="font-semibold text-main">
                             <bdi dir="ltr" className="ltr-num">{plan.panel}</bdi>
                           </dd>
                         </div>
                         <div className="flex items-center justify-between gap-2">
-                          <dt className="text-muted">{lang === 'ar' ? 'اتفاقية SLA' : 'Uptime SLA'}</dt>
+                          <dt className="text-muted">{lang === 'ar' ? 'Uptime SLA' : 'Uptime SLA'}</dt>
                           <dd className="font-semibold text-accent">
                             <bdi dir="ltr" className="ltr-num">{plan.uptime}</bdi>
                           </dd>
@@ -438,7 +438,7 @@ export const PricingSection: React.FC = () => {
                       plan.popular ? 'btn-primary' : 'btn-secondary'
                     }`}
                   >
-                    {lang === 'ar' ? 'إعداد وطلب الخادم' : 'Configure & Order'}
+                    {lang === 'ar' ? 'تخصيص وطلب السيرفر' : 'Configure & Order'}
                   </button>
 
                   <button
